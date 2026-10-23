@@ -112,7 +112,8 @@ def augment_history(frame: pd.DataFrame, flights: pd.DataFrame, *, include_curre
 
     Missing tails produce missing count/mean; a known tail with no valid history has
     count zero and missing mean. history_window_incomplete is a separate predictor
-    flag for left-censoring by the declared source coverage start. Source quality
+    flag for known left-truncation by the declared source start, not a guarantee
+    of complete coverage when zero: prior-month carry-in flights remain absent. Source quality
     uses only completed flight record fields, never full-tail future QA flags.
     """
     required = {"prediction_time", "tail_number", "upstream_flight_id", "upstream_arr_delay_minutes"}
@@ -232,6 +233,8 @@ def augment_history(frame: pd.DataFrame, flights: pd.DataFrame, *, include_curre
                     "current_upstream_added": int(added_current.sum()),
                     "events_present": int(np.sum(counts > 0))},
         "missingness_rule": "missing tail: n and mean missing; known tail with no valid events: n=0 and mean missing; incomplete window flagged separately",
+        "left_truncation_rule": "Known-left-truncation indicator, not a completeness guarantee when zero",
+        "carry_in_limitation": "Flights with prior-local-month departure dates can complete in the window but are absent from the source; no empirical maximum delay is used to claim completeness",
     }
     result.attrs["feature_audit"] = {**result.attrs.get("feature_audit", {}), "feature_group": "G1",
                                      "categorical_features": G1_CATEGORICAL, "numeric_features": G1_NUMERIC}
@@ -250,34 +253,58 @@ def load_base_features(path: str | Path = ROOT / "processed" / "flight_connectio
     if feature_group != "G1":
         raise ValueError("feature_group must be G0 or G1")
     flights = pd.read_csv(flights_path, usecols=HISTORY_SOURCE_COLUMNS, low_memory=False)
-    return augment_history(frame, flights)
+    try:
+        from .operational_features import source_calendar_starts
+    except ImportError:
+        from operational_features import source_calendar_starts
+    starts = source_calendar_starts(pd.read_csv(ROOT / 'references/airports.csv'))
+    return augment_history(frame, flights, source_start_utc=starts.max())
 
 
 def load_configured_features(config, development_only=True):
     """Compose the fixed cumulative information groups; keep one eligible cohort."""
     try:
-        from .operational_features import augment_aircraft, augment_airport_operations, AIRPORT_SOURCE_COLUMNS
+        from .operational_features import augment_aircraft, augment_airport_operations, AIRPORT_SOURCE_COLUMNS, AIRPORT_NUMERIC, AIRCRAFT_COLUMNS, source_calendar_starts
     except ImportError:
-        from operational_features import augment_aircraft, augment_airport_operations, AIRPORT_SOURCE_COLUMNS
-    group = config.get('feature_group', 'G0')
-    if group not in ['G0', 'G1', 'G2', 'G3', 'G4a', 'G4b']:
+        from operational_features import augment_aircraft, augment_airport_operations, AIRPORT_SOURCE_COLUMNS, AIRPORT_NUMERIC, AIRCRAFT_COLUMNS, source_calendar_starts
+    group = str(config.get('feature_group', 'G0')).upper()
+    if group not in ['G0', 'G1', 'G2', 'G2_FAMILY', 'G2_VARIANT', 'G3', 'G3_VARIANT', 'G4A', 'G4B']:
         raise ValueError(f'Unknown information group: {group}')
+    stage = {'G2_FAMILY': 'G2', 'G2_VARIANT': 'G2', 'G3_VARIANT': 'G3'}.get(group, group)
+
+    def audited(result):
+        default_cat = G0_CATEGORICAL.copy()
+        default_num = G1_NUMERIC.copy()
+        if stage != 'G1':
+            default_cat += ['aircraft_variant' if 'VARIANT' in group else 'aircraft_family']
+        if stage in ['G3', 'G4A', 'G4B']:
+            default_num += AIRPORT_NUMERIC
+        features = config.get('features')
+        categorical = list(config.get('categorical_features', default_cat if features is None else
+                                      [name for name in features if name in G0_CATEGORICAL + AIRCRAFT_COLUMNS]))
+        numeric = list(config.get('numeric_features', default_num if features is None else
+                                  [name for name in features if name in G1_NUMERIC + AIRPORT_NUMERIC]))
+        result.attrs['feature_audit'] = {**result.attrs.get('feature_audit', {}), 'feature_group': group,
+                                       'features': list(features) if features is not None else categorical + numeric,
+                                       'categorical_features': categorical, 'numeric_features': numeric}
+        return result
     frame = load_base_features(ROOT / config.get('connection_path', 'processed/flight_connections.csv.gz'),
                                development_only=development_only)
     if group == 'G0':
         return frame
     source_columns = list(dict.fromkeys(HISTORY_SOURCE_COLUMNS +
-                         (AIRPORT_SOURCE_COLUMNS if group in ['G3', 'G4a', 'G4b'] else [])))
+                         (AIRPORT_SOURCE_COLUMNS if stage in ['G3', 'G4A', 'G4B'] else [])))
     flights = pd.read_csv(ROOT / 'processed/flights_clean.csv.gz', usecols=source_columns, low_memory=False)
-    frame = augment_history(frame, flights)
-    if group == 'G1':
-        return frame
+    starts = source_calendar_starts(pd.read_csv(ROOT / 'references/airports.csv'))
+    frame = augment_history(frame, flights, source_start_utc=starts.max())
+    if stage == 'G1':
+        return audited(frame)
     reference = pd.read_csv(ROOT / 'references/aircraft_reference_2024.csv', dtype=str)
     aliases = pd.read_csv(ROOT / 'references/aircraft_type_aliases.csv', dtype=str)
     frame = augment_aircraft(frame, reference, aliases, inventory_year=2024)
-    if group == 'G2':
-        return frame
-    frame = augment_airport_operations(frame, flights)
-    if group == 'G3':
-        return frame
+    if stage == 'G2':
+        return audited(frame)
+    frame = augment_airport_operations(frame, flights, source_start_utc=starts)
+    if stage == 'G3':
+        return audited(frame)
     raise NotImplementedError('Weather joins must be reviewed and enabled before G4 runs')

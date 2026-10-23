@@ -1,10 +1,12 @@
 """Strict event-time history checks independent of training/validation partitions."""
 import unittest
+from unittest.mock import patch
 
 import numpy as np
 import pandas as pd
 
-from scripts.build_features import G0_FEATURES, G1_ADDED_NUMERIC, G1_FEATURES, augment_history
+from scripts.build_features import G0_FEATURES, G1_ADDED_NUMERIC, G1_FEATURES, augment_history, load_configured_features
+from scripts.operational_features import source_calendar_starts
 
 
 def queries():
@@ -29,6 +31,44 @@ def events():
 
 
 class HistoryFeatures(unittest.TestCase):
+    def test_local_month_conservative_boundary_and_carry_in_caveat(self):
+        airports = pd.DataFrame({'airport_id': [1, 2], 'timezone': ['America/New_York', 'America/Los_Angeles']})
+        starts = source_calendar_starts(airports)
+        frame = queries().iloc[[0]].copy()
+        frame['prediction_time'] = pd.Timestamp('2026-04-02T01:00Z')
+        result = augment_history(frame, events().iloc[:0], source_start_utc=starts.max())
+        self.assertEqual(starts.max(), pd.Timestamp('2026-04-01T07:00Z'))
+        self.assertEqual(result.iloc[0].history_window_incomplete, 1)
+        frame['prediction_time'] = pd.Timestamp('2026-04-02T07:00Z')
+        result = augment_history(frame, events().iloc[:0], source_start_utc=starts.max())
+        self.assertEqual(result.iloc[0].history_window_incomplete, 0)
+        self.assertIn('not a completeness guarantee', result.attrs['history_audit']['left_truncation_rule'])
+        self.assertIn('prior-local-month', result.attrs['history_audit']['carry_in_limitation'])
+
+    def test_variant_loader_and_explicit_feature_audit(self):
+        frame = queries().iloc[[0]].copy()
+        frame['downstream_airline'] = 'AA'
+        airports = pd.DataFrame({'airport_id': [1], 'timezone': ['America/Los_Angeles']})
+        ref = pd.DataFrame({'airline': ['AA'], 'tail_number': ['a'], 'aircraft_model': ['A320']})
+        aliases = pd.DataFrame({'aircraft_model_raw': ['A320'], 'aircraft_family': ['A320'], 'aircraft_variant': ['A320-200']})
+        def read(path, **kwargs):
+            if str(path).endswith('airports.csv'):
+                return airports
+            if 'aircraft_reference' in str(path):
+                return ref
+            if 'aircraft_type_aliases' in str(path):
+                return aliases
+            return events()
+        config = {'feature_group': 'G2_VARIANT', 'features': ['aircraft_variant', 'upstream_arr_delay_minutes']}
+        with patch('scripts.build_features.load_base_features', return_value=frame), patch('scripts.build_features.pd.read_csv', side_effect=read):
+            result = load_configured_features(config)
+        audit = result.attrs['feature_audit']
+        self.assertEqual(audit['feature_group'], 'G2_VARIANT')
+        self.assertEqual(audit['features'], config['features'])
+        self.assertEqual(audit['categorical_features'], ['aircraft_variant'])
+        self.assertEqual(audit['numeric_features'], ['upstream_arr_delay_minutes'])
+        self.assertEqual(result.attrs['history_audit']['source_start_utc'], '2026-04-01T07:00:00+00:00')
+
     def test_strict_same_time_and_24_hour_boundary(self):
         result = augment_history(queries(), events().sample(frac=1, random_state=42))
         self.assertEqual(result.loc[0, "tail_completed_24h_n"], 3)

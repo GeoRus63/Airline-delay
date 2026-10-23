@@ -2,10 +2,34 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from scripts.operational_features import augment_aircraft, augment_airport_operations
+from scripts.operational_features import augment_aircraft, augment_airport_operations, source_calendar_starts, _event_windows
 
 
 class OperationalFeatures(unittest.TestCase):
+    def test_empty_model_does_not_mask_unique_known_model(self):
+        frame = pd.DataFrame({'downstream_airline': ['AA'], 'tail_number': ['N1']}, index=[99])
+        ref = pd.DataFrame({'airline': ['AA', 'AA'], 'tail_number': ['N1', 'N1'], 'aircraft_model': [None, 'A320']})
+        aliases = pd.DataFrame({'aircraft_model_raw': ['A320'], 'aircraft_family': ['A320'], 'aircraft_variant': ['A320-200']})
+        result = augment_aircraft(frame, ref, aliases)
+        self.assertEqual(result.loc[99, 'aircraft_family'], 'A320')
+
+    def test_float_query_id_joins_integer_event_id(self):
+        queries = pd.DataFrame({'airport_id': [1.0], 'prediction_time': pd.to_datetime(['2026-05-01T10:00Z'])}, index=[999])
+        source = pd.DataFrame({'OriginAirportID': [1], 'actual_dep_utc': pd.to_datetime(['2026-05-01T09:30Z'])})
+        counts, _ = _event_windows(queries, source, 'OriginAirportID', 'actual_dep_utc', 60, 0)
+        self.assertEqual(counts.tolist(), [1])
+
+    def test_airport_local_month_boundary(self):
+        t = pd.Timestamp('2026-04-01T07:30Z')
+        frame = pd.DataFrame({'airport_id': ['1', '2'], 'prediction_time': [t, t]}, index=[92, 5])
+        source = pd.DataFrame({'flight_id': ['a'], 'OriginAirportID': [1], 'DestAirportID': [1],
+                               'scheduled_dep_utc': [t], 'scheduled_arr_utc': [t], 'actual_dep_utc': [t],
+                               'actual_dep_clock_error': [0.], 'DepDelay': [0.], 'DepDelayMinutes': [0.], 'duplicate_key': [False]})
+        starts = source_calendar_starts(pd.DataFrame({'airport_id': [1, 2], 'timezone': ['America/Los_Angeles', 'America/New_York']}))
+        result = augment_airport_operations(frame, source, source_start_utc=starts)
+        self.assertEqual(result.airport_history_window_incomplete.tolist(), [1, 0])
+        self.assertIn('zero does not guarantee', result.attrs['airport_operations_audit']['left_truncation_rule'])
+
     def test_inventory_join_has_unknowns_and_no_nested_predictor_decision(self):
         frame = pd.DataFrame({'downstream_airline': ['AA', 'AA', 'XX'], 'tail_number': ['N1', 'N2', 'N1']})
         ref = pd.DataFrame({'airline': ['AA'], 'tail_number': ['N1'], 'aircraft_model': ['A320']})

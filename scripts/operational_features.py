@@ -14,6 +14,16 @@ AIRPORT_SOURCE_COLUMNS = ['flight_id', 'OriginAirportID', 'DestAirportID', 'sche
                           'DepDelay', 'DepDelayMinutes', 'duplicate_key']
 
 
+def source_calendar_starts(airports, local_start='2026-04-01'):
+    """Fixed source-month midnight per airport, independent of observed outcomes."""
+    if airports.airport_id.duplicated().any() or airports.timezone.isna().any():
+        raise ValueError('Unique airport IDs and known timezones are required')
+    starts = airports.timezone.map(
+        lambda tz: pd.Timestamp(local_start).tz_localize(str(tz)).tz_convert('UTC'))
+    return pd.Series(pd.to_datetime(starts, utc=True).array,
+                     index=airports.airport_id.astype('Int64').astype('string'), name='source_start_utc')
+
+
 def augment_aircraft(frame, reference, aliases, inventory_year=2024):
     """Join by airline+tail, preserving unknowns and rejecting ambiguous mappings."""
     result = frame.copy()
@@ -24,7 +34,8 @@ def augment_aircraft(frame, reference, aliases, inventory_year=2024):
     conflicts = ref.groupby(['airline', 'tail_number']).aircraft_model.nunique().gt(1)
     if conflicts.any():
         raise ValueError('Aircraft reference has conflicting models for an airline-tail key')
-    ref = ref.drop_duplicates(['airline', 'tail_number'])
+    # A missing model cannot hide a later unique known model for the same key.
+    ref = ref.sort_values('aircraft_model', na_position='last', kind='stable').drop_duplicates(['airline', 'tail_number'])
     mapping = aliases.rename(columns={'aircraft_model_raw': 'aircraft_model'})
     if mapping.aircraft_model.duplicated().any():
         raise ValueError('Aircraft alias labels must be unique')
@@ -56,7 +67,7 @@ def _event_windows(queries, events, airport_column, time_column, before_minutes,
     source['timestamp'] = pd.to_datetime(source[time_column], utc=True).astype('datetime64[ns, UTC]')
     source = source.sort_values(['airport', 'timestamp'], kind='stable').reset_index(drop=True)
     event_groups = source.groupby('airport', sort=False).indices
-    query_airport = queries.airport_id.astype('string')
+    query_airport = queries.airport_id.astype('Int64').astype('string')
     query_time = pd.to_datetime(queries.prediction_time, utc=True).astype('datetime64[ns, UTC]').array.asi8
     query_groups = pd.DataFrame({'airport': query_airport.to_numpy()}).groupby('airport', sort=False).indices
     counts, means = np.full(len(queries), np.nan), np.full(len(queries), np.nan)
@@ -110,9 +121,20 @@ def augment_airport_operations(frame, flights, source_start_utc='2026-04-01T00:0
         frame, plans, 'OriginAirportID', 'scheduled_dep_utc', 0, 60)[0]
     result['airport_planned_arrivals_next60m_n'] = _event_windows(
         frame, plans, 'DestAirportID', 'scheduled_arr_utc', 0, 60)[0]
-    result['airport_history_window_incomplete'] = (
-        pd.to_datetime(frame.prediction_time, utc=True) - pd.Timedelta(minutes=60)
-    ).lt(pd.Timestamp(source_start_utc)).to_numpy(dtype=np.int8)
+    if isinstance(source_start_utc, (pd.Series, dict)):
+        starts = pd.Series(source_start_utc).copy()
+        starts.index = pd.Index(starts.index).astype('Int64').astype('string')
+        query_starts = frame.airport_id.astype('Int64').astype('string').map(starts)
+        query_starts = pd.to_datetime(query_starts, utc=True)
+        start_description = 'Per-airport source local-month midnight converted to UTC'
+    else:
+        start = pd.Timestamp(source_start_utc)
+        if start.tzinfo is None:
+            raise ValueError('source_start_utc must have a timezone')
+        query_starts = pd.Series(start.tz_convert('UTC'), index=frame.index)
+        start_description = start.isoformat()
+    left = pd.to_datetime(frame.prediction_time, utc=True) - pd.Timedelta(minutes=60)
+    result['airport_history_window_incomplete'] = (left.lt(query_starts) | query_starts.isna()).to_numpy(dtype=np.int8)
     result.attrs['airport_operations_audit'] = {
         'historical_window': '[prediction_time-60min, prediction_time)',
         'scheduled_window': '[prediction_time, prediction_time+60min)',
@@ -120,6 +142,9 @@ def augment_airport_operations(frame, flights, source_start_utc='2026-04-01T00:0
         'historical_quality': 'Departure clock/delay consistency and unique source key only; no arrival/outcome/full-tail QA',
         'plan_assumption': 'Archived BTS scheduled times are treated as known; historical schedule revisions are unavailable',
         'no_event_mean': 'NA; count is zero, training-only imputation',
+        'source_start_rule': start_description,
+        'left_truncation_rule': 'Indicator of known source-left truncation; zero does not guarantee complete event coverage',
+        'carry_in_limitation': 'Prior-local-month flights departing late are absent; converting source month boundaries cannot eliminate missing carry-in events',
         'left_window_incomplete_queries': int(result.airport_history_window_incomplete.sum()),
     }
     return result

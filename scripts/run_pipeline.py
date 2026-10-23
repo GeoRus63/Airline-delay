@@ -113,12 +113,22 @@ def execute(config, run_dir):
     if config['mode'] == 'development':
         from build_features import load_configured_features
         from train_models import run_development
+        from train_models import resolve_features
         frame = load_configured_features(config, development_only=True)
         write_json(run_dir / 'feature_audit.json', dict(frame.attrs))
         shutil.copy2(ROOT / 'tables/feature_dictionary.csv', run_dir / 'feature_dictionary.csv')
         (run_dir / 'data').mkdir(exist_ok=True)
         frame.to_pickle(run_dir / 'data/features.pkl')
+        (run_dir / 'tables').mkdir(exist_ok=True)
+        missing = frame[resolve_features(config)['features']].isna().sum().rename('missing_n').to_frame()
+        missing['rows'] = len(frame)
+        missing['missing_share'] = missing.missing_n / len(frame)
+        missing.rename_axis('feature').to_csv(run_dir / 'tables/feature_missing.csv')
         result = run_development(frame, config, run_dir)
+        if config.get('compare_parent', False):
+            from compare_experiments import compare_runs
+            compare_runs(ROOT / 'experiments/runs' / config['parent_run_id'], run_dir,
+                         run_dir / 'comparison', allow_running_candidate=True)
         from analyze_eda import run as eda
         from analyze_rq1 import run as rq1
         from render_notebooks import render_notebooks
@@ -128,6 +138,13 @@ def execute(config, run_dir):
             shutil.copy2(ROOT / config.get('preparation_evidence_dir', 'tables') / name, run_dir / name)
         render_notebooks(run_dir)
         return result
+    if config['mode'] == 'prepare_aircraft':
+        import prepare_aircraft
+        prepare_aircraft.main()
+        for name in ['aircraft_model_mapping.csv', 'aircraft_monthly_match_rates.csv', 'aircraft_unmatched_tails.csv']:
+            shutil.copy2(ROOT / 'references' / name, run_dir / name)
+        return {'inventory_main': 2024, 'coverage_comparison': 2025,
+                'model_granularity': 'family main; variant replacement branch; no seats or age'}
     if config['mode'] == 'audit_preparation':
         from audit_preparation import run
         return run(run_dir)
@@ -155,15 +172,21 @@ def main():
     source_names = ['scripts/run_pipeline.py', 'scripts/prepare_flights.py']
     if config['mode'] == 'audit_preparation':
         source_names.append('scripts/audit_preparation.py')
+    elif config['mode'] == 'prepare_aircraft':
+        source_names += ['scripts/prepare_aircraft.py', 'references/aircraft_reference_2024.csv',
+                         'references/aircraft_reference_2025.csv', 'references/aircraft_type_aliases.csv']
     elif config['mode'] == 'rebuild_cohorts':
         source_names.append('scripts/rebuild_cohorts.py')
     elif config['mode'] == 'development':
         source_names += ['scripts/build_features.py', 'scripts/train_models.py', 'scripts/evaluate_models.py',
                          'scripts/analyze_eda.py', 'scripts/analyze_rq1.py', 'scripts/render_notebooks.py',
                          'scripts/operational_features.py']
-        if config.get('feature_group') in ['G2', 'G3', 'G4a', 'G4b']:
+        if str(config.get('feature_group', 'G0')).upper() not in ['G0', 'G1']:
             source_names += ['references/aircraft_reference_2024.csv', 'references/aircraft_type_aliases.csv']
-        source_names += [p.relative_to(ROOT).as_posix() for p in sorted((ROOT / 'notebooks').glob('*.ipynb')) if p.name[:2] in ['01', '03', '04', '05']]
+        source_names.append('references/airports.csv')
+        if config.get('compare_parent', False):
+            source_names.append('scripts/compare_experiments.py')
+        source_names += [p.relative_to(ROOT).as_posix() for p in sorted((ROOT / 'notebooks').glob('*.ipynb')) if p.name[:2] in ['01', '02', '03', '04', '05']]
         source_names.append('tables/feature_dictionary.csv')
     source_names.append(config_path.relative_to(ROOT).as_posix())
     for name in source_names:
@@ -180,7 +203,7 @@ def main():
     if config.get('data_manifest_path'):
         data_manifest_file = ROOT / config['data_manifest_path']
         data_manifest = json.loads(data_manifest_file.read_text(encoding='utf-8'))
-        for item in data_manifest['outputs']:
+        for item in data_manifest['outputs'] + data_manifest.get('inputs', []):
             if sha256(ROOT / item['path']) != item['sha256']:
                 raise RuntimeError(f"Derived input changed: {item['path']}")
         shutil.copy2(data_manifest_file, run_dir / 'data_manifest.json')

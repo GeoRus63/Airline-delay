@@ -1,0 +1,10 @@
+{
+  "stage": "P2-aircraft-preparation",
+  "mode": "prepare_aircraft",
+  "data_id": "D0003",
+  "parent_run_id": "R0007",
+  "change": "Audit five-month 2024 primary and 2025 comparison B43 coverage; preserve unknown types",
+  "threads": 8,
+  "seed": 42,
+  "test_target_sealed": true
+}
