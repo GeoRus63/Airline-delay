@@ -1,0 +1,21 @@
+{
+  "stage": "P0",
+  "mode": "development",
+  "data_id": "D0002",
+  "connection_path": "processed/D0002/flight_connections.csv.gz",
+  "data_manifest_path": "processed/D0002/data_manifest.json",
+  "preparation_evidence_dir": "processed/D0002",
+  "parent_run_id": "R0004",
+  "change": "First development baselines and planned-information G0 linear regression on isolated QA cohorts",
+  "feature_group": "G0",
+  "features": ["airport_id", "route", "downstream_airline", "downstream_distance", "downstream_crs_elapsed_time", "downstream_day_of_week", "downstream_sched_hour", "scheduled_turnaround_minutes"],
+  "threads": 16,
+  "seed": 42,
+  "linear_tolerance": 0.000001,
+  "preprocessing": {"min_frequency": 20, "drop": "first"},
+  "test_target_sealed": true,
+  "primary_metric": "sample-weighted pooled validation MAE in minutes",
+  "prediction_rule": "clip all predictions at zero",
+  "split_rule": "UTC half-open prediction windows; training label_time strictly before cutoff",
+  "sample_interpretation": "Retrospective prediction conditional on valid observed same-tail scheduled-adjacent completed connections"
+}

@@ -1,0 +1,234 @@
+{
+  "run_id": "R0003",
+  "status": "completed",
+  "started_at_utc": "2026-10-23T21:49:58.237201+00:00",
+  "git_commit": "8cf092650a0aaac9a26b7bf94885ac4c73e58b1b",
+  "command": "D:\\airline-delay\\.venv\\Scripts\\python.exe scripts/run_pipeline.py --config configs/audit_preparation.json --run-id R0003",
+  "python": "3.13.15 | packaged by conda-forge | (main, Sep  2 2026, 21:52:43) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "logical_cpus": 32,
+  "environment": {
+    "anyio": "4.15.1",
+    "argon2-cffi": "25.1.0",
+    "argon2-cffi-bindings": "26.1.0",
+    "arrow": "1.4.0",
+    "asttokens": "3.0.2",
+    "async-lru": "2.4.0",
+    "attrs": "26.1.0",
+    "babel": "2.18.0",
+    "beautifulsoup4": "4.15.0",
+    "bleach": "6.4.0",
+    "certifi": "2026.10.23",
+    "cffi": "2.1.1",
+    "charset-normalizer": "3.5.2",
+    "cloudpickle": "3.1.2",
+    "colorama": "0.4.6",
+    "comm": "0.2.3",
+    "contourpy": "1.4.0",
+    "cycler": "0.12.1",
+    "debugpy": "1.8.22",
+    "defusedxml": "0.7.1",
+    "executing": "2.3.0",
+    "fastjsonschema": "2.22.2",
+    "fonttools": "4.67.0",
+    "fqdn": "1.6.0",
+    "h11": "0.16.0",
+    "httpcore": "1.0.9",
+    "httpx": "0.28.1",
+    "idna": "3.20",
+    "ipykernel": "7.3.0",
+    "ipython": "9.17.1",
+    "ipython_pygments_lexers": "1.1.1",
+    "isoduration": "20.11.0",
+    "jedi": "0.20.1",
+    "Jinja2": "3.1.6",
+    "joblib": "1.6.0",
+    "json5": "0.17.3",
+    "jsonpointer": "3.4",
+    "jsonschema": "4.26.0",
+    "jsonschema-specifications": "2025.9.1",
+    "jupyterlab": "4.5.7",
+    "jupyterlab_pygments": "0.3.0",
+    "jupyterlab_server": "2.28.1",
+    "jupyter_client": "8.10.0",
+    "jupyter_core": "5.9.1",
+    "jupyter-events": "0.12.1",
+    "jupyter-lsp": "2.3.1",
+    "jupyter_server": "2.21.1",
+    "jupyter_server_terminals": "0.5.4",
+    "kiwisolver": "1.5.1",
+    "lark": "1.3.1",
+    "MarkupSafe": "3.0.4",
+    "matplotlib": "3.10.9",
+    "matplotlib-inline": "0.2.2",
+    "mistune": "3.4.0",
+    "nbclient": "0.11.0",
+    "nbconvert": "7.17.1",
+    "nbformat": "5.11.0",
+    "nest-asyncio2": "1.7.4",
+    "notebook_shim": "0.2.4",
+    "numpy": "2.4.6",
+    "packaging": "26.3",
+    "pandas": "3.0.3",
+    "pandocfilters": "1.5.1",
+    "parso": "0.8.7",
+    "pillow": "13.0.0",
+    "pip": "26.2.1",
+    "platformdirs": "4.13.5",
+    "prometheus_client": "0.26.0",
+    "prompt_toolkit": "3.0.53",
+    "psutil": "7.2.2",
+    "pure_eval": "0.2.4",
+    "pycparser": "3.12",
+    "Pygments": "2.21.0",
+    "pyparsing": "3.3.3",
+    "python-dateutil": "3.0.0",
+    "python-json-logger": "4.2.0",
+    "pywinpty": "3.1.0",
+    "PyYAML": "6.0.3",
+    "pyzmq": "27.2.0",
+    "referencing": "0.37.0",
+    "requests": "2.34.2",
+    "rfc3339-validator": "0.1.4",
+    "rfc3986-validator": "0.1.1",
+    "rfc3987-syntax": "1.1.0",
+    "rpds-py": "2026.9.1",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.18.1",
+    "seaborn": "0.13.2",
+    "Send2Trash": "2.1.0",
+    "setuptools": "84.2.1",
+    "six": "1.17.0",
+    "soupsieve": "3.0.4",
+    "stack-data": "0.6.3",
+    "terminado": "0.18.1",
+    "threadpoolctl": "3.7.0",
+    "tinycss2": "1.5.1",
+    "tornado": "6.6",
+    "traitlets": "5.16.1",
+    "typing_extensions": "4.16.0",
+    "tzdata": "2026.3",
+    "uri-template": "1.3.0",
+    "urllib3": "2.8.0",
+    "wcwidth": "0.9.3",
+    "webcolors": "25.10.0",
+    "webencodings": "0.6.1",
+    "websocket-client": "1.9.2"
+  },
+  "source_files": [
+    {
+      "path": "scripts/run_pipeline.py",
+      "bytes": 9061,
+      "sha256": "d8aa82fa182bd78db857adf1265953289dc458d4f52597fce75d2f9512b4118e"
+    },
+    {
+      "path": "scripts/prepare_flights.py",
+      "bytes": 18644,
+      "sha256": "d150244a8ddf828550244d35a86d79ffaf739161f73d3495def1f18df3cdd1c8"
+    },
+    {
+      "path": "scripts/audit_preparation.py",
+      "bytes": 4670,
+      "sha256": "32f4a6d3df67a8efaaf565c255404fa87b427b45d8349cde0667111946228bd5"
+    },
+    {
+      "path": "configs/audit_preparation.json",
+      "bytes": 258,
+      "sha256": "2a745230a2fcea0daa71510609306751f8951d1d7c8ee1f424d8bdb4ef07ddd8"
+    }
+  ],
+  "input_manifest": {
+    "path": "tables/file_manifest.json",
+    "bytes": 31686,
+    "sha256": "d499da4db902f139f2fd9a3cb02676eb34bab2e3c3aab3ab97b814df3be8e209"
+  },
+  "config": {
+    "stage": "P0-data-audit",
+    "mode": "audit_preparation",
+    "data_id": "D0001",
+    "parent_run_id": "R0002",
+    "change": "Structural audit and prefix comparison of global flight quality flags",
+    "threads": 16,
+    "seed": 42,
+    "test_target_sealed": true
+  },
+  "result": {
+    "raw_rows": 3057590,
+    "raw_row_ids_unique": true,
+    "code_date_outside_observed_range": {
+      "Origin": 0,
+      "Dest": 0
+    },
+    "candidate_rows": 3046298,
+    "accepted_rows": 2823769,
+    "development_accepted_rows": 2261745,
+    "development_same_instant_pairs": 0,
+    "future_qa_changed_flags_total": 13,
+    "scope": "Structural full-period audit; outcome analysis confined to April-July UTC",
+    "limitation": "BTS and accepted adjacent connections remain a retrospective outcome-qualified cohort."
+  },
+  "ended_at_utc": "2026-10-23T21:51:40.554847+00:00",
+  "elapsed_seconds": 102.13324640000064,
+  "outputs": [
+    {
+      "path": "experiments/runs/R0003/config.json",
+      "bytes": 266,
+      "sha256": "6cc48b12dab3ffd3891ba144a965b257eb4691158939423758e80654b2139e16"
+    },
+    {
+      "path": "experiments/runs/R0003/development_trace_examples.csv",
+      "bytes": 14309,
+      "sha256": "fa31ed49252a5a5b3a896ba054af575b929767e980e328f1cc33001f244f1360"
+    },
+    {
+      "path": "experiments/runs/R0003/flight_fields.csv",
+      "bytes": 2715,
+      "sha256": "cdbe5c57cf2613c2e208833011d7e1c1e35400971dfb6ee1e145e30ad7030b64"
+    },
+    {
+      "path": "experiments/runs/R0003/monthly_structural_audit.csv",
+      "bytes": 321,
+      "sha256": "f7621710c98ad8efc71a2b27b5208bf09e129e6da4290bb3d3a5bfad24c52fdb"
+    },
+    {
+      "path": "experiments/runs/R0003/prefix_difference_2026-05-01_actual_order_conflict.csv",
+      "bytes": 305,
+      "sha256": "2442d5db082e9c195be21c7dd567dce2872e6f53b2cacfe1467af60531b0e968"
+    },
+    {
+      "path": "experiments/runs/R0003/prefix_difference_2026-06-01_actual_order_conflict.csv",
+      "bytes": 232,
+      "sha256": "15a0fc678b2b8ecf00092ed76fed0e60e77d95c441e7f6ddf45c8683c2310a81"
+    },
+    {
+      "path": "experiments/runs/R0003/prefix_difference_2026-07-01_actual_order_conflict.csv",
+      "bytes": 451,
+      "sha256": "6fd5f5fc4b9abbdb5aeed5e109d94a54ac12912b76f98ec3e71524e8bd03b6e6"
+    },
+    {
+      "path": "experiments/runs/R0003/prefix_difference_2026-08-01_actual_order_conflict.csv",
+      "bytes": 303,
+      "sha256": "6d40647b65a1e1b3c7f9c9e67c9b917a8137114808b9abd7c884d5ab4338b037"
+    },
+    {
+      "path": "experiments/runs/R0003/prefix_qa_audit.csv",
+      "bytes": 734,
+      "sha256": "45a2de9294f81f808c9f5a11b501e6381f43af9b08c841becee262cd25d06419"
+    },
+    {
+      "path": "experiments/runs/R0003/preparation_audit.json",
+      "bytes": 514,
+      "sha256": "762420ede411bc5c821e77872f409c25f9a48d619dc23becdb0f1a6b7bd46558"
+    },
+    {
+      "path": "experiments/runs/R0003/resources.csv",
+      "bytes": 1242,
+      "sha256": "517a87ea14a272979be7f77a5cdea67c78cc502d45a17fdcba69fa52d93fbd1c"
+    },
+    {
+      "path": "experiments/runs/R0003/run.log",
+      "bytes": 376,
+      "sha256": "b5157b60ab09cba0bbbc23abf71cbba12a497ef59245ad2cebce05e603e4f0f5"
+    }
+  ]
+}

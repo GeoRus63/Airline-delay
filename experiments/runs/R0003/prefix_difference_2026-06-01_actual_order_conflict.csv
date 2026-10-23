@@ -1,0 +1,3 @@
+flight_id,source_file,source_row,Tail_Number,scheduled_dep_utc,actual_order_conflict
+2026_05:578152,2026_05.zip,578152,N232WN,2026-05-31 23:40:00+00:00,True
+2026_05:391751,2026_05.zip,391751,N653FR,2026-05-31 23:19:00+00:00,True

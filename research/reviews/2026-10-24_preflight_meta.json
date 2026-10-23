@@ -1,0 +1,7 @@
+{
+  "url": "https://chatgpt.com/c/6adbd4e2-17b8-83ec-a60c-13670727a92f",
+  "model_label_observed": "Pro",
+  "prompt": "2026-10-24_preflight_prompt.txt",
+  "response": "2026-10-24_preflight_response.txt",
+  "scope": "Methodology review only; no direct source-code or raw-data validation by web reviewer"
+}

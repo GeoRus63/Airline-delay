@@ -111,12 +111,15 @@ def execute(config, run_dir):
         eda(frame, run_dir)
         rq1(run_dir, development=True)
         for name in ['cleaning_summary.json', 'connection_exclusions.csv']:
-            shutil.copy2(ROOT / 'tables' / name, run_dir / name)
+            shutil.copy2(ROOT / config.get('preparation_evidence_dir', 'tables') / name, run_dir / name)
         render_notebooks(run_dir)
         return result
     if config['mode'] == 'audit_preparation':
         from audit_preparation import run
         return run(run_dir)
+    if config['mode'] == 'rebuild_cohorts':
+        from rebuild_cohorts import run
+        return run(run_dir, ROOT / 'processed' / config['data_id'])
     raise ValueError(f"Unsupported mode: {config['mode']}")
 
 
@@ -138,9 +141,12 @@ def main():
     source_names = ['scripts/run_pipeline.py', 'scripts/prepare_flights.py']
     if config['mode'] == 'audit_preparation':
         source_names.append('scripts/audit_preparation.py')
+    elif config['mode'] == 'rebuild_cohorts':
+        source_names.append('scripts/rebuild_cohorts.py')
     elif config['mode'] == 'development':
         source_names += ['scripts/build_features.py', 'scripts/train_models.py', 'scripts/evaluate_models.py',
                          'scripts/analyze_eda.py', 'scripts/analyze_rq1.py', 'scripts/render_notebooks.py']
+        source_names += [p.relative_to(ROOT).as_posix() for p in sorted((ROOT / 'notebooks').glob('*.ipynb')) if p.name[:2] in ['01', '03', '04', '05']]
     source_names.append(config_path.relative_to(ROOT).as_posix())
     for name in source_names:
         committed = subprocess.check_output(['git', 'show', f'{git_commit}:{name}'], cwd=ROOT)
@@ -153,6 +159,14 @@ def main():
                 'source_files': [receipt(ROOT / name) for name in source_names],
                 'input_manifest': receipt(ROOT / 'tables/file_manifest.json'), 'config': config}
     write_json(run_dir / 'manifest.json', manifest)
+    if config.get('data_manifest_path'):
+        data_manifest_file = ROOT / config['data_manifest_path']
+        data_manifest = json.loads(data_manifest_file.read_text(encoding='utf-8'))
+        for item in data_manifest['outputs']:
+            if sha256(ROOT / item['path']) != item['sha256']:
+                raise RuntimeError(f"Derived input changed: {item['path']}")
+        shutil.copy2(data_manifest_file, run_dir / 'data_manifest.json')
+        manifest['derived_input_manifest'] = receipt(data_manifest_file)
     update_index(args.run_id, config, 'running', 'Execution in progress')
     stop = threading.Event()
     monitor = threading.Thread(target=monitor_resources, args=(run_dir / 'resources.csv', stop), daemon=True)

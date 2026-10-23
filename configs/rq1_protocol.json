@@ -1,0 +1,19 @@
+{
+  "registered_before_first_model": true,
+  "development_window": ["2026-04-01T00:00:00Z", "2026-08-01T00:00:00Z"],
+  "main_threshold": 15,
+  "sensitivity_thresholds": ["gt0", "ge5", "ge15"],
+  "master_delay_bins": [0, 5, 15, 30, 60, 120, "inf"],
+  "turnaround_bins": [0, 45, 90, 180, 1440.000001],
+  "airport_min_main_rows": 1000,
+  "airport_min_prediction_days": 30,
+  "cell_min_rows": 30,
+  "cell_min_prediction_days": 10,
+  "minimum_retained_share": 0.5,
+  "support_selection": "Use covariates and counts only; first full eligible airport set, then predeclared top 50/25/10/5 by main-sample count if support fails. Each attempt is retained. Stop at first cohort with >=2 airports, nonempty common cells and every airport retained share>=0.5.",
+  "fallback_airport_limits": [50, 25, 10, 5],
+  "weights": "Pooled development counts across selected airports within common cells; identical across airports. Threshold-specific conditioning of a fixed master grid/reference is required because eligibility populations differ.",
+  "bootstrap": {"unit": "common UTC prediction-date moving blocks", "block_days": 7, "replicates": 1000, "seed": 42, "interval": "95% percentile", "min_valid_replicates": 950},
+  "unsupported": "NA; never zero or per-airport renormalization",
+  "test_period": "Freeze development airport set, cells, weights and rules before August; do not change to improve August support"
+}

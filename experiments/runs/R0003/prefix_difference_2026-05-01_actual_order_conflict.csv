@@ -1,0 +1,4 @@
+flight_id,source_file,source_row,Tail_Number,scheduled_dep_utc,actual_order_conflict
+2026_04:533935,2026_04.zip,533935,N423AN,2026-04-30 23:30:00+00:00,True
+2026_04:418681,2026_04.zip,418681,N8925Q,2026-04-30 22:55:00+00:00,True
+2026_04:535370,2026_04.zip,535370,N914UY,2026-04-30 23:52:00+00:00,True

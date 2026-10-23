@@ -1,0 +1,15 @@
+{
+  "raw_rows": 3057590,
+  "raw_row_ids_unique": true,
+  "code_date_outside_observed_range": {
+    "Origin": 0,
+    "Dest": 0
+  },
+  "candidate_rows": 3046298,
+  "accepted_rows": 2823769,
+  "development_accepted_rows": 2261745,
+  "development_same_instant_pairs": 0,
+  "future_qa_changed_flags_total": 13,
+  "scope": "Structural full-period audit; outcome analysis confined to April-July UTC",
+  "limitation": "BTS and accepted adjacent connections remain a retrospective outcome-qualified cohort."
+}
