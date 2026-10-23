@@ -1,9 +1,14 @@
 """Structural isolation checks on tiny synthetic flight histories."""
 import unittest
+import json
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from unittest.mock import patch
 
 import pandas as pd
 
-from scripts.rebuild_cohorts import rebuild
+from scripts.rebuild_cohorts import rebuild, run
+from scripts.prepare_flights import build_connections
 
 
 def flights(times):
@@ -76,6 +81,43 @@ class MonthlyCohortTests(unittest.TestCase):
         result, _ = rebuild(frame)
         self.assertTrue(result.iloc[0].main_analysis_eligible)
         self.assertFalse(result.iloc[0].rq2_eligible)
+
+    def test_boundary_downstream_schedule_tie_rejected(self):
+        frame = flights(["2026-07-31 22:00Z", "2026-08-01 00:10Z", "2026-08-01 00:10Z"])
+        result, _ = rebuild(frame)
+        pair = result.iloc[0]
+        self.assertTrue(pair.downstream_outside_qa_window)
+        self.assertFalse(pair.check_unique_schedule)
+        self.assertEqual(pair.first_exclusion_reason, "unique_schedule")
+        self.assertFalse(pair.main_analysis_eligible)
+        self.assertFalse(pair.rq2_eligible)
+
+    def test_boundary_downstream_duplicate_key_rejected(self):
+        frame = flights(["2026-07-31 22:00Z", "2026-08-01 00:10Z"])
+        frame.loc[1, "duplicate_key"] = True
+        result, _ = rebuild(frame)
+        pair = result.iloc[0]
+        self.assertTrue(pair.downstream_outside_qa_window)
+        self.assertFalse(pair.check_unique_schedule)
+        self.assertEqual(pair.first_exclusion_reason, "unique_schedule")
+        self.assertFalse(pair.main_analysis_eligible)
+        self.assertFalse(pair.rq2_eligible)
+
+    def test_run_metadata_uses_destination_data_id(self):
+        frame = flights(["2026-04-10 09:00Z", "2026-04-10 10:00Z"])
+        candidates, _ = build_connections(frame)
+        with TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "processed").mkdir()
+            (root / "tables").mkdir()
+            frame.to_csv(root / "processed/flights_clean.csv.gz", index=False)
+            candidates.to_csv(root / "processed/connection_candidates.csv.gz", index=False)
+            (root / "tables/cleaning_summary.json").write_text('{"summary":{"raw_flight_rows":2}}', encoding="utf-8")
+            with patch("scripts.rebuild_cohorts.ROOT", root):
+                summary = run(root / "run", root / "processed/D0003")
+            self.assertEqual(summary["data_id"], "D0003")
+            for path in [root / "run/cohort_data_manifest.json", root / "processed/D0003/cleaning_summary.json"]:
+                self.assertEqual(json.loads(path.read_text(encoding="utf-8"))["data_id"], "D0003")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,49 @@
+{
+  "data_id": "D0002",
+  "source_data_id": "D0001",
+  "inputs": [
+    {
+      "path": "processed/flights_clean.csv.gz",
+      "bytes": 191461305,
+      "sha256": "a991822e9d14b483e490398a3230ea6103ba8ad6f344a8e0ab14cf6a7bc7d11c"
+    },
+    {
+      "path": "processed/connection_candidates.csv.gz",
+      "bytes": 215827394,
+      "sha256": "e07365d6e29d27da3951f91a02bc2abd94a8b83c9da654fc95463ad44ec0510e"
+    },
+    {
+      "path": "tables/cleaning_summary.json",
+      "bytes": 2038,
+      "sha256": "e369ab655ed64d10bb6a1bef8b1a9d36adbf00cfc3edf8be4a3c8b9407e0c0b3"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "processed/D0002/cleaning_summary.json",
+      "bytes": 2844,
+      "sha256": "9be4d0e2c2744f8fdba96dda3cbbaf0a281c5d5bca7068e2306af465e5d4fd60"
+    },
+    {
+      "path": "processed/D0002/connection_candidates.csv.gz",
+      "bytes": 277628046,
+      "sha256": "7ba29f3fd6478aada89b13c5b770cc84773a0789b7621f3c7c67ca7510de9cb1"
+    },
+    {
+      "path": "processed/D0002/connection_exclusions.csv",
+      "bytes": 499,
+      "sha256": "482f0784f2c5ecc42a74ace7f9b26e6bfbea1a4c822bbd8dcd85c269336e6cb1"
+    },
+    {
+      "path": "processed/D0002/flight_connections.csv.gz",
+      "bytes": 256086221,
+      "sha256": "f376e020cae03c3ae9a6c5db430ff809ea0ef6d6533e1702d7a5e51455b95d17"
+    },
+    {
+      "path": "processed/D0002/flight_connections.pkl",
+      "bytes": 1095760101,
+      "sha256": "9cfc3b869e2d52964e85a1bc3f6dc212282e8eca2df6f6a414acf1d2c49948cc"
+    }
+  ],
+  "code_sha256": "06c38d65aa1dea8a4a46368385d1a763e1545140ddcf6260a315d4b62dd80551"
+}

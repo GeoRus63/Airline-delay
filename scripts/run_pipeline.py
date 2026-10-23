@@ -76,9 +76,20 @@ def monitor_resources(path, stop):
     process = psutil.Process()
     with path.open('w', encoding='utf-8', newline='') as stream:
         writer = csv.writer(stream)
-        writer.writerow(['utc', 'process_rss_bytes', 'process_cpu_percent', 'system_available_bytes'])
+        writer.writerow(['utc', 'process_rss_bytes', 'process_cpu_percent', 'system_available_bytes',
+                         'process_tree_rss_bytes', 'process_tree_cpu_seconds', 'child_processes'])
         while not stop.is_set():
-            writer.writerow([now(), process.memory_info().rss, process.cpu_percent(), psutil.virtual_memory().available])
+            family = [process, *process.children(recursive=True)]
+            tree_rss, tree_cpu = 0, 0.0
+            for member in family:
+                try:
+                    tree_rss += member.memory_info().rss
+                    usage = member.cpu_times()
+                    tree_cpu += usage.user + usage.system
+                except (psutil.NoSuchProcess, psutil.AccessDenied):
+                    pass
+            writer.writerow([now(), process.memory_info().rss, process.cpu_percent(), psutil.virtual_memory().available,
+                             tree_rss, tree_cpu, len(family) - 1])
             stream.flush()
             stop.wait(5)
 
@@ -104,6 +115,7 @@ def execute(config, run_dir):
         from train_models import run_development
         frame = load_base_features(ROOT / config.get('connection_path', 'processed/flight_connections.csv.gz'), development_only=True)
         write_json(run_dir / 'feature_audit.json', frame.attrs.get('feature_audit', {}))
+        shutil.copy2(ROOT / 'tables/feature_dictionary.csv', run_dir / 'feature_dictionary.csv')
         result = run_development(frame, config, run_dir)
         from analyze_eda import run as eda
         from analyze_rq1 import run as rq1
@@ -147,6 +159,7 @@ def main():
         source_names += ['scripts/build_features.py', 'scripts/train_models.py', 'scripts/evaluate_models.py',
                          'scripts/analyze_eda.py', 'scripts/analyze_rq1.py', 'scripts/render_notebooks.py']
         source_names += [p.relative_to(ROOT).as_posix() for p in sorted((ROOT / 'notebooks').glob('*.ipynb')) if p.name[:2] in ['01', '03', '04', '05']]
+        source_names.append('tables/feature_dictionary.csv')
     source_names.append(config_path.relative_to(ROOT).as_posix())
     for name in source_names:
         committed = subprocess.check_output(['git', 'show', f'{git_commit}:{name}'], cwd=ROOT)

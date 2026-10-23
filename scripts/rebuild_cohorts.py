@@ -1,4 +1,4 @@
-"""D0002 monthly retrospective QA snapshots; not an online deployment cohort.
+"""Monthly retrospective QA snapshots; not an online deployment cohort.
 
 Full-plan adjacency is retained. Future endpoint outcomes remain necessary for
 completed-connection labels, but never propagate QA flags to earlier pairs.
@@ -15,7 +15,6 @@ except ImportError:
     from prepare_flights import build_connections, local_schedule_to_utc
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_ID = "D0002"
 FLAGS = ["tail_schedule_incomplete", "schedule_tie", "actual_order_conflict"]
 
 
@@ -94,7 +93,12 @@ def rebuild(flights, candidates=None):
         down_bad = down.map(flags.schedule_tie).fillna(False).astype(bool)
         # The boundary endpoint is checked locally; its whole-tail flags do not propagate.
         down_bad |= down.map(lookup.duplicate_key).fillna(True).astype(bool) & down_inside
-        pairs.loc[mask, "check_unique_schedule"] = ~(up_bad | down_bad) & sample.upstream_scheduled_dep_utc.ne(sample.downstream_scheduled_dep_utc)
+        # Endpoint plan ambiguity remains disqualifying even beyond the QA cutoff.
+        # Unlike whole-tail operational flags, this is a local full-plan check.
+        pairs.loc[mask, "check_unique_schedule"] = (
+            sample.full_period_audit_check_unique_schedule.fillna(False).astype(bool)
+            & ~(up_bad | down_bad)
+            & sample.upstream_scheduled_dep_utc.ne(sample.downstream_scheduled_dep_utc))
         order_bad = up.map(flags.actual_order_conflict).fillna(True).astype(bool) | down.map(flags.actual_order_conflict).fillna(False).astype(bool)
         pairs.loc[mask, "check_actual_order_consistent"] = ~order_bad & sample.upstream_actual_dep_utc.lt(sample.downstream_actual_dep_utc)
         audit.update(cohort_pairs=len(sample), boundary_downstream_pairs=int(boundary.sum()))
@@ -111,6 +115,7 @@ def rebuild(flights, candidates=None):
 
 def run(output_dir, data_dir=ROOT / "processed/D0002"):
     output_dir, data_dir = Path(output_dir), Path(data_dir)
+    data_id = data_dir.name
     if data_dir.exists() and any(data_dir.iterdir()):
         raise FileExistsError(f"Refusing to overwrite derived data: {data_dir}")
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -139,7 +144,7 @@ def run(output_dir, data_dir=ROOT / "processed/D0002"):
     pd.DataFrame(differences).to_csv(output_dir / "cohort_check_differences.csv", index=False)
     pairs.loc[changed, ["connection_id", "qa_cohort_month", "first_exclusion_reason", "full_period_audit_first_exclusion_reason"]].to_csv(output_dir / "cohort_membership_changes.csv", index=False)
     audit.to_csv(output_dir / "cohort_structural_audit.csv", index=False)
-    summary = {"data_id": DATA_ID, "source_data_id": "D0001", "candidate_rows": len(pairs),
+    summary = {"data_id": data_id, "source_data_id": "D0001", "candidate_rows": len(pairs),
                "accepted_rows": int(pairs.main_analysis_eligible.sum()), "rq2_rows": int(pairs.rq2_eligible.sum()),
                "changed_membership_rows": int(changed.sum()), "data_dir": data_dir.relative_to(ROOT).as_posix(),
                "boundary_accepted_rows": int((pairs.main_analysis_eligible & pairs.downstream_outside_qa_window).sum()),
@@ -153,9 +158,9 @@ def run(output_dir, data_dir=ROOT / "processed/D0002"):
     exclusions.to_csv(data_dir / "connection_exclusions.csv", index=False)
     source_summary = ROOT / "tables/cleaning_summary.json"
     cleaning = json.loads(source_summary.read_text(encoding="utf-8"))
-    cleaning["data_id"] = DATA_ID
+    cleaning["data_id"] = data_id
     cleaning["source_data_id"] = "D0001"
-    cleaning["audit_inheritance"] = "Raw-flight audit inherited from D0001. Full-period flight flags are audit only; D0002 monthly connection qualification is authoritative."
+    cleaning["audit_inheritance"] = f"Raw-flight audit inherited from D0001. Full-period flight flags are audit only; {data_id} monthly connection qualification is authoritative."
     cleaning["summary"].update(candidate_connections=len(pairs), accepted_connections=summary["accepted_rows"],
                                accepted_share_of_candidates=summary["accepted_rows"] / max(len(pairs), 1),
                                accepted_overnight_connections=int(pairs.loc[pairs.main_analysis_eligible, "overnight_scheduled"].sum()),
@@ -165,7 +170,7 @@ def run(output_dir, data_dir=ROOT / "processed/D0002"):
     (data_dir / "cleaning_summary.json").write_text(json.dumps(cleaning, ensure_ascii=False, indent=2), encoding="utf-8")
     sources = [ROOT / "processed/flights_clean.csv.gz", ROOT / "processed/connection_candidates.csv.gz", source_summary]
     products = sorted(data_dir.iterdir())
-    manifest = {"data_id": DATA_ID, "source_data_id": "D0001",
+    manifest = {"data_id": data_id, "source_data_id": "D0001",
                 "inputs": [{"path": p.relative_to(ROOT).as_posix(), "bytes": p.stat().st_size, "sha256": file_sha256(p)} for p in sources],
                 "outputs": [{"path": p.relative_to(ROOT).as_posix(), "bytes": p.stat().st_size, "sha256": file_sha256(p)} for p in products],
                 "code_sha256": file_sha256(Path(__file__))}

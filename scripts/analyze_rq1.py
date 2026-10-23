@@ -65,8 +65,11 @@ def select_rq1(source: pd.DataFrame, development: bool = True):
 
 
 def summarize_airports(data: pd.DataFrame, monthly: bool = False):
-    keys = (["month_utc"] if monthly else []) + ["airport_id", "airport_code"]
+    # Stable AirportID is the comparison unit: a PBI/DJT code change must not
+    # split the same airport into two supposedly independent airport estimates.
+    keys = (["month_utc"] if monthly else []) + ["airport_id"]
     summary = data.groupby(keys, observed=True, dropna=False).agg(
+        airport_code=("airport_code", lambda x: '|'.join(sorted(set(x.dropna().astype(str))))),
         n=("connection_id", "size"), mean_delta=("delta", "mean"), median_delta=("delta", "median"),
         p10_delta=("delta", lambda x: x.quantile(.1)), p90_delta=("delta", lambda x: x.quantile(.9)),
         reduction_share=("is_reduction", "mean"), amplification_share=("is_amplification", "mean"),
@@ -92,7 +95,8 @@ def run(run_dir: str | Path, development: bool = True) -> dict:
     connection_path = Path(config.get("connection_path", "processed/flight_connections.csv.gz"))
     if not connection_path.is_absolute():
         connection_path = ROOT / connection_path
-    source = pd.read_csv(connection_path, usecols=RQ1_COLUMNS, low_memory=False)
+    cache = connection_path.with_name('flight_connections.pkl')
+    source = pd.read_pickle(cache)[RQ1_COLUMNS] if cache.is_file() else pd.read_csv(connection_path, usecols=RQ1_COLUMNS, low_memory=False)
     data, audit = select_rq1(source, development=development)
     if data.empty:
         raise ValueError("No main-sample RQ1 observations in the requested scope")

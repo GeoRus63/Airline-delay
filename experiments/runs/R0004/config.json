@@ -1,0 +1,11 @@
+{
+  "stage": "P0-data-correction",
+  "mode": "rebuild_cohorts",
+  "data_id": "D0002",
+  "source_data_id": "D0001",
+  "parent_run_id": "R0003",
+  "change": "Isolate retrospective QA flags by prediction-month cutoff instead of the complete five-month archive",
+  "threads": 16,
+  "seed": 42,
+  "test_target_sealed": true
+}

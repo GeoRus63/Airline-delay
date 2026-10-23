@@ -1,0 +1,24 @@
+{
+  "data_id": "D0002",
+  "source_data_id": "D0001",
+  "candidate_rows": 3046298,
+  "accepted_rows": 2821852,
+  "rq2_rows": 2821852,
+  "changed_membership_rows": 1981,
+  "data_dir": "processed/D0002",
+  "boundary_accepted_rows": 6205,
+  "qa_out_of_scope_rows": 57302,
+  "rules": {
+    "qa_month": "upstream actual arrival UTC month",
+    "missing_schedule_membership": "origin local FlightDate midnight; unknown dates conservatively included",
+    "scope": "retrospective normally completed connections; full-plan adjacency; future endpoint labels allowed but no propagation of endpoint QA",
+    "actual_event_cutoff": "strictly before monthly cutoff",
+    "months": [
+      "2026-04",
+      "2026-05",
+      "2026-06",
+      "2026-07",
+      "2026-08"
+    ]
+  }
+}
