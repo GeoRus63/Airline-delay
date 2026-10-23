@@ -172,6 +172,25 @@ class WeatherContractTests(unittest.TestCase):
         self.assertTrue(pd.isna(matched.loc["too_old", "wind_knots"]))
         self.assertTrue(pd.isna(matched.loc["latest", "precip_flag"]))
 
+    def test_metar_missing_reason_separates_conflict_stale_and_no_observation(self):
+        observations = pd.DataFrame({
+            "airport_id": [1, 2],
+            "weather_time": pd.to_datetime(["2026-04-01T09:00Z", "2026-04-01T06:00Z"], utc=True),
+            "available_at": pd.to_datetime(["2026-04-01T09:05Z", "2026-04-01T06:05Z"], utc=True),
+            "wind_knots": [np.nan, 7.0], "metar_ambiguous": [True, False],
+        })
+        flights = pd.DataFrame({
+            "flight_id": ["conflict", "stale", "no_obs"],
+            "airport_id": [1, 2, 3],
+            "prediction_time": pd.to_datetime([
+                "2026-04-01T09:06Z", "2026-04-01T08:06Z", "2026-04-01T09:00Z",
+            ], utc=True),
+        })
+        result = match_metar_asof(flights, observations).set_index("flight_id")
+        self.assertEqual(result.loc["conflict", "metar_missing_reason"], "conflicting_reports")
+        self.assertEqual(result.loc["stale", "metar_missing_reason"], "stale_observation")
+        self.assertEqual(result.loc["no_obs", "metar_missing_reason"], "no_observation")
+
     def test_taf_latest_cancel_or_nil_never_falls_back(self):
         segments = pd.DataFrame({
             "airport_id": [1, 1, 1],
@@ -294,6 +313,10 @@ class WeatherContractTests(unittest.TestCase):
     def test_noaa_trace_missing_and_provenance_are_preserved(self):
         self.assertEqual(noaa_precip_status(0.2, "", "313"), "measured")
         self.assertEqual(noaa_precip_status(0.0, "2", "313"), "trace")
+        self.assertEqual(noaa_precip_status(0.0, "T", "382"), "trace")
+        self.assertEqual(noaa_precip_status(0.0, "2", "382"), "source_specific_measurement_code")
+        self.assertEqual(noaa_precip_status(0.2, "1", "313"), "invalid_measurement_code")
+        self.assertEqual(noaa_precip_status(0.0, "2", "413"), "source_specific_measurement_code")
         self.assertEqual(noaa_precip_status(np.nan, "", "313"), "missing")
         raw = pd.DataFrame({
             "STATION": ["USW00000001", "USW00000001"],

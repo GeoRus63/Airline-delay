@@ -104,7 +104,7 @@ def _plot_network(nodes, edges, destination):
     save_figure(fig, destination / "rq1_network_geographic.png")
 
 
-def _plot_airports(airports, nodes, destination):
+def _plot_airports(airports, nodes, destination, min_valid_replicates=950):
     main = airports.loc[airports.threshold.eq("ge15") & airports.supported].copy()
     main = main.nlargest(30, "retained_n").merge(nodes[["airport_id", "airport_code"]], on="airport_id", how="left")
     main = main.sort_values("airport_id")
@@ -113,14 +113,19 @@ def _plot_airports(airports, nodes, destination):
         positions = np.arange(len(main))
         ci = main.ci_low.notna() & main.ci_high.notna()
         ax.hlines(positions[ci], main.loc[ci, "ci_low"], main.loc[ci, "ci_high"], color="#53718a", linewidth=1.3)
-        ax.scatter(main.standardized_mean, positions, color="#24536c", s=20)
+        ax.scatter(main.loc[ci, "standardized_mean"], positions[ci], color="#24536c", s=24,
+                   label="Point estimate with 95% interval")
+        ax.scatter(main.loc[~ci, "standardized_mean"], positions[~ci], facecolors="none",
+                   edgecolors="#24536c", linewidths=1.3, s=32,
+                   label=f"Point only: valid bootstrap < {min_valid_replicates} or interval unavailable")
         labels = main.airport_code.fillna(main.airport_id.astype(str)) + " (n=" + main.retained_n.astype(int).astype(str) + ")"
         ax.set(yticks=positions, yticklabels=labels)
+        ax.legend(loc="upper center", bbox_to_anchor=(.5, -.20), frameon=False, fontsize=8)
     else:
         ax.text(.5, .5, "No airport meets frozen common-support criteria", ha="center", transform=ax.transAxes)
     ax.axvline(0, color="#777777", linewidth=.8)
     ax.set(xlabel="Standardized mean net delay change (min / connection)",
-           title="Common-support estimates and 95% date-block intervals\nUp to 30 airports chosen by retained support, ordered by AirportID; not a causal ranking")
+           title=f"Common-support estimates | intervals require >= {min_valid_replicates} valid date-block draws\nUp to 30 airports chosen by retained support, ordered by AirportID; not a causal ranking")
     save_figure(fig, destination / "rq1_standardized_airports.png")
 
 
@@ -187,7 +192,8 @@ def run(config, run_dir):
     figures.mkdir(exist_ok=True)
     plot_style()
     _plot_network(nodes, edges, figures)
-    _plot_airports(airports, nodes, figures)
+    _plot_airports(airports, nodes, figures,
+                   min_valid_replicates=frozen["protocol"]["bootstrap"]["min_valid_replicates"])
     stability = pd.read_csv(output / "rq1_threshold_stability.csv")
     _plot_stability(stability, figures)
     summary = {"development": development, "raw": raw_summary, "standardized": standardized_summary,

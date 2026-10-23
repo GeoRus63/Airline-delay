@@ -54,6 +54,18 @@ NOAA_METAR_FILL_MAP = {
     "metar_visibility_miles": ("visibility", "km", "mile", "km_to_miles"),
     "metar_ceiling_ft": ("ceiling_height", "m", "ft", "m_to_feet"),
 }
+# G4a uses wind, gust, visibility and ceiling. A missing gust in an otherwise
+# valid METAR commonly means no gust was reported; a missing ceiling can mean
+# a valid clear/FEW/SCT sky report. Only fill those fields when their absence
+# is consistent with an unavailable whole report, or (for ceiling) an
+# explicitly unreported sky condition. Other mapped fields remain available
+# for overlap diagnostics, but are not added to the G4a NOAA sensitivity.
+NOAA_METAR_FILL_POLICY = {
+    "metar_wind_knots": "value_missing",
+    "metar_visibility_miles": "value_missing",
+    "metar_gust_knots": "whole_metar_missing",
+    "metar_ceiling_ft": "whole_metar_missing_or_sky_unreported",
+}
 NOAA_UNMAPPED_FIELDS = {
     "metar_precip_amount_in": "GHCNh precipitation accumulation period is not equivalent to IEM p01i.",
     "metar_precip_flag": "GHCNh precipitation amount/type codes are not mapped to METAR occurrence flags.",
@@ -240,6 +252,37 @@ def augment_noaa(frame, noaa, airports, lag_minutes=5, max_age_minutes=120, *,
             result.loc[original.notna() & result[source_marker].isna(), source_marker] = "IEM"
         missing_mask = original.isna()
         fill_counts[target] = 0
+        policy = NOAA_METAR_FILL_POLICY.get(target)
+        if policy is None:
+            continue  # retained in NOAA overlap diagnostics, outside G4a fill
+        whole_metar_missing = (
+            _safe_bool(result["metar_missing"])
+            if "metar_missing" in result
+            else pd.Series(False, index=result.index, dtype=bool)
+        )
+        # augment_metar prefixes the source feature name, so its ambiguity
+        # flag is currently `metar_metar_ambiguous`; accept the unprefixed
+        # matcher form too for direct callers. Conflicting reports are never a
+        # NOAA-fill opportunity, even though the matcher marks them missing.
+        ambiguous_col = next((column for column in
+                              ("metar_metar_ambiguous", "metar_ambiguous")
+                              if column in result), None)
+        ambiguous = (_safe_bool(result[ambiguous_col]) if ambiguous_col
+                     else pd.Series(False, index=result.index, dtype=bool))
+        whole_metar_missing &= ~ambiguous
+        if "metar_missing_reason" in result:
+            whole_metar_missing &= result.metar_missing_reason.isin(
+                ["no_observation", "stale_observation"])
+        missing_mask &= ~ambiguous
+        if policy == "whole_metar_missing":
+            missing_mask &= whole_metar_missing
+        elif policy == "whole_metar_missing_or_sky_unreported":
+            sky_unreported = (
+                pd.to_numeric(result["metar_sky_reported"], errors="coerce").eq(0)
+                if "metar_sky_reported" in result
+                else pd.Series(False, index=result.index, dtype=bool)
+            )
+            missing_mask &= whole_metar_missing | sky_unreported
         element, native_unit, target_unit, conversion = NOAA_METAR_FILL_MAP[target]
         candidates = _noaa_field_candidates(noaa_airports, target, lag_minutes)
         if not missing_mask.any() or candidates.empty:
@@ -281,6 +324,10 @@ def augment_noaa(frame, noaa, airports, lag_minutes=5, max_age_minutes=120, *,
     result.attrs["noaa_fill_assumption"] = (
         f"GHCNh observation_time + {lag_minutes} minutes; retrospective sensitivity only; "
         "historical receipt availability not verified")
+    result.attrs["noaa_qc_limitation"] = (
+        "Only exact documented source/Quality_Code pairs are accepted. GHCNh documents both "
+        "post-integration QC and component-source QC but does not specify their serialization/precedence "
+        "in the single per-element Quality_Code field; this branch is a sensitivity analysis, not full-QC certification.")
     result.attrs["noaa_unmapped_fields"] = NOAA_UNMAPPED_FIELDS.copy()
     return result
 
@@ -581,4 +628,3 @@ def augment_taf(flights, taf_segments, taf_bulletins, *, airport_col="airport_id
                      errors="ignore")
     work.index = pd.Index(original, name=original_index.name)
     return work
-

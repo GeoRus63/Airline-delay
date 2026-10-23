@@ -10,3 +10,4 @@ R0008,R0007,P2-aircraft-preparation,completed,Audit five-month 2024 primary and 
 R0009,R0007,P2-family,completed,Add 2024 B43 aircraft family to the fixed G1 linear model,Retain outputs; review before next stage,experiments/runs/R0009
 R0010,R0009,P2-variant,completed,Replace family with variant; preserve all other features and samples,Retain outputs; review before next stage,experiments/runs/R0010
 R0011,R0009,P3,failed,Add historical airport departures and upcoming planned airport load to family mainline,Retain failure; fix under a new run_id,experiments/runs/R0011
+R0012,R0009,P3,completed,Add historical airport departures and upcoming planned airport load to family mainline,Retain outputs; review before next stage,experiments/runs/R0012

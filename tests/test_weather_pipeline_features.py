@@ -32,7 +32,7 @@ class WeatherPipelineFeatureTests(unittest.TestCase):
             "weather_time": pd.to_datetime(["2026-04-01T09:00:00Z"], utc=True).as_unit("us"),
             "available_at": pd.to_datetime(["2026-04-01T09:05:00Z"], utc=True).as_unit("us"),
             "availability_assumption": ["weather_time_plus_5_minutes"],
-            "wind_knots": [10.0], "wind_direction_deg": [180.0], "gust_knots": [15.0],
+            "wind_knots": [np.nan], "wind_direction_deg": [180.0], "gust_knots": [15.0],
             "visibility_miles": [10.0], "ceiling_ft": [6000.0], "ceiling_reported": [1],
             "sky_reported": [1], "precip_amount_in": [np.nan],
             "precip_measurement_status": ["missing"], "precip_flag": pd.array([pd.NA], dtype="Int8"),
@@ -76,8 +76,8 @@ class WeatherPipelineFeatureTests(unittest.TestCase):
 
         noaa = prepare_weather.prepare_noaa_frame(pd.DataFrame({
             "STATION": ["USW00000001"], "DATE": ["2026-04-01T09:00:00Z"],
-            "temperature": [20.0], "temperature_Source_Code": ["313"],
-            "temperature_Quality_Code": ["1"],
+            "wind_speed": [5.0], "wind_speed_Source_Code": ["313"],
+            "wind_speed_Quality_Code": ["1"],
         }), source_file="tiny.psv.gz")
         noaa.to_csv(output / "noaa_observations.csv.gz", index=False, compression="gzip")
         paths["noaa_observations"] = output / "noaa_observations.csv.gz"
@@ -125,16 +125,16 @@ class WeatherPipelineFeatureTests(unittest.TestCase):
             self.assertTrue(pd.isna(result.loc[97, "taf_prevailing_wind_knots"]))
             self.assertEqual(result.loc[12, "taf_status"], "matched")
             self.assertEqual(result.loc[12, "taf_prevailing_wind_knots"], 11.0)
-            self.assertAlmostEqual(result.loc[12, "metar_temperature_f"], 68.0)
-            self.assertEqual(result.loc[12, "metar_temperature_f_source"], "GHCNh")
-            self.assertEqual(result.loc[12, "metar_temperature_f_noaa_source_code"], "313")
+            self.assertAlmostEqual(result.loc[12, "metar_wind_knots"], 5.0 * 1.943844)
+            self.assertEqual(result.loc[12, "metar_wind_knots_source"], "GHCNh")
+            self.assertEqual(result.loc[12, "metar_wind_knots_noaa_source_code"], "313")
             for column in pipeline_weather.METAR_MODEL_NUMERIC + pipeline_weather.TAF_MODEL_NUMERIC:
                 self.assertIn(column, result)
                 self.assertTrue(pd.api.types.is_float_dtype(result[column].dtype), column)
             self.assertTrue(pd.isna(result.loc[97, "taf_prevailing_wind_knots"]))
             noaa_loaded = pipeline_weather.load_noaa(manifest_path.parent)
-            self.assertEqual(str(noaa_loaded.temperature_Source_Code.dtype), "string")
-            self.assertEqual(noaa_loaded.temperature_Source_Code.iloc[0], "313")
+            self.assertEqual(str(noaa_loaded.wind_speed_Source_Code.dtype), "string")
+            self.assertEqual(noaa_loaded.wind_speed_Source_Code.iloc[0], "313")
 
             # Manifest validation checks all listed input/output hashes.
             with patch.object(pipeline_weather, "ROOT", root):

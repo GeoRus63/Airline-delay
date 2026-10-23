@@ -113,6 +113,16 @@ def write_weather_audit(frame, run_dir, config):
     for column in weather_flags:
         queries[column.replace('_missing', '_available')] = 1 - queries[column]
     available = [name.replace('_missing', '_available') for name in weather_flags]
+    if 'taf_prevailing_missing' in frame:
+        queries['taf_prevailing_available'] = frame.taf_prevailing_missing.eq(0).astype('int8')
+        queries['taf_latest_state_located'] = (frame.taf_product_id.notna() |
+            frame.taf_untimed_archive_issue_time.notna()).astype('int8')
+        available += ['taf_prevailing_available', 'taf_latest_state_located']
+    numeric = [name for name in METAR_MODEL_NUMERIC + TAF_MODEL_NUMERIC if name in frame]
+    variable_coverage = frame[numeric].notna().sum().rename('numeric_or_flag_present_n').to_frame()
+    variable_coverage['queries'] = len(frame)
+    variable_coverage['present_share'] = variable_coverage.numeric_or_flag_present_n / len(frame)
+    variable_coverage.rename_axis('feature').to_csv(tables / 'weather_variable_coverage.csv')
     pieces = {}
     for name, keys in [('airport_date', ['airport_id', 'date_utc']), ('month', ['month_utc']), ('airport', ['airport_id'])]:
         table = queries.groupby(keys, dropna=False)[available].agg(['count', 'sum', 'mean'])
@@ -144,6 +154,46 @@ def write_weather_audit(frame, run_dir, config):
         diagnosis['pairs'].to_csv(output / 'data/noaa_overlap_pairs.csv.gz', index=False, compression='gzip')
     summary = {'rows': len(queries), 'tables': pieces,
                'availability': {name: int(queries[name].sum()) for name in available},
-               'interpretation': 'Source match availability is not complete per-variable coverage; no-query cells are missing, not zero'}
+               'interpretation': 'taf_available means any approved active condition group, not complete weather. Source match is not complete per-variable coverage; no-query cells are missing, not zero'}
     (output / 'weather_coverage_summary.json').write_text(json.dumps(summary, indent=2), encoding='utf-8')
     return summary
+
+
+def compare_common_weather(frame, run_dir, config):
+    """Supplementary predictions-only comparison on the preregistered source mask."""
+    try:
+        from .compare_experiments import compare_runs
+    except ImportError:
+        from compare_experiments import compare_runs
+    if config.get('noaa_backfill') or str(config['feature_group']).upper() != 'G4B':
+        raise ValueError('Common weather comparison is defined on the IEM G4B mainline')
+    times = pd.to_datetime(frame.prediction_time, utc=True)
+    validation = times.ge(pd.Timestamp('2026-05-01', tz='UTC')) & times.lt(pd.Timestamp('2026-08-01', tz='UTC'))
+    mask = validation & frame.metar_missing.eq(0) & frame.taf_prevailing_missing.eq(0)
+    subset = frame.loc[mask, 'connection_id'].astype(str).tolist()
+    if not subset:
+        raise ValueError('No common METAR source/TAF prevailing validation rows')
+    folder = Path(run_dir) / 'common_weather'
+    folder.mkdir(exist_ok=False)
+    frame.loc[mask, ['connection_id', 'prediction_time']].to_csv(folder / 'sample_ids.csv.gz', index=False, compression='gzip')
+    selected = frame.loc[mask]
+    counts = selected.groupby(selected.prediction_time.dt.strftime('%Y-%m')).size().rename('n')
+    counts.rename_axis('month_utc').to_csv(folder / 'sample_counts.csv')
+    features = METAR_MODEL_NUMERIC + TAF_MODEL_NUMERIC
+    missing = selected[features].isna().sum().rename('missing_n').to_frame()
+    missing['n'] = len(selected)
+    missing['missing_share'] = missing.missing_n / missing.n
+    missing.rename_axis('feature').to_csv(folder / 'variable_missing.csv')
+    g3 = ROOT / 'experiments/runs' / config['common_weather_no_weather_run']
+    g4a = ROOT / 'experiments/runs' / config['parent_run_id']
+    current = Path(run_dir)
+    purpose = 'Preregistered common IEM METAR source and TAF prevailing availability subset; no refitting'
+    for reference, candidate, label in [(g3, g4a, 'G3_to_G4a'), (g4a, current, 'G4a_to_G4b'),
+                                         (g3, current, 'G3_to_G4b')]:
+        compare_runs(reference, candidate, folder / label, subset_ids=subset, comparison_purpose=purpose,
+                     allow_running_candidate=candidate == current)
+    receipt = {'definition': 'metar_missing == 0 AND taf_prevailing_missing == 0; May-July UTC validation',
+               'n': len(subset), 'full_validation_n': int(validation.sum()), 'refitted': False,
+               'uses_target_for_selection': False, 'description': purpose}
+    (folder / 'definition.json').write_text(json.dumps(receipt, indent=2), encoding='utf-8')
+    return receipt

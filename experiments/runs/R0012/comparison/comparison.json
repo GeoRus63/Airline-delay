@@ -1,0 +1,39 @@
+{
+  "reference_run": "R0009",
+  "candidate_run": "R0012",
+  "reference_model": "g2_family_linear",
+  "candidate_model": "g3_linear",
+  "parent_run_id": "R0009",
+  "candidate_declared_parent": "R0009",
+  "comparison_purpose": null,
+  "align_rows": false,
+  "candidate_status_at_comparison": "running",
+  "allow_running_candidate": true,
+  "evaluation_ids_sha256": "db4e500797d62152fece891a62b9c171822e97e4dea76ab92efd587bcfa8d68c",
+  "split_sha256": "4e419b1462154fb34ff4e412653cb9f1b73dc790d6b018967420e7e24441a593",
+  "sample_scope": "full_evaluation",
+  "full_evaluation_n": 1707091,
+  "compared_n": 1707091,
+  "compared_identity_set_sha256": "cb539627cfec0128f2fd808ee86124ee174250e0246c8054e7372968c8a56506",
+  "common_sample_columns": null,
+  "difference_definition": "candidate minus reference; positive is worse",
+  "bootstrap": {
+    "method": "paired non-circular moving UTC date blocks",
+    "block_days": 7,
+    "repeats": 1000,
+    "seed": 42,
+    "confidence_level": 0.95,
+    "full_calendar": "2026-05-01 through 2026-07-31 UTC, including zero-sample dates",
+    "monthly_intervals": "resample each monthly calendar separately",
+    "pooled_interval": "resample the full validation calendar; blocks never cross date gaps",
+    "empty_resamples": "Exclude only bootstrap replicates with sampled n=0; valid replicate counts are reported; no prediction rows are dropped",
+    "weighting": "sum AE / sum n; sqrt(sum SE / sum n); same sampled dates for both models"
+  },
+  "interpretation": "Paired sampling uncertainty, not causal evidence; explicit subsets are supplementary comparisons",
+  "outputs": [
+    "comparison_daily_stats.csv",
+    "comparison_metrics.csv",
+    "comparison_error_differences.png",
+    "comparison.json"
+  ]
+}

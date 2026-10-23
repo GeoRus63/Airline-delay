@@ -40,17 +40,20 @@ class WeatherFeatureTests(unittest.TestCase):
             "STATION": ["USW00000001"], "DATE": ["2026-04-01T09:00:00Z"],
             "temperature": [20.0], "temperature_Source_Code": ["313"],
             "temperature_Quality_Code": ["1"],
+            "wind_speed": [5.0], "wind_speed_Source_Code": ["313"],
+            "wind_speed_Quality_Code": ["1"],
         }))
         noaa["observation_time"] = noaa.observation_time.dt.as_unit("us")
         fill_frame = pd.DataFrame({"airport_id": [1], "prediction_time": ts(
-            ["2026-04-01T09:10:00Z"]).as_unit("ns")})
+            ["2026-04-01T09:10:00Z"]).as_unit("ns"), "metar_missing": [1]})
         for column in ("metar_temperature_f", "metar_dewpoint_f", "metar_wind_direction_deg",
                        "metar_relative_humidity", "metar_wind_knots", "metar_gust_knots",
                        "metar_visibility_miles", "metar_ceiling_ft", "metar_precip_amount_in",
                        "metar_precip_flag", "metar_rain_flag", "metar_snow_flag", "metar_thunder_flag"):
             fill_frame[column] = np.nan
         result = augment_noaa(fill_frame, noaa, airports)
-        self.assertAlmostEqual(result.metar_temperature_f.iloc[0], 68.0)
+        self.assertAlmostEqual(result.metar_wind_knots.iloc[0], 5.0 * 1.943844)
+        self.assertTrue(pd.isna(result.metar_temperature_f.iloc[0]))
 
     def test_taf_untimed_archive_blocks_fallback_with_nondefault_flight_index(self):
         flights = pd.DataFrame({"airport_id": [1],
@@ -187,8 +190,9 @@ class WeatherFeatureTests(unittest.TestCase):
         self.assertEqual(result.index.tolist(), [7, 3])
         self.assertEqual(result.loc[7, "metar_wind_knots"], 77.0)
         self.assertEqual(result.loc[7, "metar_wind_knots_source"], "IEM")
-        self.assertAlmostEqual(result.loc[7, "metar_temperature_f"], 69.8)
-        self.assertAlmostEqual(result.loc[7, "metar_relative_humidity"], 55.0)
+        # NOAA fields outside the fixed G4a set remain audit/overlap-only.
+        self.assertTrue(pd.isna(result.loc[7, "metar_temperature_f"]))
+        self.assertTrue(pd.isna(result.loc[7, "metar_relative_humidity"]))
         self.assertAlmostEqual(result.loc[7, "metar_wind_knots"], 77.0)
         # The 09:00Z wind fails QC; older valid 08:00Z data is selected as-of.
         frame.loc[7, "metar_wind_knots"] = np.nan
@@ -198,7 +202,48 @@ class WeatherFeatureTests(unittest.TestCase):
         self.assertEqual(result.loc[7, "metar_wind_knots_noaa_source_code"], "313")
         self.assertTrue(pd.isna(result.loc[7, "metar_precip_amount_in"]))
         self.assertTrue(pd.isna(result.loc[3, "metar_temperature_f"]))  # No future availability.
-        self.assertEqual(result.attrs["noaa_fill_counts"]["metar_temperature_f"], 1)
+        self.assertEqual(result.attrs["noaa_fill_counts"]["metar_temperature_f"], 0)
+
+    def test_noaa_backfill_respects_structural_gust_and_ceiling_missingness(self):
+        airports = pd.DataFrame({"airport_id": [1], "ghcnh_id": ["USW00000001"]})
+        noaa = prepare_noaa_frame(pd.DataFrame({
+            "STATION": ["USW00000001"], "DATE": ["2026-04-01T08:00:00Z"],
+            "wind_speed": [5.0], "wind_speed_Quality_Code": ["1"], "wind_speed_Source_Code": ["313"],
+            "wind_gust": [8.0], "wind_gust_Quality_Code": ["1"], "wind_gust_Source_Code": ["313"],
+            "visibility": [10.0], "visibility_Quality_Code": ["1"], "visibility_Source_Code": ["313"],
+            "ceiling_height": [300.0], "ceiling_height_Quality_Code": ["1"], "ceiling_height_Source_Code": ["313"],
+        }))
+        frame = pd.DataFrame({
+            "airport_id": [1, 1, 1, 1],
+            "prediction_time": ts(["2026-04-01T09:10Z"] * 4),
+            "metar_missing": [0, 0, 1, 1],
+            "metar_sky_reported": [1, 0, pd.NA, pd.NA],
+            # This is the name produced by augment_metar's current prefixing.
+            "metar_metar_ambiguous": [False, False, False, True],
+            "metar_wind_knots": [np.nan] * 4,
+            "metar_gust_knots": [np.nan] * 4,
+            "metar_visibility_miles": [np.nan] * 4,
+            "metar_ceiling_ft": [np.nan] * 4,
+            "metar_temperature_f": [np.nan] * 4, "metar_dewpoint_f": [np.nan] * 4,
+            "metar_wind_direction_deg": [np.nan] * 4,
+            "metar_relative_humidity": [np.nan] * 4,
+            "metar_precip_amount_in": [np.nan] * 4,
+            "metar_precip_flag": [pd.NA] * 4, "metar_rain_flag": [pd.NA] * 4,
+            "metar_snow_flag": [pd.NA] * 4, "metar_thunder_flag": [pd.NA] * 4,
+        }, index=[40, 10, 99, 55])
+        result = augment_noaa(frame, noaa, airports)
+        # Existing sky observation can mean clear/FEW/SCT; do not invent a ceiling.
+        self.assertTrue(pd.isna(result.loc[40, "metar_ceiling_ft"]))
+        # Gust absence on an otherwise usable METAR is not equivalent to missing weather.
+        self.assertTrue(pd.isna(result.loc[40, "metar_gust_knots"]))
+        self.assertTrue(pd.isna(result.loc[10, "metar_gust_knots"]))
+        # Explicitly unreported sky and a wholly unavailable report can be backfilled.
+        self.assertAlmostEqual(result.loc[10, "metar_ceiling_ft"], 300.0 / 0.3048)
+        self.assertAlmostEqual(result.loc[99, "metar_gust_knots"], 8.0 * 1.943844)
+        self.assertAlmostEqual(result.loc[99, "metar_ceiling_ft"], 300.0 / 0.3048)
+        # A conflicting duplicate is not a safe missing report to backfill.
+        for column in ("metar_wind_knots", "metar_gust_knots", "metar_visibility_miles", "metar_ceiling_ft"):
+            self.assertTrue(pd.isna(result.loc[55, column]), column)
 
     def test_noaa_overlap_diagnostics_reports_converted_exact_time_differences(self):
         airports = pd.DataFrame({"airport_id": [1], "ghcnh_id": ["USW00000001"]})

@@ -41,6 +41,7 @@ NOAA_LEGACY_FULL_PASS = {
     **{source: {"1"} for source in ("220", "221", "222", "223", "347", "348")},
 }
 NOAA_LEGACY_QC_SOURCES = set(NOAA_LEGACY_FULL_PASS) | {"345", "382"}
+NOAA_PRECIPITATION_TRACE_CODE_2_SOURCES = set(NOAA_LEGACY_FULL_PASS)
 
 NOAA_ELEMENTS = (
     "temperature", "dew_point_temperature", "wind_direction", "wind_speed",
@@ -249,6 +250,11 @@ def match_metar_asof(flights, observations, *, airport_col="airport_id",
         "relative_humidity") if column in result]
     result.loc[stale, feature_columns] = np.nan
     result["metar_missing"] = (result.weather_time.isna() | stale | ambiguous).astype("int8")
+    result["metar_missing_reason"] = np.select(
+        [ambiguous, stale, result.weather_time.isna()],
+        ["conflicting_reports", "stale_observation", "no_observation"],
+        default="available",
+    )
     result = result.sort_values("_metar_input_order")
     original_index = result.pop("_metar_original_index")
     result = result.drop(columns=["_metar_input_order", "_metar_airport_key"])
@@ -480,8 +486,18 @@ def noaa_precip_status(value, measurement_code, source_code):
         return "missing"
     code = "" if pd.isna(measurement_code) else str(measurement_code).strip().upper()
     source = "" if pd.isna(source_code) else str(source_code).strip()
-    if code == "2" or (code == "T" and source in {"343", "382"}):
+    if (code == "2" and source in NOAA_PRECIPITATION_TRACE_CODE_2_SOURCES) or (
+            code == "T" and source == "382"):
         return "trace"
+    # The documentation assigns measurement code 1 to impossible/inaccurate
+    # amounts for the listed legacy source families. Do not relabel such a
+    # numeric payload as a normal measurement; the original code remains intact.
+    if code == "1" and source in NOAA_PRECIPITATION_TRACE_CODE_2_SOURCES:
+        return "invalid_measurement_code"
+    # Other nonblank codes are source-specific (e.g. accumulation boundaries).
+    # Keep the raw code and avoid implying a plain hourly measured amount.
+    if code:
+        return "source_specific_measurement_code"
     return "measured"
 
 
@@ -580,7 +596,13 @@ def run(output_dir=None, summary_path=None):
         "taf_body_issue_time_used_as_availability_proxy": True,
         "taf_receive_time_verified": False,
         "noaa_rows": noaa_rows, "noaa_stations": len(noaa_stations),
-        "noaa_quality_policy": "strict source-specific full-pass whitelist; original codes retained",
+        "noaa_quality_policy": "strict exact source/QC whitelist; original element codes retained; sensitivity only",
+        "noaa_postintegration_qc_serialization_verified": False,
+        "noaa_qc_limitation": (
+            "GHCNh publishes one Quality_Code string per element and documents post-integration QC plus "
+            "component-source QC, but does not specify precedence/serialization when both apply. "
+            "Only exact documented source/QC pairs are accepted; this is not full-QC certification."
+        ),
         "noaa_historical_availability_verified": False,
     }
     summary_file.parent.mkdir(parents=True, exist_ok=True)
