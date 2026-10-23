@@ -1,0 +1,6 @@
+Origin,OriginAirportID,OriginCityName,first_date,last_date,flights,month
+PBI,14027,"West Palm Beach/Palm Beach, FL",2026-04-01,2026-04-30,3067,4
+PBI,14027,"West Palm Beach/Palm Beach, FL",2026-05-01,2026-05-31,2545,5
+PBI,14027,"West Palm Beach/Palm Beach, FL",2026-06-01,2026-06-30,2154,6
+PBI,14027,"West Palm Beach/Palm Beach, FL",2026-07-01,2026-07-31,2102,7
+DJT,14027,"West Palm Beach/Palm Beach, FL",2026-08-01,2026-08-31,2070,8

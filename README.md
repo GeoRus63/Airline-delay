@@ -1,53 +1,55 @@
-# Airline Delay — IND5003
+# Airline delay：项目与开工入口
 
-美国国内航班延误传播四人项目。本次提交包含 2026 年 4—5 月原始数据、项目要求、参考论文，以及 A 部分的数据清洗、同机航班衔接和整体 EDA。
+研究范围：2026 年 4–8 月，3,057,590 条 BTS 航班，355 个机场。研究同机航班衔接中的延误吸收与放大，并预测下一班的出发延误。
 
-A four-person IND5003 project on delay propagation in US domestic flights. This initial upload includes April–May 2026 raw data, the project brief, reference papers, and Part A: cleaning, same-aircraft connections and overall EDA.
+本次交付原始数据、下载核对记录、完整项目方案和准备脚本。全量清洗、特征连接、EDA 与建模在新电脑执行。
 
-## 文件入口 / Start here
+## 新电脑 Codex 开工入口
 
-| 内容 / Content | 路径 / Path |
-| --- | --- |
-| 原始 BTS 数据 / Raw BTS data | [2026_04.zip](2026_04.zip), [2026_05.zip](2026_05.zip) |
-| 项目要求 / Project brief | [ind5003-2610_projects.pdf](ind5003-2610_projects.pdf) |
-| 参考论文 / Reference papers | [papers/](papers/) |
-| A 部分说明 / Part A guide | [output_A/README_先读这里.md](output_A/README_先读这里.md) |
-| 数据清洗与衔接 / Cleaning and connections | [01 Notebook](output_A/01_数据清洗与航班衔接.ipynb) |
-| 整体探索性分析 / Overall EDA | [02 Notebook](output_A/02_整体EDA.ipynb) |
-| 字段定义 / Data dictionary | [output_A/data_dictionary.md](output_A/data_dictionary.md) |
-| 共享数据 / Shared datasets | [output_A/data/](output_A/data/) |
-| 图表与汇总 / Figures and summaries | [figures/](output_A/figures/), [tables/](output_A/tables/) |
-| 机场及字段来源 / Airport and field references | [output_A/references/](output_A/references/) |
+克隆后在 Codex 中打开此项目，发送：
 
-## 获取与运行 / Get and run
+> 请按照 AGENTS.md 和 docs/Codex完整执行流程.md，在这台电脑完整完成项目：实际运行数据准备、天气与特征连接、EDA、RQ1、RQ2、模型比较和最终报告，直到完成标准满足。按阶段保存真实结果与执行进度。
+
+[Codex 完整执行流程](docs/Codex完整执行流程.md) 列出已有入口、待实现工作、执行顺序、产物和完成检查。其他说明：
+
+- [完整项目计划](docs/完整项目计划.md)：研究问题、变量、方法、模型、验证与最终成品。
+- [迁移与运行](docs/迁移与运行.md)：Git 克隆和环境安装。
+- [下载完成说明](下载完成说明.md)：数据清单、校验结果与源覆盖。
+
+## 文件在哪里
+
+| 目录/文件 | 内容 |
+|---|---|
+| `raw/flights/` | 五个月 BTS 原始航班 ZIP |
+| `raw/aircraft/` | BTS B-43 原始飞机清单 ZIP |
+| `raw/weather/metar/` | METAR/SPECI 实况原始 CSV，使用 gzip 压缩 |
+| `raw/weather/taf/` | TAF 分段预报原始 CSV，使用 gzip 压缩 |
+| `raw/weather/taf_text/` | TAF 完整原文、原始接口响应及补查记录 |
+| `raw/weather/noaa/` | 25 个缺测站的 NOAA GHCNh 原始 PSV 快照，使用 gzip 压缩 |
+| `references/` | 机场/时区、机型参考表、字段文档、任务书与论文 |
+| `tables/` | 月份清单、下载来源、机场天气覆盖、文件大小与 SHA-256 |
+| `notebooks/` | 数据清单和航班准备 Notebook，附中文说明 |
+| `scripts/` | 下载、完整性检查及目标电脑准备脚本 |
+| `processed/` | 新电脑运行后生成清洗结果；当前只有说明文件 |
+| `sources.json` | 原始数据来源和下载地址 |
+| `requirements.txt` | Python 环境版本 |
+
+## 在新电脑克隆并核对
 
 ```bash
-git clone https://github.com/GeoRus63/Airline-delay.git
-cd Airline-delay
+git clone --depth 1 https://github.com/GeoRus63/Airline-delay.git airline_delay
+cd airline_delay
+python scripts/verify_downloads.py
 ```
 
-使用 Python/Jupyter 打开 `output_A` 中的两本 Notebook，依次运行 01、02。原始 ZIP 与 `output_A` 保持当前相对位置。依赖版本见 [requirements.txt](output_A/requirements.txt)。Notebook 保存了已有输出；HTML 阅读版下载后可在浏览器打开。
+仓库直接保存原始数据文件，不需要整体迁移压缩包。`.gitattributes` 保留文件原始字节，Windows 克隆时也不会因换行转换改变数据校验值。
 
-Open the two notebooks under `output_A` in Python/Jupyter and run 01, then 02. Keep the raw ZIP files next to `output_A`. Package versions are recorded in [requirements.txt](output_A/requirements.txt). Saved notebook outputs are included; download the HTML previews to read them in a browser.
+命令只核对文件，不联网、不清洗数据。检查通过后，按照[迁移与运行](docs/迁移与运行.md)安装环境并执行准备步骤。
 
-三张共享数据表采用 `.csv.gz`，pandas 可直接读取，内容与解压后的 CSV 相同。组员继续研究主要使用 `flight_connections.csv.gz`。
+机型只用系列与具体型号两层；机场比较围绕 RQ1，不加入机场设施参数。8 月作为最终时间外测试，开发比较使用 4–7 月。网络图、周转热力图、小延误敏感性分析和变量增量实验已纳入方案。
 
-The three shared datasets use `.csv.gz`. Pandas reads these directly; their contents are identical to decompressed CSVs. Use `flight_connections.csv.gz` as the main input for subsequent research.
+<details><summary>English</summary>
 
-```python
-import pandas as pd
-connections = pd.read_csv("output_A/data/flight_connections.csv.gz")
-```
+This portable project covers 3,057,590 BTS flights from April–August 2026 across 355 airport IDs. It contains raw flight, aircraft and weather sources, integrity/coverage records, the complete research plan, and preparation scripts. Full cleaning, feature joins, EDA and modeling are to run on the destination computer. Clone the repository, read the download report, project plan and migration guide, then run the offline verifier. RQ1 studies airport delay absorption/amplification; RQ2 predicts downstream departure delay at upstream arrival. August is reserved for the final temporal test.
 
-## 协作 / Collaboration
-
-每位组员在自己的分支开展工作，完成后提交 Pull Request 合并。提交代码、说明和必要结果；共享数据已有压缩版本，无需重复提交解压 CSV。
-
-Work on a personal branch and open a pull request when ready to merge. Commit code, documentation and relevant results; use the existing compressed datasets instead of committing duplicate uncompressed CSVs.
-
-## 数据与参考 / Data and references
-
-- 航班数据 / Flight data: [BTS Reporting Carrier On-Time Performance](https://www.transtats.bts.gov/ontime/).
-- 论文 / Paper: [Flight delay propagation modeling: Data, Methods, and Future opportunities](https://doi.org/10.1016/j.tre.2024.103525).
-- 论文 / Paper: [Network science approach for identifying disruptive elements of an airline](https://arxiv.org/abs/2211.08140).
-- 机场数据的版本、来源及许可证保存在 `output_A/references/`。 / Airport reference versions, sources and licence are retained in `output_A/references/`.
+</details>

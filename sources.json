@@ -1,0 +1,79 @@
+{
+  "retrieved_date": "2026-10-24",
+  "study_period": "2026-04 to 2026-08",
+  "sources": [
+    {
+      "dataset": "BTS Reporting Carrier On-Time Performance",
+      "files": [
+        "raw/flights/2026_04.zip",
+        "raw/flights/2026_05.zip",
+        "raw/flights/2026_06.zip",
+        "raw/flights/2026_07.zip",
+        "raw/flights/2026_08.zip"
+      ],
+      "download_urls": [
+        "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_4.zip",
+        "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_5.zip",
+        "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_6.zip",
+        "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_7.zip",
+        "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2026_8.zip"
+      ]
+    },
+    {
+      "dataset": "BTS Form 41 Schedule B-43",
+      "file": "raw/aircraft/bts_b43_all_years.zip",
+      "source_url": "https://www.transtats.bts.gov/DL_SelectFields.aspx?QO_fu146_anzr=Nv4+Pn44vr4+Sv0n0pvny&gnoyr_VQ=GEH",
+      "field_documentation": "https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=GEH",
+      "acquisition": "BTS form export; cached original ZIP bundled",
+      "reference_snapshots": [
+        2024,
+        2025
+      ],
+      "release_calendar": "https://transtats.bts.gov/releaseinfo.asp"
+    },
+    {
+      "dataset": "IEM METAR/SPECI and parsed TAF",
+      "source_urls": [
+        "https://mesonet.agron.iastate.edu/request/download.phtml",
+        "https://mesonet.agron.iastate.edu/request/taf.php"
+      ],
+      "request_manifest": "tables/weather_download_manifest.json"
+    },
+    {
+      "dataset": "IEM complete TAF text products",
+      "source_url": "https://mesonet.agron.iastate.edu/cgi-bin/afos/retrieve.py?help=",
+      "request_manifest": "tables/taf_text_manifest.json"
+    },
+    {
+      "dataset": "NOAA NCEI GHCNh gap-station source snapshots",
+      "source_url": "https://www.ncei.noaa.gov/products/global-historical-climatology-network-hourly",
+      "request_manifest": "tables/noaa_download_manifest.json",
+      "dictionary": "references/noaa_ghcnh_documentation.pdf"
+    },
+    {
+      "dataset": "IEM airport weather station metadata",
+      "files": [
+        "references/iem_stations.geojson",
+        "references/iem_taf_stations.geojson"
+      ],
+      "urls": [
+        "https://mesonet.agron.iastate.edu/geojson/network.py?network=AZOS",
+        "https://mesonet.agron.iastate.edu/geojson/network.py?network=TAF"
+      ]
+    },
+    {
+      "dataset": "Airport identity, coordinates and timezone",
+      "files": [
+        "references/airports.csv",
+        "references/airport_codes.csv",
+        "references/airportsdata_snapshot.csv"
+      ],
+      "source_urls": [
+        "https://github.com/mborsetti/airportsdata",
+        "https://www.faa.gov/air_traffic/flight_info/aeronav/aero_data/NASR_Subscription/2026-08-06"
+      ],
+      "note": "Airport codes and ID appearances from the bundled BTS records. Coordinates/ICAO cross-checked with the 2026-08-06 NASR snapshot; timezone from bundled airportsdata. Infrastructure is not a model feature."
+    }
+  ],
+  "verification": "tables/file_manifest.json contains hashes and byte sizes of delivered inputs; verify_downloads.py checks archive integrity offline."
+}

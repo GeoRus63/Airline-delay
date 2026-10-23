@@ -1,0 +1,54 @@
+{
+  "retrieved_date_utc": "2026-10-23T17:59:36.607646+00:00",
+  "flight_rows": 3057590,
+  "airport_ids": 355,
+  "flight_months": [
+    "2026-04",
+    "2026-05",
+    "2026-06",
+    "2026-07",
+    "2026-08"
+  ],
+  "weather_start_utc": "2026-03-30T00:00:00Z",
+  "weather_end_exclusive_utc": "2026-09-02T00:00:00Z",
+  "weather": {
+    "metar": {
+      "raw_rows_with_buffer": 1635385,
+      "airports_with_records": 355,
+      "airports_all_five_months": 355
+    },
+    "taf": {
+      "raw_rows_with_buffer": 1368924,
+      "airports_with_records": 343,
+      "airports_all_five_months": 343
+    }
+  },
+  "weather_files": 36,
+  "training_executed": false,
+  "full_flight_cleaning_executed": false,
+  "noaa": {
+    "files": 25,
+    "original_bytes": 654058715,
+    "compressed_bytes": 24708216,
+    "stations_full_153_dates": 19,
+    "stations_with_missing_dates": [
+      "PQI",
+      "OTH",
+      "GST",
+      "GUC",
+      "WYS",
+      "STX"
+    ]
+  },
+  "taf_text": {
+    "unique_csv_product_ids": 317806,
+    "matched_csv_product_ids": 317803,
+    "missing_originals": [
+      "202608042106-KGRR-FTUS43-TAFGRR-AAA",
+      "202608042106-KOAX-FTUS43-TAFOMA-AAA",
+      "202608042107-KGRR-FTUS43-TAFAZO-AAA"
+    ]
+  },
+  "source_coverage_complete": false,
+  "download_jobs_finished": true
+}

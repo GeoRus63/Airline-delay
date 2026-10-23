@@ -1,11 +1,7 @@
-# Local files / 本地文件
-.DS_Store
-.ipynb_checkpoints/
-__pycache__/
-*.py[cod]
 .venv/
-venv/
-.env
-
-# Use compressed shared datasets / 共享数据使用压缩 CSV
-/output_A/data/*.csv
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+processed/*
+!processed/README.md
+models/
