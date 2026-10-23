@@ -19,16 +19,18 @@ PREDICTION_ATOL = 1e-10
 METRIC_ATOL = 1e-10
 
 
-def _completed_reference(config, output):
+def _completed_reference(config, output, *, root=None):
     """Check the sole completed claim and its archived artifacts before opening inputs."""
-    ledger_path = final.ROOT / "experiments/final_access/2026-08.json"
+    root = Path(final.ROOT if root is None else root).resolve()
+    resolve = lambda value: Path(value).resolve() if Path(value).is_absolute() else (root / value).resolve()
+    ledger_path = root / "experiments/final_access/2026-08.json"
     if not ledger_path.is_file():
         raise ValueError("Reproduction requires the existing completed formal ledger")
     ledger_hash = final.sha256_file(ledger_path)
     access = final._json(ledger_path)
     if access.get("status") != "completed" or access.get("test_period") != final.FINAL_FOLD:
         raise ValueError("Reproduction requires the completed formal ledger, never claimed/failed access")
-    reference = final._path(access["run_dir"])
+    reference = resolve(access["run_dir"])
     if reference.name != access.get("run_id"):
         raise ValueError("Formal ledger run identity is inconsistent")
     if output == reference or output.is_relative_to(reference) or reference.is_relative_to(output):
@@ -45,7 +47,7 @@ def _completed_reference(config, output):
     if (result.get("freeze_manifest_sha256") != access.get("freeze_manifest_sha256")
             or config.get("freeze_manifest_sha256") != access.get("freeze_manifest_sha256")):
         raise ValueError("Reproduction must use the original ledger freeze SHA-256")
-    if final._path(result["access_ledger_path"]) != ledger_path.resolve():
+    if resolve(result["access_ledger_path"]) != ledger_path.resolve():
         raise ValueError("Formal result points to a different access ledger")
     if not result.get("feature_fingerprints"):
         raise ValueError("Formal run lacks complete feature fingerprints; cannot certify full reproduction")
@@ -53,7 +55,7 @@ def _completed_reference(config, output):
     return ledger_path, ledger_hash, access, reference, result
 
 
-def _compare(reference, output, original, repeated):
+def _compare(reference, output, original, repeated, *, write_evidence=True):
     """Exact IDs/outcomes/features plus rowwise raw/clipped prediction and metric checks."""
     for key in ["config", "protocol", "models", "primary_model_name", "folds", "split_sha256",
                 "evaluation_rows", "evaluation_ids_sha256", "feature_fingerprints", "verified_inputs"]:
@@ -80,9 +82,11 @@ def _compare(reference, output, original, repeated):
                                 "max_absolute_difference": float(difference.max(initial=0)),
                                 "atol": PREDICTION_ATOL, "rtol": 0.0})
             if not np.allclose(left, right, atol=PREDICTION_ATOL, rtol=0):
-                pd.DataFrame(differences).to_csv(output / "reproduction_prediction_differences.csv", index=False)
+                if write_evidence:
+                    pd.DataFrame(differences).to_csv(output / "reproduction_prediction_differences.csv", index=False)
                 raise ValueError(f"Reproduction prediction difference exceeds fixed tolerance: {name}/{column}")
-    pd.DataFrame(differences).to_csv(output / "reproduction_prediction_differences.csv", index=False)
+    if write_evidence:
+        pd.DataFrame(differences).to_csv(output / "reproduction_prediction_differences.csv", index=False)
     expected = pd.read_csv(reference / "metrics.csv", float_precision="round_trip")
     actual = pd.read_csv(output / "metrics.csv", float_precision="round_trip")
     identity = ["model", "fold", "group", "value", "n"]
@@ -97,6 +101,93 @@ def _compare(reference, output, original, repeated):
     return {"prediction_rows_compared": sum(len(frame) for frame in before.values()),
             "metric_rows_compared": len(expected), "all_feature_values_and_types_match": True,
             "ids_and_targets_match": True, "prediction_atol": PREDICTION_ATOL, "metric_atol": METRIC_ATOL, "rtol": 0}
+
+
+def verify_saved_reproduction(run_dir, *, root=None):
+    """Audit completed saved reproduction artifacts only; no fitting/raw reads/writes.
+
+    Archived freeze copies and recorded source/input receipts identify the original
+    computation. Current raw inputs and current source bytes are deliberately not
+    opened: this is an archive audit, not another full reproduction.
+    """
+    root = Path(final.ROOT if root is None else root).resolve()
+    output = Path(run_dir).resolve()
+    manifest = final._json(output / "manifest.json")
+    runtime = final._json(output / "config.json")
+    if manifest.get("status") != "completed" or manifest.get("config") != runtime or runtime.get("mode") != "reproduce_final":
+        raise ValueError("Saved reproduction requires its completed matching pipeline manifest/config")
+    if manifest.get("run_id") != output.name:
+        raise ValueError("Saved reproduction manifest run identity differs")
+    result = final._json(output / "final_result.json")
+    if result.get("mode") != "reproduce_final" or result.get("claim_type") != "reproduction":
+        raise ValueError("Saved result is not a full final reproduction")
+    ledger, ledger_hash, access, reference, original = _completed_reference(runtime, output, root=root)
+
+    def check_hash(relative, expected, *, size=None):
+        path = Path(relative)
+        path = path.resolve() if path.is_absolute() else (output / path).resolve()
+        if not path.is_relative_to(output) or not path.is_file() or final.sha256_file(path) != expected:
+            raise ValueError(f"Saved reproduction artifact SHA-256 mismatch or invalid path: {relative}")
+        if size is not None and path.stat().st_size != size:
+            raise ValueError(f"Saved reproduction artifact size mismatch: {relative}")
+        return path
+
+    artifacts = result.get("artifact_hashes", {})
+    if not artifacts:
+        raise ValueError("Saved reproduction lacks artifact hashes")
+    for relative, expected in artifacts.items():
+        check_hash(relative, expected)
+    output_receipts = manifest.get("outputs", [])
+    if not output_receipts:
+        raise ValueError("Saved reproduction lacks completed output receipts")
+    pinned = set()
+    for receipt in output_receipts:
+        path = Path(receipt["path"])
+        path = path.resolve() if path.is_absolute() else (root / path).resolve()
+        if path in pinned:
+            raise ValueError("Saved reproduction has duplicate output receipts")
+        pinned.add(check_hash(path, receipt["sha256"], size=receipt.get("bytes")))
+    required = {"config.json", "final_result.json", "model_selection.json", "final_feature_fingerprints.json",
+                "reproduction_reference.json", "reproduction_verification.json", "reproduction_prediction_differences.csv",
+                "training_ids_targets.csv.gz", "evaluation_ids.csv.gz", "metrics.csv"}
+    required.update(f"predictions/{final.FINAL_FOLD}_{name}.csv.gz" for name in original["models"])
+    if {output / name for name in required} - pinned:
+        raise ValueError("Saved reproduction output receipts omit required reproduction evidence")
+    provenance = final._json(output / "reproduction_reference.json")
+    receipt = final._json(output / "reproduction_verification.json")
+    expected_provenance = {"mode": "reproduce_final", "claim_type": "reproduction", "formal_run_id": access["run_id"],
+                           "formal_run_dir": str(reference), "formal_final_result_sha256": access["final_result_sha256"],
+                           "freeze_manifest_sha256": access["freeze_manifest_sha256"], "access_ledger_path": str(ledger),
+                           "ledger_sha256_before": ledger_hash, "creates_new_formal_claim": False,
+                           "refitted": True, "raw_test_data_read": True}
+    if provenance != expected_provenance or result.get("reproduction_reference") != provenance:
+        raise ValueError("Saved reproduction provenance/original ledger hash differs")
+    if any(receipt.get(key) != value for key, value in provenance.items()) or receipt.get("verified") is not True:
+        raise ValueError("Saved reproduction verification receipt is missing or differs")
+    if receipt.get("ledger_sha256_after") != ledger_hash or receipt.get("formal_ledger_unchanged") is not True:
+        raise ValueError("Saved reproduction ledger after hash differs")
+    for directory in [reference, output]:
+        if final.sha256_file(directory / "model_selection.json") != access["freeze_manifest_sha256"]:
+            raise ValueError("Saved reproduction freeze identity differs from the completed formal ledger")
+    frozen = final._json(output / "model_selection.json")
+    payload = {key: value for key, value in frozen.items() if key != "payload_sha256"}
+    if (frozen.get("payload_sha256") != final.canonical_sha256(payload)
+            or result.get("freeze_payload_sha256") != frozen["payload_sha256"]
+            or result.get("freeze_manifest_sha256") != access["freeze_manifest_sha256"]
+            or result.get("config") != frozen.get("config") or result.get("protocol") != frozen.get("protocol")):
+        raise ValueError("Saved reproduction frozen payload/config differs")
+    if final._json(output / "final_feature_fingerprints.json") != result.get("feature_fingerprints"):
+        raise ValueError("Saved reproduction complete feature fingerprint evidence differs")
+    comparison = _compare(reference, output, original, result, write_evidence=False)
+    if result.get("reproduction_comparison") != comparison or any(receipt.get(key) != value for key, value in comparison.items()):
+        raise ValueError("Saved reproduction comparison receipt differs from recalculated saved artifacts")
+    if final.sha256_file(ledger) != ledger_hash:
+        raise ValueError("Formal ledger changed during saved reproduction verification")
+    return {"verified": True, "mode": "reproduce_final", "formal_run_id": access["run_id"],
+            "formal_ledger_unchanged": True, "artifact_hashes_checked": len(artifacts),
+            "output_receipts_checked": len(output_receipts), **comparison,
+            "refitted": False, "raw_test_data_read": False, "archive_written": False,
+            "verification_scope": "saved reproduction comparison; full refit remains the archived execution"}
 
 
 def run(config, run_dir):

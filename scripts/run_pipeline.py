@@ -95,6 +95,9 @@ def monitor_resources(path, stop):
 
 
 def execute(config, run_dir):
+    if config['mode'] == 'audit_delivery':
+        from audit_delivery import run
+        return run(config, run_dir)
     if config['mode'] == 'select_features':
         from select_models import select_features
         return select_features([ROOT / 'experiments/runs' / value for value in config['candidate_run_ids']],
@@ -247,7 +250,12 @@ def main():
         os.environ[name] = str(config.get('threads', 16))
     git_commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     source_names = ['scripts/run_pipeline.py', 'scripts/prepare_flights.py']
-    if config['mode'] in ['select_features', 'select_model']:
+    if config['mode'] == 'audit_delivery':
+        source_names += ['scripts/audit_delivery.py', 'scripts/verify_downloads.py',
+                         'scripts/verify_research_archive.py', 'scripts/final_evaluation.py',
+                         'scripts/reproduce_final.py', 'scripts/render_research_notebooks.py',
+                         'notebooks/00_数据清单.ipynb']
+    elif config['mode'] in ['select_features', 'select_model']:
         source_names += ['scripts/select_models.py', 'scripts/final_evaluation.py', 'scripts/train_models.py',
                          'scripts/build_features.py', 'scripts/evaluate_models.py', 'scripts/compare_experiments.py',
                          'configs/model_selection_protocol.json']

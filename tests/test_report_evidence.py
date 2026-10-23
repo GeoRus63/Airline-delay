@@ -148,15 +148,35 @@ def make_fixture(root):
     (final_dir / "figures").mkdir()
     (final_dir / "figures/final_residual_distribution.png").write_bytes(b"synthetic png stand-in")
 
+    frozen_reference = {"schema_version": 1, "frozen_on": "development_only", "supported": True,
+                        "airport_ids": [1, 2], "master_cells": [0, 1, 2],
+                        "protocol": {"fallback_airport_limits": [2], "minimum_retained_share": .5,
+                                     "airport_min_main_rows": 1, "airport_min_prediction_days": 1,
+                                     "cell_min_rows": 1, "cell_min_prediction_days": 1,
+                                     "master_delay_bins": [0, 5, 15, "inf"], "turnaround_bins": [0, 1440.000001]},
+                        "references": {"gt0": {"cells": [0, 1, 2], "weights": [.25, .25, .5], "development_counts": [2, 2, 4]},
+                                       "ge5": {"cells": [1, 2], "weights": [1 / 3, 2 / 3], "development_counts": [2, 4]},
+                                       "ge15": {"cells": [2], "weights": [1.], "development_counts": [4]}},
+                        "selection_attempts": [
+                            {"limit": None, "airport_ids": [1, 2, 3], "common_master_cells": [2], "passed": False,
+                             "threshold_support": {threshold: {"cells": [2], "retained_shares": {"1": .25, "2": .5, "3": .25}, "passed": False}
+                                                   for threshold in ["gt0", "ge5", "ge15"]}},
+                            {"limit": 2, "airport_ids": [1, 2], "common_master_cells": [0, 1, 2], "passed": True,
+                             "threshold_support": {threshold: {"cells": cells, "retained_shares": {"1": 1., "2": 1.}, "passed": True}
+                                                   for threshold, cells in [("gt0", [0, 1, 2]), ("ge5", [1, 2]), ("ge15", [2])]}}]}
     for run_id, mode in [("R0018", "analysis"), ("R0019", "rq1_final")]:
         directory = run(run_id, mode=mode, parent="R0017" if mode == "rq1_final" else "R0006", prediction_final_run_id="R0017")
-        write_json(directory / "rq1_standardized/frozen_reference.json", {"synthetic": True})
+        write_json(directory / "rq1_standardized/frozen_reference.json", frozen_reference)
         write_json(directory / "rq1_complete_summary.json", {"development": mode != "rq1_final", "frozen_reference_sha256": report.digest(directory / "rq1_standardized/frozen_reference.json")})
-        write_table(directory / "tables/rq1_airport_raw.csv", [{"airport_id": 1, "airport_code": "AAA", "n": 2, "mean_delta": -5., "s_plus": 1., "s_minus": 11., "s_net": -10.}])
-        write_table(directory / "rq1_standardized/rq1_airports.csv", [{"airport_id": 1, "threshold": "ge15", "supported": True, "retained_n": 2, "retained_share": 1., "standardized_mean": -5., "ci_low": -6., "ci_high": -4., "valid_replicates": 1000}])
-        write_table(directory / "rq1_standardized/rq1_threshold_stability.csv", [{"threshold": threshold, "common_airports": 1, "frozen_airports": 1, "direction_agreement": 1., "spearman": None} for threshold in ["gt0", "ge5", "ge15"]])
+        write_table(directory / "rq1_standardized/selection_attempts.csv", [
+            {"attempt": i + 1, "airport_limit": attempt["limit"], "airports": len(attempt["airport_ids"]), "passed": attempt["passed"],
+             "common_master_cells": json.dumps(attempt["common_master_cells"]), "airport_ids": json.dumps(attempt["airport_ids"]),
+             "threshold_support": json.dumps(attempt["threshold_support"])} for i, attempt in enumerate(frozen_reference["selection_attempts"])])
+        write_table(directory / "tables/rq1_airport_raw.csv", [{"airport_id": airport, "airport_code": "AAA" if airport == 1 else "BBB", "n": 2, "mean_delta": -5., "s_plus": 1., "s_minus": 11., "s_net": -10.} for airport in [1, 2]])
+        write_table(directory / "rq1_standardized/rq1_airports.csv", [{"airport_id": airport, "threshold": threshold, "supported": True, "retained_n": 2, "retained_share": 1., "standardized_mean": -5., "ci_low": -6., "ci_high": -4., "valid_replicates": 1000} for airport in [1, 2] for threshold in ["gt0", "ge5", "ge15"]])
+        write_table(directory / "rq1_standardized/rq1_threshold_stability.csv", [{"threshold": threshold, "common_airports": 2, "frozen_airports": 2, "direction_agreement": 1., "spearman": None} for threshold in ["gt0", "ge5", "ge15"]])
         write_table(directory / "rq1_standardized/rq1_airports_monthly.csv", [{"month_utc": "2026-04", "threshold": "ge15", "supported": True, "standardized_mean": -5., "retained_share": 1.}])
-        write_table(directory / "rq1_standardized/network_nodes.csv", [{"airport_id": 1, "valid_connection_count": 2, "standardized_mean": -5.}])
+        write_table(directory / "rq1_standardized/network_nodes.csv", [{"airport_id": airport, "airport_code": "AAA" if airport == 1 else "BBB", "valid_connection_count": 2, "standardized_mean": -5.} for airport in [1, 2]])
         write_table(directory / "rq1_standardized/network_edges.csv", [{"origin_airport_id": 1, "destination_airport_id": 2, "flight_count": 8}])
         (directory / "figures").mkdir()
         for name in ["rq1_standardized_airports", "rq1_threshold_stability", "rq1_network_geographic"]:
@@ -233,14 +253,24 @@ class ReportEvidence(unittest.TestCase):
             self.assertIn("2024 inventory remains the primary", english)
             self.assertIn("| 2026-07 | Arrival nonnegative |", english)
             self.assertIn("MAE worsened by 1.000 min (60.00 seconds)", english)
+            self.assertIn("The frozen set A contains 2 airports", english)
+            self.assertIn("The all-threshold decision was fail", english)
+            self.assertIn("The all-threshold decision was pass", english)
+            self.assertIn("| 2 | [15, inf) | [0, 1440.000001) | 0.500000 | 0.666667 | 1.000000 |", english)
+            self.assertIn("it was not registered before P0", english)
+            self.assertIn("not selection-adjusted confidence intervals", english)
+            self.assertIn("blocks unverified amended, corrected or delayed bulletin values", english)
             chinese = (root / "reports/结果解读_中文.md").read_text(encoding="utf-8")
             self.assertIn("取消和改道不能当作零延误", chinese)
             self.assertIn("一条航班在起点/终点各贡献一次movement", chinese)
+            self.assertIn("首次通过即停止", chinese)
             self.assertFalse(any(line.startswith(("- ", "* ")) for line in english.splitlines()))
             with (root / "reports/evidence_index.csv").open(encoding="utf-8", newline="") as stream:
                 evidence = list(csv.DictReader(stream))
             self.assertTrue(all(row["research_log_heading_lines"] for row in evidence))
             self.assertEqual(len({row["evidence_id"] for row in evidence}), len(evidence))
+            network_figures = [row for row in evidence if row["kind"] == "figure" and row["claim"] == "Airport connection performance and directed flight flow"]
+            self.assertEqual({Path(row["source_file"]).name for row in network_figures}, {"network_nodes.csv", "network_edges.csv"})
             receipts = json.loads((root / "reports/source_receipts.json").read_text(encoding="utf-8"))
             self.assertFalse(receipts["data_access"]["prediction_rows"])
             self.assertTrue(all(not any(token in item["path"] for token in [".pkl", "/raw/", "/predictions/"]) for item in receipts["sources"]))
@@ -317,6 +347,51 @@ class ReportEvidence(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, expected):
                     report.build_report(config, root=root)
                 self.assertFalse((root / "reports").exists())
+
+    def test_frozen_weights_and_fallback_decisions_are_checked(self):
+        for failure in ["bad_weights", "bad_threshold_pass", "incomplete_fallback"]:
+            with self.subTest(failure=failure), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                make_fixture(root)
+                directory = root / "experiments/runs/R0018"
+                path = directory / "rq1_standardized/frozen_reference.json"
+                frozen = json.loads(path.read_text())
+                if failure == "bad_weights":
+                    frozen["references"]["gt0"]["weights"][0] = .3
+                    expected = "normalized pooled development"
+                elif failure == "bad_threshold_pass":
+                    frozen["selection_attempts"][0]["threshold_support"]["gt0"]["passed"] = True
+                    attempts_path = directory / "rq1_standardized/selection_attempts.csv"
+                    attempts = pd.read_csv(attempts_path)
+                    attempts.loc[0, "threshold_support"] = json.dumps(frozen["selection_attempts"][0]["threshold_support"])
+                    attempts.to_csv(attempts_path, index=False)
+                    expected = "pass flag contradicts"
+                else:
+                    frozen.update(supported=False, airport_ids=[], master_cells=[], references={})
+                    frozen["selection_attempts"] = frozen["selection_attempts"][:1]
+                    attempts_path = directory / "rq1_standardized/selection_attempts.csv"
+                    pd.read_csv(attempts_path).iloc[:1].to_csv(attempts_path, index=False)
+                    expected = "omitted registered fallback"
+                write_json(path, frozen)
+                summary_path = directory / "rq1_complete_summary.json"
+                summary = json.loads(summary_path.read_text())
+                summary["frozen_reference_sha256"] = report.digest(path)
+                write_json(summary_path, summary)
+                seal(root, "R0018", json.loads((directory / "config.json").read_text()))
+                with self.assertRaisesRegex(ValueError, expected):
+                    report.rq1_reference_prose(report.Archive(root), "R0018")
+                self.assertFalse((root / "reports").exists())
+
+    def test_network_edges_require_an_archived_receipt(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            make_fixture(root)
+            path = root / "experiments/runs/R0018/manifest.json"
+            manifest = json.loads(path.read_text())
+            manifest["outputs"] = [item for item in manifest["outputs"] if not item["path"].endswith("network_edges.csv")]
+            write_json(path, manifest)
+            with self.assertRaisesRegex(ValueError, "Missing archived output receipt"):
+                report.rq1_prose(report.Archive(root), "R0018", "synthetic")
 
 
 if __name__ == "__main__":

@@ -16,6 +16,89 @@ from tests.test_final_evaluation import fixture
 
 
 class FinalReproduction(unittest.TestCase):
+    def _saved_reproduction(self, root):
+        frame, _, config, _, reference, original = self._formal(root)
+        output = root / "RREPRODUCED"
+        with patch.object(final, "ROOT", root), patch.object(final, "load_configured_features", return_value=frame):
+            result = reproduction.run(config, output)
+        (output / "config.json").write_text(json.dumps(config))
+        self._seal(root, output, config)
+        return output, reference, original, result
+
+    def _seal(self, root, output, config):
+        receipts = [{"path": path.relative_to(root).as_posix(), "bytes": path.stat().st_size,
+                     "sha256": final.sha256_file(path)} for path in sorted(output.rglob("*"))
+                    if path.is_file() and path.name != "manifest.json"]
+        (output / "manifest.json").write_text(json.dumps({"run_id": output.name, "status": "completed",
+                                                         "config": config, "outputs": receipts}))
+
+    def test_saved_reproduction_verifier_is_read_only_and_never_opens_raw_or_refits(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            output, _, _, _ = self._saved_reproduction(root)
+            before = {str(path): path.read_bytes() for path in root.rglob("*") if path.is_file()}
+            real_hash = final.sha256_file
+
+            def no_raw_hash(path):
+                if Path(path).name == "connections.csv":
+                    raise AssertionError("Must not hash raw input during saved audit")
+                return real_hash(path)
+
+            with patch.object(final, "load_configured_features", side_effect=AssertionError("no raw read")), \
+                    patch.object(final.training, "_run_fold", side_effect=AssertionError("no refit")), \
+                    patch.object(final, "validate_freeze", side_effect=AssertionError("no live raw/source pins")), \
+                    patch.object(final, "sha256_file", side_effect=no_raw_hash), \
+                    patch.object(Path, "write_text", side_effect=AssertionError("no archive write")), \
+                    patch.object(pd.DataFrame, "to_csv", side_effect=AssertionError("no archive write")):
+                result = reproduction.verify_saved_reproduction(output, root=root)
+            self.assertTrue(result["verified"])
+            self.assertFalse(result["refitted"])
+            self.assertFalse(result["raw_test_data_read"])
+            self.assertFalse(result["archive_written"])
+            self.assertEqual(before, {str(path): path.read_bytes() for path in root.rglob("*") if path.is_file()})
+
+    def test_saved_reproduction_rejects_missing_receipt_prediction_and_ledger_hash_tampering(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            output, _, _, _ = self._saved_reproduction(root)
+            config = final._json(output / "config.json")
+            receipt_path = output / "reproduction_verification.json"
+            receipt_bytes = receipt_path.read_bytes()
+            receipt_path.unlink()
+            with self.assertRaisesRegex(ValueError, "SHA-256|evidence"):
+                reproduction.verify_saved_reproduction(output, root=root)
+            receipt_path.write_bytes(receipt_bytes)
+            prediction = output / "predictions/2026-08_frozen_linear.csv.gz"
+            prediction_bytes = prediction.read_bytes()
+            prediction.write_bytes(prediction_bytes + b"tampered")
+            with self.assertRaisesRegex(ValueError, "SHA-256"):
+                reproduction.verify_saved_reproduction(output, root=root)
+            prediction.write_bytes(prediction_bytes)
+            receipt = final._json(receipt_path)
+            receipt["ledger_sha256_after"] = "wrong"
+            receipt_path.write_text(json.dumps(receipt))
+            self._seal(root, output, config)
+            with self.assertRaisesRegex(ValueError, "ledger after hash"):
+                reproduction.verify_saved_reproduction(output, root=root)
+            receipt_path.write_bytes(receipt_bytes)
+            self._seal(root, output, config)
+            ledger = root / "experiments/final_access/2026-08.json"
+            ledger.write_bytes(ledger.read_bytes() + b"\n")
+            with self.assertRaisesRegex(ValueError, "ledger hash"):
+                reproduction.verify_saved_reproduction(output, root=root)
+
+    def test_compare_read_only_mode_never_writes_on_prediction_difference(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            output, reference, original, result = self._saved_reproduction(root)
+            path = output / "predictions/2026-08_frozen_linear.csv.gz"
+            frame = pd.read_csv(path, float_precision="round_trip")
+            frame.loc[0, "predicted_delay_raw"] += 1
+            frame.to_csv(path, index=False, compression=final.training.GZIP)
+            with patch.object(pd.DataFrame, "to_csv", side_effect=AssertionError("no archive write")):
+                with self.assertRaisesRegex(ValueError, "prediction difference"):
+                    reproduction._compare(reference, output, original, result, write_evidence=False)
+
     def test_pipeline_dispatches_reproduction_and_archives_its_notebook_receipt(self):
         with tempfile.TemporaryDirectory() as temporary:
             output = Path(temporary)

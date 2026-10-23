@@ -158,10 +158,14 @@ class Archive:
                               "research_log_heading_lines": ";".join(self.log_entries(run_id))})
         return f"[{evidence_id}]"
 
-    def figure(self, run_id, filename, csv_file, selector, caption, code):
+    def figure(self, run_id, filename, csv_file, selector, caption, code, extra_sources=None):
         path = self.source(run_id, filename)
         ref = self.cite(run_id, csv_file, selector, caption, "figure")
-        self.cite(run_id, filename, {"whole_file": True, "plotting_code": code}, caption, "figure_image")
+        extra_sources = extra_sources or []
+        for extra_file, extra_selector in extra_sources:
+            ref += " " + self.cite(run_id, extra_file, extra_selector, caption, "figure")
+        self.cite(run_id, filename, {"whole_file": True, "plotting_code": code,
+                                    "source_files": [csv_file, *[item[0] for item in extra_sources]]}, caption, "figure_image")
         target = f"figures/{run_id}_{path.name}"
         self.figures.append((path, target))
         return f"![{caption}]({target})\n\n{caption} {ref}"
@@ -456,6 +460,125 @@ def metric_sentence(archive, run, model=None, fold="overall", group="all", value
     return f"{model} had MAE {number(row.mae)} min and RMSE {number(row.rmse)} min (n={int(row.n):,}). {ref}"
 
 
+def rq1_reference_prose(archive, run_id):
+    """Display the actual development A/C/w and every attempted fallback."""
+    filename = "rq1_standardized/frozen_reference.json"
+    frozen = archive.json(run_id, filename)
+    if frozen.get("schema_version") != 1 or frozen.get("frozen_on") != "development_only":
+        raise ValueError("RQ1 reference must be frozen on development data")
+    complete = archive.json(run_id, "rq1_complete_summary.json")
+    if complete.get("frozen_reference_sha256") != digest(archive.source(run_id, filename)):
+        raise ValueError("RQ1 complete summary does not pin its frozen reference")
+    protocol = frozen["protocol"]
+    attempts = frozen["selection_attempts"]
+    attempts_file = "rq1_standardized/selection_attempts.csv"
+    saved = archive.table(run_id, attempts_file, ["attempt", "airport_limit", "airports", "passed", "common_master_cells", "airport_ids", "threshold_support"])
+    limits = [None, *protocol["fallback_airport_limits"]]
+    if not attempts or len(saved) != len(attempts) or len(attempts) > len(limits):
+        raise ValueError("Incomplete RQ1 fallback-attempt evidence")
+    minimum = float(protocol["minimum_retained_share"])
+    protocol_ref = archive.cite(run_id, filename, {"keys": ["protocol"]}, "Registered airport, cell, date and retention eligibility gates")
+    en = [f"The development reference required at least {int(protocol['airport_min_main_rows'])} main-threshold connections and "
+          f"{int(protocol['airport_min_prediction_days'])} prediction dates per eligible airport. Each common cell required at least "
+          f"{int(protocol['cell_min_rows'])} connections and {int(protocol['cell_min_prediction_days'])} dates; every selected airport had to retain "
+          f"at least {number(100 * minimum, 1)}% of its threshold-specific population. Selection used covariates/counts, not net-delay outcomes. {protocol_ref}"]
+    zh = ["## 冻结共同支持与预定回退",
+          f"开发参考要求机场主阈值样本至少{int(protocol['airport_min_main_rows'])}条、至少{int(protocol['airport_min_prediction_days'])}个预测日期；"
+          f"每个共同格至少{int(protocol['cell_min_rows'])}条、{int(protocol['cell_min_prediction_days'])}个日期，且每个机场在每个阈值下保留率均至少{number(100 * minimum, 1)}%。"
+          f"选择只使用协变量和计数，不使用净延误结果。{protocol_ref}"]
+    width = len(protocol["turnaround_bins"]) - 1
+    for i, attempt in enumerate(attempts):
+        row = selected_row(saved, attempt=i + 1)
+        limit = None if pd.isna(row.airport_limit) else int(row.airport_limit)
+        if (attempt["limit"] != limits[i] or limit != attempt["limit"] or int(row.airports) != len(attempt["airport_ids"])
+                or bool(flag(pd.Series([row.passed])).iloc[0]) != attempt["passed"]
+                or json.loads(row.common_master_cells) != attempt["common_master_cells"]
+                or json.loads(row.airport_ids) != attempt["airport_ids"]
+                or json.loads(row.threshold_support) != attempt["threshold_support"]):
+            raise ValueError("RQ1 fallback CSV and frozen reference disagree")
+        passed = len(attempt["airport_ids"]) >= 2
+        details = []
+        for threshold, threshold_minimum in [("gt0", 0), ("ge5", 5), ("ge15", 15)]:
+            support = attempt["threshold_support"][threshold]
+            cells = [cell for cell in attempt["common_master_cells"]
+                     if float(protocol["master_delay_bins"][cell // width]) >= threshold_minimum]
+            shares = support["retained_shares"]
+            if cells != support["cells"] or set(shares) != {str(airport) for airport in attempt["airport_ids"]}:
+                raise ValueError("RQ1 fallback conditional cells/airport shares disagree")
+            values = list(shares.values())
+            if any(not math.isfinite(value) or not 0 <= value <= 1 for value in values):
+                raise ValueError("Invalid RQ1 fallback retained share")
+            threshold_passed = bool(cells) and all(value >= minimum for value in values)
+            if threshold_passed != support["passed"]:
+                raise ValueError("RQ1 fallback pass flag contradicts retained support")
+            passed &= threshold_passed
+            details.append(f"{threshold}={number(min(values) if values else float('nan'), 4)}")
+        if bool(passed) != attempt["passed"] or attempt["passed"] and i != len(attempts) - 1:
+            raise ValueError("RQ1 fallback did not stop at its first passing set")
+        ref = archive.cite(run_id, attempts_file, {"attempt": i + 1}, "Every registered common-support selection attempt and threshold-specific retained support")
+        label = "all eligible airports" if limit is None else f"top {limit} airports by main-threshold count"
+        en.append(f"Attempt {i + 1} used {label}: {len(attempt['airport_ids'])} airports and {len(attempt['common_master_cells'])} common master cells; "
+                  f"minimum retained shares were {', '.join(details)}. The all-threshold decision was {'pass' if attempt['passed'] else 'fail'}. {ref}")
+        zh.append(f"第{i + 1}次尝试{'全部合格机场' if limit is None else f'按主阈值样本量取前{limit}个机场'}："
+                  f"实际{len(attempt['airport_ids'])}机场、{len(attempt['common_master_cells'])}个共同主格；各阈值最低保留率为{', '.join(details)}，"
+                  f"全阈值判定{'通过' if attempt['passed'] else '未通过'}。{ref}")
+    success = attempts[-1]["passed"]
+    if not success and len(attempts) != len(limits):
+        raise ValueError("Unsupported RQ1 reference omitted registered fallback attempts")
+    if bool(frozen["supported"]) != success:
+        raise ValueError("RQ1 frozen supported flag differs from fallback decision")
+    if success and (frozen["airport_ids"] != attempts[-1]["airport_ids"] or frozen["master_cells"] != attempts[-1]["common_master_cells"]):
+        raise ValueError("RQ1 frozen A/C differ from the first passing attempt")
+    if not success and (frozen["airport_ids"] or frozen["master_cells"] or frozen["references"]):
+        raise ValueError("Unsupported RQ1 reference must not invent A/C/weights")
+    ref = archive.cite(run_id, filename, {"keys": ["airport_ids", "master_cells", "references", "protocol"]}, "Frozen airport set A, common master cells C and threshold-conditional reference weights w")
+    nodes_file = "rq1_standardized/network_nodes.csv"
+    nodes = archive.table(run_id, nodes_file, ["airport_id", "airport_code"])
+    labels = []
+    for airport in frozen["airport_ids"]:
+        row = selected_row(nodes, airport_id=airport)
+        labels.append(f"{row.airport_code} ({airport})")
+    codes_ref = archive.cite(run_id, nodes_file, {"airport_id_in": frozen["airport_ids"], "columns": ["airport_id", "airport_code"]}, "Verified display codes for frozen airport set")
+    en.append(f"The frozen set A contains {len(labels)} airports: {', '.join(labels) or 'none'}. "
+              f"C contains {len(frozen['master_cells'])} master cells. The procedure stops at the first passing attempt; later fallback limits are not searched after success. {ref} {codes_ref}")
+    zh.append(f"冻结A含{len(labels)}个机场：{', '.join(labels) or '无'}；C含{len(frozen['master_cells'])}个主格。"
+              f"首次通过即停止，不再尝试后面的更小机场集合。{ref} {codes_ref}")
+    maps = {}
+    for threshold, threshold_minimum in [("gt0", 0), ("ge5", 5), ("ge15", 15)]:
+        reference = frozen["references"].get(threshold)
+        if not success:
+            if reference:
+                raise ValueError("Unsupported reference must not publish weights")
+            maps[threshold] = {}
+            continue
+        if reference is None:
+            raise ValueError("Supported reference lacks a threshold weight set")
+        cells, weights, counts = reference["cells"], reference["weights"], reference["development_counts"]
+        expected_cells = [cell for cell in frozen["master_cells"] if float(protocol["master_delay_bins"][cell // width]) >= threshold_minimum]
+        if cells != expected_cells or not cells or len(cells) != len(weights) or len(cells) != len(counts):
+            raise ValueError("RQ1 frozen reference conditional weight dimensions differ")
+        if (not all(math.isfinite(weight) and weight > 0 for weight in weights)
+                or not all(math.isfinite(count) and count > 0 for count in counts)
+                or not math.isclose(sum(weights), 1, abs_tol=1e-12)
+                or any(not math.isclose(weight, count / sum(counts), abs_tol=1e-12) for weight, count in zip(weights, counts))):
+            raise ValueError("RQ1 frozen weights are not normalized pooled development counts")
+        maps[threshold] = dict(zip(cells, weights))
+    table = ["| Cell | Upstream delay (min) | Scheduled turnaround (min) | w: >0 | w: >=5 | w: >=15 |",
+             "| ---: | --- | --- | ---: | ---: | ---: |"]
+    edge = lambda value: format(float(value), ".12g")
+    for cell in frozen["master_cells"]:
+        delay = protocol["master_delay_bins"][cell // width: cell // width + 2]
+        turn = protocol["turnaround_bins"][cell % width: cell % width + 2]
+        values = [number(maps[threshold][cell], 6) if cell in maps[threshold] else "NA" for threshold in ["gt0", "ge5", "ge15"]]
+        table.append(f"| {cell} | [{edge(delay[0])}, {edge(delay[1])}) | [{edge(turn[0])}, {edge(turn[1])}) | {' | '.join(values)} |")
+    en.append("Threshold-specific weights condition one pooled development reference on its eligible cells; each weight column sums to one before display rounding. "
+              "NA denotes a cell outside that threshold's reference, not a zero or an airport-specific renormalization. The >0 population excludes zero even in the [0,5) cell. "
+              "These weights and A/C are reused for monthly and final RQ1, while an airport can lose support in an individual month. " + ref + "\n\n" + "\n".join(table))
+    zh.append("三个阈值在同一开发期主参考上条件化，表中每列权重在显示舍入前合计1。NA表示该格不属于对应阈值参考，并非补零，也不是按机场重算权重。"
+              "即使格区间从0开始，>0人群也排除零延误。逐月和最终RQ1复用同一A/C/w，但单月机场仍可能失去支持。" + ref + "\n\n" + "\n".join(table))
+    return en, zh
+
+
 def rq1_prose(archive, run_id, label):
     rawfile = "tables/rq1_airport_raw.csv"
     raw = archive.table(run_id, rawfile, ["airport_id", "airport_code", "n", "mean_delta", "s_plus", "s_minus", "s_net"])
@@ -464,6 +587,7 @@ def rq1_prose(archive, run_id, label):
         raise ValueError("RQ1 raw sample is empty")
     means = (raw.n * raw.mean_delta).sum() / n
     ref = archive.cite(run_id, rawfile, {"rows": "all", "aggregation": "sum(n*mean_delta)/sum(n); sum(n,s_plus,s_minus,s_net)"}, "Raw RQ1 sample and cumulative minutes")
+    raw_ref = ref
     text = [f"For {label}, the raw main population comprised {int(n):,} nonovernight connections with upstream delay at least 15 min. "
             f"Its mean net change was {number(means)} min per connection; cumulative increases, decreases and net change were "
             f"{number(raw.s_plus.sum(), 0)}, {number(raw.s_minus.sum(), 0)} and {number(raw.s_net.sum(), 0)} sample-minutes. "
@@ -476,6 +600,12 @@ def rq1_prose(archive, run_id, label):
                 f"The retained shares ranged from {number(supported.retained_share.min())} to {number(supported.retained_share.max())}; "
                 f"standardized mean net changes ranged from {number(supported.standardized_mean.min())} to {number(supported.standardized_mean.max())} min per connection. "
                 f"Unsupported estimates remain missing and are not ranked. {ref}")
+    interval_present = supported.ci_low.notna() & supported.ci_high.notna()
+    crosses_zero = interval_present & supported.ci_low.le(0) & supported.ci_high.ge(0)
+    text.append(f"Supported common cells retain {int(supported.retained_n.sum()):,} connections, or {number(100 * supported.retained_n.sum() / n, 2)}% of the all-airport raw main population. "
+                f"There are {int(supported.standardized_mean.lt(0).sum())} negative and {int(supported.standardized_mean.gt(0).sum())} positive supported point estimates; "
+                f"{int(interval_present.sum())} have reportable intervals and {int(crosses_zero.sum())} of those intervals include zero. "
+                f"Within-selected-airport retention is distinct from coverage of the whole raw population. {ref} {raw_ref}")
     for _, row in supported.sort_values(["retained_n", "airport_id"], ascending=[False, True]).head(3).iterrows():
         ref = archive.cite(run_id, name, {"threshold": "ge15", "airport_id": int(row.airport_id)}, "High-support airport estimate and interval")
         text.append(f"AirportID {int(row.airport_id)} had standardized net change {number(row.standardized_mean)} min "
@@ -495,6 +625,8 @@ def rq1_prose(archive, run_id, label):
         ref = archive.cite(run_id, monthly_file, {"month_utc": month, "threshold": "ge15", "supported": True}, "Monthly support under identical frozen reference")
         text.append(f"In {month}, {len(rows)} airports retained support under the same frozen reference; "
                     f"their standardized net changes ranged from {number(rows.standardized_mean.min())} to {number(rows.standardized_mean.max())} min. {ref}")
+    text.append("The set of supported airports can differ by month. These cross-airport ranges are not a fixed-airport time trend; "
+                "a monthly comparison must identify the same supported airports, and unsupported months remain NA.")
     nodes = archive.table(run_id, "rq1_standardized/network_nodes.csv", ["airport_id", "valid_connection_count", "standardized_mean"])
     edges = archive.table(run_id, "rq1_standardized/network_edges.csv", ["origin_airport_id", "destination_airport_id", "flight_count"])
     r1 = archive.cite(run_id, "rq1_standardized/network_nodes.csv", {"rows": "all"}, "Network node sample support")
@@ -506,7 +638,8 @@ def rq1_prose(archive, run_id, label):
         ("rq1_standardized_airports.png", name, "Frozen common-support airport estimates and date-block uncertainty"),
         ("rq1_threshold_stability.png", stability_file, "Direction and ranking sensitivity to upstream-delay thresholds"),
         ("rq1_network_geographic.png", "rq1_standardized/network_nodes.csv", "Airport connection performance and directed flight flow")]:
-        text.append(archive.figure(run_id, "figures/" + filename, table, {"rows": "all"}, caption, "scripts/complete_rq1.py"))
+        extras = [("rq1_standardized/network_edges.csv", {"rows": "all", "plot_selection": "top 100 directed routes by flight_count; within-panel routes shown"})] if filename == "rq1_network_geographic.png" else None
+        text.append(archive.figure(run_id, "figures/" + filename, table, {"rows": "all"}, caption, "scripts/complete_rq1.py", extra_sources=extras))
     return "\n\n".join(text)
 
 
@@ -527,6 +660,7 @@ def compose(archive, config, validated):
              "Cancelled, diverted, ambiguous and otherwise invalid chains define exclusions rather than zero outcomes. Month-prefix QA and future completed-connection selection mean the analysed population is conditional and is not a fully deployable arrival-time eligibility classifier. "
              "Aircraft family is the mainline representation, variant is an independent replacement, and the 2024/2025 B43 inventories are reference snapshots rather than historical fleet truth. Seats, aircraft age and airport infrastructure are excluded."]
     single_en, single_zh = single_flight_prose(archive, config["development_rq1_run_id"])
+    reference_en, reference_zh = rq1_reference_prose(archive, config["development_rq1_run_id"])
     lines.extend(single_en)
     eda_id = main[0]["id"]
     eda = archive.json(eda_id, "eda_summary.json")
@@ -553,6 +687,7 @@ def compose(archive, config, validated):
               "For a connection, net change is downstream nonnegative departure delay minus upstream nonnegative arrival delay. A negative change means fewer delay minutes, not necessarily punctual departure. "
               "The main population is nonovernight with upstream delay at least 15 minutes. Airport comparison adjusts only for upstream-delay and scheduled-turnaround cells within frozen common support. "
               "Common airports, cells and reference weights are held fixed across months and final reporting; uncertainty uses common date blocks and is descriptive, not causal or multiplicity-adjusted.",
+              "\n\n".join(reference_en),
               rq1_prose(archive, config["development_rq1_run_id"], "April–July development"),
               rq1_prose(archive, config["final_rq1_run_id"], "April–August final description"),
               "## RQ2: fixed-OLS feature development"]
@@ -690,15 +825,18 @@ def compose(archive, config, validated):
         ids = [item["evidence_id"] for item in archive.evidence if item["run_id"] == run["id"] and item["source_file"].endswith("/metrics.csv")]
         chinese.append(f"{run['id']} / {name}：MAE {number(row.mae)}分钟，RMSE {number(row.rmse)}分钟，样本{int(row.n):,}。" + " ".join(f"[{item}]" for item in ids[:1]))
     chinese += ["## RQ1、研究演进和局限", "RQ1先报告原始均值与累计增加/减少/净变化，再按上游延误和计划周转共同支持标准化。共同支持机场、分层和权重由开发期冻结，逐月与4–8月最终描述重复使用；>0、≥5、≥15阈值不能另选有利机场。节点大小是衔接数、颜色是标准化每次净变化、有向边宽是航班量，不能解释为机场责任。"]
+    chinese.extend(reference_zh)
     for run_id in [config["development_rq1_run_id"], config["final_rq1_run_id"]]:
         matching = [item for item in archive.evidence if item["run_id"] == run_id and item["kind"] == "conclusion"]
         chinese.append(f"{run_id} 的原始、共同支持、月际、阈值和网络证据见 " + " ".join(f"[{item['evidence_id']}]" for item in matching) + "；原始CSV筛选条件在evidence_index.csv。")
         raw = archive.table(run_id, "tables/rq1_airport_raw.csv", ["n", "mean_delta", "s_plus", "s_minus", "s_net"])
-        adjusted = archive.table(run_id, "rq1_standardized/rq1_airports.csv", ["threshold", "supported", "standardized_mean"])
+        adjusted = archive.table(run_id, "rq1_standardized/rq1_airports.csv", ["threshold", "supported", "standardized_mean", "retained_n"])
         adjusted = adjusted.loc[adjusted.threshold.eq("ge15") & flag(adjusted.supported)]
         chinese.append(f"{run_id} 原始主样本{int(raw.n.sum()):,}条，平均每次净变化{number((raw.n * raw.mean_delta).sum() / raw.n.sum())}分钟；"
                        f"累计增加{number(raw.s_plus.sum(), 0)}、累计减少{number(raw.s_minus.sum(), 0)}、累计净变化{number(raw.s_net.sum(), 0)}样本分钟。"
                        f"共同支持下可比较{len(adjusted)}个机场，标准化净变化范围{number(adjusted.standardized_mean.min())}至{number(adjusted.standardized_mean.max())}分钟。")
+        chinese.append(f"共同支持格实际保留{int(adjusted.retained_n.sum()):,}条，占全机场原始主样本{number(100 * adjusted.retained_n.sum() / raw.n.sum(), 2)}%；"
+                       "这与所选各机场内部保留率是不同分母。单月支持的机场集合可能变化，跨机场范围不等于同机场月际趋势；无支持月份仍为NA。")
     chinese += ["主线固定OLS并按预定顺序增量；variant替换和NOAA补缺独立比较。固定特征之后才比较4组决策树与2组随机森林。共同天气覆盖子集只比较已有预测，不重新训练；源报文可用不等于每个天气变量齐全。每轮无增益、失败和失效都保留，不能只讲最终最好模型。",
                 "这是观察到有效、已完成、同机相邻衔接条件下的回顾性预测，不是全航班实时部署证明。METAR观测后5分钟和TAF归档/发布时间都是可用性假设/代理，NOAA精确质量码筛选不等于官方全QC认证。静态机队参考、计划信息事前可得假设、共同支持外推广、单季节和非因果解释都限制结论。",
                 "新学方法包括as-of连接、共同支持标准化和共同日期块区间。Li等用于传播视角与buffer定义，Chauhan等用于网络口径区分，Berkeley用于预测时点与逐步实验组织；并未复现三项工作的结论。",

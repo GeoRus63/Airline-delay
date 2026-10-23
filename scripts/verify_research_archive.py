@@ -1,7 +1,7 @@
 """Read-only run receipts, historical Git source bytes and environment audit.
 
 No training, raw-data decoding, pickle loading, artifact repair or final-access
-claim is performed. Final prediction replay delegates only to verify_saved.
+claim is performed. Formal and reproduction archives use separate saved verifiers.
 """
 from __future__ import annotations
 
@@ -154,6 +154,14 @@ def _verify_final_saved(path):
     return verify_saved(path)
 
 
+def _verify_reproduction_saved(path, root):
+    try:
+        from .reproduce_final import verify_saved_reproduction
+    except ImportError:
+        from reproduce_final import verify_saved_reproduction
+    return verify_saved_reproduction(path, root=root)
+
+
 def verify_run(run_id, *, root=ROOT, index_row=None):
     """Integrity is distinct from eligibility: a preserved failed run stays failed."""
     root = Path(root).resolve()
@@ -234,18 +242,26 @@ def verify_run(run_id, *, root=ROOT, index_row=None):
         result["errors"].extend(f"{item['path']}: {error}" for item in result[category] for error in item["errors"])
     final_path = path / "final_result.json"
     mode = manifest.get("config", {}).get("mode")
+    result["mode"] = mode
     if final_path.is_file() and result["eligible_completed"]:
         if result["errors"]:
             result["warnings"].append("Final prediction replay skipped because archive receipts already failed")
         else:
             try:
-                result["final_verification"] = _verify_final_saved(path)
-                if result["final_verification"].get("refitted") is not False or result["final_verification"].get("raw_test_data_read") is not False:
+                if mode == "reproduce_final":
+                    verification = _verify_reproduction_saved(path, root)
+                    result["reproduction_verification"] = verification
+                elif mode == "final":
+                    verification = _verify_final_saved(path)
+                    result["final_verification"] = verification
+                else:
+                    raise ValueError("Final result archive requires explicit final or reproduce_final mode")
+                if verification.get("refitted") is not False or verification.get("raw_test_data_read") is not False:
                     raise ValueError("Final replay did not affirm no fitting/no raw test reads")
             except Exception as error:
                 result["errors"].append(f"Saved final prediction verification failed: {type(error).__name__}: {error}")
-    elif mode == "final" and result["eligible_completed"]:
-        result["errors"].append("Completed final run is missing final_result.json")
+    elif mode in {"final", "reproduce_final"} and result["eligible_completed"]:
+        result["errors"].append("Completed final/reproduction run is missing final_result.json")
     result["integrity_passed"] = not result["errors"]
     # Eligibility includes receipt integrity, not only a status string.
     result["eligible_completed"] &= result["integrity_passed"]
@@ -283,6 +299,7 @@ def verify_archive(*, root=ROOT, run_ids=None, all_runs=False, final_only=False)
     if failed:
         errors.append("Run integrity checks failed: " + ", ".join(failed))
     final_verified = any(item.get("final_verification", {}).get("verified") is True for item in runs)
+    reproduction_verified = any(item.get("reproduction_verification", {}).get("verified") is True for item in runs)
     if final_only and selected and not final_verified:
         errors.append("The final ledger does not identify a completed integrity-verified saved prediction archive")
     return {"schema_version": 1, "checked_at_utc": datetime.now(timezone.utc).isoformat(), "root": str(root),
@@ -290,6 +307,7 @@ def verify_archive(*, root=ROOT, run_ids=None, all_runs=False, final_only=False)
             "terminal_runs_checked": sum(not item.get("skipped_unsealed", False) for item in runs),
             "unsealed_runs_skipped": [item["run_id"] for item in runs if item.get("skipped_unsealed")],
             "final_verified": final_verified,
+            "formal_final_verified": final_verified, "reproduction_verified": reproduction_verified,
             "raw_data_read": False, "refitted": False, "pickle_or_joblib_loaded": False,
             "raw_verification_entry": "python scripts/verify_downloads.py (separate explicit command)",
             "clone_limit": "Git ignores processed/* and run data/, predictions/, models/; local absence fails full receipt verification rather than being silently skipped"}

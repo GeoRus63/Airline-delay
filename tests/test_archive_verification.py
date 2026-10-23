@@ -47,6 +47,31 @@ def fake_blob(root, commit, path):
 
 
 class ArchiveVerification(unittest.TestCase):
+    def test_reproduction_routes_to_saved_reproduction_verifier_without_formal_claim(self):
+        with tempfile.TemporaryDirectory() as temp, patch.object(audit, "_git_blob", side_effect=fake_blob), \
+             patch.object(audit, "_ignored", return_value=False), \
+             patch.object(audit, "current_environment", return_value={"requirements_match": True}), \
+             patch.object(audit, "_verify_final_saved", side_effect=AssertionError("reproduction is not formal")), \
+             patch.object(audit, "_verify_reproduction_saved", return_value={"verified": True, "refitted": False,
+                                                                           "raw_test_data_read": False}) as replay:
+            root = Path(temp)
+            run, _ = fixture(root, final=True)
+            config = {"mode": "reproduce_final"}
+            (run / "config.json").write_text(json.dumps(config))
+            manifest = json.loads((run / "manifest.json").read_text())
+            manifest["config"] = config
+            for item in manifest["outputs"]:
+                path = root / item["path"]
+                item.update(bytes=path.stat().st_size, sha256=audit._sha(path))
+            (run / "manifest.json").write_text(json.dumps(manifest))
+            result = audit.verify_archive(root=root, all_runs=True)
+            self.assertTrue(result["passed"])
+            self.assertTrue(result["reproduction_verified"])
+            self.assertFalse(result["final_verified"])
+            self.assertFalse(result["formal_final_verified"])
+            self.assertNotIn("final_verification", result["runs"][0])
+            replay.assert_called_once_with(run, root)
+
     def test_receipts_reject_tampering_and_missing_ignored_models(self):
         with tempfile.TemporaryDirectory() as temp, patch.object(audit, "_git_blob", side_effect=fake_blob), \
              patch.object(audit, "_ignored", return_value=True):
