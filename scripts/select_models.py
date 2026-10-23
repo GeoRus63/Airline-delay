@@ -154,7 +154,7 @@ def _scientific_config(run):
     # Cache/lineage/reporting switches are execution metadata, never final science.
     excluded = final.RUNTIME_KEYS | {"fold_workers", "preparation_evidence_dir", "compare_parent",
                                     "feature_source_run", "feature_source_run_id", "selected_feature_run_id",
-                                    "feature_archive_path"}
+                                    "feature_archive_path", "test_target_sealed"}
     prefixes = ("runtime", "cache", "feature_cache", "compare_", "common_weather", "preparation_evidence", "parent_")
     config = {key: value for key, value in run["config"].items()
               if key not in excluded and not key.startswith(prefixes)}

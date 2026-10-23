@@ -238,9 +238,92 @@ def comparison_text(archive, reference, candidate, folder="comparison"):
         if not math.isclose(float(row.difference_candidate_minus_reference), c.mae - r.mae, abs_tol=1e-8):
             raise ValueError("Paired MAE difference conflicts with archived metrics")
     ref = archive.cite(candidate["id"], f"{folder}/comparison_metrics.csv", {"scope": "pooled", "metric": "mae"}, "Paired MAE change and date-block interval")
-    return (f"The candidate-minus-reference MAE change was {number(row.difference_candidate_minus_reference)} min "
-            f"(95% date-block interval {number(row.ci95_low)} to {number(row.ci95_high)}; n={int(row.n):,}); "
-            f"positive values indicate deterioration. {ref}")
+    delta = float(row.difference_candidate_minus_reference)
+    direction = "improved" if delta < 0 else "worsened" if delta > 0 else "was unchanged"
+    magnitude = f" by {number(abs(delta))} min ({number(abs(delta) * 60, 2)} seconds)" if delta else ""
+    return (f"Relative to {reference['id']}, {candidate['id']} MAE {direction}{magnitude}. "
+            f"The signed candidate-minus-reference change was {number(delta)} min "
+            f"(95% date-block interval {number(row.ci95_low)} to {number(row.ci95_high)}; n={int(row.n):,}). "
+            f"Interval precision does not establish practical importance. {ref}")
+
+
+def single_flight_prose(archive, run_id):
+    """One scoped, auditable EDA digest shared by both report languages."""
+    summary_file = "tables/eda_complete_summary.json"
+    summary = archive.json(run_id, summary_file)
+    if summary.get("mode") != "development":
+        raise ValueError("Single-flight report EDA must come from development mode")
+    counts = summary["single_flight_summary"]
+    operations_file = "tables/single_flight_operations.csv"
+    operations = archive.table(run_id, operations_file, ["dimension", "group_value", "flights", "completed", "cancelled", "diverted", "status_unknown"])
+    monthly_ops = operations.loc[operations.dimension.eq("month")]
+    months = ["2026-04", "2026-05", "2026-06", "2026-07"]
+    if sorted(monthly_ops.group_value.astype(str)) != months:
+        raise ValueError("Single-flight EDA must contain exactly April–July local dates")
+    for key, column in [("scoped_flight_rows", "flights"), ("normal_completed_rows", "completed"), ("cancelled_rows", "cancelled"),
+                        ("diverted_rows", "diverted"), ("unknown_operation_status_rows", "status_unknown")]:
+        if int(monthly_ops[column].sum()) != int(counts[key]):
+            raise ValueError(f"Single-flight operations and EDA summary differ: {key}")
+    ref = archive.cite(run_id, operations_file, {"dimension": "month", "aggregation": "sum(flights,completed,cancelled,diverted,status_unknown)"}, "April–July single-flight operation population")
+    archive.cite(run_id, summary_file, {"keys": ["mode", "scope", "single_flight_summary"]}, "Single-flight EDA scope and reconciled counts")
+    en = [f"Single-flight EDA uses April–July local FlightDate, independently of the UTC connection windows. It includes {int(counts['scoped_flight_rows']):,} flights: "
+          f"{int(counts['normal_completed_rows']):,} normally completed, {int(counts['cancelled_rows']):,} cancelled, {int(counts['diverted_rows']):,} diverted "
+          f"and {int(counts['unknown_operation_status_rows']):,} with unknown operation status. Delay quantiles below describe normally completed flights only; "
+          f"cancellation and diversion are not zero-delay outcomes. {ref}",
+          "Raw DepDelay and ArrDelay preserve negative early departures/arrivals; DepDelayMinutes and ArrDelayMinutes are the corresponding nonnegative measures. "
+          "Their means can therefore differ even for the same flights. Each table row reports its own observed-outcome n; missing outcomes are excluded from its quantiles, not filled with zero."]
+    zh = ["## 单航段EDA与机型参考覆盖",
+          f"单航段EDA按当地FlightDate取4–7月，与衔接的UTC预测窗分别定义。共{int(counts['scoped_flight_rows']):,}条航班："
+          f"正常完成{int(counts['normal_completed_rows']):,}、取消{int(counts['cancelled_rows']):,}、改道{int(counts['diverted_rows']):,}、状态未知{int(counts['unknown_operation_status_rows']):,}。"
+          f"下表延误分布只覆盖正常完成航班，取消和改道不能当作零延误。{ref}",
+          "原始DepDelay/ArrDelay保留提前出发/到达的负值，DepDelayMinutes/ArrDelayMinutes为对应非负分钟，因此同批航班的两种均值并不相同。每行n是该结果字段实际非缺失数；缺失不填0，q50是中位数，q90/q99刻画右尾。"]
+    stats_file = "tables/single_flight_delay_stats.csv"
+    stats = archive.table(run_id, stats_file, ["dimension", "group_value", "outcome", "normal_completed_flights", "n", "missing", "negative", "zero", "mean", "q50", "q90", "q99"])
+    table = ["| Month | Delay measure | n | Mean | q50 | q90 | q99 | Evidence |",
+             "| --- | --- | ---: | ---: | ---: | ---: | ---: | --- |"]
+    labels = {"DepDelay": "Departure raw", "ArrDelay": "Arrival raw", "DepDelayMinutes": "Departure nonnegative", "ArrDelayMinutes": "Arrival nonnegative"}
+    for month in months:
+        operation = selected_row(monthly_ops, group_value=month)
+        for outcome, label in labels.items():
+            selector = {"dimension": "month", "group_value": month, "outcome": outcome}
+            row = selected_row(stats, **selector)
+            if int(row.normal_completed_flights) != int(operation.completed) or int(row.n + row.missing) != int(operation.completed):
+                raise ValueError("Single-flight observed/missing outcome counts do not reconcile")
+            ref = archive.cite(run_id, stats_file, selector, "Monthly signed/nonnegative single-flight delay quantiles; minutes")
+            table.append(f"| {month} | {label} | {int(row.n):,} | {number(row['mean'], 2)} | {number(row.q50, 2)} | {number(row.q90, 2)} | {number(row.q99, 2)} | {ref} |")
+    en.append("Monthly single-flight delay distributions (all summary values in minutes).\n\n" + "\n".join(table))
+    zh.append("单航段月际分布，所有统计量均为分钟；raw表示保留负值，nonnegative表示非负分钟。\n\n" + "\n".join(table))
+    coverage_file = "tables/airline_aircraft_coverage.csv"
+    coverage = archive.table(run_id, coverage_file, ["month", "Reporting_Airline", "inventory_year", "flight_rows", "mapped_model_rows", "unknown_model_rows"])
+    if (set(coverage.inventory_year.astype(int)) != {2024, 2025} or set(coverage.month.astype(str)) != set(months)
+            or coverage.duplicated(["month", "Reporting_Airline", "inventory_year"]).any()):
+        raise ValueError("Aircraft coverage requires unique airline/month keys for both 2024 and 2025 references")
+    for year in [2024, 2025]:
+        rows = coverage.loc[coverage.inventory_year.eq(year)]
+        total, matched, unknown = int(rows.flight_rows.sum()), int(rows.mapped_model_rows.sum()), int(rows.unknown_model_rows.sum())
+        if total != int(counts["scoped_flight_rows"]) or matched + unknown != total:
+            raise ValueError("Aircraft coverage denominators differ from scoped flights")
+        ref = archive.cite(run_id, coverage_file, {"inventory_year": year, "aggregation": "sum(mapped_model_rows)/sum(flight_rows); sum(unknown_model_rows)"}, "B43 reference-year flight-weighted mapping coverage")
+        en.append(f"The {year} B43 reference mapped an aircraft model for {matched:,}/{total:,} flights ({number(100 * matched / total, 2)}%); "
+                  f"{unknown:,} remained unmatched. {ref}")
+        zh.append(f"{year}年B43参考表映射到原始机型的航班为{matched:,}/{total:,}（{number(100 * matched / total, 2)}%），未匹配{unknown:,}条。{ref}")
+    en.append("The 2024 inventory remains the primary reference; 2025 is a coverage sensitivity comparison and does not replace it. "
+              "Mapping to a reference model is not proof of contemporaneous fleet membership, and unmatched tails/models remain explicit unknowns rather than being dropped.")
+    zh.append("主实验仍采用2024参考表，2025只作覆盖对照，覆盖较高也不自动替换主版本；这两份快照不能证明2026各预测时点的真实机队，未知机型保留为显式类别。")
+    activity_file = "tables/airport_activity.csv"
+    activity = archive.table(run_id, activity_file, ["airport_id", "origin_flights", "destination_flights", "total_flight_movements", "accepted_connection_count", "main_analysis_eligible_connection_count", "rq2_eligible_connection_count"])
+    if activity.airport_id.duplicated().any() or not activity.total_flight_movements.eq(activity.origin_flights + activity.destination_flights).all():
+        raise ValueError("Airport movement table has duplicate keys or inconsistent movement counts")
+    ref = archive.cite(run_id, activity_file, {"rows": "all", "aggregation": "sum(total_flight_movements,accepted_connection_count,main_analysis_eligible_connection_count,rq2_eligible_connection_count)"}, "Airport movements versus distinct QA-cohort connection populations")
+    movements, connections = int(activity.total_flight_movements.sum()), int(activity.accepted_connection_count.sum())
+    main_n, rq2_n = int(activity.main_analysis_eligible_connection_count.sum()), int(activity.rq2_eligible_connection_count.sum())
+    en.append(f"Airport activity totals {movements:,} arrival-plus-departure movements and {connections:,} accepted same-aircraft connections; "
+              f"the QA-cohort eligibility flags count {main_n:,} main-analysis and {rq2_n:,} RQ2 connections. "
+              f"A flight contributes an origin movement and a destination movement, whereas a connection is a validated pair at its transfer airport. "
+              f"Connection activity here is grouped by QA cohort month, so it is not substituted for a UTC prediction-window model denominator. {ref}")
+    zh.append(f"机场活动表合计{movements:,}次到达加出发movement，以及{connections:,}条有效同机衔接；QA-cohort条件下主分析标记{main_n:,}条、RQ2标记{rq2_n:,}条。"
+              f"一条航班在起点/终点各贡献一次movement，同机衔接则是转接机场处核验后的航段对。该表衔接按QA队列月份计数，不能替代UTC预测窗的模型样本量。{ref}")
+    return en, zh
 
 
 def validate_inputs(archive, config):
@@ -443,6 +526,8 @@ def compose(archive, config, validated):
              "The project covers BTS Reporting US domestic flights from April through August 2026. Raw sources are preserved. Cleaning retains provenance and exclusion flags, handles local time zones, midnight and 2400, and forms candidates in same-tail scheduled order before checking endpoint continuity and observed timing. "
              "Cancelled, diverted, ambiguous and otherwise invalid chains define exclusions rather than zero outcomes. Month-prefix QA and future completed-connection selection mean the analysed population is conditional and is not a fully deployable arrival-time eligibility classifier. "
              "Aircraft family is the mainline representation, variant is an independent replacement, and the 2024/2025 B43 inventories are reference snapshots rather than historical fleet truth. Seats, aircraft age and airport infrastructure are excluded."]
+    single_en, single_zh = single_flight_prose(archive, config["development_rq1_run_id"])
+    lines.extend(single_en)
     eda_id = main[0]["id"]
     eda = archive.json(eda_id, "eda_summary.json")
     ref = archive.cite(eda_id, "eda_summary.json", {"keys": ["n", "airport_n", "route_n", "overnight_n", "scope"]}, "Development RQ2 population")
@@ -595,6 +680,7 @@ def compose(archive, config, validated):
                f"冻结主预测器为 {choice['primary_model_name']}，保留学习模型来自 {choice['selected_run_id']}，特征来源为 {feature['selected_run_id']}。基线允许获胜；8月结果不用于重新选择。",
                "## RQ2逐步特征、分支和最终结果"]
     chinese.insert(2, f"开发期EDA含{int(eda['n']):,}条有效RQ2衔接、{int(eda['airport_n'])}个机场和{int(eda['route_n'])}条航线，其中隔夜{int(eda['overnight_n']):,}条；其人群包括上游准点衔接，与RQ1主样本不同。")
+    chinese[4:4] = single_zh
     for run in [*main, variant, noaa, *algorithms, final_run]:
         name = choice["primary_model_name"] if run is final_run else run["model"]["model_name"]
         row = selected_row(run["metrics"], model=name, fold="overall", group="all", value="all")

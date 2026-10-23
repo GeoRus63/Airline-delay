@@ -162,6 +162,24 @@ def make_fixture(root):
         for name in ["rq1_standardized_airports", "rq1_threshold_stability", "rq1_network_geographic"]:
             (directory / "figures" / (name + ".png")).write_bytes(b"synthetic png stand-in")
 
+    analysis = root / "experiments/runs/R0018"
+    months = ["2026-04", "2026-05", "2026-06", "2026-07"]
+    write_json(analysis / "tables/eda_complete_summary.json", {"mode": "development", "scope": "April–July local FlightDate",
+               "single_flight_summary": {"scoped_flight_rows": 12, "normal_completed_rows": 8, "cancelled_rows": 4,
+                                         "diverted_rows": 0, "unknown_operation_status_rows": 0}})
+    write_table(analysis / "tables/single_flight_operations.csv", [{"dimension": "month", "group_value": month,
+                "flights": 3, "completed": 2, "cancelled": 1, "diverted": 0, "status_unknown": 0} for month in months])
+    write_table(analysis / "tables/single_flight_delay_stats.csv", [{"dimension": "month", "group_value": month, "outcome": outcome,
+                "normal_completed_flights": 2, "n": 2, "missing": 0, "negative": int(outcome in ["DepDelay", "ArrDelay"]),
+                "zero": int(outcome.endswith("Minutes")), "mean": 3., "q50": 2., "q90": 6., "q99": 8.}
+                for month in months for outcome in ["DepDelay", "ArrDelay", "DepDelayMinutes", "ArrDelayMinutes"]])
+    write_table(analysis / "tables/airline_aircraft_coverage.csv", [{"month": month, "Reporting_Airline": "SYN", "inventory_year": year,
+                "flight_rows": 3, "mapped_model_rows": 2 if year == 2024 else 3, "unknown_model_rows": 1 if year == 2024 else 0}
+                for month in months for year in [2024, 2025]])
+    write_table(analysis / "tables/airport_activity.csv", [{"airport_id": 1, "origin_flights": 12, "destination_flights": 12,
+                "total_flight_movements": 24, "accepted_connection_count": 6,
+                "main_analysis_eligible_connection_count": 4, "rq2_eligible_connection_count": 5}])
+
     for run_id, config in configs.items():
         seal(root, run_id, config)
     # Seal candidate receipts only after all candidate comparison/EDA outputs exist.
@@ -211,6 +229,13 @@ class ReportEvidence(unittest.TestCase):
             self.assertIn("training_median", english)
             self.assertIn("not estimable", english)
             self.assertIn("invalidated", english)
+            self.assertIn("66.67%", english)
+            self.assertIn("2024 inventory remains the primary", english)
+            self.assertIn("| 2026-07 | Arrival nonnegative |", english)
+            self.assertIn("MAE worsened by 1.000 min (60.00 seconds)", english)
+            chinese = (root / "reports/结果解读_中文.md").read_text(encoding="utf-8")
+            self.assertIn("取消和改道不能当作零延误", chinese)
+            self.assertIn("一条航班在起点/终点各贡献一次movement", chinese)
             self.assertFalse(any(line.startswith(("- ", "* ")) for line in english.splitlines()))
             with (root / "reports/evidence_index.csv").open(encoding="utf-8", newline="") as stream:
                 evidence = list(csv.DictReader(stream))
@@ -271,6 +296,27 @@ class ReportEvidence(unittest.TestCase):
             seal(root, "R0019", archive_config)
             with self.assertRaisesRegex(ValueError, "reuse the development reference"):
                 report.build_report(config, root=root)
+
+    def test_single_flight_eda_schema_and_denominators_are_required(self):
+        for failure in ["missing_column", "bad_denominator"]:
+            with self.subTest(failure=failure), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                config = make_fixture(root)
+                directory = root / "experiments/runs/R0018"
+                if failure == "missing_column":
+                    path = directory / "tables/single_flight_delay_stats.csv"
+                    frame = pd.read_csv(path).drop(columns=["q99"])
+                    expected = "missing columns"
+                else:
+                    path = directory / "tables/airline_aircraft_coverage.csv"
+                    frame = pd.read_csv(path)
+                    frame.loc[0, "flight_rows"] += 1
+                    expected = "coverage denominators"
+                frame.to_csv(path, index=False)
+                seal(root, "R0018", json.loads((directory / "config.json").read_text()))
+                with self.assertRaisesRegex(ValueError, expected):
+                    report.build_report(config, root=root)
+                self.assertFalse((root / "reports").exists())
 
 
 if __name__ == "__main__":
