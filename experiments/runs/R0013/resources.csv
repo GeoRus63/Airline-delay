@@ -1,0 +1,2 @@
+utc,process_rss_bytes,process_cpu_percent,system_available_bytes,process_tree_rss_bytes,process_tree_cpu_seconds,child_processes
+2026-10-23T22:51:29.586782+00:00,35205120,0.0,68080234496,35205120,0.34375,0

@@ -333,12 +333,16 @@ def _expression(path, root):
         return f"Path({str(path)!r})"
 
 
-def _render(notebook, filename, run_dir, root, model_runs=(), rq1_run_dir=None, update_main=True):
+def _render(notebook, filename, run_dir, root, model_runs=(), rq1_run_dir=None, update_main=True, output_dir=None):
     root = Path(root).resolve()
     run_dir = _resolve(run_dir, root)
     model_runs = [_resolve(value, root) for value in model_runs]
     rq1_run_dir = run_dir if rq1_run_dir is None else _resolve(rq1_run_dir, root)
-    destination = run_dir / "notebooks"
+    archive_dir = run_dir if output_dir is None else _resolve(output_dir, root)
+    manifest_path = archive_dir / "manifest.json"
+    if manifest_path.is_file() and json.loads(manifest_path.read_text(encoding="utf-8-sig")).get("status") == "completed":
+        raise ValueError("Research notebooks must be archived outside an already completed run")
+    destination = archive_dir / "notebooks"
     destination.mkdir(parents=True, exist_ok=True)
     target = destination / filename
     if target.exists() or target.with_suffix(".html").exists():
@@ -373,7 +377,7 @@ def _render(notebook, filename, run_dir, root, model_runs=(), rq1_run_dir=None, 
             warning = {"notebook": filename, "winerror": error.winerror, "message": str(error),
                        "executed_archive": str(target), "display_copy_updated": False}
             display_warnings.append(warning)
-            warning_path = run_dir / "notebook_display_warnings.json"
+            warning_path = archive_dir / "notebook_display_warnings.json"
             existing = json.loads(warning_path.read_text(encoding="utf-8")) if warning_path.is_file() else []
             if not isinstance(existing, list):
                 raise ValueError("notebook_display_warnings.json must contain a list")
@@ -388,9 +392,10 @@ def render_analysis(run_dir, model_runs=(), *, root=ROOT, update_main=True):
                    model_runs=model_runs, update_main=update_main)
 
 
-def render_final(run_dir, rq1_run_dir=None, *, root=ROOT, update_main=True):
+def render_final(run_dir, rq1_run_dir=None, *, output_dir=None, root=ROOT, update_main=True):
+    """Read the model archive and optionally write 07 into a separate active run."""
     return _render(final_template(), "07_最终评估.ipynb", run_dir, root,
-                   rq1_run_dir=rq1_run_dir, update_main=update_main)
+                   rq1_run_dir=rq1_run_dir, update_main=update_main, output_dir=output_dir)
 
 
 if __name__ == "__main__":
@@ -399,8 +404,9 @@ if __name__ == "__main__":
     parser.add_argument("--mode", choices=["analysis", "final"], default="analysis")
     parser.add_argument("--model-runs", nargs="*", default=[])
     parser.add_argument("--rq1-run-dir")
+    parser.add_argument("--output-dir", help="Separate active archive for the final research notebook")
     parser.add_argument("--no-update-main", action="store_true")
     args = parser.parse_args()
     result = (render_analysis(args.run_dir, args.model_runs, update_main=not args.no_update_main)
-              if args.mode == "analysis" else render_final(args.run_dir, args.rq1_run_dir, update_main=not args.no_update_main))
+              if args.mode == "analysis" else render_final(args.run_dir, args.rq1_run_dir, output_dir=args.output_dir, update_main=not args.no_update_main))
     print(result)

@@ -244,6 +244,24 @@ class WeatherContractTests(unittest.TestCase):
         self.assertEqual(result["status"], "ambiguous_bulletin")
         self.assertTrue(result["segments"].empty)
 
+    def test_conflicting_duplicate_product_status_blocks_asof_forecast(self):
+        rows = pd.DataFrame({
+            "airport_id": [1, 1], "product_id": ["routine", "conflict"],
+            "station": ["KAAA", "KAAA"], "status": ["normal", "ambiguous"],
+            "message_type": ["routine", "routine"],
+            "availability_time": pd.to_datetime(["2026-04-01T08:00Z", "2026-04-01T09:00Z"], utc=True),
+            "archive_issue_time": pd.to_datetime(["2026-04-01T08:00Z", "2026-04-01T09:00Z"], utc=True),
+            "body_issue_time": pd.to_datetime(["2026-04-01T08:00Z", "2026-04-01T09:00Z"], utc=True),
+            "availability_verified": [False, False], "interval_usable": [True, False],
+            "segment_start": pd.to_datetime(["2026-04-01T08:00Z"] * 2, utc=True),
+            "segment_end": pd.to_datetime(["2026-04-01T12:00Z"] * 2, utc=True),
+        })
+        result = select_taf_asof(rows.iloc[:1], rows, 1,
+                                 "2026-04-01T10:00Z", "2026-04-01T10:30Z")
+        self.assertEqual(result["status"], "ambiguous_bulletin")
+        self.assertEqual(result["bulletin"]["product_id"], "conflict")
+        self.assertTrue(result["segments"].empty)
+
     def test_unverified_amendment_blocks_fallback_by_default(self):
         segments = pd.DataFrame({
             "airport_id": [1, 1], "product_id": ["routine", "amendment"],

@@ -97,6 +97,68 @@ class PrepareWeatherDatasetTests(unittest.TestCase):
             run_mock.assert_not_called()
             self.assertFalse((root / "references/taf_validity.csv").exists())
 
+    def _write_taf_archives(self, root, payloads):
+        (root / "tables").mkdir(parents=True, exist_ok=True)
+        requests = []
+        for index, payload in enumerate(payloads, start=1):
+            relative = f"raw/weather/taf_text/batch_{index:03d}.zip"
+            archive_path = root / relative
+            archive_path.parent.mkdir(parents=True, exist_ok=True)
+            with zipfile.ZipFile(archive_path, "w") as archive:
+                archive.writestr("TAFACT_202607062320.txt", payload)
+            requests.append({"file": relative, "sha256": "synthetic", "product_count": 1})
+        manifest_path = root / "tables/taf_text_manifest.json"
+        manifest_path.write_text(json.dumps({"requests": requests}), encoding="utf-8")
+        return manifest_path
+
+    def test_scientifically_identical_duplicate_merges_all_provenance(self):
+        first = ("335\nFTUS44 KFWD 062320\nTAFACT\nTAF\n"
+                 "KACT 062320Z 0700/0724 21005KT P6SM VCTS SCT060CB=\n")
+        second = ("674 \nFTUS44 KFWD 062320\nTAFACT\nTAF\n"
+                  "KACT 062320Z 0700/0724 21005KT P6SM VCTS SCT060CB=\n")
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            manifest = self._write_taf_archives(root, [first, second])
+            with patch.object(dataset, "ROOT", root):
+                summary = dataset._prepare_validity(manifest, root / "references/taf_validity.csv")
+            validity = pd.read_csv(root / "references/taf_validity.csv")
+            self.assertEqual(len(validity), 1)
+            row = validity.iloc[0]
+            self.assertEqual(row.status, "normal")
+            self.assertEqual(int(row.occurrence_count), 2)
+            self.assertEqual(json.loads(row.raw_name), [
+                "TAFACT_202607062320.txt", "TAFACT_202607062320.txt"])
+            self.assertEqual(json.loads(row.source_archives), [
+                "raw/weather/taf_text/batch_001.zip", "raw/weather/taf_text/batch_002.zip"])
+            self.assertEqual(len(json.loads(row.raw_sha256s)), 2)
+            self.assertEqual(summary["status_counts"]["ambiguous"], 0)
+
+    def test_conflicting_duplicate_becomes_ambiguous_without_forecast_window(self):
+        first = ("335\nFTUS44 KFWD 062320\nTAFACT\nTAF\n"
+                 "KACT 062320Z 0700/0724 21005KT P6SM VCTS SCT060CB\n"
+                 "FM070020 15005KT P6SM FEW060=\n")
+        second = ("674\nFTUS44 KFWD 062320\nTAFACT\nTAF\n"
+                  "KACT 062320Z 0700/0724 21005KT P6SM FEW050 SCT250\n"
+                  "FM070100 15005KT P6SM FEW060=\n")
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            manifest = self._write_taf_archives(root, [first, second])
+            with patch.object(dataset, "ROOT", root):
+                summary = dataset._prepare_validity(manifest, root / "references/taf_validity.csv")
+            validity = pd.read_csv(root / "references/taf_validity.csv")
+            self.assertEqual(len(validity), 1)
+            row = validity.iloc[0]
+            self.assertEqual(row.status, "ambiguous")
+            self.assertEqual(row.issue_time, "2026-07-06T23:20:00Z")
+            self.assertTrue(pd.isna(row.valid_from))
+            self.assertTrue(pd.isna(row.valid_to))
+            self.assertEqual(row.raw_header, "KACT 062320Z")
+            self.assertNotIn("VCTS", row.raw_header)
+            self.assertEqual(int(row.occurrence_count), 2)
+            self.assertEqual(summary["status_counts"]["ambiguous"], 1)
+            self.assertEqual(len(summary["ambiguous_duplicate_products"]), 1)
+            self.assertEqual(len(summary["ambiguous_duplicate_products"][0]["raw_sha256s"]), 2)
+
     def test_direct_scripts_path_import_matches_run_pipeline_behavior(self):
         script_dir = str(Path(__file__).resolve().parents[1] / "scripts")
         sys.path.insert(0, script_dir)

@@ -148,7 +148,7 @@ def run(config, run_dir):
     """Execute raw + standardized RQ1; final mode must reuse a frozen file."""
     run_dir = Path(run_dir)
     development = config.get("mode", "development") == "development"
-    if config.get("mode", "development") not in ["development", "final"]:
+    if config.get("mode", "development") not in ["development", "final", "rq1_final"]:
         raise ValueError("RQ1 mode must be development or final")
     frozen_path = config.get("rq1_frozen_reference_path")
     if not development and not frozen_path:

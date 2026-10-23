@@ -4,7 +4,7 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from scripts.prepare_weather import prepare_noaa_frame
+from scripts.prepare_weather import prepare_noaa_frame, select_taf_asof
 from scripts.weather_features import augment_metar, augment_noaa, augment_taf, noaa_overlap_diagnostics
 
 
@@ -153,6 +153,53 @@ class WeatherFeatureTests(unittest.TestCase):
         self.assertEqual(got.loc["before", "taf_status"], "no_available_bulletin")
         self.assertEqual(got.loc["other_airport", "taf_status"], "no_available_bulletin")
         self.assertEqual(got.loc["cancel", "taf_missing"], 1)
+
+    def test_augment_taf_marks_conflicting_duplicate_product_as_ambiguous(self):
+        flights = pd.DataFrame({
+            "flight_id": ["f1"], "airport_id": [1],
+            "scheduled_dep_utc": ts(["2026-04-01T10:00Z"]),
+            "prediction_time": ts(["2026-04-01T09:30Z"]),
+        }, index=[17])
+        bulletins = pd.DataFrame({
+            "airport_id": [1], "product_id": ["conflict"], "station": ["KAAA"],
+            "status": ["ambiguous"], "message_type": ["routine"],
+            "availability_time": ts(["2026-04-01T09:00Z"]),
+            "archive_issue_time": ts(["2026-04-01T09:00Z"]),
+            "body_issue_time": ts(["2026-04-01T09:00Z"]),
+        })
+        segments = pd.DataFrame(columns=["airport_id", "product_id", "interval_usable",
+                                         "segment_start", "segment_end"])
+        result = augment_taf(flights, segments, bulletins)
+        self.assertEqual(result.index.tolist(), [17])
+        self.assertEqual(result.loc[17, "taf_status"], "ambiguous_bulletin")
+        self.assertEqual(result.loc[17, "taf_missing"], 1)
+        self.assertTrue(pd.isna(result.loc[17, "taf_prevailing_wind_knots"]))
+
+    def test_amended_conflict_preserves_scalar_batch_ambiguity_without_fallback(self):
+        flights = pd.DataFrame({"airport_id": [1],
+            "scheduled_dep_utc": ts(["2026-04-01T10:00Z"]),
+            "prediction_time": ts(["2026-04-01T09:30Z"])}, index=[17])
+        bulletins = pd.DataFrame({"airport_id": [1, 1], "product_id": ["old", "conflict"],
+            "station": ["KAAA"] * 2, "status": ["normal", "ambiguous"],
+            "message_type": ["routine", "amended"],
+            "availability_time": ts(["2026-04-01T08:00Z", "2026-04-01T09:00Z"]),
+            "archive_issue_time": ts(["2026-04-01T08:00Z", "2026-04-01T09:00Z"]),
+            "body_issue_time": ts(["2026-04-01T08:00Z", "2026-04-01T09:00Z"]),
+            "availability_verified": [False, False]})
+        segments = pd.DataFrame({"airport_id": [1], "product_id": ["old"],
+            "ftype": ["Observation"], "interval_usable": [True], "wind_knots": [10.],
+            "segment_start": ts(["2026-04-01T08:00Z"]),
+            "segment_end": ts(["2026-04-01T12:00Z"])})
+        for allow in [False, True]:
+            with self.subTest(allow_unverified_revisions=allow):
+                scalar = select_taf_asof(segments, bulletins, 1, flights.prediction_time.iloc[0],
+                                         flights.scheduled_dep_utc.iloc[0], allow_unverified_revisions=allow)
+                batch = augment_taf(flights, segments, bulletins, allow_unverified_revisions=allow)
+                self.assertEqual(scalar["status"], "ambiguous_bulletin")
+                self.assertEqual(batch.loc[17, "taf_status"], scalar["status"])
+                self.assertTrue(scalar["segments"].empty)
+                self.assertEqual(batch.loc[17, "taf_missing"], 1)
+                self.assertTrue(pd.isna(batch.loc[17, "taf_prevailing_wind_knots"]))
 
     def test_augment_noaa_converts_units_respects_asof_qc_and_only_fills_missing(self):
         airports = pd.DataFrame({"airport_id": [1], "ghcnh_id": ["USW00000001"]})

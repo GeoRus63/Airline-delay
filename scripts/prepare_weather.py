@@ -442,6 +442,8 @@ def select_taf_asof(segments, bulletins, airport_id, decision_time, query_time, 
     status = str(latest.status).lower()
     if status in {"cancelled", "canceled", "nil"}:
         return {"status": status, "bulletin": bulletin, "segments": d.iloc[0:0]}
+    if status == "ambiguous":
+        return {"status": "ambiguous_bulletin", "bulletin": bulletin, "segments": d.iloc[0:0]}
     if latest.message_type in {"amended", "corrected", "delayed"} and not allow_unverified_revisions:
         return {"status": "disabled_revision", "bulletin": bulletin, "segments": d.iloc[0:0]}
     selected = d.loc[d.product_id.eq(latest.product_id)]

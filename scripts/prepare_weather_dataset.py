@@ -9,6 +9,7 @@ import csv
 import hashlib
 import json
 import os
+import re
 import shutil
 import tempfile
 import zipfile
@@ -26,7 +27,8 @@ except ImportError:  # run_pipeline.py imports modules from the scripts director
 
 ROOT = Path(__file__).resolve().parents[1]
 TAF_VALIDITY_FIELDS = ["product_id", "station", "issue_time", "valid_from", "valid_to",
-                       "status", "raw_header", "raw_name"]
+                       "status", "raw_header", "raw_name", "source_archives", "raw_sha256s",
+                       "occurrence_count", "ambiguity_reason"]
 MANIFEST_NAME = "data_manifest.json"
 
 
@@ -88,9 +90,69 @@ def _taf_archives(manifest_path):
     return manifest, archives
 
 
+def _taf_science_fingerprint(payload):
+    """Normalize ZIP wrapper noise while preserving every bulletin token."""
+    text = payload.decode("latin-1", "replace")
+    lines = text.splitlines()
+    if lines and re.fullmatch(r"\s*\d+\s*", lines[0]):
+        lines = lines[1:]
+    return " ".join(" ".join(lines).split())
+
+
+def _taf_body_sha256(payload):
+    """Hash normalized TAF body tokens, excluding a ZIP member sequence line."""
+    text = payload.decode("latin-1", "replace")
+    lines = text.splitlines()
+    if lines and re.fullmatch(r"\s*\d+\s*", lines[0]):
+        lines = lines[1:]
+    text = "\n".join(lines)
+    match = re.search(r"(?m)^[A-Z0-9]{4}\s+\d{6}Z\b", text)
+    body = text[match.start():] if match else text
+    normalized = " ".join(body.split())
+    return hashlib.sha256(normalized.encode("latin-1", "replace")).hexdigest()
+
+
+def _common_body_issue_prefix(rows):
+    """Keep only an original station/issue prefix shared by all copies."""
+    prefixes = []
+    for row in rows:
+        match = re.search(r"(?m)^\s*([A-Z0-9]{4}\s+\d{6}Z)\b", row.get("raw_header", ""))
+        if not match:
+            return ""
+        prefixes.append(match.group(1).strip())
+    return prefixes[0] if prefixes and len(set(prefixes)) == 1 else ""
+
+
+def _merge_taf_occurrences(key, occurrences):
+    """Coalesce byte-content-equivalent science; mark real conflicts unusable."""
+    rows = [item["row"] for item in occurrences]
+    science_fields = ("product_id", "station", "issue_time", "valid_from", "valid_to", "status")
+    same_parsed_science = all(
+        all(row.get(field, "") == rows[0].get(field, "") for field in science_fields)
+        for row in rows[1:])
+    same_bulletin = len({item["science_fingerprint"] for item in occurrences}) == 1
+    merged = dict(rows[0])
+    merged["raw_name"] = json.dumps([item["raw_name"] for item in occurrences], ensure_ascii=False)
+    merged["source_archives"] = json.dumps([item["source_archive"] for item in occurrences], ensure_ascii=False)
+    merged["raw_sha256s"] = json.dumps([item["raw_sha256"] for item in occurrences], ensure_ascii=False)
+    merged["occurrence_count"] = len(occurrences)
+    if same_parsed_science and same_bulletin:
+        return merged
+
+    # A bulletin ID/station pair with conflicting body tokens is not a valid
+    # forecast choice. Retain the common issue prefix so the status can enter
+    # the as-of stream, but expose no interval and never select either body.
+    merged["status"] = "ambiguous"
+    merged["valid_from"] = ""
+    merged["valid_to"] = ""
+    merged["raw_header"] = _common_body_issue_prefix(rows)
+    merged["ambiguity_reason"] = "conflicting_scientific_content_or_parsed_validity"
+    return merged
+
+
 def _prepare_validity(manifest_path, output_path):
     manifest, archives = _taf_archives(manifest_path)
-    by_product = {}
+    occurrences_by_product = {}
     archive_diagnostics = []
     for archive_path, request in archives:
         with zipfile.ZipFile(archive_path, "r") as archive:
@@ -105,15 +167,21 @@ def _prepare_validity(manifest_path, output_path):
                 if not row or row["product_id"] != product_id:
                     continue
                 key = (row["product_id"], row["station"])
-                previous = by_product.get(key)
-                if previous is not None and previous != row:
-                    raise ValueError(f"Conflicting archived TAF validity for product/station {key}")
-                by_product[key] = row
+                occurrences_by_product.setdefault(key, []).append({
+                    "row": row,
+                    "raw_name": member.filename,
+                    "source_archive": _relative(archive_path),
+                    "raw_sha256": hashlib.sha256(payload).hexdigest(),
+                    "science_fingerprint": _taf_science_fingerprint(payload),
+                    "body_sha256": _taf_body_sha256(payload),
+                })
         archive_diagnostics.append({"path": _relative(archive_path),
                                     "manifest_sha256": request.get("sha256"),
                                     "members": request.get("product_count")})
 
-    rows = sorted(by_product.values(), key=lambda row: (row["issue_time"], row["station"], row["product_id"]))
+    rows = [_merge_taf_occurrences(key, occurrences)
+            for key, occurrences in occurrences_by_product.items()]
+    rows.sort(key=lambda row: (row["issue_time"], row["station"], row["product_id"]))
     output_path.parent.mkdir(parents=True, exist_ok=True)
     fd, temporary_name = tempfile.mkstemp(prefix="taf_validity_", suffix=".csv.tmp", dir=output_path.parent)
     os.close(fd)
@@ -130,7 +198,30 @@ def _prepare_validity(manifest_path, output_path):
     return {"manifest": _relative(manifest_path), "local_archive_count": len(archives),
             "archive_diagnostics": archive_diagnostics, "validity_rows": len(rows),
             "unique_products": len({row["product_id"] for row in rows}),
-            "status_counts": {name: statuses.get(name, 0) for name in ("normal", "cancelled", "nil")},
+            "status_counts": {name: statuses.get(name, 0)
+                              for name in ("normal", "cancelled", "nil", "ambiguous")},
+            "ambiguous_duplicate_products": [
+                {"product_id": row["product_id"], "station": row["station"],
+                 "occurrence_count": row["occurrence_count"],
+                 "source_archives": json.loads(row["source_archives"]),
+                 "raw_names": json.loads(row["raw_name"]),
+                 "raw_sha256s": json.loads(row["raw_sha256s"]),
+                 "reason": row.get("ambiguity_reason")}
+                for row in rows if row["status"] == "ambiguous"],
+            "duplicate_products": [
+                {"product_id": key[0], "station": key[1], "occurrence_count": len(occurrences),
+                 "differing_parsed_fields": [field for field in
+                     ("issue_time", "valid_from", "valid_to", "status")
+                     if len({item["row"].get(field, "") for item in occurrences}) > 1],
+                 "occurrences": [{"source_archive": item["source_archive"],
+                     "raw_name": item["raw_name"], "raw_sha256": item["raw_sha256"],
+                     "body_sha256": item["body_sha256"],
+                     "issue_time": item["row"].get("issue_time", ""),
+                     "valid_from": item["row"].get("valid_from", ""),
+                     "valid_to": item["row"].get("valid_to", ""),
+                     "status": item["row"].get("status", "")}
+                     for item in occurrences]}
+                for key, occurrences in sorted(occurrences_by_product.items()) if len(occurrences) > 1],
             "normal_missing_validity_window": sum(
                 row["status"] == "normal" and (not row["valid_from"] or not row["valid_to"])
                 for row in rows)}

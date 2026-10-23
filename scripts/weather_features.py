@@ -542,10 +542,11 @@ def augment_taf(flights, taf_segments, taf_bulletins, *, airport_col="airport_id
     work.loc[has_product, "taf_status"] = "outside_validity"
     status_text = work.taf_bulletin_status.astype("string").str.lower()
     work.loc[has_product & status_text.isin(["cancelled", "canceled", "nil"]), "taf_status"] = status_text
+    work.loc[has_product & status_text.eq("ambiguous"), "taf_status"] = "ambiguous_bulletin"
     revision_disabled = work.taf_message_type.astype("string").isin(["amended", "corrected", "delayed"])
     if allow_unverified_revisions:
         revision_disabled = pd.Series(False, index=work.index)
-    work.loc[has_product & ~status_text.isin(["cancelled", "canceled", "nil"]) & revision_disabled,
+    work.loc[has_product & ~status_text.isin(["cancelled", "canceled", "nil", "ambiguous"]) & revision_disabled,
              "taf_status"] = "disabled_revision"
     work.loc[has_product & work._taf_same_time_count.fillna(0).gt(1), "taf_status"] = "ambiguous_bulletin"
     timed_before_candidate = work.taf_available_at.notna()

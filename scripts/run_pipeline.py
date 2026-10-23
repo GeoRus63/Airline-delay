@@ -110,11 +110,25 @@ def execute(config, run_dir):
         write_json(run_dir / 'data_manifest.json', data_manifest)
         print(json.dumps(summary, indent=2), flush=True)
         return summary
+    if config['mode'] == 'development' and config.get('analysis_only', False):
+        from complete_rq1 import run as complete_rq1
+        from analyze_single_flights import run as single_flight_eda
+        from explain_models import explain_run
+        from render_research_notebooks import render_analysis
+        result = {'rq1': complete_rq1(config, run_dir), 'eda': single_flight_eda(config, run_dir)}
+        for source_id in config.get('explanation_source_run_ids', []):
+            explain_run(ROOT / 'experiments/runs' / source_id, run_dir / 'explanations' / source_id)
+        render_analysis(run_dir, model_runs=[ROOT / 'experiments/runs' / name for name in config.get('model_run_ids', [])])
+        return result
     if config['mode'] == 'development':
         from build_features import load_configured_features
         from train_models import run_development
         from train_models import resolve_features
-        frame = load_configured_features(config, development_only=True)
+        if config.get('feature_archive_path'):
+            from feature_cache import load_development_archive
+            frame = load_development_archive(config)
+        else:
+            frame = load_configured_features(config, development_only=True)
         write_json(run_dir / 'feature_audit.json', dict(frame.attrs))
         shutil.copy2(ROOT / 'tables/feature_dictionary.csv', run_dir / 'feature_dictionary.csv')
         (run_dir / 'data').mkdir(exist_ok=True)
@@ -132,6 +146,9 @@ def execute(config, run_dir):
             from compare_experiments import compare_runs
             compare_runs(ROOT / 'experiments/runs' / config['parent_run_id'], run_dir,
                          run_dir / 'comparison', allow_running_candidate=True)
+        if config.get('common_weather_no_weather_run'):
+            from weather_pipeline_features import compare_common_weather
+            compare_common_weather(frame, run_dir, config)
         from analyze_eda import run as eda
         from analyze_rq1 import run as rq1
         from render_notebooks import render_notebooks
@@ -151,6 +168,28 @@ def execute(config, run_dir):
     if config['mode'] == 'prepare_weather':
         from prepare_weather_dataset import run
         return run(config, run_dir)
+    if config['mode'] == 'final':
+        from final_evaluation import run, verify_saved
+        from render_research_notebooks import render_final
+        result = run(config, run_dir)
+        write_json(run_dir / 'final_verification.json', verify_saved(run_dir))
+        render_final(run_dir)
+        return result
+    if config['mode'] == 'rq1_final':
+        from final_evaluation import verify_saved
+        from complete_rq1 import run as complete_rq1
+        from analyze_single_flights import run as single_flight_eda
+        from render_research_notebooks import render_final
+        prediction_run = ROOT / 'experiments/runs' / config['prediction_final_run_id']
+        ledger = json.loads((ROOT / 'experiments/final_access/2026-08.json').read_text(encoding='utf-8'))
+        if ledger.get('status') != 'completed' or ledger.get('run_id') != prediction_run.name:
+            raise ValueError('Final RQ1 requires the completed, uniquely claimed August prediction run')
+        if json.loads((prediction_run / 'manifest.json').read_text(encoding='utf-8')).get('status') != 'completed':
+            raise ValueError('Final prediction archive is not completed')
+        write_json(run_dir / 'prediction_final_verification.json', verify_saved(prediction_run))
+        result = {'rq1': complete_rq1(config, run_dir), 'eda': single_flight_eda(config, run_dir)}
+        render_final(prediction_run, rq1_run_dir=run_dir, output_dir=run_dir)
+        return result
     if config['mode'] == 'audit_preparation':
         from audit_preparation import run
         return run(run_dir)
@@ -184,6 +223,15 @@ def main():
     elif config['mode'] == 'prepare_weather':
         source_names += ['scripts/prepare_weather.py', 'scripts/prepare_weather_dataset.py',
                          'scripts/download_taf_text.py', 'references/airports.csv']
+    elif config['mode'] == 'final':
+        frozen = json.loads((ROOT / config['freeze_manifest_path']).read_text(encoding='utf-8'))
+        source_names += [item['path'] for item in frozen['source_files']]
+        source_names += ['scripts/render_research_notebooks.py', config['freeze_manifest_path']]
+    elif config['mode'] == 'rq1_final':
+        source_names += ['scripts/final_evaluation.py', 'scripts/complete_rq1.py', 'scripts/rq1_standardization.py', 'scripts/analyze_rq1.py',
+                         'scripts/analyze_eda.py', 'scripts/analyze_single_flights.py', 'scripts/render_research_notebooks.py',
+                         'references/airports.csv', 'references/aircraft_reference_2024.csv',
+                         'references/aircraft_reference_2025.csv', config['rq1_frozen_reference_path']]
     elif config['mode'] == 'rebuild_cohorts':
         source_names.append('scripts/rebuild_cohorts.py')
     elif config['mode'] == 'development':
@@ -198,9 +246,17 @@ def main():
         source_names.append('references/airports.csv')
         if config.get('compare_parent', False):
             source_names.append('scripts/compare_experiments.py')
+        if config.get('feature_archive_path'):
+            source_names.append('scripts/feature_cache.py')
+        if config.get('analysis_only', False):
+            source_names += ['scripts/complete_rq1.py', 'scripts/rq1_standardization.py',
+                             'scripts/analyze_single_flights.py', 'scripts/explain_models.py',
+                             'scripts/render_research_notebooks.py', 'configs/rq1_protocol.json',
+                             'references/aircraft_reference_2024.csv', 'references/aircraft_reference_2025.csv']
         source_names += [p.relative_to(ROOT).as_posix() for p in sorted((ROOT / 'notebooks').glob('*.ipynb')) if p.name[:2] in ['01', '02', '03', '04', '05']]
         source_names.append('tables/feature_dictionary.csv')
     source_names.append(config_path.relative_to(ROOT).as_posix())
+    source_names = list(dict.fromkeys(source_names))
     for name in source_names:
         committed = subprocess.check_output(['git', 'show', f'{git_commit}:{name}'], cwd=ROOT)
         if hashlib.sha256(committed).hexdigest() != sha256(ROOT / name):

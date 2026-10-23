@@ -32,7 +32,7 @@ def _path(value, default):
 def _month_scope(mode):
     if mode == "development":
         return [4, 5, 6, 7], "2026-04 through 2026-07 local FlightDate; August excluded before target parsing"
-    if mode == "final":
+    if mode in {"final", "rq1_final"}:
         return [8], "2026-08 local FlightDate; explicit post-freeze final mode"
     raise ValueError("mode must be explicitly 'development' or 'final'")
 

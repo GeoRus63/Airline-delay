@@ -1,0 +1,13 @@
+2026-10-23T22:51:29.564310+00:00 R0013 started at commit ac6e77f543247334f47a47311e3eba8d98028095
+Traceback (most recent call last):
+  File "D:\airline-delay\scripts\run_pipeline.py", line 233, in main
+    manifest['result'] = execute(config, run_dir)
+                         ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\airline-delay\scripts\run_pipeline.py", line 153, in execute
+    return run(config, run_dir)
+  File "D:\airline-delay\scripts\prepare_weather_dataset.py", line 241, in run
+    taf_info = _prepare_validity(taf_manifest_path, taf_validity_path)
+  File "D:\airline-delay\scripts\prepare_weather_dataset.py", line 110, in _prepare_validity
+    raise ValueError(f"Conflicting archived TAF validity for product/station {key}")
+ValueError: Conflicting archived TAF validity for product/station ('202607062320-KFWD-FTUS44-TAFACT', 'KACT')
+2026-10-23T22:51:30.677782+00:00 status=failed; seconds=1.1
