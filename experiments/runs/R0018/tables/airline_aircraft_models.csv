@@ -1,0 +1,1100 @@
+month,Reporting_Airline,aircraft_model,flight_rows,inventory_year,aircraft_family,aircraft_variant,classification_basis,source_url
+2026-04,AA,737-8,5014,2024,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,AA,737-800,2415,2024,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,AA,737-823,25412,2024,Boeing 737 NG,737-823,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,AA,777-223,182,2024,Boeing 777,777-223,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,AA,777-323ER,6,2024,Boeing 777,777-323ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,AA,787-8,261,2024,Boeing 787 Dreamliner,787-8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,AA,787-9,58,2024,Boeing 787 Dreamliner,787-9,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,AA,A319-112,7421,2024,Airbus A320 family ceo,A319-112,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,AA,A319-115,2518,2024,Airbus A320 family ceo,A319-115,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,AA,A319-132,4974,2024,Airbus A320 family ceo,A319-132,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,AA,A320-214,2580,2024,Airbus A320 family ceo,A320-214,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,AA,A320-232,2940,2024,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,AA,A321-211,4289,2024,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,AA,A321-231,16588,2024,Airbus A320 family ceo,A321-231,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,AA,A321-253NX,7033,2024,Airbus A320 family neo,A321-253NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,AA,unknown,2847,2024,unknown,unknown,,
+2026-04,AS,737-790,1890,2024,Boeing 737 NG,737-790,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,AS,737-8,306,2024,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,AS,737-890,4631,2024,Boeing 737 NG,737-890,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,AS,737-9,5989,2024,Boeing 737 MAX,737-9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,AS,737-900ER,8500,2024,Boeing 737 NG,737-900ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,AS,unknown,5906,2024,unknown,unknown,,
+2026-04,B6,A220-300,2559,2024,Airbus A220,A220-300,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-04,B6,A320-232,9428,2024,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,B6,A321-231,2294,2024,Airbus A320 family ceo,A321-231,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,B6,A321-231(SL),828,2024,Airbus A320 family ceo,A321-231(SL),EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,B6,A321-271NX,895,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,B6,A321231SL,639,2024,Airbus A320 family ceo,A321-231(SL),EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,B6,AIRBUSA321-231(SL),250,2024,Airbus A320 family ceo,A321-231(SL),EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,B6,BD-500-1A11,1452,2024,Airbus A220,BD-500-1A11,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-04,B6,unknown,2305,2024,unknown,unknown,,
+2026-04,DL,717-200,9276,2024,Boeing 717,717-200,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,717-23S,176,2024,Boeing 717,717-23S,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,717231,170,2024,Boeing 717,717-231,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,7172BD,1426,2024,Boeing 717,717-2BD,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,737-832,6772,2024,Boeing 737 NG,737-832,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,DL,737-8EH,282,2024,Boeing 737 NG,737-8EH,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,DL,737-900ER,6438,2024,Boeing 737 NG,737-900ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,DL,737-932ER,7587,2024,Boeing 737 NG,737-932ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,DL,737-9GPER,3421,2024,Boeing 737 NG,737-9GPER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,DL,757-231,478,2024,Boeing 757,757-231,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,757-232,2983,2024,Boeing 757,757-232,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,757-251,922,2024,Boeing 757,757-251,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,757-26D,636,2024,Boeing 757,757-26D,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,757-2Q8,443,2024,Boeing 757,757-2Q8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,757-351,1426,2024,Boeing 757,757-351,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,767-332,1483,2024,Boeing 767,767-332,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,767-432ER,211,2024,Boeing 767,767-432ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,A319-114,6096,2024,Airbus A320 family ceo,A319-114,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,DL,A320-211,447,2024,Airbus A320 family ceo,A320-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,DL,A320-212,4711,2024,Airbus A320 family ceo,A320-212,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,DL,A321-211,12021,2024,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,DL,A321-213,2510,2024,Airbus A320 family ceo,A321-213,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,DL,A321-271NX,5230,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,DL,A330-223,195,2024,Airbus A330 ceo,A330-223,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-04,DL,A330-302,73,2024,Airbus A330 ceo,A330-302,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-04,DL,A330-323,258,2024,Airbus A330 ceo,A330-323,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-04,DL,A330-941,61,2024,Airbus A330 neo,A330-941,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-04,DL,A350-941,58,2024,Airbus A350,A350-941,B-43 MODEL 原始代码；保留 A350 系列，不使用 ceo/neo 称谓,
+2026-04,DL,BD-500-1A10,4320,2024,Airbus A220,BD-500-1A10,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-04,DL,BD-500-1A11,2585,2024,Airbus A220,BD-500-1A11,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-04,DL,BOEING717-23S,541,2024,Boeing 717,717-23S,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,BOEING717-2BD,763,2024,Boeing 717,717-2BD,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,unknown,3116,2024,unknown,unknown,,
+2026-04,F9,320-214,580,2024,Airbus A320 family ceo,A320-214,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,F9,320-251N,7632,2024,Airbus A320 family neo,A320-251N,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,F9,321-211,1870,2024,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,F9,321-271NX,3160,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,F9,A321-271NX,1969,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,F9,unknown,3329,2024,unknown,unknown,,
+2026-04,G4,unknown,10318,2024,unknown,unknown,,
+2026-04,MQ,EMB170-100,1430,2024,Embraer E170/E175,EMB170-100,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,MQ,ERJ170-100LR,689,2024,Embraer E170/E175,ERJ170-100LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,MQ,ERJ170-100STD,1026,2024,Embraer E170/E175,ERJ170-100STD,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,MQ,ERJ170-200,837,2024,Embraer E170/E175,ERJ170-200,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,MQ,ERJ170-200LR,16493,2024,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,MQ,unknown,6652,2024,unknown,unknown,,
+2026-04,NK,A320-232,5074,2024,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,NK,A320-271N,1437,2024,Airbus A320 family neo,A320-271N,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,NK,A321-231,2398,2024,Airbus A320 family ceo,A321-231,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,NK,A321-271NX,1466,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,NK,unknown,94,2024,unknown,unknown,,
+2026-04,OH,CL-600-2C10,6910,2024,Bombardier CRJ,CL-600-2C10,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,OH,CL-600-2D24,12521,2024,Bombardier CRJ,CL-600-2D24,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,OH,unknown,1116,2024,unknown,unknown,,
+2026-04,OO,CL-600-2B19,8339,2024,Bombardier CRJ,CL-600-2B19,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,OO,CL-600-2C10,16483,2024,Bombardier CRJ,CL-600-2C10,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,OO,CL-600-2C11,801,2024,Bombardier CRJ,CL-600-2C11,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,OO,CL-600-2D24,6343,2024,Bombardier CRJ,CL-600-2D24,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,OO,CRJ200LR,1368,2024,Bombardier CRJ,CRJ200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,OO,ERJ170-200LL,10946,2024,Embraer E170/E175,ERJ170-200LL,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,OO,ERJ170-200LR,25565,2024,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,OO,unknown,3270,2024,unknown,unknown,,
+2026-04,UA,737-700,119,2024,Boeing 737 NG,737-700,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,UA,737-71Q,215,2024,Boeing 737 NG,737-71Q,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,UA,737-724,3202,2024,Boeing 737 NG,737-724,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,UA,737-7V3,92,2024,Boeing 737 NG,737-7V3,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,UA,737-8,7907,2024,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,UA,737-800,520,2024,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,UA,737-824,10131,2024,Boeing 737 NG,737-824,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,UA,737-9,6210,2024,Boeing 737 MAX,737-9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,UA,737-900ER,475,2024,Boeing 737 NG,737-900ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,UA,737-924,1105,2024,Boeing 737 NG,737-924,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,UA,737-924ER,9756,2024,Boeing 737 NG,737-924ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,UA,757-224,1619,2024,Boeing 757,757-224,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,UA,757-324,469,2024,Boeing 757,757-324,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,UA,757-33N,611,2024,Boeing 757,757-33N,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,UA,767-322,14,2024,Boeing 767,767-322,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,UA,767-3CB,2,2024,Boeing 767,767-3CB,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,UA,767-424ER,107,2024,Boeing 767,767-424ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,UA,777-222,770,2024,Boeing 777,777-222,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,UA,777-224,70,2024,Boeing 777,777-224,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,UA,777-300ER,279,2024,Boeing 777,777-300ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,UA,787-10,140,2024,Boeing 787 Dreamliner,787-10,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,UA,787-8,51,2024,Boeing 787 Dreamliner,787-8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,UA,787-9,245,2024,Boeing 787 Dreamliner,787-9,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,UA,A319-131,4461,2024,Airbus A320 family ceo,A319-131,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,UA,A319-132,2246,2024,Airbus A320 family ceo,A319-132,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,UA,A320-232,5747,2024,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,UA,A321-271NX,2381,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,UA,unknown,10507,2024,unknown,unknown,,
+2026-04,WN,737-700,148,2024,Boeing 737 NG,737-700,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-71B,326,2024,Boeing 737 NG,737-71B,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-73V,183,2024,Boeing 737 NG,737-73V,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-752,1331,2024,Boeing 737 NG,737-752,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-76N,648,2024,Boeing 737 NG,737-76N,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-76Q,105,2024,Boeing 737 NG,737-76Q,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-79L,163,2024,Boeing 737 NG,737-79L,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-79P,1977,2024,Boeing 737 NG,737-79P,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-7BD,3953,2024,Boeing 737 NG,737-7BD,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-7CT,1556,2024,Boeing 737 NG,737-7CT,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-7H4,33401,2024,Boeing 737 NG,737-7H4,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-7K5,162,2024,Boeing 737 NG,737-7K5,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-7K9,345,2024,Boeing 737 NG,737-7K9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-7Q8,849,2024,Boeing 737 NG,737-7Q8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-8,35045,2024,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-800,11467,2024,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-8H4,15689,2024,Boeing 737 NG,737-8H4,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737NG7H4/W,348,2024,Boeing 737 NG,737-7H4/W,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,unknown,10118,2024,unknown,unknown,,
+2026-04,YX,ERJ170-100LR,754,2024,Embraer E170/E175,ERJ170-100LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,YX,ERJ170-100SE,1783,2024,Embraer E170/E175,ERJ170-100SE,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,YX,ERJ170-100SU,735,2024,Embraer E170/E175,ERJ170-100SU,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,YX,ERJ170-200LR,25835,2024,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,YX,unknown,1906,2024,unknown,unknown,,
+2026-05,AA,737-8,5156,2024,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,AA,737-800,2547,2024,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,AA,737-823,26741,2024,Boeing 737 NG,737-823,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,AA,777-223,264,2024,Boeing 777,777-223,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,AA,777-323ER,8,2024,Boeing 777,777-323ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,AA,787-8,293,2024,Boeing 787 Dreamliner,787-8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,AA,787-9,17,2024,Boeing 787 Dreamliner,787-9,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,AA,A319-112,7738,2024,Airbus A320 family ceo,A319-112,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,AA,A319-115,2624,2024,Airbus A320 family ceo,A319-115,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,AA,A319-132,5152,2024,Airbus A320 family ceo,A319-132,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,AA,A320-214,2495,2024,Airbus A320 family ceo,A320-214,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,AA,A320-232,3338,2024,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,AA,A321-211,4441,2024,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,AA,A321-231,17478,2024,Airbus A320 family ceo,A321-231,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,AA,A321-253NX,7235,2024,Airbus A320 family neo,A321-253NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,AA,unknown,3213,2024,unknown,unknown,,
+2026-05,AS,737-790,1688,2024,Boeing 737 NG,737-790,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,AS,737-8,290,2024,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,AS,737-890,5130,2024,Boeing 737 NG,737-890,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,AS,737-9,6540,2024,Boeing 737 MAX,737-9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,AS,737-900ER,7348,2024,Boeing 737 NG,737-900ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,AS,unknown,8188,2024,unknown,unknown,,
+2026-05,B6,A220-300,2727,2024,Airbus A220,A220-300,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-05,B6,A320-232,8832,2024,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,B6,A321-231,1971,2024,Airbus A320 family ceo,A321-231,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,B6,A321-231(SL),856,2024,Airbus A320 family ceo,A321-231(SL),EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,B6,A321-271NX,647,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,B6,A321231SL,652,2024,Airbus A320 family ceo,A321-231(SL),EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,B6,AIRBUSA321-231(SL),209,2024,Airbus A320 family ceo,A321-231(SL),EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,B6,BD-500-1A11,1362,2024,Airbus A220,BD-500-1A11,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-05,B6,unknown,2550,2024,unknown,unknown,,
+2026-05,DL,717-200,10128,2024,Boeing 717,717-200,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,717-23S,137,2024,Boeing 717,717-23S,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,717231,350,2024,Boeing 717,717-231,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,7172BD,1233,2024,Boeing 717,717-2BD,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,737-832,7184,2024,Boeing 737 NG,737-832,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,DL,737-8EH,432,2024,Boeing 737 NG,737-8EH,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,DL,737-900ER,6968,2024,Boeing 737 NG,737-900ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,DL,737-932ER,8116,2024,Boeing 737 NG,737-932ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,DL,737-9GPER,3156,2024,Boeing 737 NG,737-9GPER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,DL,757-231,563,2024,Boeing 757,757-231,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,757-232,3284,2024,Boeing 757,757-232,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,757-251,929,2024,Boeing 757,757-251,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,757-26D,699,2024,Boeing 757,757-26D,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,757-2Q8,440,2024,Boeing 757,757-2Q8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,757-351,1354,2024,Boeing 757,757-351,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,767-332,1228,2024,Boeing 767,767-332,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,767-432ER,212,2024,Boeing 767,767-432ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,A319-114,6435,2024,Airbus A320 family ceo,A319-114,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,DL,A320-211,619,2024,Airbus A320 family ceo,A320-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,DL,A320-212,4656,2024,Airbus A320 family ceo,A320-212,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,DL,A321-211,12921,2024,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,DL,A321-213,2756,2024,Airbus A320 family ceo,A321-213,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,DL,A321-271NX,5496,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,DL,A330-223,61,2024,Airbus A330 ceo,A330-223,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-05,DL,A330-302,60,2024,Airbus A330 ceo,A330-302,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-05,DL,A330-323,193,2024,Airbus A330 ceo,A330-323,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-05,DL,A330-941,35,2024,Airbus A330 neo,A330-941,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-05,DL,A350-941,53,2024,Airbus A350,A350-941,B-43 MODEL 原始代码；保留 A350 系列，不使用 ceo/neo 称谓,
+2026-05,DL,BD-500-1A10,4794,2024,Airbus A220,BD-500-1A10,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-05,DL,BD-500-1A11,2816,2024,Airbus A220,BD-500-1A11,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-05,DL,BOEING717-23S,538,2024,Boeing 717,717-23S,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,BOEING717-2BD,757,2024,Boeing 717,717-2BD,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,unknown,3352,2024,unknown,unknown,,
+2026-05,F9,320-214,623,2024,Airbus A320 family ceo,A320-214,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,F9,320-251N,6992,2024,Airbus A320 family neo,A320-251N,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,F9,321-211,2097,2024,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,F9,321-271NX,3437,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,F9,A321-271NX,1733,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,F9,unknown,3541,2024,unknown,unknown,,
+2026-05,G4,unknown,10570,2024,unknown,unknown,,
+2026-05,MQ,EMB170-100,1522,2024,Embraer E170/E175,EMB170-100,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,MQ,ERJ170-100LR,745,2024,Embraer E170/E175,ERJ170-100LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,MQ,ERJ170-100STD,1104,2024,Embraer E170/E175,ERJ170-100STD,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,MQ,ERJ170-200,958,2024,Embraer E170/E175,ERJ170-200,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,MQ,ERJ170-200LR,17430,2024,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,MQ,unknown,7047,2024,unknown,unknown,,
+2026-05,NK,A320-232,161,2024,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,NK,A320-271N,47,2024,Airbus A320 family neo,A320-271N,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,NK,A321-231,100,2024,Airbus A320 family ceo,A321-231,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,NK,A321-271NX,46,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,OH,CL-600-2C10,6981,2024,Bombardier CRJ,CL-600-2C10,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,OH,CL-600-2D24,12675,2024,Bombardier CRJ,CL-600-2D24,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,OH,unknown,1198,2024,unknown,unknown,,
+2026-05,OO,CL-600-2B19,8417,2024,Bombardier CRJ,CL-600-2B19,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,OO,CL-600-2C10,16768,2024,Bombardier CRJ,CL-600-2C10,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,OO,CL-600-2C11,821,2024,Bombardier CRJ,CL-600-2C11,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,OO,CL-600-2D24,6422,2024,Bombardier CRJ,CL-600-2D24,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,OO,CRJ200LR,1469,2024,Bombardier CRJ,CRJ200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,OO,ERJ170-200LL,11342,2024,Embraer E170/E175,ERJ170-200LL,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,OO,ERJ170-200LR,26435,2024,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,OO,unknown,4320,2024,unknown,unknown,,
+2026-05,UA,737-700,85,2024,Boeing 737 NG,737-700,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,UA,737-71Q,160,2024,Boeing 737 NG,737-71Q,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,UA,737-724,3041,2024,Boeing 737 NG,737-724,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,UA,737-7V3,102,2024,Boeing 737 NG,737-7V3,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,UA,737-8,7863,2024,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,UA,737-800,560,2024,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,UA,737-824,11075,2024,Boeing 737 NG,737-824,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,UA,737-9,6698,2024,Boeing 737 MAX,737-9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,UA,737-900ER,561,2024,Boeing 737 NG,737-900ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,UA,737-924,1186,2024,Boeing 737 NG,737-924,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,UA,737-924ER,11130,2024,Boeing 737 NG,737-924ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,UA,757-224,1341,2024,Boeing 757,757-224,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,UA,757-324,605,2024,Boeing 757,757-324,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,UA,757-33N,768,2024,Boeing 757,757-33N,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,UA,767-322,6,2024,Boeing 767,767-322,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,UA,767-3CB,2,2024,Boeing 767,767-3CB,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,UA,767-424ER,71,2024,Boeing 767,767-424ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,UA,777-222,777,2024,Boeing 777,777-222,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,UA,777-224,43,2024,Boeing 777,777-224,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,UA,777-300ER,207,2024,Boeing 777,777-300ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,UA,787-10,171,2024,Boeing 787 Dreamliner,787-10,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,UA,787-8,102,2024,Boeing 787 Dreamliner,787-8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,UA,787-9,211,2024,Boeing 787 Dreamliner,787-9,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,UA,A319-131,4775,2024,Airbus A320 family ceo,A319-131,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,UA,A319-132,2303,2024,Airbus A320 family ceo,A319-132,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,UA,A320-232,6539,2024,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,UA,A321-271NX,2745,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,UA,unknown,11073,2024,unknown,unknown,,
+2026-05,WN,737-700,172,2024,Boeing 737 NG,737-700,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-71B,352,2024,Boeing 737 NG,737-71B,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-73V,158,2024,Boeing 737 NG,737-73V,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-752,1347,2024,Boeing 737 NG,737-752,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-76N,719,2024,Boeing 737 NG,737-76N,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-76Q,128,2024,Boeing 737 NG,737-76Q,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-79L,156,2024,Boeing 737 NG,737-79L,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-79P,2006,2024,Boeing 737 NG,737-79P,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-7BD,3953,2024,Boeing 737 NG,737-7BD,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-7CT,1448,2024,Boeing 737 NG,737-7CT,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-7H4,33810,2024,Boeing 737 NG,737-7H4,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-7K5,163,2024,Boeing 737 NG,737-7K5,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-7K9,332,2024,Boeing 737 NG,737-7K9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-7Q8,670,2024,Boeing 737 NG,737-7Q8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-8,36264,2024,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-800,11713,2024,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-8H4,15955,2024,Boeing 737 NG,737-8H4,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737NG7H4/W,366,2024,Boeing 737 NG,737-7H4/W,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,unknown,10934,2024,unknown,unknown,,
+2026-05,YX,ERJ170-100LR,801,2024,Embraer E170/E175,ERJ170-100LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,YX,ERJ170-100SE,1883,2024,Embraer E170/E175,ERJ170-100SE,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,YX,ERJ170-100SU,732,2024,Embraer E170/E175,ERJ170-100SU,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,YX,ERJ170-200LR,26867,2024,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,YX,unknown,1920,2024,unknown,unknown,,
+2026-06,AA,737-8,4709,2024,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,AA,737-800,2471,2024,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,AA,737-823,26056,2024,Boeing 737 NG,737-823,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,AA,777-223,241,2024,Boeing 777,777-223,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,AA,777-323ER,2,2024,Boeing 777,777-323ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,AA,787-8,235,2024,Boeing 787 Dreamliner,787-8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,AA,787-9,48,2024,Boeing 787 Dreamliner,787-9,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,AA,A319-112,7538,2024,Airbus A320 family ceo,A319-112,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,AA,A319-115,2627,2024,Airbus A320 family ceo,A319-115,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,AA,A319-132,4869,2024,Airbus A320 family ceo,A319-132,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,AA,A320-214,2497,2024,Airbus A320 family ceo,A320-214,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,AA,A320-232,3197,2024,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,AA,A321-211,4309,2024,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,AA,A321-231,17248,2024,Airbus A320 family ceo,A321-231,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,AA,A321-253NX,7253,2024,Airbus A320 family neo,A321-253NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,AA,unknown,3164,2024,unknown,unknown,,
+2026-06,AS,737-790,1532,2024,Boeing 737 NG,737-790,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,AS,737-8,377,2024,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,AS,737-890,5879,2024,Boeing 737 NG,737-890,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,AS,737-9,6451,2024,Boeing 737 MAX,737-9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,AS,737-900ER,7535,2024,Boeing 737 NG,737-900ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,AS,unknown,8117,2024,unknown,unknown,,
+2026-06,B6,A220-300,2617,2024,Airbus A220,A220-300,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-06,B6,A320-232,9919,2024,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,B6,A321-231,1836,2024,Airbus A320 family ceo,A321-231,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,B6,A321-231(SL),772,2024,Airbus A320 family ceo,A321-231(SL),EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,B6,A321-271NX,576,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,B6,A321231SL,546,2024,Airbus A320 family ceo,A321-231(SL),EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,B6,AIRBUSA321-231(SL),179,2024,Airbus A320 family ceo,A321-231(SL),EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,B6,BD-500-1A11,1531,2024,Airbus A220,BD-500-1A11,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-06,B6,unknown,2828,2024,unknown,unknown,,
+2026-06,DL,717-200,9781,2024,Boeing 717,717-200,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,717-23S,79,2024,Boeing 717,717-23S,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,717231,346,2024,Boeing 717,717-231,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,7172BD,1213,2024,Boeing 717,717-2BD,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,737-832,6954,2024,Boeing 737 NG,737-832,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,DL,737-8EH,386,2024,Boeing 737 NG,737-8EH,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,DL,737-900ER,7024,2024,Boeing 737 NG,737-900ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,DL,737-932ER,8352,2024,Boeing 737 NG,737-932ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,DL,737-9GPER,3206,2024,Boeing 737 NG,737-9GPER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,DL,757-231,538,2024,Boeing 757,757-231,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,757-232,2920,2024,Boeing 757,757-232,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,757-251,800,2024,Boeing 757,757-251,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,757-26D,526,2024,Boeing 757,757-26D,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,757-2Q8,478,2024,Boeing 757,757-2Q8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,757-351,1284,2024,Boeing 757,757-351,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,767-332,1080,2024,Boeing 767,767-332,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,767-432ER,194,2024,Boeing 767,767-432ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,A319-114,6270,2024,Airbus A320 family ceo,A319-114,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,DL,A320-211,489,2024,Airbus A320 family ceo,A320-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,DL,A320-212,4519,2024,Airbus A320 family ceo,A320-212,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,DL,A321-211,12328,2024,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,DL,A321-213,2710,2024,Airbus A320 family ceo,A321-213,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,DL,A321-271NX,5395,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,DL,A330-223,4,2024,Airbus A330 ceo,A330-223,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-06,DL,A330-302,82,2024,Airbus A330 ceo,A330-302,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-06,DL,A330-323,101,2024,Airbus A330 ceo,A330-323,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-06,DL,A330-941,56,2024,Airbus A330 neo,A330-941,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-06,DL,A350-941,43,2024,Airbus A350,A350-941,B-43 MODEL 原始代码；保留 A350 系列，不使用 ceo/neo 称谓,
+2026-06,DL,BD-500-1A10,5132,2024,Airbus A220,BD-500-1A10,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-06,DL,BD-500-1A11,2697,2024,Airbus A220,BD-500-1A11,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-06,DL,BOEING717-23S,530,2024,Boeing 717,717-23S,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,BOEING717-2BD,792,2024,Boeing 717,717-2BD,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,unknown,3938,2024,unknown,unknown,,
+2026-06,F9,320-214,751,2024,Airbus A320 family ceo,A320-214,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,F9,320-251N,6936,2024,Airbus A320 family neo,A320-251N,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,F9,321-211,2034,2024,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,F9,321-271NX,3426,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,F9,A321-271NX,1688,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,F9,unknown,4269,2024,unknown,unknown,,
+2026-06,G4,unknown,12663,2024,unknown,unknown,,
+2026-06,MQ,EMB170-100,1657,2024,Embraer E170/E175,EMB170-100,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,MQ,ERJ170-100LR,814,2024,Embraer E170/E175,ERJ170-100LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,MQ,ERJ170-100STD,1023,2024,Embraer E170/E175,ERJ170-100STD,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,MQ,ERJ170-200,920,2024,Embraer E170/E175,ERJ170-200,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,MQ,ERJ170-200LR,17086,2024,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,MQ,unknown,7707,2024,unknown,unknown,,
+2026-06,OH,CL-600-2C10,7128,2024,Bombardier CRJ,CL-600-2C10,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,OH,CL-600-2D24,12439,2024,Bombardier CRJ,CL-600-2D24,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,OH,unknown,1304,2024,unknown,unknown,,
+2026-06,OO,CL-600-2B19,7822,2024,Bombardier CRJ,CL-600-2B19,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,OO,CL-600-2C10,16788,2024,Bombardier CRJ,CL-600-2C10,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,OO,CL-600-2C11,766,2024,Bombardier CRJ,CL-600-2C11,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,OO,CL-600-2D24,6011,2024,Bombardier CRJ,CL-600-2D24,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,OO,CRJ200LR,1382,2024,Bombardier CRJ,CRJ200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,OO,ERJ170-200LL,11280,2024,Embraer E170/E175,ERJ170-200LL,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,OO,ERJ170-200LR,25593,2024,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,OO,unknown,4031,2024,unknown,unknown,,
+2026-06,UA,737-700,33,2024,Boeing 737 NG,737-700,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,UA,737-71Q,168,2024,Boeing 737 NG,737-71Q,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,UA,737-724,2810,2024,Boeing 737 NG,737-724,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,UA,737-7V3,92,2024,Boeing 737 NG,737-7V3,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,UA,737-8,7026,2024,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,UA,737-800,470,2024,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,UA,737-824,10859,2024,Boeing 737 NG,737-824,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,UA,737-9,6134,2024,Boeing 737 MAX,737-9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,UA,737-900ER,566,2024,Boeing 737 NG,737-900ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,UA,737-924,1359,2024,Boeing 737 NG,737-924,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,UA,737-924ER,11899,2024,Boeing 737 NG,737-924ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,UA,757-224,1084,2024,Boeing 757,757-224,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,UA,757-324,571,2024,Boeing 757,757-324,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,UA,757-33N,755,2024,Boeing 757,757-33N,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,UA,767-322,9,2024,Boeing 767,767-322,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,UA,767-424ER,77,2024,Boeing 767,767-424ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,UA,777-222,701,2024,Boeing 777,777-222,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,UA,777-224,15,2024,Boeing 777,777-224,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,UA,777-300ER,236,2024,Boeing 777,777-300ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,UA,787-10,192,2024,Boeing 787 Dreamliner,787-10,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,UA,787-8,39,2024,Boeing 787 Dreamliner,787-8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,UA,787-9,273,2024,Boeing 787 Dreamliner,787-9,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,UA,A319-131,4538,2024,Airbus A320 family ceo,A319-131,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,UA,A319-132,2457,2024,Airbus A320 family ceo,A319-132,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,UA,A320-232,6692,2024,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,UA,A321-271NX,2636,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,UA,unknown,11100,2024,unknown,unknown,,
+2026-06,WN,737-700,170,2024,Boeing 737 NG,737-700,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-71B,344,2024,Boeing 737 NG,737-71B,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-73V,163,2024,Boeing 737 NG,737-73V,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-752,1297,2024,Boeing 737 NG,737-752,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-76N,627,2024,Boeing 737 NG,737-76N,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-76Q,148,2024,Boeing 737 NG,737-76Q,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-79L,173,2024,Boeing 737 NG,737-79L,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-79P,1917,2024,Boeing 737 NG,737-79P,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-7BD,4002,2024,Boeing 737 NG,737-7BD,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-7CT,1650,2024,Boeing 737 NG,737-7CT,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-7H4,33423,2024,Boeing 737 NG,737-7H4,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-7K5,140,2024,Boeing 737 NG,737-7K5,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-7K9,330,2024,Boeing 737 NG,737-7K9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-7Q8,717,2024,Boeing 737 NG,737-7Q8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-8,35575,2024,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-800,11937,2024,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-8H4,15584,2024,Boeing 737 NG,737-8H4,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737NG7H4/W,341,2024,Boeing 737 NG,737-7H4/W,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,unknown,12395,2024,unknown,unknown,,
+2026-06,YX,ERJ170-100LR,796,2024,Embraer E170/E175,ERJ170-100LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,YX,ERJ170-100SE,1873,2024,Embraer E170/E175,ERJ170-100SE,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,YX,ERJ170-100SU,772,2024,Embraer E170/E175,ERJ170-100SU,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,YX,ERJ170-200LR,25745,2024,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,YX,unknown,1743,2024,unknown,unknown,,
+2026-07,AA,737-8,4580,2024,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,AA,737-800,2565,2024,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,AA,737-823,26829,2024,Boeing 737 NG,737-823,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,AA,777-223,208,2024,Boeing 777,777-223,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,AA,787-8,287,2024,Boeing 787 Dreamliner,787-8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,AA,787-9,47,2024,Boeing 787 Dreamliner,787-9,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,AA,A319-112,8024,2024,Airbus A320 family ceo,A319-112,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,AA,A319-115,2637,2024,Airbus A320 family ceo,A319-115,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,AA,A319-132,4974,2024,Airbus A320 family ceo,A319-132,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,AA,A320-214,2604,2024,Airbus A320 family ceo,A320-214,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,AA,A320-232,3188,2024,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,AA,A321-211,4423,2024,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,AA,A321-231,17601,2024,Airbus A320 family ceo,A321-231,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,AA,A321-253NX,7702,2024,Airbus A320 family neo,A321-253NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,AA,unknown,3531,2024,unknown,unknown,,
+2026-07,AS,737-790,1633,2024,Boeing 737 NG,737-790,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,AS,737-8,380,2024,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,AS,737-890,5862,2024,Boeing 737 NG,737-890,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,AS,737-9,6965,2024,Boeing 737 MAX,737-9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,AS,737-900ER,8036,2024,Boeing 737 NG,737-900ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,AS,unknown,8806,2024,unknown,unknown,,
+2026-07,B6,A220-300,2941,2024,Airbus A220,A220-300,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-07,B6,A320-232,11519,2024,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,B6,A321-231,1850,2024,Airbus A320 family ceo,A321-231,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,B6,A321-231(SL),874,2024,Airbus A320 family ceo,A321-231(SL),EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,B6,A321-271NX,634,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,B6,A321231SL,588,2024,Airbus A320 family ceo,A321-231(SL),EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,B6,AIRBUSA321-231(SL),154,2024,Airbus A320 family ceo,A321-231(SL),EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,B6,BD-500-1A11,1669,2024,Airbus A220,BD-500-1A11,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-07,B6,unknown,3083,2024,unknown,unknown,,
+2026-07,DL,717-200,9684,2024,Boeing 717,717-200,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,717-23S,186,2024,Boeing 717,717-23S,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,717231,322,2024,Boeing 717,717-231,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,7172BD,1407,2024,Boeing 717,717-2BD,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,737-832,7211,2024,Boeing 737 NG,737-832,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,DL,737-8EH,414,2024,Boeing 737 NG,737-8EH,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,DL,737-900ER,7412,2024,Boeing 737 NG,737-900ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,DL,737-932ER,8839,2024,Boeing 737 NG,737-932ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,DL,737-9GPER,3314,2024,Boeing 737 NG,737-9GPER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,DL,757-231,560,2024,Boeing 757,757-231,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,757-232,3150,2024,Boeing 757,757-232,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,757-251,625,2024,Boeing 757,757-251,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,757-26D,523,2024,Boeing 757,757-26D,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,757-2Q8,479,2024,Boeing 757,757-2Q8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,757-351,1328,2024,Boeing 757,757-351,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,767-332,1081,2024,Boeing 767,767-332,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,767-432ER,219,2024,Boeing 767,767-432ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,A319-114,6734,2024,Airbus A320 family ceo,A319-114,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,DL,A320-211,389,2024,Airbus A320 family ceo,A320-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,DL,A320-212,4774,2024,Airbus A320 family ceo,A320-212,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,DL,A321-211,12733,2024,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,DL,A321-213,2834,2024,Airbus A320 family ceo,A321-213,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,DL,A321-271NX,5785,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,DL,A330-223,6,2024,Airbus A330 ceo,A330-223,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-07,DL,A330-302,69,2024,Airbus A330 ceo,A330-302,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-07,DL,A330-323,119,2024,Airbus A330 ceo,A330-323,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-07,DL,A330-941,69,2024,Airbus A330 neo,A330-941,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-07,DL,A350-941,62,2024,Airbus A350,A350-941,B-43 MODEL 原始代码；保留 A350 系列，不使用 ceo/neo 称谓,
+2026-07,DL,BD-500-1A10,5452,2024,Airbus A220,BD-500-1A10,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-07,DL,BD-500-1A11,2731,2024,Airbus A220,BD-500-1A11,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-07,DL,BOEING717-23S,433,2024,Boeing 717,717-23S,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,BOEING717-2BD,823,2024,Boeing 717,717-2BD,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,unknown,4373,2024,unknown,unknown,,
+2026-07,F9,320-214,823,2024,Airbus A320 family ceo,A320-214,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,F9,320-251N,7425,2024,Airbus A320 family neo,A320-251N,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,F9,321-211,2205,2024,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,F9,321-271NX,3248,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,F9,A321-271NX,1862,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,F9,unknown,4919,2024,unknown,unknown,,
+2026-07,G4,unknown,13314,2024,unknown,unknown,,
+2026-07,MQ,EMB170-100,1692,2024,Embraer E170/E175,EMB170-100,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,MQ,ERJ170-100LR,752,2024,Embraer E170/E175,ERJ170-100LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,MQ,ERJ170-100STD,1101,2024,Embraer E170/E175,ERJ170-100STD,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,MQ,ERJ170-200,947,2024,Embraer E170/E175,ERJ170-200,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,MQ,ERJ170-200LR,17160,2024,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,MQ,unknown,8128,2024,unknown,unknown,,
+2026-07,OH,CL-600-2C10,7367,2024,Bombardier CRJ,CL-600-2C10,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,OH,CL-600-2D24,12604,2024,Bombardier CRJ,CL-600-2D24,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,OH,unknown,1501,2024,unknown,unknown,,
+2026-07,OO,CL-600-2B19,8296,2024,Bombardier CRJ,CL-600-2B19,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,OO,CL-600-2C10,17649,2024,Bombardier CRJ,CL-600-2C10,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,OO,CL-600-2C11,961,2024,Bombardier CRJ,CL-600-2C11,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,OO,CL-600-2D24,6504,2024,Bombardier CRJ,CL-600-2D24,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,OO,CRJ200LR,1401,2024,Bombardier CRJ,CRJ200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,OO,ERJ170-200LL,11724,2024,Embraer E170/E175,ERJ170-200LL,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,OO,ERJ170-200LR,26431,2024,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,OO,unknown,4106,2024,unknown,unknown,,
+2026-07,UA,737-700,75,2024,Boeing 737 NG,737-700,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,UA,737-71Q,205,2024,Boeing 737 NG,737-71Q,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,UA,737-724,2745,2024,Boeing 737 NG,737-724,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,UA,737-7V3,109,2024,Boeing 737 NG,737-7V3,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,UA,737-8,7066,2024,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,UA,737-800,369,2024,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,UA,737-824,11244,2024,Boeing 737 NG,737-824,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,UA,737-9,5787,2024,Boeing 737 MAX,737-9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,UA,737-900ER,560,2024,Boeing 737 NG,737-900ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,UA,737-924,1322,2024,Boeing 737 NG,737-924,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,UA,737-924ER,11758,2024,Boeing 737 NG,737-924ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,UA,757-224,1088,2024,Boeing 757,757-224,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,UA,757-324,600,2024,Boeing 757,757-324,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,UA,757-33N,784,2024,Boeing 757,757-33N,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,UA,767-322,10,2024,Boeing 767,767-322,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,UA,767-424ER,51,2024,Boeing 767,767-424ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,UA,777-222,710,2024,Boeing 777,777-222,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,UA,777-224,39,2024,Boeing 777,777-224,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,UA,777-300ER,231,2024,Boeing 777,777-300ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,UA,787-10,245,2024,Boeing 787 Dreamliner,787-10,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,UA,787-8,63,2024,Boeing 787 Dreamliner,787-8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,UA,787-9,217,2024,Boeing 787 Dreamliner,787-9,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,UA,A319-131,4526,2024,Airbus A320 family ceo,A319-131,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,UA,A319-132,2421,2024,Airbus A320 family ceo,A319-132,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,UA,A320-232,6710,2024,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,UA,A321-271NX,2695,2024,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,UA,unknown,12810,2024,unknown,unknown,,
+2026-07,WN,737-700,176,2024,Boeing 737 NG,737-700,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-71B,367,2024,Boeing 737 NG,737-71B,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-73V,166,2024,Boeing 737 NG,737-73V,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-752,1278,2024,Boeing 737 NG,737-752,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-76N,624,2024,Boeing 737 NG,737-76N,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-76Q,115,2024,Boeing 737 NG,737-76Q,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-79L,178,2024,Boeing 737 NG,737-79L,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-79P,1987,2024,Boeing 737 NG,737-79P,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-7BD,3943,2024,Boeing 737 NG,737-7BD,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-7CT,1836,2024,Boeing 737 NG,737-7CT,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-7H4,34307,2024,Boeing 737 NG,737-7H4,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-7K9,290,2024,Boeing 737 NG,737-7K9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-7Q8,791,2024,Boeing 737 NG,737-7Q8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-8,36691,2024,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-800,12204,2024,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-8H4,16354,2024,Boeing 737 NG,737-8H4,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737NG7H4/W,312,2024,Boeing 737 NG,737-7H4/W,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,unknown,13375,2024,unknown,unknown,,
+2026-07,YX,ERJ170-100LR,831,2024,Embraer E170/E175,ERJ170-100LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,YX,ERJ170-100SE,1922,2024,Embraer E170/E175,ERJ170-100SE,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,YX,ERJ170-100SU,774,2024,Embraer E170/E175,ERJ170-100SU,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,YX,ERJ170-200LR,26740,2024,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,YX,unknown,1815,2024,unknown,unknown,,
+2026-04,AA,737-8,6841,2025,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,AA,737-800,2415,2025,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,AA,737-823,25412,2025,Boeing 737 NG,737-823,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,AA,777-223,182,2025,Boeing 777,777-223,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,AA,777-323ER,6,2025,Boeing 777,777-323ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,AA,787-8,261,2025,Boeing 787 Dreamliner,787-8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,AA,787-9,62,2025,Boeing 787 Dreamliner,787-9,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,AA,A319-112,7421,2025,Airbus A320 family ceo,A319-112,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,AA,A319-115,2518,2025,Airbus A320 family ceo,A319-115,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,AA,A319-132,4974,2025,Airbus A320 family ceo,A319-132,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,AA,A320-214,2580,2025,Airbus A320 family ceo,A320-214,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,AA,A320-232,2940,2025,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,AA,A321-211,4289,2025,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,AA,A321-231,16588,2025,Airbus A320 family ceo,A321-231,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,AA,A321-253NX,7130,2025,Airbus A320 family neo,A321-253NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,AA,A321-253NY,60,2025,Airbus A320 family neo,A321-253NY,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,AA,unknown,859,2025,unknown,unknown,,
+2026-04,AS,737-790,1890,2025,Boeing 737 NG,737-790,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,AS,737-8,1024,2025,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,AS,737-890,4631,2025,Boeing 737 NG,737-890,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,AS,737-9,6626,2025,Boeing 737 MAX,737-9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,AS,737-900ER,8500,2025,Boeing 737 NG,737-900ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,AS,unknown,4551,2025,unknown,unknown,,
+2026-04,B6,A220-300,5958,2025,Airbus A220,A220-300,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-04,B6,A320-232,9428,2025,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,B6,A321-231,4011,2025,Airbus A320 family ceo,A321-231,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,B6,A321-271NX,987,2025,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,B6,unknown,266,2025,unknown,unknown,,
+2026-04,DL,717-200,9276,2025,Boeing 717,717-200,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,717-23S,176,2025,Boeing 717,717-23S,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,717231,170,2025,Boeing 717,717-231,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,7172BD,1426,2025,Boeing 717,717-2BD,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,737-832,6772,2025,Boeing 737 NG,737-832,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,DL,737-8EH,282,2025,Boeing 737 NG,737-8EH,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,DL,737-900ER,6438,2025,Boeing 737 NG,737-900ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,DL,737-932ER,8767,2025,Boeing 737 NG,737-932ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,DL,737-9GPER,2241,2025,Boeing 737 NG,737-9GPER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,DL,757-231,478,2025,Boeing 757,757-231,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,757-232,2884,2025,Boeing 757,757-232,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,757-251,1021,2025,Boeing 757,757-251,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,757-26D,636,2025,Boeing 757,757-26D,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,757-2Q8,443,2025,Boeing 757,757-2Q8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,757-351,1426,2025,Boeing 757,757-351,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,767-332,1483,2025,Boeing 767,767-332,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,767-432ER,211,2025,Boeing 767,767-432ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,A319-114,6096,2025,Airbus A320 family ceo,A319-114,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,DL,A320-211,700,2025,Airbus A320 family ceo,A320-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,DL,A320-212,4458,2025,Airbus A320 family ceo,A320-212,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,DL,A321-211,12021,2025,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,DL,A321-213,2510,2025,Airbus A320 family ceo,A321-213,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,DL,A321-271NX,6671,2025,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,DL,A330-223,195,2025,Airbus A330 ceo,A330-223,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-04,DL,A330-302,73,2025,Airbus A330 ceo,A330-302,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-04,DL,A330-323,258,2025,Airbus A330 ceo,A330-323,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-04,DL,A330-941,87,2025,Airbus A330 neo,A330-941,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-04,DL,A350-941,74,2025,Airbus A350,A350-941,B-43 MODEL 原始代码；保留 A350 系列，不使用 ceo/neo 称谓,
+2026-04,DL,BD-500-1A10,4320,2025,Airbus A220,BD-500-1A10,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-04,DL,BD-500-1A11,3444,2025,Airbus A220,BD-500-1A11,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-04,DL,BOEING717-23S,541,2025,Boeing 717,717-23S,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,BOEING717-2BD,763,2025,Boeing 717,717-2BD,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,DL,unknown,774,2025,unknown,unknown,,
+2026-04,F9,A320-214,580,2025,Airbus A320 family ceo,A320-214,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,F9,A320-251N,7632,2025,Airbus A320 family neo,A320-251N,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,F9,A321-211,1870,2025,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,F9,A321-271N,749,2025,Airbus A320 family neo,A321-271N,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,F9,A321-271NX,3516,2025,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,F9,AA321-271NX,3056,2025,Unclassified,AA321-271NX,B-43 MODEL 原始标签无法无歧义归类,
+2026-04,F9,unknown,1137,2025,unknown,unknown,,
+2026-04,G4,unknown,10318,2025,unknown,unknown,,
+2026-04,MQ,ERJ170-100LR,1769,2025,Embraer E170/E175,ERJ170-100LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,MQ,ERJ170-100SE,2519,2025,Embraer E170/E175,ERJ170-100SE,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,MQ,ERJ170-100STD,1026,2025,Embraer E170/E175,ERJ170-100STD,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,MQ,ERJ170-100SU,1582,2025,Embraer E170/E175,ERJ170-100SU,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,MQ,ERJ170-200LR,19907,2025,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,MQ,unknown,324,2025,unknown,unknown,,
+2026-04,NK,A320-232,5074,2025,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,NK,A320-271N,1437,2025,Airbus A320 family neo,A320-271N,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,NK,A321-231,2398,2025,Airbus A320 family ceo,A321-231,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,NK,A321-271NX,1560,2025,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,OH,CL-600-2C10,6910,2025,Bombardier CRJ,CL-600-2C10,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,OH,CL-600-2D24,13619,2025,Bombardier CRJ,CL-600-2D24,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,OH,unknown,18,2025,unknown,unknown,,
+2026-04,OO,CL-600-2B19,8756,2025,Bombardier CRJ,CL-600-2B19,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,OO,CL-600-2C10,16483,2025,Bombardier CRJ,CL-600-2C10,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,OO,CL-600-2C11,1402,2025,Bombardier CRJ,CL-600-2C11,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,OO,CL-600-2D24,6916,2025,Bombardier CRJ,CL-600-2D24,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,OO,CRJ200LR,1368,2025,Bombardier CRJ,CRJ200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,OO,ERJ170-100LR,117,2025,Embraer E170/E175,ERJ170-100LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,OO,ERJ170-200LL,11854,2025,Embraer E170/E175,ERJ170-200LL,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,OO,ERJ170-200LR,25728,2025,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,OO,unknown,491,2025,unknown,unknown,,
+2026-04,UA,737-724,3628,2025,Boeing 737 NG,737-724,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,UA,737-800,527,2025,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,UA,737-824,10124,2025,Boeing 737 NG,737-824,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,UA,737-924,1105,2025,Boeing 737 NG,737-924,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,UA,737-924ER,10231,2025,Boeing 737 NG,737-924ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,UA,757-224,1619,2025,Boeing 757,757-224,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,UA,757-324,1080,2025,Boeing 757,757-324,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,UA,767-322,16,2025,Boeing 767,767-322,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,UA,767-424ER,107,2025,Boeing 767,767-424ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,UA,777-222,840,2025,Boeing 777,777-222,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,UA,777-300ER,279,2025,Boeing 777,777-300ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,UA,787-10,140,2025,Boeing 787 Dreamliner,787-10,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,UA,787-8,51,2025,Boeing 787 Dreamliner,787-8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,UA,787-9,278,2025,Boeing 787 Dreamliner,787-9,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-04,UA,A319-131,4461,2025,Airbus A320 family ceo,A319-131,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,UA,A319-132,2246,2025,Airbus A320 family ceo,A319-132,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,UA,A320-232,5747,2025,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,UA,A321-271NX,4400,2025,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-04,UA,MAX8,9223,2025,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,UA,MAX9,9028,2025,Boeing 737 MAX,737-9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,UA,unknown,4321,2025,unknown,unknown,,
+2026-04,WN,737-700,148,2025,Boeing 737 NG,737-700,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-71B,326,2025,Boeing 737 NG,737-71B,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-73V,183,2025,Boeing 737 NG,737-73V,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-752,1331,2025,Boeing 737 NG,737-752,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-76N,648,2025,Boeing 737 NG,737-76N,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-76Q,105,2025,Boeing 737 NG,737-76Q,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-79L,163,2025,Boeing 737 NG,737-79L,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-79P,1977,2025,Boeing 737 NG,737-79P,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-7BD,3953,2025,Boeing 737 NG,737-7BD,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-7CT,1556,2025,Boeing 737 NG,737-7CT,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-7H4,33401,2025,Boeing 737 NG,737-7H4,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-7K5,162,2025,Boeing 737 NG,737-7K5,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-7K9,345,2025,Boeing 737 NG,737-7K9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-7Q8,849,2025,Boeing 737 NG,737-7Q8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-8,43744,2025,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-800,11467,2025,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737-8H4,15689,2025,Boeing 737 NG,737-8H4,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,737NG7H4/W,348,2025,Boeing 737 NG,737-7H4/W,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-04,WN,unknown,1419,2025,unknown,unknown,,
+2026-04,YX,ERJ170-100LR,754,2025,Embraer E170/E175,ERJ170-100LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,YX,ERJ170-100SE,1783,2025,Embraer E170/E175,ERJ170-100SE,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,YX,ERJ170-100SU,735,2025,Embraer E170/E175,ERJ170-100SU,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,YX,ERJ170-200LR,27352,2025,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-04,YX,unknown,389,2025,unknown,unknown,,
+2026-05,AA,737-8,7092,2025,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,AA,737-800,2547,2025,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,AA,737-823,26741,2025,Boeing 737 NG,737-823,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,AA,777-223,264,2025,Boeing 777,777-223,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,AA,777-323ER,8,2025,Boeing 777,777-323ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,AA,787-8,293,2025,Boeing 787 Dreamliner,787-8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,AA,787-9,18,2025,Boeing 787 Dreamliner,787-9,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,AA,A319-112,7738,2025,Airbus A320 family ceo,A319-112,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,AA,A319-115,2624,2025,Airbus A320 family ceo,A319-115,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,AA,A319-132,5152,2025,Airbus A320 family ceo,A319-132,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,AA,A320-214,2495,2025,Airbus A320 family ceo,A320-214,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,AA,A320-232,3338,2025,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,AA,A321-211,4441,2025,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,AA,A321-231,17478,2025,Airbus A320 family ceo,A321-231,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,AA,A321-253NX,7330,2025,Airbus A320 family neo,A321-253NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,AA,A321-253NY,62,2025,Airbus A320 family neo,A321-253NY,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,AA,unknown,1119,2025,unknown,unknown,,
+2026-05,AS,737-790,1688,2025,Boeing 737 NG,737-790,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,AS,737-8,1140,2025,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,AS,737-890,5130,2025,Boeing 737 NG,737-890,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,AS,737-9,7220,2025,Boeing 737 MAX,737-9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,AS,737-900ER,7348,2025,Boeing 737 NG,737-900ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,AS,unknown,6658,2025,unknown,unknown,,
+2026-05,B6,A220-300,6056,2025,Airbus A220,A220-300,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-05,B6,A320-232,8832,2025,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,B6,A321-231,3688,2025,Airbus A320 family ceo,A321-231,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,B6,A321-271NX,750,2025,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,B6,unknown,480,2025,unknown,unknown,,
+2026-05,DL,717-200,10128,2025,Boeing 717,717-200,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,717-23S,137,2025,Boeing 717,717-23S,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,717231,350,2025,Boeing 717,717-231,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,7172BD,1233,2025,Boeing 717,717-2BD,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,737-832,7184,2025,Boeing 737 NG,737-832,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,DL,737-8EH,432,2025,Boeing 737 NG,737-8EH,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,DL,737-900ER,6968,2025,Boeing 737 NG,737-900ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,DL,737-932ER,9252,2025,Boeing 737 NG,737-932ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,DL,737-9GPER,2020,2025,Boeing 737 NG,737-9GPER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,DL,757-231,563,2025,Boeing 757,757-231,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,757-232,3167,2025,Boeing 757,757-232,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,757-251,1046,2025,Boeing 757,757-251,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,757-26D,699,2025,Boeing 757,757-26D,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,757-2Q8,440,2025,Boeing 757,757-2Q8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,757-351,1354,2025,Boeing 757,757-351,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,767-332,1228,2025,Boeing 767,767-332,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,767-432ER,212,2025,Boeing 767,767-432ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,A319-114,6435,2025,Airbus A320 family ceo,A319-114,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,DL,A320-211,791,2025,Airbus A320 family ceo,A320-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,DL,A320-212,4484,2025,Airbus A320 family ceo,A320-212,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,DL,A321-211,12921,2025,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,DL,A321-213,2756,2025,Airbus A320 family ceo,A321-213,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,DL,A321-271NX,6852,2025,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,DL,A330-223,61,2025,Airbus A330 ceo,A330-223,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-05,DL,A330-302,60,2025,Airbus A330 ceo,A330-302,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-05,DL,A330-323,193,2025,Airbus A330 ceo,A330-323,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-05,DL,A330-941,57,2025,Airbus A330 neo,A330-941,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-05,DL,A350-941,69,2025,Airbus A350,A350-941,B-43 MODEL 原始代码；保留 A350 系列，不使用 ceo/neo 称谓,
+2026-05,DL,BD-500-1A10,4794,2025,Airbus A220,BD-500-1A10,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-05,DL,BD-500-1A11,3722,2025,Airbus A220,BD-500-1A11,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-05,DL,BOEING717-23S,538,2025,Boeing 717,717-23S,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,BOEING717-2BD,757,2025,Boeing 717,717-2BD,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,DL,unknown,1052,2025,unknown,unknown,,
+2026-05,F9,A320-214,623,2025,Airbus A320 family ceo,A320-214,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,F9,A320-251N,6992,2025,Airbus A320 family neo,A320-251N,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,F9,A321-211,2097,2025,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,F9,A321-271N,758,2025,Airbus A320 family neo,A321-271N,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,F9,A321-271NX,3759,2025,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,F9,AA321-271NX,2825,2025,Unclassified,AA321-271NX,B-43 MODEL 原始标签无法无歧义归类,
+2026-05,F9,unknown,1369,2025,unknown,unknown,,
+2026-05,G4,unknown,10570,2025,unknown,unknown,,
+2026-05,MQ,ERJ170-100LR,1848,2025,Embraer E170/E175,ERJ170-100LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,MQ,ERJ170-100SE,2521,2025,Embraer E170/E175,ERJ170-100SE,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,MQ,ERJ170-100STD,1104,2025,Embraer E170/E175,ERJ170-100STD,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,MQ,ERJ170-100SU,1628,2025,Embraer E170/E175,ERJ170-100SU,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,MQ,ERJ170-200LR,21151,2025,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,MQ,unknown,554,2025,unknown,unknown,,
+2026-05,NK,A320-232,161,2025,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,NK,A320-271N,47,2025,Airbus A320 family neo,A320-271N,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,NK,A321-231,100,2025,Airbus A320 family ceo,A321-231,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,NK,A321-271NX,46,2025,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,OH,CL-600-2C10,6981,2025,Bombardier CRJ,CL-600-2C10,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,OH,CL-600-2D24,13868,2025,Bombardier CRJ,CL-600-2D24,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,OH,unknown,5,2025,unknown,unknown,,
+2026-05,OO,CL-600-2B19,9072,2025,Bombardier CRJ,CL-600-2B19,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,OO,CL-600-2C10,16768,2025,Bombardier CRJ,CL-600-2C10,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,OO,CL-600-2C11,1346,2025,Bombardier CRJ,CL-600-2C11,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,OO,CL-600-2D24,7234,2025,Bombardier CRJ,CL-600-2D24,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,OO,CRJ200LR,1469,2025,Bombardier CRJ,CRJ200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,OO,ERJ170-100LR,173,2025,Embraer E170/E175,ERJ170-100LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,OO,ERJ170-200LL,12376,2025,Embraer E170/E175,ERJ170-200LL,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,OO,ERJ170-200LR,26595,2025,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,OO,unknown,961,2025,unknown,unknown,,
+2026-05,UA,737-724,3388,2025,Boeing 737 NG,737-724,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,UA,737-800,544,2025,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,UA,737-824,11091,2025,Boeing 737 NG,737-824,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,UA,737-924,1186,2025,Boeing 737 NG,737-924,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,UA,737-924ER,11691,2025,Boeing 737 NG,737-924ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,UA,757-224,1341,2025,Boeing 757,757-224,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,UA,757-324,1373,2025,Boeing 757,757-324,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,UA,767-322,8,2025,Boeing 767,767-322,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,UA,767-424ER,71,2025,Boeing 767,767-424ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,UA,777-222,820,2025,Boeing 777,777-222,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,UA,777-300ER,207,2025,Boeing 777,777-300ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,UA,787-10,171,2025,Boeing 787 Dreamliner,787-10,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,UA,787-8,102,2025,Boeing 787 Dreamliner,787-8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,UA,787-9,261,2025,Boeing 787 Dreamliner,787-9,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-05,UA,A319-131,4775,2025,Airbus A320 family ceo,A319-131,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,UA,A319-132,2303,2025,Airbus A320 family ceo,A319-132,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,UA,A320-232,6539,2025,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,UA,A321-271NX,4858,2025,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-05,UA,MAX8,9178,2025,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,UA,MAX9,9713,2025,Boeing 737 MAX,737-9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,UA,unknown,4580,2025,unknown,unknown,,
+2026-05,WN,737-700,172,2025,Boeing 737 NG,737-700,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-71B,352,2025,Boeing 737 NG,737-71B,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-73V,158,2025,Boeing 737 NG,737-73V,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-752,1347,2025,Boeing 737 NG,737-752,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-76N,719,2025,Boeing 737 NG,737-76N,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-76Q,128,2025,Boeing 737 NG,737-76Q,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-79L,156,2025,Boeing 737 NG,737-79L,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-79P,2006,2025,Boeing 737 NG,737-79P,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-7BD,3953,2025,Boeing 737 NG,737-7BD,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-7CT,1448,2025,Boeing 737 NG,737-7CT,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-7H4,33810,2025,Boeing 737 NG,737-7H4,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-7K5,163,2025,Boeing 737 NG,737-7K5,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-7K9,332,2025,Boeing 737 NG,737-7K9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-7Q8,670,2025,Boeing 737 NG,737-7Q8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-8,45192,2025,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-800,11713,2025,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737-8H4,15955,2025,Boeing 737 NG,737-8H4,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,737NG7H4/W,366,2025,Boeing 737 NG,737-7H4/W,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-05,WN,unknown,2006,2025,unknown,unknown,,
+2026-05,YX,ERJ170-100LR,801,2025,Embraer E170/E175,ERJ170-100LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,YX,ERJ170-100SE,1883,2025,Embraer E170/E175,ERJ170-100SE,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,YX,ERJ170-100SU,732,2025,Embraer E170/E175,ERJ170-100SU,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,YX,ERJ170-200LR,28393,2025,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-05,YX,unknown,394,2025,unknown,unknown,,
+2026-06,AA,737-8,6369,2025,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,AA,737-800,2471,2025,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,AA,737-823,26056,2025,Boeing 737 NG,737-823,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,AA,777-223,241,2025,Boeing 777,777-223,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,AA,777-323ER,2,2025,Boeing 777,777-323ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,AA,787-8,235,2025,Boeing 787 Dreamliner,787-8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,AA,787-9,50,2025,Boeing 787 Dreamliner,787-9,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,AA,A319-112,7538,2025,Airbus A320 family ceo,A319-112,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,AA,A319-115,2627,2025,Airbus A320 family ceo,A319-115,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,AA,A319-132,4869,2025,Airbus A320 family ceo,A319-132,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,AA,A320-214,2497,2025,Airbus A320 family ceo,A320-214,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,AA,A320-232,3197,2025,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,AA,A321-211,4309,2025,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,AA,A321-231,17248,2025,Airbus A320 family ceo,A321-231,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,AA,A321-253NX,7354,2025,Airbus A320 family neo,A321-253NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,AA,A321-253NY,189,2025,Airbus A320 family neo,A321-253NY,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,AA,unknown,1212,2025,unknown,unknown,,
+2026-06,AS,737-790,1532,2025,Boeing 737 NG,737-790,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,AS,737-8,1281,2025,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,AS,737-890,5879,2025,Boeing 737 NG,737-890,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,AS,737-9,7135,2025,Boeing 737 MAX,737-9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,AS,737-900ER,7535,2025,Boeing 737 NG,737-900ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,AS,unknown,6529,2025,unknown,unknown,,
+2026-06,B6,A220-300,6194,2025,Airbus A220,A220-300,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-06,B6,A320-232,9919,2025,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,B6,A321-231,3333,2025,Airbus A320 family ceo,A321-231,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,B6,A321-271NX,652,2025,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,B6,unknown,706,2025,unknown,unknown,,
+2026-06,DL,717-200,9781,2025,Boeing 717,717-200,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,717-23S,79,2025,Boeing 717,717-23S,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,717231,346,2025,Boeing 717,717-231,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,7172BD,1213,2025,Boeing 717,717-2BD,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,737-832,6954,2025,Boeing 737 NG,737-832,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,DL,737-8EH,386,2025,Boeing 737 NG,737-8EH,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,DL,737-900ER,7024,2025,Boeing 737 NG,737-900ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,DL,737-932ER,9429,2025,Boeing 737 NG,737-932ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,DL,737-9GPER,2129,2025,Boeing 737 NG,737-9GPER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,DL,757-231,538,2025,Boeing 757,757-231,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,757-232,2844,2025,Boeing 757,757-232,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,757-251,876,2025,Boeing 757,757-251,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,757-26D,526,2025,Boeing 757,757-26D,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,757-2Q8,478,2025,Boeing 757,757-2Q8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,757-351,1284,2025,Boeing 757,757-351,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,767-332,1080,2025,Boeing 767,767-332,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,767-432ER,194,2025,Boeing 767,767-432ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,A319-114,6270,2025,Airbus A320 family ceo,A319-114,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,DL,A320-211,623,2025,Airbus A320 family ceo,A320-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,DL,A320-212,4385,2025,Airbus A320 family ceo,A320-212,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,DL,A321-211,12328,2025,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,DL,A321-213,2710,2025,Airbus A320 family ceo,A321-213,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,DL,A321-271NX,6971,2025,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,DL,A330-223,4,2025,Airbus A330 ceo,A330-223,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-06,DL,A330-302,82,2025,Airbus A330 ceo,A330-302,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-06,DL,A330-323,101,2025,Airbus A330 ceo,A330-323,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-06,DL,A330-941,72,2025,Airbus A330 neo,A330-941,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-06,DL,A350-941,67,2025,Airbus A350,A350-941,B-43 MODEL 原始代码；保留 A350 系列，不使用 ceo/neo 称谓,
+2026-06,DL,BD-500-1A10,5132,2025,Airbus A220,BD-500-1A10,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-06,DL,BD-500-1A11,3584,2025,Airbus A220,BD-500-1A11,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-06,DL,BOEING717-23S,530,2025,Boeing 717,717-23S,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,BOEING717-2BD,792,2025,Boeing 717,717-2BD,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,DL,unknown,1435,2025,unknown,unknown,,
+2026-06,F9,A320-214,751,2025,Airbus A320 family ceo,A320-214,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,F9,A320-251N,6936,2025,Airbus A320 family neo,A320-251N,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,F9,A321-211,2034,2025,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,F9,A321-271N,843,2025,Airbus A320 family neo,A321-271N,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,F9,A321-271NX,3764,2025,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,F9,AA321-271NX,2759,2025,Unclassified,AA321-271NX,B-43 MODEL 原始标签无法无歧义归类,
+2026-06,F9,unknown,2017,2025,unknown,unknown,,
+2026-06,G4,unknown,12663,2025,unknown,unknown,,
+2026-06,MQ,ERJ170-100LR,1680,2025,Embraer E170/E175,ERJ170-100LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,MQ,ERJ170-100SE,2975,2025,Embraer E170/E175,ERJ170-100SE,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,MQ,ERJ170-100STD,1023,2025,Embraer E170/E175,ERJ170-100STD,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,MQ,ERJ170-100SU,1729,2025,Embraer E170/E175,ERJ170-100SU,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,MQ,ERJ170-200LR,20940,2025,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,MQ,unknown,860,2025,unknown,unknown,,
+2026-06,OH,CL-600-2C10,7128,2025,Bombardier CRJ,CL-600-2C10,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,OH,CL-600-2D24,13717,2025,Bombardier CRJ,CL-600-2D24,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,OH,unknown,26,2025,unknown,unknown,,
+2026-06,OO,CL-600-2B19,8380,2025,Bombardier CRJ,CL-600-2B19,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,OO,CL-600-2C10,16788,2025,Bombardier CRJ,CL-600-2C10,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,OO,CL-600-2C11,1157,2025,Bombardier CRJ,CL-600-2C11,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,OO,CL-600-2D24,6851,2025,Bombardier CRJ,CL-600-2D24,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,OO,CRJ200LR,1382,2025,Bombardier CRJ,CRJ200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,OO,ERJ170-100LR,137,2025,Embraer E170/E175,ERJ170-100LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,OO,ERJ170-200LL,12272,2025,Embraer E170/E175,ERJ170-200LL,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,OO,ERJ170-200LR,25709,2025,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,OO,unknown,997,2025,unknown,unknown,,
+2026-06,UA,737-724,3103,2025,Boeing 737 NG,737-724,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,UA,737-800,553,2025,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,UA,737-824,10776,2025,Boeing 737 NG,737-824,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,UA,737-924,1359,2025,Boeing 737 NG,737-924,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,UA,737-924ER,12465,2025,Boeing 737 NG,737-924ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,UA,757-224,1084,2025,Boeing 757,757-224,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,UA,757-324,1326,2025,Boeing 757,757-324,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,UA,767-322,9,2025,Boeing 767,767-322,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,UA,767-424ER,77,2025,Boeing 767,767-424ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,UA,777-222,716,2025,Boeing 777,777-222,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,UA,777-300ER,236,2025,Boeing 777,777-300ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,UA,787-10,192,2025,Boeing 787 Dreamliner,787-10,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,UA,787-8,39,2025,Boeing 787 Dreamliner,787-8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,UA,787-9,312,2025,Boeing 787 Dreamliner,787-9,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-06,UA,A319-131,4538,2025,Airbus A320 family ceo,A319-131,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,UA,A319-132,2457,2025,Airbus A320 family ceo,A319-132,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,UA,A320-232,6692,2025,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,UA,A321-271NX,4638,2025,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-06,UA,MAX8,8222,2025,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,UA,MAX9,8881,2025,Boeing 737 MAX,737-9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,UA,unknown,5116,2025,unknown,unknown,,
+2026-06,WN,737-700,170,2025,Boeing 737 NG,737-700,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-71B,344,2025,Boeing 737 NG,737-71B,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-73V,163,2025,Boeing 737 NG,737-73V,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-752,1297,2025,Boeing 737 NG,737-752,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-76N,627,2025,Boeing 737 NG,737-76N,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-76Q,148,2025,Boeing 737 NG,737-76Q,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-79L,173,2025,Boeing 737 NG,737-79L,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-79P,1917,2025,Boeing 737 NG,737-79P,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-7BD,4002,2025,Boeing 737 NG,737-7BD,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-7CT,1650,2025,Boeing 737 NG,737-7CT,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-7H4,33423,2025,Boeing 737 NG,737-7H4,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-7K5,140,2025,Boeing 737 NG,737-7K5,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-7K9,330,2025,Boeing 737 NG,737-7K9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-7Q8,717,2025,Boeing 737 NG,737-7Q8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-8,44590,2025,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-800,11937,2025,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737-8H4,15584,2025,Boeing 737 NG,737-8H4,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,737NG7H4/W,341,2025,Boeing 737 NG,737-7H4/W,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-06,WN,unknown,3380,2025,unknown,unknown,,
+2026-06,YX,ERJ170-100LR,796,2025,Embraer E170/E175,ERJ170-100LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,YX,ERJ170-100SE,1873,2025,Embraer E170/E175,ERJ170-100SE,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,YX,ERJ170-100SU,772,2025,Embraer E170/E175,ERJ170-100SU,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,YX,ERJ170-200LR,27098,2025,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-06,YX,unknown,390,2025,unknown,unknown,,
+2026-07,AA,737-8,6512,2025,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,AA,737-800,2565,2025,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,AA,737-823,26829,2025,Boeing 737 NG,737-823,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,AA,777-223,208,2025,Boeing 777,777-223,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,AA,787-8,287,2025,Boeing 787 Dreamliner,787-8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,AA,787-9,49,2025,Boeing 787 Dreamliner,787-9,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,AA,A319-112,8024,2025,Airbus A320 family ceo,A319-112,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,AA,A319-115,2637,2025,Airbus A320 family ceo,A319-115,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,AA,A319-132,4974,2025,Airbus A320 family ceo,A319-132,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,AA,A320-214,2604,2025,Airbus A320 family ceo,A320-214,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,AA,A320-232,3188,2025,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,AA,A321-211,4423,2025,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,AA,A321-231,17601,2025,Airbus A320 family ceo,A321-231,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,AA,A321-253NX,7800,2025,Airbus A320 family neo,A321-253NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,AA,A321-253NY,244,2025,Airbus A320 family neo,A321-253NY,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,AA,unknown,1255,2025,unknown,unknown,,
+2026-07,AS,737-790,1633,2025,Boeing 737 NG,737-790,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,AS,737-8,1339,2025,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,AS,737-890,5862,2025,Boeing 737 NG,737-890,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,AS,737-9,7711,2025,Boeing 737 MAX,737-9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,AS,737-900ER,8036,2025,Boeing 737 NG,737-900ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,AS,unknown,7101,2025,unknown,unknown,,
+2026-07,B6,A220-300,6797,2025,Airbus A220,A220-300,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-07,B6,A320-232,11519,2025,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,B6,A321-231,3466,2025,Airbus A320 family ceo,A321-231,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,B6,A321-271NX,721,2025,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,B6,unknown,809,2025,unknown,unknown,,
+2026-07,DL,717-200,9684,2025,Boeing 717,717-200,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,717-23S,186,2025,Boeing 717,717-23S,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,717231,322,2025,Boeing 717,717-231,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,7172BD,1407,2025,Boeing 717,717-2BD,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,737-832,7211,2025,Boeing 737 NG,737-832,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,DL,737-8EH,414,2025,Boeing 737 NG,737-8EH,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,DL,737-900ER,7412,2025,Boeing 737 NG,737-900ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,DL,737-932ER,9899,2025,Boeing 737 NG,737-932ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,DL,737-9GPER,2254,2025,Boeing 737 NG,737-9GPER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,DL,757-231,560,2025,Boeing 757,757-231,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,757-232,3059,2025,Boeing 757,757-232,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,757-251,716,2025,Boeing 757,757-251,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,757-26D,523,2025,Boeing 757,757-26D,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,757-2Q8,479,2025,Boeing 757,757-2Q8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,757-351,1328,2025,Boeing 757,757-351,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,767-332,1081,2025,Boeing 767,767-332,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,767-432ER,219,2025,Boeing 767,767-432ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,A319-114,6734,2025,Airbus A320 family ceo,A319-114,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,DL,A320-211,514,2025,Airbus A320 family ceo,A320-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,DL,A320-212,4649,2025,Airbus A320 family ceo,A320-212,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,DL,A321-211,12733,2025,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,DL,A321-213,2834,2025,Airbus A320 family ceo,A321-213,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,DL,A321-271NX,7465,2025,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,DL,A330-223,6,2025,Airbus A330 ceo,A330-223,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-07,DL,A330-302,69,2025,Airbus A330 ceo,A330-302,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-07,DL,A330-323,119,2025,Airbus A330 ceo,A330-323,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-07,DL,A330-941,78,2025,Airbus A330 neo,A330-941,B-43 MODEL 原始代码；A330-9xx 为 neo，其余本清单型号为 ceo,
+2026-07,DL,A350-941,77,2025,Airbus A350,A350-941,B-43 MODEL 原始代码；保留 A350 系列，不使用 ceo/neo 称谓,
+2026-07,DL,BD-500-1A10,5452,2025,Airbus A220,BD-500-1A10,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-07,DL,BD-500-1A11,3590,2025,Airbus A220,BD-500-1A11,B-43 MODEL 原始代码；保留 BD-500/A220 系列称谓,
+2026-07,DL,BOEING717-23S,433,2025,Boeing 717,717-23S,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,BOEING717-2BD,823,2025,Boeing 717,717-2BD,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,DL,unknown,1810,2025,unknown,unknown,,
+2026-07,F9,A320-214,823,2025,Airbus A320 family ceo,A320-214,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,F9,A320-251N,7425,2025,Airbus A320 family neo,A320-251N,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,F9,A321-211,2205,2025,Airbus A320 family ceo,A321-211,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,F9,A321-271N,983,2025,Airbus A320 family neo,A321-271N,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,F9,A321-271NX,3619,2025,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,F9,AA321-271NX,2966,2025,Unclassified,AA321-271NX,B-43 MODEL 原始标签无法无歧义归类,
+2026-07,F9,unknown,2461,2025,unknown,unknown,,
+2026-07,G4,unknown,13314,2025,unknown,unknown,,
+2026-07,MQ,ERJ170-100LR,1448,2025,Embraer E170/E175,ERJ170-100LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,MQ,ERJ170-100SE,3156,2025,Embraer E170/E175,ERJ170-100SE,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,MQ,ERJ170-100STD,1101,2025,Embraer E170/E175,ERJ170-100STD,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,MQ,ERJ170-100SU,1719,2025,Embraer E170/E175,ERJ170-100SU,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,MQ,ERJ170-200LR,21072,2025,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,MQ,unknown,1284,2025,unknown,unknown,,
+2026-07,OH,CL-600-2C10,7367,2025,Bombardier CRJ,CL-600-2C10,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,OH,CL-600-2D24,14049,2025,Bombardier CRJ,CL-600-2D24,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,OH,unknown,56,2025,unknown,unknown,,
+2026-07,OO,CL-600-2B19,8815,2025,Bombardier CRJ,CL-600-2B19,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,OO,CL-600-2C10,17649,2025,Bombardier CRJ,CL-600-2C10,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,OO,CL-600-2C11,1451,2025,Bombardier CRJ,CL-600-2C11,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,OO,CL-600-2D24,7233,2025,Bombardier CRJ,CL-600-2D24,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,OO,CRJ200LR,1401,2025,Bombardier CRJ,CRJ200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,OO,ERJ170-100LR,151,2025,Embraer E170/E175,ERJ170-100LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,OO,ERJ170-200LL,12686,2025,Embraer E170/E175,ERJ170-200LL,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,OO,ERJ170-200LR,26438,2025,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,OO,unknown,1248,2025,unknown,unknown,,
+2026-07,UA,737-724,3134,2025,Boeing 737 NG,737-724,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,UA,737-800,480,2025,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,UA,737-824,11133,2025,Boeing 737 NG,737-824,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,UA,737-924,1322,2025,Boeing 737 NG,737-924,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,UA,737-924ER,12318,2025,Boeing 737 NG,737-924ER,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,UA,757-224,1088,2025,Boeing 757,757-224,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,UA,757-324,1384,2025,Boeing 757,757-324,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,UA,767-322,10,2025,Boeing 767,767-322,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,UA,767-424ER,51,2025,Boeing 767,767-424ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,UA,777-222,749,2025,Boeing 777,777-222,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,UA,777-300ER,231,2025,Boeing 777,777-300ER,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,UA,787-10,245,2025,Boeing 787 Dreamliner,787-10,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,UA,787-8,63,2025,Boeing 787 Dreamliner,787-8,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,UA,787-9,241,2025,Boeing 787 Dreamliner,787-9,B-43 MODEL 原始代码；按明确的 Boeing 系列号归组,
+2026-07,UA,A319-131,4526,2025,Airbus A320 family ceo,A319-131,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,UA,A319-132,2421,2025,Airbus A320 family ceo,A319-132,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,UA,A320-232,6710,2025,Airbus A320 family ceo,A320-232,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,UA,A321-271NX,4858,2025,Airbus A320 family neo,A321-271NX,EASA TCDS A.064 型号清单及 CEO/NEO 商业名称,https://www.easa.europa.eu/en/downloads/16507/en
+2026-07,UA,MAX8,8294,2025,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,UA,MAX9,8515,2025,Boeing 737 MAX,737-9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,UA,unknown,6667,2025,unknown,unknown,,
+2026-07,WN,737-700,176,2025,Boeing 737 NG,737-700,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-71B,367,2025,Boeing 737 NG,737-71B,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-73V,166,2025,Boeing 737 NG,737-73V,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-752,1278,2025,Boeing 737 NG,737-752,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-76N,624,2025,Boeing 737 NG,737-76N,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-76Q,115,2025,Boeing 737 NG,737-76Q,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-79L,178,2025,Boeing 737 NG,737-79L,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-79P,1987,2025,Boeing 737 NG,737-79P,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-7BD,3943,2025,Boeing 737 NG,737-7BD,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-7CT,1836,2025,Boeing 737 NG,737-7CT,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-7H4,34307,2025,Boeing 737 NG,737-7H4,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-7K9,290,2025,Boeing 737 NG,737-7K9,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-7Q8,791,2025,Boeing 737 NG,737-7Q8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-8,45978,2025,Boeing 737 MAX,737-8,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-800,12204,2025,Boeing 737 NG,737-800,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737-8H4,16354,2025,Boeing 737 NG,737-8H4,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,737NG7H4/W,312,2025,Boeing 737 NG,737-7H4/W,FAA FSB 对 737 Classic、NG、MAX 系列及具体型号的分组,https://www.faa.gov/sites/faa.gov/files/2022-08/737_FSB_Report.pdf
+2026-07,WN,unknown,4088,2025,unknown,unknown,,
+2026-07,YX,ERJ170-100LR,831,2025,Embraer E170/E175,ERJ170-100LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,YX,ERJ170-100SE,1922,2025,Embraer E170/E175,ERJ170-100SE,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,YX,ERJ170-100SU,774,2025,Embraer E170/E175,ERJ170-100SU,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,YX,ERJ170-200LR,28177,2025,Embraer E170/E175,ERJ170-200LR,B-43 MODEL 原始代码；按明确的型号系列前缀归组,
+2026-07,YX,unknown,378,2025,unknown,unknown,,

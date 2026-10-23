@@ -1,0 +1,850 @@
+{
+  "run_id": "R0018",
+  "status": "completed",
+  "started_at_utc": "2026-10-23T23:40:08.678947+00:00",
+  "git_commit": "a219235e517044ec8d1088ad6d498d4783d8c60e",
+  "command": "D:\\airline-delay\\.venv\\Scripts\\python.exe scripts/run_pipeline.py --config configs/p5_analysis.json --run-id R0018",
+  "python": "3.13.15 | packaged by conda-forge | (main, Sep  2 2026, 21:52:43) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "logical_cpus": 32,
+  "environment": {
+    "anyio": "4.15.1",
+    "argon2-cffi": "25.1.0",
+    "argon2-cffi-bindings": "26.1.0",
+    "arrow": "1.4.0",
+    "asttokens": "3.0.2",
+    "async-lru": "2.4.0",
+    "attrs": "26.1.0",
+    "babel": "2.18.0",
+    "beautifulsoup4": "4.15.0",
+    "bleach": "6.4.0",
+    "certifi": "2026.10.23",
+    "cffi": "2.1.1",
+    "charset-normalizer": "3.5.2",
+    "cloudpickle": "3.1.2",
+    "colorama": "0.4.6",
+    "comm": "0.2.3",
+    "contourpy": "1.4.0",
+    "cycler": "0.12.1",
+    "debugpy": "1.8.22",
+    "defusedxml": "0.7.1",
+    "executing": "2.3.0",
+    "fastjsonschema": "2.22.2",
+    "fonttools": "4.67.0",
+    "fqdn": "1.6.0",
+    "h11": "0.16.0",
+    "httpcore": "1.0.9",
+    "httpx": "0.28.1",
+    "idna": "3.20",
+    "ipykernel": "7.3.0",
+    "ipython": "9.17.1",
+    "ipython_pygments_lexers": "1.1.1",
+    "isoduration": "20.11.0",
+    "jedi": "0.20.1",
+    "Jinja2": "3.1.6",
+    "joblib": "1.6.0",
+    "json5": "0.17.3",
+    "jsonpointer": "3.4",
+    "jsonschema": "4.26.0",
+    "jsonschema-specifications": "2025.9.1",
+    "jupyterlab": "4.5.7",
+    "jupyterlab_pygments": "0.3.0",
+    "jupyterlab_server": "2.28.1",
+    "jupyter_client": "8.10.0",
+    "jupyter_core": "5.9.1",
+    "jupyter-events": "0.12.1",
+    "jupyter-lsp": "2.3.1",
+    "jupyter_server": "2.21.1",
+    "jupyter_server_terminals": "0.5.4",
+    "kiwisolver": "1.5.1",
+    "lark": "1.3.1",
+    "MarkupSafe": "3.0.4",
+    "matplotlib": "3.10.9",
+    "matplotlib-inline": "0.2.2",
+    "mistune": "3.4.0",
+    "nbclient": "0.11.0",
+    "nbconvert": "7.17.1",
+    "nbformat": "5.11.0",
+    "nest-asyncio2": "1.7.4",
+    "notebook_shim": "0.2.4",
+    "numpy": "2.4.6",
+    "packaging": "26.3",
+    "pandas": "3.0.3",
+    "pandocfilters": "1.5.1",
+    "parso": "0.8.7",
+    "pillow": "13.0.0",
+    "pip": "26.2.1",
+    "platformdirs": "4.13.5",
+    "prometheus_client": "0.26.0",
+    "prompt_toolkit": "3.0.53",
+    "psutil": "7.2.2",
+    "pure_eval": "0.2.4",
+    "pycparser": "3.12",
+    "Pygments": "2.21.0",
+    "pyparsing": "3.3.3",
+    "python-dateutil": "3.0.0",
+    "python-json-logger": "4.2.0",
+    "pywinpty": "3.1.0",
+    "PyYAML": "6.0.3",
+    "pyzmq": "27.2.0",
+    "referencing": "0.37.0",
+    "requests": "2.34.2",
+    "rfc3339-validator": "0.1.4",
+    "rfc3986-validator": "0.1.1",
+    "rfc3987-syntax": "1.1.0",
+    "rpds-py": "2026.9.1",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.18.1",
+    "seaborn": "0.13.2",
+    "Send2Trash": "2.1.0",
+    "setuptools": "84.2.1",
+    "six": "1.17.0",
+    "soupsieve": "3.0.4",
+    "stack-data": "0.6.3",
+    "terminado": "0.18.1",
+    "threadpoolctl": "3.7.0",
+    "tinycss2": "1.5.1",
+    "tornado": "6.6",
+    "traitlets": "5.16.1",
+    "typing_extensions": "4.16.0",
+    "tzdata": "2026.3",
+    "uri-template": "1.3.0",
+    "urllib3": "2.8.0",
+    "wcwidth": "0.9.3",
+    "webcolors": "25.10.0",
+    "webencodings": "0.6.1",
+    "websocket-client": "1.9.2"
+  },
+  "source_files": [
+    {
+      "path": "scripts/run_pipeline.py",
+      "bytes": 20268,
+      "sha256": "37e52c7c2ba6851f9bf1e8b21c8ae2bd9361d0f8de6e0043d1f2c86fb02783f7"
+    },
+    {
+      "path": "scripts/prepare_flights.py",
+      "bytes": 18644,
+      "sha256": "d150244a8ddf828550244d35a86d79ffaf739161f73d3495def1f18df3cdd1c8"
+    },
+    {
+      "path": "scripts/build_features.py",
+      "bytes": 18827,
+      "sha256": "a5d990aebcf3ddf5ffbcf34bf92f79339f64484062d427f4df29d899788dd583"
+    },
+    {
+      "path": "scripts/train_models.py",
+      "bytes": 21396,
+      "sha256": "11929626005fad33ec690d59949af700bb9b11b716de255d49aad3d8033e0116"
+    },
+    {
+      "path": "scripts/evaluate_models.py",
+      "bytes": 2980,
+      "sha256": "ee39185ad678b517ab72d75444f0ba39fb9ba371aa12264b7cadafba154f8e18"
+    },
+    {
+      "path": "scripts/analyze_eda.py",
+      "bytes": 8808,
+      "sha256": "ef52d1fb06b6dd61563f4d424bf66d89998cf5a7d7dd0a6cade00f02f0edb60c"
+    },
+    {
+      "path": "scripts/analyze_rq1.py",
+      "bytes": 8824,
+      "sha256": "c93f2cbbd2e8b0bd0ace9cf4fbe458f985ba8843b39755bdba3d4f8aa5d00b4b"
+    },
+    {
+      "path": "scripts/render_notebooks.py",
+      "bytes": 25592,
+      "sha256": "96ecdd361d96944c1b7e0419d401f5ba8b9bb5fda3dc1903811d2cc7907d1002"
+    },
+    {
+      "path": "scripts/operational_features.py",
+      "bytes": 9638,
+      "sha256": "af9be876031917ea367b7cefd4c888c5b7326b750b53d842c7e13ee9691a9a5c"
+    },
+    {
+      "path": "references/aircraft_reference_2024.csv",
+      "bytes": 329571,
+      "sha256": "4a10aa59c62d40d663cde951ae944ab269b3d1d7d6818cc9d85ea045de9c397c"
+    },
+    {
+      "path": "references/aircraft_type_aliases.csv",
+      "bytes": 14406,
+      "sha256": "6a5a63c6f4913de245c2f500bf055e9e9bad214206c3d2f8620675888ba21770"
+    },
+    {
+      "path": "scripts/weather_pipeline_features.py",
+      "bytes": 12041,
+      "sha256": "cb98bee161f6685cc2427c57bf6b12a397991636d843e8500cf9ac20a3420def"
+    },
+    {
+      "path": "scripts/weather_features.py",
+      "bytes": 38222,
+      "sha256": "f22336957c868bcbab1b2a1bdeb47932c58325695056c5b4ccaa2290f28fda01"
+    },
+    {
+      "path": "scripts/prepare_weather.py",
+      "bytes": 33339,
+      "sha256": "1bd7bc54b3212ebdeccec69406f9c1c78e42220728c2a71880900f3af297ce45"
+    },
+    {
+      "path": "references/airports.csv",
+      "bytes": 45717,
+      "sha256": "0d0844c59747481f2499e48c8c5fbf5447c956642e35b009fe554d0dd013adc5"
+    },
+    {
+      "path": "scripts/feature_cache.py",
+      "bytes": 7463,
+      "sha256": "1afa70278b40f63b06e6d43df307d1016fdb3fbe173c0becf33d9c3123555c1d"
+    },
+    {
+      "path": "scripts/complete_rq1.py",
+      "bytes": 13641,
+      "sha256": "da7cc569b534492dec2f6fb56d8c0ecf3045e984958f6d300941fd7135d4b722"
+    },
+    {
+      "path": "scripts/rq1_standardization.py",
+      "bytes": 23276,
+      "sha256": "d45c27dfaacc756e22544c8a6d047aaabf0c65b6e9fa3a772a9219ddf8132d6f"
+    },
+    {
+      "path": "scripts/analyze_single_flights.py",
+      "bytes": 19149,
+      "sha256": "57ad42b3007fa5b9eb02d323be230481f1458872058b04f48cc5474926df95a8"
+    },
+    {
+      "path": "scripts/explain_models.py",
+      "bytes": 19487,
+      "sha256": "0304081a2bc648216ec660e9000d7ba0a311b79aa5ec505a3d26a87b7cd414ce"
+    },
+    {
+      "path": "scripts/render_research_notebooks.py",
+      "bytes": 28845,
+      "sha256": "bf9be6b712426fc115ca943622d7cf8390f62144022049cf8831f4b069a0c126"
+    },
+    {
+      "path": "configs/rq1_protocol.json",
+      "bytes": 1403,
+      "sha256": "c77f70ace7d4dcbc1007ad1a3402c930785b570f44f05e0aee36b64b6413859a"
+    },
+    {
+      "path": "references/aircraft_reference_2025.csv",
+      "bytes": 321237,
+      "sha256": "e90967dcf4f23139457577cd53e032583af10ca81ed02b7e5fc3876e94bcadab"
+    },
+    {
+      "path": "notebooks/01_航班清洗与衔接.ipynb",
+      "bytes": 13272,
+      "sha256": "6836d6996205147a2976bb57804a9ebda6c7465333656c7308451665fea5219c"
+    },
+    {
+      "path": "notebooks/02_天气与特征.ipynb",
+      "bytes": 195945,
+      "sha256": "7d30bdc1ac2bec44952809745e02306dc96b0ceaaa1d5774bc60b060cd952e24"
+    },
+    {
+      "path": "notebooks/03_EDA.ipynb",
+      "bytes": 585891,
+      "sha256": "6be402bb083b2967a1e3990df28c6cd2e09874b119f2b7c53bd7fa95505b74b6"
+    },
+    {
+      "path": "notebooks/04_RQ1机场分析.ipynb",
+      "bytes": 578896,
+      "sha256": "f61fb42789484b0018c1393d97ed1db156e42d1390bb6064691809fdb9b80d73"
+    },
+    {
+      "path": "notebooks/05_RQ2预测与解释.ipynb",
+      "bytes": 181127,
+      "sha256": "6ab34a98abdd7e0281c91fcd6611ea5e8c7a8a565ef0285c6aef21e91b787760"
+    },
+    {
+      "path": "tables/feature_dictionary.csv",
+      "bytes": 39168,
+      "sha256": "438f4db3eee44e035a39c24399b6af216010f0881039818b78d03c0e453a458e"
+    },
+    {
+      "path": "configs/p5_analysis.json",
+      "bytes": 894,
+      "sha256": "8f548d6ef4e8d722369272bc78b76ce98c180bd6a022b553525b09e68f733d1a"
+    }
+  ],
+  "input_manifest": {
+    "path": "tables/file_manifest.json",
+    "bytes": 31686,
+    "sha256": "d499da4db902f139f2fd9a3cb02676eb34bab2e3c3aab3ab97b814df3be8e209"
+  },
+  "config": {
+    "stage": "P5-RQ1-EDA",
+    "mode": "development",
+    "analysis_only": true,
+    "data_id": "D0003",
+    "connection_path": "processed/D0003/flight_connections.csv.gz",
+    "connections_path": "processed/D0003/flight_connections.csv.gz",
+    "data_manifest_path": "processed/D0003/data_manifest.json",
+    "flight_path": "processed/flights_clean.csv.gz",
+    "flights_path": "processed/flights_clean.csv.gz",
+    "parent_run_id": "R0017",
+    "change": "Complete registered common-support RQ1 with monthly fixed-reference network and single-flight EDA; no model fitting",
+    "threads": 8,
+    "feature_group": "G4B",
+    "feature_archive_path": "experiments/runs/R0017/data/features.pkl",
+    "rq1_protocol_path": "configs/rq1_protocol.json",
+    "model_run_ids": [
+      "R0006",
+      "R0007",
+      "R0009",
+      "R0010",
+      "R0012",
+      "R0015",
+      "R0017"
+    ],
+    "test_target_sealed": true
+  },
+  "derived_input_manifest": {
+    "path": "processed/D0003/data_manifest.json",
+    "bytes": 1625,
+    "sha256": "f653de91bac863cf678d137d6c7ce365e6d46a9d57d0a7d6c6143bd0439b7f9c"
+  },
+  "result": {
+    "rq1": {
+      "development": true,
+      "raw": {
+        "development_only": true,
+        "connection_path": "processed/D0003/flight_connections.csv.gz",
+        "sample_rule": "accepted, upstream delay >=15 min, non-overnight; ground >=0 allowed",
+        "counts": {
+          "input_accepted_connections": 2821852,
+          "outside_prediction_utc_scope": 560077,
+          "scoped_accepted_connections": 2261775,
+          "invalid_delay": 0,
+          "invalid_actual_ground": 0,
+          "upstream_below_15": 1731755,
+          "scheduled_overnight": 150345,
+          "main_connections": 379675,
+          "main_ground_zero_n": 0
+        },
+        "airports": 349,
+        "mean_delta": -7.4662487653914535,
+        "s_plus": 4071355.0,
+        "s_minus": 6906103.0,
+        "s_net": -2834748.0,
+        "delta_identity_checked": true,
+        "standardized": false,
+        "uncertainty_intervals": false,
+        "interpretation": "Descriptive raw differences; airport composition is unadjusted and results are not causal."
+      },
+      "standardized": {
+        "development": true,
+        "frozen_reference_reused": false,
+        "period": [
+          "2026-04-01 00:00:00+00:00",
+          "2026-08-01 00:00:00+00:00"
+        ],
+        "selected_airports": 25,
+        "supported_reference": true,
+        "bootstrap": {
+          "unit": "common UTC prediction-date moving blocks",
+          "block_days": 7,
+          "replicates": 1000,
+          "seed": 42,
+          "interval": "95% percentile",
+          "min_valid_replicates": 950
+        },
+        "calendar_days": 122,
+        "sample_rule": "accepted, nonovernight, upstream positive; threshold-specific subsets",
+        "uncertainty": "Common calendar moving blocks; fixed airports/cells/weights, no reselection per replicate; percentile intervals are not multiplicity adjusted.",
+        "units": {
+          "standardized_mean": "minutes per connection",
+          "s_plus_s_minus_s_net": "sample cumulative minutes"
+        }
+      },
+      "monthly": [
+        {
+          "development": true,
+          "frozen_reference_reused": true,
+          "period": [
+            "2026-04-01 00:00:00+00:00",
+            "2026-05-01 00:00:00+00:00"
+          ],
+          "selected_airports": 25,
+          "supported_reference": true,
+          "bootstrap": {
+            "unit": "common UTC prediction-date moving blocks",
+            "block_days": 7,
+            "replicates": 1000,
+            "seed": 42,
+            "interval": "95% percentile",
+            "min_valid_replicates": 950
+          },
+          "calendar_days": 30,
+          "sample_rule": "accepted, nonovernight, upstream positive; threshold-specific subsets",
+          "uncertainty": "Common calendar moving blocks; fixed airports/cells/weights, no reselection per replicate; percentile intervals are not multiplicity adjusted.",
+          "units": {
+            "standardized_mean": "minutes per connection",
+            "s_plus_s_minus_s_net": "sample cumulative minutes"
+          }
+        },
+        {
+          "development": true,
+          "frozen_reference_reused": true,
+          "period": [
+            "2026-05-01 00:00:00+00:00",
+            "2026-06-01 00:00:00+00:00"
+          ],
+          "selected_airports": 25,
+          "supported_reference": true,
+          "bootstrap": {
+            "unit": "common UTC prediction-date moving blocks",
+            "block_days": 7,
+            "replicates": 1000,
+            "seed": 42,
+            "interval": "95% percentile",
+            "min_valid_replicates": 950
+          },
+          "calendar_days": 31,
+          "sample_rule": "accepted, nonovernight, upstream positive; threshold-specific subsets",
+          "uncertainty": "Common calendar moving blocks; fixed airports/cells/weights, no reselection per replicate; percentile intervals are not multiplicity adjusted.",
+          "units": {
+            "standardized_mean": "minutes per connection",
+            "s_plus_s_minus_s_net": "sample cumulative minutes"
+          }
+        },
+        {
+          "development": true,
+          "frozen_reference_reused": true,
+          "period": [
+            "2026-06-01 00:00:00+00:00",
+            "2026-07-01 00:00:00+00:00"
+          ],
+          "selected_airports": 25,
+          "supported_reference": true,
+          "bootstrap": {
+            "unit": "common UTC prediction-date moving blocks",
+            "block_days": 7,
+            "replicates": 1000,
+            "seed": 42,
+            "interval": "95% percentile",
+            "min_valid_replicates": 950
+          },
+          "calendar_days": 30,
+          "sample_rule": "accepted, nonovernight, upstream positive; threshold-specific subsets",
+          "uncertainty": "Common calendar moving blocks; fixed airports/cells/weights, no reselection per replicate; percentile intervals are not multiplicity adjusted.",
+          "units": {
+            "standardized_mean": "minutes per connection",
+            "s_plus_s_minus_s_net": "sample cumulative minutes"
+          }
+        },
+        {
+          "development": true,
+          "frozen_reference_reused": true,
+          "period": [
+            "2026-07-01 00:00:00+00:00",
+            "2026-08-01 00:00:00+00:00"
+          ],
+          "selected_airports": 25,
+          "supported_reference": true,
+          "bootstrap": {
+            "unit": "common UTC prediction-date moving blocks",
+            "block_days": 7,
+            "replicates": 1000,
+            "seed": 42,
+            "interval": "95% percentile",
+            "min_valid_replicates": 950
+          },
+          "calendar_days": 31,
+          "sample_rule": "accepted, nonovernight, upstream positive; threshold-specific subsets",
+          "uncertainty": "Common calendar moving blocks; fixed airports/cells/weights, no reselection per replicate; percentile intervals are not multiplicity adjusted.",
+          "units": {
+            "standardized_mean": "minutes per connection",
+            "s_plus_s_minus_s_net": "sample cumulative minutes"
+          }
+        }
+      ],
+      "frozen_reference_sha256": "559ddb58275e5def26bd62cda09536c5b16700f9771c366fc85a6eafb1690547",
+      "network": {
+        "nodes": 355,
+        "edges": 6600,
+        "bts_flights": 2445202,
+        "valid_connections": 2261775,
+        "display_top_routes": 100,
+        "edge_window": "scheduled departure UTC",
+        "node_window": "upstream actual arrival UTC",
+        "unsupported_color": "gray",
+        "full_coordinate_tables": "rq1_standardized/network_nodes.csv; network_edges.csv"
+      }
+    },
+    "eda": {
+      "mode": "development",
+      "scope": "2026-04 through 2026-07 local FlightDate; August excluded before target parsing",
+      "flight_source": "processed/flights_clean.csv.gz",
+      "connection_source": "processed/D0003/flight_connections.csv.gz",
+      "single_flight_summary": {
+        "input_rows": 3057590,
+        "scoped_flight_rows": 2449201,
+        "normal_completed_rows": 2402785,
+        "cancelled_rows": 37606,
+        "diverted_rows": 8810,
+        "unknown_operation_status_rows": 0,
+        "distribution_population": "normal completed flights only; cancellations and diversions summarized separately"
+      },
+      "single_flight_target_fields": [
+        "DepDelay",
+        "ArrDelay",
+        "DepDelayMinutes",
+        "ArrDelayMinutes"
+      ],
+      "aircraft_inventory_years": [
+        2024,
+        2025
+      ],
+      "aircraft_unknown_policy": "unknown tail/model retained as an explicit category",
+      "airport_activity_note": "Flight movements and eligible connection counts are separate columns; connections use D0003 QA cohort month.",
+      "rq2_weather_coverage": "Optional feature archive strata describe RQ2 eligible prediction connections, not single-flight EDA.",
+      "tables": [
+        "single_flight_delay_stats.csv",
+        "single_flight_operations.csv",
+        "airline_aircraft_coverage.csv",
+        "airline_aircraft_models.csv",
+        "airport_activity.csv",
+        "rq2_weather_missing_coverage.csv"
+      ],
+      "figures": [
+        "monthly_delay_quantiles.png",
+        "delay_sign_counts.png"
+      ]
+    }
+  },
+  "ended_at_utc": "2026-10-23T23:41:56.764568+00:00",
+  "elapsed_seconds": 106.55579120000039,
+  "outputs": [
+    {
+      "path": "experiments/runs/R0018/config.json",
+      "bytes": 892,
+      "sha256": "4a64255abdfd4562a5aac31b264c3faf09e303a48669ff056d964072bf5a07f4"
+    },
+    {
+      "path": "experiments/runs/R0018/data_manifest.json",
+      "bytes": 1625,
+      "sha256": "f653de91bac863cf678d137d6c7ce365e6d46a9d57d0a7d6c6143bd0439b7f9c"
+    },
+    {
+      "path": "experiments/runs/R0018/figures/delay_sign_counts.png",
+      "bytes": 75204,
+      "sha256": "24b60bb7c960625b5e23b02ef23f9028d1092c29ad6502a593cd257700b4707f"
+    },
+    {
+      "path": "experiments/runs/R0018/figures/monthly_delay_quantiles.png",
+      "bytes": 49303,
+      "sha256": "2f0e7d571c6fd841cbffb28a4ce80ccd42465e2dc46262aa48cd199a34f0b1c9"
+    },
+    {
+      "path": "experiments/runs/R0018/figures/rq1_cumulative_delay.png",
+      "bytes": 61338,
+      "sha256": "8b35c4fb98e98663f480bafdeeaee305f0fe5bcf82d76cb9f845529b3603638d"
+    },
+    {
+      "path": "experiments/runs/R0018/figures/rq1_network_geographic.png",
+      "bytes": 303832,
+      "sha256": "c11c901af8a6b5fe514a9257888b05655d06abb8f6866cc47b06583ff0884d72"
+    },
+    {
+      "path": "experiments/runs/R0018/figures/rq1_raw_airport_mean.png",
+      "bytes": 93702,
+      "sha256": "3fb04c7cb5ed6a70ac883a2fb7b1d6d6f3acfb46174ce64245d16cd3002eb789"
+    },
+    {
+      "path": "experiments/runs/R0018/figures/rq1_standardized_airports.png",
+      "bytes": 137122,
+      "sha256": "e3cf77e28e243ed7575a9952b0b266de004c9c67caf11f02869cdd2940166037"
+    },
+    {
+      "path": "experiments/runs/R0018/figures/rq1_threshold_stability.png",
+      "bytes": 39335,
+      "sha256": "275c3b2ada39acc0dc93b8cfb228657c7752fd41249769af1fb0c3bd9c75bf86"
+    },
+    {
+      "path": "experiments/runs/R0018/figures/rq1_turnaround_count.png",
+      "bytes": 118480,
+      "sha256": "b2f13b6182ec974ab56f5a75e8d44ae0fb914bf1428baaefa4d5d058321585fe"
+    },
+    {
+      "path": "experiments/runs/R0018/figures/rq1_turnaround_mean_delta.png",
+      "bytes": 107816,
+      "sha256": "030c926f3c559fab57cbbfb1239964aa6a9c9215fe5208f86d3600e3768ee0b6"
+    },
+    {
+      "path": "experiments/runs/R0018/notebooks/06_共同支持与模型比较.html",
+      "bytes": 3035655,
+      "sha256": "edb72713460f0a7929d30b6bf99f2c473de4805bc66a0b106e3fd67aba8f4edf"
+    },
+    {
+      "path": "experiments/runs/R0018/notebooks/06_共同支持与模型比较.ipynb",
+      "bytes": 3754587,
+      "sha256": "621c5b24f521aa4d565c67d4f91bafc8ebf9d9a94f99c44eb6118407a8d8849c"
+    },
+    {
+      "path": "experiments/runs/R0018/resources.csv",
+      "bytes": 1803,
+      "sha256": "cfa5936284d38ba105f3b775107c7062882f0cef06abcfe3a799b69c821f88b4"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_complete_summary.json",
+      "bytes": 6102,
+      "sha256": "b83e42d6d78a93310dba4f1fd7add4d056880d0c43ff35c2fe25c62bd7775dd8"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/frozen_reference.json",
+      "bytes": 28586,
+      "sha256": "559ddb58275e5def26bd62cda09536c5b16700f9771c366fc85a6eafb1690547"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-04/frozen_reference.json",
+      "bytes": 28586,
+      "sha256": "559ddb58275e5def26bd62cda09536c5b16700f9771c366fc85a6eafb1690547"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-04/paired_bootstrap.npz",
+      "bytes": 153752,
+      "sha256": "df22f783f5129a93079f1ef42805753b4a65c0b57a2bc8d6f9bda2197f713b9c"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-04/rq1_airports.csv",
+      "bytes": 161208,
+      "sha256": "90e509932bd33f674051912369652205f282a16ab46470a40888d2c8ff736bfa"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-04/rq1_cells.csv",
+      "bytes": 1810865,
+      "sha256": "0d215e4f405f76cdc6246220c9e25ed0f7179668c99d9d33f3ffcc837c2e18ac"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-04/rq1_pairwise_differences.csv",
+      "bytes": 22752,
+      "sha256": "cad631d62e1398b38e886c9bf78a9dd867a64b8b84ea7e3b1f0133acc3df48a5"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-04/rq1_standardization_summary.json",
+      "bytes": 832,
+      "sha256": "5bc8f3b1df531141f580f22b695831628008336098d763ba79ffdca6b803f796"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-04/rq1_threshold_stability.csv",
+      "bytes": 191,
+      "sha256": "5872fde24a4a2d17a02b037b842a590c941b169a20dacef986063c0f7742fc6a"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-05/frozen_reference.json",
+      "bytes": 28586,
+      "sha256": "559ddb58275e5def26bd62cda09536c5b16700f9771c366fc85a6eafb1690547"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-05/paired_bootstrap.npz",
+      "bytes": 203504,
+      "sha256": "71f6dffc4b3433575499e36f269f93fa99c7706e99da41c938cb946da49008ec"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-05/rq1_airports.csv",
+      "bytes": 162908,
+      "sha256": "1031e8638c255ef3e9c4805460d4438c001dc1af08fcc0b538e90fc0f8e02f87"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-05/rq1_cells.csv",
+      "bytes": 1823970,
+      "sha256": "de6fc31249d9deb871e862fd99b7b611056c3f1d597e412144c2fa383d2c9fb1"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-05/rq1_pairwise_differences.csv",
+      "bytes": 24980,
+      "sha256": "2f6e9011d59cc48f72936299227ed7317c26cd1c1311ec807cfc609db306839a"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-05/rq1_standardization_summary.json",
+      "bytes": 832,
+      "sha256": "82627eb658508d9b22092990e9cd258321b974779bb6a2b78ab1d8ca14683b26"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-05/rq1_threshold_stability.csv",
+      "bytes": 163,
+      "sha256": "e593d4649871d30636816cf7f11989fe79486958b6244f1238a9e3b01ef492fa"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-06/frozen_reference.json",
+      "bytes": 28586,
+      "sha256": "559ddb58275e5def26bd62cda09536c5b16700f9771c366fc85a6eafb1690547"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-06/paired_bootstrap.npz",
+      "bytes": 304407,
+      "sha256": "35bef8f919c6c3aa3fc7c73eb9bba8b1abd397041e49045a9cd335835f2263b4"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-06/rq1_airports.csv",
+      "bytes": 166558,
+      "sha256": "132885d7ce462d0634f31737eec805cac108ef5fb396cd01d31c61b633b03390"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-06/rq1_cells.csv",
+      "bytes": 1867359,
+      "sha256": "2ca469a4a1a2d940c027fba973f8694f84d1981b45f786abddf5e2399218afd3"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-06/rq1_pairwise_differences.csv",
+      "bytes": 31527,
+      "sha256": "de9a11cdba4f76e603a3a6731108823cf767e538135a287da170a07bde85eabf"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-06/rq1_standardization_summary.json",
+      "bytes": 832,
+      "sha256": "ccb31da2a597907e634a3b59de5ee5593aba3d8b103dc04592d892a42a486843"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-06/rq1_threshold_stability.csv",
+      "bytes": 226,
+      "sha256": "31e07fcb70d0e2cdb96e151452c1ca123daca5a089470d3f8223814c267ccf1e"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-07/frozen_reference.json",
+      "bytes": 28586,
+      "sha256": "559ddb58275e5def26bd62cda09536c5b16700f9771c366fc85a6eafb1690547"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-07/paired_bootstrap.npz",
+      "bytes": 376787,
+      "sha256": "51ff6c260e0e02b1b12badea96b2c8896b4d7156266042858657b86abc318c9f"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-07/rq1_airports.csv",
+      "bytes": 169886,
+      "sha256": "3b84ccd0c5b704f9ebb457700f3ca8728df0cd6fef1d62570daf81873e983ecd"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-07/rq1_cells.csv",
+      "bytes": 1900922,
+      "sha256": "4874cc6fc501994c1cc44eb09d5a59f0955177b36b2db034a60923d6e538698b"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-07/rq1_pairwise_differences.csv",
+      "bytes": 38269,
+      "sha256": "db001c5dd2c0476ccd0dcecf2e40c311e67fd31044e71037e70a92a3667a25e2"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-07/rq1_standardization_summary.json",
+      "bytes": 832,
+      "sha256": "0ab8ad49ccd54b7f10eb0895a7f66175162cff9b534c90dbcf46b8cc97681403"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/monthly/2026-07/rq1_threshold_stability.csv",
+      "bytes": 192,
+      "sha256": "5c8d911a37cf9ba35b028ddb983280708f2587b339701d125572b9cc3754aad5"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/network_edges.csv",
+      "bytes": 110495,
+      "sha256": "5049716b817ec06c2b34157566fb69079509484a902b14608b7a179e205c0747"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/network_nodes.csv",
+      "bytes": 17379,
+      "sha256": "234a2afc6922526af0c23bac42f02e9abcda58cb0bd8e5ac0e24ebd25e009b3a"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/paired_bootstrap.npz",
+      "bytes": 604524,
+      "sha256": "7e9a065ce1920e31c1cd7d738167c9d4f7b4338ed585694e9943e3945f66012e"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/rq1_airports.csv",
+      "bytes": 187339,
+      "sha256": "8e7a007b5974e4ddd2544a077dd9603f3b4f496599a0e490f81337bf1af78225"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/rq1_airports_monthly.csv",
+      "bytes": 679100,
+      "sha256": "1694ded9ef6bccb6780c6399d559ca375493cc6890fb8a04e1b7b742328ce2d2"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/rq1_cells.csv",
+      "bytes": 2087195,
+      "sha256": "57853fc937e399d15dfe3ef7eb24edf778b897157bd47300d86481ec644c0354"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/rq1_pairwise_differences.csv",
+      "bytes": 71873,
+      "sha256": "bba7c3537872175f014e00d7f9aa8937eb506922d3a090bc31912f73f2496a64"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/rq1_standardization_summary.json",
+      "bytes": 834,
+      "sha256": "f5b5959a209f4d146c271a83e5a4c65090e81af4c796b11a27e1bf2035bfcfdf"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/rq1_threshold_stability.csv",
+      "bytes": 195,
+      "sha256": "2663bbaaca6aa6f76b7e62cb9eadfc3fe52f2d8818608b438c1876f361784fa5"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/selection_attempts.csv",
+      "bytes": 15232,
+      "sha256": "f798fe17e130959a32d27e3d161293f28c4b1cdf0d7cef645fd6b399bdd799cf"
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_summary.json",
+      "bytes": 877,
+      "sha256": "feb9713f13946928e75c01dc88e43acddcc87fe92f6674fc42d27adceb9109d6"
+    },
+    {
+      "path": "experiments/runs/R0018/run.log",
+      "bytes": 520,
+      "sha256": "fe985d97f59e32722751bc9d1bfe65f6bd687c4ead21cb1c470d0dd0a4c6988d"
+    },
+    {
+      "path": "experiments/runs/R0018/tables/airline_aircraft_coverage.csv",
+      "bytes": 6078,
+      "sha256": "e3a45ff472ace5c289f90cd1fc7b6dd734727db5dbc8876136e387923aeeab4f"
+    },
+    {
+      "path": "experiments/runs/R0018/tables/airline_aircraft_models.csv",
+      "bytes": 156539,
+      "sha256": "1e0145eb33355c66aaf2b94fc4d1135a6a91712ddb068cca563bbb58021dfd66"
+    },
+    {
+      "path": "experiments/runs/R0018/tables/airport_activity.csv",
+      "bytes": 22825,
+      "sha256": "74bd8a5ce9dbde6ed0a3d4ff38afbd289088d637b96854ff7b46ca4c7b749461"
+    },
+    {
+      "path": "experiments/runs/R0018/tables/eda_complete_summary.json",
+      "bytes": 1468,
+      "sha256": "fb6885715e35289009a95b4b8687b2663d9dd890af75094dbfe8f251a8a8bc90"
+    },
+    {
+      "path": "experiments/runs/R0018/tables/rq1_airport_monthly.csv",
+      "bytes": 229221,
+      "sha256": "84ab420761c9d7f5f22f578261c76a7fefe7a21c3965ec212eb59a3750bcabee"
+    },
+    {
+      "path": "experiments/runs/R0018/tables/rq1_airport_raw.csv",
+      "bytes": 62019,
+      "sha256": "c434068c23ac070c17599c4997ae32ccf487ee4dbe08f2c2903862deaf2855da"
+    },
+    {
+      "path": "experiments/runs/R0018/tables/rq1_turnaround_heatmap.csv",
+      "bytes": 2206,
+      "sha256": "e3c0732e83750acba007b27b5cca77e22fdb817d77536313ff1560cf0fef81e1"
+    },
+    {
+      "path": "experiments/runs/R0018/tables/rq2_weather_missing_coverage.csv",
+      "bytes": 294,
+      "sha256": "66b69db386ee48af4a23cf02c96b598e95b1bf8a57b458f1de8e733ba825dfa1"
+    },
+    {
+      "path": "experiments/runs/R0018/tables/single_flight_delay_stats.csv",
+      "bytes": 324495,
+      "sha256": "92ef4c0ceffeb0d61eabfd7d9d18070bf212576f5f382550fd0b45f254c4c03a"
+    },
+    {
+      "path": "experiments/runs/R0018/tables/single_flight_operations.csv",
+      "bytes": 29437,
+      "sha256": "c921effbf97807a188b21da97bda850cd93a240f1c37a63617c4137a1fb0b76e"
+    }
+  ]
+}

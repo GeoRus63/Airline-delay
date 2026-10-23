@@ -1,0 +1,2 @@
+analysis_population,metar_missing,taf_missing,connections,target_n,target_missing,target_mean_minutes,target_q50_minutes,target_q90_minutes,target_q99_minutes,target_max_minutes
+"RQ2 prediction connections, not individual flights",,,2261775,2261775,0,15.440297996042931,0.0,44.0,187.0,3392.0

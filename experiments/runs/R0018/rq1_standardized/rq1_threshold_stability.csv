@@ -1,0 +1,4 @@
+threshold,common_airports,frozen_airports,common_airport_share,direction_agreement,spearman
+gt0,25,25,1.0,0.76,0.9738461538461539
+ge5,25,25,1.0,0.96,0.9807692307692308
+ge15,25,25,1.0,1.0,1.0

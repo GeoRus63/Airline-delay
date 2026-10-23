@@ -1,0 +1,27 @@
+{
+  "stage": "P5-RQ1-EDA",
+  "mode": "development",
+  "analysis_only": true,
+  "data_id": "D0003",
+  "connection_path": "processed/D0003/flight_connections.csv.gz",
+  "connections_path": "processed/D0003/flight_connections.csv.gz",
+  "data_manifest_path": "processed/D0003/data_manifest.json",
+  "flight_path": "processed/flights_clean.csv.gz",
+  "flights_path": "processed/flights_clean.csv.gz",
+  "parent_run_id": "R0017",
+  "change": "Complete registered common-support RQ1 with monthly fixed-reference network and single-flight EDA; no model fitting",
+  "threads": 8,
+  "feature_group": "G4B",
+  "feature_archive_path": "experiments/runs/R0017/data/features.pkl",
+  "rq1_protocol_path": "configs/rq1_protocol.json",
+  "model_run_ids": [
+    "R0006",
+    "R0007",
+    "R0009",
+    "R0010",
+    "R0012",
+    "R0015",
+    "R0017"
+  ],
+  "test_target_sealed": true
+}
