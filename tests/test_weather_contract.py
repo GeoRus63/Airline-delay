@@ -23,7 +23,7 @@ from scripts.prepare_weather import (
 
 
 class WeatherContractTests(unittest.TestCase):
-    def _prepare_missing_text_fixture(self):
+    def _prepare_missing_text_fixture(self, missing_segment_time=None):
         ids = ["202604010800-KAAA-FTUS00-TAFAAA", "202604010900-KAAA-FTUS00-TAFAAA-AAA",
                "202604011000-KAAA-FTUS00-TAFAAA"]
         times = ["2026-04-01 08:00", "2026-04-01 09:00", "2026-04-01 10:00"]
@@ -37,6 +37,8 @@ class WeatherContractTests(unittest.TestCase):
             "issue_time": [times[0], times[2]], "valid_from": [times[0], times[2]],
             "valid_to": ["2026-04-01 18:00"] * 2, "status": ["normal"] * 2,
             "raw_header": ["TAF KAAA 010800Z 0108/0118", "TAF KAAA 011000Z 0110/0118"]})
+        if missing_segment_time is not None:
+            raw.loc[1, 'valid'] = missing_segment_time
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             (root / "references").mkdir()
@@ -66,6 +68,18 @@ class WeatherContractTests(unittest.TestCase):
         restored = select_taf_asof(segments, bulletins, 1, "2026-04-01T10:30Z", "2026-04-01T11:00Z")
         self.assertEqual(restored["status"], "matched")
         self.assertEqual(restored["segments"].wind_knots.tolist(), [20])
+
+    def test_missing_text_block_cannot_precede_archived_product_id(self):
+        for segment_time, anchor in [('2026-04-01 08:10', '2026-04-01T09:00Z'),
+                                     ('2026-04-01 09:10', '2026-04-01T09:10Z')]:
+            segments, bulletins = self._prepare_missing_text_fixture(segment_time)
+            unknown = bulletins.loc[bulletins.status.eq('unverified')].iloc[0]
+            self.assertEqual(unknown.archive_issue_time, pd.Timestamp(anchor))
+            self.assertTrue(pd.isna(unknown.body_issue_time))
+            before = select_taf_asof(segments, bulletins, 1, '2026-04-01T08:30Z', '2026-04-01T11:00Z')
+            self.assertEqual(before['status'], 'matched')
+            after = select_taf_asof(segments, bulletins, 1, '2026-04-01T09:30Z', '2026-04-01T11:00Z')
+            self.assertEqual(after['status'], 'unverified_issue_time')
 
     def test_taf_query_time_uses_later_schedule_or_prediction(self):
         flights = pd.DataFrame({

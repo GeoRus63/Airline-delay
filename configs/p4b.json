@@ -25,7 +25,7 @@
   "prediction_rule": "clip all predictions at zero",
   "split_rule": "UTC half-open prediction windows; training label_time strictly before cutoff",
   "sample_interpretation": "Retrospective prediction conditional on valid observed same-tail scheduled-adjacent completed connections",
-  "weather_manifest_path": "processed/W0001/data_manifest.json",
+  "weather_manifest_path": "processed/W0002/data_manifest.json",
   "noaa_backfill": false,
   "features": [
     "airport_id",

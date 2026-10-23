@@ -8,11 +8,11 @@
   "data_manifest_path": "processed/D0003/data_manifest.json",
   "flight_path": "processed/flights_clean.csv.gz",
   "flights_path": "processed/flights_clean.csv.gz",
-  "parent_run_id": "R0017",
+  "parent_run_id": "R0018",
   "change": "Complete registered common-support RQ1 with monthly fixed-reference network and single-flight EDA; no model fitting",
   "threads": 8,
   "feature_group": "G4B",
-  "feature_archive_path": "experiments/runs/R0016/data/features.pkl",
+  "feature_archive_path": "experiments/runs/R0017/data/features.pkl",
   "rq1_protocol_path": "configs/rq1_protocol.json",
   "model_run_ids": [
     "R0006",
@@ -21,8 +21,8 @@
     "R0010",
     "R0012",
     "R0015",
-    "R0016",
-    "R0017"
+    "R0017",
+    "R0018"
   ],
   "test_target_sealed": true
 }

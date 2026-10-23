@@ -5,7 +5,7 @@
   "connection_path": "processed/D0003/flight_connections.csv.gz",
   "data_manifest_path": "processed/D0003/data_manifest.json",
   "preparation_evidence_dir": "processed/D0003",
-  "parent_run_id": "R0016",
+  "parent_run_id": "R0017",
   "compare_parent": true,
   "change": "Fill only approved missing IEM G4a values from GHCNh in a separate retrospective sensitivity branch",
   "feature_group": "G4B",
@@ -25,7 +25,7 @@
   "prediction_rule": "clip all predictions at zero",
   "split_rule": "UTC half-open prediction windows; training label_time strictly before cutoff",
   "sample_interpretation": "Retrospective prediction conditional on valid observed same-tail scheduled-adjacent completed connections",
-  "weather_manifest_path": "processed/W0001/data_manifest.json",
+  "weather_manifest_path": "processed/W0002/data_manifest.json",
   "noaa_backfill": true,
   "features": [
     "airport_id",

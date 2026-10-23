@@ -317,9 +317,15 @@ def prepare_taf():
     missing = missing.loc[missing._merge.eq("left_only"), keys + ["valid"]].copy()
     if not missing.empty:
         missing["issue_time"] = _utc_ns(missing.pop("valid"))
-        # First archived evidence is the conservative blocking boundary; this
-        # is never used as a substitute for the missing body issue timestamp.
+        # A segment can carry a stale/misattributed issue timestamp. It cannot
+        # reveal a product before the timestamp encoded by that archived ID.
         missing = missing.groupby(keys, as_index=False, dropna=False).issue_time.min()
+        product_issue = pd.to_datetime(
+            missing.product_id.astype('string').str.extract(r'^(\d{12})-', expand=False),
+            format='%Y%m%d%H%M', utc=True, errors='coerce')
+        missing['source_segment_issue_time'] = missing.issue_time
+        missing['issue_time'] = pd.concat([missing.issue_time, product_issue], axis=1).max(axis=1)
+        # This blocking anchor is never a replacement for missing body time.
         missing["valid_from"] = pd.NaT
         missing["valid_to"] = pd.NaT
         missing["raw_header"] = ""
