@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-10-23T18:29:10.882080+00:00",
+  "created_utc": "2026-10-23T18:45:14.869795+00:00",
   "algorithm": "SHA-256",
   "scope": "Delivered repository snapshot excluding .git, this manifest, and its generated verification result.",
   "files": [
@@ -10,33 +10,33 @@
     },
     {
       "file": ".gitignore",
-      "bytes": 91,
-      "sha256": "babf101f87db16575168b276fa81673f29bbc1c9fad53c09ab33a80fbc3fd94d"
+      "bytes": 148,
+      "sha256": "b846e9a62b619f45726fa224b30e941c4ebd0e01e100742c0587f31012546944"
     },
     {
       "file": "AGENTS.md",
-      "bytes": 1037,
-      "sha256": "a517b6130d55de95cdd5a591ac4dda9839cb6668f2b5139ed4b30e51b9cd6764"
+      "bytes": 1590,
+      "sha256": "afda5a730c48cbab2e928cb08913888e2594b063fa32decc76a50acaaf297a5e"
     },
     {
       "file": "README.md",
-      "bytes": 3576,
-      "sha256": "f9f144a637c1269853268e994d4ec637d0f5cf3860d025e43f4433eaeee63039"
+      "bytes": 3880,
+      "sha256": "b214d270a1ef16c345dbf26135c2a5986af03936f84dc3cdffe07f62c15bd6ce"
     },
     {
       "file": "docs/Codex完整执行流程.md",
-      "bytes": 12762,
-      "sha256": "bc196ed430ece444cfa3a432db2e991c9579dea283802cd2418bd0743033de50"
+      "bytes": 14366,
+      "sha256": "9f01af1869927a25cb561e29b8ee6dc212717887b8238cd0185c1096c3191240"
     },
     {
       "file": "docs/完整项目计划.md",
-      "bytes": 24371,
-      "sha256": "bbc01c8a0a356f36936d6bcc9a3e2552fc2d5145cf74c1ba039e760ade0f1b85"
+      "bytes": 23464,
+      "sha256": "95875310591b3d87aaa636f2f94ae8504f1fea5ed2fad81af76db0197f92df8d"
     },
     {
       "file": "docs/数据与字段说明.md",
-      "bytes": 4818,
-      "sha256": "392fc9e0526e30b2579c98a7f22e7ec6a17ef9e59c170146e52254e420f8de51"
+      "bytes": 4849,
+      "sha256": "17cda0cc7c68b349c6faa0c6d2ab8c1675c5e074876776c7f71b4e618c6465f8"
     },
     {
       "file": "docs/机型说明.md",
@@ -45,8 +45,13 @@
     },
     {
       "file": "docs/迁移与运行.md",
-      "bytes": 3832,
-      "sha256": "f082927474f7a556dcddf02675bf37c108a3243dc437555832dfff811c471e99"
+      "bytes": 4173,
+      "sha256": "9f8c49bfecbd15c21e14e7cf4e05208663e048b1d61614f198861008e121df85"
+    },
+    {
+      "file": "experiments/index.csv",
+      "bytes": 63,
+      "sha256": "c0a8f114c263017b882aebd8cf4aa5612ab82ec4512a4b37c92c62e0c6856755"
     },
     {
       "file": "notebooks/00_数据清单.ipynb",
@@ -60,8 +65,8 @@
     },
     {
       "file": "processed/README.md",
-      "bytes": 337,
-      "sha256": "d05f131cad511b3da28fc0152c92fe95b8e70c95d2a52ffdc3d6b8c0ac780313"
+      "bytes": 517,
+      "sha256": "217053e36a65ba8ada44fe2af9fbd2d6f0261c1e1ba9d30a5a3c155c395d197e"
     },
     {
       "file": "raw/aircraft/bts_b43_all_years.zip",
@@ -827,6 +832,11 @@
       "file": "requirements.txt",
       "bytes": 184,
       "sha256": "1958efbcf09e66e01ad2fac1d0fc2af00f9e5c5c5e37d76f152ede29d4f74f06"
+    },
+    {
+      "file": "research/研究记录.md",
+      "bytes": 4668,
+      "sha256": "fa647d3856bd1c244609c5c07635372cf3b1fd8d8247746378fd4d96ab0c4fed"
     },
     {
       "file": "scripts/download_data.py",
