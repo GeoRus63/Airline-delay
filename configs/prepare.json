@@ -1,0 +1,13 @@
+{
+  "stage": "P0-data",
+  "mode": "prepare",
+  "data_id": "D0001",
+  "parent_run_id": "R0001",
+  "change": "First full five-month preparation from verified delivery snapshot",
+  "threads": 16,
+  "seed": 42,
+  "max_scheduled_turn_minutes": 1440,
+  "clock_tolerance_minutes": 1,
+  "expected_raw_rows": 3057590,
+  "test_target_sealed": true
+}

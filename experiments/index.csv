@@ -1,1 +1,2 @@
 run_id,parent_run_id,stage,status,change,decision,artifact_dir
+R0001,,P0-preflight,failed,Initial delivered synthetic preparation checks,Correct test assertion; preserve failure,experiments/runs/R0001

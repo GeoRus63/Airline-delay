@@ -1,0 +1,7 @@
+{
+  "stage": "P0-preflight",
+  "mode": "boundary_check",
+  "parent_run_id": "",
+  "change": "Initial delivered synthetic preparation checks",
+  "data_id": null
+}

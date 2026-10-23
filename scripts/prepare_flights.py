@@ -196,7 +196,7 @@ def self_check():
         sample.loc[1, "actual_dep_utc"] = sample.loc[1, "scheduled_dep_utc"]
         assert bool(build_connections(sample)[0].iloc[0].main_analysis_eligible) is accepted
     frame.loc[1, "OriginAirportID"] = 99
-    assert not build_connections(frame)[0].main_analysis_eligible.any()
+    assert build_connections(frame)[0].main_analysis_eligible.tolist() == [False, True]
     early_upstream = frame.copy()
     early_upstream.loc[1, "OriginAirportID"] = 1
     early_upstream.loc[0, ["ArrDelay", "ArrDelayMinutes"]] = [-30, 0]

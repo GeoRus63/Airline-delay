@@ -1,0 +1,4 @@
+Original command: .venv/Scripts/python.exe scripts/prepare_flights.py --check
+AssertionError at scripts/prepare_flights.py:199:
+assert not build_connections(frame)[0].main_analysis_eligible.any()
+Only OriginAirportID of row b was changed; a->b is invalid but b->c remains valid. Independent in-memory correction passed every existing assertion. No full preparation or model was run.

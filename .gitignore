@@ -7,3 +7,5 @@ processed/*
 models/
 experiments/runs/*/predictions/
 experiments/runs/*/data/
+experiments/runs/*/models/
+research/reviews/*_page.png
