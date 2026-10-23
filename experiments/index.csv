@@ -12,3 +12,4 @@ R0010,R0009,P2-variant,completed,Replace family with variant; preserve all other
 R0011,R0009,P3,failed,Add historical airport departures and upcoming planned airport load to family mainline,Retain failure; fix under a new run_id,experiments/runs/R0011
 R0012,R0009,P3,completed,Add historical airport departures and upcoming planned airport load to family mainline,Retain outputs; review before next stage,experiments/runs/R0012
 R0013,R0012,P4-weather-preparation,failed,"Prepare immutable METAR, TAF bulletin states and GHCNh quality-controlled tables from local archives",Retain failure; fix under a new run_id,experiments/runs/R0013
+R0014,R0012,P4-weather-preparation,completed,"Prepare immutable METAR, TAF bulletin states and GHCNh quality-controlled tables from local archives",Retain outputs; review before next stage,experiments/runs/R0014

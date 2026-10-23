@@ -1,0 +1,21 @@
+2026-10-23T22:59:54.356338+00:00 R0014 started at commit 3b90194a34ce054bbbb75326491a1b723c276e4b
+{
+  "metar_rows": 1616268,
+  "metar_airports": 355,
+  "taf_segment_rows": 1368657,
+  "taf_airports": 343,
+  "taf_validity_matched_rows": 1367901,
+  "taf_usable_interval_rows": 1366972,
+  "taf_bulletins": 317814,
+  "metar_assumed_lag_minutes": 5,
+  "metar_max_observation_age_minutes": 120,
+  "taf_body_issue_time_used_as_availability_proxy": true,
+  "taf_receive_time_verified": false,
+  "noaa_rows": 1373420,
+  "noaa_stations": 25,
+  "noaa_quality_policy": "strict exact source/QC whitelist; original element codes retained; sensitivity only",
+  "noaa_postintegration_qc_serialization_verified": false,
+  "noaa_qc_limitation": "GHCNh publishes one Quality_Code string per element and documents post-integration QC plus component-source QC, but does not specify precedence/serialization when both apply. Only exact documented source/QC pairs are accepted; this is not full-QC certification.",
+  "noaa_historical_availability_verified": false
+}
+2026-10-23T23:06:15.321991+00:00 status=completed; seconds=381.0
