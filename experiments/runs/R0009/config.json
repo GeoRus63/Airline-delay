@@ -1,0 +1,28 @@
+{
+  "stage": "P2-family",
+  "mode": "development",
+  "data_id": "D0003",
+  "connection_path": "processed/D0003/flight_connections.csv.gz",
+  "data_manifest_path": "processed/D0003/data_manifest.json",
+  "preparation_evidence_dir": "processed/D0003",
+  "parent_run_id": "R0007",
+  "compare_parent": true,
+  "change": "Add 2024 B43 aircraft family to the fixed G1 linear model",
+  "feature_group": "G2",
+  "model_name": "g2_family_linear",
+  "model_type": "linear",
+  "include_baselines": true,
+  "threads": 8,
+  "fold_workers": 3,
+  "seed": 42,
+  "linear_tolerance": 1e-06,
+  "preprocessing": {
+    "min_frequency": 20,
+    "drop": "first"
+  },
+  "test_target_sealed": true,
+  "primary_metric": "sample-weighted pooled validation MAE in minutes",
+  "prediction_rule": "clip all predictions at zero",
+  "split_rule": "UTC half-open prediction windows; training label_time strictly before cutoff",
+  "sample_interpretation": "Retrospective prediction conditional on valid observed same-tail scheduled-adjacent completed connections"
+}

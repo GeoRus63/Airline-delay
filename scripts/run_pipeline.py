@@ -145,6 +145,9 @@ def execute(config, run_dir):
             shutil.copy2(ROOT / 'references' / name, run_dir / name)
         return {'inventory_main': 2024, 'coverage_comparison': 2025,
                 'model_granularity': 'family main; variant replacement branch; no seats or age'}
+    if config['mode'] == 'prepare_weather':
+        from prepare_weather_dataset import run
+        return run(config, run_dir)
     if config['mode'] == 'audit_preparation':
         from audit_preparation import run
         return run(run_dir)
@@ -175,6 +178,9 @@ def main():
     elif config['mode'] == 'prepare_aircraft':
         source_names += ['scripts/prepare_aircraft.py', 'references/aircraft_reference_2024.csv',
                          'references/aircraft_reference_2025.csv', 'references/aircraft_type_aliases.csv']
+    elif config['mode'] == 'prepare_weather':
+        source_names += ['scripts/prepare_weather.py', 'scripts/prepare_weather_dataset.py',
+                         'scripts/download_taf_text.py', 'references/airports.csv']
     elif config['mode'] == 'rebuild_cohorts':
         source_names.append('scripts/rebuild_cohorts.py')
     elif config['mode'] == 'development':

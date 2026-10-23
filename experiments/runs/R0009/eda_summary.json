@@ -1,0 +1,58 @@
+{
+  "scope": "2026-04-01 <= prediction_time < 2026-08-01 UTC",
+  "population": "eligible RQ2 connections",
+  "n": 2261775,
+  "airport_n": 355,
+  "route_n": 6591,
+  "overnight_n": 437491,
+  "main_target": "nonnegative downstream departure delay",
+  "feature_audit": {
+    "development_only": true,
+    "counts": {
+      "input_connections": 2821852,
+      "outside_prediction_utc_scope": 560077,
+      "scoped_connections": 2261775,
+      "missing_or_nonfinite_target": 0,
+      "negative_target": 0,
+      "missing_label_time": 0,
+      "prediction_not_before_departure": 0,
+      "missing_or_invalid_upstream_delay": 0,
+      "eligible_connections": 2261775
+    },
+    "categorical_features": [
+      "airport_id",
+      "route",
+      "downstream_airline",
+      "aircraft_family"
+    ],
+    "numeric_features": [
+      "downstream_distance",
+      "downstream_crs_elapsed_time",
+      "downstream_day_of_week",
+      "downstream_sched_hour",
+      "scheduled_turnaround_minutes",
+      "upstream_arr_delay_minutes",
+      "tail_completed_24h_n",
+      "tail_completed_24h_arr_delay_mean",
+      "history_window_incomplete"
+    ],
+    "outcome_rule": "finite target >= 0 and prediction_time < label_time",
+    "feature_group": "G2",
+    "features": [
+      "airport_id",
+      "route",
+      "downstream_airline",
+      "aircraft_family",
+      "downstream_distance",
+      "downstream_crs_elapsed_time",
+      "downstream_day_of_week",
+      "downstream_sched_hour",
+      "scheduled_turnaround_minutes",
+      "upstream_arr_delay_minutes",
+      "tail_completed_24h_n",
+      "tail_completed_24h_arr_delay_mean",
+      "history_window_incomplete"
+    ]
+  },
+  "heatmap_note": "Delta is downstream departure delay minus upstream arrival delay; no causal interpretation."
+}
