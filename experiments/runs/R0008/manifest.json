@@ -1,0 +1,209 @@
+{
+  "run_id": "R0008",
+  "status": "completed",
+  "started_at_utc": "2026-10-23T22:27:41.643874+00:00",
+  "git_commit": "c5808fd47b77d89c9e5d7263a88b4a99178f9a76",
+  "command": "D:\\airline-delay\\.venv\\Scripts\\python.exe scripts/run_pipeline.py --config configs/prepare_aircraft.json --run-id R0008",
+  "python": "3.13.15 | packaged by conda-forge | (main, Sep  2 2026, 21:52:43) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "logical_cpus": 32,
+  "environment": {
+    "anyio": "4.15.1",
+    "argon2-cffi": "25.1.0",
+    "argon2-cffi-bindings": "26.1.0",
+    "arrow": "1.4.0",
+    "asttokens": "3.0.2",
+    "async-lru": "2.4.0",
+    "attrs": "26.1.0",
+    "babel": "2.18.0",
+    "beautifulsoup4": "4.15.0",
+    "bleach": "6.4.0",
+    "certifi": "2026.10.23",
+    "cffi": "2.1.1",
+    "charset-normalizer": "3.5.2",
+    "cloudpickle": "3.1.2",
+    "colorama": "0.4.6",
+    "comm": "0.2.3",
+    "contourpy": "1.4.0",
+    "cycler": "0.12.1",
+    "debugpy": "1.8.22",
+    "defusedxml": "0.7.1",
+    "executing": "2.3.0",
+    "fastjsonschema": "2.22.2",
+    "fonttools": "4.67.0",
+    "fqdn": "1.6.0",
+    "h11": "0.16.0",
+    "httpcore": "1.0.9",
+    "httpx": "0.28.1",
+    "idna": "3.20",
+    "ipykernel": "7.3.0",
+    "ipython": "9.17.1",
+    "ipython_pygments_lexers": "1.1.1",
+    "isoduration": "20.11.0",
+    "jedi": "0.20.1",
+    "Jinja2": "3.1.6",
+    "joblib": "1.6.0",
+    "json5": "0.17.3",
+    "jsonpointer": "3.4",
+    "jsonschema": "4.26.0",
+    "jsonschema-specifications": "2025.9.1",
+    "jupyterlab": "4.5.7",
+    "jupyterlab_pygments": "0.3.0",
+    "jupyterlab_server": "2.28.1",
+    "jupyter_client": "8.10.0",
+    "jupyter_core": "5.9.1",
+    "jupyter-events": "0.12.1",
+    "jupyter-lsp": "2.3.1",
+    "jupyter_server": "2.21.1",
+    "jupyter_server_terminals": "0.5.4",
+    "kiwisolver": "1.5.1",
+    "lark": "1.3.1",
+    "MarkupSafe": "3.0.4",
+    "matplotlib": "3.10.9",
+    "matplotlib-inline": "0.2.2",
+    "mistune": "3.4.0",
+    "nbclient": "0.11.0",
+    "nbconvert": "7.17.1",
+    "nbformat": "5.11.0",
+    "nest-asyncio2": "1.7.4",
+    "notebook_shim": "0.2.4",
+    "numpy": "2.4.6",
+    "packaging": "26.3",
+    "pandas": "3.0.3",
+    "pandocfilters": "1.5.1",
+    "parso": "0.8.7",
+    "pillow": "13.0.0",
+    "pip": "26.2.1",
+    "platformdirs": "4.13.5",
+    "prometheus_client": "0.26.0",
+    "prompt_toolkit": "3.0.53",
+    "psutil": "7.2.2",
+    "pure_eval": "0.2.4",
+    "pycparser": "3.12",
+    "Pygments": "2.21.0",
+    "pyparsing": "3.3.3",
+    "python-dateutil": "3.0.0",
+    "python-json-logger": "4.2.0",
+    "pywinpty": "3.1.0",
+    "PyYAML": "6.0.3",
+    "pyzmq": "27.2.0",
+    "referencing": "0.37.0",
+    "requests": "2.34.2",
+    "rfc3339-validator": "0.1.4",
+    "rfc3986-validator": "0.1.1",
+    "rfc3987-syntax": "1.1.0",
+    "rpds-py": "2026.9.1",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.18.1",
+    "seaborn": "0.13.2",
+    "Send2Trash": "2.1.0",
+    "setuptools": "84.2.1",
+    "six": "1.17.0",
+    "soupsieve": "3.0.4",
+    "stack-data": "0.6.3",
+    "terminado": "0.18.1",
+    "threadpoolctl": "3.7.0",
+    "tinycss2": "1.5.1",
+    "tornado": "6.6",
+    "traitlets": "5.16.1",
+    "typing_extensions": "4.16.0",
+    "tzdata": "2026.3",
+    "uri-template": "1.3.0",
+    "urllib3": "2.8.0",
+    "wcwidth": "0.9.3",
+    "webcolors": "25.10.0",
+    "webencodings": "0.6.1",
+    "websocket-client": "1.9.2"
+  },
+  "source_files": [
+    {
+      "path": "scripts/run_pipeline.py",
+      "bytes": 12636,
+      "sha256": "015d16fae845c2879c6f24b0f27d4946a229a00337543d5e900e1a2c2ce26cb6"
+    },
+    {
+      "path": "scripts/prepare_flights.py",
+      "bytes": 18644,
+      "sha256": "d150244a8ddf828550244d35a86d79ffaf739161f73d3495def1f18df3cdd1c8"
+    },
+    {
+      "path": "scripts/prepare_aircraft.py",
+      "bytes": 4035,
+      "sha256": "b1b9c3aeb1aa3d22e3ed347d80d1c620419b7272c7f4b0e4b541a2ed354e93d2"
+    },
+    {
+      "path": "references/aircraft_reference_2024.csv",
+      "bytes": 329571,
+      "sha256": "4a10aa59c62d40d663cde951ae944ab269b3d1d7d6818cc9d85ea045de9c397c"
+    },
+    {
+      "path": "references/aircraft_reference_2025.csv",
+      "bytes": 321237,
+      "sha256": "e90967dcf4f23139457577cd53e032583af10ca81ed02b7e5fc3876e94bcadab"
+    },
+    {
+      "path": "references/aircraft_type_aliases.csv",
+      "bytes": 14406,
+      "sha256": "6a5a63c6f4913de245c2f500bf055e9e9bad214206c3d2f8620675888ba21770"
+    },
+    {
+      "path": "configs/prepare_aircraft.json",
+      "bytes": 283,
+      "sha256": "205ebe193dc4ec24eec41f6fe772adae1a82a1c5160f58ccf46050fabdbfd597"
+    }
+  ],
+  "input_manifest": {
+    "path": "tables/file_manifest.json",
+    "bytes": 31686,
+    "sha256": "d499da4db902f139f2fd9a3cb02676eb34bab2e3c3aab3ab97b814df3be8e209"
+  },
+  "config": {
+    "stage": "P2-aircraft-preparation",
+    "mode": "prepare_aircraft",
+    "data_id": "D0003",
+    "parent_run_id": "R0007",
+    "change": "Audit five-month 2024 primary and 2025 comparison B43 coverage; preserve unknown types",
+    "threads": 8,
+    "seed": 42,
+    "test_target_sealed": true
+  },
+  "result": {
+    "inventory_main": 2024,
+    "coverage_comparison": 2025,
+    "model_granularity": "family main; variant replacement branch; no seats or age"
+  },
+  "ended_at_utc": "2026-10-23T22:27:53.820120+00:00",
+  "elapsed_seconds": 11.975473399994371,
+  "outputs": [
+    {
+      "path": "experiments/runs/R0008/aircraft_model_mapping.csv",
+      "bytes": 14362,
+      "sha256": "57486b5c797002cf708cfed1766feffc181d98efd77188444cfcb2d911282a83"
+    },
+    {
+      "path": "experiments/runs/R0008/aircraft_monthly_match_rates.csv",
+      "bytes": 689,
+      "sha256": "4e83a769387f0b8b6d0d3ef19cf9b3b31d48b5666b837bb3e09d684f416b9d2f"
+    },
+    {
+      "path": "experiments/runs/R0008/aircraft_unmatched_tails.csv",
+      "bytes": 123286,
+      "sha256": "49556f1078941b4de2bd5e6067b3f5000dc72766e86beda8b0e029f2b4060273"
+    },
+    {
+      "path": "experiments/runs/R0008/config.json",
+      "bytes": 291,
+      "sha256": "4d8e534e51b1621962205c6a1ac6ab8d30e8c447472ce045bbf461324b4fe130"
+    },
+    {
+      "path": "experiments/runs/R0008/resources.csv",
+      "bytes": 367,
+      "sha256": "caf7edde1927788b09988df22497762c4af70105d7e323e993630ee969ee653b"
+    },
+    {
+      "path": "experiments/runs/R0008/run.log",
+      "bytes": 213,
+      "sha256": "868967bebac3acaee2a9a88c140be8bc9ecd4785d232a60e91fa73b0bfb299a1"
+    }
+  ]
+}

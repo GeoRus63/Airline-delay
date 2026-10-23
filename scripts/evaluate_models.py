@@ -6,7 +6,7 @@ import pandas as pd
 
 GROUP_COLUMNS = {"severity": "severity", "overnight": "overnight_scheduled", "airport": "airport_id",
                  "airline": "downstream_airline", "day_of_week": "downstream_day_of_week",
-                 "scheduled_hour": "downstream_sched_hour"}
+                 "scheduled_hour": "downstream_sched_hour", "aircraft_family": "aircraft_family"}
 SUM_COLUMNS = ["n", "absolute_error_sum", "squared_error_sum", "target_ge15_n"]
 
 
@@ -25,6 +25,10 @@ def summarize_predictions(predictions: pd.DataFrame) -> pd.DataFrame:
     frame["severity"] = np.where(target < 60, "ordinary_lt60", "severe_ge60")
     results = []
     for group_name, column in {"all": None, **GROUP_COLUMNS}.items():
+        if column is not None and column not in frame.columns:
+            if column == "aircraft_family":
+                continue
+            raise ValueError(f"Missing required evaluation metadata: {column}")
         keys = ["model", "fold"] + ([column] if column else [])
         grouped = frame.groupby(keys, observed=True, dropna=False)[SUM_COLUMNS].sum().reset_index()
         grouped["group"] = group_name

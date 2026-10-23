@@ -218,7 +218,9 @@ def _run_fold(fold: str, train: pd.DataFrame, validation: pd.DataFrame, config: 
                             model = DummyRegressor(strategy="mean" if name == "training_mean" else "median")
                             model.fit(np.zeros((len(train), 1)), y)
                             predicted = model.predict(np.zeros((len(validation), 1)))
-                    result = validation[PREDICTION_METADATA].copy()
+                    metadata = PREDICTION_METADATA + [name for name in ["aircraft_family"]
+                                                      if name in validation.columns]
+                    result = validation[metadata].copy()
                     result.insert(0, "fold", fold)
                     result.insert(0, "model", name)
                     result["predicted_delay_raw"] = predicted
@@ -262,6 +264,8 @@ def run_development(frame: pd.DataFrame, config: dict, output_dir: str | Path) -
     prediction = pd.to_datetime(frame.prediction_time, utc=True, errors="raise")
     data = frame.loc[prediction.ge(DEVELOPMENT_START) & prediction.lt(DEVELOPMENT_END)].copy()
     required = set(features + PREDICTION_METADATA + ["upstream_arr_delay_minutes"])
+    if "aircraft_family" in data.columns:
+        required.add("aircraft_family")
     if required - set(data):
         raise ValueError(f"Missing modeling fields: {sorted(required - set(data))}")
     if data.empty or not data.connection_id.is_unique:
