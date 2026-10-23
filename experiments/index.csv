@@ -1,2 +1,3 @@
 run_id,parent_run_id,stage,status,change,decision,artifact_dir
 R0001,,P0-preflight,failed,Initial delivered synthetic preparation checks,Correct test assertion; preserve failure,experiments/runs/R0001
+R0002,R0001,P0-data,completed,First full five-month preparation from verified delivery snapshot,Retain outputs; review before next stage,experiments/runs/R0002

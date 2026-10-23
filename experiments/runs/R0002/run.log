@@ -1,0 +1,18 @@
+2026-10-23T21:45:05.131858+00:00 R0002 started at commit 04a61be37cb916eb66b348b739ab550bcdaef9cf
+Synthetic boundary checks passed.
+{
+  "raw_flight_rows": 3057590,
+  "duplicate_key_rows": 0,
+  "missing_tail_rows": 5171,
+  "cancelled_rows": 48919,
+  "diverted_rows": 11679,
+  "normal_operation_rows": 2996992,
+  "normal_time_valid_rows": 2996940,
+  "airport_count": 355,
+  "candidate_connections": 3046298,
+  "accepted_connections": 2823769,
+  "accepted_share_of_candidates": 0.9269510074194973,
+  "accepted_overnight_connections": 552518,
+  "accepted_cross_month_connections": 17534
+}
+2026-10-23T21:49:38.786461+00:00 status=completed; seconds=273.7

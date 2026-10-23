@@ -1,0 +1,48 @@
+{
+  "data_id": "D0001",
+  "config": {
+    "stage": "P0-data",
+    "mode": "prepare",
+    "data_id": "D0001",
+    "parent_run_id": "R0001",
+    "change": "First full five-month preparation from verified delivery snapshot",
+    "threads": 16,
+    "seed": 42,
+    "max_scheduled_turn_minutes": 1440,
+    "clock_tolerance_minutes": 1,
+    "expected_raw_rows": 3057590,
+    "test_target_sealed": true
+  },
+  "outputs": [
+    {
+      "path": "processed/flights_clean.csv.gz",
+      "bytes": 191461305,
+      "sha256": "a991822e9d14b483e490398a3230ea6103ba8ad6f344a8e0ab14cf6a7bc7d11c"
+    },
+    {
+      "path": "processed/connection_candidates.csv.gz",
+      "bytes": 215827394,
+      "sha256": "e07365d6e29d27da3951f91a02bc2abd94a8b83c9da654fc95463ad44ec0510e"
+    },
+    {
+      "path": "processed/flight_connections.csv.gz",
+      "bytes": 200285329,
+      "sha256": "d9c68029f368fa75979f6e97f1ca6a34cbf5d1045497976defadd813864a628f"
+    }
+  ],
+  "summary": {
+    "raw_flight_rows": 3057590,
+    "duplicate_key_rows": 0,
+    "missing_tail_rows": 5171,
+    "cancelled_rows": 48919,
+    "diverted_rows": 11679,
+    "normal_operation_rows": 2996992,
+    "normal_time_valid_rows": 2996940,
+    "airport_count": 355,
+    "candidate_connections": 3046298,
+    "accepted_connections": 2823769,
+    "accepted_share_of_candidates": 0.9269510074194973,
+    "accepted_overnight_connections": 552518,
+    "accepted_cross_month_connections": 17534
+  }
+}

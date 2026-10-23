@@ -1,0 +1,10 @@
+{
+  "stage": "P0-data-audit",
+  "mode": "audit_preparation",
+  "data_id": "D0001",
+  "parent_run_id": "R0002",
+  "change": "Structural audit and prefix comparison of global flight quality flags",
+  "threads": 16,
+  "seed": 42,
+  "test_target_sealed": true
+}

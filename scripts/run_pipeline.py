@@ -102,9 +102,21 @@ def execute(config, run_dir):
     if config['mode'] == 'development':
         from build_features import load_base_features
         from train_models import run_development
-        frame = load_base_features(development_only=True)
+        frame = load_base_features(ROOT / config.get('connection_path', 'processed/flight_connections.csv.gz'), development_only=True)
         write_json(run_dir / 'feature_audit.json', frame.attrs.get('feature_audit', {}))
-        return run_development(frame, config, run_dir)
+        result = run_development(frame, config, run_dir)
+        from analyze_eda import run as eda
+        from analyze_rq1 import run as rq1
+        from render_notebooks import render_notebooks
+        eda(frame, run_dir)
+        rq1(run_dir, development=True)
+        for name in ['cleaning_summary.json', 'connection_exclusions.csv']:
+            shutil.copy2(ROOT / 'tables' / name, run_dir / name)
+        render_notebooks(run_dir)
+        return result
+    if config['mode'] == 'audit_preparation':
+        from audit_preparation import run
+        return run(run_dir)
     raise ValueError(f"Unsupported mode: {config['mode']}")
 
 
@@ -123,8 +135,12 @@ def main():
     for name in ['OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS']:
         os.environ[name] = str(config.get('threads', 16))
     git_commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
-    source_names = ['scripts/run_pipeline.py', 'scripts/prepare_flights.py'] if config['mode'] == 'prepare' else [
-        'scripts/run_pipeline.py', 'scripts/build_features.py', 'scripts/train_models.py', 'scripts/evaluate_models.py']
+    source_names = ['scripts/run_pipeline.py', 'scripts/prepare_flights.py']
+    if config['mode'] == 'audit_preparation':
+        source_names.append('scripts/audit_preparation.py')
+    elif config['mode'] == 'development':
+        source_names += ['scripts/build_features.py', 'scripts/train_models.py', 'scripts/evaluate_models.py',
+                         'scripts/analyze_eda.py', 'scripts/analyze_rq1.py', 'scripts/render_notebooks.py']
     source_names.append(config_path.relative_to(ROOT).as_posix())
     for name in source_names:
         committed = subprocess.check_output(['git', 'show', f'{git_commit}:{name}'], cwd=ROOT)
