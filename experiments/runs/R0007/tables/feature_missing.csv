@@ -1,0 +1,13 @@
+feature,missing_n,rows,missing_share
+airport_id,0,2261775,0.0
+route,0,2261775,0.0
+downstream_airline,0,2261775,0.0
+downstream_distance,0,2261775,0.0
+downstream_crs_elapsed_time,0,2261775,0.0
+downstream_day_of_week,0,2261775,0.0
+downstream_sched_hour,0,2261775,0.0
+scheduled_turnaround_minutes,0,2261775,0.0
+upstream_arr_delay_minutes,0,2261775,0.0
+tail_completed_24h_n,0,2261775,0.0
+tail_completed_24h_arr_delay_mean,53090,2261775,0.023472715013650784
+history_window_incomplete,0,2261775,0.0

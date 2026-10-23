@@ -5,3 +5,4 @@ R0003,R0002,P0-data-audit,completed,Structural audit and prefix comparison of gl
 R0004,R0003,P0-data-correction,invalidated,Isolate retrospective QA flags by prediction-month cutoff instead of the complete five-month archive,Boundary downstream planned-time ambiguity can be accepted; corrected by R0005 D0003,experiments/runs/R0004
 R0005,R0004,P0-data-correction,completed,Retain endpoint planned-time ambiguity checks across monthly QA boundaries,Retain outputs; review before next stage,experiments/runs/R0005
 R0006,R0005,P0,completed,First development baselines and planned-information G0 linear regression on isolated QA cohorts,Retain outputs; review before next stage,experiments/runs/R0006
+R0007,R0006,P1,completed,Add upstream arrival delay and observed completed-tail history to G0,Retain outputs; review before next stage,experiments/runs/R0007

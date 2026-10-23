@@ -1,0 +1,88 @@
+{
+  "feature_audit": {
+    "development_only": true,
+    "counts": {
+      "input_connections": 2821852,
+      "outside_prediction_utc_scope": 560077,
+      "scoped_connections": 2261775,
+      "missing_or_nonfinite_target": 0,
+      "negative_target": 0,
+      "missing_label_time": 0,
+      "prediction_not_before_departure": 0,
+      "missing_or_invalid_upstream_delay": 0,
+      "eligible_connections": 2261775
+    },
+    "categorical_features": [
+      "airport_id",
+      "route",
+      "downstream_airline"
+    ],
+    "numeric_features": [
+      "downstream_distance",
+      "downstream_crs_elapsed_time",
+      "downstream_day_of_week",
+      "downstream_sched_hour",
+      "scheduled_turnaround_minutes",
+      "upstream_arr_delay_minutes",
+      "tail_completed_24h_n",
+      "tail_completed_24h_arr_delay_mean",
+      "history_window_incomplete"
+    ],
+    "outcome_rule": "finite target >= 0 and prediction_time < label_time",
+    "feature_group": "G1",
+    "features": [
+      "airport_id",
+      "route",
+      "downstream_airline",
+      "downstream_distance",
+      "downstream_crs_elapsed_time",
+      "downstream_day_of_week",
+      "downstream_sched_hour",
+      "scheduled_turnaround_minutes",
+      "upstream_arr_delay_minutes",
+      "tail_completed_24h_n",
+      "tail_completed_24h_arr_delay_mean",
+      "history_window_incomplete"
+    ]
+  },
+  "history_audit": {
+    "history_window": "[prediction_time - 24 hours, prediction_time)",
+    "include_current_upstream": false,
+    "source_start_utc": "2026-04-01T11:00:00+00:00",
+    "current_upstream_rule": "Excluded by default per plan: previously completed history; current upstream delay is separate",
+    "event_quality_rule": "unique flight_id, present tail, normal_operation, record-local time_valid, finite arrival delay >=0",
+    "ignored_future_qa_columns": [
+      "tail_schedule_incomplete",
+      "schedule_tie",
+      "actual_order_conflict"
+    ],
+    "quality_exclusions_are_sequential": true,
+    "counts": {
+      "source_rows": 3057590,
+      "missing_actual_arrival_rows": 60599,
+      "outside_global_history_time_scope": 662153,
+      "temporally_scoped_rows": 2395437,
+      "missing_tail_rows": 0,
+      "missing_flight_id_rows": 0,
+      "non_normal_rows": 0,
+      "invalid_record_time_rows": 48,
+      "invalid_arrival_delay_rows": 0,
+      "valid_history_event_rows": 2395389,
+      "duplicate_flight_id_rows": 0,
+      "unique_history_flight_ids": 2395389,
+      "unique_history_tails": 6069,
+      "same_tail_arrival_tie_rows_retained": 12
+    },
+    "queries": {
+      "rows": 2261775,
+      "missing_tail": 0,
+      "known_tail_zero_history": 53090,
+      "history_window_incomplete": 18121,
+      "current_upstream_added": 0,
+      "events_present": 2208685
+    },
+    "missingness_rule": "missing tail: n and mean missing; known tail with no valid events: n=0 and mean missing; incomplete window flagged separately",
+    "left_truncation_rule": "Known-left-truncation indicator, not a completeness guarantee when zero",
+    "carry_in_limitation": "Flights with prior-local-month departure dates can complete in the window but are absent from the source; no empirical maximum delay is used to claim completeness"
+  }
+}
