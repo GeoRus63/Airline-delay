@@ -1,0 +1,60 @@
+test_conflicting_duplicate_becomes_ambiguous_without_forecast_window (test_prepare_weather_dataset.PrepareWeatherDatasetTests.test_conflicting_duplicate_becomes_ambiguous_without_forecast_window) ... ok
+test_direct_scripts_path_import_matches_run_pipeline_behavior (test_prepare_weather_dataset.PrepareWeatherDatasetTests.test_direct_scripts_path_import_matches_run_pipeline_behavior) ... ok
+test_nonempty_output_is_refused_before_taf_validity_write (test_prepare_weather_dataset.PrepareWeatherDatasetTests.test_nonempty_output_is_refused_before_taf_validity_write) ... ok
+test_offline_taf_validity_archives_outputs_and_hashes (test_prepare_weather_dataset.PrepareWeatherDatasetTests.test_offline_taf_validity_archives_outputs_and_hashes) ... ok
+test_scientifically_identical_duplicate_merges_all_provenance (test_prepare_weather_dataset.PrepareWeatherDatasetTests.test_scientifically_identical_duplicate_merges_all_provenance) ... ok
+test_conflicting_duplicate_product_status_blocks_asof_forecast (test_weather_contract.WeatherContractTests.test_conflicting_duplicate_product_status_blocks_asof_forecast) ... ok
+test_metar_asof_lag_and_age_boundary (test_weather_contract.WeatherContractTests.test_metar_asof_lag_and_age_boundary) ... ok
+test_metar_asof_normalizes_mixed_datetime_units (test_weather_contract.WeatherContractTests.test_metar_asof_normalizes_mixed_datetime_units) ... ok
+test_metar_correction_is_excluded_and_untimed_duplicates_are_ambiguous (test_weather_contract.WeatherContractTests.test_metar_correction_is_excluded_and_untimed_duplicates_are_ambiguous) ... ok
+test_metar_match_preserves_input_order_and_normalizes_airport_ids (test_weather_contract.WeatherContractTests.test_metar_match_preserves_input_order_and_normalizes_airport_ids) ... ok
+test_metar_missing_and_trace_are_distinct (test_weather_contract.WeatherContractTests.test_metar_missing_and_trace_are_distinct) ... ok
+test_metar_missing_reason_separates_conflict_stale_and_no_observation (test_weather_contract.WeatherContractTests.test_metar_missing_reason_separates_conflict_stale_and_no_observation) ... ok
+test_missing_full_text_product_blocks_old_forecast (test_weather_contract.WeatherContractTests.test_missing_full_text_product_blocks_old_forecast) ... ok
+test_missing_taf_weather_codes_are_not_encoded_as_clear_weather (test_weather_contract.WeatherContractTests.test_missing_taf_weather_codes_are_not_encoded_as_clear_weather) ... ok
+test_missing_text_block_cannot_precede_archived_product_id (test_weather_contract.WeatherContractTests.test_missing_text_block_cannot_precede_archived_product_id) ... ok
+test_noaa_qc_whitelist_is_source_specific (test_weather_contract.WeatherContractTests.test_noaa_qc_whitelist_is_source_specific) ... ok
+test_noaa_trace_missing_and_provenance_are_preserved (test_weather_contract.WeatherContractTests.test_noaa_trace_missing_and_provenance_are_preserved) ... ok
+test_normal_product_after_missing_full_text_restores_forecast (test_weather_contract.WeatherContractTests.test_normal_product_after_missing_full_text_restores_forecast) ... ok
+test_taf_availability_proxy_uses_later_timestamp_and_requires_both (test_weather_contract.WeatherContractTests.test_taf_availability_proxy_uses_later_timestamp_and_requires_both) ... ok
+test_taf_latest_cancel_or_nil_never_falls_back (test_weather_contract.WeatherContractTests.test_taf_latest_cancel_or_nil_never_falls_back) ... ok
+test_taf_query_time_uses_later_schedule_or_prediction (test_weather_contract.WeatherContractTests.test_taf_query_time_uses_later_schedule_or_prediction) ... ok
+test_taf_same_time_distinct_bulletins_are_ambiguous (test_weather_contract.WeatherContractTests.test_taf_same_time_distinct_bulletins_are_ambiguous) ... ok
+test_taf_untimed_bulletin_blocks_fallback (test_weather_contract.WeatherContractTests.test_taf_untimed_bulletin_blocks_fallback) ... ok
+test_unverified_amendment_blocks_fallback_by_default (test_weather_contract.WeatherContractTests.test_unverified_amendment_blocks_fallback_by_default) ... ok
+test_weather_run_writes_pickles_returns_summary_and_refuses_reuse (test_weather_contract.WeatherContractTests.test_weather_run_writes_pickles_returns_summary_and_refuses_reuse) ... ok
+test_amended_conflict_preserves_scalar_batch_ambiguity_without_fallback (test_weather_features.WeatherFeatureTests.test_amended_conflict_preserves_scalar_batch_ambiguity_without_fallback) ... ok
+test_augment_metar_prefixes_features_and_keeps_rows (test_weather_features.WeatherFeatureTests.test_augment_metar_prefixes_features_and_keeps_rows) ... ok
+test_augment_noaa_converts_units_respects_asof_qc_and_only_fills_missing (test_weather_features.WeatherFeatureTests.test_augment_noaa_converts_units_respects_asof_qc_and_only_fills_missing) ... ok
+test_augment_taf_marks_conflicting_duplicate_product_as_ambiguous (test_weather_features.WeatherFeatureTests.test_augment_taf_marks_conflicting_duplicate_product_as_ambiguous) ... ok
+test_augment_taf_selects_then_aggregates_each_segment_type (test_weather_features.WeatherFeatureTests.test_augment_taf_selects_then_aggregates_each_segment_type) ... ok
+test_noaa_backfill_respects_structural_gust_and_ceiling_missingness (test_weather_features.WeatherFeatureTests.test_noaa_backfill_respects_structural_gust_and_ceiling_missingness) ... ok
+test_noaa_overlap_diagnostics_reports_converted_exact_time_differences (test_weather_features.WeatherFeatureTests.test_noaa_overlap_diagnostics_reports_converted_exact_time_differences) ... ok
+test_taf_and_noaa_asof_normalize_mixed_datetime_units (test_weather_features.WeatherFeatureTests.test_taf_and_noaa_asof_normalize_mixed_datetime_units) ... ok
+test_taf_untimed_archive_blocks_fallback_with_nondefault_flight_index (test_weather_features.WeatherFeatureTests.test_taf_untimed_archive_blocks_fallback_with_nondefault_flight_index) ... ok
+test_augment_weather_preserves_contract_and_blocks_unverified_taf (test_weather_pipeline_features.WeatherPipelineFeatureTests.test_augment_weather_preserves_contract_and_blocks_unverified_taf) ... ok
+test_write_weather_audit_never_requests_target_and_writes_coverage_only (test_weather_pipeline_features.WeatherPipelineFeatureTests.test_write_weather_audit_never_requests_target_and_writes_coverage_only) ... ok
+
+----------------------------------------------------------------------
+Ran 36 tests in 1.047s
+
+OK
+{
+  "metar_rows": 1,
+  "metar_airports": 1,
+  "taf_segment_rows": 1,
+  "taf_airports": 1,
+  "taf_validity_matched_rows": 1,
+  "taf_usable_interval_rows": 1,
+  "taf_bulletins": 1,
+  "metar_assumed_lag_minutes": 5,
+  "metar_max_observation_age_minutes": 120,
+  "taf_body_issue_time_used_as_availability_proxy": true,
+  "taf_receive_time_verified": false,
+  "noaa_rows": 1,
+  "noaa_stations": 1,
+  "noaa_quality_policy": "strict exact source/QC whitelist; original element codes retained; sensitivity only",
+  "noaa_postintegration_qc_serialization_verified": false,
+  "noaa_qc_limitation": "GHCNh publishes one Quality_Code string per element and documents post-integration QC plus component-source QC, but does not specify precedence/serialization when both apply. Only exact documented source/QC pairs are accepted; this is not full-QC certification.",
+  "noaa_historical_availability_verified": false
+}

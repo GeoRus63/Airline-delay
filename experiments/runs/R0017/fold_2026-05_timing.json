@@ -1,0 +1,15 @@
+{
+  "fold": "2026-05",
+  "pid": 43032,
+  "threads": 8,
+  "train_rows": 553140,
+  "validation_rows": 574571,
+  "models_seconds": {
+    "training_mean": 6.517275199999858,
+    "training_median": 6.410754500000621,
+    "carry_forward": 6.0216280999957235,
+    "g4b_linear": 84.93700959999842
+  },
+  "status": "completed",
+  "elapsed_seconds": 104.22943959999975
+}

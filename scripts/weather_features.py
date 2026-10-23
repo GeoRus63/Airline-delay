@@ -554,20 +554,23 @@ def augment_taf(flights, taf_segments, taf_bulletins, *, airport_col="airport_id
         work.taf_available_at.isna() | work.taf_untimed_archive_issue_time.ge(work.taf_available_at))
     work.loc[untimed_newer, "taf_status"] = "unverified_issue_time"
     usable = work.taf_status.eq("outside_validity") & timed_before_candidate & status_text.eq("normal")
-    work["taf_prevailing_missing"] = 1
-    work["taf_tempo_missing"] = 1
-    work["taf_probability_missing"] = 1
-    work["taf_prevailing_segment_count"] = 0
-    work["taf_tempo_segment_count"] = 0
-    work["taf_probability_segment_count"] = 0
-
+    # Accumulate positional outputs once, avoiding millions of DataFrame writes.
+    # Bulletin selection and segment aggregation retain the same semantics.
+    buffers = {}
+    time_fields = set()
+    for kind in ("prevailing", "tempo", "probability"):
+        buffers[f"taf_{kind}_missing"] = np.ones(len(work), dtype="int64")
+    for kind in ("prevailing", "tempo", "probability"):
+        buffers[f"taf_{kind}_segment_count"] = np.zeros(len(work), dtype="int64")
     for kind in ("prevailing", "tempo", "probability"):
         for field in (*TAF_VALUE_FIELDS, "segment_start_min", "segment_end_max"):
+            name = f"taf_{kind}_{field}"
             if field.endswith("_min") or field.endswith("_max"):
-                work[f"taf_{kind}_{field}"] = pd.Series(
-                    pd.NaT, index=work.index, dtype="datetime64[ns, UTC]")
+                buffers[name] = np.full(len(work), pd.NaT.value, dtype="int64")
+                time_fields.add(name)
             else:
-                work[f"taf_{kind}_{field}"] = np.nan
+                buffers[name] = np.full(len(work), np.nan)
+    status_buffer = work.taf_status.to_numpy(dtype=object, copy=True)
     if usable.any() and not taf_segments.empty:
         segments = taf_segments.copy()
         segments["_taf_airport_key"] = _airport_join_key(segments[airport_col])
@@ -612,14 +615,17 @@ def augment_taf(flights, taf_segments, taf_bulletins, *, airport_col="airport_id
                 counts = aggregate[f"taf_{kind}_segment_count"]
                 active_kind = counts > 0
                 any_active |= active_kind
-                work.loc[row_ids, f"taf_{kind}_missing"] = (counts == 0).astype("int8")
-                work.loc[row_ids, f"taf_{kind}_segment_count"] = counts
+                buffers[f"taf_{kind}_missing"][row_ids] = (counts == 0).astype("int8")
+                buffers[f"taf_{kind}_segment_count"][row_ids] = counts
                 for field, values in aggregate.items():
                     if field == f"taf_{kind}_segment_count" or field == f"taf_{kind}_missing":
                         continue
-                    work.loc[row_ids, field] = values
-            work.loc[row_ids[any_active], "taf_status"] = "matched"
+                    buffers[field][row_ids] = values.asi8 if field in time_fields else values
+            status_buffer[row_ids[any_active]] = "matched"
 
+    for field, values in buffers.items():
+        work[field] = pd.to_datetime(values, unit="ns", utc=True) if field in time_fields else values
+    work["taf_status"] = pd.Series(status_buffer, index=work.index, dtype=work.taf_status.dtype)
     work["taf_missing"] = (~work.taf_status.eq("matched")).astype("int8")
     work = work.sort_index()
     original = work.pop("_taf_original_index").tolist()

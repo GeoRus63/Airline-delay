@@ -1,4 +1,4 @@
-"""Frozen P6 assessment: one formal August access, then prediction-only verification."""
+"""Frozen P6 assessment and shared computation for exact, separately archived reproduction."""
 from __future__ import annotations
 
 import argparse
@@ -77,7 +77,8 @@ def _write_json(path, value):
 
 def _required_sources(feature_group):
     directory = Path(__file__).resolve().parent
-    names = ["final_evaluation.py", "train_models.py", "build_features.py", "evaluate_models.py", "compare_experiments.py"]
+    names = ["final_evaluation.py", "reproduce_final.py", "run_pipeline.py", "render_research_notebooks.py",
+             "train_models.py", "build_features.py", "evaluate_models.py", "compare_experiments.py"]
     if feature_group.upper() != "G0":
         names.append("operational_features.py")
     if feature_group.upper() in {"G4A", "G4B"}:
@@ -118,8 +119,8 @@ def validate_freeze(config):
     canonical hash of every field except payload_sha256 itself. Runtime config pins
     the exact frozen JSON file bytes using freeze_manifest_sha256.
     """
-    if config.get("mode") != "final":
-        raise ValueError("August assessment is available only with mode='final'")
+    if config.get("mode") not in {"final", "reproduce_final"}:
+        raise ValueError("August assessment requires mode='final' or mode='reproduce_final'")
     if {"feature_archive_path", "feature_source_run_id"} & set(config):
         raise ValueError("Final evaluation forbids development feature_archive_path/feature_source_run_id")
     if not config.get("freeze_manifest_path") or not config.get("freeze_manifest_sha256"):
@@ -201,6 +202,22 @@ def _feature_hash(frame, features):
     return digest.hexdigest()
 
 
+def _frame_fingerprint(frame, features):
+    """Cover every executed predictor, baseline input, outcome and prediction identity.
+
+    Schema is hashed too: equal string renderings must not hide dtype changes.
+    The split has already sorted rows, so the fingerprint also seals row order.
+    """
+    columns = list(dict.fromkeys(["connection_id", "prediction_time", "label_time", "target_delay",
+                                 *features, "upstream_arr_delay_minutes",
+                                 *[name for name in training.PREDICTION_METADATA if name in frame],
+                                 *(["aircraft_family"] if "aircraft_family" in frame else [])]))
+    schema = [{"name": name, "dtype": str(frame[name].dtype)} for name in columns]
+    return {"rows": len(frame), "columns": columns, "schema": schema,
+            "schema_sha256": canonical_sha256(schema), "values_sha256": _feature_hash(frame, columns),
+            "ids_sha256": training.hash_ids(frame.connection_id), "targets_sha256": training.hash_targets(frame)}
+
+
 def split_final_frame(frame):
     """The test window is half-open; training labels mature strictly before August."""
     prediction = pd.to_datetime(frame.prediction_time, utc=True, errors="raise")
@@ -255,7 +272,7 @@ def _saved_predictions(run_dir, names):
     return results
 
 
-def _postprocess_predictions(output, config, primary):
+def _postprocess_predictions(output, config, primary, *, reproduction=False):
     names = training.model_names(config)
     predictions = _saved_predictions(output, names)
     metrics = evaluation.metrics_from_summaries(pd.concat([evaluation.summarize_predictions(frame)
@@ -282,7 +299,8 @@ def _postprocess_predictions(output, config, primary):
         ax.set(xticks=np.arange(len(n)), xticklabels=labels, ylabel="Test rows (%)", xlabel="Prediction - target (min)", title=f"{name} | n={len(error):,}")
         ax.tick_params(axis="x", labelrotation=50, labelsize=8)
         ax.spines[["top", "right"]].set_visible(False)
-    fig.suptitle("Frozen August assessment | complete residual distribution, including tails")
+    caption = "Reproduction of frozen August assessment" if reproduction else "Frozen August assessment"
+    fig.suptitle(caption + " | complete residual distribution, including tails")
     fig.tight_layout()
     (output / "figures").mkdir(exist_ok=True)
     fig.savefig(output / "figures/final_residual_distribution.png", dpi=160, bbox_inches="tight")
@@ -303,17 +321,81 @@ def _postprocess_predictions(output, config, primary):
     return metrics
 
 
+def _fit_frozen(frozen, freeze_path, freeze_hash, verified, output, ledger_path, *, mode):
+    """Shared final/reproduction computation; caller owns authorization and ledger policy."""
+    locked = frozen["config"]
+    shutil.copy2(freeze_path, output / "model_selection.json")
+    _write_json(output / "final_verified_inputs.json", verified)
+    _write_json(output / "final_effective_config.json", locked)
+    frame = load_configured_features(locked, development_only=False)
+    train, test, audit = split_final_frame(frame)
+    features = locked["features"]
+    required = set(features + ["connection_id", "prediction_time", "label_time", "target_delay", "upstream_arr_delay_minutes"])
+    if required - set(frame):
+        raise ValueError(f"Frozen final feature fields missing: {sorted(required - set(frame))}")
+    fingerprints = {"schema_version": 1, "typed_features": training.resolve_features(locked),
+                    "train": _frame_fingerprint(train, features), "test": _frame_fingerprint(test, features)}
+    _write_json(output / "final_feature_fingerprints.json", fingerprints)
+    audit["train_features_sha256"], audit["validation_features_sha256"] = _feature_hash(train, features), _feature_hash(test, features)
+    pd.DataFrame([audit]).to_csv(output / "split_audit.csv", index=False)
+    train[["connection_id", "prediction_time", "label_time", "target_delay"]].to_csv(
+        output / "training_ids_targets.csv.gz", index=False, compression=training.GZIP)
+    ids = test[["connection_id", "prediction_time", "label_time", "target_delay"]].copy()
+    ids.insert(0, "fold", FINAL_FOLD)
+    ids.to_csv(output / "evaluation_ids.csv.gz", index=False, compression=training.GZIP)
+    (output / "models").mkdir(exist_ok=True)
+    (output / "predictions").mkdir(exist_ok=True)
+    validation_columns = list(dict.fromkeys(features + [name for name in training.PREDICTION_METADATA if name in test]
+                                           + ["upstream_arr_delay_minutes"]
+                                           + (["aircraft_family"] if "aircraft_family" in test else [])))
+    _, timing = training._run_fold(FINAL_FOLD, train[features + ["target_delay"]].copy(), test[validation_columns].copy(),
+                                   locked, str(output), audit)
+    metrics = _postprocess_predictions(output, locked, frozen["primary_model_name"], reproduction=mode == "reproduce_final")
+    result = {"mode": mode, "development_only": False, "freeze_manifest_path": str(freeze_path),
+              "access_ledger_path": str(ledger_path), "claim_type": "formal" if mode == "final" else "reproduction",
+              "freeze_manifest_sha256": freeze_hash, "freeze_payload_sha256": frozen["payload_sha256"],
+              "primary_model_name": frozen["primary_model_name"], "model_name": locked["model_name"],
+              "models": training.model_names(locked), "features": features, "config": locked,
+              "actual_model_params": training._regressor(locked).get_params(deep=False),
+              "protocol": frozen["protocol"], "evaluation_rows": len(test), "folds": [audit],
+              "evaluation_ids_sha256": training.hash_ids(ids.fold.astype(str) + ":" + ids.connection_id.astype(str)),
+              "split_sha256": canonical_sha256(audit), "timing": timing, "verified_inputs": verified,
+              "feature_fingerprints": fingerprints,
+              "utc_boundary_audit": _boundary_counts(_path(locked["connection_path"])),
+              "primary_metric": metrics.loc[metrics.model.eq(frozen["primary_model_name"]) & metrics.fold.eq("overall") & metrics["group"].eq("all")].to_dict("records")}
+    _write_json(output / "model_manifest.json", {
+        **result, **training.resolve_features(locked), "model_type": locked["model_type"],
+        "model_params": result["actual_model_params"], "include_baselines": True,
+        "threads": locked["threads"], "fold_workers": 1, "fold_timings": [timing],
+        "linear_tolerance": locked["linear_tolerance"],
+        "effective_preprocessing": {"min_frequency": locked["preprocessing"]["min_frequency"],
+                                    "drop": "first", "sparse": True,
+                                    "numeric_imputation": "median; training-only fitted; missing indicators",
+                                    "numeric_scaling": "StandardScaler(with_mean=False)",
+                                    "categorical_imputation": "constant __MISSING__"}})
+    result["artifact_hashes"] = {str(path.relative_to(output)): sha256_file(path) for path in sorted(output.rglob("*"))
+                                 if path.is_file() and path.name not in {"manifest.json", "run.log", "resources.csv", "final_result.json"}}
+    _write_json(output / "final_result.json", result)
+    return result
+
+def _validate_output(output, freeze_path):
+    output = Path(output).resolve()
+    # Existing run_pipeline metadata is permitted, fitted/result files never are.
+    protected = freeze_path.parent
+    if output == protected or output.is_relative_to(protected):
+        raise ValueError("Final output must not modify the source freeze archive")
+    if any((output / name).exists() for name in ["final_result.json", "model_manifest.json", "models", "predictions"]):
+        raise FileExistsError("Final model artifacts already exist; use a new run_id")
+    output.mkdir(parents=True, exist_ok=True)
+    return output
+
+
 def run(config, run_dir):
     """Validate freeze, claim the single formal test, fit once and archive everything."""
+    if config.get("mode") != "final":
+        raise ValueError("Formal August assessment requires mode='final'")
     frozen, freeze_path, freeze_hash, verified = validate_freeze(config)
-    output = Path(run_dir).resolve()
-    freeze_parent_completed = ((freeze_path.parent / "manifest.json").is_file()
-                               and _json(freeze_path.parent / "manifest.json").get("status") == "completed")
-    if output == freeze_path.parent or (freeze_parent_completed and output.is_relative_to(freeze_path.parent)):
-        raise ValueError("Final output must not modify the source freeze archive")
-    if (output / "final_result.json").exists() or (output / "model_manifest.json").exists():
-        raise FileExistsError("Final model artifacts already exist; use verify_saved instead of refitting")
-    output.mkdir(parents=True, exist_ok=True)
+    output = _validate_output(run_dir, freeze_path)
     ledger_path = ROOT / "experiments/final_access/2026-08.json"
     ledger_path.parent.mkdir(parents=True, exist_ok=True)
     access = {"test_period": FINAL_FOLD, "status": "claimed", "run_dir": str(output), "run_id": output.name,
@@ -322,54 +404,8 @@ def run(config, run_dir):
     # x-mode is intentional: another freeze or run cannot silently reopen August.
     with ledger_path.open("x", encoding="utf-8") as stream:
         json.dump(access, stream, indent=2)
-    locked = frozen["config"]
     try:
-        shutil.copy2(freeze_path, output / "model_selection.json")
-        _write_json(output / "final_verified_inputs.json", verified)
-        _write_json(output / "final_effective_config.json", locked)
-        frame = load_configured_features(locked, development_only=False)
-        train, test, audit = split_final_frame(frame)
-        features = locked["features"]
-        required = set(features + ["connection_id", "prediction_time", "label_time", "target_delay", "upstream_arr_delay_minutes"])
-        if required - set(frame):
-            raise ValueError(f"Frozen final feature fields missing: {sorted(required - set(frame))}")
-        audit["train_features_sha256"], audit["validation_features_sha256"] = _feature_hash(train, features), _feature_hash(test, features)
-        pd.DataFrame([audit]).to_csv(output / "split_audit.csv", index=False)
-        ids = test[["connection_id", "prediction_time", "label_time"]].copy()
-        ids.insert(0, "fold", FINAL_FOLD)
-        ids.to_csv(output / "evaluation_ids.csv.gz", index=False, compression=training.GZIP)
-        (output / "models").mkdir(exist_ok=True)
-        (output / "predictions").mkdir(exist_ok=True)
-        validation_columns = list(dict.fromkeys(features + [name for name in training.PREDICTION_METADATA if name in test]
-                                               + ["upstream_arr_delay_minutes"]
-                                               + (["aircraft_family"] if "aircraft_family" in test else [])))
-        _, timing = training._run_fold(FINAL_FOLD, train[features + ["target_delay"]].copy(), test[validation_columns].copy(),
-                                       locked, str(output), audit)
-        metrics = _postprocess_predictions(output, locked, frozen["primary_model_name"])
-        result = {"mode": "final", "development_only": False, "freeze_manifest_path": str(freeze_path),
-                  "access_ledger_path": str(ledger_path),
-                  "freeze_manifest_sha256": freeze_hash, "freeze_payload_sha256": frozen["payload_sha256"],
-                  "primary_model_name": frozen["primary_model_name"], "model_name": locked["model_name"],
-                  "models": training.model_names(locked), "features": features, "config": locked,
-                  "actual_model_params": training._regressor(locked).get_params(deep=False),
-                  "protocol": frozen["protocol"], "evaluation_rows": len(test), "folds": [audit],
-                  "evaluation_ids_sha256": training.hash_ids(ids.fold.astype(str) + ":" + ids.connection_id.astype(str)),
-                  "split_sha256": canonical_sha256(audit), "timing": timing, "verified_inputs": verified,
-                  "utc_boundary_audit": _boundary_counts(_path(locked["connection_path"])),
-                  "primary_metric": metrics.loc[metrics.model.eq(frozen["primary_model_name"]) & metrics.fold.eq("overall") & metrics["group"].eq("all")].to_dict("records")}
-        _write_json(output / "model_manifest.json", {
-            **result, **training.resolve_features(locked), "model_type": locked["model_type"],
-            "model_params": result["actual_model_params"], "include_baselines": True,
-            "threads": locked["threads"], "fold_workers": 1, "fold_timings": [timing],
-            "linear_tolerance": locked["linear_tolerance"],
-            "effective_preprocessing": {"min_frequency": locked["preprocessing"]["min_frequency"],
-                                        "drop": "first", "sparse": True,
-                                        "numeric_imputation": "median; training-only fitted; missing indicators",
-                                        "numeric_scaling": "StandardScaler(with_mean=False)",
-                                        "categorical_imputation": "constant __MISSING__"}})
-        result["artifact_hashes"] = {str(path.relative_to(output)): sha256_file(path) for path in sorted(output.rglob("*"))
-                                     if path.is_file() and path.name not in {"manifest.json", "run.log", "resources.csv", "final_result.json"}}
-        _write_json(output / "final_result.json", result)
+        result = _fit_frozen(frozen, freeze_path, freeze_hash, verified, output, ledger_path, mode="final")
         access.update(status="completed", ended_at_utc=_now(), final_result_sha256=sha256_file(output / "final_result.json"))
         _write_json(ledger_path, access)
         return result

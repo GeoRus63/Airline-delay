@@ -1,0 +1,7 @@
+{
+  "source_path": "D:\\airline-delay\\scripts\\weather_features.py",
+  "source_sha256": "d3d1ea8944869add56762b865aab01ce70d609aec5fddea65d2b7b5203d14c67",
+  "candidate_path": "D:\\airline-delay\\tmp\\taf_optimization\\weather_features_numpy.py",
+  "candidate_sha256": "126252d54ee2bff5a50d0288f1f644719e5c3ad91cbd538d60cdd034d7a0c556",
+  "scope": "augment_taf output buffers only; source module unchanged"
+}

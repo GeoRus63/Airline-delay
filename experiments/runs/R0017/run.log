@@ -1,0 +1,15 @@
+2026-10-23T23:18:51.731306+00:00 R0017 started at commit 455b61edc2b3d6cd73450e1cb7650c0dac375723
+[2026-05] train=553,140, validation=574,571, immature=1,544
+[2026-06] train=1,127,717, validation=561,972, immature=1,538
+[2026-07] train=1,689,573, validation=570,548, immature=1,654
+[2026-05] completed in 104.23s
+[2026-06] completed in 249.45s
+[2026-07] completed in 272.97s
+D:\airline-delay\.venv\Lib\site-packages\zmq\_future.py:718: RuntimeWarning: Proactor event loop does not implement add_reader family of methods required for zmq. Registering an additional selector thread for add_reader support via tornado. Use `asyncio.set_event_loop_policy(WindowsSelectorEventLoopPolicy())` to avoid this warning.
+  self._get_loop()
+Executed and exported 01_航班清洗与衔接.ipynb
+Executed and exported 02_天气与特征.ipynb
+Executed and exported 03_EDA.ipynb
+Executed and exported 04_RQ1机场分析.ipynb
+Executed and exported 05_RQ2预测与解释.ipynb
+2026-10-23T23:36:29.465655+00:00 status=completed; seconds=1057.7

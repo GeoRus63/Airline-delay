@@ -1,0 +1,38 @@
+         4642886 function calls (4523481 primitive calls) in 2.749 seconds
+
+   Ordered by: cumulative time
+   List reduced from 1187 to 30 due to restriction <30>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.029    0.029    2.749    2.749 weather_features.py:447(augment_taf)
+     4006    0.018    0.000    1.675    0.000 indexing.py:917(__setitem__)
+     4006    0.015    0.000    0.902    0.000 indexing.py:1889(_setitem_with_indexer)
+     4006    0.023    0.000    0.832    0.000 indexing.py:1957(_setitem_with_indexer_split_path)
+     4006    0.025    0.000    0.779    0.000 indexing.py:2122(_setitem_single_column)
+     4006    0.019    0.000    0.719    0.000 indexing.py:772(_get_setitem_indexer)
+     4006    0.008    0.000    0.674    0.000 indexing.py:1011(_convert_tuple)
+     8012    0.018    0.000    0.663    0.000 indexing.py:1470(_convert_to_indexer)
+      300    0.033    0.000    0.663    0.002 weather_features.py:400(_aggregate_segment_kind)
+     4002    0.005    0.000    0.589    0.000 indexing.py:1550(_get_listlike_indexer)
+     4003    0.021    0.000    0.579    0.000 base.py:6288(_get_indexer_strict)
+     7531    0.051    0.000    0.407    0.000 series.py:369(__init__)
+     4005    0.009    0.000    0.355    0.000 generic.py:6321(dtypes)
+     8030    0.036    0.000    0.344    0.000 base.py:3656(get_indexer)
+     4005    0.011    0.000    0.320    0.000 managers.py:1499(column_setitem)
+     4998    0.020    0.000    0.245    0.000 managers.py:399(apply)
+1055621/1048112    0.158    0.000    0.243    0.000 {built-in method builtins.isinstance}
+4421/4417    0.009    0.000    0.242    0.000 indexing.py:1192(__getitem__)
+     4003    0.010    0.000    0.241    0.000 base.py:4147(reindex)
+     4309    0.011    0.000    0.206    0.000 indexing.py:1740(_getitem_axis)
+     4012    0.003    0.000    0.200    0.000 base.py:6252(get_indexer_for)
+     2400    0.024    0.000    0.184    0.000 weather_features.py:390(_reduce_active)
+      300    0.002    0.000    0.178    0.001 groupby.py:797(get_group)
+     2700    0.005    0.000    0.169    0.000 weather_features.py:106(_numeric_array)
+     4005    0.006    0.000    0.168    0.000 managers.py:552(setitem)
+      413    0.007    0.000    0.165    0.000 generic.py:4010(take)
+      612    0.007    0.000    0.165    0.000 datetimes.py:687(to_datetime)
+      300    0.001    0.000    0.155    0.001 indexing.py:1717(_get_list_axis)
+    16802    0.041    0.000    0.153    0.000 common.py:1821(pandas_dtype)
+      310    0.002    0.000    0.147    0.000 managers.py:1052(take)
+
+

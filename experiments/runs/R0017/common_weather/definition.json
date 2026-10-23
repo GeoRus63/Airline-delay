@@ -1,0 +1,8 @@
+{
+  "definition": "metar_missing == 0 AND taf_prevailing_missing == 0; May-July UTC validation",
+  "n": 1017112,
+  "full_validation_n": 1707091,
+  "refitted": false,
+  "uses_target_for_selection": false,
+  "description": "Preregistered common IEM METAR source and TAF prevailing availability subset; no refitting"
+}

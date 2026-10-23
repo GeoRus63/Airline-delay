@@ -1,0 +1,71 @@
+{
+  "fixture_tests": {
+    "tests_run": 9,
+    "taf_exact_comparisons": [
+      {
+        "rows": 1,
+        "sha256": "19acdcaec466e0006fd7d15e75b89c04295d07b98497832f1997c1a6586c6000"
+      },
+      {
+        "rows": 1,
+        "sha256": "19acdcaec466e0006fd7d15e75b89c04295d07b98497832f1997c1a6586c6000"
+      },
+      {
+        "rows": 1,
+        "sha256": "b04b4285a35992eee1815ef313d12f15b0ceda6842500a3887b2cd17a07a3160"
+      },
+      {
+        "rows": 5,
+        "sha256": "1f5dfec1d783dd49ee4171dec629457aff6f853780d028abce830b5e3b47f27d"
+      },
+      {
+        "rows": 1,
+        "sha256": "a685f5116986d8c00c007a46dda40e13d8141748abda3f5c755bb8217ab0ad30"
+      },
+      {
+        "rows": 1,
+        "sha256": "6f433dd61d5727e47b4d2a1a371a10d1a7ed49e231117f048f6a65efdfa70174"
+      }
+    ]
+  },
+  "synthetic_timing": {
+    "baseline": {
+      "seconds": 5.976358899999468,
+      "fingerprint": "c8883404f4b3231045d0b99676a27312a6004a2e1d015394e5d8b291522d3fad",
+      "rows": 4000,
+      "columns": 57
+    },
+    "candidate": {
+      "seconds": 2.4781067999938386,
+      "fingerprint": "c8883404f4b3231045d0b99676a27312a6004a2e1d015394e5d8b291522d3fad",
+      "rows": 4000,
+      "columns": 57
+    },
+    "speed_ratio": 2.411663169648026,
+    "exact_equal": true
+  },
+  "profiled_synthetic": {
+    "baseline": {
+      "seconds": 16.70746560000407,
+      "fingerprint": "c8883404f4b3231045d0b99676a27312a6004a2e1d015394e5d8b291522d3fad",
+      "rows": 4000,
+      "columns": 57
+    },
+    "candidate": {
+      "seconds": 2.5445150999948964,
+      "fingerprint": "c8883404f4b3231045d0b99676a27312a6004a2e1d015394e5d8b291522d3fad",
+      "rows": 4000,
+      "columns": 57
+    },
+    "exact_equal": true,
+    "timing_note": "Baseline alone profiled; do not interpret these timings as a speed ratio"
+  },
+  "official_source_unchanged": true,
+  "candidate_receipt": {
+    "source_path": "D:\\airline-delay\\scripts\\weather_features.py",
+    "source_sha256": "d3d1ea8944869add56762b865aab01ce70d609aec5fddea65d2b7b5203d14c67",
+    "candidate_path": "D:\\airline-delay\\tmp\\taf_optimization\\weather_features_numpy.py",
+    "candidate_sha256": "126252d54ee2bff5a50d0288f1f644719e5c3ad91cbd538d60cdd034d7a0c556",
+    "scope": "augment_taf output buffers only; source module unchanged"
+  }
+}

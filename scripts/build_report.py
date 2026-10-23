@@ -546,7 +546,7 @@ def compose(archive, config, validated):
               "May, June and July are forward validation months, trained respectively on mature April, April–May and April–June labels. UTC month-start half-open windows govern membership. "
               "All learned imputation, category encoding and scaling are fitted inside each training fold, and every prediction is clipped at zero. The August test follows a committed frozen choice and mature April–July refitting; test performance never selects a model.",
               "The new methods are as-of availability matching, common-support standardization and paired UTC date-block uncertainty. METAR lacks actual receipt timestamps, so observation plus five minutes is assumed available, with observation age capped at 120 minutes. "
-              "TAF uses the latest archive bulletin state available at prediction time and queries the later of scheduled departure and prediction time. Archive/issue timestamps are availability proxies, not verified historical delivery receipts; TEMPO, probability, amendment, cancellation and NIL states must remain distinct. "
+              "TAF uses the latest archive bulletin state available at prediction time and queries the later of scheduled departure and prediction time. Archive/issue timestamps are availability proxies, not verified historical delivery receipts; TEMPO, probability, amendment, cancellation and NIL states remain distinct. The registered conservative rule blocks unverified amended, corrected or delayed bulletin values without falling back to an older forecast. Thus locating a latest state does not imply an approved active forecast. "
               "NOAA is a separate retrospective supplement: exact quality-code whitelisting does not establish full official QC certification or contemporaneous delivery, and conflicting or structural missing values are not automatically filled. "
               "Weather absence retains the flight with explicit missingness rather than deleting it or imputing clear weather.",
               "## RQ1: airport absorption and amplification",
@@ -604,6 +604,9 @@ def compose(archive, config, validated):
     lines.append(f"The retained learned-model run was {choice['selected_run_id']}; the frozen primary predictor was {choice['primary_model_name']}. "
                  f"The rule was: {choice['reason']}. A training-mean, training-median or carry-forward baseline was permitted to win; "
                  f"there was no requirement to select a complex estimator. {ref}")
+    lines.append("The practical and monthly-stability promotion rule was committed after P3 and before weather or tree/forest performance was inspected; it was not registered before P0. "
+                 "Feature selection is guided by OLS and depends on the fixed addition order; it does not establish the globally optimal tree feature set. The primary is the best of the rule-retained learned model and three baselines, which need not be the lowest-MAE estimator among every grid trial. "
+                 "Paired date-block intervals resample the existing predictions with shared date draws and recompute summed absolute or squared error divided by the corresponding sample count. They do not repeat training, feature selection or hyperparameter selection and are not selection-adjusted confidence intervals. " + ref)
     for decision in choice["promotion_decisions"]:
         lines.append(f"The {decision['family']} challenger {decision['candidate_run_id']} had pooled improvement {number(decision['pooled_improvement'])} min, "
                      f"required improvement {number(decision['required_improvement'])} min, and {decision['improved_months']} improving months. "

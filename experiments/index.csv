@@ -15,3 +15,4 @@ R0013,R0012,P4-weather-preparation,failed,"Prepare immutable METAR, TAF bulletin
 R0014,R0012,P4-weather-preparation,completed,"Prepare immutable METAR, TAF bulletin states and GHCNh quality-controlled tables from local archives",Retain outputs; review before next stage,experiments/runs/R0014
 R0015,R0012,P4a,completed,Add as-of METAR source observations and reporting/missingness metadata to fixed G3 OLS,Retain outputs; review before next stage,experiments/runs/R0015
 R0016,R0014,P4-weather-preparation,completed,Rebuild weather with unverified TAF blocking anchor no earlier than archived product ID; preserve W0001,Retain outputs; review before next stage,experiments/runs/R0016
+R0017,R0015,P4b,completed,Add latest-state TAF prevailing TEMPO and probability groups to fixed G4a OLS,Retain outputs; review before next stage,experiments/runs/R0017

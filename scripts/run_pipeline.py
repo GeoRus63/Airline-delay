@@ -200,6 +200,13 @@ def execute(config, run_dir):
         write_json(run_dir / 'final_verification.json', verify_saved(run_dir))
         render_final(run_dir)
         return result
+    if config['mode'] == 'reproduce_final':
+        from reproduce_final import run as reproduce_final, render_notebook
+        result = reproduce_final(config, run_dir)
+        # The original formal experiment and its public Notebook stay untouched.
+        rendered = render_notebook(run_dir)
+        write_json(run_dir / 'reproduction_notebook_receipt.json', rendered)
+        return result
     if config['mode'] == 'rq1_final':
         from final_evaluation import verify_saved
         from complete_rq1 import run as complete_rq1
@@ -254,10 +261,10 @@ def main():
     elif config['mode'] == 'prepare_weather':
         source_names += ['scripts/prepare_weather.py', 'scripts/prepare_weather_dataset.py',
                          'scripts/download_taf_text.py', 'references/airports.csv']
-    elif config['mode'] == 'final':
+    elif config['mode'] in ['final', 'reproduce_final']:
         frozen = json.loads((ROOT / config['freeze_manifest_path']).read_text(encoding='utf-8'))
         source_names += [item['path'] for item in frozen['source_files']]
-        source_names += ['scripts/render_research_notebooks.py', config['freeze_manifest_path']]
+        source_names += ['scripts/reproduce_final.py', 'scripts/render_research_notebooks.py', config['freeze_manifest_path']]
     elif config['mode'] == 'rq1_final':
         source_names += ['scripts/final_evaluation.py', 'scripts/complete_rq1.py', 'scripts/rq1_standardization.py', 'scripts/analyze_rq1.py',
                          'scripts/analyze_eda.py', 'scripts/analyze_single_flights.py', 'scripts/render_research_notebooks.py',

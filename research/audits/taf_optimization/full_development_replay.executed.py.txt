@@ -1,0 +1,127 @@
+"""Authorized one-shot development TAF replay: no fitting or target inspection."""
+from pathlib import Path
+import hashlib
+import importlib.util
+import json
+import os
+import sys
+import threading
+import time
+import traceback
+
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+ROOT = Path(__file__).resolve().parents[2]
+HERE = Path(__file__).parent
+sys.path.insert(0, str(ROOT))
+import numpy as np
+import pandas as pd
+import psutil
+from scripts.weather_pipeline_features import TAF_MODEL_NUMERIC
+
+
+def sha(path):
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(8 * 1024**2), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def series_sha(series):
+    state = hashlib.sha256((str(series.name) + "|" + str(series.dtype)).encode())
+    state.update(pd.util.hash_pandas_object(series, index=True).to_numpy(dtype="<u8").tobytes())
+    return state.hexdigest()
+
+
+def main():
+    target = HERE / "full_replay_result.json"
+    if target.exists():
+        raise FileExistsError("Full replay already recorded; preserve its evidence")
+    receipt = json.loads((HERE / "candidate_receipt.json").read_text())
+    assert sha(ROOT / "scripts/weather_features.py") == receipt["source_sha256"]
+    assert sha(HERE / "weather_features_numpy.py") == receipt["candidate_sha256"]
+    stop = threading.Event()
+    process = psutil.Process()
+    started = time.perf_counter()
+    peak = [process.memory_info().rss]
+    phase = ["load development source"]
+    observations = []
+    def monitor():
+        last_print = 0.
+        while not stop.wait(.5):
+            elapsed = time.perf_counter() - started
+            rss = process.memory_info().rss
+            peak[0] = max(peak[0], rss)
+            if elapsed - last_print >= 30:
+                item = {"elapsed_seconds": round(elapsed, 1), "phase": phase[0], "rss_gib": round(rss / 1024**3, 3),
+                        "system_available_gib": round(psutil.virtual_memory().available / 1024**3, 3)}
+                observations.append(item)
+                print(json.dumps(item), flush=True)
+                last_print = elapsed
+    monitor_thread = threading.Thread(target=monitor, daemon=True)
+    monitor_thread.start()
+    try:
+        data_path = ROOT / "experiments/runs/R0017/data/features.pkl"
+        manifest = json.loads((ROOT / "experiments/runs/R0017/manifest.json").read_text(encoding="utf-8-sig"))
+        assert manifest["config"]["mode"] == "development"
+        source_hash = sha(data_path)
+        full = pd.read_pickle(data_path)
+        times = pd.to_datetime(full.prediction_time, utc=True)
+        assert times.ge(pd.Timestamp("2026-04-01", tz="UTC")).all()
+        assert times.lt(pd.Timestamp("2026-08-01", tz="UTC")).all()
+        source_keys = ["connection_id", "airport_id", "prediction_time", "downstream_scheduled_dep_utc"]
+        expected_columns = [column for column in full.columns if column.startswith("taf_")]
+        expected = full[expected_columns].copy()
+        flights = full[source_keys].copy()
+        del full, times
+        # Feature data are immutable join-complete output. Only these projected
+        # timing/key and TAF columns are inspected; no target/label value is used.
+        phase[0] = "load W0002 weather"
+        directory = ROOT / "processed/W0002"
+        segments = pd.read_pickle(directory / "taf_segments.pkl")
+        bulletins = pd.read_pickle(directory / "taf_bulletins.pkl")
+        spec = importlib.util.spec_from_file_location("scripts.weather_features_numpy_candidate", HERE / "weather_features_numpy.py")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        phase[0] = "candidate full development TAF replay"
+        join_start = time.perf_counter()
+        output = module.augment_taf(flights, segments, bulletins, scheduled_dep_col="downstream_scheduled_dep_utc", allow_unverified_revisions=False)
+        join_seconds = time.perf_counter() - join_start
+        phase[0] = "strict saved-result comparison and per-column hashes"
+        assert len(output) == len(flights)
+        assert output.connection_id.equals(flights.connection_id)
+        pd.testing.assert_index_equal(output.index, expected.index, exact=True)
+        actual_columns = [column for column in output if column.startswith("taf_")]
+        assert actual_columns == expected_columns
+        for column in TAF_MODEL_NUMERIC:
+            output[column] = pd.to_numeric(output[column], errors="raise").astype(float)
+        hashes = []
+        for column in expected_columns:
+            pd.testing.assert_series_equal(output[column], expected[column], check_exact=True, check_dtype=True)
+            left, right = series_sha(expected[column]), series_sha(output[column])
+            assert left == right
+            hashes.append({"column": column, "dtype": str(expected[column].dtype), "saved_sha256": left, "candidate_sha256": right,
+                           "missing_n": int(expected[column].isna().sum())})
+        assert sha(ROOT / "scripts/weather_features.py") == receipt["source_sha256"]
+        assert sha(data_path) == source_hash
+        result = {"success": True, "rows": len(output), "taf_columns": len(expected_columns), "all_values_dtypes_index_exact": True,
+                  "candidate_join_seconds": join_seconds, "total_seconds": time.perf_counter() - started,
+                  "peak_process_rss_bytes": peak[0], "peak_process_rss_gib": peak[0] / 1024**3,
+                  "official_source_unchanged": True, "source_feature_path": data_path.relative_to(ROOT).as_posix(),
+                  "source_feature_sha256_before_after": source_hash, "source_manifest_status_at_read": manifest["status"],
+                  "projected_input_columns": source_keys, "candidate_receipt": receipt, "per_column_hashes": hashes,
+                  "target_columns_inspected": False, "august_flight_rows_present": False, "fit_called": False,
+                  "monitor": observations, "interpretation": "Exact full development saved-TAF equivalence only; no rule/parameter/model selection"}
+        target.write_text(json.dumps(result, indent=2), encoding="utf-8")
+        print(json.dumps({key: value for key, value in result.items() if key not in ["per_column_hashes", "monitor", "candidate_receipt"]}, indent=2), flush=True)
+    except BaseException:
+        (HERE / "full_replay_failure.txt").write_text(traceback.format_exc(), encoding="utf-8")
+        raise
+    finally:
+        stop.set()
+        monitor_thread.join(timeout=2)
+
+
+if __name__ == "__main__":
+    main()

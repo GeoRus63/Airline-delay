@@ -1,0 +1,9 @@
+{
+  "stage": "P5-feature-selection",
+  "mode": "select_features",
+  "parent_run_id": "R0019",
+  "change": "Apply registered pooled-MAE rule to all six completed OLS mainline feature sets; exclude variant and NOAA from primary selection",
+  "candidate_run_ids": ["R0006", "R0007", "R0009", "R0012", "R0015", "R0017", "R0010", "R0019"],
+  "threads": 8,
+  "test_target_sealed": true
+}

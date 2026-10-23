@@ -51,6 +51,23 @@ def fixture(root):
 
 
 class FinalEvaluation(unittest.TestCase):
+    def test_reproduction_accepts_only_same_frozen_science_and_pins_its_executed_sources(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            _, _, config, _ = fixture(root)
+            with patch.object(final, "ROOT", root):
+                replay = {**config, "mode": "reproduce_final", "stage": "P7", "change": "Exact reproduction",
+                          "parent_run_id": "SYNTHETIC_FINAL"}
+                formal = final.validate_freeze(config)
+                reproduced = final.validate_freeze(replay)
+                self.assertEqual(formal, reproduced)
+                with self.assertRaisesRegex(ValueError, "scientific setting"):
+                    final.validate_freeze({**replay, "threads": 2})
+                with self.assertRaisesRegex(ValueError, "mode='final'"):
+                    final.run(replay, root / "MUST_NOT_CLAIM")
+                self.assertTrue({"reproduce_final.py", "run_pipeline.py", "render_research_notebooks.py"}.issubset(
+                    {Path(item["path"]).name for item in formal[3]["source_files"]}))
+
     def test_development_feature_archive_forbidden_in_runtime_and_frozen_config(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
@@ -101,6 +118,10 @@ class FinalEvaluation(unittest.TestCase):
                 loader.assert_called_once_with(frozen["config"], development_only=False)
                 self.assertEqual(result["evaluation_rows"], 3)
                 self.assertEqual(result["primary_model_name"], "training_median")
+                self.assertEqual(result["claim_type"], "formal")
+                self.assertIn("upstream_arr_delay_minutes", result["feature_fingerprints"]["train"]["columns"])
+                self.assertTrue((output / "training_ids_targets.csv.gz").is_file())
+                self.assertIn("target_delay", pd.read_csv(output / "evaluation_ids.csv.gz"))
                 self.assertEqual(result["folds"][0]["excluded_immature_training_labels"], 1)
                 self.assertLess(pd.Timestamp(result["folds"][0]["max_train_label_time"]), pd.Timestamp("2026-08-01", tz="UTC"))
                 ids = pd.read_csv(output / "evaluation_ids.csv.gz")

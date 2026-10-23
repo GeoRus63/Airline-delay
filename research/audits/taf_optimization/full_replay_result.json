@@ -1,0 +1,454 @@
+{
+  "success": true,
+  "rows": 2261775,
+  "taf_columns": 53,
+  "all_values_dtypes_index_exact": true,
+  "candidate_join_seconds": 251.10568790000252,
+  "total_seconds": 266.2508048000018,
+  "peak_process_rss_bytes": 5763284992,
+  "peak_process_rss_gib": 5.3674774169921875,
+  "official_source_unchanged": true,
+  "source_feature_path": "experiments/runs/R0017/data/features.pkl",
+  "source_feature_sha256_before_after": "2a1dc2326d762a27245312b6bc59705d43222f4734aad62811d05c6a20e3ebe6",
+  "source_manifest_status_at_read": "running",
+  "projected_input_columns": [
+    "connection_id",
+    "airport_id",
+    "prediction_time",
+    "downstream_scheduled_dep_utc"
+  ],
+  "candidate_receipt": {
+    "source_path": "D:\\airline-delay\\scripts\\weather_features.py",
+    "source_sha256": "d3d1ea8944869add56762b865aab01ce70d609aec5fddea65d2b7b5203d14c67",
+    "candidate_path": "D:\\airline-delay\\tmp\\taf_optimization\\weather_features_numpy.py",
+    "candidate_sha256": "126252d54ee2bff5a50d0288f1f644719e5c3ad91cbd538d60cdd034d7a0c556",
+    "scope": "augment_taf output buffers only; source module unchanged"
+  },
+  "per_column_hashes": [
+    {
+      "column": "taf_product_id",
+      "dtype": "object",
+      "saved_sha256": "37701969b6c34098e875eb7eec2e1b6b8c92f27d2a92293a23d30de74f0a64ee",
+      "candidate_sha256": "37701969b6c34098e875eb7eec2e1b6b8c92f27d2a92293a23d30de74f0a64ee",
+      "missing_n": 8738
+    },
+    {
+      "column": "taf_bulletin_status",
+      "dtype": "object",
+      "saved_sha256": "613ae2314b4d7a279ee372fd98f102ad784ea5fb42f98a7274bdaf9c0736c426",
+      "candidate_sha256": "613ae2314b4d7a279ee372fd98f102ad784ea5fb42f98a7274bdaf9c0736c426",
+      "missing_n": 8738
+    },
+    {
+      "column": "taf_message_type",
+      "dtype": "object",
+      "saved_sha256": "9e5df66196ec5414efff2c73b44a0b0e4fd6c9f51199eab9f70cef83e7b26849",
+      "candidate_sha256": "9e5df66196ec5414efff2c73b44a0b0e4fd6c9f51199eab9f70cef83e7b26849",
+      "missing_n": 8738
+    },
+    {
+      "column": "taf_available_at",
+      "dtype": "datetime64[ns, UTC]",
+      "saved_sha256": "3db8f614516546f62a385d85b4ca71551cc3b6586fbb9c0e885b49ef21118be9",
+      "candidate_sha256": "3db8f614516546f62a385d85b4ca71551cc3b6586fbb9c0e885b49ef21118be9",
+      "missing_n": 8738
+    },
+    {
+      "column": "taf_archive_issue_time",
+      "dtype": "datetime64[ns, UTC]",
+      "saved_sha256": "9e775d1d09f5976cc3dac0fefee67bcaed82a4f19cee0ffc8a503aa3fbb1b02e",
+      "candidate_sha256": "9e775d1d09f5976cc3dac0fefee67bcaed82a4f19cee0ffc8a503aa3fbb1b02e",
+      "missing_n": 8738
+    },
+    {
+      "column": "taf_body_issue_time",
+      "dtype": "datetime64[ns, UTC]",
+      "saved_sha256": "f930cee3745404f0b93c8f6aff99a70aa8f095408701c369e7d997c386e30808",
+      "candidate_sha256": "f930cee3745404f0b93c8f6aff99a70aa8f095408701c369e7d997c386e30808",
+      "missing_n": 8738
+    },
+    {
+      "column": "taf_issue_time_mismatch_minutes",
+      "dtype": "object",
+      "saved_sha256": "e98a5ae30e031e67bb0d737901772bd4aa240d6f33d8b5aa2046f96e75aa9653",
+      "candidate_sha256": "e98a5ae30e031e67bb0d737901772bd4aa240d6f33d8b5aa2046f96e75aa9653",
+      "missing_n": 8738
+    },
+    {
+      "column": "taf_availability_assumption",
+      "dtype": "object",
+      "saved_sha256": "841ba2214816ab3b2e78389661c1625c19f6e8886b31b67ba3ebd78965c77240",
+      "candidate_sha256": "841ba2214816ab3b2e78389661c1625c19f6e8886b31b67ba3ebd78965c77240",
+      "missing_n": 8738
+    },
+    {
+      "column": "taf_untimed_archive_issue_time",
+      "dtype": "datetime64[ns, UTC]",
+      "saved_sha256": "9b750e9bc937e0dccc4b67954aaab930954fe820986b9d3d86233f05d01e27be",
+      "candidate_sha256": "9b750e9bc937e0dccc4b67954aaab930954fe820986b9d3d86233f05d01e27be",
+      "missing_n": 2253092
+    },
+    {
+      "column": "taf_query_time",
+      "dtype": "datetime64[ns, UTC]",
+      "saved_sha256": "2f14b31ed7f523f530caaa6261a16fc1a31ecef5b6342a010be8a249b97b5110",
+      "candidate_sha256": "2f14b31ed7f523f530caaa6261a16fc1a31ecef5b6342a010be8a249b97b5110",
+      "missing_n": 0
+    },
+    {
+      "column": "taf_bulletin_age_minutes",
+      "dtype": "float64",
+      "saved_sha256": "370c9a65e7d55f680080b336985830588811f3670bdee0978efa79ffbb72661d",
+      "candidate_sha256": "370c9a65e7d55f680080b336985830588811f3670bdee0978efa79ffbb72661d",
+      "missing_n": 8738
+    },
+    {
+      "column": "taf_lead_minutes",
+      "dtype": "float64",
+      "saved_sha256": "18a7cf8d56656b3895d789d3ba0f2d8f8712adac6e967f57340908874c3d8d27",
+      "candidate_sha256": "18a7cf8d56656b3895d789d3ba0f2d8f8712adac6e967f57340908874c3d8d27",
+      "missing_n": 8738
+    },
+    {
+      "column": "taf_status",
+      "dtype": "str",
+      "saved_sha256": "ca9512bbb85bb7989ec90b0cbdc9de89b0e2f989a3639ad2d8dd6aa53f53a267",
+      "candidate_sha256": "ca9512bbb85bb7989ec90b0cbdc9de89b0e2f989a3639ad2d8dd6aa53f53a267",
+      "missing_n": 0
+    },
+    {
+      "column": "taf_prevailing_missing",
+      "dtype": "float64",
+      "saved_sha256": "0b3bf04976792e3a666d651b10c20f8f19c1e23b940aa8ff292a6219e59ad7ef",
+      "candidate_sha256": "0b3bf04976792e3a666d651b10c20f8f19c1e23b940aa8ff292a6219e59ad7ef",
+      "missing_n": 0
+    },
+    {
+      "column": "taf_tempo_missing",
+      "dtype": "float64",
+      "saved_sha256": "b072687afbc68dd3bfd7d4be6d01572ecc6db7fae455a17b539bbbf80f7ef667",
+      "candidate_sha256": "b072687afbc68dd3bfd7d4be6d01572ecc6db7fae455a17b539bbbf80f7ef667",
+      "missing_n": 0
+    },
+    {
+      "column": "taf_probability_missing",
+      "dtype": "float64",
+      "saved_sha256": "fda533d044715cc9c10579b9e96e3af9ba2c3bd51d009d7082981382eab4794f",
+      "candidate_sha256": "fda533d044715cc9c10579b9e96e3af9ba2c3bd51d009d7082981382eab4794f",
+      "missing_n": 0
+    },
+    {
+      "column": "taf_prevailing_segment_count",
+      "dtype": "float64",
+      "saved_sha256": "e23808278028010616b6ba84e1f33a252c966824e005f1843461ec26818de027",
+      "candidate_sha256": "e23808278028010616b6ba84e1f33a252c966824e005f1843461ec26818de027",
+      "missing_n": 0
+    },
+    {
+      "column": "taf_tempo_segment_count",
+      "dtype": "float64",
+      "saved_sha256": "a6adeb57a2fb5b0d2bab1fb17a8e3d8f460be5103a66fa8f7cc6002db16e1fd8",
+      "candidate_sha256": "a6adeb57a2fb5b0d2bab1fb17a8e3d8f460be5103a66fa8f7cc6002db16e1fd8",
+      "missing_n": 0
+    },
+    {
+      "column": "taf_probability_segment_count",
+      "dtype": "float64",
+      "saved_sha256": "1b79eadc14b9638290831a7841368596009df0c680fc317c4793ff71f8ebaa57",
+      "candidate_sha256": "1b79eadc14b9638290831a7841368596009df0c680fc317c4793ff71f8ebaa57",
+      "missing_n": 0
+    },
+    {
+      "column": "taf_prevailing_wind_knots",
+      "dtype": "float64",
+      "saved_sha256": "ea8cd3fbebb9182fce8e49fbcd6110893142ce60c8301d1ef490b9d94248409b",
+      "candidate_sha256": "ea8cd3fbebb9182fce8e49fbcd6110893142ce60c8301d1ef490b9d94248409b",
+      "missing_n": 1059516
+    },
+    {
+      "column": "taf_prevailing_wind_direction_deg",
+      "dtype": "float64",
+      "saved_sha256": "a60640aa4725b157ec60b45aedc4f2df8fab9977434a8c17a2589cee455c92cd",
+      "candidate_sha256": "a60640aa4725b157ec60b45aedc4f2df8fab9977434a8c17a2589cee455c92cd",
+      "missing_n": 1059516
+    },
+    {
+      "column": "taf_prevailing_gust_knots",
+      "dtype": "float64",
+      "saved_sha256": "45e1b886743087a88906397076fbc7b3a5fab35c5a4fad86f5c6b65a43597bb8",
+      "candidate_sha256": "45e1b886743087a88906397076fbc7b3a5fab35c5a4fad86f5c6b65a43597bb8",
+      "missing_n": 1059516
+    },
+    {
+      "column": "taf_prevailing_visibility_miles",
+      "dtype": "float64",
+      "saved_sha256": "553bb2550f9da508f3a24568a5f0211ba0c0f381b00cede8c0636e981e0a2df4",
+      "candidate_sha256": "553bb2550f9da508f3a24568a5f0211ba0c0f381b00cede8c0636e981e0a2df4",
+      "missing_n": 905841
+    },
+    {
+      "column": "taf_prevailing_ceiling_ft",
+      "dtype": "float64",
+      "saved_sha256": "c961c92d07cdfeff666b4b1ed00e352b31f7c1bbb1e3e56213242cad35c51850",
+      "candidate_sha256": "c961c92d07cdfeff666b4b1ed00e352b31f7c1bbb1e3e56213242cad35c51850",
+      "missing_n": 1690884
+    },
+    {
+      "column": "taf_prevailing_precip_flag",
+      "dtype": "float64",
+      "saved_sha256": "b7bae116ec8d30badbdc68ffa63ed12a414b58ec552110218e769cafd489f3e0",
+      "candidate_sha256": "b7bae116ec8d30badbdc68ffa63ed12a414b58ec552110218e769cafd489f3e0",
+      "missing_n": 905841
+    },
+    {
+      "column": "taf_prevailing_rain_flag",
+      "dtype": "float64",
+      "saved_sha256": "7eb3cb4db5f8d286176466403b7f6fa4d16bb481d6cd069bb2755b016eb7357e",
+      "candidate_sha256": "7eb3cb4db5f8d286176466403b7f6fa4d16bb481d6cd069bb2755b016eb7357e",
+      "missing_n": 905841
+    },
+    {
+      "column": "taf_prevailing_snow_flag",
+      "dtype": "float64",
+      "saved_sha256": "33899cdb36ab0b1a808185f8fcf8f07d6c53d9d1a30099876eee4eec286b7c66",
+      "candidate_sha256": "33899cdb36ab0b1a808185f8fcf8f07d6c53d9d1a30099876eee4eec286b7c66",
+      "missing_n": 905841
+    },
+    {
+      "column": "taf_prevailing_thunder_flag",
+      "dtype": "float64",
+      "saved_sha256": "b2f0a76ea441d2e0ff1d798cf6fc42b03956fd66391cf93159e6345f75954251",
+      "candidate_sha256": "b2f0a76ea441d2e0ff1d798cf6fc42b03956fd66391cf93159e6345f75954251",
+      "missing_n": 905841
+    },
+    {
+      "column": "taf_prevailing_segment_start_min",
+      "dtype": "datetime64[ns, UTC]",
+      "saved_sha256": "55d6e8244afa3484496dcb069ea725fa7dbaf241722a6e3ac5e0a5d052082b87",
+      "candidate_sha256": "55d6e8244afa3484496dcb069ea725fa7dbaf241722a6e3ac5e0a5d052082b87",
+      "missing_n": 905841
+    },
+    {
+      "column": "taf_prevailing_segment_end_max",
+      "dtype": "datetime64[ns, UTC]",
+      "saved_sha256": "4530be93c7cb69eba71923009253088d5c035ae13b6fb48abc6a32979435c9c6",
+      "candidate_sha256": "4530be93c7cb69eba71923009253088d5c035ae13b6fb48abc6a32979435c9c6",
+      "missing_n": 905841
+    },
+    {
+      "column": "taf_tempo_wind_knots",
+      "dtype": "float64",
+      "saved_sha256": "1802b52a119599b2110ab5ddd98c9475f66f503dadb209121830876c7b0d7a97",
+      "candidate_sha256": "1802b52a119599b2110ab5ddd98c9475f66f503dadb209121830876c7b0d7a97",
+      "missing_n": 2254536
+    },
+    {
+      "column": "taf_tempo_wind_direction_deg",
+      "dtype": "float64",
+      "saved_sha256": "a287c50d2f5de8b6e93ae4192352afe11c7a8411946e63fc87e3c740e7e86978",
+      "candidate_sha256": "a287c50d2f5de8b6e93ae4192352afe11c7a8411946e63fc87e3c740e7e86978",
+      "missing_n": 2254536
+    },
+    {
+      "column": "taf_tempo_gust_knots",
+      "dtype": "float64",
+      "saved_sha256": "aad6a8c7d75f94ee774e54825303742b8a927183f183d33f29cb7280baf02af8",
+      "candidate_sha256": "aad6a8c7d75f94ee774e54825303742b8a927183f183d33f29cb7280baf02af8",
+      "missing_n": 2254536
+    },
+    {
+      "column": "taf_tempo_visibility_miles",
+      "dtype": "float64",
+      "saved_sha256": "d48accc726a8924ca41fd8825c79efab5ee5750f8410c5b11a81a40f5e38a320",
+      "candidate_sha256": "d48accc726a8924ca41fd8825c79efab5ee5750f8410c5b11a81a40f5e38a320",
+      "missing_n": 2222136
+    },
+    {
+      "column": "taf_tempo_ceiling_ft",
+      "dtype": "float64",
+      "saved_sha256": "e4c357ca476b0ec0104516b1a3463f868144b5316890053cebc50af7d268d80e",
+      "candidate_sha256": "e4c357ca476b0ec0104516b1a3463f868144b5316890053cebc50af7d268d80e",
+      "missing_n": 2209499
+    },
+    {
+      "column": "taf_tempo_precip_flag",
+      "dtype": "float64",
+      "saved_sha256": "ee310634c0cad87e8dc433a3b131d1d4c3851319d17e9bc6b848d4270aa263ed",
+      "candidate_sha256": "ee310634c0cad87e8dc433a3b131d1d4c3851319d17e9bc6b848d4270aa263ed",
+      "missing_n": 2198324
+    },
+    {
+      "column": "taf_tempo_rain_flag",
+      "dtype": "float64",
+      "saved_sha256": "8704a873210eb0db5cc0285c7ce9cafc704ffe4849ecc4b1ed0adee298a95629",
+      "candidate_sha256": "8704a873210eb0db5cc0285c7ce9cafc704ffe4849ecc4b1ed0adee298a95629",
+      "missing_n": 2198324
+    },
+    {
+      "column": "taf_tempo_snow_flag",
+      "dtype": "float64",
+      "saved_sha256": "21529dd15bb61ae714d1bae71147ee59141aab5f629f3b1675073733802f1fd9",
+      "candidate_sha256": "21529dd15bb61ae714d1bae71147ee59141aab5f629f3b1675073733802f1fd9",
+      "missing_n": 2198324
+    },
+    {
+      "column": "taf_tempo_thunder_flag",
+      "dtype": "float64",
+      "saved_sha256": "721a4d80b3beb115ae2b113d520db358370405fdfd9fef03c7c92d0844ab7e36",
+      "candidate_sha256": "721a4d80b3beb115ae2b113d520db358370405fdfd9fef03c7c92d0844ab7e36",
+      "missing_n": 2198324
+    },
+    {
+      "column": "taf_tempo_segment_start_min",
+      "dtype": "datetime64[ns, UTC]",
+      "saved_sha256": "2671abd820005c96f5219a4e7e17d6683f0030f9811722dc67c93064dc2504d5",
+      "candidate_sha256": "2671abd820005c96f5219a4e7e17d6683f0030f9811722dc67c93064dc2504d5",
+      "missing_n": 2198324
+    },
+    {
+      "column": "taf_tempo_segment_end_max",
+      "dtype": "datetime64[ns, UTC]",
+      "saved_sha256": "d0c5e486c4f321fc2d1ec5ff3d6755c7aa29f145053916ebb6ccecc478659854",
+      "candidate_sha256": "d0c5e486c4f321fc2d1ec5ff3d6755c7aa29f145053916ebb6ccecc478659854",
+      "missing_n": 2198324
+    },
+    {
+      "column": "taf_probability_wind_knots",
+      "dtype": "float64",
+      "saved_sha256": "a2ed21a7f63c7ea3d1f2a64cc0570704dd723ae2b000844558e3aa39f5140542",
+      "candidate_sha256": "a2ed21a7f63c7ea3d1f2a64cc0570704dd723ae2b000844558e3aa39f5140542",
+      "missing_n": 2260524
+    },
+    {
+      "column": "taf_probability_wind_direction_deg",
+      "dtype": "float64",
+      "saved_sha256": "e75f689b1393723db04ae23113286be0469c829b31e60879be01091fcd40d28c",
+      "candidate_sha256": "e75f689b1393723db04ae23113286be0469c829b31e60879be01091fcd40d28c",
+      "missing_n": 2260524
+    },
+    {
+      "column": "taf_probability_gust_knots",
+      "dtype": "float64",
+      "saved_sha256": "27c5b8925b0e42841062f6d9cd601b883580adbb06b1b11d77c1ef00e1febaaf",
+      "candidate_sha256": "27c5b8925b0e42841062f6d9cd601b883580adbb06b1b11d77c1ef00e1febaaf",
+      "missing_n": 2260524
+    },
+    {
+      "column": "taf_probability_visibility_miles",
+      "dtype": "float64",
+      "saved_sha256": "939b1826247c0fb91e85af22f6dfc8b97b492b0f5a5fce7f7fdd55d8fdee875b",
+      "candidate_sha256": "939b1826247c0fb91e85af22f6dfc8b97b492b0f5a5fce7f7fdd55d8fdee875b",
+      "missing_n": 2230762
+    },
+    {
+      "column": "taf_probability_ceiling_ft",
+      "dtype": "float64",
+      "saved_sha256": "f9af43519e2fa79936ea56b932b64cebc5f7e62c9a83d74d31ff8a65448a9e25",
+      "candidate_sha256": "f9af43519e2fa79936ea56b932b64cebc5f7e62c9a83d74d31ff8a65448a9e25",
+      "missing_n": 2225461
+    },
+    {
+      "column": "taf_probability_precip_flag",
+      "dtype": "float64",
+      "saved_sha256": "0f466a7d8bb4651bef64bbc487408ce7a4c6def2463f70885ba39c63e1c43c9d",
+      "candidate_sha256": "0f466a7d8bb4651bef64bbc487408ce7a4c6def2463f70885ba39c63e1c43c9d",
+      "missing_n": 2221266
+    },
+    {
+      "column": "taf_probability_rain_flag",
+      "dtype": "float64",
+      "saved_sha256": "6737a6adab038a27b3a34c1bd2bcdd3a70c9315b7f0773724411d14b39428f8d",
+      "candidate_sha256": "6737a6adab038a27b3a34c1bd2bcdd3a70c9315b7f0773724411d14b39428f8d",
+      "missing_n": 2221266
+    },
+    {
+      "column": "taf_probability_snow_flag",
+      "dtype": "float64",
+      "saved_sha256": "8adfdfff5447e4f130f2693fd7b3f72967c3e3c314c0f179df3415795619d3fd",
+      "candidate_sha256": "8adfdfff5447e4f130f2693fd7b3f72967c3e3c314c0f179df3415795619d3fd",
+      "missing_n": 2221266
+    },
+    {
+      "column": "taf_probability_thunder_flag",
+      "dtype": "float64",
+      "saved_sha256": "fc3c46668d3513d9e239ca64bdac10295b1bf796e84ba43ffbc12d4a432998ed",
+      "candidate_sha256": "fc3c46668d3513d9e239ca64bdac10295b1bf796e84ba43ffbc12d4a432998ed",
+      "missing_n": 2221266
+    },
+    {
+      "column": "taf_probability_segment_start_min",
+      "dtype": "datetime64[ns, UTC]",
+      "saved_sha256": "e494498a04af31528cc944f09c7a4dfcad9b50f164fd5ecb4394e1f73805c706",
+      "candidate_sha256": "e494498a04af31528cc944f09c7a4dfcad9b50f164fd5ecb4394e1f73805c706",
+      "missing_n": 2221266
+    },
+    {
+      "column": "taf_probability_segment_end_max",
+      "dtype": "datetime64[ns, UTC]",
+      "saved_sha256": "ff312c1681d09223636bd2bdda518745707157a1ce6c4f3d3d9e2e088c28a1a0",
+      "candidate_sha256": "ff312c1681d09223636bd2bdda518745707157a1ce6c4f3d3d9e2e088c28a1a0",
+      "missing_n": 2221266
+    },
+    {
+      "column": "taf_missing",
+      "dtype": "float64",
+      "saved_sha256": "a8a77ae035416a1df6c3f55478893d1072a7362f25b3c3c81c686ead2dad69e5",
+      "candidate_sha256": "a8a77ae035416a1df6c3f55478893d1072a7362f25b3c3c81c686ead2dad69e5",
+      "missing_n": 0
+    }
+  ],
+  "target_columns_inspected": false,
+  "august_flight_rows_present": false,
+  "fit_called": false,
+  "monitor": [
+    {
+      "elapsed_seconds": 30.5,
+      "phase": "candidate full development TAF replay",
+      "rss_gib": 4.41,
+      "system_available_gib": 47.416
+    },
+    {
+      "elapsed_seconds": 60.9,
+      "phase": "candidate full development TAF replay",
+      "rss_gib": 4.635,
+      "system_available_gib": 54.468
+    },
+    {
+      "elapsed_seconds": 91.2,
+      "phase": "candidate full development TAF replay",
+      "rss_gib": 4.644,
+      "system_available_gib": 53.881
+    },
+    {
+      "elapsed_seconds": 121.5,
+      "phase": "candidate full development TAF replay",
+      "rss_gib": 4.652,
+      "system_available_gib": 53.683
+    },
+    {
+      "elapsed_seconds": 151.8,
+      "phase": "candidate full development TAF replay",
+      "rss_gib": 4.66,
+      "system_available_gib": 54.098
+    },
+    {
+      "elapsed_seconds": 182.2,
+      "phase": "candidate full development TAF replay",
+      "rss_gib": 4.668,
+      "system_available_gib": 54.529
+    },
+    {
+      "elapsed_seconds": 212.5,
+      "phase": "candidate full development TAF replay",
+      "rss_gib": 4.675,
+      "system_available_gib": 58.747
+    },
+    {
+      "elapsed_seconds": 242.8,
+      "phase": "candidate full development TAF replay",
+      "rss_gib": 4.685,
+      "system_available_gib": 59.026
+    }
+  ],
+  "interpretation": "Exact full development saved-TAF equivalence only; no rule/parameter/model selection"
+}

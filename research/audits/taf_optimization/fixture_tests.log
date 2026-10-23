@@ -1,0 +1,14 @@
+test_amended_conflict_preserves_scalar_batch_ambiguity_without_fallback (tests.test_weather_features.WeatherFeatureTests.test_amended_conflict_preserves_scalar_batch_ambiguity_without_fallback) ... ok
+test_augment_metar_prefixes_features_and_keeps_rows (tests.test_weather_features.WeatherFeatureTests.test_augment_metar_prefixes_features_and_keeps_rows) ... ok
+test_augment_noaa_converts_units_respects_asof_qc_and_only_fills_missing (tests.test_weather_features.WeatherFeatureTests.test_augment_noaa_converts_units_respects_asof_qc_and_only_fills_missing) ... ok
+test_augment_taf_marks_conflicting_duplicate_product_as_ambiguous (tests.test_weather_features.WeatherFeatureTests.test_augment_taf_marks_conflicting_duplicate_product_as_ambiguous) ... ok
+test_augment_taf_selects_then_aggregates_each_segment_type (tests.test_weather_features.WeatherFeatureTests.test_augment_taf_selects_then_aggregates_each_segment_type) ... ok
+test_noaa_backfill_respects_structural_gust_and_ceiling_missingness (tests.test_weather_features.WeatherFeatureTests.test_noaa_backfill_respects_structural_gust_and_ceiling_missingness) ... ok
+test_noaa_overlap_diagnostics_reports_converted_exact_time_differences (tests.test_weather_features.WeatherFeatureTests.test_noaa_overlap_diagnostics_reports_converted_exact_time_differences) ... ok
+test_taf_and_noaa_asof_normalize_mixed_datetime_units (tests.test_weather_features.WeatherFeatureTests.test_taf_and_noaa_asof_normalize_mixed_datetime_units) ... ok
+test_taf_untimed_archive_blocks_fallback_with_nondefault_flight_index (tests.test_weather_features.WeatherFeatureTests.test_taf_untimed_archive_blocks_fallback_with_nondefault_flight_index) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.554s
+
+OK
