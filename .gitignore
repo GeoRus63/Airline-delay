@@ -9,3 +9,4 @@ experiments/runs/*/predictions/
 experiments/runs/*/data/
 experiments/runs/*/models/
 research/reviews/*_page.png
+references/taf_validity.csv

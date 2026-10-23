@@ -51,6 +51,28 @@ def fixture(root):
 
 
 class FinalEvaluation(unittest.TestCase):
+    def test_development_feature_archive_forbidden_in_runtime_and_frozen_config(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            _, frozen, config, path = fixture(root)
+            with patch.object(final, "ROOT", root), patch.object(final, "load_configured_features", side_effect=AssertionError("must not read")):
+                with self.assertRaisesRegex(ValueError, "feature_archive_path"):
+                    final.validate_freeze({**config, "feature_archive_path": "unused.pkl"})
+                with self.assertRaisesRegex(ValueError, "feature_source_run_id"):
+                    final.validate_freeze({**config, "feature_source_run_id": "unused"})
+                frozen["config"]["feature_archive_path"] = "unused.pkl"
+                frozen["payload_sha256"] = final.canonical_sha256({k: v for k, v in frozen.items() if k != "payload_sha256"})
+                path.write_text(json.dumps(frozen))
+                with self.assertRaisesRegex(ValueError, "feature_archive_path"):
+                    final.validate_freeze({**config, "freeze_manifest_sha256": final.sha256_file(path)})
+                del frozen["config"]["feature_archive_path"]
+                frozen["config"]["feature_source_run_id"] = "unused"
+                frozen["payload_sha256"] = final.canonical_sha256({k: v for k, v in frozen.items() if k != "payload_sha256"})
+                path.write_text(json.dumps(frozen))
+                with self.assertRaisesRegex(ValueError, "feature_source_run_id"):
+                    final.validate_freeze({**config, "freeze_manifest_sha256": final.sha256_file(path)})
+                self.assertFalse((root / "experiments/final_access/2026-08.json").exists())
+
     def test_freeze_pins_are_checked_before_reading_final_features(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

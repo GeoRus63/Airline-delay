@@ -115,6 +115,18 @@ class ModelSelection(unittest.TestCase):
             root = Path(temp)
             linear = write_run(root, "LINEAR")
             algorithms = algorithm_grid(root, linear)
+            # Algorithm-only runs reuse the source features and need not repeat
+            # the three baselines already archived by the linear source.
+            for algorithm in algorithms:
+                config_path = algorithm / "config.json"
+                config = json.loads(config_path.read_text())
+                config.update(feature_archive_path=str(linear / "data/features.pkl"),
+                              feature_source_run_id="LINEAR", include_baselines=False)
+                config_path.write_text(json.dumps(config))
+                manifest_path = algorithm / "model_manifest.json"
+                manifest = json.loads(manifest_path.read_text())
+                manifest.update(include_baselines=False, models=[config["model_name"]])
+                manifest_path.write_text(json.dumps(manifest))
             with patch.object(Pipeline, "fit", side_effect=AssertionError("must never train")):
                 result = selection.select_model(linear, algorithms, root / "model-choice")
             self.assertEqual(result["selected_run_id"], "RF200")
@@ -129,6 +141,9 @@ class ModelSelection(unittest.TestCase):
             self.assertEqual(len(ci), 16)
             self.assertTrue((root / "model-choice/baseline_monthly_metrics.csv").is_file())
             self.assertNotIn("mode", result["config"])
+            self.assertNotIn("feature_archive_path", result["config"])
+            self.assertNotIn("feature_source_run_id", result["config"])
+            self.assertTrue(result["config"]["include_baselines"])
             with self.assertRaisesRegex(ValueError, "grid"):
                 selection.select_model(linear, algorithms[:-1], root / "incomplete")
 

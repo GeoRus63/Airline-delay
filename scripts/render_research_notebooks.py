@@ -387,9 +387,9 @@ def _render(notebook, filename, run_dir, root, model_runs=(), rq1_run_dir=None, 
             "raw_data_read": False, "trained": False}
 
 
-def render_analysis(run_dir, model_runs=(), *, root=ROOT, update_main=True):
+def render_analysis(run_dir, model_runs=(), *, output_dir=None, root=ROOT, update_main=True):
     return _render(analysis_template(), "06_共同支持与模型比较.ipynb", run_dir, root,
-                   model_runs=model_runs, update_main=update_main)
+                   model_runs=model_runs, update_main=update_main, output_dir=output_dir)
 
 
 def render_final(run_dir, rq1_run_dir=None, *, output_dir=None, root=ROOT, update_main=True):
@@ -404,9 +404,9 @@ if __name__ == "__main__":
     parser.add_argument("--mode", choices=["analysis", "final"], default="analysis")
     parser.add_argument("--model-runs", nargs="*", default=[])
     parser.add_argument("--rq1-run-dir")
-    parser.add_argument("--output-dir", help="Separate active archive for the final research notebook")
+    parser.add_argument("--output-dir", help="Separate active archive for the executed research notebook")
     parser.add_argument("--no-update-main", action="store_true")
     args = parser.parse_args()
-    result = (render_analysis(args.run_dir, args.model_runs, update_main=not args.no_update_main)
+    result = (render_analysis(args.run_dir, args.model_runs, output_dir=args.output_dir, update_main=not args.no_update_main)
               if args.mode == "analysis" else render_final(args.run_dir, args.rq1_run_dir, output_dir=args.output_dir, update_main=not args.no_update_main))
     print(result)

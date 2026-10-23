@@ -120,6 +120,8 @@ def validate_freeze(config):
     """
     if config.get("mode") != "final":
         raise ValueError("August assessment is available only with mode='final'")
+    if {"feature_archive_path", "feature_source_run_id"} & set(config):
+        raise ValueError("Final evaluation forbids development feature_archive_path/feature_source_run_id")
     if not config.get("freeze_manifest_path") or not config.get("freeze_manifest_sha256"):
         raise ValueError("freeze_manifest_path and freeze_manifest_sha256 are required")
     path = _path(config["freeze_manifest_path"])
@@ -138,6 +140,8 @@ def validate_freeze(config):
     if not frozen.get("selection", {}).get("selected_run_id") or not frozen["selection"].get("reason"):
         raise ValueError("Freeze must identify the selected development run and selection reason")
     locked = frozen["config"]
+    if {"feature_archive_path", "feature_source_run_id"} & set(locked):
+        raise ValueError("Final evaluation forbids development feature_archive_path/feature_source_run_id")
     if REQUIRED_CONFIG_KEYS - set(locked):
         raise ValueError(f"Frozen scientific config is incomplete: {sorted(REQUIRED_CONFIG_KEYS - set(locked))}")
     if frozen.get("protocol") != DEFAULT_PROTOCOL or locked["include_baselines"] is not True:

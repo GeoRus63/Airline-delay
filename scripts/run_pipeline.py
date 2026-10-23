@@ -95,6 +95,31 @@ def monitor_resources(path, stop):
 
 
 def execute(config, run_dir):
+    if config['mode'] == 'select_features':
+        from select_models import select_features
+        return select_features([ROOT / 'experiments/runs' / value for value in config['candidate_run_ids']],
+                               run_dir / 'selection')
+    if config['mode'] == 'select_model':
+        from select_models import select_model
+        from explain_models import explain_run
+        from render_research_notebooks import render_analysis
+        feature_selection_run = ROOT / 'experiments/runs' / config['feature_selection_run_id']
+        selection_path = feature_selection_run / 'selection/feature_selection.json'
+        if json.loads((feature_selection_run / 'manifest.json').read_text(encoding='utf-8')).get('status') != 'completed':
+            raise ValueError('Model selection requires completed feature-selection evidence')
+        chosen_features = json.loads(selection_path.read_text(encoding='utf-8'))
+        if chosen_features['selected_run_id'] != config['feature_source_run_id']:
+            raise ValueError('Algorithm comparison source differs from the selected mainline feature run')
+        write_json(run_dir / 'feature_selection_reference.json', receipt(selection_path))
+        result = select_model(ROOT / 'experiments/runs' / config['feature_source_run_id'],
+                              [ROOT / 'experiments/runs' / value for value in config['algorithm_run_ids']],
+                              run_dir / 'selection')
+        for source_id in dict.fromkeys([config['feature_source_run_id'], result['selected_run_id']]):
+            explain_run(ROOT / 'experiments/runs' / source_id, run_dir / 'explanations' / source_id)
+        render_analysis(ROOT / 'experiments/runs' / config['rq1_development_run_id'],
+                        model_runs=[ROOT / 'experiments/runs' / name for name in config['model_run_ids']],
+                        output_dir=run_dir)
+        return result
     if config['mode'] == 'prepare':
         import prepare_flights
         prepare_flights.self_check()
@@ -215,7 +240,13 @@ def main():
         os.environ[name] = str(config.get('threads', 16))
     git_commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     source_names = ['scripts/run_pipeline.py', 'scripts/prepare_flights.py']
-    if config['mode'] == 'audit_preparation':
+    if config['mode'] in ['select_features', 'select_model']:
+        source_names += ['scripts/select_models.py', 'scripts/final_evaluation.py', 'scripts/train_models.py',
+                         'scripts/build_features.py', 'scripts/evaluate_models.py', 'scripts/compare_experiments.py',
+                         'configs/model_selection_protocol.json']
+        if config['mode'] == 'select_model':
+            source_names += ['scripts/explain_models.py', 'scripts/render_research_notebooks.py']
+    elif config['mode'] == 'audit_preparation':
         source_names.append('scripts/audit_preparation.py')
     elif config['mode'] == 'prepare_aircraft':
         source_names += ['scripts/prepare_aircraft.py', 'references/aircraft_reference_2024.csv',
