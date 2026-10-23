@@ -1,0 +1,26 @@
+2026-10-23T22:39:55.481320+00:00 R0011 started at commit c6a7f6ce11b0de7bac311ae775d4d2852efa240f
+[2026-05] train=553,140, validation=574,571, immature=1,544
+[2026-06] train=1,127,717, validation=561,972, immature=1,538
+[2026-07] train=1,689,573, validation=570,548, immature=1,654
+[2026-05] completed in 44.79s
+[2026-06] completed in 81.56s
+[2026-07] completed in 100.51s
+D:\airline-delay\.venv\Lib\site-packages\zmq\_future.py:718: RuntimeWarning: Proactor event loop does not implement add_reader family of methods required for zmq. Registering an additional selector thread for add_reader support via tornado. Use `asyncio.set_event_loop_policy(WindowsSelectorEventLoopPolicy())` to avoid this warning.
+  self._get_loop()
+Executed and exported 01_航班清洗与衔接.ipynb
+Executed and exported 02_天气与特征.ipynb
+Traceback (most recent call last):
+  File "D:\airline-delay\scripts\run_pipeline.py", line 233, in main
+    manifest['result'] = execute(config, run_dir)
+                         ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\airline-delay\scripts\run_pipeline.py", line 142, in execute
+    render_notebooks(run_dir)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\airline-delay\scripts\render_notebooks.py", line 280, in render_notebooks
+    shutil.copy2(executed, source)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "E:\PythonEnvs\general\Lib\shutil.py", line 453, in copy2
+    _winapi.CopyFile2(src_, dst_, flags)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+OSError: [WinError 1224] 请求的操作无法在使用用户映射区域打开的文件上执行。
+2026-10-23T22:43:57.762389+00:00 status=failed; seconds=242.3

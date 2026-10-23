@@ -1,0 +1,57 @@
+{
+  "registered_at_stage": "After P3 numerical metrics; before any weather or decision-tree/random-forest development model",
+  "primary_metric": "sample-weighted pooled May-July validation MAE (minutes)",
+  "feature_selection": {
+    "eligible_mainline": [
+      "G0",
+      "G1",
+      "G2",
+      "G3",
+      "G4A",
+      "G4B"
+    ],
+    "rule": "Choose minimum pooled MAE; tie within 1e-9 chooses fewer predictors/earlier mainline stage",
+    "excluded_primary_branches": [
+      "G2_VARIANT",
+      "NOAA retrospective backfill"
+    ],
+    "same_ids_labels_splits_required": true
+  },
+  "algorithm_candidates": {
+    "linear": "same selected feature set, fixed existing OLS settings",
+    "decision_tree": {
+      "max_depth": [
+        8,
+        16
+      ],
+      "min_samples_leaf": [
+        50,
+        200
+      ],
+      "random_state": 42
+    },
+    "random_forest": {
+      "n_estimators": 200,
+      "max_depth": 16,
+      "max_features": 0.5,
+      "min_samples_leaf": [
+        50,
+        200
+      ],
+      "random_state": 42
+    }
+  },
+  "within_family_selection": "Minimum pooled MAE; exact numerical ties choose shallower tree/larger leaf",
+  "complexity_preference": {
+    "order": [
+      "linear",
+      "decision_tree",
+      "random_forest"
+    ],
+    "promotion_rule": "Starting with linear, promote to the best candidate of the next family only if its pooled MAE improvement is at least max(0.10 minute, 0.005 * retained MAE), at least 2 of 3 monthly MAEs improve, and the worst monthly deterioration is at most 0.10 minute",
+    "paired_intervals": "Report paired 7-day 1000-repeat intervals as uncertainty evidence; no parameter changes to chase interval significance"
+  },
+  "baseline_rule": "Compare the retained learned model with training_mean, training_median and carry_forward on primary MAE; declare lowest-MAE candidate the primary, including a baseline if it wins. No RMSE override.",
+  "test_rule": "Freeze full scientific config, source/data hashes and selection reason before one formal August prediction-window assessment. No post-test tuning.",
+  "disclosure": "Practical/stability thresholds refine the original simpler-if-small-and-unstable rule during development; they were not registered before P0-P3. No algorithm candidate has been evaluated when this file is first committed."
+}

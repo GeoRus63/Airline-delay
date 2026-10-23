@@ -238,6 +238,7 @@ def render_notebooks(run_dir: str | Path, root: str | Path = ROOT, include_prepa
     _rq2_figure(run_dir)
     exporter = HTMLExporter()
     paths = []
+    display_warnings = []
     names = list(notebook_names) if notebook_names is not None else (
         (["01_航班清洗与衔接.ipynb"] if include_preparation and (run_dir / "cleaning_summary.json").is_file() and
          (root / "notebooks/01_航班清洗与衔接.ipynb").is_file() else []) +
@@ -277,10 +278,22 @@ def render_notebooks(run_dir: str | Path, root: str | Path = ROOT, include_prepa
         html, _ = exporter.from_notebook_node(notebook)
         executed.with_suffix(".html").write_text(html, encoding="utf-8")
         if update_main:
-            shutil.copy2(executed, source)
+            try:
+                shutil.copy2(executed, source)
+            except OSError as error:
+                if getattr(error, 'winerror', None) not in {32, 33, 1224}:
+                    raise
+                # The immutable executed notebook/HTML are already complete.
+                # A viewer may memory-map the convenience copy on Windows.
+                display_warnings.append({'notebook': name, 'winerror': error.winerror,
+                                         'message': str(error), 'executed_archive': str(executed),
+                                         'display_copy_updated': False})
+                (run_dir / 'notebook_display_warnings.json').write_text(
+                    json.dumps(display_warnings, ensure_ascii=False, indent=2), encoding='utf-8')
+                print(f'Display copy locked; executed archive retained: {name}', flush=True)
         paths.append(str(executed))
         print(f"Executed and exported {name}", flush=True)
-    return {"executed_notebooks": paths, "interpreter": sys.executable}
+    return {"executed_notebooks": paths, "interpreter": sys.executable, "display_copy_warnings": display_warnings}
 
 
 if __name__ == "__main__":
