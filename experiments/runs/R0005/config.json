@@ -1,0 +1,11 @@
+{
+  "stage": "P0-data-correction",
+  "mode": "rebuild_cohorts",
+  "data_id": "D0003",
+  "source_data_id": "D0001",
+  "parent_run_id": "R0004",
+  "change": "Retain endpoint planned-time ambiguity checks across monthly QA boundaries",
+  "threads": 16,
+  "seed": 42,
+  "test_target_sealed": true
+}

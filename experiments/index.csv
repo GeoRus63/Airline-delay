@@ -3,3 +3,4 @@ R0001,,P0-preflight,failed,Initial delivered synthetic preparation checks,Correc
 R0002,R0001,P0-data,completed,First full five-month preparation from verified delivery snapshot,Retain outputs; review before next stage,experiments/runs/R0002
 R0003,R0002,P0-data-audit,completed,Structural audit and prefix comparison of global flight quality flags,Retain outputs; review before next stage,experiments/runs/R0003
 R0004,R0003,P0-data-correction,invalidated,Isolate retrospective QA flags by prediction-month cutoff instead of the complete five-month archive,Boundary downstream planned-time ambiguity can be accepted; corrected by R0005 D0003,experiments/runs/R0004
+R0005,R0004,P0-data-correction,completed,Retain endpoint planned-time ambiguity checks across monthly QA boundaries,Retain outputs; review before next stage,experiments/runs/R0005

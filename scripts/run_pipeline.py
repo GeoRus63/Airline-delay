@@ -111,11 +111,13 @@ def execute(config, run_dir):
         print(json.dumps(summary, indent=2), flush=True)
         return summary
     if config['mode'] == 'development':
-        from build_features import load_base_features
+        from build_features import load_configured_features
         from train_models import run_development
-        frame = load_base_features(ROOT / config.get('connection_path', 'processed/flight_connections.csv.gz'), development_only=True)
-        write_json(run_dir / 'feature_audit.json', frame.attrs.get('feature_audit', {}))
+        frame = load_configured_features(config, development_only=True)
+        write_json(run_dir / 'feature_audit.json', dict(frame.attrs))
         shutil.copy2(ROOT / 'tables/feature_dictionary.csv', run_dir / 'feature_dictionary.csv')
+        (run_dir / 'data').mkdir(exist_ok=True)
+        frame.to_pickle(run_dir / 'data/features.pkl')
         result = run_development(frame, config, run_dir)
         from analyze_eda import run as eda
         from analyze_rq1 import run as rq1
@@ -157,7 +159,10 @@ def main():
         source_names.append('scripts/rebuild_cohorts.py')
     elif config['mode'] == 'development':
         source_names += ['scripts/build_features.py', 'scripts/train_models.py', 'scripts/evaluate_models.py',
-                         'scripts/analyze_eda.py', 'scripts/analyze_rq1.py', 'scripts/render_notebooks.py']
+                         'scripts/analyze_eda.py', 'scripts/analyze_rq1.py', 'scripts/render_notebooks.py',
+                         'scripts/operational_features.py']
+        if config.get('feature_group') in ['G2', 'G3', 'G4a', 'G4b']:
+            source_names += ['references/aircraft_reference_2024.csv', 'references/aircraft_type_aliases.csv']
         source_names += [p.relative_to(ROOT).as_posix() for p in sorted((ROOT / 'notebooks').glob('*.ipynb')) if p.name[:2] in ['01', '03', '04', '05']]
         source_names.append('tables/feature_dictionary.csv')
     source_names.append(config_path.relative_to(ROOT).as_posix())
