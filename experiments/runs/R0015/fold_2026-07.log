@@ -1,0 +1,9 @@
+{"excluded_immature_training_labels": 1654, "fold": "2026-07", "max_train_label_time": "2026-06-30T23:59:00+00:00", "max_train_prediction_time": "2026-06-30T23:29:00+00:00", "max_validation_prediction_time": "2026-07-31T23:59:00+00:00", "min_validation_prediction_time": "2026-07-01T00:00:00+00:00", "train_end_exclusive": "2026-07-01T00:00:00+00:00", "train_id_sha256": "620f6bd533a0293c182707e431ac65134e28da7eb60cc3217ffe3e3e55810078", "train_rows": 1689573, "train_start": "2026-04-01T00:00:00+00:00", "train_target_sha256": "3f44149b050fa6f382963ad2b9afca69b645b2bb61692b1516e7a7b6dae5fb81", "validation_end_exclusive": "2026-08-01T00:00:00+00:00", "validation_id_sha256": "df7fcbba5aaedaa4b8e9d6a590fa9bfaf19de5ff4b9070ad9b5c53d54e08c504", "validation_rows": 570548, "validation_start": "2026-07-01T00:00:00+00:00", "validation_target_sha256": "0533c6befc1f7beac3ebae6d421b6945f82253dc78b6555fe68265a06e464784"}
+pid=9972, threads=8
+training_mean saved; elapsed=6.648s
+training_median saved; elapsed=6.467s
+carry_forward saved; elapsed=7.038s
+D:\airline-delay\.venv\Lib\site-packages\sklearn\preprocessing\_encoders.py:261: UserWarning: Found unknown categories in columns [0, 1] during transform. These unknown categories will be encoded as the infrequent category.
+  warnings.warn(msg, UserWarning)
+g4a_linear saved; elapsed=115.682s
+status=completed; elapsed=136.161s
