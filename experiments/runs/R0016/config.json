@@ -1,0 +1,12 @@
+{
+  "stage": "P4-weather-preparation",
+  "mode": "prepare_weather",
+  "data_id": "W0002",
+  "parent_run_id": "R0014",
+  "change": "Rebuild weather with unverified TAF blocking anchor no earlier than archived product ID; preserve W0001",
+  "input_path": "raw/weather",
+  "weather_output_dir": "processed/W0002",
+  "threads": 8,
+  "seed": 42,
+  "test_target_sealed": true
+}

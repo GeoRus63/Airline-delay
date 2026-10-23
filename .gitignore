@@ -11,3 +11,4 @@ experiments/runs/*/models/
 research/reviews/*_page.png
 references/taf_validity.csv
 tmp/
+.chart-data-*/

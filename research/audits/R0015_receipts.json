@@ -1,0 +1,1395 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-10-23T23:16:42.780574+00:00",
+  "root": "D:\\airline-delay",
+  "passed": true,
+  "errors": [],
+  "warnings": [],
+  "environment": {
+    "python": "3.13.15 | packaged by conda-forge | (main, Sep  2 2026, 21:52:43) [MSC v.1944 64 bit (AMD64)]",
+    "executable": "D:\\airline-delay\\.venv\\Scripts\\python.exe",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "requirements_sha256": "1958efbcf09e66e01ad2fac1d0fc2af00f9e5c5c5e37d76f152ede29d4f74f06",
+    "packages": [
+      {
+        "package": "ipykernel",
+        "required": "7.3.0",
+        "observed": "7.3.0",
+        "matches": true
+      },
+      {
+        "package": "jupyterlab",
+        "required": "4.5.7",
+        "observed": "4.5.7",
+        "matches": true
+      },
+      {
+        "package": "matplotlib",
+        "required": "3.10.9",
+        "observed": "3.10.9",
+        "matches": true
+      },
+      {
+        "package": "nbclient",
+        "required": "0.11.0",
+        "observed": "0.11.0",
+        "matches": true
+      },
+      {
+        "package": "nbconvert",
+        "required": "7.17.1",
+        "observed": "7.17.1",
+        "matches": true
+      },
+      {
+        "package": "nbformat",
+        "required": "5.11.0",
+        "observed": "5.11.0",
+        "matches": true
+      },
+      {
+        "package": "numpy",
+        "required": "2.4.6",
+        "observed": "2.4.6",
+        "matches": true
+      },
+      {
+        "package": "pandas",
+        "required": "3.0.3",
+        "observed": "3.0.3",
+        "matches": true
+      },
+      {
+        "package": "scikit-learn",
+        "required": "1.8.0",
+        "observed": "1.8.0",
+        "matches": true
+      },
+      {
+        "package": "seaborn",
+        "required": "0.13.2",
+        "observed": "0.13.2",
+        "matches": true
+      },
+      {
+        "package": "tzdata",
+        "required": "2026.3",
+        "observed": "2026.3",
+        "matches": true
+      }
+    ],
+    "unsupported_requirement_lines": [],
+    "requirements_match": true,
+    "scope": "Direct pinned requirements only; complete historical environments remain in each run manifest"
+  },
+  "runs": [
+    {
+      "run_id": "R0015",
+      "errors": [],
+      "warnings": [],
+      "eligible_completed": true,
+      "refitted": false,
+      "raw_data_read": false,
+      "manifest_status": "completed",
+      "effective_status": "completed",
+      "source_receipts": [
+        {
+          "path": "scripts/run_pipeline.py",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 19823,
+          "observed_sha256": "b26b5389f1e40e595cba1ba274ff00b263cbd612b5adcf63fe1ebff4ad09ae99",
+          "working_file_matches_receipt": true,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "b26b5389f1e40e595cba1ba274ff00b263cbd612b5adcf63fe1ebff4ad09ae99",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "scripts/prepare_flights.py",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 18644,
+          "observed_sha256": "d150244a8ddf828550244d35a86d79ffaf739161f73d3495def1f18df3cdd1c8",
+          "working_file_matches_receipt": true,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "d150244a8ddf828550244d35a86d79ffaf739161f73d3495def1f18df3cdd1c8",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "scripts/build_features.py",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 18827,
+          "observed_sha256": "a5d990aebcf3ddf5ffbcf34bf92f79339f64484062d427f4df29d899788dd583",
+          "working_file_matches_receipt": true,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "a5d990aebcf3ddf5ffbcf34bf92f79339f64484062d427f4df29d899788dd583",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "scripts/train_models.py",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 21396,
+          "observed_sha256": "11929626005fad33ec690d59949af700bb9b11b716de255d49aad3d8033e0116",
+          "working_file_matches_receipt": true,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "11929626005fad33ec690d59949af700bb9b11b716de255d49aad3d8033e0116",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "scripts/evaluate_models.py",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 2980,
+          "observed_sha256": "ee39185ad678b517ab72d75444f0ba39fb9ba371aa12264b7cadafba154f8e18",
+          "working_file_matches_receipt": true,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "ee39185ad678b517ab72d75444f0ba39fb9ba371aa12264b7cadafba154f8e18",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "scripts/analyze_eda.py",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 8808,
+          "observed_sha256": "ef52d1fb06b6dd61563f4d424bf66d89998cf5a7d7dd0a6cade00f02f0edb60c",
+          "working_file_matches_receipt": true,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "ef52d1fb06b6dd61563f4d424bf66d89998cf5a7d7dd0a6cade00f02f0edb60c",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "scripts/analyze_rq1.py",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 8824,
+          "observed_sha256": "c93f2cbbd2e8b0bd0ace9cf4fbe458f985ba8843b39755bdba3d4f8aa5d00b4b",
+          "working_file_matches_receipt": true,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "c93f2cbbd2e8b0bd0ace9cf4fbe458f985ba8843b39755bdba3d4f8aa5d00b4b",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "scripts/render_notebooks.py",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 25592,
+          "observed_sha256": "96ecdd361d96944c1b7e0419d401f5ba8b9bb5fda3dc1903811d2cc7907d1002",
+          "working_file_matches_receipt": true,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "96ecdd361d96944c1b7e0419d401f5ba8b9bb5fda3dc1903811d2cc7907d1002",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "scripts/operational_features.py",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 9638,
+          "observed_sha256": "af9be876031917ea367b7cefd4c888c5b7326b750b53d842c7e13ee9691a9a5c",
+          "working_file_matches_receipt": true,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "af9be876031917ea367b7cefd4c888c5b7326b750b53d842c7e13ee9691a9a5c",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "references/aircraft_reference_2024.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 329571,
+          "observed_sha256": "4a10aa59c62d40d663cde951ae944ab269b3d1d7d6818cc9d85ea045de9c397c",
+          "working_file_matches_receipt": true,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "4a10aa59c62d40d663cde951ae944ab269b3d1d7d6818cc9d85ea045de9c397c",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "references/aircraft_type_aliases.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 14406,
+          "observed_sha256": "6a5a63c6f4913de245c2f500bf055e9e9bad214206c3d2f8620675888ba21770",
+          "working_file_matches_receipt": true,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "6a5a63c6f4913de245c2f500bf055e9e9bad214206c3d2f8620675888ba21770",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "scripts/weather_pipeline_features.py",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 12041,
+          "observed_sha256": "cb98bee161f6685cc2427c57bf6b12a397991636d843e8500cf9ac20a3420def",
+          "working_file_matches_receipt": true,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "cb98bee161f6685cc2427c57bf6b12a397991636d843e8500cf9ac20a3420def",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "scripts/weather_features.py",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 36990,
+          "observed_sha256": "d3d1ea8944869add56762b865aab01ce70d609aec5fddea65d2b7b5203d14c67",
+          "working_file_matches_receipt": true,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "d3d1ea8944869add56762b865aab01ce70d609aec5fddea65d2b7b5203d14c67",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "scripts/prepare_weather.py",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 33339,
+          "observed_sha256": "1bd7bc54b3212ebdeccec69406f9c1c78e42220728c2a71880900f3af297ce45",
+          "working_file_matches_receipt": false,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "bc9b68404b9b7e49c3e0ecdace5225286b3ff8a08f2ec3238daa5b987190226d",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "references/airports.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 45717,
+          "observed_sha256": "0d0844c59747481f2499e48c8c5fbf5447c956642e35b009fe554d0dd013adc5",
+          "working_file_matches_receipt": true,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "0d0844c59747481f2499e48c8c5fbf5447c956642e35b009fe554d0dd013adc5",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "scripts/compare_experiments.py",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 18298,
+          "observed_sha256": "fb30833fba85b41178f2a8ad5deb024fe7263e284ef1a613dae0cc664da4971e",
+          "working_file_matches_receipt": true,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "fb30833fba85b41178f2a8ad5deb024fe7263e284ef1a613dae0cc664da4971e",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "notebooks/01_航班清洗与衔接.ipynb",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 13272,
+          "observed_sha256": "9e8d6d1912f5acb3c6b26bc0d2a898db11410f1a269491147194dc7f884840fc",
+          "working_file_matches_receipt": false,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "75fd27fb301b1d771ffaa9a2746f01646c6d27ad6dbf41844d0b54f96e65b271",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "notebooks/02_天气与特征.ipynb",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 114922,
+          "observed_sha256": "7ee6ab17824ccdf056eb4da0b0c0db59ccc34f76f45249cf3c32f5e757cac3e7",
+          "working_file_matches_receipt": false,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "5c4ca6c8cbe299b0435bb1bae7251a93d85517459ccbd02fd0b7178cfbd7e18a",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "notebooks/03_EDA.ipynb",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 585891,
+          "observed_sha256": "53bcab34146e6ab1f935bdd8e679367cfed9ebf7e12cf65a39601c4ae562cf54",
+          "working_file_matches_receipt": false,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "c3fa2018b65350c363cda67bd6886f6e1b641d0990ff6b17b643d41743df3749",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "notebooks/04_RQ1机场分析.ipynb",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 578896,
+          "observed_sha256": "a8197a361fabb25069dd5a28dc1b6866748843b38bb8989c40301645d0d8574e",
+          "working_file_matches_receipt": false,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "037c1255253af9908dc1209a86ded8b74efba552fc52687c625535ab733faa1d",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "notebooks/05_RQ2预测与解释.ipynb",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 185936,
+          "observed_sha256": "2eaec2f4412329a32dd5918eba353a50bd2ad337cf6b3d440fffea4c64955e75",
+          "working_file_matches_receipt": false,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "17b38af2588586c48a4b55e9759136cd9468413658601105fb1dfe30c8d2e752",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "tables/feature_dictionary.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 39168,
+          "observed_sha256": "438f4db3eee44e035a39c24399b6af216010f0881039818b78d03c0e453a458e",
+          "working_file_matches_receipt": true,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "438f4db3eee44e035a39c24399b6af216010f0881039818b78d03c0e453a458e",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "configs/p4a.json",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 3201,
+          "observed_sha256": "eb42313c28f62cea263bc7630f844cc338d73a4b9895f38c124fb17caf01897d",
+          "working_file_matches_receipt": true,
+          "git_commit": "b7721caa7dbce4040db39c2b5a1a44adc5baea24",
+          "git_blob_sha256": "eb42313c28f62cea263bc7630f844cc338d73a4b9895f38c124fb17caf01897d",
+          "git_blob_matches_receipt": true,
+          "passed": true
+        }
+      ],
+      "output_receipts": [
+        {
+          "path": "experiments/runs/R0015/cleaning_summary.json",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 2844,
+          "observed_sha256": "f071c64e436924aaa00904bb668463f612db73bfef1238bc734b1559f47d579c",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/comparison/comparison.json",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 1778,
+          "observed_sha256": "d324fc762217b6b1164b2d12ac91844099e98489371ec06df794638320108851",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/comparison/comparison_daily_stats.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 9954,
+          "observed_sha256": "2b8890b03c7aecb78299164d91414e493d60b133d8014aa4375dab6872f4543b",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/comparison/comparison_error_differences.png",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 72550,
+          "observed_sha256": "47ca4993ebd15a4c772fd129ed322e5ad749aacc72f7f07f83a31dc817dee73e",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/comparison/comparison_metrics.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 1384,
+          "observed_sha256": "10863e9c73db1b9fd0d3c643bb082d590bfbf1e5bcd2c104d1b6db37ce673569",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/config.json",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 3199,
+          "observed_sha256": "99f0249210f5e25ea4eb18b453348694014e09c2aee1eb94fd50478e7f6774f0",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/connection_exclusions.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 500,
+          "observed_sha256": "b62030cea4db5a3f314c5073a4b96e2439abe18f8684695f8b85bdf7d67660c0",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/data/features.pkl",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 1227207987,
+          "observed_sha256": "55f10124f7a3bbe98c0e97df2b37b42235fb26cfb4dabecd68df9de0f225411c",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/data_manifest.json",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 1625,
+          "observed_sha256": "f653de91bac863cf678d137d6c7ce365e6d46a9d57d0a7d6c6143bd0439b7f9c",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/eda_summary.json",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 3081,
+          "observed_sha256": "7ebf8f7813066afc3c1709a730a1d0f32882f23642e4aae0f3a104710bd9a60f",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/evaluation_ids.csv.gz",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 24194533,
+          "observed_sha256": "3a416b4914c6fd01495833fff6cd0bc5ee95963b87dd6ac46139e3b2a2daa09c",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/feature_audit.json",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 7646,
+          "observed_sha256": "55d84baddd2cc37e5c437894c6428c05351aae7ee103d85632841e982d5c6fe7",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/feature_dictionary.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 39168,
+          "observed_sha256": "438f4db3eee44e035a39c24399b6af216010f0881039818b78d03c0e453a458e",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/figures/eda_airport_support.png",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 62367,
+          "observed_sha256": "71058900bcaf91b9301630d5fbf997e889eeffafcfa8aac104666cbcaa48ada9",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/figures/eda_monthly_target.png",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 35290,
+          "observed_sha256": "cc43a1588330ea377bde29ffbd0413579947ebe52d85ee9de6855126cef6dd89",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/figures/eda_target_distribution.png",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 53066,
+          "observed_sha256": "2ff40698741d03b02841864e59858f8fadf0590ab7380b5420f8f719b9d85d87",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/figures/eda_turnaround_count.png",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 138269,
+          "observed_sha256": "b5b52428147660581bf1b378886c0ab3d356c422c7187d8b807b6008695f7c36",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/figures/eda_turnaround_mean_delta.png",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 115695,
+          "observed_sha256": "8047124d2d87e950f6c2bdfd0d9c1488475ba40d632a33c4cb4457db7a6f446f",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/figures/rq1_cumulative_delay.png",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 61338,
+          "observed_sha256": "8b35c4fb98e98663f480bafdeeaee305f0fe5bcf82d76cb9f845529b3603638d",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/figures/rq1_raw_airport_mean.png",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 93702,
+          "observed_sha256": "3fb04c7cb5ed6a70ac883a2fb7b1d6d6f3acfb46174ce64245d16cd3002eb789",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/figures/rq1_turnaround_count.png",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 118480,
+          "observed_sha256": "b2f13b6182ec974ab56f5a75e8d44ae0fb914bf1428baaefa4d5d058321585fe",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/figures/rq1_turnaround_mean_delta.png",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 107816,
+          "observed_sha256": "030c926f3c559fab57cbbfb1239964aa6a9c9215fe5208f86d3600e3768ee0b6",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/figures/rq2_metric_comparison.png",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 31143,
+          "observed_sha256": "4d71dbd554a1450ee21f20896cd2c0a42a8c8c8d57138dc308fd62ce979862fd",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/figures/weather_query_coverage.png",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 99997,
+          "observed_sha256": "b7658b861b1a355a5c84dd7ebdf8359c4e84596ffa81e53f1215d369df825436",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/fold_2026-05.log",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 1383,
+          "observed_sha256": "e2c776a9775c5de11eeeb830143f37a3fea1ec445758a326047f5a2e7d59ead7",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/fold_2026-05_metrics.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 118504,
+          "observed_sha256": "59d2871b41ee3e358ed3f64cdf786a1ef7a94226b9367730c0e31ed54db812e9",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/fold_2026-05_timing.json",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 373,
+          "observed_sha256": "d2a6d15e73049ffd9d1dba127bf575b61746007a755770a87e0b530d3ecba661",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/fold_2026-06.log",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 1386,
+          "observed_sha256": "230d0a09af9cb2dfb5ec0cd6e300b10d50e3852cd6695ac0a0e7598d0c85287a",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/fold_2026-06_metrics.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 120049,
+          "observed_sha256": "6380c14b87c8a5c3d4fb4211bce72c9969c7ff8438bb2b8872bd44d16d787aa1",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/fold_2026-06_timing.json",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 374,
+          "observed_sha256": "6fb43dc7a26df93d1d6e9d14a2c234eeb787d29347f5d19e3d1fec077bfb39f0",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/fold_2026-07.log",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 1385,
+          "observed_sha256": "ff7b377086a1da4c099d54f48edc70aecf2e727557f1b09d3f62b57b61ce29a4",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/fold_2026-07_metrics.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 120578,
+          "observed_sha256": "7602fd6188b6080741c3c8927b7217eca70186bc9d1f22eb7d2645cf85bd0173",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/fold_2026-07_timing.json",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 374,
+          "observed_sha256": "f9fa75922c45c536783c529e72b3063a238a06acd8e5b15a5b93be1977b1bd1d",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/metrics.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 902256,
+          "observed_sha256": "666d086ec8abb9189dd75bb46460922617bde73b05073d2dae6f53c9b94f2d98",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/model_manifest.json",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 7904,
+          "observed_sha256": "9eb64d848936fc95818139c146320a89fb73111d63ba573dbe432f4134020ab9",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-05_carry_forward.joblib",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 63,
+          "observed_sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-05_g4a_linear.joblib",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 78794,
+          "observed_sha256": "03be03e1605f2b03c6200c8f0e54d7c5fff6d235a89cefe05a0d00dd97e4ea07",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-05_training_mean.joblib",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 315,
+          "observed_sha256": "cef15ab35d87346aab29020c2f508e6f5cdd821cf6b1f0688bfb4fc5ebefc63f",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-05_training_median.joblib",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 304,
+          "observed_sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-06_carry_forward.joblib",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 63,
+          "observed_sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-06_g4a_linear.joblib",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 83591,
+          "observed_sha256": "f4048b575394dd7ba292bde698592a1382fa7d9f83fa84bbd5f2f44feba37b1a",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-06_training_mean.joblib",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 314,
+          "observed_sha256": "254fe9773735f63d55ae4c23bab4e5969d62755b48ab3add10ad4d0060864e77",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-06_training_median.joblib",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 304,
+          "observed_sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-07_carry_forward.joblib",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 63,
+          "observed_sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-07_g4a_linear.joblib",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 89626,
+          "observed_sha256": "026b8ba256f6547a90c6085a2b358b3ff41965c05635fb607ac0aa7fbc0ed803",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-07_training_mean.joblib",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 316,
+          "observed_sha256": "c418a0f8ea9aa5d0c0c67fe1c2402e9e95fe573de5fd556694e1305042da71dd",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-07_training_median.joblib",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 304,
+          "observed_sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/notebooks/01_航班清洗与衔接.html",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 298910,
+          "observed_sha256": "b100f68d68475b0e96aba310ef2ee972491c2e85561924a004dbfb8a9711fff8",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/notebooks/01_航班清洗与衔接.ipynb",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 13272,
+          "observed_sha256": "9e8d6d1912f5acb3c6b26bc0d2a898db11410f1a269491147194dc7f884840fc",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/notebooks/02_天气与特征.html",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 351312,
+          "observed_sha256": "9c3eeccc9e52637e5533a780337263b05a4de675eee3f545a906f91c054ad8db",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/notebooks/02_天气与特征.ipynb",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 114922,
+          "observed_sha256": "7ee6ab17824ccdf056eb4da0b0c0db59ccc34f76f45249cf3c32f5e757cac3e7",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/notebooks/03_EDA.html",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 862263,
+          "observed_sha256": "6a314decca3feb72ccc337b7c0a3c677b68df2af000212a7c9c1bc1ade3ebb5d",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/notebooks/03_EDA.ipynb",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 585891,
+          "observed_sha256": "53bcab34146e6ab1f935bdd8e679367cfed9ebf7e12cf65a39601c4ae562cf54",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/notebooks/04_RQ1机场分析.html",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 837636,
+          "observed_sha256": "848fdcb6a766394a9484c827c4bd8700203bf332014a42fef07a8aac80207dd5",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/notebooks/04_RQ1机场分析.ipynb",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 578896,
+          "observed_sha256": "a8197a361fabb25069dd5a28dc1b6866748843b38bb8989c40301645d0d8574e",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/notebooks/05_RQ2预测与解释.html",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 423119,
+          "observed_sha256": "05ccb2931fe727eb77fccbdc9e4b1a181aab14194d431733a76cd5bbca5844d0",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/notebooks/05_RQ2预测与解释.ipynb",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 185936,
+          "observed_sha256": "2eaec2f4412329a32dd5918eba353a50bd2ad337cf6b3d440fffea4c64955e75",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-05_carry_forward.csv.gz",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 13826651,
+          "observed_sha256": "e248fb7df31712fa7ff6deac6f0f58d303a9b28b1f829ac82b1d9b1ca6d7cde1",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-05_g4a_linear.csv.gz",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 21657332,
+          "observed_sha256": "0ed99048b9250d3d6a31ebc9c042f03654ba94fc35e438831c4bc195df006db7",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-05_training_mean.csv.gz",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 13190162,
+          "observed_sha256": "fe504bda13ce211b8ca871b5f01ce6442544b3c37c9943c1a72a6003ca1efd99",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-05_training_median.csv.gz",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 12898887,
+          "observed_sha256": "c764d622ee23cbbd9ca6aba2ee9ad630d48af5832120fa1de639c956bbd3f081",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-06_carry_forward.csv.gz",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 13675371,
+          "observed_sha256": "492723757d022418cfbba3a84ad1cd4806a2e06a3ac11f0e5cae78cb2a24a635",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-06_g4a_linear.csv.gz",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 21239195,
+          "observed_sha256": "96401832360dda648e885fa6b1170a131cb60571b87b4e0bae5c65b34c640dfb",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-06_training_mean.csv.gz",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 12944107,
+          "observed_sha256": "f6f2c1d67c85ae12206e550b046e557b59e6cbf722363314af3445c2abfa8210",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-06_training_median.csv.gz",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 12667990,
+          "observed_sha256": "9e8c4d4c1168f6dea121491fe174d33380cffa4deecc67625c02796f6704cab2",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-07_carry_forward.csv.gz",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 14005849,
+          "observed_sha256": "5f20f5c9c4cc7c38fc8708d248b4c79196a965f904526758fec9d02d2163b88f",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-07_g4a_linear.csv.gz",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 21624055,
+          "observed_sha256": "2b1dcd176c53c2a8a8b89985018d9c569d828888e7ab396da65e48bf0f12dd07",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-07_training_mean.csv.gz",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 13189436,
+          "observed_sha256": "c65744af56cd2183e0c88bff4372500db474eb3af19e5b5ad170e2c94994b8d1",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-07_training_median.csv.gz",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 12907931,
+          "observed_sha256": "878daf7aae01a2b3fc17906777b47a6cce091ac53fafcc2f8d0767e265e85cc2",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/resources.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 5290,
+          "observed_sha256": "0d591154fd0fa57b2f87b178f992f58dc8d36de1ae9948baa94a13ecaed697cd",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/rq1_summary.json",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 877,
+          "observed_sha256": "feb9713f13946928e75c01dc88e43acddcc87fe92f6674fc42d27adceb9109d6",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/run.log",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 1039,
+          "observed_sha256": "bbc4c2e0b377607ab6a1be4ca9d81ae68d1ce73dd2c91015ea15ee44e2d7589e",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/split_audit.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 1822,
+          "observed_sha256": "6e84cf5c3bc360b9de0f75b77b4920aebd2ea82d7dd49aa5e2731807326d7509",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/tables/eda_feature_missing.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 247,
+          "observed_sha256": "52ea63177adee28ea4b30a97d0ec83722960ed7b8c6523ded5270fb7072dfcb6",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/tables/eda_monthly_target.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 504,
+          "observed_sha256": "00a739027c30f0d7460f90d2c731a011271af4e126027ffc7d0d2d82c8a73a3e",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/tables/eda_support_airline.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 192,
+          "observed_sha256": "ae29211f961e646a64856aa23e6d44d9c7bf19a7dc50259486929180b61e8b0c",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/tables/eda_support_airport.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 4845,
+          "observed_sha256": "01da34f74d6259af6e8423f49d3661b1f7fe51b03ebadbea38241ade3a8f9b75",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/tables/eda_support_route.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 129897,
+          "observed_sha256": "e81e5d2380c3f00bd02230bf32ad6b422588735f06ff7d408c664e459872b6b2",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/tables/eda_target_bins.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 310,
+          "observed_sha256": "3146e04c68319608efd37682561ebb928ffb1f972a249c87e34bf059023541a9",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/tables/eda_turnaround_heatmap.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 2608,
+          "observed_sha256": "fdf9d33277b75f3b86bf912cdfcd298861ab016c35d32abd8d9fccb55e247ec4",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/tables/feature_missing.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 1572,
+          "observed_sha256": "e5e6880a95b11e29e42cc7066883eeda6a2623c78f28e92a30da822c8330069d",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/tables/rq1_airport_monthly.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 229221,
+          "observed_sha256": "84ab420761c9d7f5f22f578261c76a7fefe7a21c3965ec212eb59a3750bcabee",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/tables/rq1_airport_raw.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 62019,
+          "observed_sha256": "c434068c23ac070c17599c4997ae32ccf487ee4dbe08f2c2903862deaf2855da",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/tables/rq1_turnaround_heatmap.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 2206,
+          "observed_sha256": "e3c0732e83750acba007b27b5cca77e22fdb817d77536313ff1560cf0fef81e1",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/tables/weather_coverage_airport.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 11444,
+          "observed_sha256": "f15220ea445d86d507edb289fbecc08deb5c04e2478bc346be245ba2ee67f19f",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/tables/weather_coverage_airport_date.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 1225469,
+          "observed_sha256": "a4ddcdc2a423dd064b6bd01df77f15bcc061ee6e021e89943b0bfedd8a778a69",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/tables/weather_coverage_month.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 249,
+          "observed_sha256": "df8cef986c0bc686913985fd3e3fc474a10289a8cb1068a84664dee0bdcae385",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/tables/weather_variable_coverage.csv",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 815,
+          "observed_sha256": "1b15e8633a3df7c1351be513e231f0ece88e5b19671805b2988549d3945e32b3",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "experiments/runs/R0015/weather_coverage_summary.json",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 360,
+          "observed_sha256": "69e5e81e39b664feb63525499398040160f037f5ba2c5b9121df503469d9de2b",
+          "working_file_matches_receipt": true,
+          "passed": true
+        }
+      ],
+      "input_manifest_receipts": [
+        {
+          "path": "tables/file_manifest.json",
+          "errors": [],
+          "git_ignored": false,
+          "exists_locally": true,
+          "observed_bytes": 31686,
+          "observed_sha256": "d499da4db902f139f2fd9a3cb02676eb34bab2e3c3aab3ab97b814df3be8e209",
+          "working_file_matches_receipt": true,
+          "passed": true
+        },
+        {
+          "path": "processed/D0003/data_manifest.json",
+          "errors": [],
+          "git_ignored": true,
+          "exists_locally": true,
+          "observed_bytes": 1625,
+          "observed_sha256": "f653de91bac863cf678d137d6c7ce365e6d46a9d57d0a7d6c6143bd0439b7f9c",
+          "working_file_matches_receipt": true,
+          "passed": true
+        }
+      ],
+      "historical_environment": {
+        "python": "3.13.15 | packaged by conda-forge | (main, Sep  2 2026, 21:52:43) [MSC v.1944 64 bit (AMD64)]",
+        "requirements_git_sha256": "1958efbcf09e66e01ad2fac1d0fc2af00f9e5c5c5e37d76f152ede29d4f74f06",
+        "packages": [
+          {
+            "package": "ipykernel",
+            "required": "7.3.0",
+            "observed": "7.3.0",
+            "matches": true
+          },
+          {
+            "package": "jupyterlab",
+            "required": "4.5.7",
+            "observed": "4.5.7",
+            "matches": true
+          },
+          {
+            "package": "matplotlib",
+            "required": "3.10.9",
+            "observed": "3.10.9",
+            "matches": true
+          },
+          {
+            "package": "nbclient",
+            "required": "0.11.0",
+            "observed": "0.11.0",
+            "matches": true
+          },
+          {
+            "package": "nbconvert",
+            "required": "7.17.1",
+            "observed": "7.17.1",
+            "matches": true
+          },
+          {
+            "package": "nbformat",
+            "required": "5.11.0",
+            "observed": "5.11.0",
+            "matches": true
+          },
+          {
+            "package": "numpy",
+            "required": "2.4.6",
+            "observed": "2.4.6",
+            "matches": true
+          },
+          {
+            "package": "pandas",
+            "required": "3.0.3",
+            "observed": "3.0.3",
+            "matches": true
+          },
+          {
+            "package": "scikit-learn",
+            "required": "1.8.0",
+            "observed": "1.8.0",
+            "matches": true
+          },
+          {
+            "package": "seaborn",
+            "required": "0.13.2",
+            "observed": "0.13.2",
+            "matches": true
+          },
+          {
+            "package": "tzdata",
+            "required": "2026.3",
+            "observed": "2026.3",
+            "matches": true
+          }
+        ],
+        "unsupported_requirement_lines": [],
+        "requirements_match": true
+      },
+      "integrity_passed": true
+    }
+  ],
+  "terminal_runs_checked": 1,
+  "unsealed_runs_skipped": [],
+  "final_verified": false,
+  "raw_data_read": false,
+  "refitted": false,
+  "pickle_or_joblib_loaded": false,
+  "raw_verification_entry": "python scripts/verify_downloads.py (separate explicit command)",
+  "clone_limit": "Git ignores processed/* and run data/, predictions/, models/; local absence fails full receipt verification rather than being silently skipped"
+}

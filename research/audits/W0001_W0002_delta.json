@@ -1,0 +1,42 @@
+{
+  "old": "W0001",
+  "new": "W0002",
+  "metar_pkl_identical": true,
+  "metar_csv_identical": true,
+  "noaa_uncompressed_csv_identical": true,
+  "validity_identical": true,
+  "taf_segments": {
+    "rows": 1368657,
+    "unmodified_fields_exact": true,
+    "changed_archive_time_rows": 3,
+    "changes": [
+      {
+        "product_id": "202605120255-KEWX-FTUS44-TAFAUS-AAA",
+        "station": "KSAT",
+        "archive_issue_time": "2026-05-12 02:55:00+00:00"
+      },
+      {
+        "product_id": "202605120255-KEWX-FTUS44-TAFAUS-AAA",
+        "station": "KSAT",
+        "archive_issue_time": "2026-05-12 02:55:00+00:00"
+      },
+      {
+        "product_id": "202605120255-KEWX-FTUS44-TAFAUS-AAA",
+        "station": "KSAT",
+        "archive_issue_time": "2026-05-12 02:55:00+00:00"
+      }
+    ]
+  },
+  "taf_bulletins": {
+    "rows": 317814,
+    "unmodified_fields_exact": true,
+    "changed_archive_time_rows": 1,
+    "changes": [
+      {
+        "product_id": "202605120255-KEWX-FTUS44-TAFAUS-AAA",
+        "station": "KSAT",
+        "archive_issue_time": "2026-05-12 02:55:00+00:00"
+      }
+    ]
+  }
+}
