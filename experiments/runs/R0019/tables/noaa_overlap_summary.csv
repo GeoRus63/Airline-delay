@@ -1,0 +1,9 @@
+feature,overlap_count,mean_signed_difference,mean_absolute_difference,max_absolute_difference,metar_unit,noaa_native_unit,conversion,unit_consistency
+metar_temperature_f,0,,,,F,C,celsius_to_fahrenheit,no_numeric_overlap
+metar_dewpoint_f,0,,,,F,C,celsius_to_fahrenheit,no_numeric_overlap
+metar_wind_direction_deg,0,,,,degree,degree,identity,no_numeric_overlap
+metar_relative_humidity,0,,,,%,%,identity,no_exact_overlap
+metar_wind_knots,0,,,,knot,m/s,mps_to_knots,no_numeric_overlap
+metar_gust_knots,0,,,,knot,m/s,mps_to_knots,no_numeric_overlap
+metar_visibility_miles,0,,,,mile,km,km_to_miles,no_numeric_overlap
+metar_ceiling_ft,0,,,,ft,m,m_to_feet,no_numeric_overlap

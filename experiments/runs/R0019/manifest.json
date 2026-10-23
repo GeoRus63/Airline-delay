@@ -1,0 +1,1155 @@
+{
+  "run_id": "R0019",
+  "status": "completed",
+  "started_at_utc": "2026-10-23T23:40:29.620583+00:00",
+  "git_commit": "a219235e517044ec8d1088ad6d498d4783d8c60e",
+  "command": "D:\\airline-delay\\.venv\\Scripts\\python.exe scripts/run_pipeline.py --config configs/p4_noaa.json --run-id R0019",
+  "python": "3.13.15 | packaged by conda-forge | (main, Sep  2 2026, 21:52:43) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "logical_cpus": 32,
+  "environment": {
+    "anyio": "4.15.1",
+    "argon2-cffi": "25.1.0",
+    "argon2-cffi-bindings": "26.1.0",
+    "arrow": "1.4.0",
+    "asttokens": "3.0.2",
+    "async-lru": "2.4.0",
+    "attrs": "26.1.0",
+    "babel": "2.18.0",
+    "beautifulsoup4": "4.15.0",
+    "bleach": "6.4.0",
+    "certifi": "2026.10.23",
+    "cffi": "2.1.1",
+    "charset-normalizer": "3.5.2",
+    "cloudpickle": "3.1.2",
+    "colorama": "0.4.6",
+    "comm": "0.2.3",
+    "contourpy": "1.4.0",
+    "cycler": "0.12.1",
+    "debugpy": "1.8.22",
+    "defusedxml": "0.7.1",
+    "executing": "2.3.0",
+    "fastjsonschema": "2.22.2",
+    "fonttools": "4.67.0",
+    "fqdn": "1.6.0",
+    "h11": "0.16.0",
+    "httpcore": "1.0.9",
+    "httpx": "0.28.1",
+    "idna": "3.20",
+    "ipykernel": "7.3.0",
+    "ipython": "9.17.1",
+    "ipython_pygments_lexers": "1.1.1",
+    "isoduration": "20.11.0",
+    "jedi": "0.20.1",
+    "Jinja2": "3.1.6",
+    "joblib": "1.6.0",
+    "json5": "0.17.3",
+    "jsonpointer": "3.4",
+    "jsonschema": "4.26.0",
+    "jsonschema-specifications": "2025.9.1",
+    "jupyterlab": "4.5.7",
+    "jupyterlab_pygments": "0.3.0",
+    "jupyterlab_server": "2.28.1",
+    "jupyter_client": "8.10.0",
+    "jupyter_core": "5.9.1",
+    "jupyter-events": "0.12.1",
+    "jupyter-lsp": "2.3.1",
+    "jupyter_server": "2.21.1",
+    "jupyter_server_terminals": "0.5.4",
+    "kiwisolver": "1.5.1",
+    "lark": "1.3.1",
+    "MarkupSafe": "3.0.4",
+    "matplotlib": "3.10.9",
+    "matplotlib-inline": "0.2.2",
+    "mistune": "3.4.0",
+    "nbclient": "0.11.0",
+    "nbconvert": "7.17.1",
+    "nbformat": "5.11.0",
+    "nest-asyncio2": "1.7.4",
+    "notebook_shim": "0.2.4",
+    "numpy": "2.4.6",
+    "packaging": "26.3",
+    "pandas": "3.0.3",
+    "pandocfilters": "1.5.1",
+    "parso": "0.8.7",
+    "pillow": "13.0.0",
+    "pip": "26.2.1",
+    "platformdirs": "4.13.5",
+    "prometheus_client": "0.26.0",
+    "prompt_toolkit": "3.0.53",
+    "psutil": "7.2.2",
+    "pure_eval": "0.2.4",
+    "pycparser": "3.12",
+    "Pygments": "2.21.0",
+    "pyparsing": "3.3.3",
+    "python-dateutil": "3.0.0",
+    "python-json-logger": "4.2.0",
+    "pywinpty": "3.1.0",
+    "PyYAML": "6.0.3",
+    "pyzmq": "27.2.0",
+    "referencing": "0.37.0",
+    "requests": "2.34.2",
+    "rfc3339-validator": "0.1.4",
+    "rfc3986-validator": "0.1.1",
+    "rfc3987-syntax": "1.1.0",
+    "rpds-py": "2026.9.1",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.18.1",
+    "seaborn": "0.13.2",
+    "Send2Trash": "2.1.0",
+    "setuptools": "84.2.1",
+    "six": "1.17.0",
+    "soupsieve": "3.0.4",
+    "stack-data": "0.6.3",
+    "terminado": "0.18.1",
+    "threadpoolctl": "3.7.0",
+    "tinycss2": "1.5.1",
+    "tornado": "6.6",
+    "traitlets": "5.16.1",
+    "typing_extensions": "4.16.0",
+    "tzdata": "2026.3",
+    "uri-template": "1.3.0",
+    "urllib3": "2.8.0",
+    "wcwidth": "0.9.3",
+    "webcolors": "25.10.0",
+    "webencodings": "0.6.1",
+    "websocket-client": "1.9.2"
+  },
+  "source_files": [
+    {
+      "path": "scripts/run_pipeline.py",
+      "bytes": 20268,
+      "sha256": "37e52c7c2ba6851f9bf1e8b21c8ae2bd9361d0f8de6e0043d1f2c86fb02783f7"
+    },
+    {
+      "path": "scripts/prepare_flights.py",
+      "bytes": 18644,
+      "sha256": "d150244a8ddf828550244d35a86d79ffaf739161f73d3495def1f18df3cdd1c8"
+    },
+    {
+      "path": "scripts/build_features.py",
+      "bytes": 18827,
+      "sha256": "a5d990aebcf3ddf5ffbcf34bf92f79339f64484062d427f4df29d899788dd583"
+    },
+    {
+      "path": "scripts/train_models.py",
+      "bytes": 21396,
+      "sha256": "11929626005fad33ec690d59949af700bb9b11b716de255d49aad3d8033e0116"
+    },
+    {
+      "path": "scripts/evaluate_models.py",
+      "bytes": 2980,
+      "sha256": "ee39185ad678b517ab72d75444f0ba39fb9ba371aa12264b7cadafba154f8e18"
+    },
+    {
+      "path": "scripts/analyze_eda.py",
+      "bytes": 8808,
+      "sha256": "ef52d1fb06b6dd61563f4d424bf66d89998cf5a7d7dd0a6cade00f02f0edb60c"
+    },
+    {
+      "path": "scripts/analyze_rq1.py",
+      "bytes": 8824,
+      "sha256": "c93f2cbbd2e8b0bd0ace9cf4fbe458f985ba8843b39755bdba3d4f8aa5d00b4b"
+    },
+    {
+      "path": "scripts/render_notebooks.py",
+      "bytes": 25592,
+      "sha256": "96ecdd361d96944c1b7e0419d401f5ba8b9bb5fda3dc1903811d2cc7907d1002"
+    },
+    {
+      "path": "scripts/operational_features.py",
+      "bytes": 9638,
+      "sha256": "af9be876031917ea367b7cefd4c888c5b7326b750b53d842c7e13ee9691a9a5c"
+    },
+    {
+      "path": "references/aircraft_reference_2024.csv",
+      "bytes": 329571,
+      "sha256": "4a10aa59c62d40d663cde951ae944ab269b3d1d7d6818cc9d85ea045de9c397c"
+    },
+    {
+      "path": "references/aircraft_type_aliases.csv",
+      "bytes": 14406,
+      "sha256": "6a5a63c6f4913de245c2f500bf055e9e9bad214206c3d2f8620675888ba21770"
+    },
+    {
+      "path": "scripts/weather_pipeline_features.py",
+      "bytes": 12041,
+      "sha256": "cb98bee161f6685cc2427c57bf6b12a397991636d843e8500cf9ac20a3420def"
+    },
+    {
+      "path": "scripts/weather_features.py",
+      "bytes": 38222,
+      "sha256": "f22336957c868bcbab1b2a1bdeb47932c58325695056c5b4ccaa2290f28fda01"
+    },
+    {
+      "path": "scripts/prepare_weather.py",
+      "bytes": 33339,
+      "sha256": "1bd7bc54b3212ebdeccec69406f9c1c78e42220728c2a71880900f3af297ce45"
+    },
+    {
+      "path": "references/airports.csv",
+      "bytes": 45717,
+      "sha256": "0d0844c59747481f2499e48c8c5fbf5447c956642e35b009fe554d0dd013adc5"
+    },
+    {
+      "path": "scripts/compare_experiments.py",
+      "bytes": 18298,
+      "sha256": "fb30833fba85b41178f2a8ad5deb024fe7263e284ef1a613dae0cc664da4971e"
+    },
+    {
+      "path": "notebooks/01_航班清洗与衔接.ipynb",
+      "bytes": 13272,
+      "sha256": "6836d6996205147a2976bb57804a9ebda6c7465333656c7308451665fea5219c"
+    },
+    {
+      "path": "notebooks/02_天气与特征.ipynb",
+      "bytes": 195945,
+      "sha256": "7d30bdc1ac2bec44952809745e02306dc96b0ceaaa1d5774bc60b060cd952e24"
+    },
+    {
+      "path": "notebooks/03_EDA.ipynb",
+      "bytes": 585891,
+      "sha256": "6be402bb083b2967a1e3990df28c6cd2e09874b119f2b7c53bd7fa95505b74b6"
+    },
+    {
+      "path": "notebooks/04_RQ1机场分析.ipynb",
+      "bytes": 578896,
+      "sha256": "f61fb42789484b0018c1393d97ed1db156e42d1390bb6064691809fdb9b80d73"
+    },
+    {
+      "path": "notebooks/05_RQ2预测与解释.ipynb",
+      "bytes": 181127,
+      "sha256": "6ab34a98abdd7e0281c91fcd6611ea5e8c7a8a565ef0285c6aef21e91b787760"
+    },
+    {
+      "path": "tables/feature_dictionary.csv",
+      "bytes": 39168,
+      "sha256": "438f4db3eee44e035a39c24399b6af216010f0881039818b78d03c0e453a458e"
+    },
+    {
+      "path": "configs/p4_noaa.json",
+      "bytes": 5570,
+      "sha256": "40a1db186a3e119e78776f04d3583852418291cdb0322e3eec4aaa56dda40484"
+    }
+  ],
+  "input_manifest": {
+    "path": "tables/file_manifest.json",
+    "bytes": 31686,
+    "sha256": "d499da4db902f139f2fd9a3cb02676eb34bab2e3c3aab3ab97b814df3be8e209"
+  },
+  "config": {
+    "stage": "P4-NOAA-sensitivity",
+    "mode": "development",
+    "data_id": "D0003",
+    "connection_path": "processed/D0003/flight_connections.csv.gz",
+    "data_manifest_path": "processed/D0003/data_manifest.json",
+    "preparation_evidence_dir": "processed/D0003",
+    "parent_run_id": "R0017",
+    "compare_parent": true,
+    "change": "Fill only approved missing IEM G4a values from GHCNh in a separate retrospective sensitivity branch",
+    "feature_group": "G4B",
+    "model_name": "g4b_noaa_linear",
+    "model_type": "linear",
+    "include_baselines": true,
+    "threads": 8,
+    "fold_workers": 3,
+    "seed": 42,
+    "linear_tolerance": 1e-06,
+    "preprocessing": {
+      "min_frequency": 20,
+      "drop": "first"
+    },
+    "test_target_sealed": true,
+    "primary_metric": "sample-weighted pooled validation MAE in minutes",
+    "prediction_rule": "clip all predictions at zero",
+    "split_rule": "UTC half-open prediction windows; training label_time strictly before cutoff",
+    "sample_interpretation": "Retrospective prediction conditional on valid observed same-tail scheduled-adjacent completed connections",
+    "weather_manifest_path": "processed/W0002/data_manifest.json",
+    "noaa_backfill": true,
+    "features": [
+      "airport_id",
+      "route",
+      "downstream_airline",
+      "aircraft_family",
+      "downstream_distance",
+      "downstream_crs_elapsed_time",
+      "downstream_day_of_week",
+      "downstream_sched_hour",
+      "scheduled_turnaround_minutes",
+      "upstream_arr_delay_minutes",
+      "tail_completed_24h_n",
+      "tail_completed_24h_arr_delay_mean",
+      "history_window_incomplete",
+      "airport_departures_60m_n",
+      "airport_departures_60m_delay_mean",
+      "airport_planned_departures_next60m_n",
+      "airport_planned_arrivals_next60m_n",
+      "airport_history_window_incomplete",
+      "metar_wind_knots",
+      "metar_gust_knots",
+      "metar_visibility_miles",
+      "metar_ceiling_ft",
+      "metar_precip_amount_in",
+      "metar_precip_flag",
+      "metar_rain_flag",
+      "metar_snow_flag",
+      "metar_thunder_flag",
+      "metar_age_minutes",
+      "metar_missing",
+      "metar_sky_reported",
+      "metar_ceiling_reported",
+      "metar_weather_codes_reported",
+      "taf_bulletin_age_minutes",
+      "taf_lead_minutes",
+      "taf_missing",
+      "taf_prevailing_wind_knots",
+      "taf_prevailing_gust_knots",
+      "taf_prevailing_visibility_miles",
+      "taf_prevailing_ceiling_ft",
+      "taf_prevailing_precip_flag",
+      "taf_prevailing_rain_flag",
+      "taf_prevailing_snow_flag",
+      "taf_prevailing_thunder_flag",
+      "taf_prevailing_segment_count",
+      "taf_prevailing_missing",
+      "taf_tempo_wind_knots",
+      "taf_tempo_gust_knots",
+      "taf_tempo_visibility_miles",
+      "taf_tempo_ceiling_ft",
+      "taf_tempo_precip_flag",
+      "taf_tempo_rain_flag",
+      "taf_tempo_snow_flag",
+      "taf_tempo_thunder_flag",
+      "taf_tempo_segment_count",
+      "taf_tempo_missing",
+      "taf_probability_wind_knots",
+      "taf_probability_gust_knots",
+      "taf_probability_visibility_miles",
+      "taf_probability_ceiling_ft",
+      "taf_probability_precip_flag",
+      "taf_probability_rain_flag",
+      "taf_probability_snow_flag",
+      "taf_probability_thunder_flag",
+      "taf_probability_segment_count",
+      "taf_probability_missing"
+    ],
+    "categorical_features": [
+      "airport_id",
+      "route",
+      "downstream_airline",
+      "aircraft_family"
+    ],
+    "numeric_features": [
+      "downstream_distance",
+      "downstream_crs_elapsed_time",
+      "downstream_day_of_week",
+      "downstream_sched_hour",
+      "scheduled_turnaround_minutes",
+      "upstream_arr_delay_minutes",
+      "tail_completed_24h_n",
+      "tail_completed_24h_arr_delay_mean",
+      "history_window_incomplete",
+      "airport_departures_60m_n",
+      "airport_departures_60m_delay_mean",
+      "airport_planned_departures_next60m_n",
+      "airport_planned_arrivals_next60m_n",
+      "airport_history_window_incomplete",
+      "metar_wind_knots",
+      "metar_gust_knots",
+      "metar_visibility_miles",
+      "metar_ceiling_ft",
+      "metar_precip_amount_in",
+      "metar_precip_flag",
+      "metar_rain_flag",
+      "metar_snow_flag",
+      "metar_thunder_flag",
+      "metar_age_minutes",
+      "metar_missing",
+      "metar_sky_reported",
+      "metar_ceiling_reported",
+      "metar_weather_codes_reported",
+      "taf_bulletin_age_minutes",
+      "taf_lead_minutes",
+      "taf_missing",
+      "taf_prevailing_wind_knots",
+      "taf_prevailing_gust_knots",
+      "taf_prevailing_visibility_miles",
+      "taf_prevailing_ceiling_ft",
+      "taf_prevailing_precip_flag",
+      "taf_prevailing_rain_flag",
+      "taf_prevailing_snow_flag",
+      "taf_prevailing_thunder_flag",
+      "taf_prevailing_segment_count",
+      "taf_prevailing_missing",
+      "taf_tempo_wind_knots",
+      "taf_tempo_gust_knots",
+      "taf_tempo_visibility_miles",
+      "taf_tempo_ceiling_ft",
+      "taf_tempo_precip_flag",
+      "taf_tempo_rain_flag",
+      "taf_tempo_snow_flag",
+      "taf_tempo_thunder_flag",
+      "taf_tempo_segment_count",
+      "taf_tempo_missing",
+      "taf_probability_wind_knots",
+      "taf_probability_gust_knots",
+      "taf_probability_visibility_miles",
+      "taf_probability_ceiling_ft",
+      "taf_probability_precip_flag",
+      "taf_probability_rain_flag",
+      "taf_probability_snow_flag",
+      "taf_probability_thunder_flag",
+      "taf_probability_segment_count",
+      "taf_probability_missing"
+    ],
+    "eligible_for_primary_selection": false,
+    "availability_interpretation": "Retrospective supplementary archive with unverified historical delivery, independent branch only"
+  },
+  "derived_input_manifest": {
+    "path": "processed/D0003/data_manifest.json",
+    "bytes": 1625,
+    "sha256": "f653de91bac863cf678d137d6c7ce365e6d46a9d57d0a7d6c6143bd0439b7f9c"
+  },
+  "result": {
+    "development_only": true,
+    "evaluation_rows": 1707091,
+    "folds": [
+      {
+        "fold": "2026-05",
+        "train_start": "2026-04-01T00:00:00+00:00",
+        "train_end_exclusive": "2026-05-01T00:00:00+00:00",
+        "validation_start": "2026-05-01T00:00:00+00:00",
+        "validation_end_exclusive": "2026-06-01T00:00:00+00:00",
+        "train_rows": 553140,
+        "validation_rows": 574571,
+        "excluded_immature_training_labels": 1544,
+        "max_train_prediction_time": "2026-04-30T23:30:00+00:00",
+        "max_train_label_time": "2026-04-30T23:59:00+00:00",
+        "min_validation_prediction_time": "2026-05-01T00:00:00+00:00",
+        "max_validation_prediction_time": "2026-05-31T23:59:00+00:00",
+        "train_id_sha256": "1d9c1c54be72084a627b3865b21fc94e9e93254c332782b18276fa184219bb62",
+        "validation_id_sha256": "db70eb2f46beff2f44a0d978cce9dbd84b44dbb52b1e50b69166b890e96adee9",
+        "train_target_sha256": "5c386d0f0ee1fc6a9a99cf99f6182c2d58579a493e3408bcd430bfc3cdb17fb1",
+        "validation_target_sha256": "4127ab7e0a6298fa42539db1bbc74075047d578ec63df34a8799373f644bfaf1"
+      },
+      {
+        "fold": "2026-06",
+        "train_start": "2026-04-01T00:00:00+00:00",
+        "train_end_exclusive": "2026-06-01T00:00:00+00:00",
+        "validation_start": "2026-06-01T00:00:00+00:00",
+        "validation_end_exclusive": "2026-07-01T00:00:00+00:00",
+        "train_rows": 1127717,
+        "validation_rows": 561972,
+        "excluded_immature_training_labels": 1538,
+        "max_train_prediction_time": "2026-05-31T23:36:00+00:00",
+        "max_train_label_time": "2026-05-31T23:59:00+00:00",
+        "min_validation_prediction_time": "2026-06-01T00:00:00+00:00",
+        "max_validation_prediction_time": "2026-06-30T23:59:00+00:00",
+        "train_id_sha256": "a90b8697524811822601e389f6dcd6af7155f7a3d71e2a2ccded6ce90e9367b3",
+        "validation_id_sha256": "e96b8cf52f6698df4b45e9a05b14fa21ebb3e2bc1f61abf9390c6b4a5641e382",
+        "train_target_sha256": "92e5c3e7e1944ae98416f68e3b23b51c470d00762f1187f7437bca5074cbc4f2",
+        "validation_target_sha256": "6f0f88b0e09b752f77db4007c4375cfdf7bdfbf30355f4d65d80f0e28ce310f8"
+      },
+      {
+        "fold": "2026-07",
+        "train_start": "2026-04-01T00:00:00+00:00",
+        "train_end_exclusive": "2026-07-01T00:00:00+00:00",
+        "validation_start": "2026-07-01T00:00:00+00:00",
+        "validation_end_exclusive": "2026-08-01T00:00:00+00:00",
+        "train_rows": 1689573,
+        "validation_rows": 570548,
+        "excluded_immature_training_labels": 1654,
+        "max_train_prediction_time": "2026-06-30T23:29:00+00:00",
+        "max_train_label_time": "2026-06-30T23:59:00+00:00",
+        "min_validation_prediction_time": "2026-07-01T00:00:00+00:00",
+        "max_validation_prediction_time": "2026-07-31T23:59:00+00:00",
+        "train_id_sha256": "620f6bd533a0293c182707e431ac65134e28da7eb60cc3217ffe3e3e55810078",
+        "validation_id_sha256": "df7fcbba5aaedaa4b8e9d6a590fa9bfaf19de5ff4b9070ad9b5c53d54e08c504",
+        "train_target_sha256": "3f44149b050fa6f382963ad2b9afca69b645b2bb61692b1516e7a7b6dae5fb81",
+        "validation_target_sha256": "0533c6befc1f7beac3ebae6d421b6945f82253dc78b6555fe68265a06e464784"
+      }
+    ],
+    "evaluation_ids_sha256": "db4e500797d62152fece891a62b9c171822e97e4dea76ab92efd587bcfa8d68c",
+    "split_sha256": "4e419b1462154fb34ff4e412653cb9f1b73dc790d6b018967420e7e24441a593",
+    "feature_group": "G4B",
+    "features": [
+      "airport_id",
+      "route",
+      "downstream_airline",
+      "aircraft_family",
+      "downstream_distance",
+      "downstream_crs_elapsed_time",
+      "downstream_day_of_week",
+      "downstream_sched_hour",
+      "scheduled_turnaround_minutes",
+      "upstream_arr_delay_minutes",
+      "tail_completed_24h_n",
+      "tail_completed_24h_arr_delay_mean",
+      "history_window_incomplete",
+      "airport_departures_60m_n",
+      "airport_departures_60m_delay_mean",
+      "airport_planned_departures_next60m_n",
+      "airport_planned_arrivals_next60m_n",
+      "airport_history_window_incomplete",
+      "metar_wind_knots",
+      "metar_gust_knots",
+      "metar_visibility_miles",
+      "metar_ceiling_ft",
+      "metar_precip_amount_in",
+      "metar_precip_flag",
+      "metar_rain_flag",
+      "metar_snow_flag",
+      "metar_thunder_flag",
+      "metar_age_minutes",
+      "metar_missing",
+      "metar_sky_reported",
+      "metar_ceiling_reported",
+      "metar_weather_codes_reported",
+      "taf_bulletin_age_minutes",
+      "taf_lead_minutes",
+      "taf_missing",
+      "taf_prevailing_wind_knots",
+      "taf_prevailing_gust_knots",
+      "taf_prevailing_visibility_miles",
+      "taf_prevailing_ceiling_ft",
+      "taf_prevailing_precip_flag",
+      "taf_prevailing_rain_flag",
+      "taf_prevailing_snow_flag",
+      "taf_prevailing_thunder_flag",
+      "taf_prevailing_segment_count",
+      "taf_prevailing_missing",
+      "taf_tempo_wind_knots",
+      "taf_tempo_gust_knots",
+      "taf_tempo_visibility_miles",
+      "taf_tempo_ceiling_ft",
+      "taf_tempo_precip_flag",
+      "taf_tempo_rain_flag",
+      "taf_tempo_snow_flag",
+      "taf_tempo_thunder_flag",
+      "taf_tempo_segment_count",
+      "taf_tempo_missing",
+      "taf_probability_wind_knots",
+      "taf_probability_gust_knots",
+      "taf_probability_visibility_miles",
+      "taf_probability_ceiling_ft",
+      "taf_probability_precip_flag",
+      "taf_probability_rain_flag",
+      "taf_probability_snow_flag",
+      "taf_probability_thunder_flag",
+      "taf_probability_segment_count",
+      "taf_probability_missing"
+    ],
+    "categorical_features": [
+      "airport_id",
+      "route",
+      "downstream_airline",
+      "aircraft_family"
+    ],
+    "numeric_features": [
+      "downstream_distance",
+      "downstream_crs_elapsed_time",
+      "downstream_day_of_week",
+      "downstream_sched_hour",
+      "scheduled_turnaround_minutes",
+      "upstream_arr_delay_minutes",
+      "tail_completed_24h_n",
+      "tail_completed_24h_arr_delay_mean",
+      "history_window_incomplete",
+      "airport_departures_60m_n",
+      "airport_departures_60m_delay_mean",
+      "airport_planned_departures_next60m_n",
+      "airport_planned_arrivals_next60m_n",
+      "airport_history_window_incomplete",
+      "metar_wind_knots",
+      "metar_gust_knots",
+      "metar_visibility_miles",
+      "metar_ceiling_ft",
+      "metar_precip_amount_in",
+      "metar_precip_flag",
+      "metar_rain_flag",
+      "metar_snow_flag",
+      "metar_thunder_flag",
+      "metar_age_minutes",
+      "metar_missing",
+      "metar_sky_reported",
+      "metar_ceiling_reported",
+      "metar_weather_codes_reported",
+      "taf_bulletin_age_minutes",
+      "taf_lead_minutes",
+      "taf_missing",
+      "taf_prevailing_wind_knots",
+      "taf_prevailing_gust_knots",
+      "taf_prevailing_visibility_miles",
+      "taf_prevailing_ceiling_ft",
+      "taf_prevailing_precip_flag",
+      "taf_prevailing_rain_flag",
+      "taf_prevailing_snow_flag",
+      "taf_prevailing_thunder_flag",
+      "taf_prevailing_segment_count",
+      "taf_prevailing_missing",
+      "taf_tempo_wind_knots",
+      "taf_tempo_gust_knots",
+      "taf_tempo_visibility_miles",
+      "taf_tempo_ceiling_ft",
+      "taf_tempo_precip_flag",
+      "taf_tempo_rain_flag",
+      "taf_tempo_snow_flag",
+      "taf_tempo_thunder_flag",
+      "taf_tempo_segment_count",
+      "taf_tempo_missing",
+      "taf_probability_wind_knots",
+      "taf_probability_gust_knots",
+      "taf_probability_visibility_miles",
+      "taf_probability_ceiling_ft",
+      "taf_probability_precip_flag",
+      "taf_probability_rain_flag",
+      "taf_probability_snow_flag",
+      "taf_probability_thunder_flag",
+      "taf_probability_segment_count",
+      "taf_probability_missing"
+    ],
+    "models": [
+      "training_mean",
+      "training_median",
+      "carry_forward",
+      "g4b_noaa_linear"
+    ],
+    "model_name": "g4b_noaa_linear",
+    "model_type": "linear",
+    "model_params": {
+      "copy_X": true,
+      "fit_intercept": true,
+      "n_jobs": 8,
+      "positive": false,
+      "tol": 1e-06
+    },
+    "include_baselines": true,
+    "effective_preprocessing": {
+      "min_frequency": 20,
+      "drop": "first",
+      "sparse": true,
+      "categorical_imputation": "constant __MISSING__; keep_empty_features=True",
+      "numeric_imputation": "median; add_indicator=True; keep_empty_features=True",
+      "numeric_scaling": "StandardScaler(with_mean=False), fixed across algorithms",
+      "unknown_categories": "infrequent_if_exist"
+    },
+    "threads": 8,
+    "fold_workers": 3,
+    "fold_timings": [
+      {
+        "fold": "2026-05",
+        "pid": 1532,
+        "threads": 8,
+        "train_rows": 553140,
+        "validation_rows": 574571,
+        "models_seconds": {
+          "training_mean": 6.789500999999291,
+          "training_median": 6.505957900000794,
+          "carry_forward": 5.879848299999139,
+          "g4b_noaa_linear": 80.25984959999914
+        },
+        "status": "completed",
+        "elapsed_seconds": 99.76302579999901
+      },
+      {
+        "fold": "2026-06",
+        "pid": 51464,
+        "threads": 8,
+        "train_rows": 1127717,
+        "validation_rows": 561972,
+        "models_seconds": {
+          "training_mean": 6.838874400003988,
+          "training_median": 5.652920399996219,
+          "carry_forward": 5.873018300000695,
+          "g4b_noaa_linear": 230.91604619999998
+        },
+        "status": "completed",
+        "elapsed_seconds": 249.63582440000027
+      },
+      {
+        "fold": "2026-07",
+        "pid": 15192,
+        "threads": 8,
+        "train_rows": 1689573,
+        "validation_rows": 570548,
+        "models_seconds": {
+          "training_mean": 6.29015470000013,
+          "training_median": 6.0568214999948395,
+          "carry_forward": 6.333972399996128,
+          "g4b_noaa_linear": 248.4250686000014
+        },
+        "status": "completed",
+        "elapsed_seconds": 267.48393770000257
+      }
+    ],
+    "linear_tolerance": 1e-06,
+    "linear_fit_intercept": true,
+    "sparse_solver": "scipy.sparse.linalg.lsqr via sklearn LinearRegression",
+    "coefficient_limit": "Airport and route columns are related; individual coefficients are not independent airport effects",
+    "metric_path": "D:\\airline-delay\\experiments\\runs\\R0019\\metrics.csv"
+  },
+  "ended_at_utc": "2026-10-23T23:53:09.295784+00:00",
+  "elapsed_seconds": 757.9959920999972,
+  "outputs": [
+    {
+      "path": "experiments/runs/R0019/cleaning_summary.json",
+      "bytes": 2844,
+      "sha256": "f071c64e436924aaa00904bb668463f612db73bfef1238bc734b1559f47d579c"
+    },
+    {
+      "path": "experiments/runs/R0019/comparison/comparison.json",
+      "bytes": 1784,
+      "sha256": "93e67f34f8354fd187fd8255dc81997fdc3e15a8c87568f755fe8a0a11761969"
+    },
+    {
+      "path": "experiments/runs/R0019/comparison/comparison_daily_stats.csv",
+      "bytes": 9928,
+      "sha256": "0df1d080657094aa87d43aa25efc6052b159ef9821f266c774da3118c693fcbe"
+    },
+    {
+      "path": "experiments/runs/R0019/comparison/comparison_error_differences.png",
+      "bytes": 71268,
+      "sha256": "f0c28b4bfa23126c0cc39578957f5b3442ff366c6d81a3e78aa11ac4f252b452"
+    },
+    {
+      "path": "experiments/runs/R0019/comparison/comparison_metrics.csv",
+      "bytes": 971,
+      "sha256": "422aced8d39a1fef1938889b0b3f8d01ba44db3a3c4f48e86b00307bb676d651"
+    },
+    {
+      "path": "experiments/runs/R0019/config.json",
+      "bytes": 5568,
+      "sha256": "237f41197e4e1f24380b92254f37100645f500c273fb4780997f7bcb98ee064a"
+    },
+    {
+      "path": "experiments/runs/R0019/connection_exclusions.csv",
+      "bytes": 500,
+      "sha256": "b62030cea4db5a3f314c5073a4b96e2439abe18f8684695f8b85bdf7d67660c0"
+    },
+    {
+      "path": "experiments/runs/R0019/data/features.pkl",
+      "bytes": 2795446188,
+      "sha256": "5cdcbabbf8b6ff8ca486ad4600dbe3dc4e2c9c028c2e3af3c4dbdf2c7365ed53"
+    },
+    {
+      "path": "experiments/runs/R0019/data/noaa_overlap_pairs.csv.gz",
+      "bytes": 181,
+      "sha256": "e9ed6bcbab8d90810b64489635cb81d4c1aa3cfc9df1039d988e45f76461f1a2"
+    },
+    {
+      "path": "experiments/runs/R0019/data_manifest.json",
+      "bytes": 1625,
+      "sha256": "f653de91bac863cf678d137d6c7ce365e6d46a9d57d0a7d6c6143bd0439b7f9c"
+    },
+    {
+      "path": "experiments/runs/R0019/eda_summary.json",
+      "bytes": 5371,
+      "sha256": "481e484b58db60ed0c4ff80b3c156b5523166013064bf8fa00ab32833cb788f1"
+    },
+    {
+      "path": "experiments/runs/R0019/evaluation_ids.csv.gz",
+      "bytes": 24194533,
+      "sha256": "3a416b4914c6fd01495833fff6cd0bc5ee95963b87dd6ac46139e3b2a2daa09c"
+    },
+    {
+      "path": "experiments/runs/R0019/feature_audit.json",
+      "bytes": 12352,
+      "sha256": "32a081ba47ec6ee731ee1c6496f15d04606fbd856327968b46f8a4d52b13e74b"
+    },
+    {
+      "path": "experiments/runs/R0019/feature_dictionary.csv",
+      "bytes": 39168,
+      "sha256": "438f4db3eee44e035a39c24399b6af216010f0881039818b78d03c0e453a458e"
+    },
+    {
+      "path": "experiments/runs/R0019/figures/eda_airport_support.png",
+      "bytes": 62367,
+      "sha256": "71058900bcaf91b9301630d5fbf997e889eeffafcfa8aac104666cbcaa48ada9"
+    },
+    {
+      "path": "experiments/runs/R0019/figures/eda_monthly_target.png",
+      "bytes": 35290,
+      "sha256": "cc43a1588330ea377bde29ffbd0413579947ebe52d85ee9de6855126cef6dd89"
+    },
+    {
+      "path": "experiments/runs/R0019/figures/eda_target_distribution.png",
+      "bytes": 53066,
+      "sha256": "2ff40698741d03b02841864e59858f8fadf0590ab7380b5420f8f719b9d85d87"
+    },
+    {
+      "path": "experiments/runs/R0019/figures/eda_turnaround_count.png",
+      "bytes": 138269,
+      "sha256": "b5b52428147660581bf1b378886c0ab3d356c422c7187d8b807b6008695f7c36"
+    },
+    {
+      "path": "experiments/runs/R0019/figures/eda_turnaround_mean_delta.png",
+      "bytes": 115695,
+      "sha256": "8047124d2d87e950f6c2bdfd0d9c1488475ba40d632a33c4cb4457db7a6f446f"
+    },
+    {
+      "path": "experiments/runs/R0019/figures/rq1_cumulative_delay.png",
+      "bytes": 61338,
+      "sha256": "8b35c4fb98e98663f480bafdeeaee305f0fe5bcf82d76cb9f845529b3603638d"
+    },
+    {
+      "path": "experiments/runs/R0019/figures/rq1_raw_airport_mean.png",
+      "bytes": 93702,
+      "sha256": "3fb04c7cb5ed6a70ac883a2fb7b1d6d6f3acfb46174ce64245d16cd3002eb789"
+    },
+    {
+      "path": "experiments/runs/R0019/figures/rq1_turnaround_count.png",
+      "bytes": 118480,
+      "sha256": "b2f13b6182ec974ab56f5a75e8d44ae0fb914bf1428baaefa4d5d058321585fe"
+    },
+    {
+      "path": "experiments/runs/R0019/figures/rq1_turnaround_mean_delta.png",
+      "bytes": 107816,
+      "sha256": "030c926f3c559fab57cbbfb1239964aa6a9c9215fe5208f86d3600e3768ee0b6"
+    },
+    {
+      "path": "experiments/runs/R0019/figures/rq2_metric_comparison.png",
+      "bytes": 31765,
+      "sha256": "19f4d3b3a77878c876cc7e576dd298e6ad743e1aae28983456d9040974109fd2"
+    },
+    {
+      "path": "experiments/runs/R0019/figures/weather_query_coverage.png",
+      "bytes": 581936,
+      "sha256": "aa561bbcadf72acc222a9b868723da1df4dcd5d6507d6c18bf72af0411926b50"
+    },
+    {
+      "path": "experiments/runs/R0019/fold_2026-05.log",
+      "bytes": 1387,
+      "sha256": "d1b1596ba22d981c5caf7fcb2dab34976a07b4b6cf9d99fe6aaf3b5d14c242c5"
+    },
+    {
+      "path": "experiments/runs/R0019/fold_2026-05_metrics.csv",
+      "bytes": 120581,
+      "sha256": "d69eb61f90efede5e02d46bc429bd713b0b18f910fe196258f73129094edc534"
+    },
+    {
+      "path": "experiments/runs/R0019/fold_2026-05_timing.json",
+      "bytes": 376,
+      "sha256": "4d60c7a793bb4be6c7856986e35a8a500fa87d23b8ff48d4c3eede37bafba287"
+    },
+    {
+      "path": "experiments/runs/R0019/fold_2026-06.log",
+      "bytes": 1391,
+      "sha256": "b457c7aa9d995862fa841b97359f48a754374a5d8f55a5717d180c8feb9705ec"
+    },
+    {
+      "path": "experiments/runs/R0019/fold_2026-06_metrics.csv",
+      "bytes": 122099,
+      "sha256": "dce3e9a517354536572a4ba6e03a0be6033b3b1a97182b75b6e6bc24c7bbd32d"
+    },
+    {
+      "path": "experiments/runs/R0019/fold_2026-06_timing.json",
+      "bytes": 380,
+      "sha256": "4a99ebc1d93aaa4c5e0d868da2d13a18d85c7235077781b1c99dd8d068f025e1"
+    },
+    {
+      "path": "experiments/runs/R0019/fold_2026-07.log",
+      "bytes": 1391,
+      "sha256": "54a3ebbaa68634c8ea71e0f8506a74815fff41451d3a5ac54ee228507e987639"
+    },
+    {
+      "path": "experiments/runs/R0019/fold_2026-07_metrics.csv",
+      "bytes": 122655,
+      "sha256": "c4ac39a11d3a0a86f1f51759db5b86305225fce52d26f6f1ff6d2c1cd025f098"
+    },
+    {
+      "path": "experiments/runs/R0019/fold_2026-07_timing.json",
+      "bytes": 379,
+      "sha256": "25f544734dd6f107b8cabfef9203106dbf081ea32d22dd4ce18df2c77db64fc2"
+    },
+    {
+      "path": "experiments/runs/R0019/metrics.csv",
+      "bytes": 910633,
+      "sha256": "f433e8e6989b1bee878cced117a57285866eb63606ff86aee97f579f48b8f311"
+    },
+    {
+      "path": "experiments/runs/R0019/model_manifest.json",
+      "bytes": 10086,
+      "sha256": "fcb71273ac15307465f8f2518ce4db64cf0d8df64ff0ffcbdec92980480ec1fc"
+    },
+    {
+      "path": "experiments/runs/R0019/models/2026-05_carry_forward.joblib",
+      "bytes": 63,
+      "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+    },
+    {
+      "path": "experiments/runs/R0019/models/2026-05_g4b_noaa_linear.joblib",
+      "bytes": 80738,
+      "sha256": "410ca5ae3a0514bb36cf3bc8f5770286ed4a7ff9fed2136b9435d7e2140645e4"
+    },
+    {
+      "path": "experiments/runs/R0019/models/2026-05_training_mean.joblib",
+      "bytes": 315,
+      "sha256": "cef15ab35d87346aab29020c2f508e6f5cdd821cf6b1f0688bfb4fc5ebefc63f"
+    },
+    {
+      "path": "experiments/runs/R0019/models/2026-05_training_median.joblib",
+      "bytes": 304,
+      "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+    },
+    {
+      "path": "experiments/runs/R0019/models/2026-06_carry_forward.joblib",
+      "bytes": 63,
+      "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+    },
+    {
+      "path": "experiments/runs/R0019/models/2026-06_g4b_noaa_linear.joblib",
+      "bytes": 85505,
+      "sha256": "583178bfc706bda0da76b3d9c30ca9e1fd3c2fbcd5132a26dec918279fb92509"
+    },
+    {
+      "path": "experiments/runs/R0019/models/2026-06_training_mean.joblib",
+      "bytes": 314,
+      "sha256": "254fe9773735f63d55ae4c23bab4e5969d62755b48ab3add10ad4d0060864e77"
+    },
+    {
+      "path": "experiments/runs/R0019/models/2026-06_training_median.joblib",
+      "bytes": 304,
+      "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+    },
+    {
+      "path": "experiments/runs/R0019/models/2026-07_carry_forward.joblib",
+      "bytes": 63,
+      "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+    },
+    {
+      "path": "experiments/runs/R0019/models/2026-07_g4b_noaa_linear.joblib",
+      "bytes": 91551,
+      "sha256": "0e700f5a57aabc25259c58f554bba4d38c2e725b56dc28720353e4bf792044b0"
+    },
+    {
+      "path": "experiments/runs/R0019/models/2026-07_training_mean.joblib",
+      "bytes": 316,
+      "sha256": "c418a0f8ea9aa5d0c0c67fe1c2402e9e95fe573de5fd556694e1305042da71dd"
+    },
+    {
+      "path": "experiments/runs/R0019/models/2026-07_training_median.joblib",
+      "bytes": 304,
+      "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+    },
+    {
+      "path": "experiments/runs/R0019/notebooks/01_航班清洗与衔接.html",
+      "bytes": 298910,
+      "sha256": "e73132d3c7adedd546fb3e66133dfd73e2cc8e83c42e839a566d189564b6357f"
+    },
+    {
+      "path": "experiments/runs/R0019/notebooks/01_航班清洗与衔接.ipynb",
+      "bytes": 13272,
+      "sha256": "f563675a8b5fb0ee74e30553d7eb8bbea91cdacbc673e5397be9e90b2a18bd50"
+    },
+    {
+      "path": "experiments/runs/R0019/notebooks/02_天气与特征.html",
+      "bytes": 374959,
+      "sha256": "2f604e403c0cbd62c25c2f9fbf21413b975ba7f95f2f13cf96c06594bfae1434"
+    },
+    {
+      "path": "experiments/runs/R0019/notebooks/02_天气与特征.ipynb",
+      "bytes": 201995,
+      "sha256": "413f97e0dbbf5b0e280f5076bc87b735c23fe0f78d6975c1a83826ff46ee9d2f"
+    },
+    {
+      "path": "experiments/runs/R0019/notebooks/03_EDA.html",
+      "bytes": 862263,
+      "sha256": "9d41a3aae5f2c233a209c95ad27fa5381de5a6c1a3f86cc43c89f7b8f746f55d"
+    },
+    {
+      "path": "experiments/runs/R0019/notebooks/03_EDA.ipynb",
+      "bytes": 585891,
+      "sha256": "4d15bac863d6ba287156b0b7c5aa3b874393f7b7f1f78360d1ea791c55091dd4"
+    },
+    {
+      "path": "experiments/runs/R0019/notebooks/04_RQ1机场分析.html",
+      "bytes": 837636,
+      "sha256": "c5f761fe9fc5832fb265814f6ce017fceb3a0baddb427eb40fee90d082eac307"
+    },
+    {
+      "path": "experiments/runs/R0019/notebooks/04_RQ1机场分析.ipynb",
+      "bytes": 578896,
+      "sha256": "4847e7aa6d36ebbecb95308528b5beb19d228989e46d0b3bacb96cd4404bc59a"
+    },
+    {
+      "path": "experiments/runs/R0019/notebooks/05_RQ2预测与解释.html",
+      "bytes": 422486,
+      "sha256": "e91c1a7bda75e3941b6bec22bd60babb193060b0cd85f1fdf1c937ba2a89cfe9"
+    },
+    {
+      "path": "experiments/runs/R0019/notebooks/05_RQ2预测与解释.ipynb",
+      "bytes": 182178,
+      "sha256": "28b3ecf7b479566dad22a99b2b7a9f1f067872196580dd98d6dbebd4e056675a"
+    },
+    {
+      "path": "experiments/runs/R0019/predictions/2026-05_carry_forward.csv.gz",
+      "bytes": 13826651,
+      "sha256": "e248fb7df31712fa7ff6deac6f0f58d303a9b28b1f829ac82b1d9b1ca6d7cde1"
+    },
+    {
+      "path": "experiments/runs/R0019/predictions/2026-05_g4b_noaa_linear.csv.gz",
+      "bytes": 21922407,
+      "sha256": "fa013d33e682689209835e8b7bb118a51aa256f1683c40f58b5ca6af833af5a4"
+    },
+    {
+      "path": "experiments/runs/R0019/predictions/2026-05_training_mean.csv.gz",
+      "bytes": 13190162,
+      "sha256": "fe504bda13ce211b8ca871b5f01ce6442544b3c37c9943c1a72a6003ca1efd99"
+    },
+    {
+      "path": "experiments/runs/R0019/predictions/2026-05_training_median.csv.gz",
+      "bytes": 12898887,
+      "sha256": "c764d622ee23cbbd9ca6aba2ee9ad630d48af5832120fa1de639c956bbd3f081"
+    },
+    {
+      "path": "experiments/runs/R0019/predictions/2026-06_carry_forward.csv.gz",
+      "bytes": 13675371,
+      "sha256": "492723757d022418cfbba3a84ad1cd4806a2e06a3ac11f0e5cae78cb2a24a635"
+    },
+    {
+      "path": "experiments/runs/R0019/predictions/2026-06_g4b_noaa_linear.csv.gz",
+      "bytes": 21493552,
+      "sha256": "bcd8c83bc2b52717c18e61dece4f1fad489d78286da119202f2535b96d567659"
+    },
+    {
+      "path": "experiments/runs/R0019/predictions/2026-06_training_mean.csv.gz",
+      "bytes": 12944107,
+      "sha256": "f6f2c1d67c85ae12206e550b046e557b59e6cbf722363314af3445c2abfa8210"
+    },
+    {
+      "path": "experiments/runs/R0019/predictions/2026-06_training_median.csv.gz",
+      "bytes": 12667990,
+      "sha256": "9e8c4d4c1168f6dea121491fe174d33380cffa4deecc67625c02796f6704cab2"
+    },
+    {
+      "path": "experiments/runs/R0019/predictions/2026-07_carry_forward.csv.gz",
+      "bytes": 14005849,
+      "sha256": "5f20f5c9c4cc7c38fc8708d248b4c79196a965f904526758fec9d02d2163b88f"
+    },
+    {
+      "path": "experiments/runs/R0019/predictions/2026-07_g4b_noaa_linear.csv.gz",
+      "bytes": 21881596,
+      "sha256": "9f9a823ab6a815887daf7b4f250d8439e5133de335e3b30ce0095c12312a3c1d"
+    },
+    {
+      "path": "experiments/runs/R0019/predictions/2026-07_training_mean.csv.gz",
+      "bytes": 13189436,
+      "sha256": "c65744af56cd2183e0c88bff4372500db474eb3af19e5b5ad170e2c94994b8d1"
+    },
+    {
+      "path": "experiments/runs/R0019/predictions/2026-07_training_median.csv.gz",
+      "bytes": 12907931,
+      "sha256": "878daf7aae01a2b3fc17906777b47a6cce091ac53fafcc2f8d0767e265e85cc2"
+    },
+    {
+      "path": "experiments/runs/R0019/resources.csv",
+      "bytes": 12518,
+      "sha256": "349db7e5cf52cc16ee5a25c60610ac1c6041acf1854714185c9404411a9f0a67"
+    },
+    {
+      "path": "experiments/runs/R0019/rq1_summary.json",
+      "bytes": 877,
+      "sha256": "feb9713f13946928e75c01dc88e43acddcc87fe92f6674fc42d27adceb9109d6"
+    },
+    {
+      "path": "experiments/runs/R0019/run.log",
+      "bytes": 1039,
+      "sha256": "5ccb1bc8057b7404774336c16d2f3393f9ede79a38ed3c2e462f1946be307e40"
+    },
+    {
+      "path": "experiments/runs/R0019/split_audit.csv",
+      "bytes": 1822,
+      "sha256": "6e84cf5c3bc360b9de0f75b77b4920aebd2ea82d7dd49aa5e2731807326d7509"
+    },
+    {
+      "path": "experiments/runs/R0019/tables/eda_feature_missing.csv",
+      "bytes": 247,
+      "sha256": "52ea63177adee28ea4b30a97d0ec83722960ed7b8c6523ded5270fb7072dfcb6"
+    },
+    {
+      "path": "experiments/runs/R0019/tables/eda_monthly_target.csv",
+      "bytes": 504,
+      "sha256": "00a739027c30f0d7460f90d2c731a011271af4e126027ffc7d0d2d82c8a73a3e"
+    },
+    {
+      "path": "experiments/runs/R0019/tables/eda_support_airline.csv",
+      "bytes": 192,
+      "sha256": "ae29211f961e646a64856aa23e6d44d9c7bf19a7dc50259486929180b61e8b0c"
+    },
+    {
+      "path": "experiments/runs/R0019/tables/eda_support_airport.csv",
+      "bytes": 4845,
+      "sha256": "01da34f74d6259af6e8423f49d3661b1f7fe51b03ebadbea38241ade3a8f9b75"
+    },
+    {
+      "path": "experiments/runs/R0019/tables/eda_support_route.csv",
+      "bytes": 129897,
+      "sha256": "e81e5d2380c3f00bd02230bf32ad6b422588735f06ff7d408c664e459872b6b2"
+    },
+    {
+      "path": "experiments/runs/R0019/tables/eda_target_bins.csv",
+      "bytes": 310,
+      "sha256": "3146e04c68319608efd37682561ebb928ffb1f972a249c87e34bf059023541a9"
+    },
+    {
+      "path": "experiments/runs/R0019/tables/eda_turnaround_heatmap.csv",
+      "bytes": 2608,
+      "sha256": "fdf9d33277b75f3b86bf912cdfcd298861ab016c35d32abd8d9fccb55e247ec4"
+    },
+    {
+      "path": "experiments/runs/R0019/tables/feature_missing.csv",
+      "bytes": 3419,
+      "sha256": "f3848413bd3bab8be7026a094ea3ef9dafdcd633bb39277a4564b6b3dfc4c4b4"
+    },
+    {
+      "path": "experiments/runs/R0019/tables/noaa_overlap_summary.csv",
+      "bytes": 676,
+      "sha256": "6fe8e10a25c0ecac8fac3b17afcbc168d03c4b239848ed882766c031a2fa59a2"
+    },
+    {
+      "path": "experiments/runs/R0019/tables/rq1_airport_monthly.csv",
+      "bytes": 229221,
+      "sha256": "84ab420761c9d7f5f22f578261c76a7fefe7a21c3965ec212eb59a3750bcabee"
+    },
+    {
+      "path": "experiments/runs/R0019/tables/rq1_airport_raw.csv",
+      "bytes": 62019,
+      "sha256": "c434068c23ac070c17599c4997ae32ccf487ee4dbe08f2c2903862deaf2855da"
+    },
+    {
+      "path": "experiments/runs/R0019/tables/rq1_turnaround_heatmap.csv",
+      "bytes": 2206,
+      "sha256": "e3c0732e83750acba007b27b5cca77e22fdb817d77536313ff1560cf0fef81e1"
+    },
+    {
+      "path": "experiments/runs/R0019/tables/taf_status_counts.csv",
+      "bytes": 156,
+      "sha256": "010270d74d757c114c4a213f4fa2eeb2ae9e9ba8243cc8c37e57865f9287c50e"
+    },
+    {
+      "path": "experiments/runs/R0019/tables/weather_coverage_airport.csv",
+      "bytes": 36300,
+      "sha256": "d414b350b6720c472a1849901585e409157e849337b4e7b311463473761f6c94"
+    },
+    {
+      "path": "experiments/runs/R0019/tables/weather_coverage_airport_date.csv",
+      "bytes": 2901891,
+      "sha256": "5bc7b66905461ec353ca7f699b59aae24498837c462ba5f0e2b975bf7af9dfb9"
+    },
+    {
+      "path": "experiments/runs/R0019/tables/weather_coverage_month.csv",
+      "bytes": 889,
+      "sha256": "d81d8e260a9bf559e6378ab0b0d968e8be3ef0b29b72da72614347562ecb7b3d"
+    },
+    {
+      "path": "experiments/runs/R0019/tables/weather_variable_coverage.csv",
+      "bytes": 2705,
+      "sha256": "3b08c3d90745d9ec980906742852f55c88c2ba7bd5d360d9593d5e764ef4b47e"
+    },
+    {
+      "path": "experiments/runs/R0019/weather_coverage_summary.json",
+      "bytes": 475,
+      "sha256": "e8166823cb333764a6eecfb6ae2c404389063014176de76a8ea06dcfc30785cc"
+    }
+  ]
+}

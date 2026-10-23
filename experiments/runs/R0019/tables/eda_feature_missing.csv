@@ -1,0 +1,9 @@
+feature,missing_n,missing_share
+airport_id,0,0.0
+route,0,0.0
+downstream_airline,0,0.0
+downstream_distance,0,0.0
+downstream_crs_elapsed_time,0,0.0
+downstream_day_of_week,0,0.0
+downstream_sched_hour,0,0.0
+scheduled_turnaround_minutes,0,0.0

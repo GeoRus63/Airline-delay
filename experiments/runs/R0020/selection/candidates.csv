@@ -1,0 +1,7 @@
+run_id,run_dir,model,feature_group,predictors,model_type,model_params,pooled_mae,pooled_rmse
+R0006,D:\airline-delay\experiments\runs\R0006,g0_linear,G0,8,linear,"{""copy_X"": true, ""fit_intercept"": true, ""n_jobs"": 8, ""positive"": false, ""tol"": 1e-06}",19.57382914121953,50.23516763734498
+R0007,D:\airline-delay\experiments\runs\R0007,g1_linear,G1,12,linear,"{""copy_X"": true, ""fit_intercept"": true, ""n_jobs"": 8, ""positive"": false, ""tol"": 1e-06}",17.258107684922926,46.94103946931297
+R0009,D:\airline-delay\experiments\runs\R0009,g2_family_linear,G2,13,linear,"{""copy_X"": true, ""fit_intercept"": true, ""n_jobs"": 8, ""positive"": false, ""tol"": 1e-06}",17.248723769582266,46.93662586207742
+R0012,D:\airline-delay\experiments\runs\R0012,g3_linear,G3,18,linear,"{""copy_X"": true, ""fit_intercept"": true, ""n_jobs"": 8, ""positive"": false, ""tol"": 1e-06}",17.27957624535732,46.90341741789913
+R0015,D:\airline-delay\experiments\runs\R0015,g4a_linear,G4A,32,linear,"{""copy_X"": true, ""fit_intercept"": true, ""n_jobs"": 8, ""positive"": false, ""tol"": 1e-06}",17.21381600138498,46.86334156424336
+R0017,D:\airline-delay\experiments\runs\R0017,g4b_linear,G4B,65,linear,"{""copy_X"": true, ""fit_intercept"": true, ""n_jobs"": 8, ""positive"": false, ""tol"": 1e-06}",16.80660373036146,44.81355707887568

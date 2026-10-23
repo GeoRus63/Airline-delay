@@ -1,0 +1,779 @@
+{
+  "run_id": "R0020",
+  "status": "completed",
+  "started_at_utc": "2026-10-23T23:54:17.811923+00:00",
+  "git_commit": "d7a69611f8bfc39029f66b4b76fb933a91512ee4",
+  "command": "D:\\airline-delay\\.venv\\Scripts\\python.exe scripts/run_pipeline.py --config configs/p5_select_features.json --run-id R0020",
+  "python": "3.13.15 | packaged by conda-forge | (main, Sep  2 2026, 21:52:43) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "logical_cpus": 32,
+  "environment": {
+    "anyio": "4.15.1",
+    "argon2-cffi": "25.1.0",
+    "argon2-cffi-bindings": "26.1.0",
+    "arrow": "1.4.0",
+    "asttokens": "3.0.2",
+    "async-lru": "2.4.0",
+    "attrs": "26.1.0",
+    "babel": "2.18.0",
+    "beautifulsoup4": "4.15.0",
+    "bleach": "6.4.0",
+    "certifi": "2026.10.23",
+    "cffi": "2.1.1",
+    "charset-normalizer": "3.5.2",
+    "cloudpickle": "3.1.2",
+    "colorama": "0.4.6",
+    "comm": "0.2.3",
+    "contourpy": "1.4.0",
+    "cycler": "0.12.1",
+    "debugpy": "1.8.22",
+    "defusedxml": "0.7.1",
+    "executing": "2.3.0",
+    "fastjsonschema": "2.22.2",
+    "fonttools": "4.67.0",
+    "fqdn": "1.6.0",
+    "h11": "0.16.0",
+    "httpcore": "1.0.9",
+    "httpx": "0.28.1",
+    "idna": "3.20",
+    "ipykernel": "7.3.0",
+    "ipython": "9.17.1",
+    "ipython_pygments_lexers": "1.1.1",
+    "isoduration": "20.11.0",
+    "jedi": "0.20.1",
+    "Jinja2": "3.1.6",
+    "joblib": "1.6.0",
+    "json5": "0.17.3",
+    "jsonpointer": "3.4",
+    "jsonschema": "4.26.0",
+    "jsonschema-specifications": "2025.9.1",
+    "jupyterlab": "4.5.7",
+    "jupyterlab_pygments": "0.3.0",
+    "jupyterlab_server": "2.28.1",
+    "jupyter_client": "8.10.0",
+    "jupyter_core": "5.9.1",
+    "jupyter-events": "0.12.1",
+    "jupyter-lsp": "2.3.1",
+    "jupyter_server": "2.21.1",
+    "jupyter_server_terminals": "0.5.4",
+    "kiwisolver": "1.5.1",
+    "lark": "1.3.1",
+    "MarkupSafe": "3.0.4",
+    "matplotlib": "3.10.9",
+    "matplotlib-inline": "0.2.2",
+    "mistune": "3.4.0",
+    "nbclient": "0.11.0",
+    "nbconvert": "7.17.1",
+    "nbformat": "5.11.0",
+    "nest-asyncio2": "1.7.4",
+    "notebook_shim": "0.2.4",
+    "numpy": "2.4.6",
+    "packaging": "26.3",
+    "pandas": "3.0.3",
+    "pandocfilters": "1.5.1",
+    "parso": "0.8.7",
+    "pillow": "13.0.0",
+    "pip": "26.2.1",
+    "platformdirs": "4.13.5",
+    "prometheus_client": "0.26.0",
+    "prompt_toolkit": "3.0.53",
+    "psutil": "7.2.2",
+    "pure_eval": "0.2.4",
+    "pycparser": "3.12",
+    "Pygments": "2.21.0",
+    "pyparsing": "3.3.3",
+    "python-dateutil": "3.0.0",
+    "python-json-logger": "4.2.0",
+    "pywinpty": "3.1.0",
+    "PyYAML": "6.0.3",
+    "pyzmq": "27.2.0",
+    "referencing": "0.37.0",
+    "requests": "2.34.2",
+    "rfc3339-validator": "0.1.4",
+    "rfc3986-validator": "0.1.1",
+    "rfc3987-syntax": "1.1.0",
+    "rpds-py": "2026.9.1",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.18.1",
+    "seaborn": "0.13.2",
+    "Send2Trash": "2.1.0",
+    "setuptools": "84.2.1",
+    "six": "1.17.0",
+    "soupsieve": "3.0.4",
+    "stack-data": "0.6.3",
+    "terminado": "0.18.1",
+    "threadpoolctl": "3.7.0",
+    "tinycss2": "1.5.1",
+    "tornado": "6.6",
+    "traitlets": "5.16.1",
+    "typing_extensions": "4.16.0",
+    "tzdata": "2026.3",
+    "uri-template": "1.3.0",
+    "urllib3": "2.8.0",
+    "wcwidth": "0.9.3",
+    "webcolors": "25.10.0",
+    "webencodings": "0.6.1",
+    "websocket-client": "1.9.2"
+  },
+  "source_files": [
+    {
+      "path": "scripts/run_pipeline.py",
+      "bytes": 20765,
+      "sha256": "c14895b24a5aae12bc68fd849162885579aa7742f419cd89316f7b41d2b233a1"
+    },
+    {
+      "path": "scripts/prepare_flights.py",
+      "bytes": 18644,
+      "sha256": "d150244a8ddf828550244d35a86d79ffaf739161f73d3495def1f18df3cdd1c8"
+    },
+    {
+      "path": "scripts/select_models.py",
+      "bytes": 26722,
+      "sha256": "bd4069668576745446ce6041699db0baf53890bdd611dcc8f7e8d03015e8e81a"
+    },
+    {
+      "path": "scripts/final_evaluation.py",
+      "bytes": 28417,
+      "sha256": "08e22ed5a41e04fa76adc7b5fcc5e9728bc3f3cf6cbaf234032437687c1afcfd"
+    },
+    {
+      "path": "scripts/train_models.py",
+      "bytes": 21396,
+      "sha256": "11929626005fad33ec690d59949af700bb9b11b716de255d49aad3d8033e0116"
+    },
+    {
+      "path": "scripts/build_features.py",
+      "bytes": 18827,
+      "sha256": "a5d990aebcf3ddf5ffbcf34bf92f79339f64484062d427f4df29d899788dd583"
+    },
+    {
+      "path": "scripts/evaluate_models.py",
+      "bytes": 2980,
+      "sha256": "ee39185ad678b517ab72d75444f0ba39fb9ba371aa12264b7cadafba154f8e18"
+    },
+    {
+      "path": "scripts/compare_experiments.py",
+      "bytes": 18298,
+      "sha256": "fb30833fba85b41178f2a8ad5deb024fe7263e284ef1a613dae0cc664da4971e"
+    },
+    {
+      "path": "configs/model_selection_protocol.json",
+      "bytes": 2389,
+      "sha256": "08f00d0e57a3b625c44a90e99f58e4dcdf742cf784cea3c04e42abb9ca5ea9b9"
+    },
+    {
+      "path": "configs/p5_select_features.json",
+      "bytes": 382,
+      "sha256": "1051e4e62b64dc8a6fd624e0ed3a5614e4de8bde486f60165cd2b790f8576932"
+    }
+  ],
+  "input_manifest": {
+    "path": "tables/file_manifest.json",
+    "bytes": 31686,
+    "sha256": "d499da4db902f139f2fd9a3cb02676eb34bab2e3c3aab3ab97b814df3be8e209"
+  },
+  "config": {
+    "stage": "P5-feature-selection",
+    "mode": "select_features",
+    "parent_run_id": "R0019",
+    "change": "Apply registered pooled-MAE rule to all six completed OLS mainline feature sets; exclude variant and NOAA from primary selection",
+    "candidate_run_ids": [
+      "R0006",
+      "R0007",
+      "R0009",
+      "R0012",
+      "R0015",
+      "R0017",
+      "R0010",
+      "R0019"
+    ],
+    "threads": 8,
+    "test_target_sealed": true
+  },
+  "result": {
+    "selection_type": "features",
+    "selected_run_id": "R0017",
+    "selected_run_dir": "D:\\airline-delay\\experiments\\runs\\R0017",
+    "config": {
+      "data_id": "D0003",
+      "connection_path": "processed/D0003/flight_connections.csv.gz",
+      "data_manifest_path": "processed/D0003/data_manifest.json",
+      "feature_group": "G4B",
+      "model_name": "g4b_linear",
+      "model_type": "linear",
+      "include_baselines": true,
+      "threads": 8,
+      "seed": 42,
+      "linear_tolerance": 1e-06,
+      "preprocessing": {
+        "drop": "first",
+        "min_frequency": 20
+      },
+      "primary_metric": "sample-weighted pooled validation MAE in minutes",
+      "prediction_rule": "clip all predictions at zero",
+      "split_rule": "UTC half-open prediction windows; training label_time strictly before cutoff",
+      "sample_interpretation": "Retrospective prediction conditional on valid observed same-tail scheduled-adjacent completed connections",
+      "weather_manifest_path": "processed/W0002/data_manifest.json",
+      "noaa_backfill": false,
+      "features": [
+        "airport_id",
+        "route",
+        "downstream_airline",
+        "aircraft_family",
+        "downstream_distance",
+        "downstream_crs_elapsed_time",
+        "downstream_day_of_week",
+        "downstream_sched_hour",
+        "scheduled_turnaround_minutes",
+        "upstream_arr_delay_minutes",
+        "tail_completed_24h_n",
+        "tail_completed_24h_arr_delay_mean",
+        "history_window_incomplete",
+        "airport_departures_60m_n",
+        "airport_departures_60m_delay_mean",
+        "airport_planned_departures_next60m_n",
+        "airport_planned_arrivals_next60m_n",
+        "airport_history_window_incomplete",
+        "metar_wind_knots",
+        "metar_gust_knots",
+        "metar_visibility_miles",
+        "metar_ceiling_ft",
+        "metar_precip_amount_in",
+        "metar_precip_flag",
+        "metar_rain_flag",
+        "metar_snow_flag",
+        "metar_thunder_flag",
+        "metar_age_minutes",
+        "metar_missing",
+        "metar_sky_reported",
+        "metar_ceiling_reported",
+        "metar_weather_codes_reported",
+        "taf_bulletin_age_minutes",
+        "taf_lead_minutes",
+        "taf_missing",
+        "taf_prevailing_wind_knots",
+        "taf_prevailing_gust_knots",
+        "taf_prevailing_visibility_miles",
+        "taf_prevailing_ceiling_ft",
+        "taf_prevailing_precip_flag",
+        "taf_prevailing_rain_flag",
+        "taf_prevailing_snow_flag",
+        "taf_prevailing_thunder_flag",
+        "taf_prevailing_segment_count",
+        "taf_prevailing_missing",
+        "taf_tempo_wind_knots",
+        "taf_tempo_gust_knots",
+        "taf_tempo_visibility_miles",
+        "taf_tempo_ceiling_ft",
+        "taf_tempo_precip_flag",
+        "taf_tempo_rain_flag",
+        "taf_tempo_snow_flag",
+        "taf_tempo_thunder_flag",
+        "taf_tempo_segment_count",
+        "taf_tempo_missing",
+        "taf_probability_wind_knots",
+        "taf_probability_gust_knots",
+        "taf_probability_visibility_miles",
+        "taf_probability_ceiling_ft",
+        "taf_probability_precip_flag",
+        "taf_probability_rain_flag",
+        "taf_probability_snow_flag",
+        "taf_probability_thunder_flag",
+        "taf_probability_segment_count",
+        "taf_probability_missing"
+      ],
+      "categorical_features": [
+        "airport_id",
+        "route",
+        "downstream_airline",
+        "aircraft_family"
+      ],
+      "numeric_features": [
+        "downstream_distance",
+        "downstream_crs_elapsed_time",
+        "downstream_day_of_week",
+        "downstream_sched_hour",
+        "scheduled_turnaround_minutes",
+        "upstream_arr_delay_minutes",
+        "tail_completed_24h_n",
+        "tail_completed_24h_arr_delay_mean",
+        "history_window_incomplete",
+        "airport_departures_60m_n",
+        "airport_departures_60m_delay_mean",
+        "airport_planned_departures_next60m_n",
+        "airport_planned_arrivals_next60m_n",
+        "airport_history_window_incomplete",
+        "metar_wind_knots",
+        "metar_gust_knots",
+        "metar_visibility_miles",
+        "metar_ceiling_ft",
+        "metar_precip_amount_in",
+        "metar_precip_flag",
+        "metar_rain_flag",
+        "metar_snow_flag",
+        "metar_thunder_flag",
+        "metar_age_minutes",
+        "metar_missing",
+        "metar_sky_reported",
+        "metar_ceiling_reported",
+        "metar_weather_codes_reported",
+        "taf_bulletin_age_minutes",
+        "taf_lead_minutes",
+        "taf_missing",
+        "taf_prevailing_wind_knots",
+        "taf_prevailing_gust_knots",
+        "taf_prevailing_visibility_miles",
+        "taf_prevailing_ceiling_ft",
+        "taf_prevailing_precip_flag",
+        "taf_prevailing_rain_flag",
+        "taf_prevailing_snow_flag",
+        "taf_prevailing_thunder_flag",
+        "taf_prevailing_segment_count",
+        "taf_prevailing_missing",
+        "taf_tempo_wind_knots",
+        "taf_tempo_gust_knots",
+        "taf_tempo_visibility_miles",
+        "taf_tempo_ceiling_ft",
+        "taf_tempo_precip_flag",
+        "taf_tempo_rain_flag",
+        "taf_tempo_snow_flag",
+        "taf_tempo_thunder_flag",
+        "taf_tempo_segment_count",
+        "taf_tempo_missing",
+        "taf_probability_wind_knots",
+        "taf_probability_gust_knots",
+        "taf_probability_visibility_miles",
+        "taf_probability_ceiling_ft",
+        "taf_probability_precip_flag",
+        "taf_probability_rain_flag",
+        "taf_probability_snow_flag",
+        "taf_probability_thunder_flag",
+        "taf_probability_segment_count",
+        "taf_probability_missing"
+      ],
+      "model_params": {
+        "fit_intercept": true,
+        "tol": 1e-06
+      }
+    },
+    "reason": "Minimum sample-weighted pooled May-July MAE; ties within 1e-9 prefer fewer predictors then earlier mainline stage",
+    "selected_pooled_mae": 16.80660373036146,
+    "excluded_runs": [
+      {
+        "run_id": "R0010",
+        "reason": "variant is supplementary"
+      },
+      {
+        "run_id": "R0019",
+        "reason": "NOAA retrospective backfill is supplementary"
+      }
+    ],
+    "excluded_primary_branches": [
+      "G2_VARIANT",
+      "NOAA retrospective backfill"
+    ],
+    "evaluation_ids_sha256": "db4e500797d62152fece891a62b9c171822e97e4dea76ab92efd587bcfa8d68c",
+    "split_sha256": "4e419b1462154fb34ff4e412653cb9f1b73dc790d6b018967420e7e24441a593",
+    "schema_version": 1,
+    "created_at_utc": "2026-10-23T23:55:27.574627+00:00",
+    "protocol": {
+      "registered_at_stage": "After P3 numerical metrics; before any weather or decision-tree/random-forest development model",
+      "primary_metric": "sample-weighted pooled May-July validation MAE (minutes)",
+      "feature_selection": {
+        "eligible_mainline": [
+          "G0",
+          "G1",
+          "G2",
+          "G3",
+          "G4A",
+          "G4B"
+        ],
+        "rule": "Choose minimum pooled MAE; tie within 1e-9 chooses fewer predictors/earlier mainline stage",
+        "excluded_primary_branches": [
+          "G2_VARIANT",
+          "NOAA retrospective backfill"
+        ],
+        "same_ids_labels_splits_required": true
+      },
+      "algorithm_candidates": {
+        "linear": "same selected feature set, fixed existing OLS settings",
+        "decision_tree": {
+          "max_depth": [
+            8,
+            16
+          ],
+          "min_samples_leaf": [
+            50,
+            200
+          ],
+          "random_state": 42
+        },
+        "random_forest": {
+          "n_estimators": 200,
+          "max_depth": 16,
+          "max_features": 0.5,
+          "min_samples_leaf": [
+            50,
+            200
+          ],
+          "random_state": 42
+        }
+      },
+      "within_family_selection": "Minimum pooled MAE; exact numerical ties choose shallower tree/larger leaf",
+      "complexity_preference": {
+        "order": [
+          "linear",
+          "decision_tree",
+          "random_forest"
+        ],
+        "promotion_rule": "Starting with linear, promote to the best candidate of the next family only if its pooled MAE improvement is at least max(0.10 minute, 0.005 * retained MAE), at least 2 of 3 monthly MAEs improve, and the worst monthly deterioration is at most 0.10 minute",
+        "paired_intervals": "Report paired 7-day 1000-repeat intervals as uncertainty evidence; no parameter changes to chase interval significance"
+      },
+      "baseline_rule": "Compare the retained learned model with training_mean, training_median and carry_forward on primary MAE; declare lowest-MAE candidate the primary, including a baseline if it wins. No RMSE override.",
+      "test_rule": "Freeze full scientific config, source/data hashes and selection reason before one formal August prediction-window assessment. No post-test tuning.",
+      "disclosure": "Practical/stability thresholds refine the original simpler-if-small-and-unstable rule during development; they were not registered before P0-P3. No algorithm candidate has been evaluated when this file is first committed."
+    },
+    "registration_commit": "6357cd4d11882d01a70b64200356b9626004103d",
+    "protocol_file": {
+      "path": "configs/model_selection_protocol.json",
+      "sha256": "08f00d0e57a3b625c44a90e99f58e4dcdf742cf784cea3c04e42abb9ca5ea9b9",
+      "bytes": 2389
+    },
+    "code_files": [
+      {
+        "path": "scripts/build_features.py",
+        "sha256": "a5d990aebcf3ddf5ffbcf34bf92f79339f64484062d427f4df29d899788dd583",
+        "bytes": 18827
+      },
+      {
+        "path": "scripts/compare_experiments.py",
+        "sha256": "fb30833fba85b41178f2a8ad5deb024fe7263e284ef1a613dae0cc664da4971e",
+        "bytes": 18298
+      },
+      {
+        "path": "scripts/evaluate_models.py",
+        "sha256": "ee39185ad678b517ab72d75444f0ba39fb9ba371aa12264b7cadafba154f8e18",
+        "bytes": 2980
+      },
+      {
+        "path": "scripts/final_evaluation.py",
+        "sha256": "08e22ed5a41e04fa76adc7b5fcc5e9728bc3f3cf6cbaf234032437687c1afcfd",
+        "bytes": 28417
+      },
+      {
+        "path": "scripts/operational_features.py",
+        "sha256": "af9be876031917ea367b7cefd4c888c5b7326b750b53d842c7e13ee9691a9a5c",
+        "bytes": 9638
+      },
+      {
+        "path": "scripts/prepare_weather.py",
+        "sha256": "1bd7bc54b3212ebdeccec69406f9c1c78e42220728c2a71880900f3af297ce45",
+        "bytes": 33339
+      },
+      {
+        "path": "scripts/render_research_notebooks.py",
+        "sha256": "bf9be6b712426fc115ca943622d7cf8390f62144022049cf8831f4b069a0c126",
+        "bytes": 28845
+      },
+      {
+        "path": "scripts/reproduce_final.py",
+        "sha256": "27526e262c94b07ca4ef00df0a1ed8e5fa0fc74faca0cf2181e52633953a3286",
+        "bytes": 18846
+      },
+      {
+        "path": "scripts/run_pipeline.py",
+        "sha256": "c14895b24a5aae12bc68fd849162885579aa7742f419cd89316f7b41d2b233a1",
+        "bytes": 20765
+      },
+      {
+        "path": "scripts/select_models.py",
+        "sha256": "bd4069668576745446ce6041699db0baf53890bdd611dcc8f7e8d03015e8e81a",
+        "bytes": 26722
+      },
+      {
+        "path": "scripts/train_models.py",
+        "sha256": "11929626005fad33ec690d59949af700bb9b11b716de255d49aad3d8033e0116",
+        "bytes": 21396
+      },
+      {
+        "path": "scripts/weather_features.py",
+        "sha256": "f22336957c868bcbab1b2a1bdeb47932c58325695056c5b4ccaa2290f28fda01",
+        "bytes": 38222
+      },
+      {
+        "path": "scripts/weather_pipeline_features.py",
+        "sha256": "cb98bee161f6685cc2427c57bf6b12a397991636d843e8500cf9ac20a3420def",
+        "bytes": 12041
+      }
+    ],
+    "candidate_files": [
+      {
+        "path": "experiments/runs/R0006/manifest.json",
+        "sha256": "408f71e3c6b719db98e7e47ab705f985c166df0b2a66f6b3914c8cf22c1f60c4",
+        "bytes": 29231
+      },
+      {
+        "path": "experiments/runs/R0006/config.json",
+        "sha256": "967018e13d60f6c20e3d55d8b68b18cf744dee1c4e25a90a9f1f7cc160663a33",
+        "bytes": 1212
+      },
+      {
+        "path": "experiments/runs/R0006/model_manifest.json",
+        "sha256": "17a3fe1dbc4dfe8377cc56fbc9a60ac0cca3c1aafcdee05dcbb7f7d7f48310b6",
+        "bytes": 6397
+      },
+      {
+        "path": "experiments/runs/R0006/metrics.csv",
+        "sha256": "d59fa998d811ef57392993baf8b3ed60c1ae65e6f85af18566a832bc3526dfbe",
+        "bytes": 860825
+      },
+      {
+        "path": "experiments/runs/R0006/predictions/2026-05_g0_linear.csv.gz",
+        "sha256": "99785f0202053641cac3b1240aafb9a94359c92071ad119b25761511d9fd00a3",
+        "bytes": 20973954
+      },
+      {
+        "path": "experiments/runs/R0006/predictions/2026-06_g0_linear.csv.gz",
+        "sha256": "a11afde43739d04b3618a165eff4c46c5918d0aa52aae759ffb511b04873ae5f",
+        "bytes": 20564200
+      },
+      {
+        "path": "experiments/runs/R0006/predictions/2026-07_g0_linear.csv.gz",
+        "sha256": "c635cf22a42e89eeec91a5c14bdfac77607a2ceef663ce87d2f5415918e5b45c",
+        "bytes": 20932217
+      },
+      {
+        "path": "experiments/runs/R0007/manifest.json",
+        "sha256": "a26ded4f9d10deda4da8ffb64adeb58903c7741810df5f01fc047243f7219dfc",
+        "bytes": 31250
+      },
+      {
+        "path": "experiments/runs/R0007/config.json",
+        "sha256": "9d4ad201bcb049eda425bc5aa2c615289b54c2c2e8fa8a7803667cd221b50f9f",
+        "bytes": 1055
+      },
+      {
+        "path": "experiments/runs/R0007/model_manifest.json",
+        "sha256": "27cf9fa3cd10b34f43dd862a9dac914b365860cdae650907e07c849dda75d93d",
+        "bytes": 6678
+      },
+      {
+        "path": "experiments/runs/R0007/metrics.csv",
+        "sha256": "b60b95f1c4c6adb587785c1cfdec93ab418db2d325abc579568c26cb9ed8e1ee",
+        "bytes": 861056
+      },
+      {
+        "path": "experiments/runs/R0007/predictions/2026-05_g1_linear.csv.gz",
+        "sha256": "f9a3c0e77583d7ed02e2ffb92d469b15ddae1315349daa9bb7d2c7c8c46c5c23",
+        "bytes": 20905851
+      },
+      {
+        "path": "experiments/runs/R0007/predictions/2026-06_g1_linear.csv.gz",
+        "sha256": "c37740c0219adea341769add06804e15771bacd698c57090b663deb5c6b3c585",
+        "bytes": 20507833
+      },
+      {
+        "path": "experiments/runs/R0007/predictions/2026-07_g1_linear.csv.gz",
+        "sha256": "befce1f5a9541c8a14c391a06753d2968e6a62a218d28840ca814c6ad0f43ccc",
+        "bytes": 20879571
+      },
+      {
+        "path": "experiments/runs/R0009/manifest.json",
+        "sha256": "a66dfbffb7f9a8dfbf3dda0ffd5ee6d4ccdfb141e2db3af9575e4036073dd961",
+        "bytes": 31758
+      },
+      {
+        "path": "experiments/runs/R0009/config.json",
+        "sha256": "928be26b6bf8cbcc63a470a76c4d80d271265ef97232aee38d56e613cbe0fd37",
+        "bytes": 1058
+      },
+      {
+        "path": "experiments/runs/R0009/model_manifest.json",
+        "sha256": "6abe6a8a62e29edb6a073070bada15ced7aeeb54e70b5383aeeb4752c1af7bd0",
+        "bytes": 6763
+      },
+      {
+        "path": "experiments/runs/R0009/metrics.csv",
+        "sha256": "80c882d30df40e54505b68d052ccc76e5e2ab17a18fe9b81087266b2279016e5",
+        "bytes": 912160
+      },
+      {
+        "path": "experiments/runs/R0009/predictions/2026-05_g2_family_linear.csv.gz",
+        "sha256": "25b67c6f1bb6c442515c8982ebcfdc88de9691498e1ba61f285b6d3ea63933ae",
+        "bytes": 21910364
+      },
+      {
+        "path": "experiments/runs/R0009/predictions/2026-06_g2_family_linear.csv.gz",
+        "sha256": "d5d2e77206659c604313559aff58046ccfbe30e1a5fed574f10bb60effa7102b",
+        "bytes": 21472574
+      },
+      {
+        "path": "experiments/runs/R0009/predictions/2026-07_g2_family_linear.csv.gz",
+        "sha256": "1483a8ff571f8d853634fe83d45e58e35cb8eee3498b24f7914c24966c6000ba",
+        "bytes": 21862184
+      },
+      {
+        "path": "experiments/runs/R0012/manifest.json",
+        "sha256": "a5078ab89b7d90c7f4e8104fe1654432aedd6d412f3eef60df2c97d3deec6819",
+        "bytes": 32110
+      },
+      {
+        "path": "experiments/runs/R0012/config.json",
+        "sha256": "1ea4bab9358b403acd1a1464ce68bb317d0c6a1a041ea7d36c65afaa64a6f396",
+        "bytes": 1073
+      },
+      {
+        "path": "experiments/runs/R0012/model_manifest.json",
+        "sha256": "d9695767fcdb84d5eb323a36c1a7d170ce21f243ef31f816fb890c4e91924b8a",
+        "bytes": 7135
+      },
+      {
+        "path": "experiments/runs/R0012/metrics.csv",
+        "sha256": "dc968c3131c39ec1ea631f6f23bfde301f7f78489b1b46baf90bfe7a891fd3ed",
+        "bytes": 900568
+      },
+      {
+        "path": "experiments/runs/R0012/predictions/2026-05_g3_linear.csv.gz",
+        "sha256": "adf71a614f9475b0ce91a326277e572474fea21cb5fc38f5e8adfd30aa90c81a",
+        "bytes": 21645576
+      },
+      {
+        "path": "experiments/runs/R0012/predictions/2026-06_g3_linear.csv.gz",
+        "sha256": "d7e28dece351219873c8c54e775465e519bffee60487168c8907417f4f6451c3",
+        "bytes": 21230840
+      },
+      {
+        "path": "experiments/runs/R0012/predictions/2026-07_g3_linear.csv.gz",
+        "sha256": "37377495fab81db583ed3fdaf4937056aeaf0df4348ea18e134d3eae1a265fe2",
+        "bytes": 21616073
+      },
+      {
+        "path": "experiments/runs/R0015/manifest.json",
+        "sha256": "df3b245e11f237d715f26ebffd7dc4137e97ecb25c33ac5391bebdb57ca32d09",
+        "bytes": 36916
+      },
+      {
+        "path": "experiments/runs/R0015/config.json",
+        "sha256": "99f0249210f5e25ea4eb18b453348694014e09c2aee1eb94fd50478e7f6774f0",
+        "bytes": 3199
+      },
+      {
+        "path": "experiments/runs/R0015/model_manifest.json",
+        "sha256": "9eb64d848936fc95818139c146320a89fb73111d63ba573dbe432f4134020ab9",
+        "bytes": 7904
+      },
+      {
+        "path": "experiments/runs/R0015/metrics.csv",
+        "sha256": "666d086ec8abb9189dd75bb46460922617bde73b05073d2dae6f53c9b94f2d98",
+        "bytes": 902256
+      },
+      {
+        "path": "experiments/runs/R0015/predictions/2026-05_g4a_linear.csv.gz",
+        "sha256": "0ed99048b9250d3d6a31ebc9c042f03654ba94fc35e438831c4bc195df006db7",
+        "bytes": 21657332
+      },
+      {
+        "path": "experiments/runs/R0015/predictions/2026-06_g4a_linear.csv.gz",
+        "sha256": "96401832360dda648e885fa6b1170a131cb60571b87b4e0bae5c65b34c640dfb",
+        "bytes": 21239195
+      },
+      {
+        "path": "experiments/runs/R0015/predictions/2026-07_g4a_linear.csv.gz",
+        "sha256": "2b1dcd176c53c2a8a8b89985018d9c569d828888e7ab396da65e48bf0f12dd07",
+        "bytes": 21624055
+      },
+      {
+        "path": "experiments/runs/R0017/manifest.json",
+        "sha256": "2dd862b2c43cbb5b43bfd0c364e7205c7a6d512ee09a148e1cf4c513e1fa715c",
+        "bytes": 45865
+      },
+      {
+        "path": "experiments/runs/R0017/config.json",
+        "sha256": "1006f3b82abec7768e3954cad3055f9c3f6c8837f7a6fd4656304ee29ca5d45e",
+        "bytes": 5530
+      },
+      {
+        "path": "experiments/runs/R0017/model_manifest.json",
+        "sha256": "ec89247900b1aebb51be989fcf6a9689b237736c6d51b084c688a3d0664b7075",
+        "bytes": 10067
+      },
+      {
+        "path": "experiments/runs/R0017/metrics.csv",
+        "sha256": "9379ac294c57e6f2d03a8b4d17adf3d90e9f722d60fe3532c6887d5e4ed5b04e",
+        "bytes": 902328
+      },
+      {
+        "path": "experiments/runs/R0017/predictions/2026-05_g4b_linear.csv.gz",
+        "sha256": "c8ba14544c20b3c4cb554c6cc5b3d6bb4b1a6a5c02fb2e0007e755e1622349a1",
+        "bytes": 21670535
+      },
+      {
+        "path": "experiments/runs/R0017/predictions/2026-06_g4b_linear.csv.gz",
+        "sha256": "bffe39ea618bf9f88aa30e5cf92b03d0c62940b3a6c3ae0db4e65c4c61bdc2a2",
+        "bytes": 21252759
+      },
+      {
+        "path": "experiments/runs/R0017/predictions/2026-07_g4b_linear.csv.gz",
+        "sha256": "4abe20c003d783d5279218008e52603dd0879cacbb7726d112cc3cdeb3832a27",
+        "bytes": 21632798
+      }
+    ],
+    "output_files": [
+      {
+        "path": "experiments/runs/R0020/selection/candidate_monthly_metrics.csv",
+        "sha256": "56869f434da23d0114cd49de92a38c995a056690664a9f8ffd3b89675adb38b2",
+        "bytes": 1724
+      },
+      {
+        "path": "experiments/runs/R0020/selection/candidates.csv",
+        "sha256": "d088ed94232eb4b3457478007a1252e8273008e8beccb27516820b0fd23fb3b6",
+        "bytes": 1330
+      },
+      {
+        "path": "experiments/runs/R0020/selection/excluded_runs.csv",
+        "sha256": "91baa6eabbc424e4a6207a9776393553529ebd5bc299219b0e0485a2fa39d0f8",
+        "bytes": 99
+      }
+    ],
+    "selection_sha256": "8984019aa91e852b1280f18e3c369160465f2abc88d43a6dc6b8f22f58a72491"
+  },
+  "ended_at_utc": "2026-10-23T23:55:27.786421+00:00",
+  "elapsed_seconds": 69.79820469999686,
+  "outputs": [
+    {
+      "path": "experiments/runs/R0020/config.json",
+      "bytes": 434,
+      "sha256": "4e153fb49bedf09f63306bd465821a4dbe15d5e64de2080223d8549f5a8b48a0"
+    },
+    {
+      "path": "experiments/runs/R0020/resources.csv",
+      "bytes": 1299,
+      "sha256": "135d84ebe824e0a74d19cc33732cb19848cbfbe62047d3ee4b0b3ea222ed13fc"
+    },
+    {
+      "path": "experiments/runs/R0020/run.log",
+      "bytes": 164,
+      "sha256": "428aa17ecefbf5a4f639583cb719d8338c311ca38b007dd635ddff7cc1bb3834"
+    },
+    {
+      "path": "experiments/runs/R0020/selection/candidate_monthly_metrics.csv",
+      "bytes": 1724,
+      "sha256": "56869f434da23d0114cd49de92a38c995a056690664a9f8ffd3b89675adb38b2"
+    },
+    {
+      "path": "experiments/runs/R0020/selection/candidates.csv",
+      "bytes": 1330,
+      "sha256": "d088ed94232eb4b3457478007a1252e8273008e8beccb27516820b0fd23fb3b6"
+    },
+    {
+      "path": "experiments/runs/R0020/selection/excluded_runs.csv",
+      "bytes": 99,
+      "sha256": "91baa6eabbc424e4a6207a9776393553529ebd5bc299219b0e0485a2fa39d0f8"
+    },
+    {
+      "path": "experiments/runs/R0020/selection/feature_selection.json",
+      "bytes": 19991,
+      "sha256": "a3b4de368a688989d08f5b7b3dca2ccb6c3f6009746fcc12c9e2e10dec3d3c86"
+    }
+  ]
+}

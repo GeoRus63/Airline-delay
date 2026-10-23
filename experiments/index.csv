@@ -17,4 +17,5 @@ R0015,R0012,P4a,completed,Add as-of METAR source observations and reporting/miss
 R0016,R0014,P4-weather-preparation,completed,Rebuild weather with unverified TAF blocking anchor no earlier than archived product ID; preserve W0001,Retain outputs; review before next stage,experiments/runs/R0016
 R0017,R0015,P4b,completed,Add latest-state TAF prevailing TEMPO and probability groups to fixed G4a OLS,Retain outputs; review before next stage,experiments/runs/R0017
 R0018,R0017,P5-RQ1-EDA,completed,Complete registered common-support RQ1 with monthly fixed-reference network and single-flight EDA; no model fitting,Retain outputs; review before next stage,experiments/runs/R0018
-R0019,R0017,P4-NOAA-sensitivity,running,Fill only approved missing IEM G4a values from GHCNh in a separate retrospective sensitivity branch,Execution in progress,experiments/runs/R0019
+R0019,R0017,P4-NOAA-sensitivity,completed,Fill only approved missing IEM G4a values from GHCNh in a separate retrospective sensitivity branch,Retain outputs; review before next stage,experiments/runs/R0019
+R0020,R0019,P5-feature-selection,completed,Apply registered pooled-MAE rule to all six completed OLS mainline feature sets; exclude variant and NOAA from primary selection,Retain outputs; review before next stage,experiments/runs/R0020
