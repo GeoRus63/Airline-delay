@@ -1,0 +1,21 @@
+{
+  "flights_rows": 1209654,
+  "connections_rows": 1131645,
+  "sample_period": "2026-04 to 2026-05",
+  "monthly_overview_csv": "eda_monthly_overview.csv",
+  "flight_date_min": "2026-04-01",
+  "flight_date_max": "2026-05-31",
+  "airlines": 13,
+  "origin_airports": 348,
+  "dep_delay_nonnegative_nonnull_n": 1199168,
+  "dep_delay_gt_180_share": 0.012240987084378502,
+  "arr_delay_nonnegative_nonnull_n": 1195552,
+  "arr_delay_gt_180_share": 0.011949292042504216,
+  "daily_dates_with_label": 61,
+  "daily_departure_delay_rate_median": 0.2073667863729011,
+  "connection_nonnull_delay_pairs_n": 1131645,
+  "connection_pairs_in_0_180_n": 1115862,
+  "connection_pairs_in_0_180_share": 0.9860530466709967,
+  "eligible_delayed_nonovernight_connections_n": 166569,
+  "eligible_connection_turnaround_groups": 6
+}

@@ -1,0 +1,10 @@
+﻿reason,pairs,share_of_candidates
+accepted,1131645,0.94087818456642
+normal_both,22432,0.018650530366143035
+scheduled_gap_in_scope,13808,0.011480319333795605
+airport_continuity,13653,0.011351448425862646
+scheduled_gap_nonnegative,12507,0.010398635132371208
+actual_order_consistent,8132,0.006761149827811838
+unique_schedule,543,0.0004514638903715972
+time_valid_both,30,2.4942756374121392e-05
+actual_ground_nonnegative,4,3.325700849882852e-06

@@ -1,0 +1,7 @@
+﻿检查 / Check,记录数 / Rows
+计划出发 UTC 缺失 / Missing scheduled departure UTC,0
+计划到达时钟差异 / Scheduled arrival clock mismatch,21
+实际出发时钟差异 / Actual departure clock missing or mismatched,0
+实际到达时钟差异 / Actual arrival clock missing or mismatched,15
+实际历时差异 / Actual elapsed time missing or mismatched,16
+完成航班时间或延误差异 / Completed flights with time or delay discrepancies,17

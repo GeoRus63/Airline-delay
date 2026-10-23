@@ -1,0 +1,23 @@
+{
+  "repository": "https://github.com/mborsetti/airportsdata",
+  "commit": "47ae282a8491758e6dafe28d4139539e561b54d5",
+  "retrieved_at": "2026-10-18T09:25:22.442522+00:00",
+  "note": "机场参照为当前快照；时区映射按 BTS 当地钟表时间核对。 / The airport reference is a current snapshot; time-zone mappings are checked against BTS local clock times.",
+  "files": [
+    {
+      "file": "airportsdata_snapshot.csv",
+      "url": "https://raw.githubusercontent.com/mborsetti/airportsdata/47ae282a8491758e6dafe28d4139539e561b54d5/airportsdata/airports.csv",
+      "sha256": "516c57d9d999f7a3be28ca649d2badbe3b972f07e57dc6173ab973b72d51cf52"
+    },
+    {
+      "file": "airportsdata_LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/mborsetti/airportsdata/47ae282a8491758e6dafe28d4139539e561b54d5/LICENSE",
+      "sha256": "1ab6bf365e1f6a1883ab6a2f797e761b221081b52a33273d86c157fd562106be"
+    },
+    {
+      "file": "airportsdata_README.rst",
+      "url": "https://raw.githubusercontent.com/mborsetti/airportsdata/47ae282a8491758e6dafe28d4139539e561b54d5/README.rst",
+      "sha256": "22adc4ee8b6183cdc4abfab4bf0e59a11d1f8e7c21e00829f44520998fc80ec5"
+    }
+  ]
+}

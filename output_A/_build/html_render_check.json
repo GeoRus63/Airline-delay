@@ -1,0 +1,61 @@
+[
+  {
+    "file": "01_数据清洗与航班衔接",
+    "title": "数据清洗与航班衔接 / Data cleaning and flight connections",
+    "headings": [
+      "1. 环境与路径 / Environment and paths",
+      "2. 读取航班记录 / Load flight records",
+      "3. 机场时区与时间转换 / Airport time zones and timestamps",
+      "4. 生成并核对时间 / Construct and check timestamps",
+      "5. 构建相邻航班连接 / Link consecutive flights",
+      "6. 生成候选表与有效表 / Create candidate and eligible tables",
+      "7. 汇总与样本 / Summaries and samples",
+      "8. 保存共享数据 / Save shared datasets",
+      "9. 组员接续 / Team handoff"
+    ],
+    "images": [],
+    "pageWidth": 1360,
+    "viewport": 1360
+  },
+  {
+    "file": "02_整体EDA",
+    "title": "航班延误探索性分析 / Exploratory analysis of flight delays",
+    "headings": [
+      "1. 延误分布 / Delay distributions",
+      "2. 每日延误率 / Daily delay rates",
+      "3. 计划出发小时与星期 / Scheduled departure hour and weekday",
+      "4. 航司与出发机场 / Airlines and origin airports",
+      "5. 前后航班延误 / Upstream and downstream delays",
+      "6. 周转时间与延误变化 / Turnaround time and delay change",
+      "汇总与下一步 / Summary and next steps"
+    ],
+    "images": [
+      {
+        "loaded": true,
+        "width": 1106
+      },
+      {
+        "loaded": true,
+        "width": 1106
+      },
+      {
+        "loaded": true,
+        "width": 1106
+      },
+      {
+        "loaded": true,
+        "width": 1106
+      },
+      {
+        "loaded": true,
+        "width": 961
+      },
+      {
+        "loaded": true,
+        "width": 1106
+      }
+    ],
+    "pageWidth": 1360,
+    "viewport": 1360
+  }
+]
