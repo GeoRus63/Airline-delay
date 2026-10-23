@@ -1,0 +1,11 @@
+P4天气融合前关键方法审查，请沿用本聊天的项目协议，只找实质问题，避免另增研究问题。我们正逐步执行本机研究：P0 G0 MAE19.5738，G1 17.2581，family17.2487；同一1707091条May–July前向验证，median baseline16.6180。8月目标仍封存。
+
+准备启用天气。请审核以下契约是否支持严谨的“回顾性、按时间代理可用性”的增量比较，指出必须阻断运行的缺陷和需披露的限制：
+1 METAR档案只有观测时刻：假设+5min可用，观测年龄<=120min，按机场最新可用记录。COR无收取时刻，排除COR值；保留仍未过期的旧非COR原文。多个不同非COR原文同站同时无版本次序则该时刻值缺失。不利用日后COR删除先前合法原文。雨/雪/雷暴未知编码保留缺失，零降水/trace/缺测分开；天空有报告但无BKN/OVC时云底缺失并附reported标记。
+2 TAF有原始segment和全文产品archive ID；正文issue与archive issue分别保存，availability=max(body,archive)代理。默认不使用AMD/COR/delayed修订的数值：先选择最新公告状态，再按可信度决定可用，不跳过这些最新状态回退旧公告；CNL/NIL/过期亦不回退。缺全文产品作为untimed占位，以已知archive时间阻断旧公告，但不赋予可用天气值。实际3条缺全文天气产品已定位（天气覆盖预审允许，不触及8月标签）。
+3 TAF查询时刻=max(prediction UTC, downstream scheduled departure UTC)，Observation标签是初始prevailing，valid_from开始，FM切换截至下一prevailing；TEMPO/PROB保持独立列，不用未来观测补预报。最新状态只有TEMPO/PROB有效而无prevailing时，以overall matched且prevailing_missing=1表示，模型保留各类missing和count。
+4 G4a仅加计划指定风/阵风/能见度/云底/降水/雨雪雷暴+age/missing/reporting flags；G4b再加各类TAF和age/lead。温湿度风向已下载但不默认入模。OLS预处理/时间折/标签/样本保持相同，缺天气不删行；另在共同可用天气样本上比较无天气与有天气预测并列n（已训练模型限定同一子集，不重新拟合）。
+5 NOAA实际为GHCNh，25站。按source-specific QC合格白名单，未知不通过；单位转换m/s→knots, km→miles, m→ft, C→F；逐变量最近合格观测+5min, age<=120，只补IEM NA不覆盖现有值，不映射无法证明等价的降水期/天气代码。此为单独事后补缺敏感性分支，不宣称历史实时数据可得，且不默认纳入最终主模型候选。先作同站同UTC时刻重叠一致性与覆盖审计。
+6 所有时间统一ns UTC；已实测修复ns/us连接错误、非默认索引错位、缺全文公告未入状态表。源与派生输入hash锁定，原raw不改，保存逐查询匹配来源时刻。
+
+请重点答：A上述TAF保守阻断及METAR旧原文策略是否一致合理；B overall matched但prevailing缺失如何如实报告覆盖；C共同天气子集定义怎样预登记且不把部分变量缺失等同完整天气；D NOAA候选应如何界定。不要建议查看8月再决定，也不要把主阈值>0/≥5/≥15改成严格>5/>15。请给简短接受/必须修复/局限结论。

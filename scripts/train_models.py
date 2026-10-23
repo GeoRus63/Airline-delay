@@ -43,10 +43,6 @@ GZIP = {"method": "gzip", "compresslevel": 3, "mtime": 0}
 MODEL_NAMES = ["training_mean", "training_median", "carry_forward", "g0_linear"]
 PREDICTION_METADATA = ["connection_id", "prediction_time", "label_time", "target_delay", "airport_id",
                        "downstream_airline", "downstream_day_of_week", "downstream_sched_hour", "overnight_scheduled"]
-WEATHER_NUMERIC_SUFFIXES = ["wind_knots", "gust_knots", "visibility_miles", "ceiling_ft", "precip_amount_in",
-                            "precip_flag", "rain_flag", "snow_flag", "thunder_flag", "age_minutes", "lead_minutes",
-                            "missing", "missing_flag"]
-WEATHER_NUMERIC = [prefix + suffix for prefix in ["metar_", "taf_"] for suffix in WEATHER_NUMERIC_SUFFIXES]
 
 
 def resolve_features(config: dict) -> dict:
@@ -65,10 +61,13 @@ def resolve_features(config: dict) -> dict:
     if group not in {"G0", "G1"}:
         allowed_cat.update(AIRCRAFT_COLUMNS)
     allowed_num = set(default_num)
-    if group == "G4A":
-        allowed_num.update(name for name in WEATHER_NUMERIC if name.startswith("metar_"))
-    elif group == "G4B":
-        allowed_num.update(WEATHER_NUMERIC)
+    if group in {"G4A", "G4B"}:
+        try:
+            from .weather_pipeline_features import METAR_MODEL_NUMERIC, TAF_MODEL_NUMERIC
+        except ImportError:
+            from weather_pipeline_features import METAR_MODEL_NUMERIC, TAF_MODEL_NUMERIC
+        default_num += METAR_MODEL_NUMERIC + (TAF_MODEL_NUMERIC if group == "G4B" else [])
+        allowed_num.update(default_num)
     explicit_features = config.get("features")
     if explicit_features is None:
         categorical = list(config.get("categorical_features", default_cat))

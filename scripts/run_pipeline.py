@@ -120,6 +120,9 @@ def execute(config, run_dir):
         (run_dir / 'data').mkdir(exist_ok=True)
         frame.to_pickle(run_dir / 'data/features.pkl')
         (run_dir / 'tables').mkdir(exist_ok=True)
+        if str(config.get('feature_group', '')).upper() in ['G4A', 'G4B']:
+            from weather_pipeline_features import write_weather_audit
+            write_weather_audit(frame, run_dir, config)
         missing = frame[resolve_features(config)['features']].isna().sum().rename('missing_n').to_frame()
         missing['rows'] = len(frame)
         missing['missing_share'] = missing.missing_n / len(frame)
@@ -189,6 +192,9 @@ def main():
                          'scripts/operational_features.py']
         if str(config.get('feature_group', 'G0')).upper() not in ['G0', 'G1']:
             source_names += ['references/aircraft_reference_2024.csv', 'references/aircraft_type_aliases.csv']
+        if str(config.get('feature_group', '')).upper() in ['G4A', 'G4B']:
+            source_names += ['scripts/weather_pipeline_features.py', 'scripts/weather_features.py',
+                             'scripts/prepare_weather.py']
         source_names.append('references/airports.csv')
         if config.get('compare_parent', False):
             source_names.append('scripts/compare_experiments.py')

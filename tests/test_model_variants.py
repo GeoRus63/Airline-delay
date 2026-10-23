@@ -71,7 +71,7 @@ class ModelVariants(unittest.TestCase):
         with self.assertRaises(ValueError):
             resolve_features({"features": G0_FEATURES, "categorical_features": G0_CATEGORICAL + ["downstream_distance"],
                               "numeric_features": G0_NUMERIC})
-        weather = resolve_features({"feature_group": "G4B", "features": G0_FEATURES + ["metar_wind_knots", "taf_visibility_miles"]})
+        weather = resolve_features({"feature_group": "G4B", "features": G0_FEATURES + ["metar_wind_knots", "taf_prevailing_visibility_miles"]})
         self.assertIn("metar_wind_knots", weather["numeric_features"])
 
     def test_unplanned_model_parameters_are_rejected(self):

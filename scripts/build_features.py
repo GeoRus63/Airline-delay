@@ -273,20 +273,11 @@ def load_configured_features(config, development_only=True):
     stage = {'G2_FAMILY': 'G2', 'G2_VARIANT': 'G2', 'G3_VARIANT': 'G3'}.get(group, group)
 
     def audited(result):
-        default_cat = G0_CATEGORICAL.copy()
-        default_num = G1_NUMERIC.copy()
-        if stage != 'G1':
-            default_cat += ['aircraft_variant' if 'VARIANT' in group else 'aircraft_family']
-        if stage in ['G3', 'G4A', 'G4B']:
-            default_num += AIRPORT_NUMERIC
-        features = config.get('features')
-        categorical = list(config.get('categorical_features', default_cat if features is None else
-                                      [name for name in features if name in G0_CATEGORICAL + AIRCRAFT_COLUMNS]))
-        numeric = list(config.get('numeric_features', default_num if features is None else
-                                  [name for name in features if name in G1_NUMERIC + AIRPORT_NUMERIC]))
-        result.attrs['feature_audit'] = {**result.attrs.get('feature_audit', {}), 'feature_group': group,
-                                       'features': list(features) if features is not None else categorical + numeric,
-                                       'categorical_features': categorical, 'numeric_features': numeric}
+        try:
+            from .train_models import resolve_features
+        except ImportError:
+            from train_models import resolve_features
+        result.attrs['feature_audit'] = {**result.attrs.get('feature_audit', {}), **resolve_features(config)}
         return result
     frame = load_base_features(ROOT / config.get('connection_path', 'processed/flight_connections.csv.gz'),
                                development_only=development_only)
@@ -307,4 +298,8 @@ def load_configured_features(config, development_only=True):
     frame = augment_airport_operations(frame, flights, source_start_utc=starts)
     if stage == 'G3':
         return audited(frame)
-    raise NotImplementedError('Weather joins must be reviewed and enabled before G4 runs')
+    try:
+        from .weather_pipeline_features import augment_weather
+    except ImportError:
+        from weather_pipeline_features import augment_weather
+    return audited(augment_weather(frame, config))

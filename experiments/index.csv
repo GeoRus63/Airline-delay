@@ -8,3 +8,4 @@ R0006,R0005,P0,completed,First development baselines and planned-information G0 
 R0007,R0006,P1,completed,Add upstream arrival delay and observed completed-tail history to G0,Retain outputs; review before next stage,experiments/runs/R0007
 R0008,R0007,P2-aircraft-preparation,completed,Audit five-month 2024 primary and 2025 comparison B43 coverage; preserve unknown types,Retain outputs; review before next stage,experiments/runs/R0008
 R0009,R0007,P2-family,completed,Add 2024 B43 aircraft family to the fixed G1 linear model,Retain outputs; review before next stage,experiments/runs/R0009
+R0010,R0009,P2-variant,completed,Replace family with variant; preserve all other features and samples,Retain outputs; review before next stage,experiments/runs/R0010

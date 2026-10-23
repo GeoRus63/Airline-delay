@@ -20,11 +20,21 @@ def load_protocol(path=ROOT / "configs/rq1_protocol.json"):
     return json.loads(Path(path).read_text(encoding="utf-8-sig"))
 
 
-def prepare(source, protocol, development=True):
+def prepare(source, protocol, development=True, period=None):
     """Apply UTC window before outcomes; keep >0 to support all three thresholds."""
     time = pd.to_datetime(source.upstream_actual_arr_utc, utc=True, errors="coerce")
     start = pd.Timestamp(protocol["development_window"][0])
     end = pd.Timestamp(protocol["development_window"][1] if development else "2026-09-01T00:00:00Z")
+    if period is not None:
+        requested_start, requested_end = map(pd.Timestamp, period)
+        if requested_start.tzinfo is None or requested_end.tzinfo is None:
+            raise ValueError("Period bounds must have explicit timezones")
+        requested_start, requested_end = requested_start.tz_convert("UTC"), requested_end.tz_convert("UTC")
+        if not (start <= requested_start < requested_end <= end):
+            raise ValueError("Requested period lies outside the permitted UTC scope")
+        if requested_start != requested_start.floor("D") or requested_end != requested_end.floor("D"):
+            raise ValueError("Bootstrap periods must use UTC midnight boundaries")
+        start, end = requested_start, requested_end
     data = source.loc[time.ge(start) & time.lt(end)].copy()
     data["prediction_time"] = time.loc[data.index]
     if data.connection_id.isna().any() or not data.connection_id.is_unique:
@@ -145,18 +155,42 @@ def _interval(values, minimum):
     return (float(np.quantile(finite, .025)), float(np.quantile(finite, .975)), len(finite)) if len(finite) >= minimum else (np.nan, np.nan, len(finite))
 
 
-def evaluate(source, frozen, development=True):
+def evaluate(source, frozen, development=True, period=None):
     """Return tables plus paired replicate estimates; never refit frozen support."""
     protocol = frozen["protocol"]
-    data, calendar = prepare(source, protocol, development)
+    data, calendar = prepare(source, protocol, development, period=period)
     bootstrap = protocol["bootstrap"]
     draws = moving_block_counts(len(calendar), bootstrap)
     airports = frozen["airport_ids"]
-    tables, differences, replicate_tables = [], [], {}
+    tables, differences, replicate_tables, cell_tables = [], [], {}, []
     for threshold in THRESHOLDS:
         subset = threshold_rows(data, threshold).copy()
         subset["plus"] = subset.delta.clip(lower=0)
         subset["minus"] = -subset.delta.clip(upper=0)
+        for name, indicator in [("reduction", subset.delta.lt(0)), ("amplification", subset.delta.gt(0)), ("unchanged", subset.delta.eq(0))]:
+            subset[name] = indicator.astype(float)
+        cell_summary = subset.groupby(["airport_id", "cell"]).agg(
+            n=("delta", "size"), prediction_days=("date", "nunique"), mean_delta=("delta", "mean"),
+            reduction_share=("reduction", "mean"), amplification_share=("amplification", "mean"), unchanged_share=("unchanged", "mean"))
+        master_size = (len(protocol["master_delay_bins"]) - 1) * (len(protocol["turnaround_bins"]) - 1)
+        full_cells = _cells_for_threshold(list(range(master_size)), protocol, threshold)
+        support_grid = pd.MultiIndex.from_product([sorted(set(subset.airport_id) | set(airports)), full_cells], names=["airport_id", "cell"])
+        cell_summary = cell_summary.reindex(support_grid)
+        cell_summary[["n", "prediction_days"]] = cell_summary[["n", "prediction_days"]].fillna(0).astype(int)
+        cell_summary = cell_summary.reset_index()
+        cell_summary["threshold"] = threshold
+        cell_summary["selected_airport"] = cell_summary.airport_id.isin(airports)
+        ref_cells = frozen["references"].get(threshold, {})
+        weight_map = dict(zip(ref_cells.get("cells", []), ref_cells.get("weights", [])))
+        cell_summary["reference_weight"] = cell_summary.cell.map(weight_map)
+        cell_summary["in_frozen_common_support"] = cell_summary.selected_airport & cell_summary.cell.isin(weight_map)
+        cell_summary["cell_support_passed"] = cell_summary.n.ge(protocol["cell_min_rows"]) & cell_summary.prediction_days.ge(protocol["cell_min_prediction_days"])
+        width = len(protocol["turnaround_bins"]) - 1
+        cell_summary["delay_bin_lower"] = cell_summary.cell.map(lambda c: protocol["master_delay_bins"][c // width])
+        cell_summary["delay_bin_upper"] = cell_summary.cell.map(lambda c: protocol["master_delay_bins"][c // width + 1])
+        cell_summary["turnaround_bin_lower"] = cell_summary.cell.map(lambda c: protocol["turnaround_bins"][c % width])
+        cell_summary["turnaround_bin_upper"] = cell_summary.cell.map(lambda c: protocol["turnaround_bins"][c % width + 1])
+        cell_tables.append(cell_summary)
         raw = subset.groupby("airport_id").agg(n=("connection_id", "size"), prediction_days=("date", "nunique"),
               mean_delta=("delta", "mean"), s_plus=("plus", "sum"), s_minus=("minus", "sum"), s_net=("delta", "sum"))
         raw = raw.reindex(sorted(set(raw.index) | set(airports)))
@@ -166,6 +200,8 @@ def evaluate(source, frozen, development=True):
         raw["retained_share"] = np.nan
         raw["supported"] = False
         raw["standardized_mean"] = np.nan
+        for name in ["reduction", "amplification", "unchanged"]:
+            raw["standardized_" + name + "_share"] = np.nan
         raw["ci_low"] = np.nan
         raw["ci_high"] = np.nan
         raw["valid_replicates"] = 0
@@ -205,6 +241,10 @@ def evaluate(source, frozen, development=True):
             raw.loc[airports, "retained_share"] = shares
             raw.loc[airports, "supported"] = supported
             raw.loc[airports, "standardized_mean"] = np.where(supported, means @ weights, np.nan)
+            cell_rates = eligible.groupby(["airport_id", "cell"])[["reduction", "amplification", "unchanged"]].mean().reindex(grid)
+            for name in ["reduction", "amplification", "unchanged"]:
+                values = cell_rates[name].to_numpy().reshape(len(airports), len(cells)) @ weights
+                raw.loc[airports, "standardized_" + name + "_share"] = np.where(supported, values, np.nan)
             raw.loc[np.asarray(airports)[supported], "support_reason"] = "supported"
             daily = eligible.groupby(["date", "airport_id", "cell"]).delta.agg(["size", "sum"])
             day_grid = pd.MultiIndex.from_product([calendar, airports, cells], names=["date", "airport_id", "cell"])
@@ -237,7 +277,7 @@ def evaluate(source, frozen, development=True):
                           "direction_agreement": float(np.sign(joined.standardized_mean_main).eq(np.sign(joined.standardized_mean_other)).mean()) if len(joined) else np.nan,
                           "spearman": rank_corr})
     difference_columns = ["threshold", "airport_left", "airport_right", "mean_difference", "ci_low", "ci_high", "valid_replicates"]
-    return {"airports": results, "pairwise_differences": pd.DataFrame(differences, columns=difference_columns), "threshold_stability": pd.DataFrame(stability),
+    return {"airports": results, "cells": pd.concat(cell_tables, ignore_index=True), "pairwise_differences": pd.DataFrame(differences, columns=difference_columns), "threshold_stability": pd.DataFrame(stability),
             "replicates": replicate_tables, "bootstrap_day_counts": draws, "calendar": calendar}
 
 
@@ -265,7 +305,7 @@ def network_tables(flights, accepted_connections, airport_results, development=T
     return nodes, edges
 
 
-def run(source, output_dir, frozen=None, development=True, protocol=None):
+def run(source, output_dir, frozen=None, development=True, protocol=None, period=None):
     """Archive tables/paired replicates; caller supplies accepted rows and manifest.
 
     Final evaluation requires a previously frozen reference. This function never
@@ -279,15 +319,16 @@ def run(source, output_dir, frozen=None, development=True, protocol=None):
         if not development:
             raise ValueError("Final evaluation requires a frozen development reference")
         frozen = freeze_reference(source, protocol)
-    result = evaluate(source, frozen, development)
+    result = evaluate(source, frozen, development, period=period)
     output_dir.mkdir(parents=True, exist_ok=True)
     (output_dir / "frozen_reference.json").write_text(json.dumps(frozen, ensure_ascii=False, indent=2, allow_nan=False), encoding="utf-8")
-    for name in ["airports", "pairwise_differences", "threshold_stability"]:
+    for name in ["airports", "cells", "pairwise_differences", "threshold_stability"]:
         result[name].to_csv(output_dir / f"rq1_{name}.csv", index=False)
     np.savez_compressed(output_dir / "paired_bootstrap.npz", **result["replicates"],
                         day_counts=result["bootstrap_day_counts"], airport_ids=np.asarray(frozen["airport_ids"]),
                         calendar_utc=result["calendar"].strftime("%Y-%m-%d").to_numpy(dtype=str))
     summary = {"development": development, "frozen_reference_reused": reference_reused,
+               "period": [str(result["calendar"][0]), str(result["calendar"][-1] + pd.Timedelta(days=1))],
                "selected_airports": len(frozen["airport_ids"]), "supported_reference": frozen["supported"],
                "bootstrap": frozen["protocol"]["bootstrap"], "calendar_days": len(result["calendar"]),
                "sample_rule": "accepted, nonovernight, upstream positive; threshold-specific subsets",
