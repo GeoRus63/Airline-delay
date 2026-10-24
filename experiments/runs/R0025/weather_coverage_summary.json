@@ -1,0 +1,15 @@
+{
+  "rows": 2261775,
+  "tables": {
+    "airport_date": 41087,
+    "month": 4,
+    "airport": 355
+  },
+  "availability": {
+    "metar_available": 2247194,
+    "taf_available": 1355934,
+    "taf_prevailing_available": 1355934,
+    "taf_latest_state_located": 2253037
+  },
+  "interpretation": "taf_available means any approved active condition group, not complete weather. Source match is not complete per-variable coverage; no-query cells are missing, not zero"
+}

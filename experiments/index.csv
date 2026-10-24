@@ -23,3 +23,4 @@ R0021,R0017,P5-models,completed,Replace selected OLS with registered decision tr
 R0022,R0021,P5-models,completed,Change decision-tree minimum leaf from 50 to 200 at fixed depth 8,Retain outputs; review before next stage,experiments/runs/R0022
 R0023,R0022,P5-models,completed,Change decision-tree depth from 8 to 16 at fixed minimum leaf 200,Retain outputs; review before next stage,experiments/runs/R0023
 R0024,R0023,P5-models,completed,Change decision-tree minimum leaf from 200 to 50 at fixed depth 16,Retain outputs; review before next stage,experiments/runs/R0024
+R0025,R0024,P5-models,completed,Replace depth-16 leaf-50 decision tree with registered 200-tree random forest max_features 0.5,Retain outputs; review before next stage,experiments/runs/R0025
