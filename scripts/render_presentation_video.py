@@ -102,8 +102,11 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         ass += f"Dialogue: 1,{ass_time(start)},{ass_time(end)},Caption,,0,0,0,,{escaped}\n"
     (build / "captions.ass").write_text(ass, encoding="utf-8-sig")
     target = output / "airline_delay_captioned.mp4"
+    # Keep the whole 16:9 slide above a separate subtitle band. Full-frame slides
+    # put their bottom captions underneath the two-line narration subtitles.
     # Expand stills before rendering subtitles so cues change throughout each slide.
-    command = [str(ffmpeg), "-hide_banner", "-n", "-f", "concat", "-safe", "1", "-i", "slides.ffconcat", "-vf", "scale=1920:1080:flags=lanczos,setsar=1,fps=5,ass=captions.ass", "-r", "5", "-fps_mode", "cfr", "-t", str(duration), "-an", "-c:v", "libx264", "-preset", "slow", "-crf", "22", "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-metadata", "title=Airline delay captioned demonstration", "-metadata", "comment=Captioned demonstration, no narration. Human narration has not been recorded.", str(target)]
+    video_filter = "scale=1600:900:flags=lanczos,pad=1920:1080:160:0:color=white,setsar=1,fps=5,ass=captions.ass"
+    command = [str(ffmpeg), "-hide_banner", "-n", "-f", "concat", "-safe", "1", "-i", "slides.ffconcat", "-vf", video_filter, "-r", "5", "-fps_mode", "cfr", "-t", str(duration), "-an", "-c:v", "libx264", "-preset", "slow", "-crf", "22", "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-metadata", "title=Airline delay captioned demonstration", "-metadata", "comment=Captioned demonstration, no narration. Human narration has not been recorded.", str(target)]
     result = run(command, cwd=build)
     (build / "encode.log").write_text(result.stderr, encoding="utf-8")
     probe = json.loads(run([str(ffprobe), "-v", "error", "-show_streams", "-show_format", "-of", "json", str(target)]).stdout)
@@ -119,6 +122,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     for name, time in [("first-caption.png", min(1, duration / 4)), ("last-frame.png", duration - .2)]:
         run([str(ffmpeg), "-hide_banner", "-n", "-ss", str(time), "-i", str(target), "-frames:v", "1", str(output / name)])
     receipt = {"video": str(target), "duration_seconds": duration, "width": 1920, "height": 1080, "fps": 5, "audio": False, "captions": "burned from source SRT via ASS", "captioned_label": "Captioned demonstration (no narration)", "size_bytes": target.stat().st_size, "sha256": sha256(target), "tools": {k: {"path": str(p), "sha256": sha256(p), "version": versions[k]} for k, p in [("ffmpeg", ffmpeg), ("ffprobe", ffprobe)]}, "source_files": [{"path": str(p), "sha256": sha256(p)} for p in [timeline_path, captions_path, *source_pngs]], "command": command, "working_directory": str(build), "ffprobe": probe, "visual_review_required": ["first-caption.png", "last-frame.png"]}
+    receipt["display_layout"] = {"slide": {"x": 160, "y": 0, "width": 1600, "height": 900}, "subtitle_band": {"y": 900, "height": 180}, "subtitle_font": "Arial", "subtitle_font_size": 36, "subtitle_bottom_margin": 48, "canvas_background": "white"}
     (output / "video_receipt.json").write_text(json.dumps(receipt, indent=2), encoding="utf-8")
     print(json.dumps({k: receipt[k] for k in ["video", "duration_seconds", "width", "height", "fps", "audio", "size_bytes", "sha256"]}, indent=2))
 

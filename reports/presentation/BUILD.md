@@ -43,6 +43,8 @@ finalizer 的草稿和完整验证收据位于输出目录同级的隐藏构建�
 
 `render_presentation_video.py` 默认要求 600 秒，拒绝覆盖已有目录。本机 FFmpeg/FFprobe 默认使用 `E:/JasnaDev/assets/ffmpeg/bin/`，可通过 `--ffmpeg`、`--ffprobe` 指定其他已验证路径。编码为 1920×1080、5 fps、H.264、CRF 22、yuv420p、faststart，无音轨。字幕从 SRT 转换后烧录，整段显示 “Captioned demonstration (no narration)”。脚本实际检查时长、尺寸、音轨和文件小于 100 MB，并提取首段字幕截图及最后一帧。`video_receipt.json` 保存工具确切路径、版本与 SHA256、源 PNG/时间轴/字幕 SHA256、完整编码参数和 FFprobe 输出。不得仅凭编码成功声称逐帧内容已检查，至少复核两张提取图及每页转场。
 
+视频保留独立字幕区域：16:9 幻灯片缩放至 1600×900，置于白色 1920×1080 画布的 x=160、y=0；底部 y=900–1080 专供字幕，避免字幕遮住幻灯片图下注释。字幕使用 Arial 36、底边距 48，常规两行字幕约位于 y=946–1032。`video_receipt.json` 同时记录此布局。仍须实际检查最终全部页面和字幕转场，12 秒布局测试不是完整视频验收。
+
 12 秒合成测试使用 `--expected-duration 12`，不要把该参数用于最终课程视频。任务书第6页建议避免AI语音，没有明文要求必须存在音轨；本次交付采用600秒无配音字幕演示，并保留英文讲稿。如果之后录制真人英文讲解，应依据实际录音重新调整字幕；当前自动分配字幕不代表已经与真人录音同步，也不代表已录制真人旁白。
 
 环境路径可通过 `CODEX_PRESENTATION_RUNTIME`、`RUNTIME_NODE_MODULES`、`RUNTIME_PYTHON` 和 `PRESENTATION_SKILL_DIR` 覆盖。应继续使用提供的 runtime，不安装替代 PPTX 库。PPTX authoring marker 在本次首次合成生成前已成功执行一次。
