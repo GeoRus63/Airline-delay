@@ -1,0 +1,58 @@
+{
+  "observed_at_utc": "2026-10-24T00:44:31.150175+00:00",
+  "run_id": "R0025",
+  "running_archive_unchanged": true,
+  "source": "experiments/runs/R0025/resources.csv",
+  "calculation": "delta cumulative process-tree CPU seconds divided by elapsed wall seconds; includes trainer and its descendants",
+  "windows": {
+    "three_folds": {
+      "sample_count": 168,
+      "first": {
+        "utc": "2026-10-24T00:25:00.446575+00:00",
+        "process_rss_bytes": "11734114304",
+        "process_cpu_percent": "0.6",
+        "system_available_bytes": "47111630848",
+        "process_tree_rss_bytes": "21303275520",
+        "process_tree_cpu_seconds": "4446.1875",
+        "child_processes": "3"
+      },
+      "last": {
+        "utc": "2026-10-24T00:39:00.652541+00:00",
+        "process_rss_bytes": "11734208512",
+        "process_cpu_percent": "0.6",
+        "system_available_bytes": "46693171200",
+        "process_tree_rss_bytes": "21359980544",
+        "process_tree_cpu_seconds": "24426.34375",
+        "child_processes": "3"
+      },
+      "wall_seconds": 840.205966,
+      "tree_cpu_seconds_difference": 19980.15625,
+      "average_logical_cpu_equivalents": 23.78006948120147
+    },
+    "after_first_fold": {
+      "sample_count": 30,
+      "first": {
+        "utc": "2026-10-24T00:42:01.698068+00:00",
+        "process_rss_bytes": "11136311296",
+        "process_cpu_percent": "0.9",
+        "system_available_bytes": "49018875904",
+        "process_tree_rss_bytes": "19061174272",
+        "process_tree_cpu_seconds": "28336.296875",
+        "child_processes": "3"
+      },
+      "last": {
+        "utc": "2026-10-24T00:44:27.535887+00:00",
+        "process_rss_bytes": "11136311296",
+        "process_cpu_percent": "0.3",
+        "system_available_bytes": "48651870208",
+        "process_tree_rss_bytes": "19055243264",
+        "process_tree_cpu_seconds": "30651.453125",
+        "child_processes": "3"
+      },
+      "wall_seconds": 145.837819,
+      "tree_cpu_seconds_difference": 2315.15625,
+      "average_logical_cpu_equivalents": 15.874868850034023
+    }
+  },
+  "interpretation": "Resource scheduling observation only, not a timing comparison or a model-performance result; does not guarantee another execution budget is faster"
+}
