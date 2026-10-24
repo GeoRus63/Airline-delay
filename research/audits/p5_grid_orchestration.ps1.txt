@@ -1,0 +1,41 @@
+$ErrorActionPreference = 'Stop'
+$projectRoot = 'D:\Airline-delay'
+Set-Location -LiteralPath $projectRoot
+if ((git branch --show-current) -ne 'codex/apr-aug-research') { throw 'Unexpected Git branch' }
+$grid = @(
+    @('R0022', 'configs/p5_dt_d8_l200.json'),
+    @('R0023', 'configs/p5_dt_d16_l200.json'),
+    @('R0024', 'configs/p5_dt_d16_l50.json'),
+    @('R0025', 'configs/p5_rf_d16_l50.json'),
+    @('R0026', 'configs/p5_rf_d16_l200.json')
+)
+foreach ($entry in $grid) {
+    $runId = $entry[0]
+    & .\.venv\Scripts\python.exe -X utf8 scripts/run_pipeline.py --config $entry[1] --run-id $runId
+    if ($LASTEXITCODE -ne 0) { throw "Pipeline failed: $runId" }
+    $auditPath = "research/audits/${runId}_archive_integrity.json"
+    & .\.venv\Scripts\python.exe -X utf8 scripts/verify_research_archive.py --run-id $runId --output $auditPath > "tmp/${runId}_audit_console.json"
+    if ($LASTEXITCODE -ne 0) { throw "Archive audit failed: $runId" }
+    $manifest = Get-Content -LiteralPath "experiments/runs/$runId/model_manifest.json" -Raw | ConvertFrom-Json
+    if ($manifest.evaluation_ids_sha256 -ne 'db4e500797d62152fece891a62b9c171822e97e4dea76ab92efd587bcfa8d68c' -or $manifest.split_sha256 -ne '4e419b1462154fb34ff4e412653cb9f1b73dc790d6b018967420e7e24441a593') { throw "Cohort changed: $runId" }
+    $metrics = Import-Csv -LiteralPath "experiments/runs/$runId/metrics.csv" | Where-Object { $_.model -eq $manifest.model_name -and $_.group -eq 'all' }
+    $pooled = $metrics | Where-Object { $_.fold -eq 'overall' }
+    $monthText = ($metrics | Where-Object { $_.fold -ne 'overall' } | ForEach-Object { "$($_.fold): MAE=$($_.mae), RMSE=$($_.rmse)" }) -join '; '
+    @"
+
+### $runId / 登记网格运行核对
+
+- **依据**：R0020选择的R0017/G4B完整开发特征与固定DT4/RF2网格。
+- **唯一改动**：该run config.json中的change及父运行链；不改变特征、预处理、UTC窗口或样本。
+- **观察**：模型 $($manifest.model_name)，pooled MAE=$($pooled.mae)、RMSE=$($pooled.rmse)分钟，n=$($pooled.n)。$monthText。完整历史源码/输出收据核验通过；evaluation_ids和split SHA与主线一致。
+- **决定**：保留独立候选及正负结果，未据单个候选提前选择或修改网格；全部候选完成后按登记规则统一比较。
+- **下一步**：继续剩余预定候选或进入R0027选模与解释；8月目标仍封存。
+"@ | Add-Content -LiteralPath 'research/研究记录.md' -Encoding utf8
+    git add -- "experiments/runs/$runId" experiments/index.csv research/研究记录.md $auditPath notebooks/01_航班清洗与衔接.ipynb notebooks/02_天气与特征.ipynb notebooks/03_EDA.ipynb notebooks/04_RQ1机场分析.ipynb notebooks/05_RQ2预测与解释.ipynb
+    if ($LASTEXITCODE -ne 0) { throw "Git add failed: $runId" }
+    git commit -m "Archive $runId registered model and verified forward-fold results"
+    if ($LASTEXITCODE -ne 0) { throw "Git commit failed: $runId" }
+    git push origin codex/apr-aug-research
+    if ($LASTEXITCODE -ne 0) { throw "Git push failed: $runId" }
+    Write-Output "$runId VERIFIED_AND_PUSHED MAE=$($pooled.mae) RMSE=$($pooled.rmse)"
+}

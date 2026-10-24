@@ -1,0 +1,1035 @@
+{
+  "reviewed_at_utc": "2026-10-23T23:57:33.931267+00:00",
+  "review_type": "independent read-only completed development archive audit",
+  "success": true,
+  "reference_run": "R0017",
+  "candidate_run": "R0019",
+  "development_rows": 2261775,
+  "validation_rows": 1707091,
+  "evaluation_ids_sha256": "db4e500797d62152fece891a62b9c171822e97e4dea76ab92efd587bcfa8d68c",
+  "split_sha256": "4e419b1462154fb34ff4e412653cb9f1b73dc790d6b018967420e7e24441a593",
+  "all_shared_columns_exact_equal": true,
+  "shared_columns": 118,
+  "changed_common_columns": [],
+  "new_diagnostic_columns": [
+    "metar_ceiling_ft_noaa_age_minutes",
+    "metar_ceiling_ft_noaa_observation_time",
+    "metar_ceiling_ft_noaa_quality_code",
+    "metar_ceiling_ft_noaa_source_code",
+    "metar_ceiling_ft_noaa_source_file",
+    "metar_ceiling_ft_noaa_station",
+    "metar_ceiling_ft_source",
+    "metar_dewpoint_f_noaa_age_minutes",
+    "metar_dewpoint_f_noaa_observation_time",
+    "metar_dewpoint_f_noaa_quality_code",
+    "metar_dewpoint_f_noaa_source_code",
+    "metar_dewpoint_f_noaa_source_file",
+    "metar_dewpoint_f_noaa_station",
+    "metar_dewpoint_f_source",
+    "metar_gust_knots_noaa_age_minutes",
+    "metar_gust_knots_noaa_observation_time",
+    "metar_gust_knots_noaa_quality_code",
+    "metar_gust_knots_noaa_source_code",
+    "metar_gust_knots_noaa_source_file",
+    "metar_gust_knots_noaa_station",
+    "metar_gust_knots_source",
+    "metar_noaa_missing",
+    "metar_relative_humidity_noaa_age_minutes",
+    "metar_relative_humidity_noaa_observation_time",
+    "metar_relative_humidity_noaa_quality_code",
+    "metar_relative_humidity_noaa_source_code",
+    "metar_relative_humidity_noaa_source_file",
+    "metar_relative_humidity_noaa_station",
+    "metar_relative_humidity_source",
+    "metar_temperature_f_noaa_age_minutes",
+    "metar_temperature_f_noaa_observation_time",
+    "metar_temperature_f_noaa_quality_code",
+    "metar_temperature_f_noaa_source_code",
+    "metar_temperature_f_noaa_source_file",
+    "metar_temperature_f_noaa_station",
+    "metar_temperature_f_source",
+    "metar_visibility_miles_noaa_age_minutes",
+    "metar_visibility_miles_noaa_observation_time",
+    "metar_visibility_miles_noaa_quality_code",
+    "metar_visibility_miles_noaa_source_code",
+    "metar_visibility_miles_noaa_source_file",
+    "metar_visibility_miles_noaa_station",
+    "metar_visibility_miles_source",
+    "metar_wind_direction_deg_noaa_age_minutes",
+    "metar_wind_direction_deg_noaa_observation_time",
+    "metar_wind_direction_deg_noaa_quality_code",
+    "metar_wind_direction_deg_noaa_source_code",
+    "metar_wind_direction_deg_noaa_source_file",
+    "metar_wind_direction_deg_noaa_station",
+    "metar_wind_direction_deg_source",
+    "metar_wind_knots_noaa_age_minutes",
+    "metar_wind_knots_noaa_observation_time",
+    "metar_wind_knots_noaa_quality_code",
+    "metar_wind_knots_noaa_source_code",
+    "metar_wind_knots_noaa_source_file",
+    "metar_wind_knots_noaa_station",
+    "metar_wind_knots_source"
+  ],
+  "taf_fields_exact_equal": 53,
+  "target_prediction_label_time_and_ids_exact_equal": true,
+  "checked_column_fingerprints": [
+    {
+      "column": "connection_id",
+      "dtype": "str",
+      "R0017_sha256": "6abc1343b0bfcded7145a7e50737a5c2c7bbe7d28cb2cf458968e97e4094fd0f",
+      "R0019_sha256": "6abc1343b0bfcded7145a7e50737a5c2c7bbe7d28cb2cf458968e97e4094fd0f"
+    },
+    {
+      "column": "prediction_time",
+      "dtype": "datetime64[ns, UTC]",
+      "R0017_sha256": "edb6346c35fa1788909b8aa6f6045c50254b1a9bd1c5d0f34557fc92128c2343",
+      "R0019_sha256": "edb6346c35fa1788909b8aa6f6045c50254b1a9bd1c5d0f34557fc92128c2343"
+    },
+    {
+      "column": "label_time",
+      "dtype": "datetime64[us, UTC]",
+      "R0017_sha256": "93f7bde8724df71a2a70cc480f6825af29d199df39ccef947aba3210b5c9664d",
+      "R0019_sha256": "93f7bde8724df71a2a70cc480f6825af29d199df39ccef947aba3210b5c9664d"
+    },
+    {
+      "column": "target_delay",
+      "dtype": "float64",
+      "R0017_sha256": "6331871a6241a2d41aa901f822e4c416216e6d2a6d7a0951f006dce401a660dc",
+      "R0019_sha256": "6331871a6241a2d41aa901f822e4c416216e6d2a6d7a0951f006dce401a660dc"
+    },
+    {
+      "column": "taf_product_id",
+      "dtype": "object",
+      "R0017_sha256": "37701969b6c34098e875eb7eec2e1b6b8c92f27d2a92293a23d30de74f0a64ee",
+      "R0019_sha256": "37701969b6c34098e875eb7eec2e1b6b8c92f27d2a92293a23d30de74f0a64ee"
+    },
+    {
+      "column": "taf_bulletin_status",
+      "dtype": "object",
+      "R0017_sha256": "613ae2314b4d7a279ee372fd98f102ad784ea5fb42f98a7274bdaf9c0736c426",
+      "R0019_sha256": "613ae2314b4d7a279ee372fd98f102ad784ea5fb42f98a7274bdaf9c0736c426"
+    },
+    {
+      "column": "taf_message_type",
+      "dtype": "object",
+      "R0017_sha256": "9e5df66196ec5414efff2c73b44a0b0e4fd6c9f51199eab9f70cef83e7b26849",
+      "R0019_sha256": "9e5df66196ec5414efff2c73b44a0b0e4fd6c9f51199eab9f70cef83e7b26849"
+    },
+    {
+      "column": "taf_available_at",
+      "dtype": "datetime64[ns, UTC]",
+      "R0017_sha256": "3db8f614516546f62a385d85b4ca71551cc3b6586fbb9c0e885b49ef21118be9",
+      "R0019_sha256": "3db8f614516546f62a385d85b4ca71551cc3b6586fbb9c0e885b49ef21118be9"
+    },
+    {
+      "column": "taf_archive_issue_time",
+      "dtype": "datetime64[ns, UTC]",
+      "R0017_sha256": "9e775d1d09f5976cc3dac0fefee67bcaed82a4f19cee0ffc8a503aa3fbb1b02e",
+      "R0019_sha256": "9e775d1d09f5976cc3dac0fefee67bcaed82a4f19cee0ffc8a503aa3fbb1b02e"
+    },
+    {
+      "column": "taf_body_issue_time",
+      "dtype": "datetime64[ns, UTC]",
+      "R0017_sha256": "f930cee3745404f0b93c8f6aff99a70aa8f095408701c369e7d997c386e30808",
+      "R0019_sha256": "f930cee3745404f0b93c8f6aff99a70aa8f095408701c369e7d997c386e30808"
+    },
+    {
+      "column": "taf_issue_time_mismatch_minutes",
+      "dtype": "object",
+      "R0017_sha256": "e98a5ae30e031e67bb0d737901772bd4aa240d6f33d8b5aa2046f96e75aa9653",
+      "R0019_sha256": "e98a5ae30e031e67bb0d737901772bd4aa240d6f33d8b5aa2046f96e75aa9653"
+    },
+    {
+      "column": "taf_availability_assumption",
+      "dtype": "object",
+      "R0017_sha256": "841ba2214816ab3b2e78389661c1625c19f6e8886b31b67ba3ebd78965c77240",
+      "R0019_sha256": "841ba2214816ab3b2e78389661c1625c19f6e8886b31b67ba3ebd78965c77240"
+    },
+    {
+      "column": "taf_untimed_archive_issue_time",
+      "dtype": "datetime64[ns, UTC]",
+      "R0017_sha256": "9b750e9bc937e0dccc4b67954aaab930954fe820986b9d3d86233f05d01e27be",
+      "R0019_sha256": "9b750e9bc937e0dccc4b67954aaab930954fe820986b9d3d86233f05d01e27be"
+    },
+    {
+      "column": "taf_query_time",
+      "dtype": "datetime64[ns, UTC]",
+      "R0017_sha256": "2f14b31ed7f523f530caaa6261a16fc1a31ecef5b6342a010be8a249b97b5110",
+      "R0019_sha256": "2f14b31ed7f523f530caaa6261a16fc1a31ecef5b6342a010be8a249b97b5110"
+    },
+    {
+      "column": "taf_bulletin_age_minutes",
+      "dtype": "float64",
+      "R0017_sha256": "370c9a65e7d55f680080b336985830588811f3670bdee0978efa79ffbb72661d",
+      "R0019_sha256": "370c9a65e7d55f680080b336985830588811f3670bdee0978efa79ffbb72661d"
+    },
+    {
+      "column": "taf_lead_minutes",
+      "dtype": "float64",
+      "R0017_sha256": "18a7cf8d56656b3895d789d3ba0f2d8f8712adac6e967f57340908874c3d8d27",
+      "R0019_sha256": "18a7cf8d56656b3895d789d3ba0f2d8f8712adac6e967f57340908874c3d8d27"
+    },
+    {
+      "column": "taf_status",
+      "dtype": "str",
+      "R0017_sha256": "ca9512bbb85bb7989ec90b0cbdc9de89b0e2f989a3639ad2d8dd6aa53f53a267",
+      "R0019_sha256": "ca9512bbb85bb7989ec90b0cbdc9de89b0e2f989a3639ad2d8dd6aa53f53a267"
+    },
+    {
+      "column": "taf_prevailing_missing",
+      "dtype": "float64",
+      "R0017_sha256": "0b3bf04976792e3a666d651b10c20f8f19c1e23b940aa8ff292a6219e59ad7ef",
+      "R0019_sha256": "0b3bf04976792e3a666d651b10c20f8f19c1e23b940aa8ff292a6219e59ad7ef"
+    },
+    {
+      "column": "taf_tempo_missing",
+      "dtype": "float64",
+      "R0017_sha256": "b072687afbc68dd3bfd7d4be6d01572ecc6db7fae455a17b539bbbf80f7ef667",
+      "R0019_sha256": "b072687afbc68dd3bfd7d4be6d01572ecc6db7fae455a17b539bbbf80f7ef667"
+    },
+    {
+      "column": "taf_probability_missing",
+      "dtype": "float64",
+      "R0017_sha256": "fda533d044715cc9c10579b9e96e3af9ba2c3bd51d009d7082981382eab4794f",
+      "R0019_sha256": "fda533d044715cc9c10579b9e96e3af9ba2c3bd51d009d7082981382eab4794f"
+    },
+    {
+      "column": "taf_prevailing_segment_count",
+      "dtype": "float64",
+      "R0017_sha256": "e23808278028010616b6ba84e1f33a252c966824e005f1843461ec26818de027",
+      "R0019_sha256": "e23808278028010616b6ba84e1f33a252c966824e005f1843461ec26818de027"
+    },
+    {
+      "column": "taf_tempo_segment_count",
+      "dtype": "float64",
+      "R0017_sha256": "a6adeb57a2fb5b0d2bab1fb17a8e3d8f460be5103a66fa8f7cc6002db16e1fd8",
+      "R0019_sha256": "a6adeb57a2fb5b0d2bab1fb17a8e3d8f460be5103a66fa8f7cc6002db16e1fd8"
+    },
+    {
+      "column": "taf_probability_segment_count",
+      "dtype": "float64",
+      "R0017_sha256": "1b79eadc14b9638290831a7841368596009df0c680fc317c4793ff71f8ebaa57",
+      "R0019_sha256": "1b79eadc14b9638290831a7841368596009df0c680fc317c4793ff71f8ebaa57"
+    },
+    {
+      "column": "taf_prevailing_wind_knots",
+      "dtype": "float64",
+      "R0017_sha256": "ea8cd3fbebb9182fce8e49fbcd6110893142ce60c8301d1ef490b9d94248409b",
+      "R0019_sha256": "ea8cd3fbebb9182fce8e49fbcd6110893142ce60c8301d1ef490b9d94248409b"
+    },
+    {
+      "column": "taf_prevailing_wind_direction_deg",
+      "dtype": "float64",
+      "R0017_sha256": "a60640aa4725b157ec60b45aedc4f2df8fab9977434a8c17a2589cee455c92cd",
+      "R0019_sha256": "a60640aa4725b157ec60b45aedc4f2df8fab9977434a8c17a2589cee455c92cd"
+    },
+    {
+      "column": "taf_prevailing_gust_knots",
+      "dtype": "float64",
+      "R0017_sha256": "45e1b886743087a88906397076fbc7b3a5fab35c5a4fad86f5c6b65a43597bb8",
+      "R0019_sha256": "45e1b886743087a88906397076fbc7b3a5fab35c5a4fad86f5c6b65a43597bb8"
+    },
+    {
+      "column": "taf_prevailing_visibility_miles",
+      "dtype": "float64",
+      "R0017_sha256": "553bb2550f9da508f3a24568a5f0211ba0c0f381b00cede8c0636e981e0a2df4",
+      "R0019_sha256": "553bb2550f9da508f3a24568a5f0211ba0c0f381b00cede8c0636e981e0a2df4"
+    },
+    {
+      "column": "taf_prevailing_ceiling_ft",
+      "dtype": "float64",
+      "R0017_sha256": "c961c92d07cdfeff666b4b1ed00e352b31f7c1bbb1e3e56213242cad35c51850",
+      "R0019_sha256": "c961c92d07cdfeff666b4b1ed00e352b31f7c1bbb1e3e56213242cad35c51850"
+    },
+    {
+      "column": "taf_prevailing_precip_flag",
+      "dtype": "float64",
+      "R0017_sha256": "b7bae116ec8d30badbdc68ffa63ed12a414b58ec552110218e769cafd489f3e0",
+      "R0019_sha256": "b7bae116ec8d30badbdc68ffa63ed12a414b58ec552110218e769cafd489f3e0"
+    },
+    {
+      "column": "taf_prevailing_rain_flag",
+      "dtype": "float64",
+      "R0017_sha256": "7eb3cb4db5f8d286176466403b7f6fa4d16bb481d6cd069bb2755b016eb7357e",
+      "R0019_sha256": "7eb3cb4db5f8d286176466403b7f6fa4d16bb481d6cd069bb2755b016eb7357e"
+    },
+    {
+      "column": "taf_prevailing_snow_flag",
+      "dtype": "float64",
+      "R0017_sha256": "33899cdb36ab0b1a808185f8fcf8f07d6c53d9d1a30099876eee4eec286b7c66",
+      "R0019_sha256": "33899cdb36ab0b1a808185f8fcf8f07d6c53d9d1a30099876eee4eec286b7c66"
+    },
+    {
+      "column": "taf_prevailing_thunder_flag",
+      "dtype": "float64",
+      "R0017_sha256": "b2f0a76ea441d2e0ff1d798cf6fc42b03956fd66391cf93159e6345f75954251",
+      "R0019_sha256": "b2f0a76ea441d2e0ff1d798cf6fc42b03956fd66391cf93159e6345f75954251"
+    },
+    {
+      "column": "taf_prevailing_segment_start_min",
+      "dtype": "datetime64[ns, UTC]",
+      "R0017_sha256": "55d6e8244afa3484496dcb069ea725fa7dbaf241722a6e3ac5e0a5d052082b87",
+      "R0019_sha256": "55d6e8244afa3484496dcb069ea725fa7dbaf241722a6e3ac5e0a5d052082b87"
+    },
+    {
+      "column": "taf_prevailing_segment_end_max",
+      "dtype": "datetime64[ns, UTC]",
+      "R0017_sha256": "4530be93c7cb69eba71923009253088d5c035ae13b6fb48abc6a32979435c9c6",
+      "R0019_sha256": "4530be93c7cb69eba71923009253088d5c035ae13b6fb48abc6a32979435c9c6"
+    },
+    {
+      "column": "taf_tempo_wind_knots",
+      "dtype": "float64",
+      "R0017_sha256": "1802b52a119599b2110ab5ddd98c9475f66f503dadb209121830876c7b0d7a97",
+      "R0019_sha256": "1802b52a119599b2110ab5ddd98c9475f66f503dadb209121830876c7b0d7a97"
+    },
+    {
+      "column": "taf_tempo_wind_direction_deg",
+      "dtype": "float64",
+      "R0017_sha256": "a287c50d2f5de8b6e93ae4192352afe11c7a8411946e63fc87e3c740e7e86978",
+      "R0019_sha256": "a287c50d2f5de8b6e93ae4192352afe11c7a8411946e63fc87e3c740e7e86978"
+    },
+    {
+      "column": "taf_tempo_gust_knots",
+      "dtype": "float64",
+      "R0017_sha256": "aad6a8c7d75f94ee774e54825303742b8a927183f183d33f29cb7280baf02af8",
+      "R0019_sha256": "aad6a8c7d75f94ee774e54825303742b8a927183f183d33f29cb7280baf02af8"
+    },
+    {
+      "column": "taf_tempo_visibility_miles",
+      "dtype": "float64",
+      "R0017_sha256": "d48accc726a8924ca41fd8825c79efab5ee5750f8410c5b11a81a40f5e38a320",
+      "R0019_sha256": "d48accc726a8924ca41fd8825c79efab5ee5750f8410c5b11a81a40f5e38a320"
+    },
+    {
+      "column": "taf_tempo_ceiling_ft",
+      "dtype": "float64",
+      "R0017_sha256": "e4c357ca476b0ec0104516b1a3463f868144b5316890053cebc50af7d268d80e",
+      "R0019_sha256": "e4c357ca476b0ec0104516b1a3463f868144b5316890053cebc50af7d268d80e"
+    },
+    {
+      "column": "taf_tempo_precip_flag",
+      "dtype": "float64",
+      "R0017_sha256": "ee310634c0cad87e8dc433a3b131d1d4c3851319d17e9bc6b848d4270aa263ed",
+      "R0019_sha256": "ee310634c0cad87e8dc433a3b131d1d4c3851319d17e9bc6b848d4270aa263ed"
+    },
+    {
+      "column": "taf_tempo_rain_flag",
+      "dtype": "float64",
+      "R0017_sha256": "8704a873210eb0db5cc0285c7ce9cafc704ffe4849ecc4b1ed0adee298a95629",
+      "R0019_sha256": "8704a873210eb0db5cc0285c7ce9cafc704ffe4849ecc4b1ed0adee298a95629"
+    },
+    {
+      "column": "taf_tempo_snow_flag",
+      "dtype": "float64",
+      "R0017_sha256": "21529dd15bb61ae714d1bae71147ee59141aab5f629f3b1675073733802f1fd9",
+      "R0019_sha256": "21529dd15bb61ae714d1bae71147ee59141aab5f629f3b1675073733802f1fd9"
+    },
+    {
+      "column": "taf_tempo_thunder_flag",
+      "dtype": "float64",
+      "R0017_sha256": "721a4d80b3beb115ae2b113d520db358370405fdfd9fef03c7c92d0844ab7e36",
+      "R0019_sha256": "721a4d80b3beb115ae2b113d520db358370405fdfd9fef03c7c92d0844ab7e36"
+    },
+    {
+      "column": "taf_tempo_segment_start_min",
+      "dtype": "datetime64[ns, UTC]",
+      "R0017_sha256": "2671abd820005c96f5219a4e7e17d6683f0030f9811722dc67c93064dc2504d5",
+      "R0019_sha256": "2671abd820005c96f5219a4e7e17d6683f0030f9811722dc67c93064dc2504d5"
+    },
+    {
+      "column": "taf_tempo_segment_end_max",
+      "dtype": "datetime64[ns, UTC]",
+      "R0017_sha256": "d0c5e486c4f321fc2d1ec5ff3d6755c7aa29f145053916ebb6ccecc478659854",
+      "R0019_sha256": "d0c5e486c4f321fc2d1ec5ff3d6755c7aa29f145053916ebb6ccecc478659854"
+    },
+    {
+      "column": "taf_probability_wind_knots",
+      "dtype": "float64",
+      "R0017_sha256": "a2ed21a7f63c7ea3d1f2a64cc0570704dd723ae2b000844558e3aa39f5140542",
+      "R0019_sha256": "a2ed21a7f63c7ea3d1f2a64cc0570704dd723ae2b000844558e3aa39f5140542"
+    },
+    {
+      "column": "taf_probability_wind_direction_deg",
+      "dtype": "float64",
+      "R0017_sha256": "e75f689b1393723db04ae23113286be0469c829b31e60879be01091fcd40d28c",
+      "R0019_sha256": "e75f689b1393723db04ae23113286be0469c829b31e60879be01091fcd40d28c"
+    },
+    {
+      "column": "taf_probability_gust_knots",
+      "dtype": "float64",
+      "R0017_sha256": "27c5b8925b0e42841062f6d9cd601b883580adbb06b1b11d77c1ef00e1febaaf",
+      "R0019_sha256": "27c5b8925b0e42841062f6d9cd601b883580adbb06b1b11d77c1ef00e1febaaf"
+    },
+    {
+      "column": "taf_probability_visibility_miles",
+      "dtype": "float64",
+      "R0017_sha256": "939b1826247c0fb91e85af22f6dfc8b97b492b0f5a5fce7f7fdd55d8fdee875b",
+      "R0019_sha256": "939b1826247c0fb91e85af22f6dfc8b97b492b0f5a5fce7f7fdd55d8fdee875b"
+    },
+    {
+      "column": "taf_probability_ceiling_ft",
+      "dtype": "float64",
+      "R0017_sha256": "f9af43519e2fa79936ea56b932b64cebc5f7e62c9a83d74d31ff8a65448a9e25",
+      "R0019_sha256": "f9af43519e2fa79936ea56b932b64cebc5f7e62c9a83d74d31ff8a65448a9e25"
+    },
+    {
+      "column": "taf_probability_precip_flag",
+      "dtype": "float64",
+      "R0017_sha256": "0f466a7d8bb4651bef64bbc487408ce7a4c6def2463f70885ba39c63e1c43c9d",
+      "R0019_sha256": "0f466a7d8bb4651bef64bbc487408ce7a4c6def2463f70885ba39c63e1c43c9d"
+    },
+    {
+      "column": "taf_probability_rain_flag",
+      "dtype": "float64",
+      "R0017_sha256": "6737a6adab038a27b3a34c1bd2bcdd3a70c9315b7f0773724411d14b39428f8d",
+      "R0019_sha256": "6737a6adab038a27b3a34c1bd2bcdd3a70c9315b7f0773724411d14b39428f8d"
+    },
+    {
+      "column": "taf_probability_snow_flag",
+      "dtype": "float64",
+      "R0017_sha256": "8adfdfff5447e4f130f2693fd7b3f72967c3e3c314c0f179df3415795619d3fd",
+      "R0019_sha256": "8adfdfff5447e4f130f2693fd7b3f72967c3e3c314c0f179df3415795619d3fd"
+    },
+    {
+      "column": "taf_probability_thunder_flag",
+      "dtype": "float64",
+      "R0017_sha256": "fc3c46668d3513d9e239ca64bdac10295b1bf796e84ba43ffbc12d4a432998ed",
+      "R0019_sha256": "fc3c46668d3513d9e239ca64bdac10295b1bf796e84ba43ffbc12d4a432998ed"
+    },
+    {
+      "column": "taf_probability_segment_start_min",
+      "dtype": "datetime64[ns, UTC]",
+      "R0017_sha256": "e494498a04af31528cc944f09c7a4dfcad9b50f164fd5ecb4394e1f73805c706",
+      "R0019_sha256": "e494498a04af31528cc944f09c7a4dfcad9b50f164fd5ecb4394e1f73805c706"
+    },
+    {
+      "column": "taf_probability_segment_end_max",
+      "dtype": "datetime64[ns, UTC]",
+      "R0017_sha256": "ff312c1681d09223636bd2bdda518745707157a1ce6c4f3d3d9e2e088c28a1a0",
+      "R0019_sha256": "ff312c1681d09223636bd2bdda518745707157a1ce6c4f3d3d9e2e088c28a1a0"
+    },
+    {
+      "column": "taf_missing",
+      "dtype": "float64",
+      "R0017_sha256": "a8a77ae035416a1df6c3f55478893d1072a7362f25b3c3c81c686ead2dad69e5",
+      "R0019_sha256": "a8a77ae035416a1df6c3f55478893d1072a7362f25b3c3c81c686ead2dad69e5"
+    }
+  ],
+  "noaa_fields": {
+    "metar_temperature_f": {
+      "element": "temperature",
+      "policy": null,
+      "in_primary_predictors": false,
+      "native_unit": "C",
+      "target_unit": "F",
+      "conversion": "celsius_to_fahrenheit",
+      "base_missing_n": 14803,
+      "base_existing_IEM_n": 2246972,
+      "structural_or_other_policy_excluded_missing_n": 14803,
+      "rule_eligible_missing_n": 0,
+      "candidate_observation_diagnostic_n": 0,
+      "candidate_within_age_120_n": 0,
+      "filled_n": 0,
+      "source_counts": {
+        "IEM": 2246972,
+        "MISSING": 14803
+      },
+      "candidate_source_codes": {},
+      "candidate_QC_codes": {},
+      "W0002_all_period_QC_eligible_rows": 70967
+    },
+    "metar_dewpoint_f": {
+      "element": "dew_point_temperature",
+      "policy": null,
+      "in_primary_predictors": false,
+      "native_unit": "C",
+      "target_unit": "F",
+      "conversion": "celsius_to_fahrenheit",
+      "base_missing_n": 14920,
+      "base_existing_IEM_n": 2246855,
+      "structural_or_other_policy_excluded_missing_n": 14920,
+      "rule_eligible_missing_n": 0,
+      "candidate_observation_diagnostic_n": 0,
+      "candidate_within_age_120_n": 0,
+      "filled_n": 0,
+      "source_counts": {
+        "IEM": 2246855,
+        "MISSING": 14920
+      },
+      "candidate_source_codes": {},
+      "candidate_QC_codes": {},
+      "W0002_all_period_QC_eligible_rows": 70921
+    },
+    "metar_wind_direction_deg": {
+      "element": "wind_direction",
+      "policy": null,
+      "in_primary_predictors": false,
+      "native_unit": "degree",
+      "target_unit": "degree",
+      "conversion": "identity",
+      "base_missing_n": 119399,
+      "base_existing_IEM_n": 2142376,
+      "structural_or_other_policy_excluded_missing_n": 119399,
+      "rule_eligible_missing_n": 0,
+      "candidate_observation_diagnostic_n": 0,
+      "candidate_within_age_120_n": 0,
+      "filled_n": 0,
+      "source_counts": {
+        "IEM": 2142376,
+        "MISSING": 119399
+      },
+      "candidate_source_codes": {},
+      "candidate_QC_codes": {},
+      "W0002_all_period_QC_eligible_rows": 57797
+    },
+    "metar_relative_humidity": {
+      "element": "relative_humidity",
+      "policy": null,
+      "in_primary_predictors": false,
+      "native_unit": "%",
+      "target_unit": "%",
+      "conversion": "identity",
+      "base_missing_n": 14920,
+      "base_existing_IEM_n": 2246855,
+      "structural_or_other_policy_excluded_missing_n": 14920,
+      "rule_eligible_missing_n": 0,
+      "candidate_observation_diagnostic_n": 0,
+      "candidate_within_age_120_n": 0,
+      "filled_n": 0,
+      "source_counts": {
+        "IEM": 2246855,
+        "MISSING": 14920
+      },
+      "candidate_source_codes": {},
+      "candidate_QC_codes": {},
+      "W0002_all_period_QC_eligible_rows": 0
+    },
+    "metar_wind_knots": {
+      "element": "wind_speed",
+      "policy": "value_missing",
+      "in_primary_predictors": true,
+      "native_unit": "m/s",
+      "target_unit": "knot",
+      "conversion": "mps_to_knots",
+      "base_missing_n": 17199,
+      "base_existing_IEM_n": 2244576,
+      "structural_or_other_policy_excluded_missing_n": 237,
+      "rule_eligible_missing_n": 16962,
+      "candidate_observation_diagnostic_n": 0,
+      "candidate_within_age_120_n": 0,
+      "filled_n": 0,
+      "source_counts": {
+        "IEM": 2244576,
+        "MISSING": 17199
+      },
+      "candidate_source_codes": {},
+      "candidate_QC_codes": {},
+      "W0002_all_period_QC_eligible_rows": 70690
+    },
+    "metar_gust_knots": {
+      "element": "wind_gust",
+      "policy": "whole_metar_missing",
+      "in_primary_predictors": true,
+      "native_unit": "m/s",
+      "target_unit": "knot",
+      "conversion": "mps_to_knots",
+      "base_missing_n": 1794349,
+      "base_existing_IEM_n": 467426,
+      "structural_or_other_policy_excluded_missing_n": 1780005,
+      "rule_eligible_missing_n": 14344,
+      "candidate_observation_diagnostic_n": 0,
+      "candidate_within_age_120_n": 0,
+      "filled_n": 0,
+      "source_counts": {
+        "MISSING": 1794349,
+        "IEM": 467426
+      },
+      "candidate_source_codes": {},
+      "candidate_QC_codes": {},
+      "W0002_all_period_QC_eligible_rows": 12344
+    },
+    "metar_visibility_miles": {
+      "element": "visibility",
+      "policy": "value_missing",
+      "in_primary_predictors": true,
+      "native_unit": "km",
+      "target_unit": "mile",
+      "conversion": "km_to_miles",
+      "base_missing_n": 14947,
+      "base_existing_IEM_n": 2246828,
+      "structural_or_other_policy_excluded_missing_n": 237,
+      "rule_eligible_missing_n": 14710,
+      "candidate_observation_diagnostic_n": 0,
+      "candidate_within_age_120_n": 0,
+      "filled_n": 0,
+      "source_counts": {
+        "IEM": 2246828,
+        "MISSING": 14947
+      },
+      "candidate_source_codes": {},
+      "candidate_QC_codes": {},
+      "W0002_all_period_QC_eligible_rows": 71007
+    },
+    "metar_ceiling_ft": {
+      "element": "ceiling_height",
+      "policy": "whole_metar_missing_or_sky_unreported",
+      "in_primary_predictors": true,
+      "native_unit": "m",
+      "target_unit": "ft",
+      "conversion": "m_to_feet",
+      "base_missing_n": 1138342,
+      "base_existing_IEM_n": 1123433,
+      "structural_or_other_policy_excluded_missing_n": 1123496,
+      "rule_eligible_missing_n": 14846,
+      "candidate_observation_diagnostic_n": 0,
+      "candidate_within_age_120_n": 0,
+      "filled_n": 0,
+      "source_counts": {
+        "MISSING": 1138342,
+        "IEM": 1123433
+      },
+      "candidate_source_codes": {},
+      "candidate_QC_codes": {},
+      "W0002_all_period_QC_eligible_rows": 60614
+    }
+  },
+  "primary_fill_variables": [
+    "metar_wind_knots",
+    "metar_visibility_miles",
+    "metar_gust_knots",
+    "metar_ceiling_ft"
+  ],
+  "mapped_diagnostic_variables": [
+    "metar_temperature_f",
+    "metar_dewpoint_f",
+    "metar_wind_direction_deg",
+    "metar_relative_humidity",
+    "metar_wind_knots",
+    "metar_gust_knots",
+    "metar_visibility_miles",
+    "metar_ceiling_ft"
+  ],
+  "coverage": {
+    "R0017": {
+      "rows": 2261775,
+      "tables": {
+        "airport_date": 41087,
+        "month": 4,
+        "airport": 355
+      },
+      "availability": {
+        "metar_available": 2247194,
+        "taf_available": 1355934,
+        "taf_prevailing_available": 1355934,
+        "taf_latest_state_located": 2253037
+      },
+      "interpretation": "taf_available means any approved active condition group, not complete weather. Source match is not complete per-variable coverage; no-query cells are missing, not zero"
+    },
+    "R0019": {
+      "rows": 2261775,
+      "tables": {
+        "airport_date": 41087,
+        "month": 4,
+        "airport": 355
+      },
+      "availability": {
+        "metar_available": 2247194,
+        "taf_available": 1355934,
+        "taf_prevailing_available": 1355934,
+        "taf_latest_state_located": 2253037
+      },
+      "interpretation": "taf_available means any approved active condition group, not complete weather. Source match is not complete per-variable coverage; no-query cells are missing, not zero"
+    }
+  },
+  "weather_coverage_CSVs_byte_identical": true,
+  "metrics_exact_equal_after_model_name_normalization": true,
+  "paired_daily_AE_SE_sums_exact_equal": true,
+  "paired_differences": [
+    {
+      "scope": "2026-05",
+      "metric": "mae",
+      "n": 574571,
+      "calendar_dates": 31,
+      "reference_error": 14.719031887193784,
+      "candidate_error": 14.719031887193784,
+      "difference_candidate_minus_reference": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "valid_bootstrap_repeats": 1000,
+      "unit": "minutes",
+      "sample_scope": "full_evaluation"
+    },
+    {
+      "scope": "2026-05",
+      "metric": "rmse",
+      "n": 574571,
+      "calendar_dates": 31,
+      "reference_error": 38.936825326041024,
+      "candidate_error": 38.936825326041024,
+      "difference_candidate_minus_reference": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "valid_bootstrap_repeats": 1000,
+      "unit": "minutes",
+      "sample_scope": "full_evaluation"
+    },
+    {
+      "scope": "2026-06",
+      "metric": "mae",
+      "n": 561972,
+      "calendar_dates": 30,
+      "reference_error": 16.87352262431066,
+      "candidate_error": 16.87352262431066,
+      "difference_candidate_minus_reference": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "valid_bootstrap_repeats": 1000,
+      "unit": "minutes",
+      "sample_scope": "full_evaluation"
+    },
+    {
+      "scope": "2026-06",
+      "metric": "rmse",
+      "n": 561972,
+      "calendar_dates": 30,
+      "reference_error": 44.32349850581305,
+      "candidate_error": 44.32349850581305,
+      "difference_candidate_minus_reference": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "valid_bootstrap_repeats": 1000,
+      "unit": "minutes",
+      "sample_scope": "full_evaluation"
+    },
+    {
+      "scope": "2026-07",
+      "metric": "mae",
+      "n": 570548,
+      "calendar_dates": 31,
+      "reference_error": 18.842982259127268,
+      "candidate_error": 18.842982259127268,
+      "difference_candidate_minus_reference": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "valid_bootstrap_repeats": 1000,
+      "unit": "minutes",
+      "sample_scope": "full_evaluation"
+    },
+    {
+      "scope": "2026-07",
+      "metric": "rmse",
+      "n": 570548,
+      "calendar_dates": 31,
+      "reference_error": 50.46711423071503,
+      "candidate_error": 50.46711423071503,
+      "difference_candidate_minus_reference": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "valid_bootstrap_repeats": 1000,
+      "unit": "minutes",
+      "sample_scope": "full_evaluation"
+    },
+    {
+      "scope": "pooled",
+      "metric": "mae",
+      "n": 1707091,
+      "calendar_dates": 92,
+      "reference_error": 16.80660373036146,
+      "candidate_error": 16.80660373036146,
+      "difference_candidate_minus_reference": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "valid_bootstrap_repeats": 1000,
+      "unit": "minutes",
+      "sample_scope": "full_evaluation"
+    },
+    {
+      "scope": "pooled",
+      "metric": "rmse",
+      "n": 1707091,
+      "calendar_dates": 92,
+      "reference_error": 44.81355707887569,
+      "candidate_error": 44.81355707887569,
+      "difference_candidate_minus_reference": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "valid_bootstrap_repeats": 1000,
+      "unit": "minutes",
+      "sample_scope": "full_evaluation"
+    }
+  ],
+  "noaa_overlap_summary": [
+    {
+      "feature": "metar_temperature_f",
+      "overlap_count": 0,
+      "mean_signed_difference": "NA",
+      "mean_absolute_difference": "NA",
+      "max_absolute_difference": "NA",
+      "metar_unit": "F",
+      "noaa_native_unit": "C",
+      "conversion": "celsius_to_fahrenheit",
+      "unit_consistency": "no_numeric_overlap"
+    },
+    {
+      "feature": "metar_dewpoint_f",
+      "overlap_count": 0,
+      "mean_signed_difference": "NA",
+      "mean_absolute_difference": "NA",
+      "max_absolute_difference": "NA",
+      "metar_unit": "F",
+      "noaa_native_unit": "C",
+      "conversion": "celsius_to_fahrenheit",
+      "unit_consistency": "no_numeric_overlap"
+    },
+    {
+      "feature": "metar_wind_direction_deg",
+      "overlap_count": 0,
+      "mean_signed_difference": "NA",
+      "mean_absolute_difference": "NA",
+      "max_absolute_difference": "NA",
+      "metar_unit": "degree",
+      "noaa_native_unit": "degree",
+      "conversion": "identity",
+      "unit_consistency": "no_numeric_overlap"
+    },
+    {
+      "feature": "metar_relative_humidity",
+      "overlap_count": 0,
+      "mean_signed_difference": "NA",
+      "mean_absolute_difference": "NA",
+      "max_absolute_difference": "NA",
+      "metar_unit": "%",
+      "noaa_native_unit": "%",
+      "conversion": "identity",
+      "unit_consistency": "no_exact_overlap"
+    },
+    {
+      "feature": "metar_wind_knots",
+      "overlap_count": 0,
+      "mean_signed_difference": "NA",
+      "mean_absolute_difference": "NA",
+      "max_absolute_difference": "NA",
+      "metar_unit": "knot",
+      "noaa_native_unit": "m/s",
+      "conversion": "mps_to_knots",
+      "unit_consistency": "no_numeric_overlap"
+    },
+    {
+      "feature": "metar_gust_knots",
+      "overlap_count": 0,
+      "mean_signed_difference": "NA",
+      "mean_absolute_difference": "NA",
+      "max_absolute_difference": "NA",
+      "metar_unit": "knot",
+      "noaa_native_unit": "m/s",
+      "conversion": "mps_to_knots",
+      "unit_consistency": "no_numeric_overlap"
+    },
+    {
+      "feature": "metar_visibility_miles",
+      "overlap_count": 0,
+      "mean_signed_difference": "NA",
+      "mean_absolute_difference": "NA",
+      "max_absolute_difference": "NA",
+      "metar_unit": "mile",
+      "noaa_native_unit": "km",
+      "conversion": "km_to_miles",
+      "unit_consistency": "no_numeric_overlap"
+    },
+    {
+      "feature": "metar_ceiling_ft",
+      "overlap_count": 0,
+      "mean_signed_difference": "NA",
+      "mean_absolute_difference": "NA",
+      "max_absolute_difference": "NA",
+      "metar_unit": "ft",
+      "noaa_native_unit": "m",
+      "conversion": "m_to_feet",
+      "unit_consistency": "no_numeric_overlap"
+    }
+  ],
+  "limitations": [
+    "No accepted numeric METAR/NOAA exact-time overlaps: unit conversion agreement cannot be established from observed pairs.",
+    "This branch makes zero effective model-input changes; its identical errors do not test the predictive value of otherwise usable NOAA information.",
+    "W0002 QC counts cover the prepared weather archive, not an April-July/airport/time-policy funnel. Existing saved diagnostics cannot partition candidate absence into station/time/source-period/conflict causes.",
+    "Source-specific whitelist filtering is not full NOAA post-integration QC certification, and historical delivery availability is unverified."
+  ],
+  "source_receipts": [
+    {
+      "path": "experiments/runs/R0017/manifest.json",
+      "sha256": "2dd862b2c43cbb5b43bfd0c364e7205c7a6d512ee09a148e1cf4c513e1fa715c",
+      "bytes": 45865
+    },
+    {
+      "path": "experiments/runs/R0019/manifest.json",
+      "sha256": "e488a5c6278e591b959588f0669212f8eb1ca415f1c8bb42c8118ea80fa7d257",
+      "bytes": 42353
+    },
+    {
+      "path": "experiments/runs/R0017/config.json",
+      "sha256": "1006f3b82abec7768e3954cad3055f9c3f6c8837f7a6fd4656304ee29ca5d45e",
+      "bytes": 5530
+    },
+    {
+      "path": "experiments/runs/R0019/config.json",
+      "sha256": "237f41197e4e1f24380b92254f37100645f500c273fb4780997f7bcb98ee064a",
+      "bytes": 5568
+    },
+    {
+      "path": "experiments/runs/R0017/model_manifest.json",
+      "sha256": "ec89247900b1aebb51be989fcf6a9689b237736c6d51b084c688a3d0664b7075",
+      "bytes": 10067
+    },
+    {
+      "path": "experiments/runs/R0019/model_manifest.json",
+      "sha256": "fcb71273ac15307465f8f2518ce4db64cf0d8df64ff0ffcbdec92980480ec1fc",
+      "bytes": 10086
+    },
+    {
+      "path": "experiments/runs/R0017/evaluation_ids.csv.gz",
+      "sha256": "3a416b4914c6fd01495833fff6cd0bc5ee95963b87dd6ac46139e3b2a2daa09c",
+      "bytes": 24194533
+    },
+    {
+      "path": "experiments/runs/R0019/evaluation_ids.csv.gz",
+      "sha256": "3a416b4914c6fd01495833fff6cd0bc5ee95963b87dd6ac46139e3b2a2daa09c",
+      "bytes": 24194533
+    },
+    {
+      "path": "experiments/runs/R0017/feature_audit.json",
+      "sha256": "9115306153cb0bb554780c9a01891a4ae279e64e081297b3370d19f78345ea52",
+      "bytes": 11089
+    },
+    {
+      "path": "experiments/runs/R0019/feature_audit.json",
+      "sha256": "32a081ba47ec6ee731ee1c6496f15d04606fbd856327968b46f8a4d52b13e74b",
+      "bytes": 12352
+    },
+    {
+      "path": "experiments/runs/R0017/weather_coverage_summary.json",
+      "sha256": "e8166823cb333764a6eecfb6ae2c404389063014176de76a8ea06dcfc30785cc",
+      "bytes": 475
+    },
+    {
+      "path": "experiments/runs/R0019/weather_coverage_summary.json",
+      "sha256": "e8166823cb333764a6eecfb6ae2c404389063014176de76a8ea06dcfc30785cc",
+      "bytes": 475
+    },
+    {
+      "path": "experiments/runs/R0019/comparison/comparison.json",
+      "sha256": "93e67f34f8354fd187fd8255dc81997fdc3e15a8c87568f755fe8a0a11761969",
+      "bytes": 1784
+    },
+    {
+      "path": "experiments/runs/R0019/comparison/comparison_metrics.csv",
+      "sha256": "422aced8d39a1fef1938889b0b3f8d01ba44db3a3c4f48e86b00307bb676d651",
+      "bytes": 971
+    },
+    {
+      "path": "experiments/runs/R0019/comparison/comparison_daily_stats.csv",
+      "sha256": "0df1d080657094aa87d43aa25efc6052b159ef9821f266c774da3118c693fcbe",
+      "bytes": 9928
+    },
+    {
+      "path": "experiments/runs/R0017/metrics.csv",
+      "sha256": "9379ac294c57e6f2d03a8b4d17adf3d90e9f722d60fe3532c6887d5e4ed5b04e",
+      "bytes": 902328
+    },
+    {
+      "path": "experiments/runs/R0019/metrics.csv",
+      "sha256": "f433e8e6989b1bee878cced117a57285866eb63606ff86aee97f579f48b8f311",
+      "bytes": 910633
+    },
+    {
+      "path": "experiments/runs/R0019/tables/noaa_overlap_summary.csv",
+      "sha256": "6fe8e10a25c0ecac8fac3b17afcbc168d03c4b239848ed882766c031a2fa59a2",
+      "bytes": 676
+    },
+    {
+      "path": "experiments/runs/R0017/tables/weather_variable_coverage.csv",
+      "sha256": "3b08c3d90745d9ec980906742852f55c88c2ba7bd5d360d9593d5e764ef4b47e",
+      "bytes": 2705
+    },
+    {
+      "path": "experiments/runs/R0019/tables/weather_variable_coverage.csv",
+      "sha256": "3b08c3d90745d9ec980906742852f55c88c2ba7bd5d360d9593d5e764ef4b47e",
+      "bytes": 2705
+    },
+    {
+      "path": "experiments/runs/R0017/tables/weather_coverage_month.csv",
+      "sha256": "d81d8e260a9bf559e6378ab0b0d968e8be3ef0b29b72da72614347562ecb7b3d",
+      "bytes": 889
+    },
+    {
+      "path": "experiments/runs/R0019/tables/weather_coverage_month.csv",
+      "sha256": "d81d8e260a9bf559e6378ab0b0d968e8be3ef0b29b72da72614347562ecb7b3d",
+      "bytes": 889
+    },
+    {
+      "path": "experiments/runs/R0017/tables/weather_coverage_airport.csv",
+      "sha256": "d414b350b6720c472a1849901585e409157e849337b4e7b311463473761f6c94",
+      "bytes": 36300
+    },
+    {
+      "path": "experiments/runs/R0019/tables/weather_coverage_airport.csv",
+      "sha256": "d414b350b6720c472a1849901585e409157e849337b4e7b311463473761f6c94",
+      "bytes": 36300
+    },
+    {
+      "path": "experiments/runs/R0017/tables/weather_coverage_airport_date.csv",
+      "sha256": "5bc7b66905461ec353ca7f699b59aae24498837c462ba5f0e2b975bf7af9dfb9",
+      "bytes": 2901891
+    },
+    {
+      "path": "experiments/runs/R0019/tables/weather_coverage_airport_date.csv",
+      "sha256": "5bc7b66905461ec353ca7f699b59aae24498837c462ba5f0e2b975bf7af9dfb9",
+      "bytes": 2901891
+    },
+    {
+      "path": "experiments/runs/R0017/tables/taf_status_counts.csv",
+      "sha256": "010270d74d757c114c4a213f4fa2eeb2ae9e9ba8243cc8c37e57865f9287c50e",
+      "bytes": 156
+    },
+    {
+      "path": "experiments/runs/R0019/tables/taf_status_counts.csv",
+      "sha256": "010270d74d757c114c4a213f4fa2eeb2ae9e9ba8243cc8c37e57865f9287c50e",
+      "bytes": 156
+    },
+    {
+      "path": "experiments/runs/R0019/data/noaa_overlap_pairs.csv.gz",
+      "sha256": "e9ed6bcbab8d90810b64489635cb81d4c1aa3cfc9df1039d988e45f76461f1a2",
+      "bytes": 181
+    },
+    {
+      "path": "experiments/runs/R0017/data/features.pkl",
+      "sha256": "2a1dc2326d762a27245312b6bc59705d43222f4734aad62811d05c6a20e3ebe6",
+      "bytes": 2159300442
+    },
+    {
+      "path": "experiments/runs/R0019/data/features.pkl",
+      "sha256": "5cdcbabbf8b6ff8ca486ad4600dbe3dc4e2c9c028c2e3af3c4dbdf2c7365ed53",
+      "bytes": 2795446188
+    },
+    {
+      "path": "processed/W0002/data_manifest.json",
+      "sha256": "3bacd4c94b1c267c71024299cb948f95372ad2ddb7332aceb2475b27de2889da",
+      "bytes": 316941
+    }
+  ],
+  "elapsed_seconds": 53.9184247000012,
+  "peak_process_rss_gib": 8.076187133789062,
+  "august_flight_rows_read": false,
+  "raw_weather_or_other_flight_datasets_read": false,
+  "models_refit": false,
+  "production_sources_modified": false,
+  "native_binary_policy_reconstruction": "Saved model-ready metar_missing is float; its pre-cast native int8 meaning was reconstructed with numeric equality to 1, rather than string conversion of 1.0.",
+  "base_METAR_missing_reason_counts": {
+    "available": 2247194,
+    "no_observation": 11899,
+    "stale_observation": 2445,
+    "conflicting_reports": 237
+  },
+  "whole_missing_nonambiguous_policy_rows": 14344,
+  "W0002_manifest_matches_run_feature_audit": true
+}

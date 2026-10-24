@@ -1,0 +1,26 @@
+{
+  "scope_rows": 611929,
+  "fields": {
+    "wind_speed_qc_eligible": {
+      "all_pass": 70690,
+      "development_pass": 0,
+      "latest_pass": "2026-03-26 17:32:00+00:00"
+    },
+    "wind_gust_qc_eligible": {
+      "all_pass": 12344,
+      "development_pass": 0,
+      "latest_pass": "2026-03-26 17:31:00+00:00"
+    },
+    "visibility_qc_eligible": {
+      "all_pass": 71007,
+      "development_pass": 0,
+      "latest_pass": "2026-03-26 17:32:00+00:00"
+    },
+    "ceiling_height_qc_eligible": {
+      "all_pass": 60614,
+      "development_pass": 0,
+      "latest_pass": "2026-03-26 17:32:00+00:00"
+    }
+  },
+  "verified_by": "root independent weather metadata check; no flight targets"
+}

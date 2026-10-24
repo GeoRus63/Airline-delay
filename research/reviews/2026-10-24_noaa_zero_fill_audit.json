@@ -1,0 +1,247 @@
+{
+  "scope": "Weather-only NOAA metadata, then April-July weather and R0019 development query fields; no raw files or August flight targets.",
+  "files": [
+    "processed/W0002/noaa_observations.csv.gz",
+    "references/airports.csv",
+    "experiments/runs/R0019/data/features.pkl"
+  ],
+  "development_noaa_rows": 611929,
+  "development_noaa_stations": 25,
+  "mapped_rows": 611929,
+  "mapped_airports": 25,
+  "full_period_accepted_metadata": {
+    "wind_speed": {
+      "all_period_count": 70690,
+      "last_pass_utc": "2026-03-26 17:32:00+00:00"
+    },
+    "wind_gust": {
+      "all_period_count": 12344,
+      "last_pass_utc": "2026-03-26 17:31:00+00:00"
+    },
+    "visibility": {
+      "all_period_count": 71007,
+      "last_pass_utc": "2026-03-26 17:32:00+00:00"
+    },
+    "ceiling_height": {
+      "all_period_count": 60614,
+      "last_pass_utc": "2026-03-26 17:32:00+00:00"
+    }
+  },
+  "fields": {
+    "metar_wind_knots": {
+      "policy_eligible_missing_queries": 16962,
+      "missing_query_airports": 311,
+      "overlap_noaa_airports": 24,
+      "queries_at_noaa_airports": 949,
+      "overlap_airport_codes": [
+        "ABR",
+        "ADK",
+        "AEX",
+        "BTM",
+        "BTR",
+        "BZN",
+        "CMX",
+        "DIK",
+        "EKO",
+        "EWN",
+        "FLG",
+        "GUC",
+        "INL",
+        "LGB",
+        "OME",
+        "ORF",
+        "OTH",
+        "PLN",
+        "PQI",
+        "PRC",
+        "RIW",
+        "ROW",
+        "STX",
+        "WYS"
+      ],
+      "qc_accepted_candidates": 0,
+      "diagnostic_finite_nearby_observations_without_qc": 267,
+      "nearby_examples_rejected_by_qc": [
+        {
+          "airport_id": "10185",
+          "prediction_time": "2026-04-01 14:15:00+00:00",
+          "observation_time": "2026-04-01 14:00:00+00:00",
+          "source_code": "413",
+          "quality_code": null,
+          "native_value": 3.1,
+          "direct_search_equals_asof": true
+        },
+        {
+          "airport_id": "12954",
+          "prediction_time": "2026-04-01 17:08:00+00:00",
+          "observation_time": "2026-04-01 15:53:00+00:00",
+          "source_code": "413",
+          "quality_code": null,
+          "native_value": 2.6,
+          "direct_search_equals_asof": true
+        }
+      ]
+    },
+    "metar_gust_knots": {
+      "policy_eligible_missing_queries": 14344,
+      "missing_query_airports": 234,
+      "overlap_noaa_airports": 21,
+      "queries_at_noaa_airports": 699,
+      "overlap_airport_codes": [
+        "ABR",
+        "ADK",
+        "AEX",
+        "BTM",
+        "BTR",
+        "BZN",
+        "CMX",
+        "DIK",
+        "EKO",
+        "FLG",
+        "LGB",
+        "OME",
+        "ORF",
+        "OTH",
+        "PLN",
+        "PQI",
+        "PRC",
+        "RIW",
+        "ROW",
+        "STX",
+        "WYS"
+      ],
+      "qc_accepted_candidates": 0,
+      "diagnostic_finite_nearby_observations_without_qc": 20,
+      "nearby_examples_rejected_by_qc": [
+        {
+          "airport_id": "15027",
+          "prediction_time": "2026-04-08 17:21:00+00:00",
+          "observation_time": "2026-04-08 16:53:00+00:00",
+          "source_code": "413",
+          "quality_code": null,
+          "native_value": 11.3,
+          "direct_search_equals_asof": true
+        },
+        {
+          "airport_id": "15027",
+          "prediction_time": "2026-04-08 17:41:00+00:00",
+          "observation_time": "2026-04-08 16:53:00+00:00",
+          "source_code": "413",
+          "quality_code": null,
+          "native_value": 11.3,
+          "direct_search_equals_asof": true
+        }
+      ]
+    },
+    "metar_visibility_miles": {
+      "policy_eligible_missing_queries": 14710,
+      "missing_query_airports": 262,
+      "overlap_noaa_airports": 21,
+      "queries_at_noaa_airports": 711,
+      "overlap_airport_codes": [
+        "ABR",
+        "ADK",
+        "AEX",
+        "BTM",
+        "BTR",
+        "BZN",
+        "CMX",
+        "DIK",
+        "EKO",
+        "FLG",
+        "LGB",
+        "OME",
+        "ORF",
+        "OTH",
+        "PLN",
+        "PQI",
+        "PRC",
+        "RIW",
+        "ROW",
+        "STX",
+        "WYS"
+      ],
+      "qc_accepted_candidates": 0,
+      "diagnostic_finite_nearby_observations_without_qc": 65,
+      "nearby_examples_rejected_by_qc": [
+        {
+          "airport_id": "13931",
+          "prediction_time": "2026-04-03 16:53:00+00:00",
+          "observation_time": "2026-04-03 15:51:00+00:00",
+          "source_code": "413",
+          "quality_code": null,
+          "native_value": 16.09,
+          "direct_search_equals_asof": true
+        },
+        {
+          "airport_id": "15027",
+          "prediction_time": "2026-04-08 17:21:00+00:00",
+          "observation_time": "2026-04-08 16:53:00+00:00",
+          "source_code": "413",
+          "quality_code": null,
+          "native_value": 16.09,
+          "direct_search_equals_asof": true
+        }
+      ]
+    },
+    "metar_ceiling_ft": {
+      "policy_eligible_missing_queries": 14846,
+      "missing_query_airports": 263,
+      "overlap_noaa_airports": 21,
+      "queries_at_noaa_airports": 712,
+      "overlap_airport_codes": [
+        "ABR",
+        "ADK",
+        "AEX",
+        "BTM",
+        "BTR",
+        "BZN",
+        "CMX",
+        "DIK",
+        "EKO",
+        "FLG",
+        "LGB",
+        "OME",
+        "ORF",
+        "OTH",
+        "PLN",
+        "PQI",
+        "PRC",
+        "RIW",
+        "ROW",
+        "STX",
+        "WYS"
+      ],
+      "qc_accepted_candidates": 0,
+      "diagnostic_finite_nearby_observations_without_qc": 15,
+      "nearby_examples_rejected_by_qc": [
+        {
+          "airport_id": "10185",
+          "prediction_time": "2026-04-01 14:15:00+00:00",
+          "observation_time": "2026-04-01 14:00:00+00:00",
+          "source_code": "413",
+          "quality_code": null,
+          "native_value": 335.0,
+          "direct_search_equals_asof": true
+        },
+        {
+          "airport_id": "12954",
+          "prediction_time": "2026-04-21 21:55:00+00:00",
+          "observation_time": "2026-04-21 20:53:00+00:00",
+          "source_code": "413",
+          "quality_code": null,
+          "native_value": 945.0,
+          "direct_search_equals_asof": true
+        }
+      ]
+    }
+  },
+  "diagnostic_correction": {
+    "initial_mistake": "Applied _safe_bool directly to post-cast archived float metar_missing; 1.0 string is not accepted by that helper, incorrectly counting zero gust queries.",
+    "actual_execution": "augment_metar produces int8 metar_missing; augment_noaa executes before weather_pipeline_features casts model numeric columns to float.",
+    "corrected_method": "Use numeric eq(1), equivalent to the actual pre-cast int8 input.",
+    "impact": "Not evidence of a production R0019 bug; no invalidation or rerun warranted from this diagnostic mistake.",
+    "helper_boundary": "Generic callers passing float 1.0 to _safe_bool are not supported; no production fix made."
+  },
+  "conclusion": "All approved candidates end March 26, beyond the 120-minute window for every development query; development source 413/blank and 412/blank QC are rejected under frozen policy. Zero fills are explained by QC/time support, not station-key/UTC/asof failure. No policy relaxation, old artifact edit or rerun."
+}
