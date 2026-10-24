@@ -1,0 +1,15 @@
+{
+  "mode": "rq1_final",
+  "stage": "P6-RQ1-final",
+  "parent_run_id": "R0028",
+  "change": "Describe April-August RQ1 using the unchanged R0018 development reference; report August support separately",
+  "threads": 8,
+  "data_id": "D0003",
+  "connection_path": "processed/D0003/flight_connections.csv.gz",
+  "connections_path": "processed/D0003/flight_connections.csv.gz",
+  "data_manifest_path": "processed/D0003/data_manifest.json",
+  "flight_path": "processed/flights_clean.csv.gz",
+  "flights_path": "processed/flights_clean.csv.gz",
+  "prediction_final_run_id": "R0028",
+  "rq1_frozen_reference_path": "experiments/runs/R0018/rq1_standardized/frozen_reference.json"
+}

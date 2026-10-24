@@ -1,0 +1,8 @@
+{
+  "mode": "final",
+  "stage": "P6-final",
+  "parent_run_id": "R0027",
+  "change": "One formal frozen August assessment after completed P5 and Pro final review",
+  "freeze_manifest_path": "experiments/freezes/F0001/model_selection.json",
+  "freeze_manifest_sha256": "286c7de3cc56da3c6c61e16670bde538a672de7bca7f4b3136ce68501c2648f4"
+}

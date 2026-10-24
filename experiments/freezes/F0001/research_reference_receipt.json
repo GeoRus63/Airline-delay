@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "sealed_at_utc": "2026-10-24T03:08:05.836757+00:00",
+  "scope": "Supplementary research references; executable RQ2 freeze is model_selection.json and is not modified by this bundle",
+  "final_source_commit": "33f98c7054f801a6767c323b5f483cc99ec65ce2",
+  "model_freeze": {
+    "path": "experiments/freezes/F0001/model_selection.json",
+    "bytes": 37316,
+    "sha256": "286c7de3cc56da3c6c61e16670bde538a672de7bca7f4b3136ce68501c2648f4"
+  },
+  "environment": {
+    "path": "experiments/freezes/F0001/environment.json",
+    "bytes": 8101,
+    "sha256": "eff6e213595e3268696d726ffed966dff6c55acf496307c911b7a0765f3d9292"
+  },
+  "selection_decision": {
+    "path": "experiments/runs/R0027/selection/model_selection_decision.json",
+    "bytes": 26636,
+    "sha256": "cd2e7d80390374e87e9e55c38802ead27990fe6e4c12e6f00cddea6d869cb913"
+  },
+  "selected_development_manifest": {
+    "path": "experiments/runs/R0025/manifest.json",
+    "bytes": 38294,
+    "sha256": "8e798325eb24b819fc666e87e1eeb4a1dd030c575fd8597655027fb9c63bf7e7"
+  },
+  "rq1_reference": {
+    "path": "experiments/runs/R0018/rq1_standardized/frozen_reference.json",
+    "bytes": 28586,
+    "sha256": "559ddb58275e5def26bd62cda09536c5b16700f9771c366fc85a6eafb1690547"
+  },
+  "rq1_reference_details": {
+    "airport_ids": [
+      13930,
+      11292,
+      11298,
+      14771,
+      10397,
+      14107,
+      12889,
+      12892,
+      11057,
+      13204,
+      11278,
+      10693,
+      14747,
+      14679,
+      10721,
+      12953,
+      12266,
+      10821,
+      10423,
+      13232,
+      14100,
+      11259,
+      13303,
+      11433,
+      11697
+    ],
+    "master_cells": [
+      0,
+      1,
+      4,
+      5,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14,
+      16,
+      17,
+      18,
+      21,
+      22,
+      23
+    ],
+    "references": {
+      "gt0": {
+        "cells": [
+          0,
+          1,
+          4,
+          5,
+          8,
+          9,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18,
+          21,
+          22,
+          23
+        ],
+        "weights": [
+          0.03297921349098879,
+          0.11010009353231053,
+          0.05826644144458559,
+          0.18702274091549984,
+          0.04707606829254673,
+          0.1512487261457708,
+          0.024860050535367776,
+          0.04036128599946952,
+          0.12743847109572404,
+          0.028880543883405694,
+          0.022545474850976504,
+          0.07472812809738529,
+          0.027881004564935155,
+          0.02952270601538397,
+          0.013504948836430136,
+          0.023584102299219634
+        ],
+        "development_counts": [
+          11812,
+          39434,
+          20869,
+          66985,
+          16861,
+          54172,
+          8904,
+          14456,
+          45644,
+          10344,
+          8075,
+          26765,
+          9986,
+          10574,
+          4837,
+          8447
+        ]
+      },
+      "ge5": {
+        "cells": [
+          4,
+          5,
+          8,
+          9,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18,
+          21,
+          22,
+          23
+        ],
+        "weights": [
+          0.06799513878254523,
+          0.2182497662249649,
+          0.05493631870298026,
+          0.17650259514725383,
+          0.029010911673764087,
+          0.04710037501751276,
+          0.1487167624031096,
+          0.03370270331911677,
+          0.02630987328904369,
+          0.08720541901935039,
+          0.03253627178506381,
+          0.03445208670691616,
+          0.015759858464285365,
+          0.02752191946409313
+        ],
+        "development_counts": [
+          20869,
+          66985,
+          16861,
+          54172,
+          8904,
+          14456,
+          45644,
+          10344,
+          8075,
+          26765,
+          9986,
+          10574,
+          4837,
+          8447
+        ]
+      },
+      "ge15": {
+        "cells": [
+          8,
+          9,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18,
+          21,
+          22,
+          23
+        ],
+        "weights": [
+          0.07696802318946432,
+          0.24728733480930318,
+          0.04064547052244768,
+          0.06598954648163786,
+          0.208358249834524,
+          0.04721886198160363,
+          0.03686120557825303,
+          0.12217834889188141,
+          0.04558464382717458,
+          0.0482687786729966,
+          0.022080204505512062,
+          0.03855933170520165
+        ],
+        "development_counts": [
+          16861,
+          54172,
+          8904,
+          14456,
+          45644,
+          10344,
+          8075,
+          26765,
+          9986,
+          10574,
+          4837,
+          8447
+        ]
+      }
+    }
+  },
+  "rq1_protocol": {
+    "path": "configs/rq1_protocol.json",
+    "bytes": 1403,
+    "sha256": "c77f70ace7d4dcbc1007ad1a3402c930785b570f44f05e0aee36b64b6413859a"
+  },
+  "execution_configs": [
+    {
+      "path": "configs/p6_final.json",
+      "bytes": 344,
+      "sha256": "e9ea8e9a80be0e8121b7c34f08b32dfd7f37337055e90b215891ba75032e47c2"
+    },
+    {
+      "path": "configs/p6_rq1_final.json",
+      "bytes": 689,
+      "sha256": "fe2fe9a566f694e969aab0a883226ab34f1cacc1788222692fbdf61597d014db"
+    },
+    {
+      "path": "configs/p7_reproduce_final.json",
+      "bytes": 412,
+      "sha256": "9647ac3dd13d726ad856e10a6a15abbfc3c3351b8553351772a4bb79fa526946"
+    }
+  ],
+  "pro_decisions": {
+    "path": "research/reviews/2026-10-24_final_selection_decisions.md",
+    "bytes": 2216,
+    "sha256": "d66619db1a0c5c6d582d30a5c854b1d21cc034ee24c90a65bcd7262d94226de3"
+  },
+  "planned_runs": {
+    "formal": "R0028",
+    "final_rq1": "R0029",
+    "full_reproduction": "R0030"
+  },
+  "formal_ledger_exists_at_seal": false,
+  "final_protocol": {
+    "timezone": "UTC",
+    "train_start": "2026-04-01T00:00:00+00:00",
+    "train_end_exclusive": "2026-08-01T00:00:00+00:00",
+    "train_label_end_exclusive": "2026-08-01T00:00:00+00:00",
+    "test_start": "2026-08-01T00:00:00+00:00",
+    "test_end_exclusive": "2026-09-01T00:00:00+00:00",
+    "target": "downstream_nonnegative_departure_delay_minutes",
+    "eligibility": "finite target_delay >= 0; prediction_time < label_time",
+    "prediction_postprocess": "clip_zero",
+    "severity_threshold_minutes": 60,
+    "delayed_threshold_minutes": 15,
+    "bootstrap": {
+      "block_days": 7,
+      "repeats": 1000,
+      "seed": 42
+    }
+  },
+  "execution_delta": {
+    "explicitly_requested": true,
+    "threads": {
+      "development": 8,
+      "final": 24
+    },
+    "reason": "Only execution worker budgets change; RF prediction uses fixed sequential tree reduction; learning parameters remain unchanged",
+    "learning_parameters_unchanged": true,
+    "development_config_sha256": "ac051a561340887b89c76e8b1e393de93340d16d9dabb9023daa627b4b259d84",
+    "prediction_threads": {
+      "development": 8,
+      "final": 1
+    }
+  }
+}

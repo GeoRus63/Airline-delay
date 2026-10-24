@@ -1,0 +1,8 @@
+{
+  "mode": "reproduce_final",
+  "stage": "P7-full-reproduction",
+  "parent_run_id": "R0029",
+  "change": "Rebuild features, refit all four frozen predictors and compare with the original formal R0028 without changing its ledger",
+  "freeze_manifest_path": "experiments/freezes/F0001/model_selection.json",
+  "freeze_manifest_sha256": "286c7de3cc56da3c6c61e16670bde538a672de7bca7f4b3136ce68501c2648f4"
+}
