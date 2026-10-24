@@ -1,0 +1,25 @@
+{
+  "development": false,
+  "frozen_reference_reused": true,
+  "period": [
+    "2026-08-01 00:00:00+00:00",
+    "2026-09-01 00:00:00+00:00"
+  ],
+  "selected_airports": 25,
+  "supported_reference": true,
+  "bootstrap": {
+    "unit": "common UTC prediction-date moving blocks",
+    "block_days": 7,
+    "replicates": 1000,
+    "seed": 42,
+    "interval": "95% percentile",
+    "min_valid_replicates": 950
+  },
+  "calendar_days": 31,
+  "sample_rule": "accepted, nonovernight, upstream positive; threshold-specific subsets",
+  "uncertainty": "Common calendar moving blocks; fixed airports/cells/weights, no reselection per replicate; percentile intervals are not multiplicity adjusted.",
+  "units": {
+    "standardized_mean": "minutes per connection",
+    "s_plus_s_minus_s_net": "sample cumulative minutes"
+  }
+}

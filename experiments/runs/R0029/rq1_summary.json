@@ -1,0 +1,25 @@
+{
+  "development_only": false,
+  "connection_path": "processed/D0003/flight_connections.csv.gz",
+  "sample_rule": "accepted, upstream delay >=15 min, non-overnight; ground >=0 allowed",
+  "counts": {
+    "input_accepted_connections": 2821852,
+    "outside_prediction_utc_scope": 0,
+    "scoped_accepted_connections": 2821852,
+    "invalid_delay": 0,
+    "invalid_actual_ground": 0,
+    "upstream_below_15": 2144353,
+    "scheduled_overnight": 195486,
+    "main_connections": 482013,
+    "main_ground_zero_n": 0
+  },
+  "airports": 350,
+  "mean_delta": -7.253872820857529,
+  "s_plus": 5327257.0,
+  "s_minus": 8823718.0,
+  "s_net": -3496461.0,
+  "delta_identity_checked": true,
+  "standardized": false,
+  "uncertainty_intervals": false,
+  "interpretation": "Descriptive raw differences; airport composition is unadjusted and results are not causal."
+}

@@ -1,0 +1,192 @@
+{
+  "development": false,
+  "raw": {
+    "development_only": false,
+    "connection_path": "processed/D0003/flight_connections.csv.gz",
+    "sample_rule": "accepted, upstream delay >=15 min, non-overnight; ground >=0 allowed",
+    "counts": {
+      "input_accepted_connections": 2821852,
+      "outside_prediction_utc_scope": 0,
+      "scoped_accepted_connections": 2821852,
+      "invalid_delay": 0,
+      "invalid_actual_ground": 0,
+      "upstream_below_15": 2144353,
+      "scheduled_overnight": 195486,
+      "main_connections": 482013,
+      "main_ground_zero_n": 0
+    },
+    "airports": 350,
+    "mean_delta": -7.253872820857529,
+    "s_plus": 5327257.0,
+    "s_minus": 8823718.0,
+    "s_net": -3496461.0,
+    "delta_identity_checked": true,
+    "standardized": false,
+    "uncertainty_intervals": false,
+    "interpretation": "Descriptive raw differences; airport composition is unadjusted and results are not causal."
+  },
+  "standardized": {
+    "development": false,
+    "frozen_reference_reused": true,
+    "period": [
+      "2026-04-01 00:00:00+00:00",
+      "2026-09-01 00:00:00+00:00"
+    ],
+    "selected_airports": 25,
+    "supported_reference": true,
+    "bootstrap": {
+      "unit": "common UTC prediction-date moving blocks",
+      "block_days": 7,
+      "replicates": 1000,
+      "seed": 42,
+      "interval": "95% percentile",
+      "min_valid_replicates": 950
+    },
+    "calendar_days": 153,
+    "sample_rule": "accepted, nonovernight, upstream positive; threshold-specific subsets",
+    "uncertainty": "Common calendar moving blocks; fixed airports/cells/weights, no reselection per replicate; percentile intervals are not multiplicity adjusted.",
+    "units": {
+      "standardized_mean": "minutes per connection",
+      "s_plus_s_minus_s_net": "sample cumulative minutes"
+    }
+  },
+  "monthly": [
+    {
+      "development": false,
+      "frozen_reference_reused": true,
+      "period": [
+        "2026-04-01 00:00:00+00:00",
+        "2026-05-01 00:00:00+00:00"
+      ],
+      "selected_airports": 25,
+      "supported_reference": true,
+      "bootstrap": {
+        "unit": "common UTC prediction-date moving blocks",
+        "block_days": 7,
+        "replicates": 1000,
+        "seed": 42,
+        "interval": "95% percentile",
+        "min_valid_replicates": 950
+      },
+      "calendar_days": 30,
+      "sample_rule": "accepted, nonovernight, upstream positive; threshold-specific subsets",
+      "uncertainty": "Common calendar moving blocks; fixed airports/cells/weights, no reselection per replicate; percentile intervals are not multiplicity adjusted.",
+      "units": {
+        "standardized_mean": "minutes per connection",
+        "s_plus_s_minus_s_net": "sample cumulative minutes"
+      }
+    },
+    {
+      "development": false,
+      "frozen_reference_reused": true,
+      "period": [
+        "2026-05-01 00:00:00+00:00",
+        "2026-06-01 00:00:00+00:00"
+      ],
+      "selected_airports": 25,
+      "supported_reference": true,
+      "bootstrap": {
+        "unit": "common UTC prediction-date moving blocks",
+        "block_days": 7,
+        "replicates": 1000,
+        "seed": 42,
+        "interval": "95% percentile",
+        "min_valid_replicates": 950
+      },
+      "calendar_days": 31,
+      "sample_rule": "accepted, nonovernight, upstream positive; threshold-specific subsets",
+      "uncertainty": "Common calendar moving blocks; fixed airports/cells/weights, no reselection per replicate; percentile intervals are not multiplicity adjusted.",
+      "units": {
+        "standardized_mean": "minutes per connection",
+        "s_plus_s_minus_s_net": "sample cumulative minutes"
+      }
+    },
+    {
+      "development": false,
+      "frozen_reference_reused": true,
+      "period": [
+        "2026-06-01 00:00:00+00:00",
+        "2026-07-01 00:00:00+00:00"
+      ],
+      "selected_airports": 25,
+      "supported_reference": true,
+      "bootstrap": {
+        "unit": "common UTC prediction-date moving blocks",
+        "block_days": 7,
+        "replicates": 1000,
+        "seed": 42,
+        "interval": "95% percentile",
+        "min_valid_replicates": 950
+      },
+      "calendar_days": 30,
+      "sample_rule": "accepted, nonovernight, upstream positive; threshold-specific subsets",
+      "uncertainty": "Common calendar moving blocks; fixed airports/cells/weights, no reselection per replicate; percentile intervals are not multiplicity adjusted.",
+      "units": {
+        "standardized_mean": "minutes per connection",
+        "s_plus_s_minus_s_net": "sample cumulative minutes"
+      }
+    },
+    {
+      "development": false,
+      "frozen_reference_reused": true,
+      "period": [
+        "2026-07-01 00:00:00+00:00",
+        "2026-08-01 00:00:00+00:00"
+      ],
+      "selected_airports": 25,
+      "supported_reference": true,
+      "bootstrap": {
+        "unit": "common UTC prediction-date moving blocks",
+        "block_days": 7,
+        "replicates": 1000,
+        "seed": 42,
+        "interval": "95% percentile",
+        "min_valid_replicates": 950
+      },
+      "calendar_days": 31,
+      "sample_rule": "accepted, nonovernight, upstream positive; threshold-specific subsets",
+      "uncertainty": "Common calendar moving blocks; fixed airports/cells/weights, no reselection per replicate; percentile intervals are not multiplicity adjusted.",
+      "units": {
+        "standardized_mean": "minutes per connection",
+        "s_plus_s_minus_s_net": "sample cumulative minutes"
+      }
+    },
+    {
+      "development": false,
+      "frozen_reference_reused": true,
+      "period": [
+        "2026-08-01 00:00:00+00:00",
+        "2026-09-01 00:00:00+00:00"
+      ],
+      "selected_airports": 25,
+      "supported_reference": true,
+      "bootstrap": {
+        "unit": "common UTC prediction-date moving blocks",
+        "block_days": 7,
+        "replicates": 1000,
+        "seed": 42,
+        "interval": "95% percentile",
+        "min_valid_replicates": 950
+      },
+      "calendar_days": 31,
+      "sample_rule": "accepted, nonovernight, upstream positive; threshold-specific subsets",
+      "uncertainty": "Common calendar moving blocks; fixed airports/cells/weights, no reselection per replicate; percentile intervals are not multiplicity adjusted.",
+      "units": {
+        "standardized_mean": "minutes per connection",
+        "s_plus_s_minus_s_net": "sample cumulative minutes"
+      }
+    }
+  ],
+  "frozen_reference_sha256": "559ddb58275e5def26bd62cda09536c5b16700f9771c366fc85a6eafb1690547",
+  "network": {
+    "nodes": 355,
+    "edges": 6629,
+    "bts_flights": 3054489,
+    "valid_connections": 2821852,
+    "display_top_routes": 100,
+    "edge_window": "scheduled departure UTC",
+    "node_window": "upstream actual arrival UTC",
+    "unsupported_color": "gray",
+    "full_coordinate_tables": "rq1_standardized/network_nodes.csv; network_edges.csv"
+  }
+}

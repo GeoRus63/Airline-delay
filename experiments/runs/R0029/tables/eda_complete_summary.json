@@ -1,0 +1,39 @@
+{
+  "mode": "rq1_final",
+  "scope": "2026-08 local FlightDate; explicit post-freeze final mode",
+  "flight_source": "processed/flights_clean.csv.gz",
+  "connection_source": "processed/D0003/flight_connections.csv.gz",
+  "single_flight_summary": {
+    "input_rows": 3057590,
+    "scoped_flight_rows": 608389,
+    "normal_completed_rows": 594207,
+    "cancelled_rows": 11313,
+    "diverted_rows": 2869,
+    "unknown_operation_status_rows": 0,
+    "distribution_population": "normal completed flights only; cancellations and diversions summarized separately"
+  },
+  "single_flight_target_fields": [
+    "DepDelay",
+    "ArrDelay",
+    "DepDelayMinutes",
+    "ArrDelayMinutes"
+  ],
+  "aircraft_inventory_years": [
+    2024,
+    2025
+  ],
+  "aircraft_unknown_policy": "unknown tail/model retained as an explicit category",
+  "airport_activity_note": "Flight movements and eligible connection counts are separate columns; connections use D0003 QA cohort month.",
+  "rq2_weather_coverage": "Not requested; no feature archive was read.",
+  "tables": [
+    "single_flight_delay_stats.csv",
+    "single_flight_operations.csv",
+    "airline_aircraft_coverage.csv",
+    "airline_aircraft_models.csv",
+    "airport_activity.csv"
+  ],
+  "figures": [
+    "monthly_delay_quantiles.png",
+    "delay_sign_counts.png"
+  ]
+}
