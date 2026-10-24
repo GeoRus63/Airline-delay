@@ -22,3 +22,4 @@ R0020,R0019,P5-feature-selection,completed,Apply registered pooled-MAE rule to a
 R0021,R0017,P5-models,completed,Replace selected OLS with registered decision tree depth 8 leaf 50 on identical cached features,Retain outputs; review before next stage,experiments/runs/R0021
 R0022,R0021,P5-models,completed,Change decision-tree minimum leaf from 50 to 200 at fixed depth 8,Retain outputs; review before next stage,experiments/runs/R0022
 R0023,R0022,P5-models,completed,Change decision-tree depth from 8 to 16 at fixed minimum leaf 200,Retain outputs; review before next stage,experiments/runs/R0023
+R0024,R0023,P5-models,completed,Change decision-tree minimum leaf from 200 to 50 at fixed depth 16,Retain outputs; review before next stage,experiments/runs/R0024

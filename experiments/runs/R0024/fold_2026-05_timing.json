@@ -1,0 +1,12 @@
+{
+  "fold": "2026-05",
+  "pid": 9668,
+  "threads": 8,
+  "train_rows": 553140,
+  "validation_rows": 574571,
+  "models_seconds": {
+    "dt_d16_l50": 94.54393460000574
+  },
+  "status": "completed",
+  "elapsed_seconds": 94.85056010000699
+}
