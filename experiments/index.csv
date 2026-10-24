@@ -19,3 +19,4 @@ R0017,R0015,P4b,completed,Add latest-state TAF prevailing TEMPO and probability 
 R0018,R0017,P5-RQ1-EDA,completed,Complete registered common-support RQ1 with monthly fixed-reference network and single-flight EDA; no model fitting,Retain outputs; review before next stage,experiments/runs/R0018
 R0019,R0017,P4-NOAA-sensitivity,completed,Fill only approved missing IEM G4a values from GHCNh in a separate retrospective sensitivity branch,Retain outputs; review before next stage,experiments/runs/R0019
 R0020,R0019,P5-feature-selection,completed,Apply registered pooled-MAE rule to all six completed OLS mainline feature sets; exclude variant and NOAA from primary selection,Retain outputs; review before next stage,experiments/runs/R0020
+R0021,R0017,P5-models,completed,Replace selected OLS with registered decision tree depth 8 leaf 50 on identical cached features,Retain outputs; review before next stage,experiments/runs/R0021
