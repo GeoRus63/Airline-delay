@@ -1,0 +1,9 @@
+{"excluded_immature_training_labels": 1530, "fold": "2026-08", "max_train_label_time": "2026-07-31T23:59:00+00:00", "max_train_prediction_time": "2026-07-31T23:39:00+00:00", "max_validation_prediction_time": "2026-08-31T23:59:00+00:00", "min_validation_prediction_time": "2026-08-01T00:00:00+00:00", "train_end_exclusive": "2026-08-01T00:00:00+00:00", "train_features_sha256": "432e0f82f1131bca949b1901596ff01426b18229d14f8043f9b5d36809cade5d", "train_id_sha256": "b6ec90b571c6b8a154401d0f4c6e39fedb870f1c518aa3585c9ffdecfef13edb", "train_rows": 2260245, "train_start": "2026-04-01T00:00:00+00:00", "train_target_sha256": "7c20408148724fe79dd901d13be954f41083e7f1d682fb1858a8bfbab6c4db17", "validation_end_exclusive": "2026-09-01T00:00:00+00:00", "validation_features_sha256": "096ee9640492cc8bf523e346baf3a199635d8e82d100c5c81419cf18fdc0a8ba", "validation_id_sha256": "b7c668fd69297202a405e05f4afde2970365a0480e7834f0f9be9a9bf2b72437", "validation_rows": 560077, "validation_start": "2026-08-01T00:00:00+00:00", "validation_target_sha256": "48e7ced29a3dcea1a9da90848e1ebd03e4089f0fb4cdd695da5f8a7f85c4aa13"}
+pid=49224, threads=24
+training_mean saved; elapsed=4.772s
+training_median saved; elapsed=4.366s
+carry_forward saved; elapsed=4.645s
+D:\airline-delay\.venv\Lib\site-packages\sklearn\preprocessing\_encoders.py:261: UserWarning: Found unknown categories in columns [1] during transform. These unknown categories will be encoded as the infrequent category.
+  warnings.warn(msg, UserWarning)
+rf_d16_l50 saved; elapsed=3518.882s
+status=completed; elapsed=3532.672s

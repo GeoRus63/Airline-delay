@@ -1,0 +1,15 @@
+{
+  "verified": true,
+  "evaluation_rows": 560077,
+  "models": [
+    "training_mean",
+    "training_median",
+    "carry_forward",
+    "rf_d16_l50"
+  ],
+  "metrics_recomputed": true,
+  "artifact_hashes_checked": 37,
+  "access_ledger_checked": true,
+  "refitted": false,
+  "raw_test_data_read": false
+}

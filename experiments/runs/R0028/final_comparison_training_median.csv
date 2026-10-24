@@ -1,0 +1,3 @@
+scope,metric,n,calendar_dates,reference_error,candidate_error,difference_candidate_minus_reference,ci95_low,ci95_high,valid_bootstrap_repeats,unit,reference_model,candidate_model,sample_scope
+pooled,mae,560077,31,17.999769674526895,13.655091473780468,-4.3446782007464275,-6.64680397430951,-1.9850183749758563,1000,minutes,training_median,rf_d16_l50,final_test
+pooled,rmse,560077,31,56.17811629861794,42.91711903137761,-13.260997267240327,-16.16518524702894,-10.050402339182982,1000,minutes,training_median,rf_d16_l50,final_test

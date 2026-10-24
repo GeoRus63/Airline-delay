@@ -1,0 +1,864 @@
+{
+  "schema_version": 1,
+  "typed_features": {
+    "feature_group": "G4B",
+    "features": [
+      "airport_id",
+      "route",
+      "downstream_airline",
+      "aircraft_family",
+      "downstream_distance",
+      "downstream_crs_elapsed_time",
+      "downstream_day_of_week",
+      "downstream_sched_hour",
+      "scheduled_turnaround_minutes",
+      "upstream_arr_delay_minutes",
+      "tail_completed_24h_n",
+      "tail_completed_24h_arr_delay_mean",
+      "history_window_incomplete",
+      "airport_departures_60m_n",
+      "airport_departures_60m_delay_mean",
+      "airport_planned_departures_next60m_n",
+      "airport_planned_arrivals_next60m_n",
+      "airport_history_window_incomplete",
+      "metar_wind_knots",
+      "metar_gust_knots",
+      "metar_visibility_miles",
+      "metar_ceiling_ft",
+      "metar_precip_amount_in",
+      "metar_precip_flag",
+      "metar_rain_flag",
+      "metar_snow_flag",
+      "metar_thunder_flag",
+      "metar_age_minutes",
+      "metar_missing",
+      "metar_sky_reported",
+      "metar_ceiling_reported",
+      "metar_weather_codes_reported",
+      "taf_bulletin_age_minutes",
+      "taf_lead_minutes",
+      "taf_missing",
+      "taf_prevailing_wind_knots",
+      "taf_prevailing_gust_knots",
+      "taf_prevailing_visibility_miles",
+      "taf_prevailing_ceiling_ft",
+      "taf_prevailing_precip_flag",
+      "taf_prevailing_rain_flag",
+      "taf_prevailing_snow_flag",
+      "taf_prevailing_thunder_flag",
+      "taf_prevailing_segment_count",
+      "taf_prevailing_missing",
+      "taf_tempo_wind_knots",
+      "taf_tempo_gust_knots",
+      "taf_tempo_visibility_miles",
+      "taf_tempo_ceiling_ft",
+      "taf_tempo_precip_flag",
+      "taf_tempo_rain_flag",
+      "taf_tempo_snow_flag",
+      "taf_tempo_thunder_flag",
+      "taf_tempo_segment_count",
+      "taf_tempo_missing",
+      "taf_probability_wind_knots",
+      "taf_probability_gust_knots",
+      "taf_probability_visibility_miles",
+      "taf_probability_ceiling_ft",
+      "taf_probability_precip_flag",
+      "taf_probability_rain_flag",
+      "taf_probability_snow_flag",
+      "taf_probability_thunder_flag",
+      "taf_probability_segment_count",
+      "taf_probability_missing"
+    ],
+    "categorical_features": [
+      "airport_id",
+      "route",
+      "downstream_airline",
+      "aircraft_family"
+    ],
+    "numeric_features": [
+      "downstream_distance",
+      "downstream_crs_elapsed_time",
+      "downstream_day_of_week",
+      "downstream_sched_hour",
+      "scheduled_turnaround_minutes",
+      "upstream_arr_delay_minutes",
+      "tail_completed_24h_n",
+      "tail_completed_24h_arr_delay_mean",
+      "history_window_incomplete",
+      "airport_departures_60m_n",
+      "airport_departures_60m_delay_mean",
+      "airport_planned_departures_next60m_n",
+      "airport_planned_arrivals_next60m_n",
+      "airport_history_window_incomplete",
+      "metar_wind_knots",
+      "metar_gust_knots",
+      "metar_visibility_miles",
+      "metar_ceiling_ft",
+      "metar_precip_amount_in",
+      "metar_precip_flag",
+      "metar_rain_flag",
+      "metar_snow_flag",
+      "metar_thunder_flag",
+      "metar_age_minutes",
+      "metar_missing",
+      "metar_sky_reported",
+      "metar_ceiling_reported",
+      "metar_weather_codes_reported",
+      "taf_bulletin_age_minutes",
+      "taf_lead_minutes",
+      "taf_missing",
+      "taf_prevailing_wind_knots",
+      "taf_prevailing_gust_knots",
+      "taf_prevailing_visibility_miles",
+      "taf_prevailing_ceiling_ft",
+      "taf_prevailing_precip_flag",
+      "taf_prevailing_rain_flag",
+      "taf_prevailing_snow_flag",
+      "taf_prevailing_thunder_flag",
+      "taf_prevailing_segment_count",
+      "taf_prevailing_missing",
+      "taf_tempo_wind_knots",
+      "taf_tempo_gust_knots",
+      "taf_tempo_visibility_miles",
+      "taf_tempo_ceiling_ft",
+      "taf_tempo_precip_flag",
+      "taf_tempo_rain_flag",
+      "taf_tempo_snow_flag",
+      "taf_tempo_thunder_flag",
+      "taf_tempo_segment_count",
+      "taf_tempo_missing",
+      "taf_probability_wind_knots",
+      "taf_probability_gust_knots",
+      "taf_probability_visibility_miles",
+      "taf_probability_ceiling_ft",
+      "taf_probability_precip_flag",
+      "taf_probability_rain_flag",
+      "taf_probability_snow_flag",
+      "taf_probability_thunder_flag",
+      "taf_probability_segment_count",
+      "taf_probability_missing"
+    ]
+  },
+  "train": {
+    "rows": 2260245,
+    "columns": [
+      "connection_id",
+      "prediction_time",
+      "label_time",
+      "target_delay",
+      "airport_id",
+      "route",
+      "downstream_airline",
+      "aircraft_family",
+      "downstream_distance",
+      "downstream_crs_elapsed_time",
+      "downstream_day_of_week",
+      "downstream_sched_hour",
+      "scheduled_turnaround_minutes",
+      "upstream_arr_delay_minutes",
+      "tail_completed_24h_n",
+      "tail_completed_24h_arr_delay_mean",
+      "history_window_incomplete",
+      "airport_departures_60m_n",
+      "airport_departures_60m_delay_mean",
+      "airport_planned_departures_next60m_n",
+      "airport_planned_arrivals_next60m_n",
+      "airport_history_window_incomplete",
+      "metar_wind_knots",
+      "metar_gust_knots",
+      "metar_visibility_miles",
+      "metar_ceiling_ft",
+      "metar_precip_amount_in",
+      "metar_precip_flag",
+      "metar_rain_flag",
+      "metar_snow_flag",
+      "metar_thunder_flag",
+      "metar_age_minutes",
+      "metar_missing",
+      "metar_sky_reported",
+      "metar_ceiling_reported",
+      "metar_weather_codes_reported",
+      "taf_bulletin_age_minutes",
+      "taf_lead_minutes",
+      "taf_missing",
+      "taf_prevailing_wind_knots",
+      "taf_prevailing_gust_knots",
+      "taf_prevailing_visibility_miles",
+      "taf_prevailing_ceiling_ft",
+      "taf_prevailing_precip_flag",
+      "taf_prevailing_rain_flag",
+      "taf_prevailing_snow_flag",
+      "taf_prevailing_thunder_flag",
+      "taf_prevailing_segment_count",
+      "taf_prevailing_missing",
+      "taf_tempo_wind_knots",
+      "taf_tempo_gust_knots",
+      "taf_tempo_visibility_miles",
+      "taf_tempo_ceiling_ft",
+      "taf_tempo_precip_flag",
+      "taf_tempo_rain_flag",
+      "taf_tempo_snow_flag",
+      "taf_tempo_thunder_flag",
+      "taf_tempo_segment_count",
+      "taf_tempo_missing",
+      "taf_probability_wind_knots",
+      "taf_probability_gust_knots",
+      "taf_probability_visibility_miles",
+      "taf_probability_ceiling_ft",
+      "taf_probability_precip_flag",
+      "taf_probability_rain_flag",
+      "taf_probability_snow_flag",
+      "taf_probability_thunder_flag",
+      "taf_probability_segment_count",
+      "taf_probability_missing",
+      "overnight_scheduled"
+    ],
+    "schema": [
+      {
+        "name": "connection_id",
+        "dtype": "str"
+      },
+      {
+        "name": "prediction_time",
+        "dtype": "datetime64[ns, UTC]"
+      },
+      {
+        "name": "label_time",
+        "dtype": "datetime64[us, UTC]"
+      },
+      {
+        "name": "target_delay",
+        "dtype": "float64"
+      },
+      {
+        "name": "airport_id",
+        "dtype": "object"
+      },
+      {
+        "name": "route",
+        "dtype": "object"
+      },
+      {
+        "name": "downstream_airline",
+        "dtype": "object"
+      },
+      {
+        "name": "aircraft_family",
+        "dtype": "str"
+      },
+      {
+        "name": "downstream_distance",
+        "dtype": "float64"
+      },
+      {
+        "name": "downstream_crs_elapsed_time",
+        "dtype": "float64"
+      },
+      {
+        "name": "downstream_day_of_week",
+        "dtype": "float64"
+      },
+      {
+        "name": "downstream_sched_hour",
+        "dtype": "int64"
+      },
+      {
+        "name": "scheduled_turnaround_minutes",
+        "dtype": "float64"
+      },
+      {
+        "name": "upstream_arr_delay_minutes",
+        "dtype": "float64"
+      },
+      {
+        "name": "tail_completed_24h_n",
+        "dtype": "float64"
+      },
+      {
+        "name": "tail_completed_24h_arr_delay_mean",
+        "dtype": "float64"
+      },
+      {
+        "name": "history_window_incomplete",
+        "dtype": "int8"
+      },
+      {
+        "name": "airport_departures_60m_n",
+        "dtype": "float64"
+      },
+      {
+        "name": "airport_departures_60m_delay_mean",
+        "dtype": "float64"
+      },
+      {
+        "name": "airport_planned_departures_next60m_n",
+        "dtype": "float64"
+      },
+      {
+        "name": "airport_planned_arrivals_next60m_n",
+        "dtype": "float64"
+      },
+      {
+        "name": "airport_history_window_incomplete",
+        "dtype": "int8"
+      },
+      {
+        "name": "metar_wind_knots",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_gust_knots",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_visibility_miles",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_ceiling_ft",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_precip_amount_in",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_precip_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_rain_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_snow_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_thunder_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_age_minutes",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_missing",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_sky_reported",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_ceiling_reported",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_weather_codes_reported",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_bulletin_age_minutes",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_lead_minutes",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_missing",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_prevailing_wind_knots",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_prevailing_gust_knots",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_prevailing_visibility_miles",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_prevailing_ceiling_ft",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_prevailing_precip_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_prevailing_rain_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_prevailing_snow_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_prevailing_thunder_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_prevailing_segment_count",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_prevailing_missing",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_tempo_wind_knots",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_tempo_gust_knots",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_tempo_visibility_miles",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_tempo_ceiling_ft",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_tempo_precip_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_tempo_rain_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_tempo_snow_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_tempo_thunder_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_tempo_segment_count",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_tempo_missing",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_probability_wind_knots",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_probability_gust_knots",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_probability_visibility_miles",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_probability_ceiling_ft",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_probability_precip_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_probability_rain_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_probability_snow_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_probability_thunder_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_probability_segment_count",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_probability_missing",
+        "dtype": "float64"
+      },
+      {
+        "name": "overnight_scheduled",
+        "dtype": "bool"
+      }
+    ],
+    "schema_sha256": "1d597011068048bfed78e010d9bee743b74805f98514ce897abe47c8f472682a",
+    "values_sha256": "427d0a876f68c2cee768ea18df441911852de3940dfa026d7ff6efd5e004d35b",
+    "ids_sha256": "b6ec90b571c6b8a154401d0f4c6e39fedb870f1c518aa3585c9ffdecfef13edb",
+    "targets_sha256": "7c20408148724fe79dd901d13be954f41083e7f1d682fb1858a8bfbab6c4db17"
+  },
+  "test": {
+    "rows": 560077,
+    "columns": [
+      "connection_id",
+      "prediction_time",
+      "label_time",
+      "target_delay",
+      "airport_id",
+      "route",
+      "downstream_airline",
+      "aircraft_family",
+      "downstream_distance",
+      "downstream_crs_elapsed_time",
+      "downstream_day_of_week",
+      "downstream_sched_hour",
+      "scheduled_turnaround_minutes",
+      "upstream_arr_delay_minutes",
+      "tail_completed_24h_n",
+      "tail_completed_24h_arr_delay_mean",
+      "history_window_incomplete",
+      "airport_departures_60m_n",
+      "airport_departures_60m_delay_mean",
+      "airport_planned_departures_next60m_n",
+      "airport_planned_arrivals_next60m_n",
+      "airport_history_window_incomplete",
+      "metar_wind_knots",
+      "metar_gust_knots",
+      "metar_visibility_miles",
+      "metar_ceiling_ft",
+      "metar_precip_amount_in",
+      "metar_precip_flag",
+      "metar_rain_flag",
+      "metar_snow_flag",
+      "metar_thunder_flag",
+      "metar_age_minutes",
+      "metar_missing",
+      "metar_sky_reported",
+      "metar_ceiling_reported",
+      "metar_weather_codes_reported",
+      "taf_bulletin_age_minutes",
+      "taf_lead_minutes",
+      "taf_missing",
+      "taf_prevailing_wind_knots",
+      "taf_prevailing_gust_knots",
+      "taf_prevailing_visibility_miles",
+      "taf_prevailing_ceiling_ft",
+      "taf_prevailing_precip_flag",
+      "taf_prevailing_rain_flag",
+      "taf_prevailing_snow_flag",
+      "taf_prevailing_thunder_flag",
+      "taf_prevailing_segment_count",
+      "taf_prevailing_missing",
+      "taf_tempo_wind_knots",
+      "taf_tempo_gust_knots",
+      "taf_tempo_visibility_miles",
+      "taf_tempo_ceiling_ft",
+      "taf_tempo_precip_flag",
+      "taf_tempo_rain_flag",
+      "taf_tempo_snow_flag",
+      "taf_tempo_thunder_flag",
+      "taf_tempo_segment_count",
+      "taf_tempo_missing",
+      "taf_probability_wind_knots",
+      "taf_probability_gust_knots",
+      "taf_probability_visibility_miles",
+      "taf_probability_ceiling_ft",
+      "taf_probability_precip_flag",
+      "taf_probability_rain_flag",
+      "taf_probability_snow_flag",
+      "taf_probability_thunder_flag",
+      "taf_probability_segment_count",
+      "taf_probability_missing",
+      "overnight_scheduled"
+    ],
+    "schema": [
+      {
+        "name": "connection_id",
+        "dtype": "str"
+      },
+      {
+        "name": "prediction_time",
+        "dtype": "datetime64[ns, UTC]"
+      },
+      {
+        "name": "label_time",
+        "dtype": "datetime64[us, UTC]"
+      },
+      {
+        "name": "target_delay",
+        "dtype": "float64"
+      },
+      {
+        "name": "airport_id",
+        "dtype": "object"
+      },
+      {
+        "name": "route",
+        "dtype": "object"
+      },
+      {
+        "name": "downstream_airline",
+        "dtype": "object"
+      },
+      {
+        "name": "aircraft_family",
+        "dtype": "str"
+      },
+      {
+        "name": "downstream_distance",
+        "dtype": "float64"
+      },
+      {
+        "name": "downstream_crs_elapsed_time",
+        "dtype": "float64"
+      },
+      {
+        "name": "downstream_day_of_week",
+        "dtype": "float64"
+      },
+      {
+        "name": "downstream_sched_hour",
+        "dtype": "int64"
+      },
+      {
+        "name": "scheduled_turnaround_minutes",
+        "dtype": "float64"
+      },
+      {
+        "name": "upstream_arr_delay_minutes",
+        "dtype": "float64"
+      },
+      {
+        "name": "tail_completed_24h_n",
+        "dtype": "float64"
+      },
+      {
+        "name": "tail_completed_24h_arr_delay_mean",
+        "dtype": "float64"
+      },
+      {
+        "name": "history_window_incomplete",
+        "dtype": "int8"
+      },
+      {
+        "name": "airport_departures_60m_n",
+        "dtype": "float64"
+      },
+      {
+        "name": "airport_departures_60m_delay_mean",
+        "dtype": "float64"
+      },
+      {
+        "name": "airport_planned_departures_next60m_n",
+        "dtype": "float64"
+      },
+      {
+        "name": "airport_planned_arrivals_next60m_n",
+        "dtype": "float64"
+      },
+      {
+        "name": "airport_history_window_incomplete",
+        "dtype": "int8"
+      },
+      {
+        "name": "metar_wind_knots",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_gust_knots",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_visibility_miles",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_ceiling_ft",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_precip_amount_in",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_precip_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_rain_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_snow_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_thunder_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_age_minutes",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_missing",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_sky_reported",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_ceiling_reported",
+        "dtype": "float64"
+      },
+      {
+        "name": "metar_weather_codes_reported",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_bulletin_age_minutes",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_lead_minutes",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_missing",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_prevailing_wind_knots",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_prevailing_gust_knots",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_prevailing_visibility_miles",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_prevailing_ceiling_ft",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_prevailing_precip_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_prevailing_rain_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_prevailing_snow_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_prevailing_thunder_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_prevailing_segment_count",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_prevailing_missing",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_tempo_wind_knots",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_tempo_gust_knots",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_tempo_visibility_miles",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_tempo_ceiling_ft",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_tempo_precip_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_tempo_rain_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_tempo_snow_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_tempo_thunder_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_tempo_segment_count",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_tempo_missing",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_probability_wind_knots",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_probability_gust_knots",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_probability_visibility_miles",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_probability_ceiling_ft",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_probability_precip_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_probability_rain_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_probability_snow_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_probability_thunder_flag",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_probability_segment_count",
+        "dtype": "float64"
+      },
+      {
+        "name": "taf_probability_missing",
+        "dtype": "float64"
+      },
+      {
+        "name": "overnight_scheduled",
+        "dtype": "bool"
+      }
+    ],
+    "schema_sha256": "1d597011068048bfed78e010d9bee743b74805f98514ce897abe47c8f472682a",
+    "values_sha256": "a6f6637e9552f77246733fbd057a48875221a94640e117a4d5d2076c91a27345",
+    "ids_sha256": "b7c668fd69297202a405e05f4afde2970365a0480e7834f0f9be9a9bf2b72437",
+    "targets_sha256": "48e7ced29a3dcea1a9da90848e1ebd03e4089f0fb4cdd695da5f8a7f85c4aa13"
+  }
+}

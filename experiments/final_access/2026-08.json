@@ -1,0 +1,12 @@
+{
+  "test_period": "2026-08",
+  "status": "completed",
+  "run_dir": "D:\\airline-delay\\experiments\\runs\\R0028",
+  "run_id": "R0028",
+  "freeze_manifest_sha256": "286c7de3cc56da3c6c61e16670bde538a672de7bca7f4b3136ce68501c2648f4",
+  "data_id": "D0003",
+  "frozen_at_utc": "2026-10-24T03:06:18.048702+00:00",
+  "access_started_at_utc": "2026-10-24T03:08:49.927133+00:00",
+  "ended_at_utc": "2026-10-24T04:15:09.349012+00:00",
+  "final_result_sha256": "f96499f27b315715d773f6370b10bfc62f3a27947d40a0397ea1fe263b557be3"
+}
