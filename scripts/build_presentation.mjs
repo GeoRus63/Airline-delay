@@ -128,5 +128,5 @@ await fs.writeFile(path.join(outputDir,'speaker_script_en.md'),script.join('\n')
 await fs.writeFile(path.join(outputDir,'captions_en.srt'),srt.join('\n'));
 await fs.copyFile(contentPath,path.join(outputDir,'content.json'));
 await fs.writeFile(path.join(outputDir,'source_images.json'),JSON.stringify(sourceImages,null,2));
-await fs.writeFile(path.join(outputDir,'timing.json'),JSON.stringify({duration:time,narration:'human-recording-required',captionedDemo:true,slides:content.slides.map((s,i)=>({slide:i+1,png:`slides/slide-${String(i+1).padStart(2,'0')}.png`,duration:durations[i]}))},null,2));
+await fs.writeFile(path.join(outputDir,'timing.json'),JSON.stringify({duration:time,narration:'not-recorded',captionedDemo:true,slides:content.slides.map((s,i)=>({slide:i+1,png:`slides/slide-${String(i+1).padStart(2,'0')}.png`,duration:durations[i]}))},null,2));
 console.log(JSON.stringify({pptx:finalPath,slides:content.slides.length,duration:time,receipt:path.join(stagingDir,'validation.json'),previews:path.join(outputDir,'slides'),narration:'No audio generated. Script and timed captions ready for human recording.'},null,2));
