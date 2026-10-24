@@ -9,6 +9,7 @@ experiments/runs/*/predictions/
 experiments/runs/*/data/
 experiments/runs/*/models/
 research/reviews/*_page.png
+research/reviews/*_screenshot.png
 references/taf_validity.csv
 tmp/
 .chart-data-*/

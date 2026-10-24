@@ -1,0 +1,119 @@
+{
+  "checked_at_utc": "2026-10-24T00:38:27.743712+00:00",
+  "scope": "Synthetic data only; actual production preprocessing, no final freeze or August access",
+  "versions": {
+    "sklearn": "1.8.0",
+    "numpy": "2.4.6",
+    "scipy": "1.18.1",
+    "joblib": "1.6.0"
+  },
+  "preprocessing": {
+    "feature_group": "G0",
+    "preprocessing": {
+      "drop": "first",
+      "min_frequency": 20
+    }
+  },
+  "input_matrix": {
+    "format": "csr",
+    "dtype": "float64",
+    "shape": [
+      5400,
+      27
+    ],
+    "nnz": 41221,
+    "training_rows": 5400,
+    "query_rows": 600
+  },
+  "observed_parallel_backends": [
+    {
+      "n_jobs": 1,
+      "backend": "SequentialBackend"
+    },
+    {
+      "n_jobs": 24,
+      "backend": "ThreadingBackend"
+    },
+    {
+      "n_jobs": 1,
+      "backend": "SequentialBackend"
+    },
+    {
+      "n_jobs": 24,
+      "backend": "ThreadingBackend"
+    },
+    {
+      "n_jobs": 1,
+      "backend": "SequentialBackend"
+    },
+    {
+      "n_jobs": 24,
+      "backend": "ThreadingBackend"
+    },
+    {
+      "n_jobs": 1,
+      "backend": "SequentialBackend"
+    },
+    {
+      "n_jobs": 24,
+      "backend": "ThreadingBackend"
+    }
+  ],
+  "comparisons": [
+    {
+      "parameters": {
+        "n_estimators": 200,
+        "max_depth": 16,
+        "max_features": 0.5,
+        "min_samples_leaf": 50,
+        "random_state": 42
+      },
+      "threads_compared": [
+        1,
+        24
+      ],
+      "all_tree_seeds_equal": true,
+      "all_tree_nodes_and_values_exactly_equal": true,
+      "node_count_min": 85,
+      "node_count_max": 109,
+      "total_nodes": 19398,
+      "prediction_rows": 600,
+      "raw_prediction_max_absolute_difference": 2.842170943040401e-14,
+      "clipped_prediction_max_absolute_difference": 2.842170943040401e-14,
+      "atol": 1e-10,
+      "rtol": 0,
+      "passed": true
+    },
+    {
+      "parameters": {
+        "n_estimators": 200,
+        "max_depth": 16,
+        "max_features": 0.5,
+        "min_samples_leaf": 200,
+        "random_state": 42
+      },
+      "threads_compared": [
+        1,
+        24
+      ],
+      "all_tree_seeds_equal": true,
+      "all_tree_nodes_and_values_exactly_equal": true,
+      "node_count_min": 17,
+      "node_count_max": 29,
+      "total_nodes": 4900,
+      "prediction_rows": 600,
+      "raw_prediction_max_absolute_difference": 2.842170943040401e-14,
+      "clipped_prediction_max_absolute_difference": 2.842170943040401e-14,
+      "atol": 1e-10,
+      "rtol": 0,
+      "passed": true
+    }
+  ],
+  "source_evidence": {
+    "installed_forest_file": "D:\\airline-delay\\.venv\\Lib\\site-packages\\sklearn\\ensemble\\_forest.py",
+    "installed_forest_sha256": "4dd334514b7551590a049548570b824a9cd91bc444959af7a1ac20a104116702",
+    "seed_order": "Forest.fit constructs seeded estimators sequentially before Parallel enumerates those trees",
+    "prediction_order": "Threaded predict accumulates tree predictions under a lock; last-bit summation differences are possible"
+  },
+  "limitation": "Small synthetic equivalence is not a full-data guarantee; final and reproduction use the identical frozen thread count and unchanged 1e-10 tolerance"
+}

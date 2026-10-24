@@ -1,8 +1,10 @@
-# Airline delay：项目与开工入口
+# Airline delay：项目与运行入口
 
 研究范围：2026 年 4–8 月，3,057,590 条 BTS 航班，355 个机场。研究同机航班衔接中的延误吸收与放大，并预测下一班的出发延误。
 
-本次交付原始数据、下载核对记录、完整项目方案和准备脚本。全量清洗、特征连接、EDA 与建模在新电脑执行。
+本次 4–8 月重建已完成五个月清洗、D0003 衔接、W0002 天气、G0–G4B 主线与 variant/NOAA 分支、开发 EDA 和完整 RQ1。R0020 已选中 R0017/G4B 特征，四个决策树候选 R0021–R0024 已完成，随机森林候选继续按登记网格运行。
+
+**项目仍在 P5：最终选模和冻结审查尚未完成；8 月预测窗口目标仍封存，尚无正式访问 ledger。** 正式评估、最终 RQ1、实际完整复现、中英文最终报告和交付审计均须继续执行。当前状态见[执行进度](docs/执行进度.md)及[实验索引](experiments/index.csv)。
 
 ## 新电脑 Codex 开工入口
 
@@ -10,10 +12,11 @@
 
 > 请按照 AGENTS.md 和 docs/Codex完整执行流程.md，在这台电脑完整完成项目：实际运行数据准备、天气与特征连接、EDA、RQ1、RQ2、模型比较和最终报告，直到完成标准满足。先跑通基础分析再逐组扩展，每轮保留研究理由、配置、实际结果和决定，包括无增益与失败实验。
 
-[Codex 完整执行流程](docs/Codex完整执行流程.md) 列出已有入口、待实现工作、执行顺序、产物和完成检查。其他说明：
+[Codex 完整执行流程](docs/Codex完整执行流程.md) 保留阶段要求、执行顺序、产物和完成检查；其中初始交付状态是历史背景，实际完成状态以研究日志和实验索引为准。继续运行和迁移优先阅读[最终运行说明](docs/最终运行说明.md)。其他说明：
 
 - [完整项目计划](docs/完整项目计划.md)：研究问题、变量、方法、模型、验证与最终成品。
-- [迁移与运行](docs/迁移与运行.md)：Git 克隆和环境安装。
+- [最终运行说明](docs/最终运行说明.md)：实际 Python 3.13.15 环境、数据版本、run/config 对应、最终冻结与复现、报告及交付命令。
+- [迁移与运行](docs/迁移与运行.md)：早期克隆说明；环境版本和当前运行办法以最终运行说明为准。
 - [下载完成说明](下载完成说明.md)：数据清单、校验结果与源覆盖。
 - [研究记录](research/研究记录.md)与[实验索引](experiments/index.csv)：从本次重建版开始保留研究与迭代证据。
 
@@ -29,29 +32,29 @@
 | `raw/weather/noaa/` | 25 个缺测站的 NOAA GHCNh 原始 PSV 快照，使用 gzip 压缩 |
 | `references/` | 机场/时区、机型参考表、字段文档、任务书与论文 |
 | `tables/` | 月份清单、下载来源、机场天气覆盖、文件大小与 SHA-256 |
-| `notebooks/` | 数据清单和航班准备 Notebook，附中文说明 |
-| `scripts/` | 下载、完整性检查及目标电脑准备脚本 |
-| `processed/` | 新电脑运行后生成的可重建中间数据；当前只有说明文件 |
+| `notebooks/` | 中文数据准备、特征、EDA、RQ1/RQ2 与研究结果 Notebook；逐轮执行版本在 run 档案 |
+| `scripts/` | 数据准备、as-of 特征、训练/评估、分析、选模、冻结/复现、报告构建及只读审计 |
+| `processed/` | 本机 D0003 衔接、W0001/W0002 天气和基础航班等派生数据；大文件不随 Git 克隆恢复 |
 | `research/`、`experiments/` | 研究日志、实验索引、按 run_id 保存的运行证据 |
 | `sources.json` | 原始数据来源和下载地址 |
-| `requirements.txt` | Python 环境版本 |
+| `requirements.txt`、`requirements.lock.txt` | 直接依赖与实际完整锁定环境 |
 
 ## 在新电脑克隆并核对
 
 ```bash
-git clone --depth 1 https://github.com/GeoRus63/Airline-delay.git airline_delay
+git clone --branch codex/apr-aug-research https://github.com/GeoRus63/Airline-delay.git airline_delay
 cd airline_delay
-python scripts/verify_downloads.py
+python scripts/verify_downloads.py --raw-only
 ```
 
-仓库直接保存原始数据文件。`.gitattributes` 保留文件原始字节，Windows 克隆时也不会因换行转换改变数据校验值。
+仓库直接保存原始数据文件。`.gitattributes` 保留文件原始字节，Windows 克隆时也不会因换行转换改变数据校验值。选模协议和逐轮源码审计需要完整 Git 历史。`processed/` 及各 run 的 `data/`、`predictions/`、`models/` 被 Git 忽略，迁移须另行同步并按收据核验；仅克隆仓库不能恢复完整实验。
 
-命令只核对文件，不联网、不清洗数据。检查通过后，按照[迁移与运行](docs/迁移与运行.md)安装环境并执行准备步骤。
+命令只核对原始文件大小、哈希及压缩完整性，不联网、不清洗、不解析测试目标。检查通过后，按照[最终运行说明](docs/最终运行说明.md)恢复隔离环境与本地产物，再选择只读审计或使用新 run_id 重建。不要覆盖已完成运行。
 
-机型只用系列与具体型号两层；机场比较围绕 RQ1，不加入机场设施参数。8 月作为最终时间外测试，开发比较使用 4–7 月。网络图、周转热力图、小延误敏感性分析和变量增量实验已纳入方案。
+机型只用 family/variant，不加入机场设施、座位数或机龄。开发比较使用 4–7 月 UTC 前向验证与成熟训练标签；8 月保留为一次正式时间外测试。网络图、周转热力图、阈值敏感性和变量增量已有开发结果；最终结论须等待预先冻结方案的正式评估。
 
 <details><summary>English</summary>
 
-This portable project covers 3,057,590 BTS flights from April–August 2026 across 355 airport IDs. It contains raw flight, aircraft and weather sources, integrity/coverage records, the complete research plan, and preparation scripts. Full cleaning, feature joins, EDA and modeling are to run on the destination computer. Clone the repository, read the download report, project plan and migration guide, then run the offline verifier. RQ1 studies airport delay absorption/amplification; RQ2 predicts downstream departure delay at upstream arrival. August is reserved for the final temporal test.
+This project covers 3,057,590 BTS flights from April–August 2026 across 355 airport IDs. Five-month preparation, cumulative development feature experiments, EDA and development RQ1 are complete. Feature selection retained R0017/G4B; the registered algorithm comparison is still in progress. Final selection, freeze review, the single formal August assessment, full refit reproduction and final deliverables remain unfinished. August prediction-window targets remain sealed. Use the final running guide and experiment index for current status. Full Git history and separately copied ignored processed data, predictions, feature archives and models are required for migration and receipt verification.
 
 </details>

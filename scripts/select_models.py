@@ -6,8 +6,10 @@ fits an estimator, or creates the final-access ledger.
 from __future__ import annotations
 
 from datetime import datetime, timezone
+import copy
 import hashlib
 import json
+import os
 from pathlib import Path
 import subprocess
 
@@ -379,11 +381,13 @@ def _assert_committed(paths):
     return commit
 
 
-def create_freeze(selection, path):
+def create_freeze(selection, path, *, final_threads=None):
     """Explicit opt-in only: seal a completed model selection, never assess August.
 
     Returns file-byte and canonical-payload hashes. This is deliberately not called
     by either selection function. The caller commits all source changes first.
+    final_threads is an explicit execution-only override, recorded in the freeze;
+    the completed selection/source check always precedes this override.
     """
     selection_path = Path(selection).resolve() if isinstance(selection, (str, Path)) else None
     selection = _json(selection_path) if selection_path else dict(selection)
@@ -399,7 +403,20 @@ def create_freeze(selection, path):
     source = _load_run(selection["selected_run_dir"])
     if source["path"].name != selection["selected_run_id"] or _scientific_config(source) != selection["config"]:
         raise ValueError("Selection source/config no longer matches its completed archive")
-    config = selection["config"]
+    config = copy.deepcopy(selection["config"])
+    execution_delta = None
+    if final_threads is not None:
+        maximum = os.cpu_count() or 1
+        if type(final_threads) is not int or not 1 <= final_threads <= maximum:
+            raise ValueError(f"final_threads must be an integer in 1..{maximum}; booleans are not allowed")
+        execution_delta = {
+            "explicitly_requested": True,
+            "threads": {"development": config["threads"], "final": final_threads},
+            "reason": "Only parallel worker count changes for the single final fold; learning parameters remain unchanged",
+            "learning_parameters_unchanged": True,
+            "development_config_sha256": final.canonical_sha256(selection["config"]),
+        }
+        config["threads"] = final_threads
     sources = final._required_sources(config["feature_group"]) | {Path(__file__).resolve(), PROTOCOL_PATH.resolve()}
     for name in ["scripts/run_pipeline.py", "requirements.txt"]:
         if (ROOT / name).is_file():
@@ -423,6 +440,8 @@ def create_freeze(selection, path):
               "primary_model_name": selection["primary_model_name"], "config": config,
               "protocol": final.DEFAULT_PROTOCOL, "source_files": [_receipt(item) for item in sorted(sources)],
               "data_files": [_receipt(item) for item in sorted(data)]}
+    if execution_delta is not None:
+        frozen["execution_delta"] = execution_delta
     frozen["payload_sha256"] = final.canonical_sha256(frozen)
     # Validate the exact schema/pins before publishing the requested freeze path.
     # A temporary file in the same output directory is never a final-access claim.
