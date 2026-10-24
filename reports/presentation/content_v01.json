@@ -1,0 +1,359 @@
+{
+  "title": "Flight delay propagation and downstream prediction",
+  "duration": 600,
+  "slides": [
+    {
+      "title": "Random forest: August MAE 13.655 min",
+      "claims": [
+        "RQ2: 560,077 final connections, RMSE 42.917 min",
+        "RQ1: 24/25 supported estimates show fewer delay minutes",
+        "Retrospective evidence, conditional on completed connections"
+      ],
+      "notes": "The main prediction result is an August mean absolute error of 13.655 minutes for the frozen primary predictor, Random forest. Its root mean squared error is 42.917 minutes over 560,077 accepted connections. The airport analysis supports 25 estimates under the unchanged development reference. These are the two findings around which I will explain the project. A simple baseline was allowed to win, so model complexity is not a success criterion. The analysis is retrospective and describes valid observed completed connections. It does not assign causal responsibility to airports, and the final test result did not trigger another round of tuning.",
+      "duration": 50,
+      "citations": [
+        "R0028: experiments/runs/R0028/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"rf_d16_l50\", \"value\": \"all\"}; SHA256=c1c7194ed6739a50de9abe050f1ca23138a8ab9b8b5fb42ff9c769ff42f58591; research journal headings=658;667;692",
+        "R0029: experiments/runs/R0029/rq1_standardized/rq1_airports.csv; selector={\"supported\": true, \"threshold\": \"ge15\"}; SHA256=0af06767c5a7ed8f1f414fc4f58a01fcef24fd9e280f6a118b4b0dd597390a1d; research journal headings=675;684;692",
+        "R0027: experiments/runs/R0027/selection/model_selection_decision.json; selector={\"keys\": [\"selected_run_id\", \"primary_model_name\", \"reason\", \"promotion_decisions\"]}; SHA256=cd2e7d80390374e87e9e55c38802ead27990fe6e4c12e6f00cddea6d869cb913; research journal headings=625;634"
+      ]
+    },
+    {
+      "title": "Prediction time and research questions",
+      "claims": [
+        "RQ1: downstream minus upstream delay, with upstream delay ≥15 min",
+        "RQ2: downstream nonnegative departure delay, including upstream on-time flights",
+        "UTC forward validation, then one frozen August assessment"
+      ],
+      "notes": "The first question describes how delay changes across consecutive flights of the same aircraft. For the main airport analysis, upstream delay must reach fifteen minutes and the connection must be nonovernight. A negative net change means fewer delay minutes downstream, even if the aircraft remains late. The second question predicts nonnegative downstream departure delay at upstream actual arrival. Its population includes upstream on-time flights, and eligibility requires the prediction time to precede the downstream departure label. Training uses only labels mature before each UTC validation boundary. The forward folds train through April, May and June and validate the following month. August remains the final frozen assessment.",
+      "duration": 45,
+      "citations": [
+        "R0006: experiments/runs/R0006/model_manifest.json; selector={\"keys\": [\"folds\", \"evaluation_rows\"]}; SHA256=17a3fe1dbc4dfe8377cc56fbc9a60ac0cca3c1aafcdee05dcbb7f7d7f48310b6; research journal headings=84;129;138",
+        "R0029: experiments/runs/R0029/tables/rq1_airport_raw.csv; selector={\"aggregation\": \"sum(n);sum(n*mean_delta)/sum(n);sum(s_net)\"}; SHA256=aba0812b0fa2b74ace5e97fd5241fbf54ab8c874abf35b7850a6d62212b1545f; research journal headings=675;684;692"
+      ]
+    },
+    {
+      "title": "The prediction sample differs from all flights",
+      "claims": [
+        "Development: 2,261,775 valid prediction connections",
+        "355 airports, 6,591 routes",
+        "437,491 overnight connections reported separately"
+      ],
+      "notes": "The development prediction sample contains 2,261,775 valid connections across 355 airports and 6,591 routes. It includes 437,491 overnight connections, which receive separate error reporting. These counts describe connections, not the number of individual flights. Cleaning first follows scheduled same-tail order, then checks actual timing and endpoint continuity. Cancellations, diversions and ambiguous chains define exclusions rather than zero delay. This completed-connection selection limits operational interpretation because future completion is not guaranteed at prediction time. Planned schedule availability and static aircraft inventories also remain assumptions. Keeping these population definitions explicit prevents a lower error on a different sample from masquerading as an improvement.",
+      "duration": 50,
+      "citations": [
+        "R0006: experiments/runs/R0006/eda_summary.json; selector={\"keys\": [\"n\", \"airport_n\", \"route_n\", \"overnight_n\"]}; SHA256=51682e4057c1a3d43cc2d0004b97aff268e21003c951bec37f5d02268f429918; research journal headings=84;129;138"
+      ]
+    },
+    {
+      "title": "Support-selected airport examples",
+      "claims": [
+        "25 frozen airports, 25 supported final estimates",
+        "24 negative estimates; FLL interval includes zero"
+      ],
+      "notes": "The development procedure froze 25 airports and 16 common master cells. The final main-threshold analysis supports 25 airport estimates, with standardized means spanning -16.424 to 0.436 minutes. Among supported point estimates, 24 are negative. The sole positive point estimate is FLL, plus 0.436 minutes, with 95% interval [-2.403, 3.012], which includes zero. Across the raw main population of 482,013 connections, the mean change is -7.254 minutes, which differs from standardized comparison. The standardization reuses the same airport set, cells and threshold-conditional pooled development weights. It does not renormalize separately for a weakly supported airport. Unsupported estimates remain missing. An airport may lose support in a particular month, so missing months stay NA rather than becoming zero or entering a rank. The April–August RQ1 summary includes development months and is not an independent August validation.",
+      "duration": 55,
+      "citations": [
+        "R0029: experiments/runs/R0029/rq1_standardized/rq1_airports.csv; selector={\"supported\": true, \"threshold\": \"ge15\"}; SHA256=0af06767c5a7ed8f1f414fc4f58a01fcef24fd9e280f6a118b4b0dd597390a1d; research journal headings=675;684;692",
+        "R0029: experiments/runs/R0029/tables/rq1_airport_raw.csv; selector={\"aggregation\": \"sum(n);sum(n*mean_delta)/sum(n);sum(s_net)\"}; SHA256=aba0812b0fa2b74ace5e97fd5241fbf54ab8c874abf35b7850a6d62212b1545f; research journal headings=675;684;692",
+        "R0029: experiments/runs/R0029/rq1_standardized/frozen_reference.json; selector={\"keys\": [\"airport_ids\", \"master_cells\", \"references\"]}; SHA256=559ddb58275e5def26bd62cda09536c5b16700f9771c366fc85a6eafb1690547; research journal headings=675;684;692",
+        "R0029: experiments/runs/R0029/figures/rq1_standardized_airports.png; selector={\"whole_file\": true}; SHA256=d90de5fffeafabda33fcac5474a1e08df32621869703bb677bca9f7ae473f917; research journal headings=675;684;692",
+        "R0029: experiments/runs/R0029/rq1_standardized/rq1_airports.csv; selector={\"threshold\": \"ge15\"}; SHA256=0af06767c5a7ed8f1f414fc4f58a01fcef24fd9e280f6a118b4b0dd597390a1d; research journal headings=675;684;692",
+        "R0029: experiments/runs/R0029/rq1_standardized/rq1_airports.csv; selector={\"airport_id\": 11697, \"threshold\": \"ge15\"}; SHA256=0af06767c5a7ed8f1f414fc4f58a01fcef24fd9e280f6a118b4b0dd597390a1d; research journal headings=675;684;692",
+        "R0029: experiments/runs/R0029/rq1_standardized/network_nodes.csv; selector={\"airport_id\": 11697, \"columns\": [\"airport_id\", \"airport_code\"]}; SHA256=b5415e1f6cf6fdb8c81cd433d0610771d2b683fc4176c6395d78c3ee1cd5e83b; research journal headings=675;684;692",
+        "R0029: experiments/runs/R0029/rq1_standardized/rq1_airports.csv; selector={\"airport_ids\": [13930, 11292, 14771, 11697], \"selection\": \"top 3 by retained_n descending, airport_id ascending; append sole positive estimate if distinct\", \"supported\": true, \"threshold\": \"ge15\"}; SHA256=0af06767c5a7ed8f1f414fc4f58a01fcef24fd9e280f6a118b4b0dd597390a1d; research journal headings=675;684;692",
+        "R0029: experiments/runs/R0029/rq1_standardized/network_nodes.csv; selector={\"airport_ids\": [13930, 11292, 14771, 11697], \"columns\": [\"airport_id\", \"airport_code\"]}; SHA256=b5415e1f6cf6fdb8c81cd433d0610771d2b683fc4176c6395d78c3ee1cd5e83b; research journal headings=675;684;692"
+      ],
+      "table": [
+        [
+          "Airport",
+          "Retained n",
+          "Δ (min)",
+          "95% CI"
+        ],
+        [
+          "ORD",
+          "27,946",
+          "-14.045",
+          "[-15.986, -12.278]"
+        ],
+        [
+          "DEN",
+          "23,836",
+          "-11.451",
+          "[-12.982, -9.905]"
+        ],
+        [
+          "SFO",
+          "20,768",
+          "-16.424",
+          "[-17.457, -15.139]"
+        ],
+        [
+          "FLL",
+          "5,598",
+          "0.436",
+          "[-2.403, 3.012]"
+        ]
+      ],
+      "tableColumnWidths": [
+        110,
+        150,
+        130,
+        354
+      ],
+      "caption": "Examples selected by support, not a ranking. Full airport results remain in the linked CSV/plot."
+    },
+    {
+      "title": "Network denominators and monthly airport support",
+      "claims": [
+        "355 nodes, 6,629 directed routes",
+        "2,821,852 connections; 3,054,489 flights"
+      ],
+      "notes": "The network contains 355 airport nodes and 6,629 directed routes, representing 3,054,489 flights in the route tables. Its nodes represent 2,821,852 accepted connections, while route counts represent individual flights. The full geographic network remains available in the linked report and Notebook source figure. There, node colour shows supported standardized change, gray indicates no support, and edge width shows flight traffic rather than delay-propagation events. Monthly supported-airport counts are 2026-04: 6, 2026-05: 8, 2026-06: 12, 2026-07: 15, 2026-08: 15. These counts may change under the same frozen reference. Consequently, a range across available airports in one month is not a trend for a fixed airport panel, and the map cannot establish which airport caused a downstream delay.",
+      "duration": 55,
+      "citations": [
+        "R0029: experiments/runs/R0029/figures/rq1_network_geographic.png; selector={\"whole_file\": true}; SHA256=796d007c0c47fab5e5f6f29b10ada1290d21fc83b172973597837b1eeff0b11e; research journal headings=675;684;692",
+        "R0029: experiments/runs/R0029/rq1_standardized/network_nodes.csv; selector={\"rows\": \"all\"}; SHA256=b5415e1f6cf6fdb8c81cd433d0610771d2b683fc4176c6395d78c3ee1cd5e83b; research journal headings=675;684;692",
+        "R0029: experiments/runs/R0029/rq1_standardized/network_edges.csv; selector={\"aggregation\": \"count;sum(flight_count)\"}; SHA256=f40baa3f2993cb826af553b24bebc7f4f7beab2ca319b61282cba219ccf83fc5; research journal headings=675;684;692",
+        "R0029: experiments/runs/R0029/rq1_standardized/rq1_airports_monthly.csv; selector={\"aggregation\": \"count(supported) by month_utc\", \"threshold\": \"ge15\"}; SHA256=332ad834aee1bfef0d2435423ff5e2cbf6172f3b5d9696364488b45b9f24ef29; research journal headings=675;684;692"
+      ],
+      "chart": {
+        "type": "bar",
+        "categories": [
+          "2026-04",
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08"
+        ],
+        "series": [
+          {
+            "name": "Supported airports",
+            "values": [
+              6,
+              8,
+              12,
+              15,
+              15
+            ]
+          }
+        ],
+        "yLabel": "Supported airports",
+        "minimum": 0,
+        "maximum": 25,
+        "numberFormat": "0",
+        "showValues": true
+      },
+      "caption": "The supported airport set changes by month. This is not a fixed-cohort trend."
+    },
+    {
+      "title": "Feature increments share the same evaluation sample",
+      "claims": [
+        "G0 MAE 19.574 min; G4B 16.807 min",
+        "OLS, preprocessing and evaluation identities stay fixed"
+      ],
+      "notes": "This chart shows every cumulative feature stage, including steps that fail to improve error. G0 provides the baseline schedule context, followed by aircraft-chain history, aircraft family, airport operating history, observations and TAF. G0 has MAE 19.574 minutes and G4B has 16.807 minutes. G1 changed pooled MAE by -2.316 minutes against G0, with interval -2.406 to -2.216. G2 changed pooled MAE by -0.009 minutes against G1, with interval -0.011 to -0.007. G3 changed pooled MAE by 0.031 minutes against G2, with interval 0.009 to 0.052. G4A changed pooled MAE by -0.066 minutes against G3, with interval -0.079 to -0.047. G4B changed pooled MAE by -0.407 minutes against G4A, with interval -0.664 to -0.164. All paired differences use the same evaluation identities and time splits. Negative candidate-minus-reference differences indicate improvement. The addition order determines the measured increment. This is not an order-independent ranking of information value, and scheduled turnaround already belongs to G0.",
+      "duration": 55,
+      "citations": [
+        "R0006: experiments/runs/R0006/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"g0_linear\", \"value\": \"all\"}; SHA256=d59fa998d811ef57392993baf8b3ed60c1ae65e6f85af18566a832bc3526dfbe; research journal headings=84;129;138",
+        "R0007: experiments/runs/R0007/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"g1_linear\", \"value\": \"all\"}; SHA256=b60b95f1c4c6adb587785c1cfdec93ab418db2d325abc579568c26cb9ed8e1ee; research journal headings=75;147",
+        "R0009: experiments/runs/R0009/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"g2_family_linear\", \"value\": \"all\"}; SHA256=80c882d30df40e54505b68d052ccc76e5e2ab17a18fe9b81087266b2279016e5; research journal headings=173;182",
+        "R0012: experiments/runs/R0012/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"g3_linear\", \"value\": \"all\"}; SHA256=dc968c3131c39ec1ea631f6f23bfde301f7f78489b1b46baf90bfe7a891fd3ed; research journal headings=216;224;233",
+        "R0015: experiments/runs/R0015/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"g4a_linear\", \"value\": \"all\"}; SHA256=666d086ec8abb9189dd75bb46460922617bde73b05073d2dae6f53c9b94f2d98; research journal headings=286;295",
+        "R0017: experiments/runs/R0017/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"g4b_linear\", \"value\": \"all\"}; SHA256=9379ac294c57e6f2d03a8b4d17adf3d90e9f722d60fe3532c6887d5e4ed5b04e; research journal headings=322;331",
+        "R0007: experiments/runs/R0007/comparison/comparison_metrics.csv; selector={\"metric\": \"mae\", \"scope\": \"pooled\"}; SHA256=2019d29f6502a30ab0677c87f2b5eadee30a7216e0dcfea647fd23e7a81adeae; research journal headings=75;147",
+        "R0009: experiments/runs/R0009/comparison/comparison_metrics.csv; selector={\"metric\": \"mae\", \"scope\": \"pooled\"}; SHA256=3891751d00128b821413d3663eec113162c444f50a4b3b2602116e0fd26e282e; research journal headings=173;182",
+        "R0012: experiments/runs/R0012/comparison/comparison_metrics.csv; selector={\"metric\": \"mae\", \"scope\": \"pooled\"}; SHA256=948e0ac6a3de3a7686079627119ed29ad292558fcd601da360a0bf58bd16cf31; research journal headings=216;224;233",
+        "R0015: experiments/runs/R0015/comparison/comparison_metrics.csv; selector={\"metric\": \"mae\", \"scope\": \"pooled\"}; SHA256=10863e9c73db1b9fd0d3c643bb082d590bfbf1e5bcd2c104d1b6db37ce673569; research journal headings=286;295",
+        "R0017: experiments/runs/R0017/comparison/comparison_metrics.csv; selector={\"metric\": \"mae\", \"scope\": \"pooled\"}; SHA256=484497484239bfbdc56135407e49a6525b2ab0fc66e64dbe6e98d251e584fc1b; research journal headings=322;331"
+      ],
+      "chart": {
+        "type": "bar",
+        "categories": [
+          "G0",
+          "G1",
+          "G2",
+          "G3",
+          "G4A",
+          "G4B"
+        ],
+        "series": [
+          {
+            "name": "Development MAE",
+            "values": [
+              19.5738,
+              17.2581,
+              17.2487,
+              17.2796,
+              17.2138,
+              16.8066
+            ]
+          }
+        ],
+        "yLabel": "MAE (minutes)",
+        "numberFormat": "0.00"
+      }
+    },
+    {
+      "title": "Weather and aircraft detail have separate controls",
+      "claims": [
+        "Variant versus family: ΔMAE -0.002 min",
+        "NOAA versus IEM G4B: ΔMAE 0.000 min",
+        "TAF blocks unverified revisions and delayed values",
+        "NOAA filled 0 values, 0 in selected model columns"
+      ],
+      "notes": "The variant replacement changes MAE by -0.002 minutes against family. NOAA supplementation changes MAE by 0.000 minutes against IEM G4B. The archived audit records 0 inserted field values, of which 0 are in selected model columns. No NOAA values entered the selected model columns in this branch. This unchanged value contribution cannot establish that NOAA information has no predictive value. These remain separate branches. Weather joins respect the arrival prediction time and declared observation lag. TAF applies a conservative revision block, excluding unverified amended, corrected or delayed bulletin values. The missing-weather rows remain in the sample. G4B records 2,261,775 weather queries. The saved availability counts describe source states, not complete weather vectors or proof of real-time delivery.",
+      "duration": 50,
+      "citations": [
+        "R0010: experiments/runs/R0010/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"g2_variant_linear\", \"value\": \"all\"}; SHA256=554bb60903029c9ca3377b09abc78a45796ce71c4a8284cee18c63ed8f21c4b3; research journal headings=190;199",
+        "R0019: experiments/runs/R0019/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"g4b_noaa_linear\", \"value\": \"all\"}; SHA256=f433e8e6989b1bee878cced117a57285866eb63606ff86aee97f579f48b8f311; research journal headings=380;448",
+        "R0010: experiments/runs/R0010/comparison/comparison_metrics.csv; selector={\"metric\": \"mae\", \"scope\": \"pooled\"}; SHA256=80f5030f4041f70b4be013dbfbfdffeffe0e2fcb04c2ed4a863ed2a969e523ff; research journal headings=190;199",
+        "R0019: experiments/runs/R0019/comparison/comparison_metrics.csv; selector={\"metric\": \"mae\", \"scope\": \"pooled\"}; SHA256=422aced8d39a1fef1938889b0b3f8d01ba44db3a3c4f48e86b00307bb676d651; research journal headings=380;448",
+        "R0019: experiments/runs/R0019/feature_audit.json; selector={\"keys\": [\"noaa_fill_counts\", \"noaa_fill_assumption\", \"noaa_qc_limitation\", \"weather_audit\"]}; SHA256=32a081ba47ec6ee731ee1c6496f15d04606fbd856327968b46f8a4d52b13e74b; research journal headings=380;448",
+        "R0017: experiments/runs/R0017/weather_coverage_summary.json; selector={\"keys\": [\"rows\", \"availability\"]}; SHA256=e8166823cb333764a6eecfb6ae2c404389063014176de76a8ea06dcfc30785cc; research journal headings=322;331"
+      ]
+    },
+    {
+      "title": "Random forest wins the registered comparison",
+      "claims": [
+        "Feature source R0017; learned model R0025",
+        "Frozen primary predictor: Random forest"
+      ],
+      "notes": "The feature-selection decision retained R0017. The six tree and forest candidates then hold that feature set and preprocessing fixed. The chart includes four decision trees across two depths and two minimum-leaf sizes, plus two random forests at fixed depth. Forests use two hundred trees and one-half of features per split, with seed forty-two. The retained learned model is R0025, while the primary predictor is Random forest. The recorded reason is: Registered family minima and sequential practical/monthly-stability promotion, followed by minimum pooled MAE against all three baselines. The practical and monthly-stability promotion rule was committed after P3, before weather and tree results were inspected. It was not registered before P0. The chosen primary need not be the single lowest-error trial among every exploratory candidate.",
+      "duration": 55,
+      "citations": [
+        "R0017: experiments/runs/R0017/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"g4b_linear\", \"value\": \"all\"}; SHA256=9379ac294c57e6f2d03a8b4d17adf3d90e9f722d60fe3532c6887d5e4ed5b04e; research journal headings=322;331",
+        "R0021: experiments/runs/R0021/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"dt_d8_l50\", \"value\": \"all\"}; SHA256=d130d03df78daf9f405e77775f668856da02572601e3bf6ed3d44420e262c403; research journal headings=414;423",
+        "R0022: experiments/runs/R0022/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"dt_d8_l200\", \"value\": \"all\"}; SHA256=efaf2aaff3c0368bbb69077073997587eddc575adb5d5d9dddcef4aad3d317c2; research journal headings=431;440",
+        "R0023: experiments/runs/R0023/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"dt_d16_l200\", \"value\": \"all\"}; SHA256=d125b9d8e7b9732d4fd1202ec04d901502412a40ace2b8ee0a109f009a5bf9bb; research journal headings=468;477",
+        "R0024: experiments/runs/R0024/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"dt_d16_l50\", \"value\": \"all\"}; SHA256=5453a7e28fda5e22e8fc27ad61b56de6b3d6d9c10b893f77bd45992cb304ec34; research journal headings=493;502",
+        "R0025: experiments/runs/R0025/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"rf_d16_l50\", \"value\": \"all\"}; SHA256=54cbc2f8ee1055e800efce03bf7c14d9f7d6b32a8b18b95a0b97afe7466d7934; research journal headings=580;589",
+        "R0026: experiments/runs/R0026/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"rf_d16_l200\", \"value\": \"all\"}; SHA256=3a5245060431d8a9a3ffd156f65fb6186fda456d462850efd6c615ea89d98b33; research journal headings=608;617",
+        "R0027: experiments/runs/R0027/selection/model_selection_decision.json; selector={\"keys\": [\"selected_run_id\", \"primary_model_name\", \"reason\", \"promotion_decisions\"]}; SHA256=cd2e7d80390374e87e9e55c38802ead27990fe6e4c12e6f00cddea6d869cb913; research journal headings=625;634",
+        "R0020: experiments/runs/R0020/selection/feature_selection.json; selector={\"keys\": [\"selected_run_id\", \"reason\"]}; SHA256=a3b4de368a688989d08f5b7b3dca2ccb6c3f6009746fcc12c9e2e10dec3d3c86; research journal headings=397;406"
+      ],
+      "chart": {
+        "type": "bar",
+        "categories": [
+          "OLS",
+          "DT d8 l50",
+          "DT d8 l200",
+          "DT d16 l200",
+          "DT d16 l50",
+          "RF d16 l50",
+          "RF d16 l200"
+        ],
+        "series": [
+          {
+            "name": "Development MAE",
+            "values": [
+              16.8066,
+              12.5435,
+              12.5809,
+              12.485,
+              12.5197,
+              12.1643,
+              12.3101
+            ]
+          }
+        ],
+        "yLabel": "MAE (minutes)",
+        "numberFormat": "0.00"
+      }
+    },
+    {
+      "title": "August evaluates the frozen primary and comparators",
+      "claims": [
+        "Primary MAE 13.655 min, RMSE 42.917 min",
+        "560,077 connections in the UTC August test window"
+      ],
+      "notes": "This is the final August comparison after the rules, features, preprocessing and primary predictor were frozen. The primary, Random forest, records MAE 13.655 minutes and RMSE 42.917 minutes. The table also preserves the learned model and all three simple comparators. The mean and median baselines are estimated from mature training labels, while carry-forward transfers upstream delay directly. MAE is the primary decision metric because it measures average absolute minutes. RMSE gives greater weight to large errors. Neither metric alone describes every delay regime. The 6 paired intervals are individual 95% intervals, not a joint 95% statement across comparisons. The final access ledger and saved-result verification identify this test. These slides read saved summaries only, without reopening test labels or refitting.",
+      "duration": 55,
+      "citations": [
+        "R0028: experiments/runs/R0028/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"rf_d16_l50\", \"value\": \"all\"}; SHA256=c1c7194ed6739a50de9abe050f1ca23138a8ab9b8b5fb42ff9c769ff42f58591; research journal headings=658;667;692",
+        "R0028: experiments/runs/R0028/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"training_mean\", \"value\": \"all\"}; SHA256=c1c7194ed6739a50de9abe050f1ca23138a8ab9b8b5fb42ff9c769ff42f58591; research journal headings=658;667;692",
+        "R0028: experiments/runs/R0028/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"training_median\", \"value\": \"all\"}; SHA256=c1c7194ed6739a50de9abe050f1ca23138a8ab9b8b5fb42ff9c769ff42f58591; research journal headings=658;667;692",
+        "R0028: experiments/runs/R0028/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"carry_forward\", \"value\": \"all\"}; SHA256=c1c7194ed6739a50de9abe050f1ca23138a8ab9b8b5fb42ff9c769ff42f58591; research journal headings=658;667;692",
+        "R0028: experiments/runs/R0028/final_comparisons.csv; selector={\"candidate_model\": \"rf_d16_l50\", \"metrics\": [\"mae\", \"rmse\"], \"scope\": \"pooled\"}; SHA256=99fe2bb8ecb87a7c30969436b64a18c75cfc26fa2bd3aa8eb83cc7d7d517f42e; research journal headings=658;667;692",
+        "R0028: experiments/runs/R0028/final_verification.json; selector={\"keys\": [\"verified\", \"metrics_recomputed\", \"refitted\", \"raw_test_data_read\"]}; SHA256=1799a3cda51991e9ebe63f437f3f59a21d4dbb05af87d6b64d64ce8f671ccf0b; research journal headings=658;667;692",
+        "R0028: experiments/runs/R0028/model_selection.json; selector={\"keys\": [\"payload_sha256\", \"primary_model_name\"]}; SHA256=286c7de3cc56da3c6c61e16670bde538a672de7bca7f4b3136ce68501c2648f4; research journal headings=658;667;692"
+      ],
+      "table": [
+        [
+          "Predictor",
+          "MAE (min)",
+          "RMSE (min)"
+        ],
+        [
+          "Random forest",
+          "13.655",
+          "42.917"
+        ],
+        [
+          "Training mean",
+          "23.630",
+          "53.278"
+        ],
+        [
+          "Training median",
+          "18.000",
+          "56.178"
+        ],
+        [
+          "Upstream delay",
+          "19.107",
+          "59.972"
+        ]
+      ]
+    },
+    {
+      "title": "Error differs across delay regimes",
+      "claims": [
+        "Ordinary MAE: RF 8.2788 vs median 6.7446 min",
+        "Ordinary RMSE: RF 10.8156 vs median 14.6415 min",
+        "Severe MAE: RF 69.3255 vs median 134.5447 min",
+        "Severe: 8.8068% of cases, 44.7113% of AE, 94.2084% of SE"
+      ],
+      "notes": "For ordinary delays below sixty minutes, RF MAE is 8.2788 versus median 6.7446, higher. RMSE is 10.8156 versus 14.6415, lower. For severe delays, MAE is 69.3255 versus 134.5447 minutes. Severe cases are 8.8068% of the sample but contribute 44.7113% of RF absolute error and 94.2084% of squared error. These outcome-defined groups are post-hoc diagnostics. They support neither a deployable model-switching rule nor a claim of group-level statistical significance.",
+      "duration": 45,
+      "citations": [
+        "R0028: experiments/runs/R0028/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"rf_d16_l50\", \"value\": \"all\"}; SHA256=c1c7194ed6739a50de9abe050f1ca23138a8ab9b8b5fb42ff9c769ff42f58591; research journal headings=658;667;692",
+        "R0028: experiments/runs/R0028/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"severity\", \"model\": \"rf_d16_l50\", \"value\": \"ordinary_lt60\"}; SHA256=c1c7194ed6739a50de9abe050f1ca23138a8ab9b8b5fb42ff9c769ff42f58591; research journal headings=658;667;692",
+        "R0028: experiments/runs/R0028/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"severity\", \"model\": \"rf_d16_l50\", \"value\": \"severe_ge60\"}; SHA256=c1c7194ed6739a50de9abe050f1ca23138a8ab9b8b5fb42ff9c769ff42f58591; research journal headings=658;667;692",
+        "R0028: experiments/runs/R0028/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"severity\", \"model\": \"training_median\", \"value\": \"ordinary_lt60\"}; SHA256=c1c7194ed6739a50de9abe050f1ca23138a8ab9b8b5fb42ff9c769ff42f58591; research journal headings=658;667;692",
+        "R0028: experiments/runs/R0028/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"severity\", \"model\": \"training_median\", \"value\": \"severe_ge60\"}; SHA256=c1c7194ed6739a50de9abe050f1ca23138a8ab9b8b5fb42ff9c769ff42f58591; research journal headings=658;667;692",
+        "R0028: experiments/runs/R0028/metrics.csv; selector={\"fallback_sums\": [\"AE=n*mae\", \"SE=n*rmse^2\"], \"fold\": \"overall\", \"formulas\": [\"n_severe/n_all\", \"AE_severe/AE_all\", \"SE_severe/SE_all\"], \"groups\": [\"all\", \"severity\"], \"model\": \"rf_d16_l50\"}; SHA256=c1c7194ed6739a50de9abe050f1ca23138a8ab9b8b5fb42ff9c769ff42f58591; research journal headings=658;667;692"
+      ]
+    },
+    {
+      "title": "Interpretation stays conditional on the fitted models",
+      "claims": [
+        "Largest displayed permutation change: G1_upstream_delay, 14.951 min",
+        "Date-block intervals condition on fitted predictions and selection",
+        "Airport rankings, permutation and PDP are noncausal"
+      ],
+      "notes": "On the fixed explanation subsample for 2026-07, group G1_upstream_delay has the largest archived permutation MAE increase, 14.951 minutes, with repeat standard deviation 0.097 over 5 repeats. This explains the retained learned model separately from a potentially winning baseline. Joint-group permutation preserves within-group relationships but may break relationships across groups. Repeat standard deviation is not a confidence interval. Group permutation changes cannot be added together or substituted for staged feature increments. PDP uses hypothetical input replacements that may leave observed correlated-feature support. Coefficients, importance and airport rankings therefore do not identify causal effects. The date-block intervals resample saved predictions with common date draws. They do not repeat training or selection, and they are not selection-adjusted. The evidence also covers one season, conditional completed chains and incomplete weather delivery provenance. NOAA supplementation is retrospective. Any change made after seeing August requires a genuinely new unseen evaluation period, rather than relabeling the same test as independent validation.",
+      "duration": 65,
+      "citations": [
+        "R0027: experiments/runs/R0027/explanations/R0025/permutation_summary.csv; selector={\"fold\": \"2026-07\", \"group\": \"G1_upstream_delay\"}; SHA256=97e911ee5fc99a03504f82ef6f090c12fdda02e270637800f8109326edd211bb; research journal headings=625;634",
+        "R0027: experiments/runs/R0027/selection/model_selection_decision.json; selector={\"keys\": [\"selected_run_id\", \"primary_model_name\", \"reason\", \"promotion_decisions\"]}; SHA256=cd2e7d80390374e87e9e55c38802ead27990fe6e4c12e6f00cddea6d869cb913; research journal headings=625;634",
+        "R0029: experiments/runs/R0029/rq1_standardized/frozen_reference.json; selector={\"keys\": [\"airport_ids\", \"master_cells\", \"references\"]}; SHA256=559ddb58275e5def26bd62cda09536c5b16700f9771c366fc85a6eafb1690547; research journal headings=675;684;692"
+      ]
+    },
+    {
+      "title": "The final conclusions retain their scope",
+      "claims": [
+        "RQ1: 25 supported estimates under frozen common support",
+        "RQ2: Random forest, final MAE 13.655 min",
+        "A new season is needed to test generalization"
+      ],
+      "notes": "The airport answer is conditional on 25 supported final estimates and the frozen common reference. The prediction answer is the frozen Random forest predictor with August MAE 13.655 minutes. The useful next step is an independently evaluated new season with stronger availability evidence and explicit operational eligibility, while preserving the archived decisions and unsuccessful experiments.",
+      "duration": 20,
+      "citations": [
+        "R0029: experiments/runs/R0029/rq1_standardized/rq1_airports.csv; selector={\"supported\": true, \"threshold\": \"ge15\"}; SHA256=0af06767c5a7ed8f1f414fc4f58a01fcef24fd9e280f6a118b4b0dd597390a1d; research journal headings=675;684;692",
+        "R0028: experiments/runs/R0028/metrics.csv; selector={\"fold\": \"overall\", \"group\": \"all\", \"model\": \"rf_d16_l50\", \"value\": \"all\"}; SHA256=c1c7194ed6739a50de9abe050f1ca23138a8ab9b8b5fb42ff9c769ff42f58591; research journal headings=658;667;692",
+        "R0027: experiments/runs/R0027/selection/model_selection_decision.json; selector={\"keys\": [\"selected_run_id\", \"primary_model_name\", \"reason\", \"promotion_decisions\"]}; SHA256=cd2e7d80390374e87e9e55c38802ead27990fe6e4c12e6f00cddea6d869cb913; research journal headings=625;634"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+"""Enumerate existing final deliverables and pin pre-audit accepted bytes."""
+from datetime import datetime, timezone
+import hashlib
+import json
+from pathlib import Path
+
+root = Path(__file__).resolve().parents[1]
+paths = set()
+directories = ['reports/research_v01', 'reports/source_snapshots/S0001',
+               'reports/presentation/deck_v01', 'reports/presentation/.deck_v01-build',
+               'reports/presentation/video_v01', 'reports/figures',
+               'research/audits/final_delivery_v01', 'experiments/freezes/F0001']
+for relative in directories:
+    directory = root/relative
+    assert directory.is_dir(), relative
+    paths.update(p.relative_to(root).as_posix() for p in directory.rglob('*') if p.is_file())
+paths.update(p.relative_to(root).as_posix() for p in (root/'scripts').glob('*') if p.suffix in {'.py','.mjs'})
+paths.update(p.relative_to(root).as_posix() for p in (root/'configs').glob('*.json'))
+paths.update(p.relative_to(root).as_posix() for p in (root/'notebooks').glob('*.ipynb'))
+paths.update(p.relative_to(root).as_posix() for p in (root/'research/reviews').glob('2026-10-24_final_delivery_*') if p.suffix in {'.txt','.json','.md'})
+paths.update(['reports/report_en.md','reports/report_en.pdf','reports/结果解读_中文.md',
+              'reports/evidence_index.csv','reports/presentation/content_v01.json',
+              'reports/presentation/content_v01.sources.json','reports/presentation/content_v01.evidence.csv',
+              'reports/presentation/BUILD.md','docs/最终运行说明.md','docs/完整项目计划.md',
+              'docs/Codex完整执行流程.md','AGENTS.md','requirements.txt','requirements.lock.txt',
+              'research/literature_review.md','experiments/final_access/2026-08.json',
+              'research/audits/final_stage_runtime_samples.jsonl',
+              'research/audits/final_report_source_sealing.py.txt',
+              'research/audits/final_content_source_verification.py.txt',
+              'research/audits/final_video_verification.py.txt',
+              'research/audits/final_requirements_content_review.json',
+              'research/audits/final_requirements_content_resolution.json'])
+for run in ['R0028','R0029','R0030']:
+    for name in ['manifest.json','config.json']:
+        paths.add(f'experiments/runs/{run}/{name}')
+    paths.update(p.relative_to(root).as_posix() for p in (root/f'experiments/runs/{run}/notebooks').glob('*') if p.is_file())
+    paths.update(p.relative_to(root).as_posix() for p in (root/'research/audits').glob(f'{run}_*') if p.is_file())
+for name in ['reproduction_reference.json','reproduction_verification.json',
+             'reproduction_prediction_differences.csv','final_feature_fingerprints.json',
+             'fold_2026-08_timing.json','final_result.json']:
+    paths.add(f'experiments/runs/R0030/{name}')
+baseline_relative = 'research/audits/final_delivery_v01/pre_delivery_file_pins.json'
+config_relative = 'configs/p7_audit_delivery.json'
+paths.update([baseline_relative,config_relative])
+assert not (root/baseline_relative).exists() and not (root/config_relative).exists()
+for relative in paths-{baseline_relative,config_relative}:
+    p=root/relative
+    assert p.is_file() and p.stat().st_size>0, relative
+    assert not relative.startswith('experiments/runs/R0031/')
+    assert relative not in {'README.md','docs/执行进度.md','experiments/index.csv','research/研究记录.md'}
+config={'mode':'audit_delivery','stage':'P7-delivery-audit','parent_run_id':'R0030',
+        'change':'Verify original raw bytes, every preserved run and exact final deliverables; execute and seal the inventory Notebook',
+        'threads':8,'delivery_paths':sorted(paths)}
+(root/config_relative).write_text(json.dumps(config,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+pins=[]
+for relative in sorted(paths-{baseline_relative,'notebooks/00_数据清单.ipynb'}):
+    p=root/relative
+    pins.append({'path':relative,'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()})
+baseline={'created_at_utc':datetime.now(timezone.utc).isoformat(),
+          'scope':'Accepted final files must remain byte-identical through P7. The inventory Notebook is first executed by P7 and is checked against its post-render delivery receipt after completion.',
+          'excluded_expected_update':'notebooks/00_数据清单.ipynb',
+          'source_snapshot':'reports/source_snapshots/S0001/mapping.json',
+          'freeze':'experiments/freezes/F0001/model_selection.json',
+          'delivery_run_id':'R0031','files':pins}
+(root/baseline_relative).write_text(json.dumps(baseline,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+assert all((root/p).is_file() and (root/p).stat().st_size>0 for p in paths)
+print(json.dumps({'delivery_files':len(paths),'pre_audit_pins':len(pins),
+                  'bytes':sum((root/p).stat().st_size for p in paths)},indent=2))

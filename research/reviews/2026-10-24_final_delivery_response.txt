@@ -1,0 +1,66 @@
+heading "ChatGPT 说：" [level=4]
+    - paragraph:
+      - strong: 结论：现有回执支持宣布RQ2在指定冻结源码、数据和环境下的端到端数值复现通过；来源快照与封存方案未见实质漏洞，可以进入最终交付验收。
+      - text: PDF/PPTX/视频成品检查及P7仍须按计划实际完成，当前不能标记整体交付已封存。
+    - heading "1. 复现证明的准确范围" [level=2]
+    - paragraph:
+      - strong: 可以声称：
+      - text: R0030从冻结输入重建特征、重新拟合四个预测器；训练和测试数据核验一致，raw/clip预测八项比较的最大绝对差均为0，全部3320行指标通过预先规定的atol=1e-10、rtol=0；正式账本未变，唯一正式评估仍为R0028。
+    - paragraph:
+      - strong: 不能扩大为：
+    - list:
+      - listitem: 所有指标、模型文件或全部产物均逐字节相同——目前证明的是预测数值一致、指标在既定容差内一致。
+      - listitem: 新增了一次独立测试，或已经证明跨环境、跨版本、跨硬件的复现能力。
+      - listitem: RQ1也完成了与R0030相同范围的独立重建复算。
+      - listitem: 数值复现通过等于视觉检查、P7或全部交付验收已经通过。
+    - heading "2. 快照与封存顺序合理，保留三项接口核查" [level=2]
+    - paragraph: S0001固定已推送版本的原字节，报告来源与其匹配，后续日志另行追加，这条来源链合理。动态README/index/journal及P7自身不参加预封存，也能避免自引用；已纳入清单的独立运行说明应承担固定版本的使用说明。
+    - paragraph: 最低限度确认：
+    - list:
+      - paragraph:
+        - strong: P7不能改写此前验收的交付文件。
+        - text: 特别检查执行00 Notebook是否回写已列入delivery_paths的Notebook、图表或其他成品。若会回写，使用副本或独立输出目录。最终记录的SHA必须对应实际交付、且经过视觉QA的同一版本。这不需要修改冻结研究源码。
+      - paragraph:
+        - strong: P7执行后生成的收据必须持久归档。
+        - text: 因P7发生在提交推送之后，其结果不能仅留在终端。应保存完整逐文件清单、SHA、对应commit、F0001/S0001引用及验收状态，再归档或提交推送该收据；无需让P7包含自己的哈希。后续外部审计作为独立收据追加，不回写封存成品。
+      - paragraph:
+        - strong: 区分文件身份与文件可获得性。
+        - text: 大型产物可以按当前方案本地保留，但运行说明须明确哪些随交付提供、哪些通过收据定位本地文件。不能将“Git保存了hash收据”表述为“Git已经包含全部原始数据、模型和预测”。
+    - heading "3. 成品验收措辞" [level=2]
+    - paragraph:
+      - text: 全片3000帧解码与36个抽帧检查，应分别记录为
+      - strong: 完整解码检查
+      - text: 和
+      - strong: 抽样视觉检查
+      - text: ，不能写成全部3000帧均经逐帧人工审阅。正文页数上限、12页演示、600秒时长及字幕呈现，应以最终导出文件验收；无旁白字幕演示继续如实标注。
+    - paragraph:
+      - strong: 没有需要重新选模、重训、改变科学规则或调整容差的阻断项。
+      - text: 完成上述成品检查并取得P7实际通过记录后，即可按既定范围封存交付；外部全档案审计在完成前仍单列为待执行。
+    - button "复制":
+    - button "评价回复":
+    - button "朗读":
+    - button "分享":
+    - button "重新生成回复":
+    - button "更多操作":
+    - generic: ChatGPT 可能会出错。请核查重要信息。
+    - button "滚动到底部":
+    - heading "最新一条回复" [level=4]
+    - status
+    - button "添加文件等内容":
+    - textbox "询问 ChatGPT":
+      - paragraph: 询问 ChatGPT
+    - button "选择 ChatGPT 模型":
+      - generic: 思考强度
+      - generic: Pro
+    - button "听写":
+    - button "开始语音":
+  - heading "活动" [level=3]
+  - button "子智能体 已使用 24 个":
+    - generic: 子智能体
+    - generic: 已使用 24 个
+  - button "输出" [expanded]:
+    - generic: 输出
+  - generic: 暂无输出
+- status
+- status
+- status: 回答已完成

@@ -1,0 +1,227 @@
+{
+  "video": "D:\\airline-delay\\reports\\presentation\\video_v01\\airline_delay_captioned.mp4",
+  "duration_seconds": 600.0,
+  "width": 1920,
+  "height": 1080,
+  "fps": 5,
+  "audio": false,
+  "captions": "burned from source SRT via ASS",
+  "captioned_label": "Captioned demonstration (no narration)",
+  "size_bytes": 2946834,
+  "sha256": "2b2fdac48de98731e73b6fcff9f2a2c04b1cefa8abda05b6bfcb16b1cf7fedb2",
+  "tools": {
+    "ffmpeg": {
+      "path": "E:\\JasnaDev\\assets\\ffmpeg\\bin\\ffmpeg.exe",
+      "sha256": "cf6b46df53d3672e86af7662358bbd2b21c90cc78c133f3f81f46e63acc387b3",
+      "version": "ffmpeg version 9.0.1-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with gcc 16.1.0 (Rev2, Built by MSYS2 project)\nconfiguration: --enable-gpl --enable-version3 --enable-shared --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper\nlibavutil      61.  1.101 / 61.  1.101\nlibavcodec     63.  1.101 / 63.  1.101\nlibavformat    63.  1.101 / 63.  1.101\nlibavdevice    63.  1.101 / 63.  1.101\nlibavfilter    12.  1.101 / 12.  1.101\nlibswscale     10.  1.101 / 10.  1.101\nlibswresample   7.  1.101 /  7.  1.101\n\nExiting with exit code 0\n"
+    },
+    "ffprobe": {
+      "path": "E:\\JasnaDev\\assets\\ffmpeg\\bin\\ffprobe.exe",
+      "sha256": "0c49675a5f3098b881b1508368deb22e23d22fe56fa7a197df1b98c4e5ea79bf",
+      "version": "ffprobe version 9.0.1-full_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers\nbuilt with gcc 16.1.0 (Rev2, Built by MSYS2 project)\nconfiguration: --enable-gpl --enable-version3 --enable-shared --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper\nlibavutil      61.  1.101 / 61.  1.101\nlibavcodec     63.  1.101 / 63.  1.101\nlibavformat    63.  1.101 / 63.  1.101\nlibavdevice    63.  1.101 / 63.  1.101\nlibavfilter    12.  1.101 / 12.  1.101\nlibswscale     10.  1.101 / 10.  1.101\nlibswresample   7.  1.101 /  7.  1.101\n"
+    }
+  },
+  "source_files": [
+    {
+      "path": "D:\\airline-delay\\reports\\presentation\\deck_v01\\timing.json",
+      "sha256": "2e7c07a6c93454b74f26176e56793d56f9c1f9bfb0425f9293cb9a309f18978c"
+    },
+    {
+      "path": "D:\\airline-delay\\reports\\presentation\\deck_v01\\captions_en.srt",
+      "sha256": "77969ccd36d1c77b68ec3fc6add04860c0a3b32fccbd959f4bbb0f1dc7378a60"
+    },
+    {
+      "path": "D:\\airline-delay\\reports\\presentation\\deck_v01\\slides\\slide-01.png",
+      "sha256": "fcc4a1934d5636e0e40271b143a0d3ae40687055f15e154b3447225ca19ae851"
+    },
+    {
+      "path": "D:\\airline-delay\\reports\\presentation\\deck_v01\\slides\\slide-02.png",
+      "sha256": "041a3cc8355913a75a820c91477c26bfdc59a9fa9ccc4736e37ed875b6fa9b42"
+    },
+    {
+      "path": "D:\\airline-delay\\reports\\presentation\\deck_v01\\slides\\slide-03.png",
+      "sha256": "630976f806969d25a7672016ecf6a6903780841c973cd6531382c8b233461334"
+    },
+    {
+      "path": "D:\\airline-delay\\reports\\presentation\\deck_v01\\slides\\slide-04.png",
+      "sha256": "ffaa6605247dfccd0f073833b46558e0eaf9087915e5fec6d2905888b52cfc0d"
+    },
+    {
+      "path": "D:\\airline-delay\\reports\\presentation\\deck_v01\\slides\\slide-05.png",
+      "sha256": "b3e73314f66e2ed74181d099d6d634d8d62747e6c27fef1098616c1d2f008fa8"
+    },
+    {
+      "path": "D:\\airline-delay\\reports\\presentation\\deck_v01\\slides\\slide-06.png",
+      "sha256": "342d530adb449309fac05ff656ef34ecbbeb1755d2f9865de3f8a92d1e44a6ba"
+    },
+    {
+      "path": "D:\\airline-delay\\reports\\presentation\\deck_v01\\slides\\slide-07.png",
+      "sha256": "23efba1228571eb0b2746a281a948e78b24513b4486029f4ef881c799fff7441"
+    },
+    {
+      "path": "D:\\airline-delay\\reports\\presentation\\deck_v01\\slides\\slide-08.png",
+      "sha256": "8ebb0500cadc9de21e55b0de2df076796c51f93ca38b410cfc1238b9b1a572f2"
+    },
+    {
+      "path": "D:\\airline-delay\\reports\\presentation\\deck_v01\\slides\\slide-09.png",
+      "sha256": "8e4401b43eed2164f1e3ba50c754e7d438ab6ee5a422895c0b0d4131dee237a4"
+    },
+    {
+      "path": "D:\\airline-delay\\reports\\presentation\\deck_v01\\slides\\slide-10.png",
+      "sha256": "561714f959f532fa717997a6e0e2ce32df2d12e451a58e4e0996e20e1d826d94"
+    },
+    {
+      "path": "D:\\airline-delay\\reports\\presentation\\deck_v01\\slides\\slide-11.png",
+      "sha256": "5b445bad96aff9c2ff8d7b0d22c361f8373c6221a74a8a8a8d3a9601db94e6db"
+    },
+    {
+      "path": "D:\\airline-delay\\reports\\presentation\\deck_v01\\slides\\slide-12.png",
+      "sha256": "e1d911c61ff2de1c4313f4e5012b39ee6792c2d1cc6a01bdf12263789ff92d3a"
+    }
+  ],
+  "command": [
+    "E:\\JasnaDev\\assets\\ffmpeg\\bin\\ffmpeg.exe",
+    "-hide_banner",
+    "-n",
+    "-f",
+    "concat",
+    "-safe",
+    "1",
+    "-i",
+    "slides.ffconcat",
+    "-vf",
+    "scale=1600:900:flags=lanczos,pad=1920:1080:160:0:color=white,setsar=1,fps=5,ass=captions.ass",
+    "-r",
+    "5",
+    "-fps_mode",
+    "cfr",
+    "-t",
+    "600.0",
+    "-an",
+    "-c:v",
+    "libx264",
+    "-preset",
+    "slow",
+    "-crf",
+    "22",
+    "-pix_fmt",
+    "yuv420p",
+    "-movflags",
+    "+faststart",
+    "-metadata",
+    "title=Airline delay captioned demonstration",
+    "-metadata",
+    "comment=Captioned demonstration, no narration. Human narration has not been recorded.",
+    "D:\\airline-delay\\reports\\presentation\\video_v01\\airline_delay_captioned.mp4"
+  ],
+  "working_directory": "D:\\airline-delay\\reports\\presentation\\video_v01\\_build",
+  "ffprobe": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "avc1",
+        "codec_tag": "0x31637661",
+        "mime_codec_string": "avc1.640032",
+        "width": 1920,
+        "height": 1080,
+        "coded_width": 1920,
+        "coded_height": 1080,
+        "has_b_frames": 2,
+        "sample_aspect_ratio": "1:1",
+        "display_aspect_ratio": "16:9",
+        "pix_fmt": "yuv420p",
+        "level": 50,
+        "color_range": "tv",
+        "color_transfer": "iec61966-2-1",
+        "color_primaries": "bt709",
+        "chroma_location": "left",
+        "field_order": "progressive",
+        "is_avc": "true",
+        "nal_length_size": "4",
+        "id": "0x1",
+        "r_frame_rate": "5/1",
+        "avg_frame_rate": "5/1",
+        "time_base": "1/10240",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 6144000,
+        "duration": "600.000000",
+        "bit_rate": "38797",
+        "bits_per_raw_sample": "8",
+        "nb_frames": "3000",
+        "extradata_size": 52,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "VideoHandler",
+          "encoder": "Lavc63.1.101 libx264"
+        }
+      }
+    ],
+    "format": {
+      "filename": "D:\\airline-delay\\reports\\presentation\\video_v01\\airline_delay_captioned.mp4",
+      "nb_streams": 1,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+      "format_long_name": "QuickTime / MOV",
+      "start_time": "0.000000",
+      "duration": "600.000000",
+      "size": "2946834",
+      "bit_rate": "39291",
+      "probe_score": 100,
+      "tags": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "title": "Airline delay captioned demonstration",
+        "encoder": "Lavf63.1.101",
+        "comment": "Captioned demonstration, no narration. Human narration has not been recorded."
+      }
+    }
+  },
+  "visual_review_required": [
+    "first-caption.png",
+    "last-frame.png"
+  ],
+  "display_layout": {
+    "slide": {
+      "x": 160,
+      "y": 0,
+      "width": 1600,
+      "height": 900
+    },
+    "subtitle_band": {
+      "y": 900,
+      "height": 180
+    },
+    "subtitle_font": "Arial",
+    "subtitle_font_size": 36,
+    "subtitle_bottom_margin": 48,
+    "canvas_background": "white"
+  }
+}

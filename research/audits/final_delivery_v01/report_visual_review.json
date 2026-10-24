@@ -1,0 +1,412 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-24T05:31:38.120928+00:00",
+  "review_kind": "formal_report_pdf_full_visual_review",
+  "status": "passed",
+  "source_markdown": {
+    "path": "reports/research_v01/report_en.md",
+    "bytes": 44981,
+    "sha256": "2c394b528f7b090a4ef94a10c75552d7ba67267ba156f9dbda9e0a1ce454363c"
+  },
+  "chinese_markdown_unchanged": {
+    "path": "reports/research_v01/结果解读_中文.md",
+    "bytes": 19339,
+    "sha256": "a91ca530aeee03989b48d8cf13c610f52b75a58322641ec2d5a7b35f424c5956"
+  },
+  "builder_source": {
+    "path": "scripts/build_report.py",
+    "bytes": 140727,
+    "sha256": "4b304a640b62cc8fca26bf519980554e792676e16466c0edf5fc24cd931e95b9"
+  },
+  "renderer_source": {
+    "path": "scripts/render_report_pdf.py",
+    "bytes": 23613,
+    "sha256": "1b45bd80ab3f11bf4f54ca38a16ba4f3e6c3606d204d6b55b57fe47a515a1928"
+  },
+  "source_receipts": {
+    "path": "reports/research_v01/source_receipts.json",
+    "bytes": 31567,
+    "sha256": "fdec2a1c7e9186b0010168e1a08f2b760c6b43e4ae3e84631bc5acd3baafe4e4"
+  },
+  "evidence_index": {
+    "path": "reports/research_v01/evidence_index.csv",
+    "bytes": 62926,
+    "sha256": "2f6977c4d1e82fbae3844a74ee819dcbf22ab6526cbdc014246373318ce90d26"
+  },
+  "network_rendering_receipts": {
+    "path": "reports/research_v01/network_rendering_receipts.json",
+    "bytes": 39726,
+    "sha256": "efa530968885f524271a4022d6166e0f964209075f6465014caeb5da7163004d"
+  },
+  "pdf": {
+    "path": "reports/research_v01/report_en.pdf",
+    "bytes": 1136053,
+    "sha256": "ffed06cb312a307104da4eeb13adcca2a0df386452105421dd77d3faf6c9af6d"
+  },
+  "layout_receipt": {
+    "path": "reports/research_v01/report_en.layout.json",
+    "bytes": 9937,
+    "sha256": "00b51abab939a172a549ae2a18f8cda44d71e1b086f36d6c814c153e25be184b"
+  },
+  "render_command": {
+    "python": "C:/Users/Ham/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe",
+    "arguments": [
+      "-X",
+      "utf8",
+      "scripts/render_report_pdf.py",
+      "--input",
+      "reports/research_v01/report_en.md",
+      "--output",
+      "reports/research_v01/report_en.pdf",
+      "--font-dir",
+      "C:/Windows/Fonts",
+      "--math-python",
+      ".venv/Scripts/python.exe"
+    ],
+    "poppler_path_prefix": "C:/Users/Ham/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/poppler/Library/bin",
+    "authoring_marker_repeated": false
+  },
+  "runtime": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "executable": "C:\\Users\\Ham\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "reportlab": "4.4.9",
+    "pypdf": "6.10.0"
+  },
+  "page_count": 22,
+  "body_page_count": 19,
+  "body_page_limit": 25,
+  "body_page_limit_passed": true,
+  "font_family": "Times New Roman",
+  "minimum_pdf_text_points": 10.0,
+  "body_text_points": 11.0,
+  "table_caption_points": 10,
+  "pdf_text_fonts": [
+    "/AAAAAA+TimesNewRomanPS-BoldMT",
+    "/AAAAAA+TimesNewRomanPS-ItalicMT",
+    "/AAAAAA+TimesNewRomanPSMT"
+  ],
+  "embedded_truetype_fonts": {
+    "/AAAAAA+TimesNewRomanPS-BoldMT": true,
+    "/AAAAAA+TimesNewRomanPSMT": true,
+    "/AAAAAA+TimesNewRomanPS-ItalicMT": true
+  },
+  "all_document_fonts_passed": true,
+  "elements": {
+    "figures": 7,
+    "tables": 2,
+    "equations": 0
+  },
+  "equation_rendering": "No display/inline TeX expressions occur in the supplied final Markdown; no equation images generated. Numeric/inequality notation visually inspected.",
+  "network_placed_font_checks": [
+    {
+      "run_id": "R0018",
+      "minimum_source_text_points": 10.0,
+      "minimum_placed_text_points": 10.101069455870256,
+      "all_airport_code_labels_omitted": true,
+      "image_sha256": "12d69785e4cdda8479c9556566d96bfa65fc5e7092ce3e35eeb2b600ca0ce5ed"
+    },
+    {
+      "run_id": "R0029",
+      "minimum_source_text_points": 10.0,
+      "minimum_placed_text_points": 10.101069455870256,
+      "all_airport_code_labels_omitted": true,
+      "image_sha256": "5b1aa27f631230784a848c3baa4cfaa64a04ef5dc452354001c533e5c3393b14"
+    }
+  ],
+  "markdown_word_count": 6144,
+  "evidence_rows": 200,
+  "distinct_english_evidence_citations": 188,
+  "citation_checks": {
+    "all_markdown_ids_exist_in_evidence_index": true,
+    "all_markdown_ids_present_in_pdf_text": true,
+    "code_overview_page": 20,
+    "reproduction_paragraph_page": 19,
+    "R0030_zero_difference_and_seen_test_wording_present": true
+  },
+  "all_builder_outputs_hashes_rechecked": true,
+  "all_pages_visually_reviewed": true,
+  "page_reviews": [
+    {
+      "page": 1,
+      "section": "cover",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-01.png",
+        "bytes": 20040,
+        "sha256": "45c3f60c9ca6de2ef0d3dc3d2f74d388923fea1d5e036a2045d4a39707d88bb0"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "Cover title centered, complete and clear."
+    },
+    {
+      "page": 2,
+      "section": "contents",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-02.png",
+        "bytes": 75681,
+        "sha256": "ac54d1d970f63ef46c68dc673471ddbaab2099a8b776dd3ff32843b381c333c3"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "Contents fits with code overview and references; section page numbers visually match."
+    },
+    {
+      "page": 3,
+      "section": "body",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-03.png",
+        "bytes": 336931,
+        "sha256": "494f70d1fd0173d4b0bf67a2fdba0e9f2c48d797e3475875276a1d4b8a100e5c"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "Research questions, literature and data overview clear; first three EDA table rows fit without clipping."
+    },
+    {
+      "page": 4,
+      "section": "body",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-04.png",
+        "bytes": 268535,
+        "sha256": "9d39ab6ddc18ae40d0179691f66a82f0a7f5fa76ae00a2af3a4f258fa365c12f"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "EDA table repeats its header; remaining rows, B43 coverage and initial monthly summaries fit."
+    },
+    {
+      "page": 5,
+      "section": "body",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-05.png",
+        "bytes": 175129,
+        "sha256": "c0f0eb43c23d03d663abbda96af49735b5d395119c181f85c566f36768277a6f"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "Target histogram and new EDA-to-method rationale clear; source references fit."
+    },
+    {
+      "page": 6,
+      "section": "body",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-06.png",
+        "bytes": 357167,
+        "sha256": "6a612f495c70a7dd8757d45eed1cb7c73024a6b63b724226d3fb64c498fa5d03"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "Timing, execution budgets, 24 fit/1 prediction and shared prediction policy fit without clipping."
+    },
+    {
+      "page": 7,
+      "section": "body",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-07.png",
+        "bytes": 333744,
+        "sha256": "556e18eea6a7796696bee16c2051b94eb0f74ebd2e0d8331df7425d958e9ba1b"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "RQ1 definitions, fallback decisions, all 25 airport identities and first weight rows fit."
+    },
+    {
+      "page": 8,
+      "section": "body",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-08.png",
+        "bytes": 276521,
+        "sha256": "fe5af6401d0d92673a394984cdd9671be02eb8e8aae10f7271d199c6082ac230"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "Weight table repeats its header; remaining rows and development retention/uncertainty prose fit."
+    },
+    {
+      "page": 9,
+      "section": "body",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-09.png",
+        "bytes": 173121,
+        "sha256": "00faaeb7b8bed2d53ad35c4fbd4af1941a94003fd8724a63ffc218f963eef79a"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "Threshold, monthly support and network denominator prose clear; trailing whitespace before next figure group acceptable."
+    },
+    {
+      "page": 10,
+      "section": "body",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-10.png",
+        "bytes": 137251,
+        "sha256": "98ec04655b13dee82d360da4d9f8f6debbbb3503a3bfe94554f537c74c14cedd"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "Development CI/sensitivity figures and captions readable without overlap."
+    },
+    {
+      "page": 11,
+      "section": "body",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-11.png",
+        "bytes": 293415,
+        "sha256": "5ed1b70c7a9fcc021dc2145ae62b70ab7729aec617029c4ec8a429dac1cba8eb"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "Development network has clear regions, legend and colorbar with no airport-code collisions; caption and final-period opening fit."
+    },
+    {
+      "page": 12,
+      "section": "body",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-12.png",
+        "bytes": 253107,
+        "sha256": "156ca4546627b0eb7a2b231431d859c77ffc50f59ab9699a7cf5e6b0c3214c7e"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "Expanded-period thresholds, monthly support and network populations fit."
+    },
+    {
+      "page": 13,
+      "section": "body",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-13.png",
+        "bytes": 136912,
+        "sha256": "8f487f270bc9190f51b902fec474e5dd514dc666c4eb7dc40ff1f6a0ce28858a"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "Expanded-period CI/sensitivity figures clear, captions and axis labels unobstructed."
+    },
+    {
+      "page": 14,
+      "section": "body",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-14.png",
+        "bytes": 266726,
+        "sha256": "8ad91f5b154f369cd2a03180f2dc76613eb0f3d50a796182912d95fdf40d1641"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "Expanded-period network clear; RQ2 baseline and G0/G1 results fit."
+    },
+    {
+      "page": 15,
+      "section": "body",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-15.png",
+        "bytes": 334540,
+        "sha256": "c0b624018bdf438abfb199189e5d1a7fad7852f9dd2226b4d41a03e9a7a47255"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "Incremental OLS and independent branch discussion fit; NOAA paragraph continues naturally onto next page."
+    },
+    {
+      "page": 16,
+      "section": "body",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-16.png",
+        "bytes": 311311,
+        "sha256": "a20fdfc4132927413993dfcc0571bdcf5542ab9a043c074df3b02f2675023711"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "NOAA zero-backfill/unsupported-overlap limits, common sample and algorithm section clear."
+    },
+    {
+      "page": 17,
+      "section": "body",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-17.png",
+        "bytes": 336301,
+        "sha256": "443a5e0668ed1cc42c9fb6f60f354b9994adb8fdbbd791c359dc0b77a5ad4e1c"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "Selection, conditional interval/permutation limits and coefficient introduction fit."
+    },
+    {
+      "page": 18,
+      "section": "body",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-18.png",
+        "bytes": 343834,
+        "sha256": "b82b9245200c1c7225a97d0a4caf2ee06025091ceffd2177595c2d14fb30ee82"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "OLS coefficients and clipping caveat clear; August ordinary/severe tradeoff and interval conditions fit."
+    },
+    {
+      "page": 19,
+      "section": "body",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-19.png",
+        "bytes": 290803,
+        "sha256": "a380a90e7e21cd2a13050c89917b6376ce28db1d508972b27a1f2293f6800952"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "Grouped diagnostics and full R0030 paragraph fit; already-seen-test limitation explicit."
+    },
+    {
+      "page": 20,
+      "section": "body",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-20.png",
+        "bytes": 303017,
+        "sha256": "a05f1d38d6111c1791ec40d2d790feed0e3cea12f39fae37a3788124d3aefc72"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "Research evolution and independent code-structure overview complete and readable."
+    },
+    {
+      "page": 21,
+      "section": "body",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-21.png",
+        "bytes": 96039,
+        "sha256": "5f0b478a57bfb5021514c743704e753eff3d69b3ccfe1e4931799c86b9f81d81"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "Limitations complete; trailing whitespace acceptable; references start on their dedicated page."
+    },
+    {
+      "page": 22,
+      "section": "references",
+      "image": {
+        "path": "reports/research_v01/report_en.qa/page-22.png",
+        "bytes": 86660,
+        "sha256": "1b1693a241ce1646df8756b22452f04c455e5425d56227e5935ced6e6dbd3d2c"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "observations": "All three references and wrapped URLs clear and uncropped."
+    }
+  ],
+  "issues": [],
+  "limitations": [
+    "Raster labels in five unmodified archived scientific figures were visually reviewed for readability and overlap; PDF text-font checks cannot certify their families or exact point sizes. The two report-redrawn networks have separate source/placed minimum-font receipts.",
+    "Review verifies actual supplied Markdown/PDF layout and citation rendering, not raw data or original prediction computations. R0030 execution evidence is stated by supplied source text; visual task did not independently rerun or revalidate reproduction.",
+    "Original renderer layout receipt remains unchanged with visual_review_completed=false. This separate audit records actual review of all twenty-two PNGs."
+  ],
+  "scope": {
+    "source_markdown_modified": false,
+    "scientific_source_modified": false,
+    "source_snapshot_modified": false,
+    "raw_data_read": false,
+    "prediction_rows_read": false,
+    "feature_pickle_or_models_read": false,
+    "fit_called": false,
+    "pipeline_started": false,
+    "git_commands_run": false,
+    "canonical_copy_performed": false
+  }
+}

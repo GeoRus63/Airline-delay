@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-24T05:32:29.706967+00:00",
+  "review_kind": "independent_actual_visual_review_of_final_captioned_video_sample_frames",
+  "passed": true,
+  "visual_review_completed": true,
+  "video": {
+    "path": "reports/presentation/video_v01/airline_delay_captioned.mp4",
+    "bytes": 2946834,
+    "sha256": "2b2fdac48de98731e73b6fcff9f2a2c04b1cefa8abda05b6bfcb16b1cf7fedb2"
+  },
+  "source_receipts": [
+    {
+      "path": "research/audits/final_delivery_v01/video/decode_and_transitions.json",
+      "bytes": 13879,
+      "sha256": "e232e9747ec92b867c6a62a078945ec4dcf8db619e52681cde8289eae21db813"
+    },
+    {
+      "path": "reports/presentation/video_v01/video_receipt.json",
+      "bytes": 12104,
+      "sha256": "3ea2217e016ad2fb2fcef80b527778f81501bc8b95db30a22cc1a51718c24f48"
+    }
+  ],
+  "checks": {
+    "all_twelve_slides_actually_viewed": true,
+    "eighteen_requested_images_actually_viewed": true,
+    "viewed_sample_image_hashes_match_decode_receipts": true,
+    "current_video_sha_matches_both_receipts": true,
+    "current_video_bytes_match_receipt": true,
+    "recorded_duration600_1920x1080_5fps_noaudio": true,
+    "recorded_full_decode_success": true,
+    "recorded_36_start_middle_end_pixel_samples_pass": true,
+    "viewed_frame_captions_do_not_obscure_body_charts_tables_or_footnotes": true,
+    "displayed_decimals_intact_at_reviewed_frames": true,
+    "no_narration_label_actually_visible": true,
+    "final_frame_readable_and_not_blank": true
+  },
+  "actual_visual_coverage": {
+    "all_slides_covered": 12,
+    "individually_viewed_images": 18,
+    "positions": "all12 middle frames; slide04/05start+end; first-caption and last-frame",
+    "resolution": "Each image opened with tools.view_image detail=original at1920x1080; no contact-sheet-only inference.",
+    "watched_full600_second_playback": false,
+    "frame_by_frame_visual_review": false
+  },
+  "observed_frames": [
+    {
+      "path": "research/audits/final_delivery_v01/video/slide-01-middle.png",
+      "bytes": 251729,
+      "sha256": "ae3206ed0171906bec437a10df904175c015d5a84a09b740511f52ae0ff4f3af",
+      "slide": 1,
+      "position": "middle",
+      "actual_view_method": "tools.view_image detail=original; individually rendered to reviewer",
+      "passed": true,
+      "observation": "Readable findings-first title and three findings. MAE13.655/RMSE42.917 and560,077 retain complete digits. Two-line subtitle is wholly below the slide and does not cover text or page number."
+    },
+    {
+      "path": "research/audits/final_delivery_v01/video/slide-02-middle.png",
+      "bytes": 272864,
+      "sha256": "96d078dfa93f811b9a201f8636453263abc62cd0f090245adb7500b7e42ce781",
+      "slide": 2,
+      "position": "middle",
+      "actual_view_method": "tools.view_image detail=original; individually rendered to reviewer",
+      "passed": true,
+      "observation": "Both RQs and UTC validation statement fit within the slide. The upstream>=15 glyph and long RQ2 sentence are clear. Subtitle describes arrival prediction time without touching slide content."
+    },
+    {
+      "path": "research/audits/final_delivery_v01/video/slide-03-middle.png",
+      "bytes": 224950,
+      "sha256": "8dd17049eb260f2bf80f6d3b70aa47bb63889bca5905e7f9ebd88599ca95cf42",
+      "slide": 3,
+      "position": "middle",
+      "actual_view_method": "tools.view_image detail=original; individually rendered to reviewer",
+      "passed": true,
+      "observation": "Population, airport/route and overnight counts are fully displayed with thousands separators. Title and all three statements are clear. Subtitle is separated below the page number."
+    },
+    {
+      "path": "research/audits/final_delivery_v01/video/slide-04-middle.png",
+      "bytes": 354750,
+      "sha256": "4bd94883d1f8c96c34b1f43c0fdd46ba33a84b7f2e39adadabb2c36c984c51c2",
+      "slide": 4,
+      "position": "middle",
+      "actual_view_method": "tools.view_image detail=original; individually rendered to reviewer",
+      "passed": true,
+      "observation": "ORD/DEN/SFO/FLL table, retained counts, signed delta values and both ends of every displayed95%CI are readable. FLL0.436[-2.403,3.012] is intact. Support-selected-not-ranking footnote stays above the subtitle band with visible whitespace."
+    },
+    {
+      "path": "research/audits/final_delivery_v01/video/slide-05-middle.png",
+      "bytes": 292295,
+      "sha256": "5c4d5d46d4a75a9f50639ae2422194b6118947325661f2a79d5ed89fdbef9eb8",
+      "slide": 5,
+      "position": "middle",
+      "actual_view_method": "tools.view_image detail=original; individually rendered to reviewer",
+      "passed": true,
+      "observation": "Monthly support bars6,8,12,15,15, month labels and y-axis are clear. Node/route and connection/flight denominators fit. The changing-support/non-fixed-cohort footnote is complete and separated from subtitles."
+    },
+    {
+      "path": "research/audits/final_delivery_v01/video/slide-06-middle.png",
+      "bytes": 264010,
+      "sha256": "f0aa40859c8c2bea507efabb048dec9ac501932c644cdadeca7977526f888fe4",
+      "slide": 6,
+      "position": "middle",
+      "actual_view_method": "tools.view_image detail=original; individually rendered to reviewer",
+      "passed": true,
+      "observation": "G0-G4B chart and0-25 MAE axis are clear; endpoint MAEs19.574/16.807 are complete. At inspected middle cue,0.031 and interval0.009 to0.052 remain whole numeric tokens and are not cut by the caption box."
+    },
+    {
+      "path": "research/audits/final_delivery_v01/video/slide-07-middle.png",
+      "bytes": 272206,
+      "sha256": "4c9711c28047b44e795e9be8b5077fa64f95761e786354a8b3d275f6ee735e92",
+      "slide": 7,
+      "position": "middle",
+      "actual_view_method": "tools.view_image detail=original; individually rendered to reviewer",
+      "passed": true,
+      "observation": "Variant-0.002, NOAA0.000 and zero-fill statement are intact. TAF revision rule is clear. Subtitle explicitly avoids treating unchanged inputs as evidence of no NOAA predictive value and stays below content."
+    },
+    {
+      "path": "research/audits/final_delivery_v01/video/slide-08-middle.png",
+      "bytes": 254802,
+      "sha256": "f3053751787b7d6f728a04390126ce0d10203f2dbd054220d8f5b4d0975fda9a",
+      "slide": 8,
+      "position": "middle",
+      "actual_view_method": "tools.view_image detail=original; individually rendered to reviewer",
+      "passed": true,
+      "observation": "Readable Random forest winner title. R0017/R0025 and full fixed-grid axis labels, including depths and leaf50/200, remain visible above caption band. Caption continues the forest-configuration explanation without obscuring labels."
+    },
+    {
+      "path": "research/audits/final_delivery_v01/video/slide-09-middle.png",
+      "bytes": 322106,
+      "sha256": "41c9d536576bb54fd206986706a3d6d7baedcaf40ba525baa49007c24214e283",
+      "slide": 9,
+      "position": "middle",
+      "actual_view_method": "tools.view_image detail=original; individually rendered to reviewer",
+      "passed": true,
+      "observation": "All four predictor names and MAE/RMSE table values are complete, including13.655/42.917,23.630/53.278,18.000/56.178 and19.107/59.972. No numeric cell clipping. Subtitle occupies its own band."
+    },
+    {
+      "path": "research/audits/final_delivery_v01/video/slide-10-middle.png",
+      "bytes": 276095,
+      "sha256": "cc93681d50fa23e65575e109ca48035ff0f83fb7012ec426cc79cf169a8fec74",
+      "slide": 10,
+      "position": "middle",
+      "actual_view_method": "tools.view_image detail=original; individually rendered to reviewer",
+      "passed": true,
+      "observation": "All four-digit decimals and percent values are fully readable:8.2788/6.7446,10.8156/14.6415,69.3255/134.5447,8.8068%,44.7113%,94.2084%. Caption likewise preserves134.5447 and8.8068% and does not cover body."
+    },
+    {
+      "path": "research/audits/final_delivery_v01/video/slide-11-middle.png",
+      "bytes": 276033,
+      "sha256": "dac235ead3f0509ed73c8a22ecdb48b95d30929d8875b8cbd69189e834911fd7",
+      "slide": 11,
+      "position": "middle",
+      "actual_view_method": "tools.view_image detail=original; individually rendered to reviewer",
+      "passed": true,
+      "observation": "Long interpretation title and three limitations fit. G1_upstream_delay14.951 is complete. Hypothetical PDP/support caption is two readable lines below the body, with no overflow."
+    },
+    {
+      "path": "research/audits/final_delivery_v01/video/slide-12-middle.png",
+      "bytes": 235890,
+      "sha256": "8c19ff811b60524db17da24e05e22be9be53ecebe61fb2add3b5c89fbb2fc921",
+      "slide": 12,
+      "position": "middle",
+      "actual_view_method": "tools.view_image detail=original; individually rendered to reviewer",
+      "passed": true,
+      "observation": "Concluding RQ1/RQ2 scope,25 supported estimates, Random forest MAE13.655 and new-season limitation are clear. Caption is separate and no-narration label remains visible."
+    },
+    {
+      "path": "reports/presentation/video_v01/first-caption.png",
+      "bytes": 249276,
+      "sha256": "08318d8565b9653f8af11aa6109617cc82dd34a82e4a63347e68b2dfcca8dfea",
+      "slide": 1,
+      "position": "first-caption",
+      "actual_view_method": "tools.view_image detail=original; individually rendered to reviewer",
+      "passed": true,
+      "observation": "First displayed subtitle opens the main prediction result with complete13.655. Title, metrics and page01 are unobstructed. Top label reads Captioned demonstration (no narration)."
+    },
+    {
+      "path": "reports/presentation/video_v01/last-frame.png",
+      "bytes": 232221,
+      "sha256": "d7cf992fbd92be44f54832fe64af09fa397aae6caa11c86bccad0d429f3ee513",
+      "slide": 12,
+      "position": "last-frame",
+      "actual_view_method": "tools.view_image detail=original; individually rendered to reviewer",
+      "passed": true,
+      "observation": "Last frame still displays the full concluding slide and page12. Final subtitle closes preserving archived decisions and unsuccessful experiments, ends with a period, and is not clipped. Top no-narration label remains readable; no blank/black end frame."
+    },
+    {
+      "path": "research/audits/final_delivery_v01/video/slide-04-start.png",
+      "bytes": 352565,
+      "sha256": "e20a086eb160871c1e288311c9e567659cddc14c65bd342642a719c7a58c096c",
+      "slide": 4,
+      "position": "start",
+      "actual_view_method": "tools.view_image detail=original; individually rendered to reviewer",
+      "passed": true,
+      "observation": "Start cue discusses25 airports and16 common cells. Table decimals/interval endpoints and the complete support-selected-not-ranking footnote are visible; caption does not cover the footnote."
+    },
+    {
+      "path": "research/audits/final_delivery_v01/video/slide-04-end.png",
+      "bytes": 358323,
+      "sha256": "250b62637518c29009a0a12d9364ff1a2943683c9f31a4632cef40541fd508da",
+      "slide": 4,
+      "position": "end",
+      "actual_view_method": "tools.view_image detail=original; individually rendered to reviewer",
+      "passed": true,
+      "observation": "End cue says the summary includes development months and is not independent August validation. Both subtitle lines, all table decimals, footnote and page04 remain clear with separate vertical regions."
+    },
+    {
+      "path": "research/audits/final_delivery_v01/video/slide-05-start.png",
+      "bytes": 294126,
+      "sha256": "741a3557885d9a2ab277a27cc82ad25a32d4f9339cea9f056647b70576c958bb",
+      "slide": 5,
+      "position": "start",
+      "actual_view_method": "tools.view_image detail=original; individually rendered to reviewer",
+      "passed": true,
+      "observation": "Start cue355 airport nodes/6,629 routes stays within subtitle band. Monthly chart and changing-support footnote are fully visible, with no overlay."
+    },
+    {
+      "path": "research/audits/final_delivery_v01/video/slide-05-end.png",
+      "bytes": 286018,
+      "sha256": "e3d33f35194eb53be6117c299b4fbab85a78a46252f612b75e3654cc9f4ee881",
+      "slide": 5,
+      "position": "end",
+      "actual_view_method": "tools.view_image detail=original; individually rendered to reviewer",
+      "passed": true,
+      "observation": "End cue rejects causal airport attribution. Monthly labels/bars, complete changing-support footnote and page05 remain unobscured."
+    }
+  ],
+  "recorded_automated_verification_read_but_not_rerun": {
+    "path": "research/audits/final_delivery_v01/video/decode_and_transitions.json",
+    "full_stream_decode_exit_code": 0,
+    "decoded_frames": 3000,
+    "pixel_samples": 36,
+    "maximum_observed_mean_channel_error": 0.31214754901960784,
+    "maximum_allowed_mean_channel_error": 5.0,
+    "attribution": "Root agent executed the full stream decoder and36 automated source-slide comparisons. This reviewer read that receipt and independently visually inspected18images; these are separate forms of evidence."
+  },
+  "findings": [],
+  "limitations": [
+    "This is sampled actual visual inspection across every slide, not visual examination of all3000frames or a continuous600second watch.",
+    "Subtitle readability and absence of overlay are observed at the18listed frames; every intermediate caption cue was not visually checked.",
+    "No subtitle timing, semantic completeness or audio-track decoding was independently rerun; media properties are from the hashed existing video receipt and root decoder receipt.",
+    "No narration label is accurate for the declared silent captioned demonstration. Course tips avoidAIvoice are not recast as a mandatory audio-track requirement.",
+    "English-only captions are appropriate for the requested English technical presentation; Chinese captions were not required.",
+    "Source slide top header content is offset above the comparison crop by the captioned-demo label; no content obstruction was observed.",
+    "No finalP7delivery approval, external upload, source-data validity or cross-player compatibility is implied."
+  ],
+  "mutations": {
+    "created_only": "research/audits/final_delivery_v01/video_visual_review.json",
+    "modified_video": false,
+    "modified_source": false,
+    "modified_existing_receipts": false,
+    "used_git": false
+  }
+}

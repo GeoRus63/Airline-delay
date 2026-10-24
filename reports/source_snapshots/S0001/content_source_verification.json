@@ -1,0 +1,61 @@
+{
+  "created_at_utc": "2026-10-24T05:28:58.645098+00:00",
+  "passed": true,
+  "source_git_commit": "cc9eb8d32f6f105a7f4a2da26e0d668a5246a5de",
+  "mapping_sha256": "4c5c6afff9c8cc69006d29ef1304a81a483083594e85b4fb739feca8f274d447",
+  "checks": [
+    {
+      "consumer": "reports/research_v01/source_receipts.json",
+      "source": "experiments/index.csv",
+      "snapshot": "reports/source_snapshots/S0001/experiments/index.csv",
+      "bytes": 5850,
+      "sha256": "adf52507ce5252ae64533264d7623cc1cdf11fd98cc432c60eb223fc288efa5e",
+      "passed": true
+    },
+    {
+      "consumer": "reports/research_v01/source_receipts.json",
+      "source": "research/研究记录.md",
+      "snapshot": "reports/source_snapshots/S0001/research/研究记录.md",
+      "bytes": 89868,
+      "sha256": "cde71150b358f47f506455ac4a7f79c503434b8939b07d62729194967a82a12e",
+      "passed": true
+    },
+    {
+      "consumer": "reports/research_v01/source_receipts.json",
+      "all_live_sources_rehashed": 153,
+      "passed": true
+    },
+    {
+      "consumer": "reports/presentation/content_v01.sources.json",
+      "source": "experiments/index.csv",
+      "snapshot": "reports/source_snapshots/S0001/experiments/index.csv",
+      "bytes": 5850,
+      "sha256": "adf52507ce5252ae64533264d7623cc1cdf11fd98cc432c60eb223fc288efa5e",
+      "passed": true
+    },
+    {
+      "consumer": "reports/presentation/content_v01.sources.json",
+      "source": "research/研究记录.md",
+      "snapshot": "reports/source_snapshots/S0001/research/研究记录.md",
+      "bytes": 89868,
+      "sha256": "cde71150b358f47f506455ac4a7f79c503434b8939b07d62729194967a82a12e",
+      "passed": true
+    },
+    {
+      "consumer": "reports/presentation/content_v01.sources.json",
+      "all_live_sources_rehashed": 112,
+      "passed": true
+    }
+  ],
+  "consumer_receipts": [
+    {
+      "path": "reports/research_v01/source_receipts.json",
+      "sha256": "fdec2a1c7e9186b0010168e1a08f2b760c6b43e4ae3e84631bc5acd3baafe4e4"
+    },
+    {
+      "path": "reports/presentation/content_v01.sources.json",
+      "sha256": "382ef410a0034331ee80a1a163bbfd6e970beb6a0c516dc9dbb3c6ff1deddd1b"
+    }
+  ],
+  "scope": "Both actual final content builders consumed the exact preserved pre-publication index/journal bytes; every reported source matched live bytes at this check. Later journal/index updates do not invalidate those preserved snapshots."
+}

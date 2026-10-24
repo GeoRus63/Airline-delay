@@ -1,0 +1,141 @@
+﻿[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Caption,Arial,36,&H00FFFFFF,&H00FFFFFF,&H001A1A1A,&H001A1A1A,0,0,0,0,100,100,0,0,3,8,0,2,100,100,48,1
+Style: Label,Arial,22,&H003E4B5A,&H003E4B5A,&H00FFFFFF,&H00FFFFFF,0,0,0,0,100,100,0,0,3,4,0,8,80,80,12,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:10:00.00,Label,,0,0,0,,Captioned demonstration (no narration)
+Dialogue: 1,0:00:00.00,0:00:07.00,Caption,,0,0,0,,The main prediction result is an August\Nmean absolute error of 13.655 minutes for
+Dialogue: 1,0:00:07.00,0:00:13.00,Caption,,0,0,0,,the frozen primary predictor, Random\Nforest. Its root mean squared error is
+Dialogue: 1,0:00:13.00,0:00:18.00,Caption,,0,0,0,,42.917 minutes over 560,077 accepted\Nconnections. The airport analysis supports
+Dialogue: 1,0:00:18.00,0:00:23.50,Caption,,0,0,0,,25 estimates under the unchanged\Ndevelopment reference. These are the two
+Dialogue: 1,0:00:23.50,0:00:30.50,Caption,,0,0,0,,findings around which I will explain the\Nproject. A simple baseline was allowed to
+Dialogue: 1,0:00:30.50,0:00:37.00,Caption,,0,0,0,,win, so model complexity is not a success\Ncriterion. The analysis is retrospective
+Dialogue: 1,0:00:37.00,0:00:42.50,Caption,,0,0,0,,and describes valid observed completed\Nconnections. It does not assign causal
+Dialogue: 1,0:00:42.50,0:00:46.00,Caption,,0,0,0,,responsibility to airports,\Nand the final test
+Dialogue: 1,0:00:46.00,0:00:50.00,Caption,,0,0,0,,result did not trigger\Nanother round of tuning.
+Dialogue: 1,0:00:50.00,0:00:55.09,Caption,,0,0,0,,The first question describes how delay\Nchanges across consecutive flights of the
+Dialogue: 1,0:00:55.09,0:00:59.76,Caption,,0,0,0,,same aircraft. For the main airport\Nanalysis, upstream delay must reach
+Dialogue: 1,0:00:59.76,0:01:05.28,Caption,,0,0,0,,fifteen minutes and the connection must be\Nnonovernight. A negative net change means
+Dialogue: 1,0:01:05.28,0:01:10.38,Caption,,0,0,0,,fewer delay minutes downstream, even if\Nthe aircraft remains late. The second
+Dialogue: 1,0:01:10.38,0:01:14.20,Caption,,0,0,0,,question predicts nonnegative downstream\Ndeparture delay at upstream actual
+Dialogue: 1,0:01:14.20,0:01:18.44,Caption,,0,0,0,,arrival. Its population includes upstream\Non-time flights, and eligibility requires
+Dialogue: 1,0:01:18.44,0:01:23.11,Caption,,0,0,0,,the prediction time to precede the\Ndownstream departure label. Training uses
+Dialogue: 1,0:01:23.11,0:01:27.78,Caption,,0,0,0,,only labels mature before each UTC\Nvalidation boundary. The forward folds
+Dialogue: 1,0:01:27.78,0:01:32.88,Caption,,0,0,0,,train through April, May and June and\Nvalidate the following month. August
+Dialogue: 1,0:01:32.88,0:01:35.00,Caption,,0,0,0,,remains the final frozen assessment.
+Dialogue: 1,0:01:35.00,0:01:39.95,Caption,,0,0,0,,The development prediction sample contains\N2,261,775 valid connections across 355
+Dialogue: 1,0:01:39.95,0:01:44.90,Caption,,0,0,0,,airports and 6,591 routes. It includes\N437,491 overnight connections, which
+Dialogue: 1,0:01:44.90,0:01:49.85,Caption,,0,0,0,,receive separate error reporting. These\Ncounts describe connections, not the
+Dialogue: 1,0:01:49.85,0:01:54.80,Caption,,0,0,0,,number of individual flights. Cleaning\Nfirst follows scheduled same-tail order,
+Dialogue: 1,0:01:54.80,0:01:59.75,Caption,,0,0,0,,then checks actual timing and endpoint\Ncontinuity. Cancellations, diversions and
+Dialogue: 1,0:01:59.75,0:02:04.70,Caption,,0,0,0,,ambiguous chains define exclusions rather\Nthan zero delay. This completed-connection
+Dialogue: 1,0:02:04.70,0:02:08.17,Caption,,0,0,0,,selection limits operational\Ninterpretation because future completion
+Dialogue: 1,0:02:08.17,0:02:13.61,Caption,,0,0,0,,is not guaranteed at prediction time.\NPlanned schedule availability and static
+Dialogue: 1,0:02:13.61,0:02:17.57,Caption,,0,0,0,,aircraft inventories also remain\Nassumptions. Keeping these population
+Dialogue: 1,0:02:17.57,0:02:23.02,Caption,,0,0,0,,definitions explicit prevents a lower\Nerror on a different sample from
+Dialogue: 1,0:02:23.02,0:02:25.00,Caption,,0,0,0,,masquerading as an improvement.
+Dialogue: 1,0:02:25.00,0:02:29.93,Caption,,0,0,0,,The development procedure froze 25\Nairports and 16 common master cells. The
+Dialogue: 1,0:02:29.93,0:02:34.03,Caption,,0,0,0,,final main-threshold analysis supports 25\Nairport estimates, with standardized means
+Dialogue: 1,0:02:34.03,0:02:38.54,Caption,,0,0,0,,spanning -16.424 to 0.436 minutes.\NAmong supported point estimates, 24 are
+Dialogue: 1,0:02:38.54,0:02:43.88,Caption,,0,0,0,,negative. The sole positive point estimate\Nis FLL, plus 0.436 minutes, with 95%
+Dialogue: 1,0:02:43.88,0:02:48.81,Caption,,0,0,0,,interval [-2.403, 3.012], which includes\Nzero. Across the raw main population of
+Dialogue: 1,0:02:48.81,0:02:53.32,Caption,,0,0,0,,482,013 connections, the mean change\Nis -7.254 minutes, which differs from
+Dialogue: 1,0:02:53.32,0:02:56.60,Caption,,0,0,0,,standardized comparison. The\Nstandardization reuses the same airport
+Dialogue: 1,0:02:56.60,0:03:00.71,Caption,,0,0,0,,set, cells and threshold-conditional\Npooled development weights. It does not
+Dialogue: 1,0:03:00.71,0:03:04.40,Caption,,0,0,0,,renormalize separately for a weakly\Nsupported airport. Unsupported estimates
+Dialogue: 1,0:03:04.40,0:03:09.74,Caption,,0,0,0,,remain missing. An airport may lose\Nsupport in a particular month, so missing
+Dialogue: 1,0:03:09.74,0:03:15.48,Caption,,0,0,0,,months stay NA rather than becoming zero\Nor entering a rank. The April–August RQ1
+Dialogue: 1,0:03:15.48,0:03:20.00,Caption,,0,0,0,,summary includes development months and\Nis not an independent August validation.
+Dialogue: 1,0:03:20.00,0:03:25.22,Caption,,0,0,0,,The network contains 355 airport nodes\Nand 6,629 directed routes, representing
+Dialogue: 1,0:03:25.22,0:03:30.43,Caption,,0,0,0,,3,054,489 flights in the route tables.\NIts nodes represent 2,821,852 accepted
+Dialogue: 1,0:03:30.43,0:03:35.17,Caption,,0,0,0,,connections, while route counts represent\Nindividual flights. The full geographic
+Dialogue: 1,0:03:35.17,0:03:40.86,Caption,,0,0,0,,network remains available in the linked\Nreport and Notebook source figure. There,
+Dialogue: 1,0:03:40.86,0:03:46.08,Caption,,0,0,0,,node colour shows supported standardized\Nchange, gray indicates no support, and
+Dialogue: 1,0:03:46.08,0:03:50.82,Caption,,0,0,0,,edge width shows flight traffic rather\Nthan delay-propagation events. Monthly
+Dialogue: 1,0:03:50.82,0:03:56.03,Caption,,0,0,0,,supported-airport counts are 2026-04:\N6, 2026-05: 8, 2026-06: 12, 2026-07: 15,
+Dialogue: 1,0:03:56.03,0:04:02.20,Caption,,0,0,0,,2026-08: 15. These counts may change under\Nthe same frozen reference. Consequently, a
+Dialogue: 1,0:04:02.20,0:04:09.31,Caption,,0,0,0,,range across available airports in one\Nmonth is not a trend for a fixed airport
+Dialogue: 1,0:04:09.31,0:04:15.00,Caption,,0,0,0,,panel, and the map cannot establish\Nwhich airport caused a downstream delay.
+Dialogue: 1,0:04:15.00,0:04:19.37,Caption,,0,0,0,,This chart shows every cumulative feature\Nstage, including steps that fail to
+Dialogue: 1,0:04:19.37,0:04:23.01,Caption,,0,0,0,,improve error. G0 provides the\Nbaseline schedule context, followed by
+Dialogue: 1,0:04:23.01,0:04:25.93,Caption,,0,0,0,,aircraft-chain history, aircraft family,\Nairport operating history, observations
+Dialogue: 1,0:04:25.93,0:04:31.76,Caption,,0,0,0,,and TAF. G0 has MAE 19.574 minutes and G4B\Nhas 16.807 minutes. G1 changed pooled MAE
+Dialogue: 1,0:04:31.76,0:04:36.13,Caption,,0,0,0,,by -2.316 minutes against G0, with\Ninterval -2.406 to -2.216. G2 changed
+Dialogue: 1,0:04:36.13,0:04:41.23,Caption,,0,0,0,,pooled MAE by -0.009 minutes against G1,\Nwith interval -0.011 to -0.007. G3 changed
+Dialogue: 1,0:04:41.23,0:04:46.32,Caption,,0,0,0,,pooled MAE by 0.031 minutes against G2,\Nwith interval 0.009 to 0.052. G4A changed
+Dialogue: 1,0:04:46.32,0:04:51.06,Caption,,0,0,0,,pooled MAE by -0.066 minutes against\NG3, with interval -0.079 to -0.047. G4B
+Dialogue: 1,0:04:51.06,0:04:55.43,Caption,,0,0,0,,changed pooled MAE by -0.407 minutes\Nagainst G4A, with interval -0.664 to
+Dialogue: 1,0:04:55.43,0:04:59.44,Caption,,0,0,0,,-0.164. All paired differences use the\Nsame evaluation identities and time
+Dialogue: 1,0:04:59.44,0:05:01.99,Caption,,0,0,0,,splits. Negative candidate-minus-reference\Ndifferences indicate improvement. The
+Dialogue: 1,0:05:01.99,0:05:05.63,Caption,,0,0,0,,addition order determines the\Nmeasured increment. This is not an
+Dialogue: 1,0:05:05.63,0:05:07.82,Caption,,0,0,0,,order-independent ranking\Nof information value, and
+Dialogue: 1,0:05:07.82,0:05:10.00,Caption,,0,0,0,,scheduled turnaround\Nalready belongs to G0.
+Dialogue: 1,0:05:10.00,0:05:14.70,Caption,,0,0,0,,The variant replacement changes MAE\Nby -0.002 minutes against family. NOAA
+Dialogue: 1,0:05:14.70,0:05:19.40,Caption,,0,0,0,,supplementation changes MAE by 0.000\Nminutes against IEM G4B. The archived
+Dialogue: 1,0:05:19.40,0:05:25.81,Caption,,0,0,0,,audit records 0 inserted field values, of\Nwhich 0 are in selected model columns. No
+Dialogue: 1,0:05:25.81,0:05:30.94,Caption,,0,0,0,,NOAA values entered the selected model\Ncolumns in this branch. This unchanged
+Dialogue: 1,0:05:30.94,0:05:35.64,Caption,,0,0,0,,value contribution cannot establish that\NNOAA information has no predictive value.
+Dialogue: 1,0:05:35.64,0:05:40.34,Caption,,0,0,0,,These remain separate branches. Weather\Njoins respect the arrival prediction time
+Dialogue: 1,0:05:40.34,0:05:45.04,Caption,,0,0,0,,and declared observation lag. TAF applies\Na conservative revision block, excluding
+Dialogue: 1,0:05:45.04,0:05:49.32,Caption,,0,0,0,,unverified amended, corrected or delayed\Nbulletin values. The missing-weather rows
+Dialogue: 1,0:05:49.32,0:05:54.02,Caption,,0,0,0,,remain in the sample. G4B records\N2,261,775 weather queries. The saved
+Dialogue: 1,0:05:54.02,0:05:58.29,Caption,,0,0,0,,availability counts describe source\Nstates, not complete weather vectors or
+Dialogue: 1,0:05:58.29,0:06:00.00,Caption,,0,0,0,,proof of real-time delivery.
+Dialogue: 1,0:06:00.00,0:06:04.92,Caption,,0,0,0,,The feature-selection decision retained\NR0017. The six tree and forest candidates
+Dialogue: 1,0:06:04.92,0:06:09.84,Caption,,0,0,0,,then hold that feature set and\Npreprocessing fixed. The chart includes
+Dialogue: 1,0:06:09.84,0:06:15.65,Caption,,0,0,0,,four decision trees across two depths and\Ntwo minimum-leaf sizes, plus two random
+Dialogue: 1,0:06:15.65,0:06:21.91,Caption,,0,0,0,,forests at fixed depth. Forests use two\Nhundred trees and one-half of features per
+Dialogue: 1,0:06:21.91,0:06:27.72,Caption,,0,0,0,,split, with seed forty-two. The retained\Nlearned model is R0025, while the primary
+Dialogue: 1,0:06:27.72,0:06:33.09,Caption,,0,0,0,,predictor is Random forest. The recorded\Nreason is: Registered family minima and
+Dialogue: 1,0:06:33.09,0:06:36.67,Caption,,0,0,0,,sequential practical/monthly-stability\Npromotion, followed by minimum pooled MAE
+Dialogue: 1,0:06:36.67,0:06:41.58,Caption,,0,0,0,,against all three baselines. The practical\Nand monthly-stability promotion rule was
+Dialogue: 1,0:06:41.58,0:06:47.40,Caption,,0,0,0,,committed after P3, before weather and\Ntree results were inspected. It was not
+Dialogue: 1,0:06:47.40,0:06:53.21,Caption,,0,0,0,,registered before P0. The chosen primary\Nneed not be the single lowest-error trial
+Dialogue: 1,0:06:53.21,0:06:55.00,Caption,,0,0,0,,among every exploratory candidate.
+Dialogue: 1,0:06:55.00,0:07:00.50,Caption,,0,0,0,,This is the final August comparison after\Nthe rules, features, preprocessing and
+Dialogue: 1,0:07:00.50,0:07:05.54,Caption,,0,0,0,,primary predictor were frozen. The\Nprimary, Random forest, records MAE 13.655
+Dialogue: 1,0:07:05.54,0:07:11.96,Caption,,0,0,0,,minutes and RMSE 42.917 minutes. The table\Nalso preserves the learned model and all
+Dialogue: 1,0:07:11.96,0:07:17.46,Caption,,0,0,0,,three simple comparators. The mean and\Nmedian baselines are estimated from mature
+Dialogue: 1,0:07:17.46,0:07:22.04,Caption,,0,0,0,,training labels, while carry-forward\Ntransfers upstream delay directly. MAE is
+Dialogue: 1,0:07:22.04,0:07:27.08,Caption,,0,0,0,,the primary decision metric because it\Nmeasures average absolute minutes. RMSE
+Dialogue: 1,0:07:27.08,0:07:32.58,Caption,,0,0,0,,gives greater weight to large errors.\NNeither metric alone describes every delay
+Dialogue: 1,0:07:32.58,0:07:38.54,Caption,,0,0,0,,regime. The 6 paired intervals are\Nindividual 95% intervals, not a joint 95%
+Dialogue: 1,0:07:38.54,0:07:42.67,Caption,,0,0,0,,statement across comparisons. The\Nfinal access ledger and saved-result
+Dialogue: 1,0:07:42.67,0:07:47.71,Caption,,0,0,0,,verification identify this test. These\Nslides read saved summaries only, without
+Dialogue: 1,0:07:47.71,0:07:50.00,Caption,,0,0,0,,reopening test labels or refitting.
+Dialogue: 1,0:07:50.00,0:07:58.60,Caption,,0,0,0,,For ordinary delays below sixty minutes,\NRF MAE is 8.2788 versus median 6.7446,
+Dialogue: 1,0:07:58.60,0:08:07.21,Caption,,0,0,0,,higher. RMSE is 10.8156 versus 14.6415,\Nlower. For severe delays, MAE is 69.3255
+Dialogue: 1,0:08:07.21,0:08:15.15,Caption,,0,0,0,,versus 134.5447 minutes. Severe cases\Nare 8.8068% of the sample but contribute
+Dialogue: 1,0:08:15.15,0:08:23.09,Caption,,0,0,0,,44.7113% of RF absolute error and 94.2084%\Nof squared error. These outcome-defined
+Dialogue: 1,0:08:23.09,0:08:29.04,Caption,,0,0,0,,groups are post-hoc diagnostics.\NThey support neither a deployable
+Dialogue: 1,0:08:29.04,0:08:35.00,Caption,,0,0,0,,model-switching rule nor a claim of\Ngroup-level statistical significance.
+Dialogue: 1,0:08:35.00,0:08:39.64,Caption,,0,0,0,,On the fixed explanation subsample for\N2026-07, group G1_upstream_delay has the
+Dialogue: 1,0:08:39.64,0:08:43.86,Caption,,0,0,0,,largest archived permutation MAE increase,\N14.951 minutes, with repeat standard
+Dialogue: 1,0:08:43.86,0:08:48.51,Caption,,0,0,0,,deviation 0.097 over 5 repeats. This\Nexplains the retained learned model
+Dialogue: 1,0:08:48.51,0:08:51.88,Caption,,0,0,0,,separately from a potentially winning\Nbaseline. Joint-group permutation
+Dialogue: 1,0:08:51.88,0:08:55.68,Caption,,0,0,0,,preserves within-group relationships but\Nmay break relationships across groups.
+Dialogue: 1,0:08:55.68,0:08:59.90,Caption,,0,0,0,,Repeat standard deviation is not a\Nconfidence interval. Group permutation
+Dialogue: 1,0:08:59.90,0:09:04.54,Caption,,0,0,0,,changes cannot be added together or\Nsubstituted for staged feature increments.
+Dialogue: 1,0:09:04.54,0:09:08.77,Caption,,0,0,0,,PDP uses hypothetical input replacements\Nthat may leave observed correlated-feature
+Dialogue: 1,0:09:08.77,0:09:12.99,Caption,,0,0,0,,support. Coefficients, importance and\Nairport rankings therefore do not identify
+Dialogue: 1,0:09:12.99,0:09:17.21,Caption,,0,0,0,,causal effects. The date-block intervals\Nresample saved predictions with common
+Dialogue: 1,0:09:17.21,0:09:22.70,Caption,,0,0,0,,date draws. They do not repeat\Ntraining or selection, and they are not
+Dialogue: 1,0:09:22.70,0:09:26.49,Caption,,0,0,0,,selection-adjusted. The evidence also\Ncovers one season, conditional completed
+Dialogue: 1,0:09:26.49,0:09:30.29,Caption,,0,0,0,,chains and incomplete weather delivery\Nprovenance. NOAA supplementation is
+Dialogue: 1,0:09:30.29,0:09:34.93,Caption,,0,0,0,,retrospective. Any change made after\Nseeing August requires a genuinely new
+Dialogue: 1,0:09:34.93,0:09:37.47,Caption,,0,0,0,,unseen evaluation period,\Nrather than relabeling
+Dialogue: 1,0:09:37.47,0:09:40.00,Caption,,0,0,0,,the same test as independent validation.
+Dialogue: 1,0:09:40.00,0:09:44.73,Caption,,0,0,0,,The airport answer is conditional on 25\Nsupported final estimates and the frozen
+Dialogue: 1,0:09:44.73,0:09:49.09,Caption,,0,0,0,,common reference. The prediction answer\Nis the frozen Random forest predictor with
+Dialogue: 1,0:09:49.09,0:09:53.82,Caption,,0,0,0,,August MAE 13.655 minutes. The useful next\Nstep is an independently evaluated new
+Dialogue: 1,0:09:53.82,0:09:57.09,Caption,,0,0,0,,season with stronger availability evidence\Nand explicit operational eligibility,
+Dialogue: 1,0:09:57.09,0:10:00.00,Caption,,0,0,0,,while preserving the archived\Ndecisions and unsuccessful experiments.

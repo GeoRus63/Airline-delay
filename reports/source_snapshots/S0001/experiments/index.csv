@@ -1,0 +1,31 @@
+run_id,parent_run_id,stage,status,change,decision,artifact_dir
+R0001,,P0-preflight,failed,Initial delivered synthetic preparation checks,Correct test assertion; preserve failure,experiments/runs/R0001
+R0002,R0001,P0-data,completed,First full five-month preparation from verified delivery snapshot,Retain outputs; review before next stage,experiments/runs/R0002
+R0003,R0002,P0-data-audit,completed,Structural audit and prefix comparison of global flight quality flags,Retain outputs; review before next stage,experiments/runs/R0003
+R0004,R0003,P0-data-correction,invalidated,Isolate retrospective QA flags by prediction-month cutoff instead of the complete five-month archive,Boundary downstream planned-time ambiguity can be accepted; corrected by R0005 D0003,experiments/runs/R0004
+R0005,R0004,P0-data-correction,completed,Retain endpoint planned-time ambiguity checks across monthly QA boundaries,Retain outputs; review before next stage,experiments/runs/R0005
+R0006,R0005,P0,completed,First development baselines and planned-information G0 linear regression on isolated QA cohorts,Retain outputs; review before next stage,experiments/runs/R0006
+R0007,R0006,P1,completed,Add upstream arrival delay and observed completed-tail history to G0,Retain outputs; review before next stage,experiments/runs/R0007
+R0008,R0007,P2-aircraft-preparation,completed,Audit five-month 2024 primary and 2025 comparison B43 coverage; preserve unknown types,Retain outputs; review before next stage,experiments/runs/R0008
+R0009,R0007,P2-family,completed,Add 2024 B43 aircraft family to the fixed G1 linear model,Retain outputs; review before next stage,experiments/runs/R0009
+R0010,R0009,P2-variant,completed,Replace family with variant; preserve all other features and samples,Retain outputs; review before next stage,experiments/runs/R0010
+R0011,R0009,P3,failed,Add historical airport departures and upcoming planned airport load to family mainline,Retain failure; fix under a new run_id,experiments/runs/R0011
+R0012,R0009,P3,completed,Add historical airport departures and upcoming planned airport load to family mainline,Retain outputs; review before next stage,experiments/runs/R0012
+R0013,R0012,P4-weather-preparation,failed,"Prepare immutable METAR, TAF bulletin states and GHCNh quality-controlled tables from local archives",Retain failure; fix under a new run_id,experiments/runs/R0013
+R0014,R0012,P4-weather-preparation,completed,"Prepare immutable METAR, TAF bulletin states and GHCNh quality-controlled tables from local archives",Retain outputs; review before next stage,experiments/runs/R0014
+R0015,R0012,P4a,completed,Add as-of METAR source observations and reporting/missingness metadata to fixed G3 OLS,Retain outputs; review before next stage,experiments/runs/R0015
+R0016,R0014,P4-weather-preparation,completed,Rebuild weather with unverified TAF blocking anchor no earlier than archived product ID; preserve W0001,Retain outputs; review before next stage,experiments/runs/R0016
+R0017,R0015,P4b,completed,Add latest-state TAF prevailing TEMPO and probability groups to fixed G4a OLS,Retain outputs; review before next stage,experiments/runs/R0017
+R0018,R0017,P5-RQ1-EDA,completed,Complete registered common-support RQ1 with monthly fixed-reference network and single-flight EDA; no model fitting,Retain outputs; review before next stage,experiments/runs/R0018
+R0019,R0017,P4-NOAA-sensitivity,completed,Fill only approved missing IEM G4a values from GHCNh in a separate retrospective sensitivity branch,Retain outputs; review before next stage,experiments/runs/R0019
+R0020,R0019,P5-feature-selection,completed,Apply registered pooled-MAE rule to all six completed OLS mainline feature sets; exclude variant and NOAA from primary selection,Retain outputs; review before next stage,experiments/runs/R0020
+R0021,R0017,P5-models,completed,Replace selected OLS with registered decision tree depth 8 leaf 50 on identical cached features,Retain outputs; review before next stage,experiments/runs/R0021
+R0022,R0021,P5-models,completed,Change decision-tree minimum leaf from 50 to 200 at fixed depth 8,Retain outputs; review before next stage,experiments/runs/R0022
+R0023,R0022,P5-models,completed,Change decision-tree depth from 8 to 16 at fixed minimum leaf 200,Retain outputs; review before next stage,experiments/runs/R0023
+R0024,R0023,P5-models,completed,Change decision-tree minimum leaf from 200 to 50 at fixed depth 16,Retain outputs; review before next stage,experiments/runs/R0024
+R0025,R0024,P5-models,completed,Replace depth-16 leaf-50 decision tree with registered 200-tree random forest max_features 0.5,Retain outputs; review before next stage,experiments/runs/R0025
+R0026,R0025,P5-models,completed,"Change random-forest minimum leaf from 50 to 200; retain all other learning settings. Pre-run execution allocation: sequential folds, 24 threads per fold, separately reviewed and recorded",Retain outputs; review before next stage,experiments/runs/R0026
+R0027,R0026,P5-model-selection,completed,Apply registered family minima and practical monthly promotion; compare retained learned model with all three baselines; explain without refitting,Retain outputs; review before next stage,experiments/runs/R0027
+R0028,R0027,P6-final,completed,One formal frozen August assessment after completed P5 and Pro final review,Retain outputs; review before next stage,experiments/runs/R0028
+R0029,R0028,P6-RQ1-final,completed,Describe April-August RQ1 using the unchanged R0018 development reference; report August support separately,Retain outputs; review before next stage,experiments/runs/R0029
+R0030,R0029,P7-full-reproduction,completed,"Rebuild features, refit all four frozen predictors and compare with the original formal R0028 without changing its ledger",Retain outputs; review before next stage,experiments/runs/R0030

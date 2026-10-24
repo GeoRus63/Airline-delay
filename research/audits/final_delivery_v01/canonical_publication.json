@@ -1,0 +1,140 @@
+{
+  "created_at_utc": "2026-10-24T05:33:06.883093+00:00",
+  "passed": true,
+  "files": [
+    {
+      "source": "reports/research_v01/report_en.md",
+      "destination": "reports/report_en.md",
+      "bytes": 44981,
+      "sha256": "2c394b528f7b090a4ef94a10c75552d7ba67267ba156f9dbda9e0a1ce454363c",
+      "byte_identical": true
+    },
+    {
+      "source": "reports/research_v01/report_en.pdf",
+      "destination": "reports/report_en.pdf",
+      "bytes": 1136053,
+      "sha256": "ffed06cb312a307104da4eeb13adcca2a0df386452105421dd77d3faf6c9af6d",
+      "byte_identical": true
+    },
+    {
+      "source": "reports/research_v01/结果解读_中文.md",
+      "destination": "reports/结果解读_中文.md",
+      "bytes": 19339,
+      "sha256": "a91ca530aeee03989b48d8cf13c610f52b75a58322641ec2d5a7b35f424c5956",
+      "byte_identical": true
+    },
+    {
+      "source": "reports/research_v01/evidence_index.csv",
+      "destination": "reports/evidence_index.csv",
+      "bytes": 62926,
+      "sha256": "2f6977c4d1e82fbae3844a74ee819dcbf22ab6526cbdc014246373318ce90d26",
+      "byte_identical": true
+    },
+    {
+      "source": "reports/research_v01/figures/R0006_eda_target_distribution.png",
+      "destination": "reports/figures/R0006_eda_target_distribution.png",
+      "bytes": 53066,
+      "sha256": "2ff40698741d03b02841864e59858f8fadf0590ab7380b5420f8f719b9d85d87",
+      "byte_identical": true
+    },
+    {
+      "source": "reports/research_v01/figures/R0018_network_publication.png",
+      "destination": "reports/figures/R0018_network_publication.png",
+      "bytes": 215170,
+      "sha256": "12d69785e4cdda8479c9556566d96bfa65fc5e7092ce3e35eeb2b600ca0ce5ed",
+      "byte_identical": true
+    },
+    {
+      "source": "reports/research_v01/figures/R0018_rq1_standardized_airports.png",
+      "destination": "reports/figures/R0018_rq1_standardized_airports.png",
+      "bytes": 137122,
+      "sha256": "e3cf77e28e243ed7575a9952b0b266de004c9c67caf11f02869cdd2940166037",
+      "byte_identical": true
+    },
+    {
+      "source": "reports/research_v01/figures/R0018_rq1_threshold_stability.png",
+      "destination": "reports/figures/R0018_rq1_threshold_stability.png",
+      "bytes": 39335,
+      "sha256": "275c3b2ada39acc0dc93b8cfb228657c7752fd41249769af1fb0c3bd9c75bf86",
+      "byte_identical": true
+    },
+    {
+      "source": "reports/research_v01/figures/R0029_network_publication.png",
+      "destination": "reports/figures/R0029_network_publication.png",
+      "bytes": 214321,
+      "sha256": "5b1aa27f631230784a848c3baa4cfaa64a04ef5dc452354001c533e5c3393b14",
+      "byte_identical": true
+    },
+    {
+      "source": "reports/research_v01/figures/R0029_rq1_standardized_airports.png",
+      "destination": "reports/figures/R0029_rq1_standardized_airports.png",
+      "bytes": 137447,
+      "sha256": "d90de5fffeafabda33fcac5474a1e08df32621869703bb677bca9f7ae473f917",
+      "byte_identical": true
+    },
+    {
+      "source": "reports/research_v01/figures/R0029_rq1_threshold_stability.png",
+      "destination": "reports/figures/R0029_rq1_threshold_stability.png",
+      "bytes": 39316,
+      "sha256": "fb579c529c88779a9fd06374b40c98565f5928c8fc2ba8c89d6e18cfac5d23cb",
+      "byte_identical": true
+    }
+  ],
+  "markdown_local_links": [
+    {
+      "document": "reports/report_en.md",
+      "target": "figures/R0006_eda_target_distribution.png",
+      "exists": true
+    },
+    {
+      "document": "reports/report_en.md",
+      "target": "figures/R0018_rq1_standardized_airports.png",
+      "exists": true
+    },
+    {
+      "document": "reports/report_en.md",
+      "target": "figures/R0018_rq1_threshold_stability.png",
+      "exists": true
+    },
+    {
+      "document": "reports/report_en.md",
+      "target": "figures/R0018_network_publication.png",
+      "exists": true
+    },
+    {
+      "document": "reports/report_en.md",
+      "target": "figures/R0029_rq1_standardized_airports.png",
+      "exists": true
+    },
+    {
+      "document": "reports/report_en.md",
+      "target": "figures/R0029_rq1_threshold_stability.png",
+      "exists": true
+    },
+    {
+      "document": "reports/report_en.md",
+      "target": "figures/R0029_network_publication.png",
+      "exists": true
+    }
+  ],
+  "root_independent_visual_checks": {
+    "report_pages": [
+      11,
+      19,
+      20
+    ],
+    "ppt_slides": [
+      4,
+      8
+    ],
+    "video_frames": [
+      "first-caption.png"
+    ],
+    "observations": "Network labels/legend, R30 reproduction paragraph, independent code overview, FLL interval, human-readable model title, and complete 13.655 subtitle checked in actual rendered outputs; no overlap or clipping observed."
+  },
+  "full_visual_qa": [
+    "research/audits/final_delivery_v01/report_visual_review.json",
+    "research/audits/final_delivery_v01/presentation_visual_review.json",
+    "research/audits/final_delivery_v01/video_visual_review.json"
+  ]
+}

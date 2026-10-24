@@ -1,0 +1,67 @@
+{
+  "duration": 600,
+  "narration": "not-recorded",
+  "captionedDemo": true,
+  "slides": [
+    {
+      "slide": 1,
+      "png": "slides/slide-01.png",
+      "duration": 50
+    },
+    {
+      "slide": 2,
+      "png": "slides/slide-02.png",
+      "duration": 45
+    },
+    {
+      "slide": 3,
+      "png": "slides/slide-03.png",
+      "duration": 50
+    },
+    {
+      "slide": 4,
+      "png": "slides/slide-04.png",
+      "duration": 55
+    },
+    {
+      "slide": 5,
+      "png": "slides/slide-05.png",
+      "duration": 55
+    },
+    {
+      "slide": 6,
+      "png": "slides/slide-06.png",
+      "duration": 55
+    },
+    {
+      "slide": 7,
+      "png": "slides/slide-07.png",
+      "duration": 50
+    },
+    {
+      "slide": 8,
+      "png": "slides/slide-08.png",
+      "duration": 55
+    },
+    {
+      "slide": 9,
+      "png": "slides/slide-09.png",
+      "duration": 55
+    },
+    {
+      "slide": 10,
+      "png": "slides/slide-10.png",
+      "duration": 45
+    },
+    {
+      "slide": 11,
+      "png": "slides/slide-11.png",
+      "duration": 65
+    },
+    {
+      "slide": 12,
+      "png": "slides/slide-12.png",
+      "duration": 20
+    }
+  ]
+}

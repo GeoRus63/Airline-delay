@@ -1,0 +1,384 @@
+{
+  "created_at_utc": "2026-10-24T05:30:41.321421+00:00",
+  "video": "reports/presentation/video_v01/airline_delay_captioned.mp4",
+  "video_sha256": "2b2fdac48de98731e73b6fcff9f2a2c04b1cefa8abda05b6bfcb16b1cf7fedb2",
+  "full_decode_exit_code": 0,
+  "decoded_frames": 3000,
+  "duration_seconds": 600,
+  "source_slide_size": [
+    1600,
+    900
+  ],
+  "crop_for_pixel_comparison": [
+    160,
+    50,
+    1760,
+    900
+  ],
+  "maximum_allowed_mean_channel_error": 5.0,
+  "samples": [
+    {
+      "slide": 1,
+      "position": "start",
+      "seconds": 0.4,
+      "frame": "research/audits/final_delivery_v01/video/slide-01-start.png",
+      "sha256": "87316bdd32deadebd527488c2c0d1a0db2ef23336a466435d7ccf1da7b61158c",
+      "nearest_source_slide": 1,
+      "mean_absolute_channel_error": 0.16242156862745097,
+      "passed": true
+    },
+    {
+      "slide": 1,
+      "position": "middle",
+      "seconds": 25.0,
+      "frame": "research/audits/final_delivery_v01/video/slide-01-middle.png",
+      "sha256": "ae3206ed0171906bec437a10df904175c015d5a84a09b740511f52ae0ff4f3af",
+      "nearest_source_slide": 1,
+      "mean_absolute_channel_error": 0.16233823529411764,
+      "passed": true
+    },
+    {
+      "slide": 1,
+      "position": "end",
+      "seconds": 49.6,
+      "frame": "research/audits/final_delivery_v01/video/slide-01-end.png",
+      "sha256": "ae1861357fe8ca4131e780fea93a9f0f5b717c3424ec27fe6b7483bc0cd35a16",
+      "nearest_source_slide": 1,
+      "mean_absolute_channel_error": 0.16257083333333333,
+      "passed": true
+    },
+    {
+      "slide": 2,
+      "position": "start",
+      "seconds": 50.4,
+      "frame": "research/audits/final_delivery_v01/video/slide-02-start.png",
+      "sha256": "6d95629d2f12c1c87470b26af578b474701af1fb0f3251cced1e7907117b527e",
+      "nearest_source_slide": 2,
+      "mean_absolute_channel_error": 0.16623651960784314,
+      "passed": true
+    },
+    {
+      "slide": 2,
+      "position": "middle",
+      "seconds": 72.5,
+      "frame": "research/audits/final_delivery_v01/video/slide-02-middle.png",
+      "sha256": "96d078dfa93f811b9a201f8636453263abc62cd0f090245adb7500b7e42ce781",
+      "nearest_source_slide": 2,
+      "mean_absolute_channel_error": 0.16629485294117646,
+      "passed": true
+    },
+    {
+      "slide": 2,
+      "position": "end",
+      "seconds": 94.6,
+      "frame": "research/audits/final_delivery_v01/video/slide-02-end.png",
+      "sha256": "8a96007976c861b3b7cead15d9670fdd339ca9d6fb8ec19c580c09f1e07efec9",
+      "nearest_source_slide": 2,
+      "mean_absolute_channel_error": 0.16623799019607843,
+      "passed": true
+    },
+    {
+      "slide": 3,
+      "position": "start",
+      "seconds": 95.4,
+      "frame": "research/audits/final_delivery_v01/video/slide-03-start.png",
+      "sha256": "28c902b5e1d4225e76e168b451b500c498ec0637e5c74b93d402d89bbe068004",
+      "nearest_source_slide": 3,
+      "mean_absolute_channel_error": 0.12814852941176472,
+      "passed": true
+    },
+    {
+      "slide": 3,
+      "position": "middle",
+      "seconds": 120.0,
+      "frame": "research/audits/final_delivery_v01/video/slide-03-middle.png",
+      "sha256": "8dd17049eb260f2bf80f6d3b70aa47bb63889bca5905e7f9ebd88599ca95cf42",
+      "nearest_source_slide": 3,
+      "mean_absolute_channel_error": 0.1282203431372549,
+      "passed": true
+    },
+    {
+      "slide": 3,
+      "position": "end",
+      "seconds": 144.6,
+      "frame": "research/audits/final_delivery_v01/video/slide-03-end.png",
+      "sha256": "1b68fec8e46794a0d437496230c012a216901ccfc4ef960eb49d578bd87c176d",
+      "nearest_source_slide": 3,
+      "mean_absolute_channel_error": 0.12828823529411765,
+      "passed": true
+    },
+    {
+      "slide": 4,
+      "position": "start",
+      "seconds": 145.4,
+      "frame": "research/audits/final_delivery_v01/video/slide-04-start.png",
+      "sha256": "e20a086eb160871c1e288311c9e567659cddc14c65bd342642a719c7a58c096c",
+      "nearest_source_slide": 4,
+      "mean_absolute_channel_error": 0.30816029411764706,
+      "passed": true
+    },
+    {
+      "slide": 4,
+      "position": "middle",
+      "seconds": 172.5,
+      "frame": "research/audits/final_delivery_v01/video/slide-04-middle.png",
+      "sha256": "4bd94883d1f8c96c34b1f43c0fdd46ba33a84b7f2e39adadabb2c36c984c51c2",
+      "nearest_source_slide": 4,
+      "mean_absolute_channel_error": 0.30811813725490195,
+      "passed": true
+    },
+    {
+      "slide": 4,
+      "position": "end",
+      "seconds": 199.6,
+      "frame": "research/audits/final_delivery_v01/video/slide-04-end.png",
+      "sha256": "250b62637518c29009a0a12d9364ff1a2943683c9f31a4632cef40541fd508da",
+      "nearest_source_slide": 4,
+      "mean_absolute_channel_error": 0.31214754901960784,
+      "passed": true
+    },
+    {
+      "slide": 5,
+      "position": "start",
+      "seconds": 200.4,
+      "frame": "research/audits/final_delivery_v01/video/slide-05-start.png",
+      "sha256": "741a3557885d9a2ab277a27cc82ad25a32d4f9339cea9f056647b70576c958bb",
+      "nearest_source_slide": 5,
+      "mean_absolute_channel_error": 0.27639460784313724,
+      "passed": true
+    },
+    {
+      "slide": 5,
+      "position": "middle",
+      "seconds": 227.5,
+      "frame": "research/audits/final_delivery_v01/video/slide-05-middle.png",
+      "sha256": "5c4d5d46d4a75a9f50639ae2422194b6118947325661f2a79d5ed89fdbef9eb8",
+      "nearest_source_slide": 5,
+      "mean_absolute_channel_error": 0.2757311274509804,
+      "passed": true
+    },
+    {
+      "slide": 5,
+      "position": "end",
+      "seconds": 254.6,
+      "frame": "research/audits/final_delivery_v01/video/slide-05-end.png",
+      "sha256": "e3d33f35194eb53be6117c299b4fbab85a78a46252f612b75e3654cc9f4ee881",
+      "nearest_source_slide": 5,
+      "mean_absolute_channel_error": 0.252631862745098,
+      "passed": true
+    },
+    {
+      "slide": 6,
+      "position": "start",
+      "seconds": 255.4,
+      "frame": "research/audits/final_delivery_v01/video/slide-06-start.png",
+      "sha256": "4507ec1f1552dd2e39a7579cd634331b2b067ae34937ed102f18513b66833e9c",
+      "nearest_source_slide": 6,
+      "mean_absolute_channel_error": 0.3091051470588235,
+      "passed": true
+    },
+    {
+      "slide": 6,
+      "position": "middle",
+      "seconds": 282.5,
+      "frame": "research/audits/final_delivery_v01/video/slide-06-middle.png",
+      "sha256": "f0aa40859c8c2bea507efabb048dec9ac501932c644cdadeca7977526f888fe4",
+      "nearest_source_slide": 6,
+      "mean_absolute_channel_error": 0.3083519607843137,
+      "passed": true
+    },
+    {
+      "slide": 6,
+      "position": "end",
+      "seconds": 309.6,
+      "frame": "research/audits/final_delivery_v01/video/slide-06-end.png",
+      "sha256": "1e8883a67df37b16b4364ad68e12ec09c43acc2a43c4a6ba1b57630b78714dc6",
+      "nearest_source_slide": 6,
+      "mean_absolute_channel_error": 0.2886593137254902,
+      "passed": true
+    },
+    {
+      "slide": 7,
+      "position": "start",
+      "seconds": 310.4,
+      "frame": "research/audits/final_delivery_v01/video/slide-07-start.png",
+      "sha256": "5ccea126e7bb04ba36abef80e053c366730cd1291a28b7192dd11a5d807b832d",
+      "nearest_source_slide": 7,
+      "mean_absolute_channel_error": 0.16210588235294118,
+      "passed": true
+    },
+    {
+      "slide": 7,
+      "position": "middle",
+      "seconds": 335.0,
+      "frame": "research/audits/final_delivery_v01/video/slide-07-middle.png",
+      "sha256": "4c9711c28047b44e795e9be8b5077fa64f95761e786354a8b3d275f6ee735e92",
+      "nearest_source_slide": 7,
+      "mean_absolute_channel_error": 0.16210539215686273,
+      "passed": true
+    },
+    {
+      "slide": 7,
+      "position": "end",
+      "seconds": 359.6,
+      "frame": "research/audits/final_delivery_v01/video/slide-07-end.png",
+      "sha256": "414ffcc8223e21aee7feadf5e4678992fcf786da46cddb0cb2da0130df6e2ccb",
+      "nearest_source_slide": 7,
+      "mean_absolute_channel_error": 0.16202230392156863,
+      "passed": true
+    },
+    {
+      "slide": 8,
+      "position": "start",
+      "seconds": 360.4,
+      "frame": "research/audits/final_delivery_v01/video/slide-08-start.png",
+      "sha256": "16d0e1e7c08515758e7a0fb685f33dc54a32111a3fa51630839c682f2774d5b9",
+      "nearest_source_slide": 8,
+      "mean_absolute_channel_error": 0.27688970588235295,
+      "passed": true
+    },
+    {
+      "slide": 8,
+      "position": "middle",
+      "seconds": 387.5,
+      "frame": "research/audits/final_delivery_v01/video/slide-08-middle.png",
+      "sha256": "f3053751787b7d6f728a04390126ce0d10203f2dbd054220d8f5b4d0975fda9a",
+      "nearest_source_slide": 8,
+      "mean_absolute_channel_error": 0.27688848039215685,
+      "passed": true
+    },
+    {
+      "slide": 8,
+      "position": "end",
+      "seconds": 414.6,
+      "frame": "research/audits/final_delivery_v01/video/slide-08-end.png",
+      "sha256": "05b85901c283a83dc8b81fa68c83a0c7d2c9087607f40ffecf3024d457edd87b",
+      "nearest_source_slide": 8,
+      "mean_absolute_channel_error": 0.28005563725490196,
+      "passed": true
+    },
+    {
+      "slide": 9,
+      "position": "start",
+      "seconds": 415.4,
+      "frame": "research/audits/final_delivery_v01/video/slide-09-start.png",
+      "sha256": "a34e1282dbc5abfa8578858606bb34fb887f0db77a9b85a126e3a614b23fd1d6",
+      "nearest_source_slide": 9,
+      "mean_absolute_channel_error": 0.30015269607843137,
+      "passed": true
+    },
+    {
+      "slide": 9,
+      "position": "middle",
+      "seconds": 442.5,
+      "frame": "research/audits/final_delivery_v01/video/slide-09-middle.png",
+      "sha256": "41c9d536576bb54fd206986706a3d6d7baedcaf40ba525baa49007c24214e283",
+      "nearest_source_slide": 9,
+      "mean_absolute_channel_error": 0.2995281862745098,
+      "passed": true
+    },
+    {
+      "slide": 9,
+      "position": "end",
+      "seconds": 469.6,
+      "frame": "research/audits/final_delivery_v01/video/slide-09-end.png",
+      "sha256": "1ea94d7ce877bbfdd21a6110136af6a43d75e9b5dcd7ad54c52a4361e5b98f02",
+      "nearest_source_slide": 9,
+      "mean_absolute_channel_error": 0.2769921568627451,
+      "passed": true
+    },
+    {
+      "slide": 10,
+      "position": "start",
+      "seconds": 470.4,
+      "frame": "research/audits/final_delivery_v01/video/slide-10-start.png",
+      "sha256": "5c70a35dccba2d2c80c25e4c064a5500fc957343ff98b4f020b2393b58c59afd",
+      "nearest_source_slide": 10,
+      "mean_absolute_channel_error": 0.15940441176470588,
+      "passed": true
+    },
+    {
+      "slide": 10,
+      "position": "middle",
+      "seconds": 492.5,
+      "frame": "research/audits/final_delivery_v01/video/slide-10-middle.png",
+      "sha256": "cc93681d50fa23e65575e109ca48035ff0f83fb7012ec426cc79cf169a8fec74",
+      "nearest_source_slide": 10,
+      "mean_absolute_channel_error": 0.15940441176470588,
+      "passed": true
+    },
+    {
+      "slide": 10,
+      "position": "end",
+      "seconds": 514.6,
+      "frame": "research/audits/final_delivery_v01/video/slide-10-end.png",
+      "sha256": "61d58c53ab1179a9f1f73b6e21c9b6470fd5f52e55d714af7d831d53d62dc5dd",
+      "nearest_source_slide": 10,
+      "mean_absolute_channel_error": 0.15933676470588234,
+      "passed": true
+    },
+    {
+      "slide": 11,
+      "position": "start",
+      "seconds": 515.4,
+      "frame": "research/audits/final_delivery_v01/video/slide-11-start.png",
+      "sha256": "774ce670e4dfd2e3f5a34374ed57e3fb01327bc7162517b1f17b8dc2ed8a5236",
+      "nearest_source_slide": 11,
+      "mean_absolute_channel_error": 0.16890588235294118,
+      "passed": true
+    },
+    {
+      "slide": 11,
+      "position": "middle",
+      "seconds": 547.5,
+      "frame": "research/audits/final_delivery_v01/video/slide-11-middle.png",
+      "sha256": "dac235ead3f0509ed73c8a22ecdb48b95d30929d8875b8cbd69189e834911fd7",
+      "nearest_source_slide": 11,
+      "mean_absolute_channel_error": 0.1688938725490196,
+      "passed": true
+    },
+    {
+      "slide": 11,
+      "position": "end",
+      "seconds": 579.6,
+      "frame": "research/audits/final_delivery_v01/video/slide-11-end.png",
+      "sha256": "c94672d793cbfdf3625f54232a5f10cefca8ff8e8eb3d192e5094380e3f3fe55",
+      "nearest_source_slide": 11,
+      "mean_absolute_channel_error": 0.1688764705882353,
+      "passed": true
+    },
+    {
+      "slide": 12,
+      "position": "start",
+      "seconds": 580.4,
+      "frame": "research/audits/final_delivery_v01/video/slide-12-start.png",
+      "sha256": "ced01b2de88b571ada6caf1648f6e3ed618b733c0cebc8dfd1d6fd457f8d5058",
+      "nearest_source_slide": 12,
+      "mean_absolute_channel_error": 0.14550416666666666,
+      "passed": true
+    },
+    {
+      "slide": 12,
+      "position": "middle",
+      "seconds": 590.0,
+      "frame": "research/audits/final_delivery_v01/video/slide-12-middle.png",
+      "sha256": "8c19ff811b60524db17da24e05e22be9be53ecebe61fb2add3b5c89fbb2fc921",
+      "nearest_source_slide": 12,
+      "mean_absolute_channel_error": 0.1455031862745098,
+      "passed": true
+    },
+    {
+      "slide": 12,
+      "position": "end",
+      "seconds": 599.6,
+      "frame": "research/audits/final_delivery_v01/video/slide-12-end.png",
+      "sha256": "7dee28390c3b1b2176519eafc7510ea0af56c4de7d981157659104b73052f4cb",
+      "nearest_source_slide": 12,
+      "mean_absolute_channel_error": 0.14555122549019608,
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "visual_review_completed": false,
+  "scope": "Full stream decode plus 36 start/middle/end frames compared with their original slide. Captions and legibility still require actual visual inspection."
+}

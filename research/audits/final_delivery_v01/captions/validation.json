@@ -1,0 +1,207 @@
+{
+  "created_utc": "2026-10-24T05:29:44.805Z",
+  "status": "passed caption-only validation; no PPTX or final video built",
+  "content": {
+    "path": "D:\\airline-delay\\reports\\presentation\\content_v01.json",
+    "sha256": "765f5758a95ab764f5c5e9c9cac14e7e0d3cff9079b04aa39b24cc47064fd92d"
+  },
+  "builder": {
+    "path": "D:\\airline-delay\\scripts\\build_presentation.mjs",
+    "sha256": "551bce57159774caee8f474130ad9422e9178ea42792f0ed421e87a3c3a6a9a9",
+    "tested_function_source": "function stamp(seconds) {return new Date(Math.round(seconds*1000)).toISOString().slice(11,23).replace('.',',');}\nfunction captionChunks(notes) {\n  const words=notes.trim().split(/\\s+/), chunks=[];\n  if(!notes.trim()) throw new Error('Caption notes must contain words');\n  if(words.some(word=>word.length>42)) throw new Error('Caption word exceeds 42 characters');\n  // Split only at whitespace: decimal points and all punctuation stay intact.\n  let current=[];\n  for(const word of words) {\n    const candidate=[...current,word];\n    try {captionLines(candidate.join(' '));current=candidate;}\n    catch {chunks.push(current);current=[word];}\n  }\n  if(current.length) chunks.push(current);\n  // Balance a short final cue with its predecessor instead of leaving a\n  // one-to-three-word flash at the end of a sentence or slide.\n  if(chunks.length>1 && chunks.at(-1).length<4) {\n    const combined=[...chunks.at(-2),...chunks.at(-1)]; let best=null;\n    for(let cut=4;cut<=combined.length-4;cut++) {\n      const pair=[combined.slice(0,cut),combined.slice(cut)];\n      try {pair.forEach(part=>captionLines(part.join(' ')));}\n      catch {continue;}\n      if(!best || Math.abs(pair[0].length-pair[1].length)<Math.abs(best[0].length-best[1].length)) best=pair;\n    }\n    if(best) chunks.splice(-2,2,...best);\n  }\n  return chunks.map(words=>words.join(' '));\n}\nfunction captionLines(chunk) {\n  if(chunk.length<=42) return chunk;\n  const words=chunk.split(' '); let best=null;\n  for(let cut=1;cut<words.length;cut++) {\n    const lines=[words.slice(0,cut).join(' '),words.slice(cut).join(' ')];\n    if(lines.some(line=>line.length>42)) continue;\n    if(!best || Math.abs(lines[0].length-lines[1].length)<Math.abs(best[0].length-best[1].length)) best=lines;\n  }\n  if(!best) throw new Error('Caption must fit at most two lines of 42 characters');\n  return best.join('\\n');\n}\n"
+  },
+  "validator": {
+    "path": "D:\\airline-delay\\scripts\\validate_presentation_captions.mjs",
+    "sha256": "798fbc706521bcadfa9cecbc3f958f12e4efdab8187e749b5f64209daee4a957"
+  },
+  "before": null,
+  "after": {
+    "path": "D:\\airline-delay\\research\\audits\\final_delivery_v01\\captions\\captions_after.srt",
+    "sha256": "77969ccd36d1c77b68ec3fc6add04860c0a3b32fccbd959f4bbb0f1dc7378a60",
+    "duration_seconds": 600,
+    "slides": 12,
+    "cue_count": 126,
+    "minimum_cue_seconds": 1.709,
+    "minimum_cue_words": 4,
+    "maximum_lines": 2,
+    "maximum_line_characters": 42,
+    "first_four_cues": [
+      {
+        "number": 1,
+        "slide": 1,
+        "start_ms": 0,
+        "end_ms": 7000,
+        "duration_seconds": 7,
+        "word_count": 14,
+        "text": "The main prediction result is an August\nmean absolute error of 13.655 minutes for"
+      },
+      {
+        "number": 2,
+        "slide": 1,
+        "start_ms": 7000,
+        "end_ms": 13000,
+        "duration_seconds": 6,
+        "word_count": 12,
+        "text": "the frozen primary predictor, Random\nforest. Its root mean squared error is"
+      },
+      {
+        "number": 3,
+        "slide": 1,
+        "start_ms": 13000,
+        "end_ms": 18000,
+        "duration_seconds": 5,
+        "word_count": 10,
+        "text": "42.917 minutes over 560,077 accepted\nconnections. The airport analysis supports"
+      },
+      {
+        "number": 4,
+        "slide": 1,
+        "start_ms": 18000,
+        "end_ms": 23500,
+        "duration_seconds": 5.5,
+        "word_count": 11,
+        "text": "25 estimates under the unchanged\ndevelopment reference. These are the two"
+      }
+    ],
+    "every_note_word_and_punctuation_preserved": true,
+    "rounded_timeline_contiguous": true,
+    "original_slide_durations_preserved": true
+  },
+  "edge_cases_passed": 6,
+  "oversize_word_rejection_passed": true,
+  "slides": [
+    {
+      "slide": 1,
+      "duration_seconds": 50,
+      "notes_sha256": "a10130ace0f6b4ef8382333a6ad1a0e7d5d354a05e01fb599ff72da1ae3a73a2",
+      "word_count": 100,
+      "cue_count": 9,
+      "minimum_cue_seconds": 3.5,
+      "minimum_cue_words": 7,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    },
+    {
+      "slide": 2,
+      "duration_seconds": 45,
+      "notes_sha256": "55f0180433898058520b96c533d0c645a28834aaf1187eb10da4dc98053d1803",
+      "word_count": 106,
+      "cue_count": 10,
+      "minimum_cue_seconds": 2.123,
+      "minimum_cue_words": 5,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    },
+    {
+      "slide": 3,
+      "duration_seconds": 50,
+      "notes_sha256": "321662d67cb64c8a021bbb847a04e1a08b5f065dd97c477375713b5ef7b47cab",
+      "word_count": 101,
+      "cue_count": 11,
+      "minimum_cue_seconds": 1.98,
+      "minimum_cue_words": 4,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    },
+    {
+      "slide": 4,
+      "duration_seconds": 55,
+      "notes_sha256": "abffa0a8a9b898d3037027b5dcdd00985b8e4eec1f21524f9b050e49ab256e73",
+      "word_count": 134,
+      "cue_count": 12,
+      "minimum_cue_seconds": 3.283,
+      "minimum_cue_words": 8,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    },
+    {
+      "slide": 5,
+      "duration_seconds": 55,
+      "notes_sha256": "20f614a758059e68cfe671592737e3eed1d34889fc3104d7a2702a7d848b02e8",
+      "word_count": 116,
+      "cue_count": 10,
+      "minimum_cue_seconds": 4.741,
+      "minimum_cue_words": 10,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    },
+    {
+      "slide": 6,
+      "duration_seconds": 55,
+      "notes_sha256": "0741f48e471b26a25d4947badc214ae60d38a13f0b5713339a55c6bb1bb44223",
+      "word_count": 151,
+      "cue_count": 14,
+      "minimum_cue_seconds": 2.185,
+      "minimum_cue_words": 6,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    },
+    {
+      "slide": 7,
+      "duration_seconds": 50,
+      "notes_sha256": "1f08b98d75a0cab6e4a34b7ba41e0285a3cc311c2e8ccc1ba7cece40c6c9292a",
+      "word_count": 117,
+      "cue_count": 11,
+      "minimum_cue_seconds": 1.709,
+      "minimum_cue_words": 4,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 41
+    },
+    {
+      "slide": 8,
+      "duration_seconds": 55,
+      "notes_sha256": "86e4be943a507903a79b2b66085d350d5d99f7320e535ff2598d47bd02e4c985",
+      "word_count": 123,
+      "cue_count": 11,
+      "minimum_cue_seconds": 1.789,
+      "minimum_cue_words": 4,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    },
+    {
+      "slide": 9,
+      "duration_seconds": 55,
+      "notes_sha256": "c859cfd0fa3fd80a830aeb43836dfddd534d698a0eb706f639a92e6509ef87c4",
+      "word_count": 120,
+      "cue_count": 11,
+      "minimum_cue_seconds": 2.292,
+      "minimum_cue_words": 5,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    },
+    {
+      "slide": 10,
+      "duration_seconds": 45,
+      "notes_sha256": "43a8e08c829b65b2067bc00b70c48273a8b82c6f296679893800ea8d7b19a922",
+      "word_count": 68,
+      "cue_count": 6,
+      "minimum_cue_seconds": 5.956,
+      "minimum_cue_words": 9,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    },
+    {
+      "slide": 11,
+      "duration_seconds": 65,
+      "notes_sha256": "56f77bc0b73a65289a1b1fedb18adc9e3626cddc26498e4b0e5ba1039af2f692",
+      "word_count": 154,
+      "cue_count": 16,
+      "minimum_cue_seconds": 2.532,
+      "minimum_cue_words": 6,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    },
+    {
+      "slide": 12,
+      "duration_seconds": 20,
+      "notes_sha256": "19cdcee206feff253ffd91ec7f8f39d1e40ed4b94e1d241360496b26c1667a99",
+      "word_count": 55,
+      "cue_count": 5,
+      "minimum_cue_seconds": 2.909,
+      "minimum_cue_words": 8,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    }
+  ],
+  "limitations": "Timing remains proportional to word count, not synchronized to recorded speech. Full rendered-caption readability and final 600-second video QA remain required."
+}

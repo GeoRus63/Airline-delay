@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-24T05:28:52.650753+00:00",
+  "source_git_commit": "cc9eb8d32f6f105a7f4a2da26e0d668a5246a5de",
+  "source_remote_commit": "cc9eb8d32f6f105a7f4a2da26e0d668a5246a5de",
+  "reproduction_run_id": "R0030",
+  "frozen_science_source_pins_checked": 15,
+  "completed_reproduction_and_freeze_pins": [
+    {
+      "path": "experiments/runs/R0030/manifest.json",
+      "sha256": "f1222dff9b4b8350380796c5bd3a1feea318faf044ac5bea2bba026242416e92",
+      "bytes": 92370
+    },
+    {
+      "path": "experiments/runs/R0030/reproduction_verification.json",
+      "sha256": "fa12d66c446dc4312da87c3f97428a2e9c14bd8b6a96e48e791c359c3eb2c865",
+      "bytes": 1006
+    },
+    {
+      "path": "research/audits/R0030_archive_integrity.json",
+      "sha256": "f8043039aae4a728f79d35b1d7576079e6ce16b3bbe1c032774b8e9345ef0d34",
+      "bytes": 35502
+    },
+    {
+      "path": "experiments/freezes/F0001/model_selection.json",
+      "sha256": "286c7de3cc56da3c6c61e16670bde538a672de7bca7f4b3136ce68501c2648f4",
+      "bytes": 37316
+    },
+    {
+      "path": "configs/p6_final.json",
+      "sha256": "e9ea8e9a80be0e8121b7c34f08b32dfd7f37337055e90b215891ba75032e47c2",
+      "bytes": 344
+    },
+    {
+      "path": "configs/p7_reproduce_final.json",
+      "sha256": "9647ac3dd13d726ad856e10a6a15abbfc3c3351b8553351772a4bb79fa526946",
+      "bytes": 412
+    }
+  ],
+  "committed_build_sources": [
+    {
+      "path": "scripts/build_report.py",
+      "sha256": "4b304a640b62cc8fca26bf519980554e792676e16466c0edf5fc24cd931e95b9",
+      "bytes": 140727
+    },
+    {
+      "path": "scripts/render_report_pdf.py",
+      "sha256": "1b45bd80ab3f11bf4f54ca38a16ba4f3e6c3606d204d6b55b57fe47a515a1928",
+      "bytes": 23613
+    },
+    {
+      "path": "scripts/build_presentation_content.py",
+      "sha256": "081bb1fb640088570536997ca3d2f4ebd945297b365eeb18af9f14cea0d4bb5b",
+      "bytes": 35494
+    },
+    {
+      "path": "scripts/build_presentation.mjs",
+      "sha256": "551bce57159774caee8f474130ad9422e9178ea42792f0ed421e87a3c3a6a9a9",
+      "bytes": 11894
+    },
+    {
+      "path": "scripts/render_presentation_video.py",
+      "sha256": "f52f4716b1c14e583d2842012b5bc045073033072c6b7287415aaeca569d091f",
+      "bytes": 8488
+    },
+    {
+      "path": "configs/p7_report.json",
+      "sha256": "e4878da31ce1eaed7efbb8cd2d147fb822bd6cd6a07576d62eb11bfc3337b442",
+      "bytes": 537
+    }
+  ],
+  "sources": [
+    {
+      "original_path": "experiments/index.csv",
+      "snapshot_path": "reports/source_snapshots/S0001/experiments/index.csv",
+      "bytes": 5850,
+      "sha256": "adf52507ce5252ae64533264d7623cc1cdf11fd98cc432c60eb223fc288efa5e",
+      "source_git_commit": "cc9eb8d32f6f105a7f4a2da26e0d668a5246a5de",
+      "git_blob_matches_worktree": true
+    },
+    {
+      "original_path": "research/研究记录.md",
+      "snapshot_path": "reports/source_snapshots/S0001/research/研究记录.md",
+      "bytes": 89868,
+      "sha256": "cde71150b358f47f506455ac4a7f79c503434b8939b07d62729194967a82a12e",
+      "source_git_commit": "cc9eb8d32f6f105a7f4a2da26e0d668a5246a5de",
+      "git_blob_matches_worktree": true
+    }
+  ],
+  "scope": "Exact bytes consumed by both final report and presentation content before later journal/index updates."
+}
