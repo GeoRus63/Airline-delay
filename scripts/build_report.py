@@ -1265,7 +1265,8 @@ def build_report(config, *, root=ROOT):
                "sources": list(archive.receipts.values()), "english_word_count": words,
                "format_requirements": {"font": "Times New Roman", "minimum_points": 10,
                                        "body_page_limit": 25, "pdf_render_verified": False,
-                                       "video_minutes": 10, "human_narration_required": True},
+                                       "video_minutes": 10,
+                                       "narration_guidance": "Course brief page 6 advises avoiding AI voice; it does not explicitly require an audio track."},
                "data_access": {"raw": False, "pickle": False, "prediction_rows": False, "fit": False},
                "outputs": [{"path": path.relative_to(output).as_posix(), "sha256": digest(path), "bytes": path.stat().st_size}
                            for path in sorted(output.rglob("*")) if path.is_file()]}
