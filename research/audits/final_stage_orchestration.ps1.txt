@@ -1,0 +1,53 @@
+$ErrorActionPreference = 'Stop'
+Set-Location -LiteralPath 'D:\Airline-delay'
+if ((git branch --show-current) -ne 'codex/apr-aug-research') { throw 'Unexpected branch' }
+$pythonPath = '.venv/Scripts/python.exe'
+$formalProcesses = @(Get-CimInstance Win32_Process -Filter "Name = 'python.exe'" | Where-Object { $_.CommandLine -match 'run_pipeline\.py.*--run-id R0028(?:\s|$)' } | Select-Object -ExpandProperty ProcessId)
+Write-Output "Waiting for existing R0028 process IDs: $($formalProcesses -join ', ')"
+while (@($formalProcesses | Where-Object { Get-Process -Id $_ -ErrorAction SilentlyContinue }).Count -gt 0) { Start-Sleep -Seconds 5 }
+$formalManifest = Get-Content -LiteralPath 'experiments/runs/R0028/manifest.json' -Raw -Encoding utf8 | ConvertFrom-Json
+if ($formalManifest.status -ne 'completed') { throw 'Original R0028 did not complete; preserve its ledger and stop' }
+
+function Seal-CompletedRun([string]$runId) {
+    $auditPath = "research/audits/${runId}_archive_integrity.json"
+    & $pythonPath -X utf8 scripts/verify_research_archive.py --run-id $runId --output $auditPath > "tmp/${runId}_audit_console.json"
+    if ($LASTEXITCODE -ne 0) { throw "Archive verification failed: $runId" }
+    $audit = Get-Content -LiteralPath $auditPath -Raw -Encoding utf8 | ConvertFrom-Json
+    if (-not $audit.passed) { throw "Archive did not pass: $runId" }
+    if ($runId -eq 'R0028' -and -not $audit.formal_final_verified) { throw 'Formal saved result not verified' }
+    if ($runId -eq 'R0030' -and -not $audit.reproduction_verified) { throw 'Full reproduction not verified' }
+    $manifest = Get-Content -LiteralPath "experiments/runs/$runId/manifest.json" -Raw -Encoding utf8 | ConvertFrom-Json
+    if ($manifest.status -ne 'completed') { throw "Run not complete: $runId" }
+    $observation = if ($runId -eq 'R0028') {
+        $primary = Import-Csv -LiteralPath "experiments/runs/$runId/metrics.csv" | Where-Object { $_.model -eq 'rf_d16_l50' -and $_.group -eq 'all' -and $_.fold -eq 'overall' }
+        if (@($primary).Count -ne 1) { throw 'Expected one formal primary pooled row' }
+        "Frozen primary RF: n=$($primary.n), MAE=$($primary.mae), RMSE=$($primary.rmse) minutes."
+    } elseif ($runId -eq 'R0029') { 'Fixed-reference final RQ1 and combined 07 Notebook completed; inspect saved tables before interpretation.' }
+    else { 'Full feature rebuild/refit and fixed-tolerance saved reproduction verification passed; original formal ledger unchanged.' }
+    @"
+
+### $runId / 顺序执行后的独立归档核验
+
+- **依据与操作**：已提交的F0001及阶段配置；独立运行完成后才启动归档审计，不重开formal、不改变选择。
+- **实际观察**：$observation
+- **证据**：experiments/runs/$runId/manifest.json；$auditPath，passed=true。
+- **决定**：保留本轮全部结果及收据；正式与复现身份分开。审计失败会立即停止，不删除账本或覆盖运行。
+- **下一步**：按已授权阶段继续，最终结论与报告仍需主代理核对实际结果及交付质量。
+"@ | Add-Content -LiteralPath 'research/研究记录.md' -Encoding utf8
+    $stagePaths = @("experiments/runs/$runId", 'experiments/final_access/2026-08.json', 'experiments/index.csv', 'research/研究记录.md', $auditPath)
+    if (Test-Path -LiteralPath 'notebooks/07_最终评估.ipynb') { $stagePaths += 'notebooks/07_最终评估.ipynb' }
+    git add -- @stagePaths
+    if ($LASTEXITCODE -ne 0) { throw "Git stage failed: $runId" }
+    git commit -m "Archive $runId frozen final-stage result and verified evidence"
+    if ($LASTEXITCODE -ne 0) { throw "Git commit failed: $runId" }
+    git push origin codex/apr-aug-research
+    if ($LASTEXITCODE -ne 0) { throw "Git push failed: $runId" }
+    Write-Output "$runId VERIFIED_AND_PUSHED $observation"
+}
+
+Seal-CompletedRun 'R0028'
+foreach ($entry in @(@('R0029', 'configs/p6_rq1_final.json'), @('R0030', 'configs/p7_reproduce_final.json'))) {
+    & $pythonPath -X utf8 scripts/run_pipeline.py --config $entry[1] --run-id $entry[0]
+    if ($LASTEXITCODE -ne 0) { throw "Pipeline failed: $($entry[0]); preserve artifacts and stop" }
+    Seal-CompletedRun $entry[0]
+}
