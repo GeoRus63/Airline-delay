@@ -4,13 +4,29 @@
 
 本次 4–8 月重建已完成五个月清洗、D0003 衔接、W0002 天气、G0–G4B 主线与 variant/NOAA 分支、开发 EDA、完整 RQ1 和全部 DT/RF 开发网格。R0027 已按登记规则选中 R0025：G4B 65 个输入、200 树随机森林、depth16/leaf50、max_features=0.5、seed42，开发期 pooled MAE 12.1643 分钟、RMSE 41.7654 分钟，胜过三个基线。
 
-**P0–P6 已实际完成：唯一正式 8 月评估 R0028 和最终 RQ1/R0029 均完成独立审计并推送；P7 完整重建/重训 R0030 正在运行，尚未声明复现通过。** 不得重新启动第二次 formal 或删除访问账本，也不要重复启动当前批处理。第十轮 Pro 审查未要求方法变更，报告中的误差分组、支持和证据状态仍需准确披露。最终中英文报告、PDF、可编辑PPTX、600秒无配音字幕视频和P7交付审计待生成，计划路径见[最终运行说明](docs/最终运行说明.md)。当前状态见[执行进度](docs/执行进度.md)及[实验索引](experiments/index.csv)。
+**P0–P7 已全部实际完成并验收。** R0028是唯一正式8月评估，R0029完成最终RQ1，R0030按同一F0001重新构建特征并拟合四模型，R0031完成交付审计。外部[全档案后审计](research/audits/R0031_post_delivery_integrity.json)通过：31条运行记录，零错误/警告、无跳过未封存运行；27次completed、3次failed、1次invalidated全部保留。关键节点共完成11次侧边浏览器网页版Pro审查，原文及决定在`research/reviews/`。
+
+8月560,077条连接上，随机森林MAE为**13.6551分钟**、RMSE为42.9171分钟，MAE较训练中位数基线降低约24.14%。同冻结方案完整复现的四模型raw/clip逐行最大差异均0，3,320行指标通过既定容差；这是已见测试集计算复现，不增加独立测试证据。RQ1固定参考下25机场均有支持，24个标准化净延误变化估计为负，唯一正值FLL的区间包含0；不能解释为机场因果责任。
+
+## 最终交付与复盘入口
+
+| 内容 | 实际文件 |
+|---|---|
+| 英文课程报告 | [PDF](reports/report_en.pdf) · [Markdown](reports/report_en.md)，总22页、正文19页 |
+| 中文结果解释 | [结果解读](reports/结果解读_中文.md) |
+| 可编辑演示 | [12页PPTX](reports/presentation/deck_v01/airline_delay.pptx) · [英文讲稿](reports/presentation/deck_v01/speaker_script_en.md) |
+| 10分钟字幕视频 | [600秒MP4](reports/presentation/video_v01/airline_delay_captioned.mp4)，无旁白/无音轨 |
+| 研究全过程 | [研究记录](research/研究记录.md) · [实验索引](experiments/index.csv) · [证据索引](reports/evidence_index.csv) |
+| 来源与质量检查 | [S0001来源快照](reports/source_snapshots/S0001/mapping.json) · [报告QA](research/audits/final_delivery_v01/report_visual_review.json) · [演示QA](research/audits/final_delivery_v01/presentation_visual_review.json) · [视频QA](research/audits/final_delivery_v01/video_visual_review.json) |
+| 封存与迁移 | [271文件交付收据](experiments/runs/R0031/delivery_receipts.json) · [交付后检查](research/audits/R0031_delivery_postcheck.json) · [最终运行说明](docs/最终运行说明.md) |
+
+报告/演示的历史索引和日志原字节保存在S0001，后续研究日志仍可追加；已封存成品不能覆盖。最终报告22页、PPT12页均逐页检查；视频完成全片3,000帧解码及36帧自动比对，人工抽查18帧覆盖全部12页，不宣称逐帧人工观看。
 
 ## 新电脑 Codex 开工入口
 
 克隆后在 Codex 中打开此项目，发送：
 
-> 请按照 AGENTS.md 和 docs/Codex完整执行流程.md，在这台电脑完整完成项目：实际运行数据准备、天气与特征连接、EDA、RQ1、RQ2、模型比较和最终报告，直到完成标准满足。先跑通基础分析再逐组扩展，每轮保留研究理由、配置、实际结果和决定，包括无增益与失败实验。
+> 请先阅读README及docs/最终运行说明.md，恢复并只读核对已完成的P0–P7档案与本地大型产物，不重复启动formal或覆盖已封存run。需要另作完整复现或新研究时，使用新run_id并保留原冻结、正式账本、失败和无增益记录；已见8月不得重新称作未见测试。
 
 [Codex 完整执行流程](docs/Codex完整执行流程.md) 保留阶段要求、执行顺序、产物和完成检查；其中初始交付状态是历史背景，实际完成状态以研究日志和实验索引为准。继续运行和迁移优先阅读[最终运行说明](docs/最终运行说明.md)。其他说明：
 
@@ -51,10 +67,10 @@ python scripts/verify_downloads.py --raw-only
 
 命令只核对原始文件大小、哈希及压缩完整性，不联网、不清洗、不解析测试目标。检查通过后，按照[最终运行说明](docs/最终运行说明.md)恢复隔离环境与本地产物，再选择只读审计或使用新 run_id 重建。不要覆盖已完成运行。
 
-机型只用 family/variant，不加入机场设施、座位数或机龄。开发比较使用4–7月UTC前向验证与成熟训练标签；正式8月评估已经完成，结果按F0001归档，不再据此调参。研究依据与结果解释以研究日志和有效运行档案为准；完整复现与最终报告的交付状态仍需后续核验。
+机型只用 family/variant，不加入机场设施、座位数或机龄。开发比较使用4–7月UTC前向验证与成熟训练标签；正式8月评估已经完成，结果按F0001归档，不再据此调参。研究依据与结果解释以研究日志和有效运行档案为准；完整复现、最终成品及P7/外部后审计均已实际通过。当前状态和各阶段Notebook绑定见[执行进度](docs/执行进度.md)。
 
 <details><summary>English</summary>
 
-This project covers 3,057,590 BTS flights from April–August 2026 across 355 airport IDs. P0–P6 are complete, including registered model selection, the unique frozen August assessment R0028 and final RQ1 R0029; both final runs passed independent archive checks and were pushed. R0030 is rebuilding features and refitting the frozen models; successful full reproduction is not yet claimed. Final reports, editable slides, a 600-second captioned video without narration and delivery audit remain pending. Do not reopen the formal test or duplicate the running batch. Full Git history and separately copied ignored processed data, predictions, feature archives and models are required for migration and receipt verification.
+This project covers 3,057,590 BTS flights from April–August 2026 across 355 airport IDs. P0–P7 are complete: registered selection, unique frozen August assessment R0028, final RQ1 R0029, full RQ2 reconstruction/refitting R0030, and delivery audit R0031. The external audit verified all 31 preserved run records with zero errors/warnings and no unsealed runs skipped. All four models' raw/clipped predictions reproduced exactly; 3,320 metric rows passed the fixed tolerance. This is numerical reproduction on the already-seen test set, not another independent test. The English report has 19 body pages (22 total); the 12-slide editable deck and 600-second captioned video have been checked. The video contains no narration. Final files, evidence and eleven web-Pro review records are preserved. Full Git history and separately copied ignored processed data, feature archives, predictions and models are required for migration; cloning Git alone is not a complete computational backup.
 
 </details>

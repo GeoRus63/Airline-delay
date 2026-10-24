@@ -1,0 +1,52 @@
+"""Read-only comparison of actual completed P7 output against pre-audit pins."""
+from datetime import datetime, timezone
+import hashlib
+import json
+from pathlib import Path
+
+root=Path(__file__).resolve().parents[1]
+def read(relative):
+    return json.loads((root/relative).read_text(encoding='utf8'))
+def pin(relative):
+    p=root/relative
+    return {'path':relative,'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
+manifest=read('experiments/runs/R0031/manifest.json')
+assert manifest['status']=='completed'
+config=read('configs/p7_audit_delivery.json')
+delivered=read('experiments/runs/R0031/delivery_receipts.json')
+baseline=read('research/audits/final_delivery_v01/pre_delivery_file_pins.json')
+assert len(delivered)==len(config['delivery_paths'])==len({x['path'] for x in delivered})
+assert {x['path'] for x in delivered}==set(config['delivery_paths'])
+for item in delivered:
+    assert pin(item['path'])==item, item['path']
+for item in baseline['files']:
+    assert pin(item['path'])==item, f'Previously accepted bytes changed: {item["path"]}'
+mapping=read('reports/source_snapshots/S0001/mapping.json')
+historical={item['original_path']:item['snapshot_path'] for item in mapping['sources']}
+source_checks=[]
+for receipt,key in [('reports/research_v01/source_receipts.json','sources'),
+                    ('reports/presentation/content_v01.sources.json','source_files')]:
+    sources=read(receipt)[key]
+    for item in sources:
+        relative=historical.get(item['path'],item['path'])
+        actual=pin(relative)
+        assert actual['bytes']==item['bytes'] and actual['sha256']==item['sha256'],item['path']
+    source_checks.append({'consumer':receipt,'checked':len(sources),'historical_paths_resolved_via_S0001':list(historical),'passed':True})
+notebook_path='notebooks/00_数据清单.ipynb'
+notebook=read(notebook_path)
+code=[cell for cell in notebook['cells'] if cell['cell_type']=='code']
+assert code and all(cell.get('execution_count') is not None for cell in code)
+assert not [out for cell in code for out in cell.get('outputs',[]) if out.get('output_type')=='error']
+result={'created_at_utc':datetime.now(timezone.utc).isoformat(),'passed':True,
+        'delivery_run_id':'R0031','execution_git_commit':manifest['git_commit'],
+        'delivery_files_rehashed':len(delivered),'accepted_pre_audit_files_unchanged':len(baseline['files']),
+        'expected_first_execution_update':notebook_path,'inventory_executed_code_cells':len(code),
+        'inventory_notebook':pin(notebook_path),'source_receipts_resolved_and_rehashed':source_checks,
+        'receipt':pin('experiments/runs/R0031/delivery_receipts.json'),
+        'source_snapshot':pin('reports/source_snapshots/S0001/mapping.json'),
+        'freeze':pin('experiments/freezes/F0001/model_selection.json'),
+        'scope':'Exact delivered bytes and preserved historical report sources; 00 visual review and the external full archive audit are separate records.'}
+target=root/'research/audits/R0031_delivery_postcheck.json'
+assert not target.exists()
+target.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+print(json.dumps(result,ensure_ascii=False,indent=2))

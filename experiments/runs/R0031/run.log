@@ -1,0 +1,12 @@
+2026-10-24T05:36:43.695780+00:00 R0031 started at commit edae7562458d2a4dfdc421672cc23351b71bb55a
+{
+  "files_checked": 133,
+  "total_bytes": 374386653,
+  "failures": [],
+  "passed": true,
+  "scope": "raw inputs only",
+  "nonraw_entries_excluded": 51
+}
+D:\airline-delay\.venv\Lib\site-packages\zmq\_future.py:718: RuntimeWarning: Proactor event loop does not implement add_reader family of methods required for zmq. Registering an additional selector thread for add_reader support via tornado. Use `asyncio.set_event_loop_policy(WindowsSelectorEventLoopPolicy())` to avoid this warning.
+  self._get_loop()
+2026-10-24T05:39:53.496265+00:00 status=completed; seconds=189.8

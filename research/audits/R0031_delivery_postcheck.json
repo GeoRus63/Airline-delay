@@ -1,0 +1,51 @@
+{
+  "created_at_utc": "2026-10-24T05:40:29.111752+00:00",
+  "passed": true,
+  "delivery_run_id": "R0031",
+  "execution_git_commit": "edae7562458d2a4dfdc421672cc23351b71bb55a",
+  "delivery_files_rehashed": 271,
+  "accepted_pre_audit_files_unchanged": 269,
+  "expected_first_execution_update": "notebooks/00_数据清单.ipynb",
+  "inventory_executed_code_cells": 4,
+  "inventory_notebook": {
+    "path": "notebooks/00_数据清单.ipynb",
+    "bytes": 21189,
+    "sha256": "2908aa19729c94ef2d89e5700abcd3521e6a0e930d9706cf4feb72b854f3119b"
+  },
+  "source_receipts_resolved_and_rehashed": [
+    {
+      "consumer": "reports/research_v01/source_receipts.json",
+      "checked": 153,
+      "historical_paths_resolved_via_S0001": [
+        "experiments/index.csv",
+        "research/研究记录.md"
+      ],
+      "passed": true
+    },
+    {
+      "consumer": "reports/presentation/content_v01.sources.json",
+      "checked": 112,
+      "historical_paths_resolved_via_S0001": [
+        "experiments/index.csv",
+        "research/研究记录.md"
+      ],
+      "passed": true
+    }
+  ],
+  "receipt": {
+    "path": "experiments/runs/R0031/delivery_receipts.json",
+    "bytes": 47214,
+    "sha256": "7270cb6c313b4021df5895b7d579bbc6f410f1f78d87089827334fa7d6197186"
+  },
+  "source_snapshot": {
+    "path": "reports/source_snapshots/S0001/mapping.json",
+    "bytes": 3360,
+    "sha256": "4c5c6afff9c8cc69006d29ef1304a81a483083594e85b4fb739feca8f274d447"
+  },
+  "freeze": {
+    "path": "experiments/freezes/F0001/model_selection.json",
+    "bytes": 37316,
+    "sha256": "286c7de3cc56da3c6c61e16670bde538a672de7bca7f4b3136ce68501c2648f4"
+  },
+  "scope": "Exact delivered bytes and preserved historical report sources; 00 visual review and the external full archive audit are separate records."
+}

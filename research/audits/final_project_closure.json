@@ -1,0 +1,76 @@
+{
+  "created_at_utc": "2026-10-24T05:46:09.245606+00:00",
+  "status": "P0-P7 complete; actual artifacts and independent delivery checks passed",
+  "run_status_counts": {
+    "completed": 27,
+    "failed": 3,
+    "invalidated": 1
+  },
+  "delivery_files_rehashed_at_closure": 271,
+  "formal_run": "R0028",
+  "full_rq2_reproduction_run": "R0030",
+  "delivery_audit_run": "R0031",
+  "delivery_execution_source_commit": "edae7562458d2a4dfdc421672cc23351b71bb55a",
+  "content_source_commit": "cc9eb8d32f6f105a7f4a2da26e0d668a5246a5de",
+  "pro_review_nodes": 11,
+  "pro_meta_records_including_correction": 12,
+  "evidence": [
+    {
+      "path": "research/audits/R0031_post_delivery_integrity.json",
+      "bytes": 1006060,
+      "sha256": "3f5ec3d03a3b605b909308af3fb4f7625a1f8db64bfd0ced340cdb7dcdc7a981"
+    },
+    {
+      "path": "research/audits/R0031_delivery_postcheck.json",
+      "bytes": 1838,
+      "sha256": "9dd80dc6523d09a3663639b0976bd3ac2de2a9b9890057a22dd9fd6a5091de85"
+    },
+    {
+      "path": "research/audits/R0031_inventory_notebook_review.json",
+      "bytes": 2595,
+      "sha256": "1f28bcdf5cba9f545ae2a8f4da4dd3ca45464f531bc84e19a11002b06a4324bd"
+    },
+    {
+      "path": "experiments/runs/R0031/manifest.json",
+      "bytes": 23187,
+      "sha256": "cd5a619280f06c74f5eb502e68cccb7d2322ae7287820aede8a6a0ab39e1e241"
+    },
+    {
+      "path": "experiments/runs/R0031/delivery_receipts.json",
+      "bytes": 47214,
+      "sha256": "7270cb6c313b4021df5895b7d579bbc6f410f1f78d87089827334fa7d6197186"
+    },
+    {
+      "path": "reports/source_snapshots/S0001/mapping.json",
+      "bytes": 3360,
+      "sha256": "4c5c6afff9c8cc69006d29ef1304a81a483083594e85b4fb739feca8f274d447"
+    },
+    {
+      "path": "reports/source_snapshots/S0001/content_source_verification.json",
+      "bytes": 2466,
+      "sha256": "4bbabb92b8d0385b555c411ba83114d69460cb2ff9f101ba7a413e194d540349"
+    },
+    {
+      "path": "research/audits/final_delivery_v01/report_visual_review.json",
+      "bytes": 15476,
+      "sha256": "3ceedaefe39dbc6aab20f9033bdd30e645edd6923b6e64fdb2bc7a7664e8f128"
+    },
+    {
+      "path": "research/audits/final_delivery_v01/presentation_visual_review.json",
+      "bytes": 15539,
+      "sha256": "f49db537eb6436e9e4682f9586c7eeea9ee3d21e9f332deea57a4348e771d715"
+    },
+    {
+      "path": "research/audits/final_delivery_v01/video_visual_review.json",
+      "bytes": 14522,
+      "sha256": "b659eb8588604b14c4ee0d2e1d4db0d0cd85a1421f3989102b10ba3f7dfaf645"
+    }
+  ],
+  "limitations": [
+    "Numerical reproduction is conditional on the frozen inputs/environment; it is not new independent test evidence or an RQ1 full rerun",
+    "Video contains captions but no narration; visual QA covered all slides through samples, not manual inspection of every frame",
+    "Ignored processed/feature/prediction/model files remain local and require separate migration; Git alone is not a complete computational backup"
+  ],
+  "closure_helper_note": "Initial read-only attempt stopped on an invalid utf8-sig encoding alias; corrected to utf-8-sig before writing this receipt. No delivered file was changed.",
+  "publication": "Commit and push this closure with the R0031 archives and final state pages, then verify local and remote HEAD equality."
+}

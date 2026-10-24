@@ -29,3 +29,4 @@ R0027,R0026,P5-model-selection,completed,Apply registered family minima and prac
 R0028,R0027,P6-final,completed,One formal frozen August assessment after completed P5 and Pro final review,Retain outputs; review before next stage,experiments/runs/R0028
 R0029,R0028,P6-RQ1-final,completed,Describe April-August RQ1 using the unchanged R0018 development reference; report August support separately,Retain outputs; review before next stage,experiments/runs/R0029
 R0030,R0029,P7-full-reproduction,completed,"Rebuild features, refit all four frozen predictors and compare with the original formal R0028 without changing its ledger",Retain outputs; review before next stage,experiments/runs/R0030
+R0031,R0030,P7-delivery-audit,completed,"Verify original raw bytes, every preserved run and exact final deliverables; execute and seal the inventory Notebook",Retain outputs; review before next stage,experiments/runs/R0031

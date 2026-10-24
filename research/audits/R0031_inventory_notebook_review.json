@@ -1,0 +1,59 @@
+{
+  "created_at_utc": "2026-10-24T05:42:16.488459+00:00",
+  "passed": true,
+  "source_receipts": [
+    {
+      "path": "notebooks/00_数据清单.ipynb",
+      "bytes": 21189,
+      "sha256": "2908aa19729c94ef2d89e5700abcd3521e6a0e930d9706cf4feb72b854f3119b"
+    },
+    {
+      "path": "experiments/runs/R0031/notebooks/00_数据清单.ipynb",
+      "bytes": 21212,
+      "sha256": "2ef0dc2086701e2d3cc26c66f7084aa22965891ceec270c91a243162c7eac415"
+    },
+    {
+      "path": "experiments/runs/R0031/notebooks/00_数据清单.html",
+      "bytes": 303897,
+      "sha256": "207e8dce0b20fbc8648b19fc1293527a43c48c5b25bdb2d2f2f975d2e8017f34"
+    },
+    {
+      "path": "research/audits/R0031_inventory_flights_screenshot.png",
+      "bytes": 89845,
+      "sha256": "07bbd66adb120243e73a07752dab9c55573d90dbf068c0db94a88d1b31216b00"
+    },
+    {
+      "path": "research/audits/R0031_inventory_weather_screenshot.png",
+      "bytes": 79769,
+      "sha256": "7362355626a5e55ae2e3dfaa6ddc8206d63b728f9befba13f48f4c6eac04db2d"
+    }
+  ],
+  "public_and_archived_notebook_byte_identical": false,
+  "only_display_copy_binding_differs": {
+    "archived": "NOTEBOOK_DIR = ROOT / 'experiments/runs/R0031/notebooks'",
+    "public": "NOTEBOOK_DIR = ROOT / 'notebooks'",
+    "all_other_json_content_and_outputs_identical": true
+  },
+  "executed_code_cells": 4,
+  "cell_errors": 0,
+  "valid_links_or_anchors": 4,
+  "images": 0,
+  "broken_images": 0,
+  "browser": "Codex sidebar browser",
+  "actual_visual_sections": [
+    "5-month flight table",
+    "METAR/TAF monthly coverage",
+    "TAF no-record station list and migration guidance"
+  ],
+  "observations": [
+    "Counts/headers readable with no clipped columns at observed viewport",
+    "Raw download snapshot is explicitly distinct from cleaned samples and current run status",
+    "Long source-status descriptions use pandas ellipses; complete originals remain in tables/weather_unavailable.csv"
+  ],
+  "diagnostic_attempts": [
+    "Initial raw-byte equality assertion failed; inspected _display_copy and observed the sole intentional NOTEBOOK_DIR substitution",
+    "One read-only diagnostic snippet had a syntax typo, corrected before execution; no notebook mutation",
+    "Exact JSON comparison after only that known binding substitution passed"
+  ],
+  "scope": "Actual post-P7 public Notebook and archived HTML outputs checked read-only. Browser renders the archived HTML; public output content is proven identical, with the expected public NOTEBOOK_DIR binding. No sealed file was changed."
+}
