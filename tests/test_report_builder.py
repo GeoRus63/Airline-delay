@@ -1,6 +1,7 @@
 """Execution disclosure tests use only synthetic completed summary archives."""
 import json
 from pathlib import Path
+import shutil
 import tempfile
 import unittest
 
@@ -8,6 +9,135 @@ import pandas as pd
 
 from scripts import build_report as report
 from tests.test_report_evidence import make_fixture, seal, write_json, write_table
+
+
+class ReproductionDisclosure(unittest.TestCase):
+    def fixture(self, root):
+        config = make_fixture(root)
+        config["reproduction_run_id"] = "R0021"
+        formal = root / "experiments/runs/R0017"
+        directory = root / "experiments/runs/R0021"
+        directory.mkdir()
+        frozen = json.loads((formal / "model_selection.json").read_text())
+        frozen.update(config={"threads": 8}, protocol={"timezone": "UTC"})
+        frozen["payload_sha256"] = report.canonical({k: v for k, v in frozen.items() if k != "payload_sha256"})
+        write_json(formal / "model_selection.json", frozen)
+        model = json.loads((formal / "model_manifest.json").read_text())
+        model.update(threads=8, fold_workers=1)
+        write_json(formal / "model_manifest.json", model)
+        original = json.loads((formal / "final_result.json").read_text())
+        models = [model["model_name"], *report.BASELINES]
+        original.update(mode="final", claim_type="formal", config=frozen["config"], protocol=frozen["protocol"],
+                        models=models, evaluation_rows=2, folds=model["folds"], split_sha256=model["split_sha256"],
+                        evaluation_ids_sha256=model["evaluation_ids_sha256"], feature_fingerprints={"synthetic_train": "a", "synthetic_test": "b"},
+                        verified_inputs={"synthetic_sources": "same"}, freeze_payload_sha256=frozen["payload_sha256"],
+                        freeze_manifest_sha256=report.digest(formal / "model_selection.json"))
+        write_json(formal / "final_result.json", original)
+        formal_config = json.loads((formal / "config.json").read_text())
+        formal_config["threads"] = 8
+        seal(root, "R0017", formal_config)
+        ledger = root / "experiments/final_access/2026-08.json"
+        access = {"status": "completed", "run_id": "R0017", "final_result_sha256": report.digest(formal / "final_result.json"),
+                  "freeze_manifest_sha256": original["freeze_manifest_sha256"]}
+        write_json(ledger, access)
+        reference = {"mode": "reproduce_final", "claim_type": "reproduction", "formal_run_id": "R0017", "formal_run_dir": str(formal),
+                     "formal_final_result_sha256": access["final_result_sha256"], "freeze_manifest_sha256": access["freeze_manifest_sha256"],
+                     "access_ledger_path": str(ledger), "ledger_sha256_before": report.digest(ledger),
+                     "creates_new_formal_claim": False, "refitted": True, "raw_test_data_read": True}
+        comparison = {"prediction_rows_compared": 8, "metric_rows_compared": len(pd.read_csv(formal / "metrics.csv")),
+                      "all_feature_values_and_types_match": True, "ids_and_targets_match": True,
+                      "prediction_atol": 1e-10, "metric_atol": 1e-10, "rtol": 0}
+        repeated = json.loads(json.dumps(original))
+        repeated.update(mode="reproduce_final", claim_type="reproduction", reproduction_reference=reference,
+                        reproduction_comparison=comparison)
+        verified = {**reference, **comparison, "verified": True, "ledger_sha256_after": report.digest(ledger), "formal_ledger_unchanged": True}
+        differences = [{"model": model_name, "column": column, "rows": 2, "max_absolute_difference": 2e-14 if column.endswith("raw") else 1e-14,
+                        "atol": 1e-10, "rtol": 0.} for model_name in models for column in ["predicted_delay_raw", "predicted_delay"]]
+        shutil.copyfile(formal / "model_selection.json", directory / "model_selection.json")
+        shutil.copyfile(formal / "metrics.csv", directory / "metrics.csv")
+        self.persist(root, reference, verified, repeated, differences)
+        index = pd.read_csv(root / "experiments/index.csv").to_dict("records")
+        index.append({"run_id": "R0021", "parent_run_id": "R0017", "status": "completed", "artifact_dir": "experiments/runs/R0021",
+                      "change": "Synthetic full reproduction", "decision": "same frozen computation"})
+        write_table(root / "experiments/index.csv", index)
+        with (root / "research/研究记录.md").open("a", encoding="utf-8") as stream:
+            stream.write("\n### Synthetic — R0021\n")
+        return config, reference, verified, repeated, differences
+
+    def persist(self, root, reference, verified, repeated, differences):
+        directory = root / "experiments/runs/R0021"
+        for name, value in [("reproduction_reference.json", reference), ("reproduction_verification.json", verified), ("final_result.json", repeated)]:
+            write_json(directory / name, value)
+        write_table(directory / "reproduction_prediction_differences.csv", differences)
+        seal(root, "R0021", {"mode": "reproduce_final", "parent_run_id": "R0017"})
+
+    def test_completed_reproduction_prose_uses_only_archived_summary_evidence(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            config, *_ = self.fixture(root)
+            before = {path: report.digest(path) for path in (root / "experiments").rglob("*") if path.is_file()}
+            result = report.build_report(config, root=root)
+            text = (Path(result["output_dir"]) / "report_en.md").read_text(encoding="utf-8")
+            chinese = (Path(result["output_dir"]) / "结果解读_中文.md").read_text(encoding="utf-8")
+            self.assertIn("Completed reproduction R0021", text)
+            self.assertIn("2e-14/1e-14 min", text)
+            self.assertIn("eight raw/clipped comparison rows", text)
+            self.assertIn("already-seen test set, not a new independent test", text)
+            self.assertIn("仅读归档JSON/CSV执行证据", chinese)
+            self.assertEqual(before, {path: report.digest(path) for path in before})
+
+    def test_missing_optional_reproduction_does_not_open_an_extra_run(self):
+        self.assertEqual(report.reproduction_prose(None, {}, None), ([], []))
+
+    def test_invalid_reproduction_evidence_is_rejected(self):
+        faults = ["wrong_mode", "wrong_formal", "freeze", "ledger", "refitted", "new_claim", "types", "ids", "tolerance",
+                  "missing_pair", "duplicate_pair", "nonfinite", "difference", "rows", "metric_rows", "missing_receipt"]
+        for fault in faults:
+            with self.subTest(fault=fault), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                config, reference, verified, repeated, differences = self.fixture(root)
+                directory = root / "experiments/runs/R0021"
+                if fault == "wrong_formal":
+                    reference["formal_run_id"] = verified["formal_run_id"] = "R0001"
+                elif fault == "freeze":
+                    with (directory / "model_selection.json").open("a") as stream:
+                        stream.write("\n")
+                elif fault == "ledger":
+                    verified["ledger_sha256_after"] = "changed"
+                elif fault == "refitted":
+                    reference["refitted"] = verified["refitted"] = False
+                elif fault == "new_claim":
+                    reference["creates_new_formal_claim"] = verified["creates_new_formal_claim"] = True
+                elif fault == "types":
+                    verified["all_feature_values_and_types_match"] = False
+                elif fault == "ids":
+                    repeated["evaluation_ids_sha256"] = "different"
+                elif fault == "tolerance":
+                    verified["prediction_atol"] = 1e-8
+                elif fault == "missing_pair":
+                    differences.pop()
+                elif fault == "duplicate_pair":
+                    differences[-1] = differences[0].copy()
+                elif fault == "nonfinite":
+                    differences[0]["max_absolute_difference"] = float("nan")
+                elif fault == "difference":
+                    differences[0]["max_absolute_difference"] = 1.1e-10
+                elif fault == "rows":
+                    differences[0]["rows"] = 3
+                elif fault == "metric_rows":
+                    verified["metric_rows_compared"] += 1
+                self.persist(root, reference, verified, repeated, differences)
+                if fault == "wrong_mode":
+                    seal(root, "R0021", {"mode": "final", "parent_run_id": "R0017"})
+                if fault == "missing_receipt":
+                    manifest_path = directory / "manifest.json"
+                    manifest = json.loads(manifest_path.read_text())
+                    manifest["outputs"] = [item for item in manifest["outputs"] if not item["path"].endswith("reproduction_prediction_differences.csv")]
+                    write_json(manifest_path, manifest)
+                archive = report.Archive(root)
+                with self.assertRaises(ValueError):
+                    report.reproduction_prose(archive, config, report.model_archive(archive, "R0017", development=False))
+                self.assertFalse((root / "reports").exists())
 
 
 class CoefficientDisclosure(unittest.TestCase):

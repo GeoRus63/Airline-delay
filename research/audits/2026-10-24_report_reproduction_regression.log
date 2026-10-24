@@ -1,0 +1,8 @@
+test_completed_reproduction_prose_uses_only_archived_summary_evidence (tests.test_report_builder.ReproductionDisclosure.test_completed_reproduction_prose_uses_only_archived_summary_evidence) ... ok
+test_invalid_reproduction_evidence_is_rejected (tests.test_report_builder.ReproductionDisclosure.test_invalid_reproduction_evidence_is_rejected) ... ok
+test_missing_optional_reproduction_does_not_open_an_extra_run (tests.test_report_builder.ReproductionDisclosure.test_missing_optional_reproduction_does_not_open_an_extra_run) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 11.782s
+
+OK

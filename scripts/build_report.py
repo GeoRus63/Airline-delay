@@ -5,7 +5,8 @@ after P6: python scripts/build_report.py --config configs/report.json
 The JSON keys are mainline_run_ids (G0/G1/G2/G3/G4A/G4B dictionary),
 variant_run_id, noaa_run_id, algorithm_run_ids (the four DT and two RF runs),
 development_rq1_run_id, feature_selection_run_id, model_selection_run_id,
-final_prediction_run_id, final_rq1_run_id, and optional output_dir (reports).
+final_prediction_run_id, final_rq1_run_id, optional reproduction_run_id, and
+optional output_dir (reports).
 output_dir must not exist. Markdown typography metadata is for the downstream
 PDF renderer; this script does not certify PDF pages, fonts, slides or video.
 """
@@ -692,6 +693,121 @@ def rq1_prose(archive, run_id, label):
     return "\n\n".join(text)
 
 
+def reproduction_prose(archive, config, final_run):
+    """Check archived refit receipts only; never reopen row-level predictions."""
+    run_id = config.get("reproduction_run_id")
+    if run_id is None:
+        return [], []
+    run = archive.run(run_id)
+    if run["config"].get("mode") != "reproduce_final":
+        raise ValueError("Report reproduction run must have mode reproduce_final")
+    formal_id = config["final_prediction_run_id"]
+    original = archive.json(formal_id, "final_result.json")
+    repeated = archive.json(run_id, "final_result.json")
+    reference = archive.json(run_id, "reproduction_reference.json")
+    verified = archive.json(run_id, "reproduction_verification.json")
+    freeze = archive.source(formal_id, "model_selection.json")
+    freeze_sha = digest(freeze)
+    if digest(archive.source(run_id, "model_selection.json")) != freeze_sha:
+        raise ValueError("Reproduction freeze differs from the formal archived copy")
+    ledger = archive.path("experiments/final_access/2026-08.json")
+    access = archive.json_path(ledger)
+    if (access.get("status") != "completed" or access.get("run_id") != formal_id
+            or access.get("freeze_manifest_sha256") != freeze_sha
+            or access.get("final_result_sha256") != digest(archive.source(formal_id, "final_result.json"))):
+        raise ValueError("Reproduction formal ledger identity differs")
+    expected = {"mode": "reproduce_final", "claim_type": "reproduction", "formal_run_id": formal_id,
+                "formal_final_result_sha256": access["final_result_sha256"], "freeze_manifest_sha256": freeze_sha,
+                "ledger_sha256_before": digest(ledger), "creates_new_formal_claim": False,
+                "refitted": True, "raw_test_data_read": True}
+    for key, value in expected.items():
+        if reference.get(key) != value or verified.get(key) != value or type(reference.get(key)) is not type(value) or type(verified.get(key)) is not type(value):
+            raise ValueError(f"Reproduction provenance/verification differs: {key}")
+    for name, expected_path in [("formal_run_dir", final_run["path"]), ("access_ledger_path", ledger)]:
+        for source in [reference, verified]:
+            actual = Path(source.get(name, ""))
+            actual = actual if actual.is_absolute() else archive.root / actual
+            if actual.resolve() != expected_path.resolve():
+                raise ValueError("Reproduction formal path or ledger path differs")
+    if (verified.get("verified") is not True or verified.get("formal_ledger_unchanged") is not True
+            or verified.get("ledger_sha256_after") != digest(ledger)
+            or original.get("mode") != "final" or original.get("claim_type") != "formal"
+            or repeated.get("mode") != "reproduce_final" or repeated.get("claim_type") != "reproduction"
+            or repeated.get("reproduction_reference") != reference):
+        raise ValueError("Reproduction executed-refit/ledger verification is incomplete")
+    identity_keys = ["config", "protocol", "models", "primary_model_name", "folds", "split_sha256",
+                     "evaluation_rows", "evaluation_ids_sha256", "feature_fingerprints", "verified_inputs"]
+    for key in identity_keys:
+        if key not in original or not original[key] or original[key] != repeated.get(key):
+            raise ValueError(f"Reproduction archived identity/config differs: {key}")
+    models = original["models"]
+    if (not isinstance(models, list) or len(models) != 4 or len(set(models)) != 4
+            or set(models) != {final_run["model"]["model_name"], *BASELINES}):
+        raise ValueError("Reproduction must compare the frozen learned model and all three baselines")
+    frozen = archive.json(formal_id, "model_selection.json")
+    for result in [original, repeated]:
+        if (result.get("freeze_manifest_sha256") != freeze_sha or result.get("freeze_payload_sha256") != frozen["payload_sha256"]
+                or result.get("config") != frozen.get("config") or result.get("protocol") != frozen.get("protocol")):
+            raise ValueError("Reproduction result does not identify the original frozen configuration")
+    n = original["evaluation_rows"]
+    if (type(n) is not int or n <= 0 or n != final_run["model"]["evaluation_rows"]
+            or original["evaluation_ids_sha256"] != final_run["model"]["evaluation_ids_sha256"]
+            or original["split_sha256"] != final_run["model"]["split_sha256"]):
+        raise ValueError("Reproduction formal evaluation identity/row count differs")
+    comparison = repeated.get("reproduction_comparison", {})
+    for key, expected_value in {"prediction_rows_compared": n * len(models), "all_feature_values_and_types_match": True,
+                                "ids_and_targets_match": True, "prediction_atol": 1e-10, "metric_atol": 1e-10, "rtol": 0}.items():
+        if (verified.get(key) != expected_value or comparison.get(key) != expected_value
+                or isinstance(expected_value, bool) and (verified.get(key) is not expected_value or comparison.get(key) is not expected_value)):
+            raise ValueError(f"Reproduction comparison declaration differs: {key}")
+    filename = "reproduction_prediction_differences.csv"
+    differences = archive.table(run_id, filename, ["model", "column", "rows", "max_absolute_difference", "atol", "rtol"])
+    columns = ["predicted_delay_raw", "predicted_delay"]
+    expected_pairs = {(model, column) for model in models for column in columns}
+    if (len(differences) != 8 or differences.duplicated(["model", "column"]).any()
+            or set(zip(differences.model, differences.column)) != expected_pairs):
+        raise ValueError("Reproduction requires exactly eight complete model/raw/clipped comparison rows")
+    for row in differences.itertuples():
+        if (not all(math.isfinite(float(value)) for value in [row.rows, row.max_absolute_difference, row.atol, row.rtol])
+                or row.rows != n or row.max_absolute_difference < 0 or row.max_absolute_difference > 1e-10
+                or row.atol != 1e-10 or row.rtol != 0):
+            raise ValueError("Reproduction prediction differences/rows exceed the fixed comparison protocol")
+    metrics = archive.table(run_id, "metrics.csv", METRIC_COLUMNS)
+    original_metrics = final_run["metrics"]
+    keys = ["model", "fold", "group", "value", "n"]
+    left, right = (frame.assign(value=frame.value.astype(str)).sort_values(keys).reset_index(drop=True)
+                   for frame in [original_metrics, metrics])
+    if list(left.columns) != list(right.columns) or len(left) != len(right) or not left[keys].equals(right[keys]):
+        raise ValueError("Reproduction metric row identities/counts differ")
+    if verified.get("metric_rows_compared") != len(left) or comparison.get("metric_rows_compared") != len(left):
+        raise ValueError("Reproduction metric row-count declaration differs")
+    for key in [column for column in left if column not in keys]:
+        if key == "unit":
+            if not left[key].equals(right[key]):
+                raise ValueError("Reproduction metric units differ")
+        elif not all(math.isfinite(float(a)) and math.isfinite(float(b)) and abs(a - b) <= 1e-10 for a, b in zip(left[key], right[key])):
+            raise ValueError("Reproduction metric differences exceed the fixed tolerance")
+    refs = " ".join(archive.cite(run_id, source, selector, claim) for source, selector, claim in [
+        ("reproduction_verification.json", {"keys": [*expected, "verified", "formal_ledger_unchanged", "ledger_sha256_after", *comparison]}, "Archived full-refit execution verification and fixed acceptance conditions"),
+        ("reproduction_reference.json", {"keys": list(reference)}, "Original formal experiment and unchanged ledger identity"),
+        ("model_selection.json", {"whole_file": True, "sha256_equals_formal_copy": freeze_sha}, "Identical formal/reproduction freeze copy"),
+        (filename, {"rows": "all", "aggregation": "max(max_absolute_difference) separately for predicted_delay_raw and predicted_delay"}, "Observed raw and clipped prediction reproduction differences"),
+        ("metrics.csv", {"rows": "all", "comparison": "same formal identities and absolute tolerance 1e-10"}, "Reproduced metric rows and fixed-tolerance agreement")])
+    raw = differences.loc[differences.column.eq(columns[0]), "max_absolute_difference"].max()
+    clipped = differences.loc[differences.column.eq(columns[1]), "max_absolute_difference"].max()
+    en = [f"Completed reproduction {run_id} records feature rebuilding and refitting under the identical freeze used by formal run {formal_id}. "
+          f"The archived execution verification reports matching feature values/types and IDs/targets, with the formal ledger unchanged. "
+          f"It compared {n:,} evaluation rows per model across four models ({n * 4:,} model-prediction rows and eight raw/clipped comparison rows), "
+          f"plus {len(metrics):,} metric rows. Maximum absolute raw/clipped prediction differences were {raw:.6g}/{clipped:.6g} min, "
+          f"within fixed atol=1e-10 and rtol=0. This report checks archived JSON/CSV execution evidence only; it does not rebuild features, refit or reopen predictions. "
+          f"This is reproduction on the already-seen test set, not a new independent test or formal claim. {refs}"]
+    zh = [f"完整复现{run_id}的执行归档记录使用正式实验{formal_id}同一freeze重建特征并重新拟合；特征值/类型、ID/目标核对一致，正式账本前后不变。"
+          f"四模型各核对{n:,}条评价记录，合计{n * 4:,}条模型预测记录及8行原始/截断差异汇总，另核对{len(metrics):,}行指标。"
+          f"原始/截断预测最大绝对差为{raw:.6g}/{clipped:.6g}分钟，均在固定atol=1e-10、rtol=0内。"
+          f"本报告仅读归档JSON/CSV执行证据，不重建、不重训、不打开预测文件；这是已见测试集上的复现，不是新增独立测试或第二项正式声明。{refs}"]
+    return en, zh
+
+
 def ols_coefficient_prose(archive, selection_run_id, feature_run):
     """Read the feature-source OLS, independently of any selected tree/forest."""
     run_id = feature_run["id"]
@@ -857,6 +973,7 @@ def compose(archive, config, validated):
     execution_en, execution_zh = execution_prose(archive, [*main, variant, noaa, *algorithms], selected_run, final_run)
     feature_run = next(run for run in main if run["id"] == feature["selected_run_id"])
     coefficient_en, coefficient_zh = ols_coefficient_prose(archive, config["model_selection_run_id"], feature_run)
+    reproduction_en, reproduction_zh = reproduction_prose(archive, config, final_run)
     lines.extend(single_en)
     eda_id = main[0]["id"]
     eda = archive.json(eda_id, "eda_summary.json")
@@ -986,6 +1103,7 @@ def compose(archive, config, validated):
         for _, row in rows.sort_values(["n", "value"], ascending=[False, True]).head(2).iterrows():
             lines.append(f"Among the largest observed {grouping} groups, {row.value}: " +
                          metric_sentence(archive, final_run, choice["primary_model_name"], group=grouping, value=row.value))
+    lines.extend(reproduction_en)
     lines += ["## Research evolution, reproducibility and limitations",
               "The development chain preserves unfavourable and favourable results rather than skipping a stage after observing its MAE. Failed and invalidated runs remain in the experiment index and research journal; their metrics are excluded from current conclusions."]
     for _, row in archive.index.loc[archive.index.status.isin(["failed", "invalidated"])].iterrows():
@@ -1025,6 +1143,7 @@ def compose(archive, config, validated):
     chinese.extend(noaa_zh)
     chinese += ["## 执行预算与复现", *execution_zh]
     chinese.extend(coefficient_zh)
+    chinese.extend(reproduction_zh)
     chinese += ["## RQ1、研究演进和局限", "RQ1先报告原始均值与累计增加/减少/净变化，再按上游延误和计划周转共同支持标准化。共同支持机场、分层和权重由开发期冻结，逐月与4–8月最终描述重复使用；>0、≥5、≥15阈值不能另选有利机场。节点大小是衔接数、颜色是标准化每次净变化、有向边宽是航班量，不能解释为机场责任。"]
     chinese.extend(reference_zh)
     for run_id in [config["development_rq1_run_id"], config["final_rq1_run_id"]]:
