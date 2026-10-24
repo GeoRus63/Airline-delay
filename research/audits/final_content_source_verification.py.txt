@@ -1,0 +1,41 @@
+"""Verify actual report/presentation sources immediately after both content builds."""
+from datetime import datetime, timezone
+import hashlib
+import json
+from pathlib import Path
+
+root = Path(__file__).resolve().parents[1]
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+mapping_path = root / 'reports/source_snapshots/S0001/mapping.json'
+mapping = json.loads(mapping_path.read_text(encoding='utf8'))
+outputs = [('reports/research_v01/source_receipts.json', 'sources'),
+           ('reports/presentation/content_v01.sources.json', 'source_files')]
+checks = []
+for relative, key in outputs:
+    receipt_path = root / relative
+    receipt = json.loads(receipt_path.read_text(encoding='utf8'))
+    by_path = {item['path']: item for item in receipt[key]}
+    assert len(by_path) == len(receipt[key]), f'Duplicate source receipts: {relative}'
+    for item in receipt[key]:
+        path = root / item['path']
+        assert path.is_relative_to(root) and path.is_file(), str(path)
+        assert path.stat().st_size == item['bytes'] and sha(path) == item['sha256'], item['path']
+    for pinned in mapping['sources']:
+        item = by_path[pinned['original_path']]
+        snapshot = root / pinned['snapshot_path']
+        assert item['bytes'] == pinned['bytes'] == snapshot.stat().st_size
+        assert item['sha256'] == pinned['sha256'] == sha(snapshot)
+        checks.append({'consumer': relative, 'source': item['path'],
+                       'snapshot': pinned['snapshot_path'], 'bytes': item['bytes'],
+                       'sha256': item['sha256'], 'passed': True})
+    checks.append({'consumer': relative, 'all_live_sources_rehashed': len(by_path), 'passed': True})
+target = root / 'reports/source_snapshots/S0001/content_source_verification.json'
+assert not target.exists(), 'Never overwrite a source verification'
+result = {'created_at_utc': datetime.now(timezone.utc).isoformat(), 'passed': True,
+          'source_git_commit': mapping['source_git_commit'],
+          'mapping_sha256': sha(mapping_path), 'checks': checks,
+          'consumer_receipts': [{'path': path, 'sha256': sha(root/path)} for path, _ in outputs],
+          'scope': 'Both actual final content builders consumed the exact preserved pre-publication index/journal bytes; every reported source matched live bytes at this check. Later journal/index updates do not invalidate those preserved snapshots.'}
+target.write_text(json.dumps(result, ensure_ascii=False, indent=2)+'\n', encoding='utf8')
+print(json.dumps(result, ensure_ascii=False, indent=2))

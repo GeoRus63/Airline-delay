@@ -1,0 +1,71 @@
+"""Decode the complete final video and verify each slide around its transitions."""
+from datetime import datetime, timezone
+import hashlib
+import json
+import subprocess
+from pathlib import Path
+
+import numpy as np
+from PIL import Image
+
+root = Path(__file__).resolve().parents[1]
+deck = root / 'reports/presentation/deck_v01'
+video = root / 'reports/presentation/video_v01/airline_delay_captioned.mp4'
+target = root / 'research/audits/final_delivery_v01/video'
+assert not target.exists(), 'Keep existing verification intact'
+target.mkdir(parents=True)
+ffmpeg = 'E:/JasnaDev/assets/ffmpeg/bin/ffmpeg.exe'
+timeline = json.loads((deck/'timing.json').read_text(encoding='utf8'))
+assert timeline['duration'] == 600
+decoded = subprocess.run([ffmpeg, '-hide_banner', '-v', 'error', '-i', str(video),
+                          '-progress', 'pipe:1', '-nostats', '-f', 'null', '-'],
+                         capture_output=True, text=True, encoding='utf8')
+(target/'full_decode.stdout.txt').write_text(decoded.stdout, encoding='utf8')
+(target/'full_decode.stderr.txt').write_text(decoded.stderr or '(no decode errors)\n', encoding='utf8')
+assert decoded.returncode == 0 and not decoded.stderr.strip(), decoded.stderr
+last = dict(line.split('=', 1) for line in decoded.stdout.splitlines() if '=' in line)
+assert last['progress'] == 'end' and int(last['frame']) == 3000, last
+
+# Compare the slide region only, excluding the top label and reserved subtitles.
+# This is a media integrity check, not a statistical result or visual acceptance.
+slide_width, slide_height = 1600, 900
+crop = (160, 50, 1760, 900)
+expected = []
+for slide in timeline['slides']:
+    canvas = Image.new('RGB', (1920, 1080), 'white')
+    im = Image.open(deck/slide['png']).convert('RGB').resize((slide_width, slide_height), Image.Resampling.LANCZOS)
+    canvas.paste(im, (160, 0))
+    expected.append(np.array(canvas.crop(crop), dtype=np.int16))
+samples = []
+elapsed = 0.0
+for idx, slide in enumerate(timeline['slides']):
+    duration = float(slide['duration'])
+    for kind, seconds in [('start', elapsed+.4), ('middle', elapsed+duration/2),
+                          ('end', elapsed+duration-.4)]:
+        name = f'slide-{idx+1:02d}-{kind}.png'
+        frame = target/name
+        command = [ffmpeg, '-hide_banner', '-v', 'error', '-n', '-ss', f'{seconds:.3f}',
+                   '-i', str(video), '-frames:v', '1', str(frame)]
+        result = subprocess.run(command, capture_output=True, text=True)
+        assert result.returncode == 0, result.stderr
+        actual = np.array(Image.open(frame).convert('RGB').crop(crop), dtype=np.int16)
+        distances = [float(np.mean(np.abs(actual-ref))) for ref in expected]
+        nearest = int(np.argmin(distances))
+        assert nearest == idx and distances[idx] < 5.0, (idx, kind, distances)
+        samples.append({'slide':idx+1, 'position':kind, 'seconds':seconds,
+                        'frame':frame.relative_to(root).as_posix(),
+                        'sha256':hashlib.sha256(frame.read_bytes()).hexdigest(),
+                        'nearest_source_slide':nearest+1, 'mean_absolute_channel_error':distances[idx],
+                        'passed':True})
+    elapsed += duration
+receipt = {'created_at_utc':datetime.now(timezone.utc).isoformat(),
+           'video':video.relative_to(root).as_posix(),
+           'video_sha256':hashlib.sha256(video.read_bytes()).hexdigest(),
+           'full_decode_exit_code':decoded.returncode, 'decoded_frames':int(last['frame']),
+           'duration_seconds':600, 'source_slide_size':[slide_width,slide_height],
+           'crop_for_pixel_comparison':list(crop), 'maximum_allowed_mean_channel_error':5.0,
+           'samples':samples, 'passed':True, 'visual_review_completed':False,
+           'scope':'Full stream decode plus 36 start/middle/end frames compared with their original slide. Captions and legibility still require actual visual inspection.'}
+(target/'decode_and_transitions.json').write_text(json.dumps(receipt, indent=2)+'\n', encoding='utf8')
+print(json.dumps({'passed':True,'decoded_frames':3000,'sample_count':len(samples),
+                  'maximum_mean_error':max(x['mean_absolute_channel_error'] for x in samples)}, indent=2))

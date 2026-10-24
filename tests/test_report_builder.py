@@ -1,6 +1,7 @@
 """Execution disclosure tests use only synthetic completed summary archives."""
 import json
 from pathlib import Path
+import re
 import shutil
 import tempfile
 import unittest
@@ -9,6 +10,56 @@ import pandas as pd
 
 from scripts import build_report as report
 from tests.test_report_evidence import make_fixture, seal, write_json, write_table
+
+
+class ReportContentDisclosure(unittest.TestCase):
+    def test_chinese_metric_citations_match_the_displayed_model_and_population(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            config = make_fixture(root)
+            archive = report.Archive(root)
+            validated = report.validate_inputs(archive, config)
+            _, chinese = report.compose(archive, config, validated)
+            evidence = {item["evidence_id"]: item for item in archive.evidence}
+            matches = re.findall(r"^(R\d+) / ([^：]+)：MAE [^\n]+。\[(E\d+)\]$", chinese, re.M)
+            self.assertEqual(len(matches), len(config["mainline_run_ids"]) + len(config["algorithm_run_ids"]) + 3)
+            for run_id, model, evidence_id in matches:
+                item = evidence[evidence_id]
+                self.assertEqual(item["run_id"], run_id)
+                self.assertEqual(item["source_file"], f"experiments/runs/{run_id}/metrics.csv")
+                self.assertEqual(json.loads(item["selector"]), dict(model=model, fold="overall", group="all", value="all"))
+            g0 = config["mainline_run_ids"]["G0"]
+            first_g0_metric = next(item for item in archive.evidence if item["run_id"] == g0 and item["source_file"].endswith("/metrics.csv"))
+            self.assertEqual(json.loads(first_g0_metric["selector"])["model"], "training_mean")
+            g0_citation = next(evidence_id for run_id, _, evidence_id in matches if run_id == g0)
+            self.assertNotEqual(g0_citation, first_g0_metric["evidence_id"])
+
+    def test_code_overview_and_eda_rationale_are_explicit_and_source_backed(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            config = make_fixture(root)
+            archive = report.Archive(root)
+            english, chinese = report.compose(archive, config, report.validate_inputs(archive, config))
+            overview = english.split("## Overview of code structure\n\n", 1)[1].split("## Limitations", 1)[0]
+            for module in ["run_pipeline.py", "prepare_flights.py", "build_features.py", "train_models.py", "evaluate_models.py",
+                           "select_models.py", "final_evaluation.py", "reproduce_final.py", "render_research_notebooks.py",
+                           "build_report.py", "build_presentation_content.py", "rq1_standardization.py"]:
+                self.assertIn(module, overview)
+            self.assertIn("do not fit models or reopen prediction rows", overview)
+            rationale = next(paragraph for paragraph in english.split("\n\n") if paragraph.startswith("These exploratory observations"))
+            self.assertLess(english.index(rationale), english.index("## Prediction timing"))
+            for phrase in ["right tail", "month-to-month", "MAE", "RMSE", "training-median", "carry-forward", "severe-delay",
+                           "forward validation", "explicit unknown", "family versus variant", "missingness", "common-availability",
+                           "not a retrospective change", "preregistered before P0"]:
+                self.assertIn(phrase, rationale)
+            ids = re.findall(r"\[(E\d+)\]", rationale)
+            referenced = [item for item in archive.evidence if item["evidence_id"] in ids]
+            self.assertEqual(len(referenced), 3)
+            self.assertEqual({Path(item["source_file"]).name for item in referenced},
+                             {"eda_monthly_target.csv", "airline_aircraft_coverage.csv", "weather_coverage_summary.json"})
+            self.assertTrue(all(item["research_log_heading_lines"] for item in referenced))
+            self.assertIn("这是对既定方法的描述性解释", chinese)
+            self.assertIn("未据此事后更改评价规则", chinese)
 
 
 class ReproductionDisclosure(unittest.TestCase):

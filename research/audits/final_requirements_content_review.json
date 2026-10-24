@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-24T05:00:36.467408+00:00",
+  "review_kind": "static_substantive_requirements_and_preview_content_review",
+  "status": "complete_with_report_content_findings_not_final_delivery_qa",
+  "scope": {
+    "read_raw_data": false,
+    "read_predictions": false,
+    "read_models": false,
+    "pipeline_started": false,
+    "refit_called": false,
+    "source_or_archive_mutated": false,
+    "r0030_status_at_assignment": "running; no completion or reproduction success inferred",
+    "limitations": [
+      "No recomputation of scientific results or validation of underlying raw data.",
+      "No independent final PDF/page-by-page visual, PPTX, subtitle, media playback, video duration/audio or final P7 audit.",
+      "Existing layout receipt is recorded as prior preview evidence only, not independently revalidated here.",
+      "References were checked for their stated use in the brief/plan/report; source paper bibliographic or page-claim verification was outside this review."
+    ]
+  },
+  "source_receipts": [
+    {
+      "path": "docs/完整项目计划.md",
+      "bytes": 23464,
+      "sha256": "95875310591b3d87aaa636f2f94ae8504f1fea5ed2fad81af76db0197f92df8d"
+    },
+    {
+      "path": "docs/Codex完整执行流程.md",
+      "bytes": 14366,
+      "sha256": "9f01af1869927a25cb561e29b8ee6dc212717887b8238cd0185c1096c3191240"
+    },
+    {
+      "path": "references/ind5003-2610_projects.pdf",
+      "bytes": 59224,
+      "sha256": "1c261f18593bd75d64d263ea16f6ed02a5ca35f6b05ca16195df2f56c3b9c9be"
+    },
+    {
+      "path": "reports/preview_v02/report_en.md",
+      "bytes": 42019,
+      "sha256": "96b23b6260328e2725c600c87119b02c9424ffb7fe2f522e856ad251906e7539"
+    },
+    {
+      "path": "reports/preview_v02/结果解读_中文.md",
+      "bytes": 18020,
+      "sha256": "7a509ed45283a1f079c1e794c7386782a9cfe823d117171ac78a9293381ff61a"
+    },
+    {
+      "path": "reports/preview_v02/evidence_index.csv",
+      "bytes": 59680,
+      "sha256": "858cfa6bfd31b3e77e8c18e66c7c775bfb35bcb77127925faddb7f31b6ae2868"
+    },
+    {
+      "path": "reports/preview_v02/report_preview_v02.layout.json",
+      "bytes": 9827,
+      "sha256": "0b0be7bd68f4e5dce951044be741ab6badbf0e92b37c3844ad8f8015765f3ef3"
+    },
+    {
+      "path": "tmp/final_presentation_preview_v01/content_v03.json",
+      "bytes": 33841,
+      "sha256": "867b82b1fbc924bdbc64b5d4a690eadf6e69405a037d3777a2eb8fe01ba34292"
+    },
+    {
+      "path": "scripts/build_presentation_content.py",
+      "bytes": 35494,
+      "sha256": "081bb1fb640088570536997ca3d2f4ebd945297b365eeb18af9f14cea0d4bb5b"
+    },
+    {
+      "path": "scripts/build_report.py",
+      "bytes": 136539,
+      "sha256": "066b9064d3e3ffe9a0340e1ebb60c8f9a19851796821ffe4b70d3ddd3635727c"
+    }
+  ],
+  "requirements_mapping": [
+    {
+      "requirement": "Fixed RQ1 airport absorption/amplification and RQ2 downstream prediction",
+      "authority": "course PDF pp1-2; project plan sections1-2",
+      "classification": "course questions plus fixed project scope",
+      "coverage": "English Research questions and principal findings; RQ1; RQ2; Chinese RQ1/RQ2; slides1-2,4-12",
+      "assessment": "covered; cause-code attribution is explicitly excluded and no third RQ is required by the 2-3 question submission rule"
+    },
+    {
+      "requirement": "Literature review and method adoption/adaptation",
+      "authority": "course PDF pp2,6; project plan section5; workflow line140",
+      "classification": "required",
+      "coverage": "English Related work and adopted methods; References; Chinese closing literature paragraph",
+      "assessment": "covered at concise conceptual level; chain/network, buffer, network denominator and prediction-horizon distinctions are explicit; no false paper replication claim"
+    },
+    {
+      "requirement": "Data overview and preparation",
+      "authority": "course PDF p6",
+      "classification": "required",
+      "coverage": "English Data, preparation and exploratory analysis; Prediction timing, validation and new methods; Chinese Single-flight EDA and mapping",
+      "assessment": "covered; source-specific availability proxies, exclusions, static inventories and separate flight/connection/UTC/local scopes are acknowledged; full executable detail belongs to accompanying runbook/code"
+    },
+    {
+      "requirement": "EDA guides subsequent analysis",
+      "authority": "course PDF p6; workflow line140",
+      "classification": "required qualitative report linkage",
+      "coverage": "English EDA counts, monthly skew/tail and B43 coverage; later validation/baselines/severity/branches",
+      "assessment": "observations and methods present but their rationale linkage is implicit; see F03"
+    },
+    {
+      "requirement": "Independent code structure overview",
+      "authority": "course PDF p6 item6 clearly demarcated sections",
+      "classification": "required report section",
+      "coverage": "English Research evolution, reproducibility and limitations generic shared-scripts paragraph",
+      "assessment": "partial; see F01"
+    },
+    {
+      "requirement": "New techniques overview",
+      "authority": "course PDF p6 item5; project plan section4",
+      "classification": "required when newly learned methods used",
+      "coverage": "English Prediction timing, validation and new methods; RQ1 common support; paired date-block paragraphs; Chinese new-method summary",
+      "assessment": "covered: as-of availability, common-support standardization and date blocks; course LR/DT/RF not misclassified as new"
+    },
+    {
+      "requirement": "Mainline increments, branches, fixed-feature algorithms and three baselines",
+      "authority": "project plan section4; workflow P1-P5",
+      "classification": "project-required research",
+      "coverage": "English RQ2, independent checks, selection and August assessment; Chinese all named run metrics; slides6-10",
+      "assessment": "covered G0/G1/G2family/G3/G4A/G4B, independent variant and NOAA, four DT/two RF, training mean/median/carry-forward; same cohort and staged selection limitations explained"
+    },
+    {
+      "requirement": "RQ1 common support, cumulative versus per-connection metrics, monthly and threshold sensitivity, network units",
+      "authority": "project plan sections2-3; workflow P5",
+      "classification": "project-required research",
+      "coverage": "English RQ1 full section and figures; Chinese reference/support sections; slides4-5",
+      "assessment": "covered; unsupported NA, distinct national/selected-airport denominators, incomplete sign robustness, FLL zero-crossing, month-changing support, graph flights versus connections and noncausality explicit"
+    },
+    {
+      "requirement": "Research evolution including failures, invalidation and no-gain results",
+      "authority": "course PDF p6 iteration; workflow lines61,140",
+      "classification": "required",
+      "coverage": "English research evolution and staged results; Chinese evolution; slides6-8",
+      "assessment": "covered failed R1/R11/R13, invalidated R4, adverse G3 and zero-treatment NOAA; methods are retained under fixed protocol rather than winners-only history"
+    },
+    {
+      "requirement": "English continuous prose and font/page constraints",
+      "authority": "course PDF pp5-6",
+      "classification": "required",
+      "coverage": "English Markdown headings/prose/tables; TNR11 metadata; existing preview layout receipt",
+      "assessment": "No body bullet/numbered list detected; tables/figures do not violate prose instruction. Existing preview receipt reports20 total/17 body pages; final PDF layout remains separate QA."
+    },
+    {
+      "requirement": "10-minute technical findings-first video",
+      "authority": "course PDF pp5-6",
+      "classification": "mandatory video duration/type; findings-first and visual emphasis are tips",
+      "coverage": "12-slide content_v03, total600 seconds,1341 note words; slide1 findings then methods/details",
+      "assessment": "content pacing and scope suitable on static inspection; actual finished video not audited. PDF avoid-AI-voice text is in tips, not explicit mandatory audio-track requirement; caption-only content is not here labeled a hard-rule violation."
+    },
+    {
+      "requirement": "Code/data runnable by teaching team with documentation",
+      "authority": "course PDF pp5,7; workflow final completion criteria",
+      "classification": "required delivery",
+      "coverage": "English reproducibility paragraph points to archives; accompanying runbook/pipeline planned delivery",
+      "assessment": "content acknowledges local large data dependency; no claim Git clone alone suffices. Final source snapshot/raw provision/P7/media/canonical copies remain planned work and are not new findings."
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "priority": "P2",
+      "classification": "course-required report structure/content",
+      "path": "reports/preview_v02/report_en.md",
+      "location": "Research evolution, reproducibility and limitations (generic Shared scripts paragraph)",
+      "finding": "No clearly demarcated Overview of code structure section. Existing prose mentions shared functions without actual entry/config/module/Notebook/output relationships.",
+      "minimum_remedy": "Add a short independent English Code structure and reproducibility subsection naming run_pipeline, JSON configs, shared preparation/features/train/evaluation/RQ1 modules, notebooks and run artifacts/runbook. Reuse existing implementation; no new framework or research."
+    },
+    {
+      "id": "F02",
+      "priority": "P2",
+      "classification": "specific evidence citation mismatch",
+      "path": "reports/preview_v02/结果解读_中文.md",
+      "location": "R0006 / g0_linear MAE19.574 paragraph",
+      "finding": "Citation E0124 selects training_mean, while this g0_linear claim corresponds to E0127. Current builder chooses first metrics evidence for a run without matching model selector.",
+      "minimum_remedy": "Select evidence by the same model/fold/group/value selector as the displayed metric; cite E0127 for current preview G0.",
+      "evidence_verified": "Loaded only report evidence_index.csv; E0124.model=training_mean, E0127.model=g0_linear; no prediction/metric recomputation."
+    },
+    {
+      "id": "F03",
+      "priority": "P2",
+      "classification": "course-required EDA-to-analysis rationale, not missing experiment",
+      "path": "reports/preview_v02/report_en.md",
+      "location": "Data, preparation and exploratory analysis; transition into Prediction timing and RQ2",
+      "finding": "The report lists EDA patterns and later methods, but does not explicitly explain how observations guided subsequent choices or why each information group was introduced.",
+      "minimum_remedy": "Add concise existing-evidence rationale: right tail/month changes motivate mean/median/carry-forward and MAE+RMSE/severe diagnostics with forward folds; B43 unknown coverage motivates explicit unknowns and independent granularity check; weather missingness motivates preserved cohort and common-availability comparison. Describe staged groups as hypotheses, not causal contributions."
+    }
+  ],
+  "optional_presentation_enhancements": [
+    {
+      "id": "O01",
+      "classification": "optional report evidence presentation, not new scientific requirement",
+      "observation": "PDP is discussed only as a noncausal/support caution in these report texts, with no actual curve-specific interpretation or link. Existing R0027 filenames show two PDP figures plus support/value tables, permutation figure and tree-path text; their existence was listed without opening models/predictions.",
+      "suggestion": "If space permits, link or show an existing PDP with support caveat and one sentence describing its observed shape after checking saved PDP table. Do not rerun, tune or imply causality."
+    },
+    {
+      "id": "O02",
+      "classification": "optional citation precision",
+      "observation": "Chinese R18 omnibus RQ1 evidence list includes earlier same-run single-flight/B43 evidence; source run is correct but the broad list obscures direct RQ1 support.",
+      "suggestion": "Narrow to relevant files/claims; this is not evidence that the RQ1 analysis is absent."
+    }
+  ],
+  "already_addressed_in_current_presentation_builder": {
+    "model_display_labels": "display_model_name maps RF/DT/linear to Random forest/Decision tree/OLS and baselines to readable names; later generation will replace preview technical rf_d16_l50 labels",
+    "slide8_title": "Current builder uses actual primary_label wins registered comparison; content_v03 still has earlier generic baseline-allowed title",
+    "assessment": "These are known builder changes, not unresolved requirement failures; no builder execution performed"
+  },
+  "presentation_static_counts": {
+    "slides": 12,
+    "duration_seconds": 600,
+    "speaker_words": 1341,
+    "actual_video_checked": false
+  },
+  "not_findings": [
+    "R0030 not yet included in preview; known unfinished reproduction, not falsely called passed.",
+    "Final source snapshot, final reports, English PDF, editable PPTX, captions/silent600s media and final P7 pending are established planned work.",
+    "No need to add third research question, cause-code attribution, airport facilities, seats/age, XGBoost, ALE, centrality or percolation.",
+    "Course narrative audio advice is not recast as mandatory human audio.",
+    "One-season generalization, conditional completed cohort, unchanged NOAA inputs, retrospective outcome groups and individual rather than joint intervals are accurately qualified."
+  ],
+  "result": "Three content/citation remedies use existing evidence; no mandatory new research experiment identified within inspected scope."
+}

@@ -1238,6 +1238,18 @@ def compose(archive, config, validated):
         lines.append(f"In {row.month_utc}, n={int(row.n):,}; mean/median downstream delay was {number(row['mean'])}/{number(row['median'])} min, "
                      f"the 99th percentile was {number(row.p99)} min, and the severe-delay share was {number(row.target_ge60_share)}. {ref}")
     lines.append(archive.figure(eda_id, "figures/eda_target_distribution.png", "tables/eda_target_bins.csv", {"rows": "all"}, "Development target distribution", "scripts/analyze_eda.py"))
+    rationale_refs = " ".join([
+        archive.cite(eda_id, "tables/eda_monthly_target.csv", {"rows": "all", "columns": ["mean", "median", "p99", "target_ge60_share"]}, "Descriptive motivation from target tails and monthly distributions"),
+        archive.cite(config["development_rq1_run_id"], "tables/airline_aircraft_coverage.csv", {"rows": "all", "columns": ["inventory_year", "mapped_model_rows", "unknown_model_rows"]}, "Descriptive motivation for unknown aircraft categories and granularity checks"),
+        archive.cite(main[-1]["id"], "weather_coverage_summary.json", {"keys": ["rows", "availability", "interpretation"]}, "Descriptive motivation for weather missingness and common-availability comparisons")])
+    rationale_en = ("These exploratory observations connect the data description to the existing analysis plan. The right tail and month-to-month distribution changes provide descriptive motivation for reporting MAE alongside tail-sensitive RMSE, comparing training-mean, training-median and carry-forward baselines, and examining severe-delay errors within forward validation. "
+                    "Unmatched B43 records motivate retaining explicit unknown categories and checking family versus variant independently; incomplete weather availability motivates missingness indicators, preserving the full eligible cohort and a supplementary common-availability comparison. "
+                    "Staged information groups test predictive hypotheses rather than causal contributions. This is a descriptive rationale for the specified methods, not evidence that these observations or the later selection rule were preregistered before P0, and not a retrospective change to the evaluation rules. " + rationale_refs)
+    rationale_zh = ("EDA与既定分析的连接在于：右尾和月际分布变化为同时报告MAE与更敏感于大误差的RMSE、比较训练均值/中位数/延误延续基线、采用前向验证并诊断严重延误误差提供描述性动机。"
+                    "B43未匹配支持保留显式unknown并独立比较family/variant；天气覆盖不完整支持保留缺失标记与完整合格队列，再补充共同可用性样本比较。"
+                    "逐组信息实验检验预测假设，不分解因果贡献。这是对既定方法的描述性解释，不能倒置为这些观察或后续选模规则在P0前已预注册，也未据此事后更改评价规则。" + rationale_refs)
+    lines.append(rationale_en)
+    single_zh.append(rationale_zh)
     lines += ["## Prediction timing, validation and new methods",
               "Prediction time is upstream actual arrival; the target is downstream nonnegative departure delay, with prediction strictly before label time. "
               "May, June and July are forward validation months, trained respectively on mature April, April–May and April–June labels. UTC month-start half-open windows govern membership. "
@@ -1365,7 +1377,7 @@ def compose(archive, config, validated):
             lines.append(f"Among the largest observed {grouping} groups, {row.value}: " +
                          metric_sentence(archive, final_run, choice["primary_model_name"], group=grouping, value=row.value))
     lines.extend(reproduction_en)
-    lines += ["## Research evolution, reproducibility and limitations",
+    lines += ["## Research evolution and reproducibility",
               "The development chain preserves unfavourable and favourable results rather than skipping a stage after observing its MAE. Failed and invalidated runs remain in the experiment index and research journal; their metrics are excluded from current conclusions."]
     for _, row in archive.index.loc[archive.index.status.isin(["failed", "invalidated"])].iterrows():
         # Only status/change/decision are used; failed numerical outputs are never loaded.
@@ -1377,10 +1389,20 @@ def compose(archive, config, validated):
                                  "source_sha256": digest(archive.root / "experiments/index.csv"), "research_log": "research/研究记录.md",
                                  "research_log_heading_lines": ";".join(archive.log_entries(row.run_id))})
         lines.append(f"{row.run_id} was {row.status}. Its recorded change was “{row.change}”; the decision was “{row.decision}”. [{evidence_id}]")
-    lines += ["Shared scripts implement preparation, feature generation, training, evaluation, standardization and selection; Chinese notebooks call these same functions and expose archived checks. "
+    lines += ["## Overview of code structure",
+              "scripts/run_pipeline.py is the JSON-configured entry point that dispatches preparation, development, selection and final/reproduction modes into separate run directories. "
+              "prepare_flights.py constructs cleaned flights and same-aircraft connections; prepare_aircraft.py and prepare_weather_dataset.py prepare reference inputs. "
+              "build_features.py combines planned and historical inputs with operational_features.py and weather_pipeline_features.py/weather_features.py. "
+              "train_models.py fits fold-specific preprocessing and estimators, evaluate_models.py computes errors, and compare_experiments.py performs paired comparisons. "
+              "analyze_eda.py/analyze_single_flights.py produce descriptive summaries; complete_rq1.py and rq1_standardization.py implement the airport analysis. "
+              "select_models.py records feature/model decisions, final_evaluation.py executes the frozen assessment, and reproduce_final.py reruns that same frozen computation under the separate reproduction claim.",
+              "Chinese notebooks call shared script functions through render_notebooks.py and render_research_notebooks.py instead of duplicating the scientific calculations. "
+              "build_report.py and build_presentation_content.py consume completed lightweight archives for presentation only; they do not fit models or reopen prediction rows. "
+              "The report network redraw changes only figure presentation from saved node/edge tables. "
               "Each run holds its actual JSON configuration, manifest, logs, metrics, evaluation identities, predictions and applicable models/figures/notebooks. "
               "This report's evidence index ties every numerical claim and displayed figure to its original run, CSV/JSON selector, SHA-256 receipt and journal heading. "
               "Raw and large local derived/model files remain necessary for full computational reproduction even when they are excluded from version control.",
+              "## Limitations",
               "Limitations include one season and reporting coverage, conditional completed-connection selection, incomplete weather delivery provenance, retrospective NOAA supplementation, static aircraft inventories, and assumptions about advance availability of BTS planned schedules. "
               "Scheduled turnaround is not a measured operational buffer. Common support limits generalization and may disappear in individual months; missing intervals are not evidence of no effect. "
               "Date blocks quantify sampling uncertainty under the specified calendar, not causal identification or protection against all temporal dependence. "
@@ -1399,8 +1421,13 @@ def compose(archive, config, validated):
     for run in [*main, variant, noaa, *algorithms, final_run]:
         name = choice["primary_model_name"] if run is final_run else run["model"]["model_name"]
         row = selected_row(run["metrics"], model=name, fold="overall", group="all", value="all")
-        ids = [item["evidence_id"] for item in archive.evidence if item["run_id"] == run["id"] and item["source_file"].endswith("/metrics.csv")]
-        chinese.append(f"{run['id']} / {name}：MAE {number(row.mae)}分钟，RMSE {number(row.rmse)}分钟，样本{int(row.n):,}。" + " ".join(f"[{item}]" for item in ids[:1]))
+        selector = dict(model=name, fold="overall", group="all", value="all")
+        ids = [item["evidence_id"] for item in archive.evidence if item["run_id"] == run["id"]
+               and item["source_file"] == f"experiments/runs/{run['id']}/metrics.csv"
+               and json.loads(item["selector"]) == selector]
+        if not ids:
+            raise ValueError(f"Chinese metric lacks an exact model/fold/group/value citation: {run['id']}/{name}")
+        chinese.append(f"{run['id']} / {name}：MAE {number(row.mae)}分钟，RMSE {number(row.rmse)}分钟，样本{int(row.n):,}。[{ids[0]}]")
     chinese.extend(noaa_zh)
     chinese += ["## 执行预算与复现", *execution_zh]
     chinese.extend(coefficient_zh)
