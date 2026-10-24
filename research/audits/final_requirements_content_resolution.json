@@ -1,0 +1,48 @@
+{
+  "created_at_utc": "2026-10-24T05:11:02.612395+00:00",
+  "reviewed_source_commit": "9aea15e",
+  "root_reviewed": true,
+  "dispositions": [
+    {
+      "finding": "F01",
+      "action": "Explicit Overview of code structure added, and actual referenced script paths independently checked",
+      "status": "implemented"
+    },
+    {
+      "finding": "F02",
+      "action": "Chinese metric citation requires exact run/path/model/fold/group/value; tests exercise all 15 model lines and the G0/training_mean mismatch",
+      "status": "implemented"
+    },
+    {
+      "finding": "F03",
+      "action": "English and Chinese source-backed EDA rationale added with temporal/preregistration boundary stated",
+      "status": "implemented"
+    }
+  ],
+  "checks": {
+    "agent_actual_tests": 12,
+    "agent_elapsed_seconds": 20.027,
+    "agent_test_status": "passed",
+    "root_diff_review": true,
+    "root_source_fields_and_module_names_checked": true,
+    "root_whitespace_check_passed": true
+  },
+  "source_receipts": [
+    {
+      "path": "research/audits/final_requirements_content_review.json",
+      "sha256": "103471397a9620824430e359c1679e02f905a9fabc006cf05fb2bc63c5a915d5",
+      "bytes": 14084
+    },
+    {
+      "path": "scripts/build_report.py",
+      "sha256": "4b304a640b62cc8fca26bf519980554e792676e16466c0edf5fc24cd931e95b9",
+      "bytes": 140727
+    },
+    {
+      "path": "tests/test_report_builder.py",
+      "sha256": "69ebdef43709acc0534848db5eca85f8ade05f730b62353726ba460397888bcd",
+      "bytes": 33235
+    }
+  ],
+  "final_pdf_visual_acceptance": "pending actual final generation after R0030; this receipt does not reuse preview pagination or QA"
+}
