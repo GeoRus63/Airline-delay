@@ -1,0 +1,17 @@
+{
+  "checked_at_utc": "2026-10-24T03:01:31.367291+00:00",
+  "run_id": "R0027",
+  "html": "experiments/runs/R0027/notebooks/06_共同支持与模型比较.html",
+  "sha256": "1d7fb79893591d2e646e2ed917bc9e45aca500f43bd3eec5f27911120ea8e909",
+  "kernel_errors": 0,
+  "local_links_checked": 128,
+  "missing_links": [],
+  "browser_visual_checks": [
+    "opening scope and run bindings",
+    "actual R0017 OLS coefficients/intercept",
+    "actual R0025 empty coefficient applicability and tree paths",
+    "cross-run source and explanation links present"
+  ],
+  "screenshot_local": "research/reviews/2026-10-24_R0027_notebook_screenshot.png",
+  "scope": "Source linkage and selected visible sections; not a visual check of every scroll position"
+}

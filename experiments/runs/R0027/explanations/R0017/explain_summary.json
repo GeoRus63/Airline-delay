@@ -1,0 +1,222 @@
+{
+  "source_run": "R0017",
+  "source_status_at_explanation": "completed",
+  "model_name": "g4b_linear",
+  "source_files": {
+    "features": "data/features.pkl",
+    "model_manifest": "model_manifest.json",
+    "models": [
+      "models\\2026-07_g4b_linear.joblib"
+    ]
+  },
+  "features": [
+    "airport_id",
+    "route",
+    "downstream_airline",
+    "aircraft_family",
+    "downstream_distance",
+    "downstream_crs_elapsed_time",
+    "downstream_day_of_week",
+    "downstream_sched_hour",
+    "scheduled_turnaround_minutes",
+    "upstream_arr_delay_minutes",
+    "tail_completed_24h_n",
+    "tail_completed_24h_arr_delay_mean",
+    "history_window_incomplete",
+    "airport_departures_60m_n",
+    "airport_departures_60m_delay_mean",
+    "airport_planned_departures_next60m_n",
+    "airport_planned_arrivals_next60m_n",
+    "airport_history_window_incomplete",
+    "metar_wind_knots",
+    "metar_gust_knots",
+    "metar_visibility_miles",
+    "metar_ceiling_ft",
+    "metar_precip_amount_in",
+    "metar_precip_flag",
+    "metar_rain_flag",
+    "metar_snow_flag",
+    "metar_thunder_flag",
+    "metar_age_minutes",
+    "metar_missing",
+    "metar_sky_reported",
+    "metar_ceiling_reported",
+    "metar_weather_codes_reported",
+    "taf_bulletin_age_minutes",
+    "taf_lead_minutes",
+    "taf_missing",
+    "taf_prevailing_wind_knots",
+    "taf_prevailing_gust_knots",
+    "taf_prevailing_visibility_miles",
+    "taf_prevailing_ceiling_ft",
+    "taf_prevailing_precip_flag",
+    "taf_prevailing_rain_flag",
+    "taf_prevailing_snow_flag",
+    "taf_prevailing_thunder_flag",
+    "taf_prevailing_segment_count",
+    "taf_prevailing_missing",
+    "taf_tempo_wind_knots",
+    "taf_tempo_gust_knots",
+    "taf_tempo_visibility_miles",
+    "taf_tempo_ceiling_ft",
+    "taf_tempo_precip_flag",
+    "taf_tempo_rain_flag",
+    "taf_tempo_snow_flag",
+    "taf_tempo_thunder_flag",
+    "taf_tempo_segment_count",
+    "taf_tempo_missing",
+    "taf_probability_wind_knots",
+    "taf_probability_gust_knots",
+    "taf_probability_visibility_miles",
+    "taf_probability_ceiling_ft",
+    "taf_probability_precip_flag",
+    "taf_probability_rain_flag",
+    "taf_probability_snow_flag",
+    "taf_probability_thunder_flag",
+    "taf_probability_segment_count",
+    "taf_probability_missing"
+  ],
+  "folds": [
+    {
+      "fold": "2026-07",
+      "validation_start": "2026-07-01T00:00:00+00:00",
+      "validation_end_exclusive": "2026-08-01T00:00:00+00:00",
+      "validation_n": 570548,
+      "sample_n": 10000,
+      "sampling_fraction": 0.017527009121055547,
+      "original_clipped_mae": 18.186582208087604,
+      "model_path": "models\\2026-07_g4b_linear.joblib"
+    }
+  ],
+  "sample_n_requested_per_fold": 10000,
+  "repeats": 5,
+  "seed": 42,
+  "sampling": "Uniform without replacement within each validation fold; fixed seed; chronological source positions retained",
+  "fit_called": false,
+  "prediction_rule": "clip predictions below zero before all error/PDP calculations",
+  "permutation_groups": {
+    "G0_plan": [
+      "airport_id",
+      "route",
+      "downstream_airline",
+      "downstream_distance",
+      "downstream_crs_elapsed_time",
+      "downstream_day_of_week",
+      "downstream_sched_hour",
+      "scheduled_turnaround_minutes"
+    ],
+    "G1_upstream_delay": [
+      "upstream_arr_delay_minutes"
+    ],
+    "G1_tail_history": [
+      "tail_completed_24h_n",
+      "tail_completed_24h_arr_delay_mean",
+      "history_window_incomplete"
+    ],
+    "G2_aircraft": [
+      "aircraft_family"
+    ],
+    "G3_airport_operations": [
+      "airport_departures_60m_n",
+      "airport_departures_60m_delay_mean",
+      "airport_planned_departures_next60m_n",
+      "airport_planned_arrivals_next60m_n",
+      "airport_history_window_incomplete"
+    ],
+    "G4a_METAR": [
+      "metar_wind_knots",
+      "metar_gust_knots",
+      "metar_visibility_miles",
+      "metar_ceiling_ft",
+      "metar_precip_amount_in",
+      "metar_precip_flag",
+      "metar_rain_flag",
+      "metar_snow_flag",
+      "metar_thunder_flag",
+      "metar_age_minutes",
+      "metar_missing",
+      "metar_sky_reported",
+      "metar_ceiling_reported",
+      "metar_weather_codes_reported"
+    ],
+    "G4b_TAF": [
+      "taf_bulletin_age_minutes",
+      "taf_lead_minutes",
+      "taf_missing",
+      "taf_prevailing_wind_knots",
+      "taf_prevailing_gust_knots",
+      "taf_prevailing_visibility_miles",
+      "taf_prevailing_ceiling_ft",
+      "taf_prevailing_precip_flag",
+      "taf_prevailing_rain_flag",
+      "taf_prevailing_snow_flag",
+      "taf_prevailing_thunder_flag",
+      "taf_prevailing_segment_count",
+      "taf_prevailing_missing",
+      "taf_tempo_wind_knots",
+      "taf_tempo_gust_knots",
+      "taf_tempo_visibility_miles",
+      "taf_tempo_ceiling_ft",
+      "taf_tempo_precip_flag",
+      "taf_tempo_rain_flag",
+      "taf_tempo_snow_flag",
+      "taf_tempo_thunder_flag",
+      "taf_tempo_segment_count",
+      "taf_tempo_missing",
+      "taf_probability_wind_knots",
+      "taf_probability_gust_knots",
+      "taf_probability_visibility_miles",
+      "taf_probability_ceiling_ft",
+      "taf_probability_precip_flag",
+      "taf_probability_rain_flag",
+      "taf_probability_snow_flag",
+      "taf_probability_thunder_flag",
+      "taf_probability_segment_count",
+      "taf_probability_missing"
+    ]
+  },
+  "permutation_sd": "Sample standard deviation across repeats; not a confidence interval",
+  "pdp": {
+    "features": [
+      "upstream_arr_delay_minutes",
+      "scheduled_turnaround_minutes"
+    ],
+    "grid": "11 evenly spaced points from fixed development sample q05 to q95; unique points retained",
+    "audit": [
+      {
+        "fold": "2026-07",
+        "feature": "upstream_arr_delay_minutes",
+        "finite_sample_n": 10000,
+        "missing_or_nonfinite_n": 0,
+        "q05": 0.0,
+        "q95": 106.0,
+        "grid_n": 11
+      },
+      {
+        "fold": "2026-07",
+        "feature": "scheduled_turnaround_minutes",
+        "finite_sample_n": 10000,
+        "missing_or_nonfinite_n": 0,
+        "q05": 31.0,
+        "q95": 667.0499999999993,
+        "grid_n": 11
+      }
+    ]
+  },
+  "skips": [],
+  "tree_path_files": [],
+  "prediction_warnings": [
+    {
+      "category": "UserWarning",
+      "message": "Found unknown categories in columns [0, 1] during transform. These unknown categories will be encoded as the infrequent category.",
+      "count": 58
+    }
+  ],
+  "limitations": [
+    "Permutation may create unrealistic combinations with other correlated input groups; importance is conditional on model and sample, not causal",
+    "Joint G0 permutation keeps airport, route and other plan inputs together; individual airport/route importance is not estimated",
+    "Encoded linear coefficients use reference categories and scaled numeric inputs; airport-route collinearity prevents interpreting individual coefficients as independent airport effects",
+    "PDP averages hypothetical input replacements, can cross correlated-feature support, and is descriptive rather than causal",
+    "Fixed validation subsampling and repeat SD do not quantify full population or temporal uncertainty; no August grid selection or explanation"
+  ]
+}

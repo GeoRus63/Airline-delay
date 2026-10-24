@@ -1,0 +1,3 @@
+family,reference_run_id,candidate_run_id,pooled_improvement,required_improvement,improved_months,worst_monthly_deterioration,promoted,rejection_reasons,monthly_candidate_minus_reference
+decision_tree,R0017,R0023,4.3216284173111035,0.1,3,-3.9591108947746125,True,,"[-3.9591108947746125, -4.447029989427897, -4.563185452224369]"
+random_forest,R0023,R0025,0.3206994286374272,0.1,3,-0.2817330577268091,True,,"[-0.2975884755561946, -0.2817330577268091, -0.38235400076145964]"

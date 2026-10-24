@@ -25,3 +25,4 @@ R0023,R0022,P5-models,completed,Change decision-tree depth from 8 to 16 at fixed
 R0024,R0023,P5-models,completed,Change decision-tree minimum leaf from 200 to 50 at fixed depth 16,Retain outputs; review before next stage,experiments/runs/R0024
 R0025,R0024,P5-models,completed,Replace depth-16 leaf-50 decision tree with registered 200-tree random forest max_features 0.5,Retain outputs; review before next stage,experiments/runs/R0025
 R0026,R0025,P5-models,completed,"Change random-forest minimum leaf from 50 to 200; retain all other learning settings. Pre-run execution allocation: sequential folds, 24 threads per fold, separately reviewed and recorded",Retain outputs; review before next stage,experiments/runs/R0026
+R0027,R0026,P5-model-selection,completed,Apply registered family minima and practical monthly promotion; compare retained learned model with all three baselines; explain without refitting,Retain outputs; review before next stage,experiments/runs/R0027

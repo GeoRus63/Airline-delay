@@ -1,0 +1,145 @@
+Tree 0; encoded/scaled inputs; truncated at depth 3
+|--- numeric__downstream_sched_hour <= 2.543
+|   |--- numeric__upstream_arr_delay_minutes <= 1.092
+|   |   |--- numeric__scheduled_turnaround_minutes <= 0.107
+|   |   |   |--- numeric__upstream_arr_delay_minutes <= 0.011
+|   |   |   |   |--- truncated branch of depth 12
+|   |   |   |--- numeric__upstream_arr_delay_minutes >  0.011
+|   |   |   |   |--- truncated branch of depth 6
+|   |   |--- numeric__scheduled_turnaround_minutes >  0.107
+|   |   |   |--- numeric__downstream_sched_hour <= 2.136
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |   |--- numeric__downstream_sched_hour >  2.136
+|   |   |   |   |--- truncated branch of depth 13
+|   |--- numeric__upstream_arr_delay_minutes >  1.092
+|   |   |--- numeric__taf_lead_minutes <= 0.854
+|   |   |   |--- numeric__upstream_arr_delay_minutes <= 3.006
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |   |--- numeric__upstream_arr_delay_minutes >  3.006
+|   |   |   |   |--- truncated branch of depth 11
+|   |   |--- numeric__taf_lead_minutes >  0.854
+|   |   |   |--- numeric__taf_bulletin_age_minutes <= 2.650
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |   |--- numeric__taf_bulletin_age_minutes >  2.650
+|   |   |   |   |--- truncated branch of depth 13
+|--- numeric__downstream_sched_hour >  2.543
+|   |--- numeric__upstream_arr_delay_minutes <= 1.317
+|   |   |--- numeric__upstream_arr_delay_minutes <= 0.417
+|   |   |   |--- numeric__upstream_arr_delay_minutes <= 0.056
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |   |--- numeric__upstream_arr_delay_minutes >  0.056
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |--- numeric__upstream_arr_delay_minutes >  0.417
+|   |   |   |--- numeric__upstream_arr_delay_minutes <= 0.799
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |   |--- numeric__upstream_arr_delay_minutes >  0.799
+|   |   |   |   |--- truncated branch of depth 13
+|   |--- numeric__upstream_arr_delay_minutes >  1.317
+|   |   |--- numeric__upstream_arr_delay_minutes <= 2.939
+|   |   |   |--- numeric__upstream_arr_delay_minutes <= 1.948
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |   |--- numeric__upstream_arr_delay_minutes >  1.948
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |--- numeric__upstream_arr_delay_minutes >  2.939
+|   |   |   |--- numeric__taf_lead_minutes <= 1.449
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |   |--- numeric__taf_lead_minutes >  1.449
+|   |   |   |   |--- truncated branch of depth 8
+
+
+Tree 1; encoded/scaled inputs; truncated at depth 3
+|--- numeric__downstream_sched_hour <= 2.543
+|   |--- numeric__upstream_arr_delay_minutes <= 1.137
+|   |   |--- numeric__upstream_arr_delay_minutes <= 0.079
+|   |   |   |--- numeric__scheduled_turnaround_minutes <= 0.107
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |   |--- numeric__scheduled_turnaround_minutes >  0.107
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |--- numeric__upstream_arr_delay_minutes >  0.079
+|   |   |   |--- numeric__scheduled_turnaround_minutes <= 0.278
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |   |--- numeric__scheduled_turnaround_minutes >  0.278
+|   |   |   |   |--- truncated branch of depth 13
+|   |--- numeric__upstream_arr_delay_minutes >  1.137
+|   |   |--- numeric__taf_lead_minutes <= 0.842
+|   |   |   |--- numeric__taf_lead_minutes <= 0.356
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |   |--- numeric__taf_lead_minutes >  0.356
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |--- numeric__taf_lead_minutes >  0.842
+|   |   |   |--- numeric__scheduled_turnaround_minutes <= 0.299
+|   |   |   |   |--- truncated branch of depth 9
+|   |   |   |--- numeric__scheduled_turnaround_minutes >  0.299
+|   |   |   |   |--- truncated branch of depth 13
+|--- numeric__downstream_sched_hour >  2.543
+|   |--- numeric__upstream_arr_delay_minutes <= 1.407
+|   |   |--- numeric__upstream_arr_delay_minutes <= 0.417
+|   |   |   |--- numeric__airport_departures_60m_delay_mean <= 0.485
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |   |--- numeric__airport_departures_60m_delay_mean >  0.485
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |--- numeric__upstream_arr_delay_minutes >  0.417
+|   |   |   |--- numeric__taf_lead_minutes <= 0.305
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |   |--- numeric__taf_lead_minutes >  0.305
+|   |   |   |   |--- truncated branch of depth 13
+|   |--- numeric__upstream_arr_delay_minutes >  1.407
+|   |   |--- numeric__upstream_arr_delay_minutes <= 3.254
+|   |   |   |--- numeric__scheduled_turnaround_minutes <= 0.400
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |   |--- numeric__scheduled_turnaround_minutes >  0.400
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |--- numeric__upstream_arr_delay_minutes >  3.254
+|   |   |   |--- numeric__scheduled_turnaround_minutes <= 0.555
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |   |--- numeric__scheduled_turnaround_minutes >  0.555
+|   |   |   |   |--- truncated branch of depth 13
+
+
+Tree 2; encoded/scaled inputs; truncated at depth 3
+|--- numeric__upstream_arr_delay_minutes <= 1.182
+|   |--- numeric__airport_departures_60m_delay_mean <= 0.286
+|   |   |--- numeric__upstream_arr_delay_minutes <= 0.304
+|   |   |   |--- numeric__scheduled_turnaround_minutes <= 0.107
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |   |--- numeric__scheduled_turnaround_minutes >  0.107
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |--- numeric__upstream_arr_delay_minutes >  0.304
+|   |   |   |--- numeric__downstream_sched_hour <= 1.932
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |   |--- numeric__downstream_sched_hour >  1.932
+|   |   |   |   |--- truncated branch of depth 13
+|   |--- numeric__airport_departures_60m_delay_mean >  0.286
+|   |   |--- numeric__upstream_arr_delay_minutes <= 0.327
+|   |   |   |--- numeric__taf_lead_minutes <= 0.181
+|   |   |   |   |--- truncated branch of depth 11
+|   |   |   |--- numeric__taf_lead_minutes >  0.181
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |--- numeric__upstream_arr_delay_minutes >  0.327
+|   |   |   |--- numeric__downstream_sched_hour <= 1.932
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |   |--- numeric__downstream_sched_hour >  1.932
+|   |   |   |   |--- truncated branch of depth 13
+|--- numeric__upstream_arr_delay_minutes >  1.182
+|   |--- numeric__scheduled_turnaround_minutes <= 0.412
+|   |   |--- numeric__airport_departures_60m_n <= 0.074
+|   |   |   |--- numeric__airport_planned_departures_next60m_n <= 0.025
+|   |   |   |   |--- truncated branch of depth 12
+|   |   |   |--- numeric__airport_planned_departures_next60m_n >  0.025
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |--- numeric__airport_departures_60m_n >  0.074
+|   |   |   |--- numeric__airport_planned_departures_next60m_n <= 0.025
+|   |   |   |   |--- truncated branch of depth 11
+|   |   |   |--- numeric__airport_planned_departures_next60m_n >  0.025
+|   |   |   |   |--- truncated branch of depth 13
+|   |--- numeric__scheduled_turnaround_minutes >  0.412
+|   |   |--- numeric__airport_planned_departures_next60m_n <= 0.025
+|   |   |   |--- numeric__taf_lead_minutes <= 0.687
+|   |   |   |   |--- truncated branch of depth 4
+|   |   |   |--- numeric__taf_lead_minutes >  0.687
+|   |   |   |   |--- truncated branch of depth 13
+|   |   |--- numeric__airport_planned_departures_next60m_n >  0.025
+|   |   |   |--- numeric__taf_lead_minutes <= 0.364
+|   |   |   |   |--- truncated branch of depth 12
+|   |   |   |--- numeric__taf_lead_minutes >  0.364
+|   |   |   |   |--- truncated branch of depth 13

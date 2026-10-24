@@ -1,0 +1,35 @@
+{
+  "stage": "P5-model-selection",
+  "mode": "select_model",
+  "parent_run_id": "R0026",
+  "change": "Apply registered family minima and practical monthly promotion; compare retained learned model with all three baselines; explain without refitting",
+  "feature_selection_run_id": "R0020",
+  "feature_source_run_id": "R0017",
+  "algorithm_run_ids": [
+    "R0021",
+    "R0022",
+    "R0023",
+    "R0024",
+    "R0025",
+    "R0026"
+  ],
+  "rq1_development_run_id": "R0018",
+  "model_run_ids": [
+    "R0006",
+    "R0007",
+    "R0009",
+    "R0010",
+    "R0012",
+    "R0015",
+    "R0017",
+    "R0019",
+    "R0021",
+    "R0022",
+    "R0023",
+    "R0024",
+    "R0025",
+    "R0026"
+  ],
+  "threads": 8,
+  "test_target_sealed": true
+}
