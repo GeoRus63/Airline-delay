@@ -283,8 +283,8 @@ def single_flight_prose(archive, run_id):
           "原始DepDelay/ArrDelay保留提前出发/到达的负值，DepDelayMinutes/ArrDelayMinutes为对应非负分钟，因此同批航班的两种均值并不相同。每行n是该结果字段实际非缺失数；缺失不填0，q50是中位数，q90/q99刻画右尾。"]
     stats_file = "tables/single_flight_delay_stats.csv"
     stats = archive.table(run_id, stats_file, ["dimension", "group_value", "outcome", "normal_completed_flights", "n", "missing", "negative", "zero", "mean", "q50", "q90", "q99"])
-    table = ["| Month | Delay measure | n | Mean | q50 | q90 | q99 | Evidence |",
-             "| --- | --- | ---: | ---: | ---: | ---: | ---: | --- |"]
+    table = ["| Month | Measure / evidence | n | Mean | q50 | q90 | q99 |",
+             "| --- | --- | ---: | ---: | ---: | ---: | ---: |"]
     labels = {"DepDelay": "Departure raw", "ArrDelay": "Arrival raw", "DepDelayMinutes": "Departure nonnegative", "ArrDelayMinutes": "Arrival nonnegative"}
     for month in months:
         operation = selected_row(monthly_ops, group_value=month)
@@ -294,7 +294,7 @@ def single_flight_prose(archive, run_id):
             if int(row.normal_completed_flights) != int(operation.completed) or int(row.n + row.missing) != int(operation.completed):
                 raise ValueError("Single-flight observed/missing outcome counts do not reconcile")
             ref = archive.cite(run_id, stats_file, selector, "Monthly signed/nonnegative single-flight delay quantiles; minutes")
-            table.append(f"| {month} | {label} | {int(row.n):,} | {number(row['mean'], 2)} | {number(row.q50, 2)} | {number(row.q90, 2)} | {number(row.q99, 2)} | {ref} |")
+            table.append(f"| {month} | {label} {ref} | {int(row.n):,} | {number(row['mean'], 2)} | {number(row.q50, 2)} | {number(row.q90, 2)} | {number(row.q99, 2)} |")
     en.append("Monthly single-flight delay distributions (all summary values in minutes).\n\n" + "\n".join(table))
     zh.append("单航段月际分布，所有统计量均为分钟；raw表示保留负值，nonnegative表示非负分钟。\n\n" + "\n".join(table))
     coverage_file = "tables/airline_aircraft_coverage.csv"
@@ -458,6 +458,54 @@ def metric_sentence(archive, run, model=None, fold="overall", group="all", value
     row = selected_row(run["metrics"], **selector)
     ref = archive.cite(run["id"], "metrics.csv", selector, f"{model}: MAE/RMSE and sample support")
     return f"{model} had MAE {number(row.mae)} min and RMSE {number(row.rmse)} min (n={int(row.n):,}). {ref}"
+
+
+def noaa_prose(archive, run_id):
+    """Report the effective treatment and observable overlap, not its label."""
+    audit_file = "feature_audit.json"
+    audit = archive.json(run_id, audit_file)
+    counts = audit.get("noaa_fill_counts")
+    model_columns = audit.get("weather_audit", {}).get("metar_model_columns")
+    if not isinstance(counts, dict) or not counts or not isinstance(model_columns, list):
+        raise ValueError("NOAA report requires archived fill counts and actual METAR predictor whitelist")
+    if any(not isinstance(value, (int, float)) or not math.isfinite(value) or value < 0 or int(value) != value for value in counts.values()):
+        raise ValueError("NOAA archived fill counts must be nonnegative integers")
+    primary = [name for name in counts if name in model_columns]
+    all_fills = sum(int(value) for value in counts.values())
+    predictor_fills = sum(int(counts[name]) for name in primary)
+    ref = archive.cite(run_id, audit_file, {"keys": ["noaa_fill_counts", "weather_audit.metar_model_columns"]}, "Actual value-level NOAA backfills and predictor-eligible mappings")
+    details = "; ".join(f"{name}={int(value):,}" for name, value in counts.items())
+    en = [f"The NOAA audit tracks {len(counts)} mapped quantities, of which {len(primary)} are in the actual METAR predictor whitelist: "
+          f"{', '.join(primary) or 'none'}. It records {all_fills:,} filled values in total and {predictor_fills:,} fills in predictor columns; "
+          f"these are value-level counts rather than distinct-flight counts. Per-field counts were {details}. {ref}"]
+    zh = ["## NOAA补缺实际改变了什么",
+          f"归档记录{len(counts)}个映射量，但实际METAR预测变量白名单只包含其中{len(primary)}个：{', '.join(primary) or '无'}。"
+          f"全部映射量合计填{all_fills:,}个值，入模变量填{predictor_fills:,}个值；这是逐值计数，不能当作不同航班数。各字段为{details}。{ref}"]
+    if predictor_fills == 0:
+        en.append("With zero effective predictor backfills, this branch provides no effective NOAA input contrast. "
+                  "Unchanged errors reflect unchanged prediction inputs rather than evidence that otherwise usable NOAA information has no predictive value. "
+                  "The experiment is retained as a zero-treatment result under the registered conservative rules. " + ref)
+        zh.append("入模变量零有效补值，意味着本分支没有形成NOAA输入对照；误差不变反映预测输入未变，不能推断其他情况下可用的NOAA信息没有预测价值。"
+                  "该轮作为既定保守规则下的零实际处理结果保留。" + ref)
+    overlap_file = "tables/noaa_overlap_summary.csv"
+    overlap = archive.table(run_id, overlap_file, ["feature", "overlap_count", "mean_signed_difference", "mean_absolute_difference", "metar_unit", "noaa_native_unit", "conversion", "unit_consistency"])
+    pair_counts = pd.to_numeric(overlap.overlap_count, errors="raise")
+    if (overlap.feature.duplicated().any() or set(overlap.feature) != set(counts)
+            or any(not math.isfinite(value) or value < 0 or int(value) != value for value in pair_counts)):
+        raise ValueError("NOAA overlap diagnostic has duplicate, omitted or invalid mapped fields")
+    pairs = int(overlap.overlap_count.sum())
+    ref = archive.cite(run_id, overlap_file, {"rows": "all", "aggregation": "sum(overlap_count); per-feature overlap_count and unit_consistency"}, "Observed NOAA/IEM overlap support and limits of unit comparison")
+    if pairs == 0:
+        en.append(f"Across {len(overlap)} mapped fields, the exact-airport/time diagnostic contains zero accepted numeric value pairs. "
+                  "The no_numeric_overlap/no_exact_overlap labels indicate missing comparison support; they do not establish unit agreement. "
+                  "Conversions are documented operations, but agreement after conversion was not empirically verified by these archived pairs. " + ref)
+        zh.append(f"{len(overlap)}个映射字段在机场/时刻精确匹配诊断中均没有合格数值对。no_numeric_overlap/no_exact_overlap只表示缺乏对照支持，"
+                  "不表示已验证单位一致。单位换算是代码中明确的操作，但此次归档没有数值对来实证核验换算后的一致程度。" + ref)
+    else:
+        en.append(f"The overlap table contains {pairs:,} numeric value pairs across mapped fields, counted per field rather than as unique observations. "
+                  "Its converted differences are descriptive checks and do not certify global QC or historical delivery availability. " + ref)
+        zh.append(f"重叠表各字段合计有{pairs:,}对数值，按字段计数而非唯一观测条数；换算后差异是描述性核对，不能认证全QC或历史送达可用性。" + ref)
+    return en, zh
 
 
 def rq1_reference_prose(archive, run_id):
@@ -661,6 +709,7 @@ def compose(archive, config, validated):
              "Aircraft family is the mainline representation, variant is an independent replacement, and the 2024/2025 B43 inventories are reference snapshots rather than historical fleet truth. Seats, aircraft age and airport infrastructure are excluded."]
     single_en, single_zh = single_flight_prose(archive, config["development_rq1_run_id"])
     reference_en, reference_zh = rq1_reference_prose(archive, config["development_rq1_run_id"])
+    noaa_en, noaa_zh = noaa_prose(archive, noaa["id"])
     lines.extend(single_en)
     eda_id = main[0]["id"]
     eda = archive.json(eda_id, "eda_summary.json")
@@ -703,7 +752,7 @@ def compose(archive, config, validated):
               "Variant replaces family without becoming a cumulative mainline stage. " + metric_sentence(archive, variant),
               comparison_text(archive, main[2], variant),
               "NOAA supplements IEM in a separate branch and is ineligible for primary feature selection. " + metric_sentence(archive, noaa),
-              comparison_text(archive, main[-1], noaa)]
+              comparison_text(archive, main[-1], noaa), "\n\n".join(noaa_en)]
     common = archive.json(main[-1]["id"], "common_weather/definition.json")
     if common.get("refitted") is not False or common.get("uses_target_for_selection") is not False:
         raise ValueError("Common-weather analysis must use a fixed availability subset without refitting")
@@ -824,6 +873,7 @@ def compose(archive, config, validated):
         row = selected_row(run["metrics"], model=name, fold="overall", group="all", value="all")
         ids = [item["evidence_id"] for item in archive.evidence if item["run_id"] == run["id"] and item["source_file"].endswith("/metrics.csv")]
         chinese.append(f"{run['id']} / {name}：MAE {number(row.mae)}分钟，RMSE {number(row.rmse)}分钟，样本{int(row.n):,}。" + " ".join(f"[{item}]" for item in ids[:1]))
+    chinese.extend(noaa_zh)
     chinese += ["## RQ1、研究演进和局限", "RQ1先报告原始均值与累计增加/减少/净变化，再按上游延误和计划周转共同支持标准化。共同支持机场、分层和权重由开发期冻结，逐月与4–8月最终描述重复使用；>0、≥5、≥15阈值不能另选有利机场。节点大小是衔接数、颜色是标准化每次净变化、有向边宽是航班量，不能解释为机场责任。"]
     chinese.extend(reference_zh)
     for run_id in [config["development_rq1_run_id"], config["final_rq1_run_id"]]:

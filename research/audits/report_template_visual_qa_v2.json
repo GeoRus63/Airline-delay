@@ -1,0 +1,274 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-24T00:09:06.454179+00:00",
+  "synthetic_only": true,
+  "research_data_read": false,
+  "august_targets_read": false,
+  "real_final_report_generated": false,
+  "source_receipt": {
+    "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.layout.json",
+    "bytes": 9095,
+    "sha256": "ee5d654ef701d4707fcb7c1f73cf3435b528332b5e9906fec79972db4e781d26"
+  },
+  "pdf": {
+    "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.pdf",
+    "bytes": 887316,
+    "sha256": "32d7f9c8165cf1b167535afef89c5a3db4c543d3fd4a9027cbffc20c286dd639"
+  },
+  "markdown": {
+    "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\fixture_project_v02\\reports\\report_en.md",
+    "bytes": 31695,
+    "sha256": "3e61319224d697d77d8351af5d1454b7c996ec6ef983f6579512ac6a9ba85604"
+  },
+  "builder": {
+    "path": "D:\\airline-delay\\scripts\\build_report.py",
+    "bytes": 86960,
+    "sha256": "591413452c4f4be018fead3ec029930adb1a10f25f47410d0ebc1846de119ba7"
+  },
+  "tests": {
+    "path": "D:\\airline-delay\\tests\\test_report_evidence.py",
+    "bytes": 33022,
+    "sha256": "e58ae9acb2d5fdd840e2db0d2dbdefe1fc59decf261b25d1e022e4ab3bd05fcd"
+  },
+  "renderer": {
+    "path": "D:\\airline-delay\\scripts\\render_report_pdf.py",
+    "bytes": 23613,
+    "sha256": "1b45bd80ab3f11bf4f54ca38a16ba4f3e6c3606d204d6b55b57fe47a515a1928"
+  },
+  "runtime": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "executable": "C:\\Users\\Ham\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe"
+  },
+  "total_pages": 18,
+  "body_pages": 15,
+  "body_limit": 25,
+  "font_family": "Times New Roman",
+  "minimum_pdf_text_points": 10,
+  "body_points": 11,
+  "caption_table_points": 10,
+  "figures": 7,
+  "tables": 2,
+  "maximum_table_columns": 7,
+  "frozen_airports": 25,
+  "master_cells": 16,
+  "evidence_items": 128,
+  "continuous_prose_without_bullets": true,
+  "all_evidence_ids_resolved": true,
+  "visual_review_completed": true,
+  "visual_qa_passed": true,
+  "pages": [
+    {
+      "page": 1,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Cover is clearly marked synthetic and centred without clipping.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-01.png",
+        "bytes": 19951,
+        "sha256": "e57e1b4159caeedb9bbd4ceeb529b05194554eab69794dfd6ee2a2b4513bbf62"
+      }
+    },
+    {
+      "page": 2,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Contents entries and page numbers fit; all sections readable.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-02.png",
+        "bytes": 70972,
+        "sha256": "dc322abcf10ac78080b6273ca19ca53b101c825ca010bb559ce473c3ca4da12e"
+      }
+    },
+    {
+      "page": 3,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Opening narrative and beginning of 16-row EDA table fit without overlap.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-03.png",
+        "bytes": 327055,
+        "sha256": "c504c357e1b1dacf3d14c068d8a2432a992c4722e1e695bdefc027148457b376"
+      }
+    },
+    {
+      "page": 4,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "EDA table continues with repeated header; counts, quantiles and evidence IDs fit.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-04.png",
+        "bytes": 217007,
+        "sha256": "cb585973d57a570c731690420cace3fbc016637984db3cd6911ccda8fdcdf589"
+      }
+    },
+    {
+      "page": 5,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Distribution chart, caption and methods are readable; synthetic stamp clear of axes.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-05.png",
+        "bytes": 277254,
+        "sha256": "7adb9b550f2e9b729f7758938be957e4c3aa1e728092dda5b7fb26051036795f"
+      }
+    },
+    {
+      "page": 6,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "A25 codes/IDs, full fallback decisions and start of C16 weight table are readable.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-06.png",
+        "bytes": 259966,
+        "sha256": "420d2f7a713b205aeaccae7865c4aac50b5b0a53c74e42d68aa5105479b824db"
+      }
+    },
+    {
+      "page": 7,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Weight table continues with repeated header; RQ1 prose and monthly estimates fit.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-07.png",
+        "bytes": 286394,
+        "sha256": "c34f07905f810d211aa290dd1c7cba0cd6eca556c34f7b58b068707508685bfb"
+      }
+    },
+    {
+      "page": 8,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "A25 interval plot has legible labels and caption with no clipping.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-08.png",
+        "bytes": 146082,
+        "sha256": "70aaaf51fb40dcbd6e021e2d85a44dadd934a3c2f19f706fea476c07a667838c"
+      }
+    },
+    {
+      "page": 9,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Threshold and network charts and captions fit; no axis-label or footer overlap.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-09.png",
+        "bytes": 237291,
+        "sha256": "d0433ffacb8af59dc9df6d10f43fbac06cb3b8c45abbc27584e2af8c9fb260b5"
+      }
+    },
+    {
+      "page": 10,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Five synthetic final-description months and separate network denominators fit.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-10.png",
+        "bytes": 263714,
+        "sha256": "98ddd4a47eeb2a5e7fdf82b32464818f7cfa3a73356d64b97ed540ea3e11b9b2"
+      }
+    },
+    {
+      "page": 11,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Second A25 interval plot and caption are readable without clipping.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-11.png",
+        "bytes": 95614,
+        "sha256": "c477ee586a10edde29d19d347f0fc7ef493b787736d16fd40608e57ef70b61ae"
+      }
+    },
+    {
+      "page": 12,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Second threshold/network charts and RQ2 start fit without overlapping captions.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-12.png",
+        "bytes": 216757,
+        "sha256": "59b7693867965234ad95f1099adefa6e16285d8b2b7bb47070309d9c71ce0dbe"
+      }
+    },
+    {
+      "page": 13,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "OLS stages and branch comparisons are continuous prose and readable.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-13.png",
+        "bytes": 300949,
+        "sha256": "530d6e9fb24940c4ef382931faff17049026f5401de9392a35859c921177977f"
+      }
+    },
+    {
+      "page": 14,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "NOAA zero-fill/no-overlap limitations, common coverage and algorithm section fit.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-14.png",
+        "bytes": 300859,
+        "sha256": "83a2c288ec5e3fa32d8276d34753096796e2308aefac0bd799764d55a3ec6f53"
+      }
+    },
+    {
+      "page": 15,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Grid, model-selection/CI disclosures and synthetic final-test opening fit.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-15.png",
+        "bytes": 304973,
+        "sha256": "db88ce2fe1605d32b26bb856eb7239210377c66a9c437d4f83f285cb0763bafa"
+      }
+    },
+    {
+      "page": 16,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Group errors, research evolution and limitation opening fit without overlap.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-16.png",
+        "bytes": 302727,
+        "sha256": "80cbb1d69dace97368ed0d4785da03d6e382c986ff0c333aec8d959f297ea1cd"
+      }
+    },
+    {
+      "page": 17,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Limitations paragraph continues normally; remaining whitespace is acceptable.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-17.png",
+        "bytes": 65649,
+        "sha256": "7efce6e88513634a6c03c13363d3ed8742189769dfe260204c94f25f1be76a6f"
+      }
+    },
+    {
+      "page": 18,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Three references and links fit without truncation or overlap.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-18.png",
+        "bytes": 86572,
+        "sha256": "1e5d78bd9ddd21e6648aed3847fd912408945beef09537fef94b33fc1faac480"
+      }
+    }
+  ],
+  "unit_tests": {
+    "command": ".venv/Scripts/python.exe -m unittest tests.test_report_evidence -v",
+    "tests": 10,
+    "passed": 10,
+    "seconds": 8.712
+  },
+  "production_change": "Merge EDA evidence IDs into the measure column: seven columns satisfy the existing renderer, preserving all values and receipts.",
+  "renderer_modified": false,
+  "iteration_notes": "First rehearsal exposed overlapping synthetic chart stamps; fixture-only stamps moved above each chart. Final v02 all 18 pages reviewed.",
+  "limits": [
+    "This synthetic rehearsal is not a real research result or final delivery.",
+    "Future real Markdown, especially different figure proportions or longer labels, still requires fresh page/font and visual checks.",
+    "Raster chart glyph sizes are visually readable; the >=10pt automated check certifies PDF text, not image glyph sizes.",
+    "This report currently contains no display equations; the earlier renderer-specific math marker was not repeated."
+  ]
+}

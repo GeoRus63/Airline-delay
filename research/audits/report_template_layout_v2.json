@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-24T00:06:45.269381+00:00",
+  "input": {
+    "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\fixture_project_v02\\reports\\report_en.md",
+    "bytes": 31695,
+    "sha256": "3e61319224d697d77d8351af5d1454b7c996ec6ef983f6579512ac6a9ba85604"
+  },
+  "pdf": {
+    "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.pdf",
+    "bytes": 887316,
+    "sha256": "32d7f9c8165cf1b167535afef89c5a3db4c543d3fd4a9027cbffc20c286dd639"
+  },
+  "page_count": 18,
+  "body_page_count": 15,
+  "body_page_limit": 25,
+  "body_page_limit_passed": true,
+  "page_sections": [
+    {
+      "page": 1,
+      "section": "cover"
+    },
+    {
+      "page": 2,
+      "section": "contents"
+    },
+    {
+      "page": 3,
+      "section": "body"
+    },
+    {
+      "page": 4,
+      "section": "body"
+    },
+    {
+      "page": 5,
+      "section": "body"
+    },
+    {
+      "page": 6,
+      "section": "body"
+    },
+    {
+      "page": 7,
+      "section": "body"
+    },
+    {
+      "page": 8,
+      "section": "body"
+    },
+    {
+      "page": 9,
+      "section": "body"
+    },
+    {
+      "page": 10,
+      "section": "body"
+    },
+    {
+      "page": 11,
+      "section": "body"
+    },
+    {
+      "page": 12,
+      "section": "body"
+    },
+    {
+      "page": 13,
+      "section": "body"
+    },
+    {
+      "page": 14,
+      "section": "body"
+    },
+    {
+      "page": 15,
+      "section": "body"
+    },
+    {
+      "page": 16,
+      "section": "body"
+    },
+    {
+      "page": 17,
+      "section": "body"
+    },
+    {
+      "page": 18,
+      "section": "references"
+    }
+  ],
+  "font_family": "Times New Roman",
+  "font_files": [
+    {
+      "path": "C:\\Windows\\Fonts\\times.ttf",
+      "bytes": 1190952,
+      "sha256": "0bf1b21b27b370039b60eca23d532c3fe3fb308750d8f13816db70a6cb666804"
+    },
+    {
+      "path": "C:\\Windows\\Fonts\\timesbd.ttf",
+      "bytes": 1170312,
+      "sha256": "cb8f85dedb0ab01792baad20da28d26773485ac9c21e112bb5c511a8b2001eee"
+    },
+    {
+      "path": "C:\\Windows\\Fonts\\timesi.ttf",
+      "bytes": 963084,
+      "sha256": "11e6aae7436a5f2442eada66493d1767c78dde02acedc0afa6e7d0afeb0f3a14"
+    },
+    {
+      "path": "C:\\Windows\\Fonts\\timesbi.ttf",
+      "bytes": 904428,
+      "sha256": "5d78b5c66ac8e9c3fc94bd4ead792e1127f5f3faa29f768ff9b599339afe95bf"
+    }
+  ],
+  "pdf_text_fonts": [
+    "/AAAAAA+TimesNewRomanPS-BoldMT",
+    "/AAAAAA+TimesNewRomanPS-ItalicMT",
+    "/AAAAAA+TimesNewRomanPSMT"
+  ],
+  "minimum_pdf_text_points": 10.0,
+  "font_embedding_truetype": {
+    "/AAAAAA+TimesNewRomanPS-BoldMT": true,
+    "/AAAAAA+TimesNewRomanPSMT": true,
+    "/AAAAAA+TimesNewRomanPS-ItalicMT": true
+  },
+  "fonts_passed": true,
+  "body_points": 11.0,
+  "caption_table_points": 10,
+  "math": {
+    "expression_count": 0,
+    "base_points": 15,
+    "font": "Times New Roman",
+    "renderer": "existing matplotlib.mathtext to 240-dpi PNG; no raw TeX output",
+    "python": null
+  },
+  "figures": [
+    {
+      "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\fixture_project_v02\\reports\\figures\\R0001_eda_target_distribution.png",
+      "bytes": 75038,
+      "sha256": "fe9877dbd783bbcc0954ffec21176de25c2b4e82b3d5ca0a1c71fd9159b547f9",
+      "width_points": 487.27559055118115,
+      "height_points": 236.6767154105737,
+      "effective_dpi": 268.9237929028505,
+      "caption": "Figure 1. Development target distribution [E0033]"
+    },
+    {
+      "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\fixture_project_v02\\reports\\figures\\R0018_rq1_standardized_airports.png",
+      "bytes": 157718,
+      "sha256": "523d1b703887a30c3b88dd73b7ee84ae09099578b6affdfaa1b6c40f6aa32823",
+      "width_points": 475.0,
+      "height_points": 475,
+      "effective_dpi": 275.87368421052633,
+      "caption": "Figure 2. Frozen common-support airport estimates and date-block uncertainty [E0049]"
+    },
+    {
+      "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\fixture_project_v02\\reports\\figures\\R0018_rq1_threshold_stability.png",
+      "bytes": 62753,
+      "sha256": "a55b80ee1902997d78b535a9446fbda03146579ef008af5e4d345a455972721c",
+      "width_points": 487.27559055118115,
+      "height_points": 217.39987886129623,
+      "effective_dpi": 268.9237929028505,
+      "caption": "Figure 3. Direction and ranking sensitivity to upstream-delay thresholds [E0051]"
+    },
+    {
+      "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\fixture_project_v02\\reports\\figures\\R0018_rq1_network_geographic.png",
+      "bytes": 326962,
+      "sha256": "4fc356e40ea6ec43ec1e5381229af254124a891ab3499e9241cfd934dcdd04f9",
+      "width_points": 487.27559055118115,
+      "height_points": 315.239435307273,
+      "effective_dpi": 374.5724258289703,
+      "caption": "Figure 4. Airport connection performance and directed flight flow [E0053] [E0054]"
+    },
+    {
+      "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\fixture_project_v02\\reports\\figures\\R0019_rq1_standardized_airports.png",
+      "bytes": 157718,
+      "sha256": "523d1b703887a30c3b88dd73b7ee84ae09099578b6affdfaa1b6c40f6aa32823",
+      "width_points": 475.0,
+      "height_points": 475,
+      "effective_dpi": 275.87368421052633,
+      "caption": "Figure 5. Frozen common-support airport estimates and date-block uncertainty [E0071]"
+    },
+    {
+      "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\fixture_project_v02\\reports\\figures\\R0019_rq1_threshold_stability.png",
+      "bytes": 62753,
+      "sha256": "a55b80ee1902997d78b535a9446fbda03146579ef008af5e4d345a455972721c",
+      "width_points": 487.27559055118115,
+      "height_points": 217.39987886129623,
+      "effective_dpi": 268.9237929028505,
+      "caption": "Figure 6. Direction and ranking sensitivity to upstream-delay thresholds [E0073]"
+    },
+    {
+      "path": "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\fixture_project_v02\\reports\\figures\\R0019_rq1_network_geographic.png",
+      "bytes": 326962,
+      "sha256": "4fc356e40ea6ec43ec1e5381229af254124a891ab3499e9241cfd934dcdd04f9",
+      "width_points": 487.27559055118115,
+      "height_points": 315.239435307273,
+      "effective_dpi": 374.5724258289703,
+      "caption": "Figure 7. Airport connection performance and directed flight flow [E0075] [E0076]"
+    }
+  ],
+  "elements": {
+    "figures": 7,
+    "tables": 2,
+    "equations": 0
+  },
+  "qa_images": [
+    "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-01.png",
+    "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-02.png",
+    "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-03.png",
+    "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-04.png",
+    "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-05.png",
+    "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-06.png",
+    "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-07.png",
+    "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-08.png",
+    "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-09.png",
+    "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-10.png",
+    "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-11.png",
+    "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-12.png",
+    "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-13.png",
+    "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-14.png",
+    "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-15.png",
+    "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-16.png",
+    "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-17.png",
+    "D:\\airline-delay\\tmp\\report_full_synthetic_v01\\report_synthetic_qa_v02.qa\\page-18.png"
+  ],
+  "visual_review_required": true,
+  "visual_review_completed": false,
+  "layout_checks_passed": true,
+  "limitations": [
+    "Raster chart axis-label sizes require visual review; document font checks cannot certify image text",
+    "Page/font checks apply only to this supplied Markdown; they do not certify a future final report"
+  ],
+  "fit_called": false,
+  "research_data_read": false,
+  "runtime": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "executable": "C:\\Users\\Ham\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "reportlab": "4.4.9",
+    "pypdf": "6.10.0"
+  }
+}

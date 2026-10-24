@@ -121,6 +121,14 @@ def make_fixture(root):
                "n": 6, "full_validation_n": 6, "definition": "synthetic availability only"})
     for run_id in ["R0005", "R0006", "R0008"]:
         write_json(root / "experiments/runs" / run_id / "weather_coverage_summary.json", {"rows": 8, "availability": {"metar_available": 7}})
+    mapped_fields = ["metar_temperature_f", "metar_dewpoint_f", "metar_wind_direction_deg", "metar_relative_humidity",
+                     "metar_wind_knots", "metar_gust_knots", "metar_visibility_miles", "metar_ceiling_ft"]
+    write_json(root / "experiments/runs/R0008/feature_audit.json", {"noaa_fill_counts": {name: 0 for name in mapped_fields},
+               "weather_audit": {"metar_model_columns": mapped_fields[4:]}})
+    write_table(root / "experiments/runs/R0008/tables/noaa_overlap_summary.csv", [
+        {"feature": name, "overlap_count": 0, "mean_signed_difference": None, "mean_absolute_difference": None,
+         "metar_unit": "synthetic unit", "noaa_native_unit": "synthetic native unit", "conversion": "documented synthetic conversion",
+         "unit_consistency": "no_numeric_overlap"} for name in mapped_fields])
     first = root / "experiments/runs/R0001"
     write_json(first / "eda_summary.json", {"n": 8, "airport_n": 1, "route_n": 1, "overnight_n": 1})
     write_table(first / "tables/eda_monthly_target.csv", [{"month_utc": "2026-04", "n": 8, "mean": 10., "median": 0., "p99": 60., "target_ge60_share": .1}])
@@ -251,7 +259,7 @@ class ReportEvidence(unittest.TestCase):
             self.assertIn("invalidated", english)
             self.assertIn("66.67%", english)
             self.assertIn("2024 inventory remains the primary", english)
-            self.assertIn("| 2026-07 | Arrival nonnegative |", english)
+            self.assertIn("| 2026-07 | Arrival nonnegative [E", english)
             self.assertIn("MAE worsened by 1.000 min (60.00 seconds)", english)
             self.assertIn("The frozen set A contains 2 airports", english)
             self.assertIn("The all-threshold decision was fail", english)
@@ -260,11 +268,18 @@ class ReportEvidence(unittest.TestCase):
             self.assertIn("it was not registered before P0", english)
             self.assertIn("not selection-adjusted confidence intervals", english)
             self.assertIn("blocks unverified amended, corrected or delayed bulletin values", english)
+            self.assertIn("8 mapped quantities, of which 4", english)
+            self.assertIn("no effective NOAA input contrast", english)
+            self.assertIn("they do not establish unit agreement", english)
             chinese = (root / "reports/结果解读_中文.md").read_text(encoding="utf-8")
             self.assertIn("取消和改道不能当作零延误", chinese)
             self.assertIn("一条航班在起点/终点各贡献一次movement", chinese)
             self.assertIn("首次通过即停止", chinese)
+            self.assertIn("不能推断其他情况下可用的NOAA信息没有预测价值", chinese)
             self.assertFalse(any(line.startswith(("- ", "* ")) for line in english.splitlines()))
+            for line in english.splitlines():
+                if line.startswith("|"):
+                    self.assertLessEqual(len(line.strip().strip("|").split("|")), 7)
             with (root / "reports/evidence_index.csv").open(encoding="utf-8", newline="") as stream:
                 evidence = list(csv.DictReader(stream))
             self.assertTrue(all(row["research_log_heading_lines"] for row in evidence))
@@ -392,6 +407,45 @@ class ReportEvidence(unittest.TestCase):
             write_json(path, manifest)
             with self.assertRaisesRegex(ValueError, "Missing archived output receipt"):
                 report.rq1_prose(report.Archive(root), "R0018", "synthetic")
+
+    def test_noaa_wording_follows_actual_fill_and_overlap_counts(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            make_fixture(root)
+            directory = root / "experiments/runs/R0008"
+            audit_path = directory / "feature_audit.json"
+            audit = json.loads(audit_path.read_text())
+            audit["noaa_fill_counts"]["metar_wind_knots"] = 2
+            write_json(audit_path, audit)
+            overlap_path = directory / "tables/noaa_overlap_summary.csv"
+            overlap = pd.read_csv(overlap_path)
+            overlap.loc[overlap.feature.eq("metar_wind_knots"), "overlap_count"] = 3
+            overlap.to_csv(overlap_path, index=False)
+            seal(root, "R0008", json.loads((directory / "config.json").read_text()))
+            english, chinese = report.noaa_prose(report.Archive(root), "R0008")
+            self.assertIn("2 fills in predictor columns", " ".join(english))
+            self.assertIn("3 numeric value pairs", " ".join(english))
+            self.assertNotIn("no effective NOAA input contrast", " ".join(english))
+            self.assertNotIn("零有效补值", " ".join(chinese))
+
+    def test_noaa_missing_counts_or_invalid_values_are_rejected(self):
+        for failure in ["missing", "negative"]:
+            with self.subTest(failure=failure), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                make_fixture(root)
+                directory = root / "experiments/runs/R0008"
+                path = directory / "feature_audit.json"
+                audit = json.loads(path.read_text())
+                if failure == "missing":
+                    audit.pop("noaa_fill_counts")
+                    expected = "requires archived fill counts"
+                else:
+                    audit["noaa_fill_counts"]["metar_wind_knots"] = -1
+                    expected = "nonnegative integers"
+                write_json(path, audit)
+                seal(root, "R0008", json.loads((directory / "config.json").read_text()))
+                with self.assertRaisesRegex(ValueError, expected):
+                    report.noaa_prose(report.Archive(root), "R0008")
 
 
 if __name__ == "__main__":
