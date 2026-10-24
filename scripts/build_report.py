@@ -692,6 +692,73 @@ def rq1_prose(archive, run_id, label):
     return "\n\n".join(text)
 
 
+def ols_coefficient_prose(archive, selection_run_id, feature_run):
+    """Read the feature-source OLS, independently of any selected tree/forest."""
+    run_id = feature_run["id"]
+    model = feature_run["model"]
+    if model.get("model_type") != "linear" or model.get("development_only") is not True:
+        raise ValueError("OLS coefficient explanation requires the actual development linear feature source")
+    if "StandardScaler(with_mean=False)" not in model.get("effective_preprocessing", {}).get("numeric_scaling", ""):
+        raise ValueError("OLS coefficient explanation requires the recorded numeric scaling")
+    base = f"explanations/{run_id}"
+    summary_file = base + "/explain_summary.json"
+    summary = archive.json(selection_run_id, summary_file)
+    if (summary.get("source_run") != run_id or summary.get("fit_called") is not False
+            or summary.get("model_name") != model["model_name"] or summary.get("features") != model["features"]):
+        raise ValueError("OLS explanation source/model/features or no-refit declaration differs")
+    folds = [item["fold"] for item in summary.get("folds", [])]
+    if not folds or len(folds) != len(set(folds)) or not set(folds) <= {item["fold"] for item in model["folds"]}:
+        raise ValueError("OLS explanation folds must identify saved development models")
+    coefficient_file, intercept_file = base + "/explain_coefficients.csv", base + "/explain_intercepts.csv"
+    coefficients = archive.table(selection_run_id, coefficient_file, ["fold", "encoded_feature", "coefficient"])
+    intercepts = archive.table(selection_run_id, intercept_file, ["fold", "intercept"])
+    if (coefficients.duplicated(["fold", "encoded_feature"]).any() or intercepts.fold.duplicated().any()
+            or set(coefficients.fold) != set(folds) or set(intercepts.fold) != set(folds)
+            or not all(math.isfinite(float(value)) for value in coefficients.coefficient)
+            or not all(math.isfinite(float(value)) for value in intercepts.intercept)):
+        raise ValueError("OLS coefficient/intercept rows are duplicated, nonfinite or have inconsistent folds")
+    ref = archive.cite(selection_run_id, summary_file,
+                       {"keys": ["source_run", "model_name", "features", "folds", "fit_called"]},
+                       "Saved development OLS explanation provenance and no-refit scope")
+    scaling_ref = archive.cite(run_id, "model_manifest.json",
+                               {"keys": ["model_type", "features", "effective_preprocessing.numeric_scaling"]},
+                               "Actual linear feature source and training-fitted numeric scaling")
+    en = [f"For coefficient interpretation, the OLS benchmark is the selected feature-source run {run_id}, independently of the retained algorithm. "
+          f"The saved development coefficient tables are read without refitting. {ref} {scaling_ref}"]
+    zh = ["## OLS数值系数的含义",
+          f"系数解释固定使用特征来源{run_id}的OLS基准，不因最终保留树或森林而改读其空系数表；只读取开发期已保存系数表，没有读取模型文件或重新拟合。{ref} {scaling_ref}"]
+    specified = ["upstream_arr_delay_minutes", "scheduled_turnaround_minutes", "downstream_distance"]
+    for fold in sorted(folds):
+        values, chinese_values = [], []
+        for feature in specified:
+            encoded = "numeric__" + feature
+            if feature not in model["features"]:
+                if ((coefficients.fold == fold) & (coefficients.encoded_feature == encoded)).any():
+                    raise ValueError("OLS coefficient exists for a feature absent from the source model")
+                values.append(f"{feature} was not included")
+                chinese_values.append(f"{feature}未纳入该模型")
+                continue
+            row = selected_row(coefficients, fold=fold, encoded_feature=encoded)
+            row_ref = archive.cite(selection_run_id, coefficient_file, {"fold": fold, "encoded_feature": encoded},
+                                   "Prespecified OLS numeric coefficient in transformed-input units")
+            values.append(f"{feature}={number(row.coefficient, 6)} {row_ref}")
+            chinese_values.append(f"{feature}={number(row.coefficient, 6)} {row_ref}")
+        row = selected_row(intercepts, fold=fold)
+        row_ref = archive.cite(selection_run_id, intercept_file, {"fold": fold}, "Saved OLS intercept in transformed coordinates")
+        en.append(f"For the {fold} saved OLS fit, the prespecified numeric coefficients were {'; '.join(values)}; "
+                  f"the intercept was {number(row.intercept, 6)} min. {row_ref}")
+        zh.append(f"{fold}保存的OLS预指定数值系数为{'；'.join(chinese_values)}；截距为{number(row.intercept, 6)}分钟。{row_ref}")
+    en.append("Under StandardScaler(with_mean=False), each listed coefficient is the change in the raw linear prediction, in minutes, "
+              "for one unit of that transformed variable with other transformed inputs fixed: approximately one training standard deviation of the imputed original predictor. "
+              "Constant predictors are an exception to this standard-deviation interpretation. Clipping predictions at zero means the deployed prediction need not have the same marginal change. "
+              "The intercept describes transformed zero inputs and reference categories, which need not represent a feasible flight or population baseline. "
+              "These conditional associations do not rank airport/route importance by absolute coefficient or identify causal effects. " + scaling_ref)
+    zh.append("StandardScaler(with_mean=False)下，每个系数表示其他转换输入固定时，该转换变量增加1单位引起的原始线性预测变化，单位为分钟；"
+              "约对应填补后原变量的1个训练期标准差，常量变量不适用这一标准差解释。预测截断为非负后不保证仍有相同边际变化。"
+              "截距对应转换坐标为零及参考类别，未必是一条可行航班或总体基线；这些条件关联不能按系数绝对值给机场/航线重要性排名，也不识别因果。" + scaling_ref)
+    return en, zh
+
+
 def execution_prose(archive, development_runs, selected_run, final_run):
     """Disclose recorded resource budgets without inventing missing defaults."""
     def positive(value):
@@ -788,6 +855,8 @@ def compose(archive, config, validated):
     noaa_en, noaa_zh = noaa_prose(archive, noaa["id"])
     selected_run = next(run for run in [*main, *algorithms] if run["id"] == choice["selected_run_id"])
     execution_en, execution_zh = execution_prose(archive, [*main, variant, noaa, *algorithms], selected_run, final_run)
+    feature_run = next(run for run in main if run["id"] == feature["selected_run_id"])
+    coefficient_en, coefficient_zh = ols_coefficient_prose(archive, config["model_selection_run_id"], feature_run)
     lines.extend(single_en)
     eda_id = main[0]["id"]
     eda = archive.json(eda_id, "eda_summary.json")
@@ -890,6 +959,7 @@ def compose(archive, config, validated):
         lines.append(f"On the fixed {fold} validation explanation sample, the largest grouped permutation MAE increase was for {row.group}: "
                      f"{number(row.mean_delta_mae)} min (repeat SD {number(row.sd_delta_mae)}, {int(row.repeats)} repeats). "
                      f"This is model/sample sensitivity, not full-population temporal uncertainty. {ref}")
+    lines.extend(coefficient_en)
     lines += ["## One-time August assessment and remaining errors",
               "The final metrics below come from the completed single-access ledger and saved-result verification. This report reads summary tables only and does not reopen test features or refit models."]
     for model in [final_run["model"]["model_name"], *BASELINES]:
@@ -954,6 +1024,7 @@ def compose(archive, config, validated):
         chinese.append(f"{run['id']} / {name}：MAE {number(row.mae)}分钟，RMSE {number(row.rmse)}分钟，样本{int(row.n):,}。" + " ".join(f"[{item}]" for item in ids[:1]))
     chinese.extend(noaa_zh)
     chinese += ["## 执行预算与复现", *execution_zh]
+    chinese.extend(coefficient_zh)
     chinese += ["## RQ1、研究演进和局限", "RQ1先报告原始均值与累计增加/减少/净变化，再按上游延误和计划周转共同支持标准化。共同支持机场、分层和权重由开发期冻结，逐月与4–8月最终描述重复使用；>0、≥5、≥15阈值不能另选有利机场。节点大小是衔接数、颜色是标准化每次净变化、有向边宽是航班量，不能解释为机场责任。"]
     chinese.extend(reference_zh)
     for run_id in [config["development_rq1_run_id"], config["final_rq1_run_id"]]:

@@ -94,6 +94,8 @@ class NotebookSources(unittest.TestCase):
             write(rq1 / "manifest.json", {"status": "completed"})
             # A wrong-source decoy must never appear in the selection explanation section.
             write(rq1 / "explanations/old/explain_summary.json", {"marker": "WRONG_OLD_EXPLANATION"})
+            write(rq1 / "explanations/old/explain_coefficients.csv", "fold,encoded_feature,coefficient\n2026-07,numeric__WRONG_OLD_COEF,999\n")
+            write(rq1 / "explanations/old/explain_2026-07_tree_paths.txt", "WRONG_OLD_TREE_PATH\n")
             write(rq2 / "eda_summary.json", {"marker": "RQ2_FROM_R17"})
             for filename in ["eda_monthly_target.csv", "eda_target_bins.csv", "eda_feature_missing.csv",
                              "eda_support_airport.csv", "eda_support_route.csv", "eda_support_airline.csv"]:
@@ -108,6 +110,16 @@ class NotebookSources(unittest.TestCase):
             explanation_image = selection / "explanations/R0017/permutation_2026-07.png"
             write(explanation_image, PNG)
             write(selection / "explanations/R0017/permutation_summary.csv", "fold,group,mean_delta_mae\n2026-07,G0,1\n")
+            coefficient_path = selection / "explanations/R0017/explain_coefficients.csv"
+            intercept_path = selection / "explanations/R0017/explain_intercepts.csv"
+            write(coefficient_path, "fold,encoded_feature,coefficient\n2026-07,numeric__NEW_COEF_FROM_R27,0.7\n2026-07,categorical__REFERENCE_ENCODING,0.1\n")
+            write(intercept_path, "fold,intercept\n2026-07,0.25\n")
+            tree_dir = selection / "explanations/tree_model"
+            write(tree_dir / "explain_summary.json", {"source_run": "tree_model", "tree_path_files": ["explain_2026-07_tree_paths.txt"]})
+            write(tree_dir / "explain_coefficients.csv", "fold,encoded_feature,coefficient\n")
+            write(tree_dir / "explain_intercepts.csv", "fold,intercept\n")
+            tree_path = tree_dir / "explain_2026-07_tree_paths.txt"
+            write(tree_path, "NEW_TREE_PATH_FROM_R27\n" + "\n".join(f"synthetic path line {i}" for i in range(125)) + "\nHIDDEN_TREE_PATH_TAIL\n")
             result = notebooks._render(guarded(notebooks.analysis_template()), "06_test.ipynb", rq1, root,
                                        rq2_eda_run_dir=rq2, output_dir=selection, update_main=True)
             executed = nbformat.read(result["executed_notebook"], as_version=4)
@@ -115,10 +127,25 @@ class NotebookSources(unittest.TestCase):
             for marker in ["SINGLE_FLIGHT_FROM_R18", "RQ2_FROM_R17", "CHOICE_FROM_R27", "EXPLANATION_FROM_R27"]:
                 self.assertIn(marker, text)
             self.assertNotIn("WRONG_OLD_EXPLANATION", text)
+            self.assertIn("NEW_COEF_FROM_R27", text)
+            self.assertIn("NEW_TREE_PATH_FROM_R27", text)
+            self.assertIn("0.25", text)
+            self.assertIn("参考类别", text)
+            self.assertIn("不能把绝对系数大小直接当重要性排名", text)
+            self.assertIn("OLS 没有树分裂路径", text)
+            self.assertIn("系数表为空", text)
+            self.assertIn("截距表为空", text)
+            self.assertIn("展示文本已截断", text)
+            self.assertIn("不能直接按原始分钟或距离解读", text)
+            self.assertIn("不代表整个森林的全局解释", text)
+            self.assertNotIn("HIDDEN_TREE_PATH_TAIL", text)
+            self.assertNotIn("WRONG_OLD_COEF", text)
+            self.assertNotIn("WRONG_OLD_TREE_PATH", text)
             links = markdown_links(executed, selection / "notebooks")
             for source in [rq1 / "config.json", rq1 / "tables/eda_complete_summary.json", rq2 / "eda_summary.json",
                            rq2 / "tables/eda_monthly_target.csv", rq2 / "figures/eda_target_distribution.png",
-                           selection / "selection/model_selection_decision.json", explanation_image]:
+                           selection / "selection/model_selection_decision.json", explanation_image,
+                           coefficient_path, intercept_path, tree_path]:
                 self.assertIn((source.name, source.resolve()), links)
             self.assertTrue(all(path.is_file() for _, path in links))
             self.assertFalse((rq1 / "notebooks").exists())

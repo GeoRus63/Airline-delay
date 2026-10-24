@@ -48,8 +48,8 @@ def make_fixture(root):
                           "max_train_prediction_time": "2026-04-30T23:00:00+00:00", "max_train_label_time": "2026-04-30T23:30:00+00:00",
                           "validation_target_sha256": "synthetic-targets"})
         model = {"development_only": not final, "model_name": run_id.lower(), "model_type": kind, "feature_group": group,
-                 "features": features or ["synthetic"], "model_params": params or {"tol": 1e-6},
-                 "effective_preprocessing": {"drop": "first"}, "evaluation_ids_sha256": "synthetic-ids-final" if final else "synthetic-ids",
+                 "features": features or ["scheduled_turnaround_minutes", "downstream_distance"], "model_params": params or {"tol": 1e-6},
+                 "effective_preprocessing": {"drop": "first", "numeric_scaling": "StandardScaler(with_mean=False), fixed across algorithms"}, "evaluation_ids_sha256": "synthetic-ids-final" if final else "synthetic-ids",
                  "split_sha256": "synthetic-splits-final" if final else "synthetic-splits", "evaluation_rows": len(months) * 2, "folds": folds}
         write_json(directory / "model_manifest.json", model)
         metrics = []
@@ -96,7 +96,13 @@ def make_fixture(root):
     choice = {"selection_type": "model", "selected_run_id": "R0001", "feature_source_run_id": "R0001", "primary_model_name": "training_median", "reason": "synthetic baseline wins", "promotion_decisions": [], "candidate_files": []}
     choice["selection_sha256"] = report.canonical(choice)
     write_json(model_dir / "selection/model_selection_decision.json", choice)
-    write_json(model_dir / "explanations/R0001/explain_summary.json", {"source_run": "R0001", "fit_called": False})
+    write_json(model_dir / "explanations/R0001/explain_summary.json", {"source_run": "R0001", "fit_called": False,
+               "model_name": "r0001", "features": ["scheduled_turnaround_minutes", "downstream_distance"],
+               "folds": [{"fold": "2026-05", "model_path": "models/2026-05_r0001.joblib"}]})
+    write_table(model_dir / "explanations/R0001/explain_coefficients.csv", [
+        {"fold": "2026-05", "encoded_feature": "numeric__scheduled_turnaround_minutes", "coefficient": -.75},
+        {"fold": "2026-05", "encoded_feature": "numeric__downstream_distance", "coefficient": 1.25}])
+    write_table(model_dir / "explanations/R0001/explain_intercepts.csv", [{"fold": "2026-05", "intercept": 3.5}])
     write_table(model_dir / "explanations/R0001/permutation_summary.csv", [{"fold": "2026-05", "group": "G0", "mean_delta_mae": .2, "sd_delta_mae": .1, "repeats": 3}])
     for directory, candidates in [(feature_dir, main), (model_dir, ["R0001", *algorithm_ids])]:
         rows = []
@@ -271,6 +277,9 @@ class ReportEvidence(unittest.TestCase):
             self.assertIn("8 mapped quantities, of which 4", english)
             self.assertIn("no effective NOAA input contrast", english)
             self.assertIn("they do not establish unit agreement", english)
+            self.assertIn("scheduled_turnaround_minutes=-0.750000", english)
+            self.assertIn("upstream_arr_delay_minutes was not included", english)
+            self.assertIn("Clipping predictions at zero", english)
             chinese = (root / "reports/结果解读_中文.md").read_text(encoding="utf-8")
             self.assertIn("取消和改道不能当作零延误", chinese)
             self.assertIn("一条航班在起点/终点各贡献一次movement", chinese)

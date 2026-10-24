@@ -90,7 +90,17 @@ class PresentationContent(unittest.TestCase):
     def test_positive_noaa_fills_use_the_actual_selected_columns(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            config = presentation_fixture(root, {"synthetic": 2, "unused_temperature": 4})
+            config = presentation_fixture(root, {"metar_wind_knots": 2, "metar_temperature_f": 4})
+            # This case owns its selected NOAA fields rather than relying on the
+            # report fixture's default G0 feature names. Keep one inserted field
+            # inside the model and one outside it, so the intersection matters.
+            directory = root / "experiments/runs" / config["noaa_run_id"]
+            model_path = directory / "model_manifest.json"
+            model = json.loads(model_path.read_text(encoding="utf-8"))
+            model["features"].append("metar_wind_knots")
+            self.assertNotIn("metar_temperature_f", model["features"])
+            fixture.write_json(model_path, model)
+            fixture.seal(root, config["noaa_run_id"], json.loads((directory / "config.json").read_text(encoding="utf-8")))
             result = presentation.build_content(config, "reports/presentation/content.json", root=root)
             slide = json.loads(Path(result["content"]).read_text(encoding="utf-8"))["slides"][6]
             self.assertIn("NOAA filled 6 values, 2 in selected model columns", slide["claims"])

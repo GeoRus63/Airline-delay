@@ -96,6 +96,52 @@ def single_flight_eda(base):
     for name in ["monthly_delay_quantiles.png", "delay_sign_counts.png"]:
         archived_image("figures/" + name, base=base)
 
+def model_structure_explanations(base):
+    summaries = sorted(base.glob("**/explain_summary.json"))
+    if not summaries:
+        notice(f"**未归档结构解释摘要：{base.name}。**")
+    for summary_path in summaries:
+        source = summary_path.parent
+        summary = json.loads(summary_path.read_text(encoding="utf-8-sig"))
+        notice(f"### 系数、截距与树路径：{source.name}（{base.name}）")
+        coefficients = source / "explain_coefficients.csv"
+        has_linear_coefficients = False
+        if coefficients.is_file():
+            notice(f"**{link_file(coefficients)}**：完整编码系数表可下载。")
+            table = pd.read_csv(coefficients, float_precision="round_trip")
+            if table.empty:
+                notice("系数表为空。树模型没有线性 coef_；应结合下面的已归档树路径阅读，不生成替代系数。")
+            elif not {"fold", "encoded_feature", "coefficient"}.issubset(table):
+                notice("系数表未归档完整 fold/encoded_feature/coefficient 字段，不能分类展示。")
+            else:
+                has_linear_coefficients = True
+                numeric = table.loc[table.encoded_feature.astype(str).str.startswith("numeric__")]
+                categorical = table.loc[~table.encoded_feature.astype(str).str.startswith("numeric__")]
+                notice(f"**numeric__ 数值特征系数：{len(numeric):,} 行**（预处理后的编码/缩放单位）。")
+                with pd.option_context("display.max_columns", None, "display.max_rows", None):
+                    display(numeric)
+                notice(f"**其他编码系数：共 {len(categorical):,} 行，按归档行序仅显示前 12 行**。类别系数依赖参考类别，数值系数使用缩放后输入；不能把绝对系数大小直接当重要性排名，也不能解释为因果效应。")
+                display(categorical.head(12))
+        else:
+            notice("**未归档 explain_coefficients.csv**。树模型不适用线性系数；缺失文件本身不证明已完成线性解释。")
+        intercepts = archived_table("explain_intercepts.csv", base=source, limit=None)
+        if intercepts is not None and intercepts.empty:
+            notice("截距表为空；树模型没有线性截距项，不补造截距。")
+        paths = sorted(source.glob("explain_*_tree_paths.txt"))
+        if not paths:
+            if has_linear_coefficients:
+                notice("该归档提供线性系数。OLS 没有树分裂路径，树路径不适用。")
+            elif summary.get("tree_path_files"):
+                notice("**摘要列有树路径文件，但当前解释目录未归档对应 txt；不能展示替代路径。**")
+            else:
+                notice("未归档树路径；是否适用应结合该模型类型与解释摘要判断。")
+        for path in paths:
+            lines = path.read_text(encoding="utf-8-sig").splitlines()
+            notice(f"**{link_file(path)}**：完整文本 {len(lines):,} 行，下面最多展示前 120 行。DT 为一棵树，RF 为归档的前 3 棵，路径截于深度 3。阈值处于编码/缩放输入空间，不能直接按原始分钟或距离解读。RF 的前 3 棵、深度 3 截断仅为结构示例，不代表整个森林的全局解释。")
+            notice("```text\n" + "\n".join(lines[:120]) + "\n```")
+            if len(lines) > 120:
+                notice("展示文本已截断，完整路径见上方归档下载链接。")
+
 def rq1_reference(base):
     value = archived_json("rq1_standardized/frozen_reference.json", base=base,
                           keys=["schema_version", "frozen_on", "supported", "protocol", "interpretation"])
@@ -259,7 +305,8 @@ archive_matches("**/permutation_summary.csv", base=OUTPUT_RUN_DIR, limit=None)
 archive_matches("**/permutation_2026-07.png", base=OUTPUT_RUN_DIR, kind="image")
 archive_matches("**/pdp_values.csv", base=OUTPUT_RUN_DIR)
 archive_matches("**/pdp_support.csv", base=OUTPUT_RUN_DIR)
-archive_matches("**/pdp_2026-07_*.png", base=OUTPUT_RUN_DIR, kind="image")'''),
+archive_matches("**/pdp_2026-07_*.png", base=OUTPUT_RUN_DIR, kind="image")
+model_structure_explanations(OUTPUT_RUN_DIR)'''),
     ])
 
 

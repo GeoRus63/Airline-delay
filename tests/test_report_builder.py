@@ -7,7 +7,74 @@ import unittest
 import pandas as pd
 
 from scripts import build_report as report
-from tests.test_report_evidence import make_fixture, seal, write_json
+from tests.test_report_evidence import make_fixture, seal, write_json, write_table
+
+
+class CoefficientDisclosure(unittest.TestCase):
+    def test_included_upstream_requires_its_numeric_row_and_is_then_reported(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            make_fixture(root)
+            source_dir = root / "experiments/runs/R0001"
+            model = json.loads((source_dir / "model_manifest.json").read_text())
+            model["features"].append("upstream_arr_delay_minutes")
+            write_json(source_dir / "model_manifest.json", model)
+            seal(root, "R0001", json.loads((source_dir / "config.json").read_text()))
+            directory = root / "experiments/runs/R0016"
+            base = directory / "explanations/R0001"
+            summary = json.loads((base / "explain_summary.json").read_text())
+            summary["features"] = model["features"]
+            write_json(base / "explain_summary.json", summary)
+            seal(root, "R0016", json.loads((directory / "config.json").read_text()))
+            archive = report.Archive(root)
+            with self.assertRaisesRegex(ValueError, "Expected exactly one result row"):
+                report.ols_coefficient_prose(archive, "R0016", report.model_archive(archive, "R0001"))
+            path = base / "explain_coefficients.csv"
+            rows = pd.read_csv(path).to_dict("records")
+            rows.append({"fold": "2026-05", "encoded_feature": "numeric__upstream_arr_delay_minutes", "coefficient": 12.5})
+            write_table(path, rows)
+            seal(root, "R0016", json.loads((directory / "config.json").read_text()))
+            archive = report.Archive(root)
+            en, _ = report.ols_coefficient_prose(archive, "R0016", report.model_archive(archive, "R0001"))
+            self.assertIn("upstream_arr_delay_minutes=12.500000", " ".join(en))
+
+    def test_prespecified_coefficients_use_feature_source_even_when_tree_is_selected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            make_fixture(root)
+            archive = report.Archive(root)
+            source = report.model_archive(archive, "R0001")
+            en, zh = report.ols_coefficient_prose(archive, "R0016", source)
+            self.assertIn("feature-source run R0001", " ".join(en))
+            self.assertIn("upstream_arr_delay_minutes was not included", " ".join(en))
+            self.assertIn("downstream_distance=1.250000", " ".join(en))
+            self.assertIn("1个训练期标准差", " ".join(zh))
+            self.assertTrue(any('numeric__scheduled_turnaround_minutes' in row["selector"] for row in archive.evidence))
+            self.assertTrue(all("R0009" not in row["source_file"] for row in archive.evidence))
+
+    def test_wrong_source_missing_coefficient_and_missing_intercept_are_rejected(self):
+        for fault in ["source", "coefficient", "intercept", "refit", "nonlinear"]:
+            with self.subTest(fault=fault), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                make_fixture(root)
+                directory = root / "experiments/runs/R0016"
+                base = directory / "explanations/R0001"
+                summary = json.loads((base / "explain_summary.json").read_text())
+                if fault == "source":
+                    summary["source_run"] = "R0009"
+                elif fault == "refit":
+                    summary["fit_called"] = True
+                elif fault == "coefficient":
+                    path = base / "explain_coefficients.csv"
+                    pd.read_csv(path).iloc[1:].to_csv(path, index=False)
+                elif fault == "intercept":
+                    write_table(base / "explain_intercepts.csv", [{"fold": "2026-07", "intercept": 1.}])
+                write_json(base / "explain_summary.json", summary)
+                seal(root, "R0016", json.loads((directory / "config.json").read_text()))
+                archive = report.Archive(root)
+                source = report.model_archive(archive, "R0009" if fault == "nonlinear" else "R0001")
+                with self.assertRaises(ValueError):
+                    report.ols_coefficient_prose(archive, "R0016", source)
 
 
 class ExecutionDisclosure(unittest.TestCase):

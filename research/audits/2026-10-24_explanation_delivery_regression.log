@@ -1,0 +1,43 @@
+test_display_copy_preserves_external_fragment_and_embedded_images (tests.test_notebook_sources.NotebookSources.test_display_copy_preserves_external_fragment_and_embedded_images) ... ok
+test_final_notebook_links_prediction_and_rq1_eda_from_actual_output (tests.test_notebook_sources.NotebookSources.test_final_notebook_links_prediction_and_rq1_eda_from_actual_output) ... D:\airline-delay\.venv\Lib\site-packages\zmq\_future.py:718: RuntimeWarning: Proactor event loop does not implement add_reader family of methods required for zmq. Registering an additional selector thread for add_reader support via tornado. Use `asyncio.set_event_loop_policy(WindowsSelectorEventLoopPolicy())` to avoid this warning.
+  self._get_loop()
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+ok
+test_selection_notebook_reads_explicit_eda_and_explanation_sources (tests.test_notebook_sources.NotebookSources.test_selection_notebook_reads_explicit_eda_and_explanation_sources) ... [IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+ok
+test_included_upstream_requires_its_numeric_row_and_is_then_reported (tests.test_report_builder.CoefficientDisclosure.test_included_upstream_requires_its_numeric_row_and_is_then_reported) ... ok
+test_prespecified_coefficients_use_feature_source_even_when_tree_is_selected (tests.test_report_builder.CoefficientDisclosure.test_prespecified_coefficients_use_feature_source_even_when_tree_is_selected) ... ok
+test_wrong_source_missing_coefficient_and_missing_intercept_are_rejected (tests.test_report_builder.CoefficientDisclosure.test_wrong_source_missing_coefficient_and_missing_intercept_are_rejected) ... ok
+test_algorithm_archive_can_declare_no_repeated_baselines (tests.test_report_builder.ExecutionDisclosure.test_algorithm_archive_can_declare_no_repeated_baselines) ... ok
+test_legacy_fixture_missing_fields_is_not_assumed_to_use_defaults (tests.test_report_builder.ExecutionDisclosure.test_legacy_fixture_missing_fields_is_not_assumed_to_use_defaults) ... ok
+test_mixed_budgets_and_explicit_override_are_source_backed (tests.test_report_builder.ExecutionDisclosure.test_mixed_budgets_and_explicit_override_are_source_backed) ... ok
+test_same_budget_needs_no_override (tests.test_report_builder.ExecutionDisclosure.test_same_budget_needs_no_override) ... ok
+test_unrecorded_override_or_conflicting_manifest_is_rejected (tests.test_report_builder.ExecutionDisclosure.test_unrecorded_override_or_conflicting_manifest_is_rejected) ... ok
+test_bad_or_missing_receipt_rejected_before_output (tests.test_report_evidence.ReportEvidence.test_bad_or_missing_receipt_rejected_before_output) ... ok
+test_complete_report_is_summary_only_traceable_and_nonmutating (tests.test_report_evidence.ReportEvidence.test_complete_report_is_summary_only_traceable_and_nonmutating) ... ok
+test_final_freeze_and_rq1_reference_must_match (tests.test_report_evidence.ReportEvidence.test_final_freeze_and_rq1_reference_must_match) ... ok
+test_frozen_weights_and_fallback_decisions_are_checked (tests.test_report_evidence.ReportEvidence.test_frozen_weights_and_fallback_decisions_are_checked) ... ok
+test_invalidated_source_and_incomplete_chain_rejected (tests.test_report_evidence.ReportEvidence.test_invalidated_source_and_incomplete_chain_rejected) ... ok
+test_network_edges_require_an_archived_receipt (tests.test_report_evidence.ReportEvidence.test_network_edges_require_an_archived_receipt) ... ok
+test_noaa_missing_counts_or_invalid_values_are_rejected (tests.test_report_evidence.ReportEvidence.test_noaa_missing_counts_or_invalid_values_are_rejected) ... ok
+test_noaa_wording_follows_actual_fill_and_overlap_counts (tests.test_report_evidence.ReportEvidence.test_noaa_wording_follows_actual_fill_and_overlap_counts) ... ok
+test_path_escapes_and_large_data_are_forbidden (tests.test_report_evidence.ReportEvidence.test_path_escapes_and_large_data_are_forbidden) ... ok
+test_single_flight_eda_schema_and_denominators_are_required (tests.test_report_evidence.ReportEvidence.test_single_flight_eda_schema_and_denominators_are_required) ... ok
+test_complete_deck_is_dynamic_summary_only_and_nonmutating (tests.test_presentation_content.PresentationContent.test_complete_deck_is_dynamic_summary_only_and_nonmutating) ... ok
+test_invalidated_run_is_never_presentation_evidence (tests.test_presentation_content.PresentationContent.test_invalidated_run_is_never_presentation_evidence) ... ok
+test_positive_noaa_fills_use_the_actual_selected_columns (tests.test_presentation_content.PresentationContent.test_positive_noaa_fills_use_the_actual_selected_columns) ... FAIL
+test_tampered_summary_rejected_before_any_output (tests.test_presentation_content.PresentationContent.test_tampered_summary_rejected_before_any_output) ... ok
+
+======================================================================
+FAIL: test_positive_noaa_fills_use_the_actual_selected_columns (tests.test_presentation_content.PresentationContent.test_positive_noaa_fills_use_the_actual_selected_columns)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\airline-delay\tests\test_presentation_content.py", line 96, in test_positive_noaa_fills_use_the_actual_selected_columns
+    self.assertIn("NOAA filled 6 values, 2 in selected model columns", slide["claims"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'NOAA filled 6 values, 2 in selected model columns' not found in ['Variant versus family: ΔMAE 0.000 min', 'NOAA versus IEM G4B: ΔMAE 0.000 min', 'TAF blocks unverified revisions and delayed values', 'NOAA filled 6 values, 0 in selected model columns']
+
+----------------------------------------------------------------------
+Ran 25 tests in 34.286s
+
+FAILED (failures=1)
