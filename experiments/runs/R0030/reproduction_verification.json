@@ -1,0 +1,23 @@
+{
+  "mode": "reproduce_final",
+  "claim_type": "reproduction",
+  "formal_run_id": "R0028",
+  "formal_run_dir": "D:\\airline-delay\\experiments\\runs\\R0028",
+  "formal_final_result_sha256": "f96499f27b315715d773f6370b10bfc62f3a27947d40a0397ea1fe263b557be3",
+  "freeze_manifest_sha256": "286c7de3cc56da3c6c61e16670bde538a672de7bca7f4b3136ce68501c2648f4",
+  "access_ledger_path": "D:\\airline-delay\\experiments\\final_access\\2026-08.json",
+  "ledger_sha256_before": "f1c0b984773a7c61587b9c24bb02903895adb84157576ea3ee8d90e1c2fe33cb",
+  "creates_new_formal_claim": false,
+  "refitted": true,
+  "raw_test_data_read": true,
+  "prediction_rows_compared": 2240308,
+  "metric_rows_compared": 3320,
+  "all_feature_values_and_types_match": true,
+  "ids_and_targets_match": true,
+  "prediction_atol": 1e-10,
+  "metric_atol": 1e-10,
+  "rtol": 0,
+  "verified": true,
+  "ledger_sha256_after": "f1c0b984773a7c61587b9c24bb02903895adb84157576ea3ee8d90e1c2fe33cb",
+  "formal_ledger_unchanged": true
+}

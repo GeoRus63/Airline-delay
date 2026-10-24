@@ -1,0 +1,17 @@
+{
+  "fold": "2026-08",
+  "pid": 48520,
+  "threads": 24,
+  "train_rows": 2260245,
+  "validation_rows": 560077,
+  "models_seconds": {
+    "training_mean": 4.9531985000066925,
+    "training_median": 4.481391199995414,
+    "carry_forward": 4.47973120000097,
+    "rf_d16_l50": 3565.3591293000063
+  },
+  "status": "completed",
+  "fit_threads": 24,
+  "prediction_threads": 1,
+  "elapsed_seconds": 3579.2804875
+}

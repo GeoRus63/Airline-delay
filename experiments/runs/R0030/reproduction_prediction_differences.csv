@@ -1,0 +1,9 @@
+model,column,rows,max_absolute_difference,atol,rtol
+training_mean,predicted_delay_raw,560077,0.0,1e-10,0.0
+training_mean,predicted_delay,560077,0.0,1e-10,0.0
+training_median,predicted_delay_raw,560077,0.0,1e-10,0.0
+training_median,predicted_delay,560077,0.0,1e-10,0.0
+carry_forward,predicted_delay_raw,560077,0.0,1e-10,0.0
+carry_forward,predicted_delay,560077,0.0,1e-10,0.0
+rf_d16_l50,predicted_delay_raw,560077,0.0,1e-10,0.0
+rf_d16_l50,predicted_delay,560077,0.0,1e-10,0.0

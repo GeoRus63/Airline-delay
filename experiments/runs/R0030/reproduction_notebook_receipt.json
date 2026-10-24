@@ -1,0 +1,16 @@
+{
+  "executed_notebook": "D:\\airline-delay\\experiments\\runs\\R0030\\notebooks\\07_最终评估.ipynb",
+  "html": "D:\\airline-delay\\experiments\\runs\\R0030\\notebooks\\07_最终评估.html",
+  "interpreter": "D:\\airline-delay\\.venv\\Scripts\\python.exe",
+  "update_main": false,
+  "display_copy_warnings": [],
+  "raw_data_read": false,
+  "trained": false,
+  "source_runs": {
+    "main": "D:\\airline-delay\\experiments\\runs\\R0030",
+    "rq1": "D:\\airline-delay\\experiments\\runs\\R0030",
+    "rq2_eda": "D:\\airline-delay\\experiments\\runs\\R0030",
+    "explanations": "D:\\airline-delay\\experiments\\runs\\R0030"
+  },
+  "notebook_directory": "D:\\airline-delay\\experiments\\runs\\R0030\\notebooks"
+}
