@@ -1,0 +1,1538 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-24T09:49:49.257197+00:00",
+  "source_commit": "3dec73765b3d02006918f40277b0684b3a65fec8",
+  "release_tag": "research-artifacts-v1",
+  "release_url": "https://github.com/GeoRus63/Airline-delay/releases/tag/research-artifacts-v1",
+  "scope": "All existing per-run models and full prediction files, including failed-run outputs; explanation prediction samples are already in Git. Processed inputs and per-run feature data are not included.",
+  "aircraft_reference": "2024 primary; 2025 update remains pending. These are preserved original results, not retrained results.",
+  "file_count": 268,
+  "uncompressed_file_bytes": 2243334942,
+  "model_file_count": 134,
+  "prediction_file_count": 134,
+  "archive_count": 17,
+  "archives": [
+    {
+      "run_id": "R0006",
+      "run_status": "completed",
+      "asset": "R0006-models-predictions.zip",
+      "bytes": 174240256,
+      "sha256": "1905473867e4ed283678a82bcac1930b4431856dd5c57c17ec5c0780a44adfe2",
+      "download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/research-artifacts-v1/R0006-models-predictions.zip",
+      "files": [
+        {
+          "path": "experiments/runs/R0006/models/2026-05_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0006/models/2026-05_g0_linear.joblib",
+          "bytes": 76683,
+          "sha256": "7e92079c98cfac3de60bee4d46c28ef60be4c48d263e36134a95d5807bd44e48"
+        },
+        {
+          "path": "experiments/runs/R0006/models/2026-05_training_mean.joblib",
+          "bytes": 315,
+          "sha256": "cef15ab35d87346aab29020c2f508e6f5cdd821cf6b1f0688bfb4fc5ebefc63f"
+        },
+        {
+          "path": "experiments/runs/R0006/models/2026-05_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0006/models/2026-06_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0006/models/2026-06_g0_linear.joblib",
+          "bytes": 81597,
+          "sha256": "e065129884a0d2295ed4eeae867dc1b3c7dd45fffc92496dc9129577f49fb07c"
+        },
+        {
+          "path": "experiments/runs/R0006/models/2026-06_training_mean.joblib",
+          "bytes": 314,
+          "sha256": "254fe9773735f63d55ae4c23bab4e5969d62755b48ab3add10ad4d0060864e77"
+        },
+        {
+          "path": "experiments/runs/R0006/models/2026-06_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0006/models/2026-07_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0006/models/2026-07_g0_linear.joblib",
+          "bytes": 87570,
+          "sha256": "6fe34f5df9c6d62b3033b873042e34ae8a7cd65e456b5188827cfb3bb1795153"
+        },
+        {
+          "path": "experiments/runs/R0006/models/2026-07_training_mean.joblib",
+          "bytes": 316,
+          "sha256": "c418a0f8ea9aa5d0c0c67fe1c2402e9e95fe573de5fd556694e1305042da71dd"
+        },
+        {
+          "path": "experiments/runs/R0006/models/2026-07_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0006/predictions/2026-05_carry_forward.csv.gz",
+          "bytes": 12955853,
+          "sha256": "8897a76d90b43754b4b252e52bd655252fda3b9d42d551eafda0e87f84c19713"
+        },
+        {
+          "path": "experiments/runs/R0006/predictions/2026-05_g0_linear.csv.gz",
+          "bytes": 20973954,
+          "sha256": "99785f0202053641cac3b1240aafb9a94359c92071ad119b25761511d9fd00a3"
+        },
+        {
+          "path": "experiments/runs/R0006/predictions/2026-05_training_mean.csv.gz",
+          "bytes": 12278559,
+          "sha256": "3c80723824f1edd1d1c446e3be8479e0b6f9615222c725da4313c82f94392b3a"
+        },
+        {
+          "path": "experiments/runs/R0006/predictions/2026-05_training_median.csv.gz",
+          "bytes": 12034119,
+          "sha256": "af2cf0915e684beebab2cc2d03b41278696329756d9535099780448dc3cd254c"
+        },
+        {
+          "path": "experiments/runs/R0006/predictions/2026-06_carry_forward.csv.gz",
+          "bytes": 12833897,
+          "sha256": "def0949faff0be287191a276c50dc28f2334cb897a9e9ed8143bf4aff06ae3dd"
+        },
+        {
+          "path": "experiments/runs/R0006/predictions/2026-06_g0_linear.csv.gz",
+          "bytes": 20564200,
+          "sha256": "a11afde43739d04b3618a165eff4c46c5918d0aa52aae759ffb511b04873ae5f"
+        },
+        {
+          "path": "experiments/runs/R0006/predictions/2026-06_training_mean.csv.gz",
+          "bytes": 12067604,
+          "sha256": "6c2281b2d67a788af03be946cf12d4cbd18ca5f10b1a3919fc44a1cdaf565c35"
+        },
+        {
+          "path": "experiments/runs/R0006/predictions/2026-06_training_median.csv.gz",
+          "bytes": 11829742,
+          "sha256": "b28476ae3ea05088650cf45a7b878e1785146e9924b6999145e88c44ce5aec27"
+        },
+        {
+          "path": "experiments/runs/R0006/predictions/2026-07_carry_forward.csv.gz",
+          "bytes": 13154439,
+          "sha256": "86efd91a6fa838be66dae3ea69e7c4e7d25445e317578a4e06eb40abba724840"
+        },
+        {
+          "path": "experiments/runs/R0006/predictions/2026-07_g0_linear.csv.gz",
+          "bytes": 20932217,
+          "sha256": "c635cf22a42e89eeec91a5c14bdfac77607a2ceef663ce87d2f5415918e5b45c"
+        },
+        {
+          "path": "experiments/runs/R0006/predictions/2026-07_training_mean.csv.gz",
+          "bytes": 12302661,
+          "sha256": "9fdc615de23430ecef5e93a90e67f39acc060d3dcbcfad6e91e269718435bb7f"
+        },
+        {
+          "path": "experiments/runs/R0006/predictions/2026-07_training_median.csv.gz",
+          "bytes": 12059909,
+          "sha256": "66a6f478509468f017f9765b047f06f90f519013052d7c71b88ef227bc87572b"
+        }
+      ]
+    },
+    {
+      "run_id": "R0007",
+      "run_status": "completed",
+      "asset": "R0007-models-predictions.zip",
+      "bytes": 174064078,
+      "sha256": "02bc37b6dc99f3f5e2335fa6f4936ff718e40887c1a7ad22148cd52ffead2b35",
+      "download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/research-artifacts-v1/R0007-models-predictions.zip",
+      "files": [
+        {
+          "path": "experiments/runs/R0007/models/2026-05_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0007/models/2026-05_g1_linear.joblib",
+          "bytes": 77003,
+          "sha256": "fa38659e7922a3c4b7366afcf71fb38c6a569c653cf54e8f5f3b3da46005c099"
+        },
+        {
+          "path": "experiments/runs/R0007/models/2026-05_training_mean.joblib",
+          "bytes": 315,
+          "sha256": "cef15ab35d87346aab29020c2f508e6f5cdd821cf6b1f0688bfb4fc5ebefc63f"
+        },
+        {
+          "path": "experiments/runs/R0007/models/2026-05_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0007/models/2026-06_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0007/models/2026-06_g1_linear.joblib",
+          "bytes": 81914,
+          "sha256": "f8ed1e857e9f4869632b43ddca9afacfa4c2834d15ffcf3432465131f6078123"
+        },
+        {
+          "path": "experiments/runs/R0007/models/2026-06_training_mean.joblib",
+          "bytes": 314,
+          "sha256": "254fe9773735f63d55ae4c23bab4e5969d62755b48ab3add10ad4d0060864e77"
+        },
+        {
+          "path": "experiments/runs/R0007/models/2026-06_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0007/models/2026-07_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0007/models/2026-07_g1_linear.joblib",
+          "bytes": 87871,
+          "sha256": "8657c1adae5dba8d6510d192283b631a2b40d405e787740f5a9cd973201c7e22"
+        },
+        {
+          "path": "experiments/runs/R0007/models/2026-07_training_mean.joblib",
+          "bytes": 316,
+          "sha256": "c418a0f8ea9aa5d0c0c67fe1c2402e9e95fe573de5fd556694e1305042da71dd"
+        },
+        {
+          "path": "experiments/runs/R0007/models/2026-07_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0007/predictions/2026-05_carry_forward.csv.gz",
+          "bytes": 12955853,
+          "sha256": "8897a76d90b43754b4b252e52bd655252fda3b9d42d551eafda0e87f84c19713"
+        },
+        {
+          "path": "experiments/runs/R0007/predictions/2026-05_g1_linear.csv.gz",
+          "bytes": 20905851,
+          "sha256": "f9a3c0e77583d7ed02e2ffb92d469b15ddae1315349daa9bb7d2c7c8c46c5c23"
+        },
+        {
+          "path": "experiments/runs/R0007/predictions/2026-05_training_mean.csv.gz",
+          "bytes": 12278559,
+          "sha256": "3c80723824f1edd1d1c446e3be8479e0b6f9615222c725da4313c82f94392b3a"
+        },
+        {
+          "path": "experiments/runs/R0007/predictions/2026-05_training_median.csv.gz",
+          "bytes": 12034119,
+          "sha256": "af2cf0915e684beebab2cc2d03b41278696329756d9535099780448dc3cd254c"
+        },
+        {
+          "path": "experiments/runs/R0007/predictions/2026-06_carry_forward.csv.gz",
+          "bytes": 12833897,
+          "sha256": "def0949faff0be287191a276c50dc28f2334cb897a9e9ed8143bf4aff06ae3dd"
+        },
+        {
+          "path": "experiments/runs/R0007/predictions/2026-06_g1_linear.csv.gz",
+          "bytes": 20507833,
+          "sha256": "c37740c0219adea341769add06804e15771bacd698c57090b663deb5c6b3c585"
+        },
+        {
+          "path": "experiments/runs/R0007/predictions/2026-06_training_mean.csv.gz",
+          "bytes": 12067604,
+          "sha256": "6c2281b2d67a788af03be946cf12d4cbd18ca5f10b1a3919fc44a1cdaf565c35"
+        },
+        {
+          "path": "experiments/runs/R0007/predictions/2026-06_training_median.csv.gz",
+          "bytes": 11829742,
+          "sha256": "b28476ae3ea05088650cf45a7b878e1785146e9924b6999145e88c44ce5aec27"
+        },
+        {
+          "path": "experiments/runs/R0007/predictions/2026-07_carry_forward.csv.gz",
+          "bytes": 13154439,
+          "sha256": "86efd91a6fa838be66dae3ea69e7c4e7d25445e317578a4e06eb40abba724840"
+        },
+        {
+          "path": "experiments/runs/R0007/predictions/2026-07_g1_linear.csv.gz",
+          "bytes": 20879571,
+          "sha256": "befce1f5a9541c8a14c391a06753d2968e6a62a218d28840ca814c6ad0f43ccc"
+        },
+        {
+          "path": "experiments/runs/R0007/predictions/2026-07_training_mean.csv.gz",
+          "bytes": 12302661,
+          "sha256": "9fdc615de23430ecef5e93a90e67f39acc060d3dcbcfad6e91e269718435bb7f"
+        },
+        {
+          "path": "experiments/runs/R0007/predictions/2026-07_training_median.csv.gz",
+          "bytes": 12059909,
+          "sha256": "66a6f478509468f017f9765b047f06f90f519013052d7c71b88ef227bc87572b"
+        }
+      ]
+    },
+    {
+      "run_id": "R0009",
+      "run_status": "completed",
+      "asset": "R0009-models-predictions.zip",
+      "bytes": 184806477,
+      "sha256": "d83758a469002dfde82b473036264c568e019dfb3c5bb0a5190d260a014aa1dc",
+      "download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/research-artifacts-v1/R0009-models-predictions.zip",
+      "files": [
+        {
+          "path": "experiments/runs/R0009/models/2026-05_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0009/models/2026-05_g2_family_linear.joblib",
+          "bytes": 77352,
+          "sha256": "38efbeb2da571f7144056cc838b1a71461ade53926531dc523d5407e0a2d64ac"
+        },
+        {
+          "path": "experiments/runs/R0009/models/2026-05_training_mean.joblib",
+          "bytes": 315,
+          "sha256": "cef15ab35d87346aab29020c2f508e6f5cdd821cf6b1f0688bfb4fc5ebefc63f"
+        },
+        {
+          "path": "experiments/runs/R0009/models/2026-05_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0009/models/2026-06_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0009/models/2026-06_g2_family_linear.joblib",
+          "bytes": 82159,
+          "sha256": "05b9633071cf1b5daab3aad96e631155f6a806b2d420328f099f2be8bacef30b"
+        },
+        {
+          "path": "experiments/runs/R0009/models/2026-06_training_mean.joblib",
+          "bytes": 314,
+          "sha256": "254fe9773735f63d55ae4c23bab4e5969d62755b48ab3add10ad4d0060864e77"
+        },
+        {
+          "path": "experiments/runs/R0009/models/2026-06_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0009/models/2026-07_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0009/models/2026-07_g2_family_linear.joblib",
+          "bytes": 88124,
+          "sha256": "065baab207bcd2143703e9f5b45cc235d8484e891aa909a33f5465053d04f3ca"
+        },
+        {
+          "path": "experiments/runs/R0009/models/2026-07_training_mean.joblib",
+          "bytes": 316,
+          "sha256": "c418a0f8ea9aa5d0c0c67fe1c2402e9e95fe573de5fd556694e1305042da71dd"
+        },
+        {
+          "path": "experiments/runs/R0009/models/2026-07_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0009/predictions/2026-05_carry_forward.csv.gz",
+          "bytes": 13826651,
+          "sha256": "e248fb7df31712fa7ff6deac6f0f58d303a9b28b1f829ac82b1d9b1ca6d7cde1"
+        },
+        {
+          "path": "experiments/runs/R0009/predictions/2026-05_g2_family_linear.csv.gz",
+          "bytes": 21910364,
+          "sha256": "25b67c6f1bb6c442515c8982ebcfdc88de9691498e1ba61f285b6d3ea63933ae"
+        },
+        {
+          "path": "experiments/runs/R0009/predictions/2026-05_training_mean.csv.gz",
+          "bytes": 13190162,
+          "sha256": "fe504bda13ce211b8ca871b5f01ce6442544b3c37c9943c1a72a6003ca1efd99"
+        },
+        {
+          "path": "experiments/runs/R0009/predictions/2026-05_training_median.csv.gz",
+          "bytes": 12898887,
+          "sha256": "c764d622ee23cbbd9ca6aba2ee9ad630d48af5832120fa1de639c956bbd3f081"
+        },
+        {
+          "path": "experiments/runs/R0009/predictions/2026-06_carry_forward.csv.gz",
+          "bytes": 13675371,
+          "sha256": "492723757d022418cfbba3a84ad1cd4806a2e06a3ac11f0e5cae78cb2a24a635"
+        },
+        {
+          "path": "experiments/runs/R0009/predictions/2026-06_g2_family_linear.csv.gz",
+          "bytes": 21472574,
+          "sha256": "d5d2e77206659c604313559aff58046ccfbe30e1a5fed574f10bb60effa7102b"
+        },
+        {
+          "path": "experiments/runs/R0009/predictions/2026-06_training_mean.csv.gz",
+          "bytes": 12944107,
+          "sha256": "f6f2c1d67c85ae12206e550b046e557b59e6cbf722363314af3445c2abfa8210"
+        },
+        {
+          "path": "experiments/runs/R0009/predictions/2026-06_training_median.csv.gz",
+          "bytes": 12667990,
+          "sha256": "9e8c4d4c1168f6dea121491fe174d33380cffa4deecc67625c02796f6704cab2"
+        },
+        {
+          "path": "experiments/runs/R0009/predictions/2026-07_carry_forward.csv.gz",
+          "bytes": 14005849,
+          "sha256": "5f20f5c9c4cc7c38fc8708d248b4c79196a965f904526758fec9d02d2163b88f"
+        },
+        {
+          "path": "experiments/runs/R0009/predictions/2026-07_g2_family_linear.csv.gz",
+          "bytes": 21862184,
+          "sha256": "1483a8ff571f8d853634fe83d45e58e35cb8eee3498b24f7914c24966c6000ba"
+        },
+        {
+          "path": "experiments/runs/R0009/predictions/2026-07_training_mean.csv.gz",
+          "bytes": 13189436,
+          "sha256": "c65744af56cd2183e0c88bff4372500db474eb3af19e5b5ad170e2c94994b8d1"
+        },
+        {
+          "path": "experiments/runs/R0009/predictions/2026-07_training_median.csv.gz",
+          "bytes": 12907931,
+          "sha256": "878daf7aae01a2b3fc17906777b47a6cce091ac53fafcc2f8d0767e265e85cc2"
+        }
+      ]
+    },
+    {
+      "run_id": "R0010",
+      "run_status": "completed",
+      "asset": "R0010-models-predictions.zip",
+      "bytes": 174569108,
+      "sha256": "0531d1a9ac9a821ad65d3ff20f4bca3781af5aaa4f66e17d73b12a0bd99e925d",
+      "download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/research-artifacts-v1/R0010-models-predictions.zip",
+      "files": [
+        {
+          "path": "experiments/runs/R0010/models/2026-05_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0010/models/2026-05_g2_variant_linear.joblib",
+          "bytes": 78407,
+          "sha256": "a39e0e3c6c55d657160e237c56da45c61232a014f6299a2c893e20d3061bc51c"
+        },
+        {
+          "path": "experiments/runs/R0010/models/2026-05_training_mean.joblib",
+          "bytes": 315,
+          "sha256": "cef15ab35d87346aab29020c2f508e6f5cdd821cf6b1f0688bfb4fc5ebefc63f"
+        },
+        {
+          "path": "experiments/runs/R0010/models/2026-05_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0010/models/2026-06_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0010/models/2026-06_g2_variant_linear.joblib",
+          "bytes": 83275,
+          "sha256": "3463f629eab0bc2463d6d725b2482aba86b2cfd5ddb076fc608caa6b0c0730e2"
+        },
+        {
+          "path": "experiments/runs/R0010/models/2026-06_training_mean.joblib",
+          "bytes": 314,
+          "sha256": "254fe9773735f63d55ae4c23bab4e5969d62755b48ab3add10ad4d0060864e77"
+        },
+        {
+          "path": "experiments/runs/R0010/models/2026-06_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0010/models/2026-07_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0010/models/2026-07_g2_variant_linear.joblib",
+          "bytes": 89214,
+          "sha256": "290954498984042a24bbb4cf3abf4031e3136eaf9626ceda950dd6a71cbbfb23"
+        },
+        {
+          "path": "experiments/runs/R0010/models/2026-07_training_mean.joblib",
+          "bytes": 316,
+          "sha256": "c418a0f8ea9aa5d0c0c67fe1c2402e9e95fe573de5fd556694e1305042da71dd"
+        },
+        {
+          "path": "experiments/runs/R0010/models/2026-07_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0010/predictions/2026-05_carry_forward.csv.gz",
+          "bytes": 12955853,
+          "sha256": "8897a76d90b43754b4b252e52bd655252fda3b9d42d551eafda0e87f84c19713"
+        },
+        {
+          "path": "experiments/runs/R0010/predictions/2026-05_g2_variant_linear.csv.gz",
+          "bytes": 21076704,
+          "sha256": "60d46a4d0a3966c7b679eeceb29a2a631530bd2ffd65d79da069af0b18492a1a"
+        },
+        {
+          "path": "experiments/runs/R0010/predictions/2026-05_training_mean.csv.gz",
+          "bytes": 12278559,
+          "sha256": "3c80723824f1edd1d1c446e3be8479e0b6f9615222c725da4313c82f94392b3a"
+        },
+        {
+          "path": "experiments/runs/R0010/predictions/2026-05_training_median.csv.gz",
+          "bytes": 12034119,
+          "sha256": "af2cf0915e684beebab2cc2d03b41278696329756d9535099780448dc3cd254c"
+        },
+        {
+          "path": "experiments/runs/R0010/predictions/2026-06_carry_forward.csv.gz",
+          "bytes": 12833897,
+          "sha256": "def0949faff0be287191a276c50dc28f2334cb897a9e9ed8143bf4aff06ae3dd"
+        },
+        {
+          "path": "experiments/runs/R0010/predictions/2026-06_g2_variant_linear.csv.gz",
+          "bytes": 20670461,
+          "sha256": "e5bc5d71d9b8a6ce00ebc046824c5a79a28a84dd928fe05a441a285fbc78ab90"
+        },
+        {
+          "path": "experiments/runs/R0010/predictions/2026-06_training_mean.csv.gz",
+          "bytes": 12067604,
+          "sha256": "6c2281b2d67a788af03be946cf12d4cbd18ca5f10b1a3919fc44a1cdaf565c35"
+        },
+        {
+          "path": "experiments/runs/R0010/predictions/2026-06_training_median.csv.gz",
+          "bytes": 11829742,
+          "sha256": "b28476ae3ea05088650cf45a7b878e1785146e9924b6999145e88c44ce5aec27"
+        },
+        {
+          "path": "experiments/runs/R0010/predictions/2026-07_carry_forward.csv.gz",
+          "bytes": 13154439,
+          "sha256": "86efd91a6fa838be66dae3ea69e7c4e7d25445e317578a4e06eb40abba724840"
+        },
+        {
+          "path": "experiments/runs/R0010/predictions/2026-07_g2_variant_linear.csv.gz",
+          "bytes": 21046916,
+          "sha256": "32f035534f6bf3f9902b2ae1150cdf6be4d0ec06a75c98d4ef926e701d46cd49"
+        },
+        {
+          "path": "experiments/runs/R0010/predictions/2026-07_training_mean.csv.gz",
+          "bytes": 12302661,
+          "sha256": "9fdc615de23430ecef5e93a90e67f39acc060d3dcbcfad6e91e269718435bb7f"
+        },
+        {
+          "path": "experiments/runs/R0010/predictions/2026-07_training_median.csv.gz",
+          "bytes": 12059909,
+          "sha256": "66a6f478509468f017f9765b047f06f90f519013052d7c71b88ef227bc87572b"
+        }
+      ]
+    },
+    {
+      "run_id": "R0011",
+      "run_status": "failed",
+      "asset": "R0011-models-predictions.zip",
+      "bytes": 184054789,
+      "sha256": "0e7d9a0788c55a8465049c745574fc5051652ca92ab0cdb9c9ef0300e7f8a21b",
+      "download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/research-artifacts-v1/R0011-models-predictions.zip",
+      "files": [
+        {
+          "path": "experiments/runs/R0011/models/2026-05_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0011/models/2026-05_g3_linear.joblib",
+          "bytes": 77685,
+          "sha256": "10cdc1476047d96f5eb8ea216f39aa5dff011a29e478d32bf91574a68aba3a4b"
+        },
+        {
+          "path": "experiments/runs/R0011/models/2026-05_training_mean.joblib",
+          "bytes": 315,
+          "sha256": "cef15ab35d87346aab29020c2f508e6f5cdd821cf6b1f0688bfb4fc5ebefc63f"
+        },
+        {
+          "path": "experiments/runs/R0011/models/2026-05_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0011/models/2026-06_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0011/models/2026-06_g3_linear.joblib",
+          "bytes": 82500,
+          "sha256": "e48f78345497941df17da4dc3d1373ae556c1135c43a14760ac912d723401388"
+        },
+        {
+          "path": "experiments/runs/R0011/models/2026-06_training_mean.joblib",
+          "bytes": 314,
+          "sha256": "254fe9773735f63d55ae4c23bab4e5969d62755b48ab3add10ad4d0060864e77"
+        },
+        {
+          "path": "experiments/runs/R0011/models/2026-06_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0011/models/2026-07_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0011/models/2026-07_g3_linear.joblib",
+          "bytes": 88479,
+          "sha256": "da1a742fa3dff61d0ee8416c7aa412bf95af46a7d1b7fa05e940645207240384"
+        },
+        {
+          "path": "experiments/runs/R0011/models/2026-07_training_mean.joblib",
+          "bytes": 316,
+          "sha256": "c418a0f8ea9aa5d0c0c67fe1c2402e9e95fe573de5fd556694e1305042da71dd"
+        },
+        {
+          "path": "experiments/runs/R0011/models/2026-07_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0011/predictions/2026-05_carry_forward.csv.gz",
+          "bytes": 13826651,
+          "sha256": "e248fb7df31712fa7ff6deac6f0f58d303a9b28b1f829ac82b1d9b1ca6d7cde1"
+        },
+        {
+          "path": "experiments/runs/R0011/predictions/2026-05_g3_linear.csv.gz",
+          "bytes": 21645576,
+          "sha256": "adf71a614f9475b0ce91a326277e572474fea21cb5fc38f5e8adfd30aa90c81a"
+        },
+        {
+          "path": "experiments/runs/R0011/predictions/2026-05_training_mean.csv.gz",
+          "bytes": 13190162,
+          "sha256": "fe504bda13ce211b8ca871b5f01ce6442544b3c37c9943c1a72a6003ca1efd99"
+        },
+        {
+          "path": "experiments/runs/R0011/predictions/2026-05_training_median.csv.gz",
+          "bytes": 12898887,
+          "sha256": "c764d622ee23cbbd9ca6aba2ee9ad630d48af5832120fa1de639c956bbd3f081"
+        },
+        {
+          "path": "experiments/runs/R0011/predictions/2026-06_carry_forward.csv.gz",
+          "bytes": 13675371,
+          "sha256": "492723757d022418cfbba3a84ad1cd4806a2e06a3ac11f0e5cae78cb2a24a635"
+        },
+        {
+          "path": "experiments/runs/R0011/predictions/2026-06_g3_linear.csv.gz",
+          "bytes": 21230840,
+          "sha256": "d7e28dece351219873c8c54e775465e519bffee60487168c8907417f4f6451c3"
+        },
+        {
+          "path": "experiments/runs/R0011/predictions/2026-06_training_mean.csv.gz",
+          "bytes": 12944107,
+          "sha256": "f6f2c1d67c85ae12206e550b046e557b59e6cbf722363314af3445c2abfa8210"
+        },
+        {
+          "path": "experiments/runs/R0011/predictions/2026-06_training_median.csv.gz",
+          "bytes": 12667990,
+          "sha256": "9e8c4d4c1168f6dea121491fe174d33380cffa4deecc67625c02796f6704cab2"
+        },
+        {
+          "path": "experiments/runs/R0011/predictions/2026-07_carry_forward.csv.gz",
+          "bytes": 14005849,
+          "sha256": "5f20f5c9c4cc7c38fc8708d248b4c79196a965f904526758fec9d02d2163b88f"
+        },
+        {
+          "path": "experiments/runs/R0011/predictions/2026-07_g3_linear.csv.gz",
+          "bytes": 21616073,
+          "sha256": "37377495fab81db583ed3fdaf4937056aeaf0df4348ea18e134d3eae1a265fe2"
+        },
+        {
+          "path": "experiments/runs/R0011/predictions/2026-07_training_mean.csv.gz",
+          "bytes": 13189436,
+          "sha256": "c65744af56cd2183e0c88bff4372500db474eb3af19e5b5ad170e2c94994b8d1"
+        },
+        {
+          "path": "experiments/runs/R0011/predictions/2026-07_training_median.csv.gz",
+          "bytes": 12907931,
+          "sha256": "878daf7aae01a2b3fc17906777b47a6cce091ac53fafcc2f8d0767e265e85cc2"
+        }
+      ]
+    },
+    {
+      "run_id": "R0012",
+      "run_status": "completed",
+      "asset": "R0012-models-predictions.zip",
+      "bytes": 184054789,
+      "sha256": "734b8c8f9a891cf0291d6815133e9e48afcd672d00062b584d4587fe99de714e",
+      "download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/research-artifacts-v1/R0012-models-predictions.zip",
+      "files": [
+        {
+          "path": "experiments/runs/R0012/models/2026-05_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0012/models/2026-05_g3_linear.joblib",
+          "bytes": 77685,
+          "sha256": "10cdc1476047d96f5eb8ea216f39aa5dff011a29e478d32bf91574a68aba3a4b"
+        },
+        {
+          "path": "experiments/runs/R0012/models/2026-05_training_mean.joblib",
+          "bytes": 315,
+          "sha256": "cef15ab35d87346aab29020c2f508e6f5cdd821cf6b1f0688bfb4fc5ebefc63f"
+        },
+        {
+          "path": "experiments/runs/R0012/models/2026-05_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0012/models/2026-06_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0012/models/2026-06_g3_linear.joblib",
+          "bytes": 82500,
+          "sha256": "e48f78345497941df17da4dc3d1373ae556c1135c43a14760ac912d723401388"
+        },
+        {
+          "path": "experiments/runs/R0012/models/2026-06_training_mean.joblib",
+          "bytes": 314,
+          "sha256": "254fe9773735f63d55ae4c23bab4e5969d62755b48ab3add10ad4d0060864e77"
+        },
+        {
+          "path": "experiments/runs/R0012/models/2026-06_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0012/models/2026-07_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0012/models/2026-07_g3_linear.joblib",
+          "bytes": 88479,
+          "sha256": "da1a742fa3dff61d0ee8416c7aa412bf95af46a7d1b7fa05e940645207240384"
+        },
+        {
+          "path": "experiments/runs/R0012/models/2026-07_training_mean.joblib",
+          "bytes": 316,
+          "sha256": "c418a0f8ea9aa5d0c0c67fe1c2402e9e95fe573de5fd556694e1305042da71dd"
+        },
+        {
+          "path": "experiments/runs/R0012/models/2026-07_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0012/predictions/2026-05_carry_forward.csv.gz",
+          "bytes": 13826651,
+          "sha256": "e248fb7df31712fa7ff6deac6f0f58d303a9b28b1f829ac82b1d9b1ca6d7cde1"
+        },
+        {
+          "path": "experiments/runs/R0012/predictions/2026-05_g3_linear.csv.gz",
+          "bytes": 21645576,
+          "sha256": "adf71a614f9475b0ce91a326277e572474fea21cb5fc38f5e8adfd30aa90c81a"
+        },
+        {
+          "path": "experiments/runs/R0012/predictions/2026-05_training_mean.csv.gz",
+          "bytes": 13190162,
+          "sha256": "fe504bda13ce211b8ca871b5f01ce6442544b3c37c9943c1a72a6003ca1efd99"
+        },
+        {
+          "path": "experiments/runs/R0012/predictions/2026-05_training_median.csv.gz",
+          "bytes": 12898887,
+          "sha256": "c764d622ee23cbbd9ca6aba2ee9ad630d48af5832120fa1de639c956bbd3f081"
+        },
+        {
+          "path": "experiments/runs/R0012/predictions/2026-06_carry_forward.csv.gz",
+          "bytes": 13675371,
+          "sha256": "492723757d022418cfbba3a84ad1cd4806a2e06a3ac11f0e5cae78cb2a24a635"
+        },
+        {
+          "path": "experiments/runs/R0012/predictions/2026-06_g3_linear.csv.gz",
+          "bytes": 21230840,
+          "sha256": "d7e28dece351219873c8c54e775465e519bffee60487168c8907417f4f6451c3"
+        },
+        {
+          "path": "experiments/runs/R0012/predictions/2026-06_training_mean.csv.gz",
+          "bytes": 12944107,
+          "sha256": "f6f2c1d67c85ae12206e550b046e557b59e6cbf722363314af3445c2abfa8210"
+        },
+        {
+          "path": "experiments/runs/R0012/predictions/2026-06_training_median.csv.gz",
+          "bytes": 12667990,
+          "sha256": "9e8c4d4c1168f6dea121491fe174d33380cffa4deecc67625c02796f6704cab2"
+        },
+        {
+          "path": "experiments/runs/R0012/predictions/2026-07_carry_forward.csv.gz",
+          "bytes": 14005849,
+          "sha256": "5f20f5c9c4cc7c38fc8708d248b4c79196a965f904526758fec9d02d2163b88f"
+        },
+        {
+          "path": "experiments/runs/R0012/predictions/2026-07_g3_linear.csv.gz",
+          "bytes": 21616073,
+          "sha256": "37377495fab81db583ed3fdaf4937056aeaf0df4348ea18e134d3eae1a265fe2"
+        },
+        {
+          "path": "experiments/runs/R0012/predictions/2026-07_training_mean.csv.gz",
+          "bytes": 13189436,
+          "sha256": "c65744af56cd2183e0c88bff4372500db474eb3af19e5b5ad170e2c94994b8d1"
+        },
+        {
+          "path": "experiments/runs/R0012/predictions/2026-07_training_median.csv.gz",
+          "bytes": 12907931,
+          "sha256": "878daf7aae01a2b3fc17906777b47a6cce091ac53fafcc2f8d0767e265e85cc2"
+        }
+      ]
+    },
+    {
+      "run_id": "R0015",
+      "run_status": "completed",
+      "asset": "R0015-models-predictions.zip",
+      "bytes": 184086241,
+      "sha256": "0e5b13b68a917ec22a976d043b60324225f6f9271d9fe4440364cad3f620468d",
+      "download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/research-artifacts-v1/R0015-models-predictions.zip",
+      "files": [
+        {
+          "path": "experiments/runs/R0015/models/2026-05_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-05_g4a_linear.joblib",
+          "bytes": 78794,
+          "sha256": "03be03e1605f2b03c6200c8f0e54d7c5fff6d235a89cefe05a0d00dd97e4ea07"
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-05_training_mean.joblib",
+          "bytes": 315,
+          "sha256": "cef15ab35d87346aab29020c2f508e6f5cdd821cf6b1f0688bfb4fc5ebefc63f"
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-05_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-06_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-06_g4a_linear.joblib",
+          "bytes": 83591,
+          "sha256": "f4048b575394dd7ba292bde698592a1382fa7d9f83fa84bbd5f2f44feba37b1a"
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-06_training_mean.joblib",
+          "bytes": 314,
+          "sha256": "254fe9773735f63d55ae4c23bab4e5969d62755b48ab3add10ad4d0060864e77"
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-06_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-07_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-07_g4a_linear.joblib",
+          "bytes": 89626,
+          "sha256": "026b8ba256f6547a90c6085a2b358b3ff41965c05635fb607ac0aa7fbc0ed803"
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-07_training_mean.joblib",
+          "bytes": 316,
+          "sha256": "c418a0f8ea9aa5d0c0c67fe1c2402e9e95fe573de5fd556694e1305042da71dd"
+        },
+        {
+          "path": "experiments/runs/R0015/models/2026-07_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-05_carry_forward.csv.gz",
+          "bytes": 13826651,
+          "sha256": "e248fb7df31712fa7ff6deac6f0f58d303a9b28b1f829ac82b1d9b1ca6d7cde1"
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-05_g4a_linear.csv.gz",
+          "bytes": 21657332,
+          "sha256": "0ed99048b9250d3d6a31ebc9c042f03654ba94fc35e438831c4bc195df006db7"
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-05_training_mean.csv.gz",
+          "bytes": 13190162,
+          "sha256": "fe504bda13ce211b8ca871b5f01ce6442544b3c37c9943c1a72a6003ca1efd99"
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-05_training_median.csv.gz",
+          "bytes": 12898887,
+          "sha256": "c764d622ee23cbbd9ca6aba2ee9ad630d48af5832120fa1de639c956bbd3f081"
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-06_carry_forward.csv.gz",
+          "bytes": 13675371,
+          "sha256": "492723757d022418cfbba3a84ad1cd4806a2e06a3ac11f0e5cae78cb2a24a635"
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-06_g4a_linear.csv.gz",
+          "bytes": 21239195,
+          "sha256": "96401832360dda648e885fa6b1170a131cb60571b87b4e0bae5c65b34c640dfb"
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-06_training_mean.csv.gz",
+          "bytes": 12944107,
+          "sha256": "f6f2c1d67c85ae12206e550b046e557b59e6cbf722363314af3445c2abfa8210"
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-06_training_median.csv.gz",
+          "bytes": 12667990,
+          "sha256": "9e8c4d4c1168f6dea121491fe174d33380cffa4deecc67625c02796f6704cab2"
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-07_carry_forward.csv.gz",
+          "bytes": 14005849,
+          "sha256": "5f20f5c9c4cc7c38fc8708d248b4c79196a965f904526758fec9d02d2163b88f"
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-07_g4a_linear.csv.gz",
+          "bytes": 21624055,
+          "sha256": "2b1dcd176c53c2a8a8b89985018d9c569d828888e7ab396da65e48bf0f12dd07"
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-07_training_mean.csv.gz",
+          "bytes": 13189436,
+          "sha256": "c65744af56cd2183e0c88bff4372500db474eb3af19e5b5ad170e2c94994b8d1"
+        },
+        {
+          "path": "experiments/runs/R0015/predictions/2026-07_training_median.csv.gz",
+          "bytes": 12907931,
+          "sha256": "878daf7aae01a2b3fc17906777b47a6cce091ac53fafcc2f8d0767e265e85cc2"
+        }
+      ]
+    },
+    {
+      "run_id": "R0017",
+      "run_status": "completed",
+      "asset": "R0017-models-predictions.zip",
+      "bytes": 184127534,
+      "sha256": "e23258e5ec668e0fbcff1b22e4bf121591c206b6009413c35425913b69aa8de5",
+      "download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/research-artifacts-v1/R0017-models-predictions.zip",
+      "files": [
+        {
+          "path": "experiments/runs/R0017/models/2026-05_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0017/models/2026-05_g4b_linear.joblib",
+          "bytes": 80738,
+          "sha256": "410ca5ae3a0514bb36cf3bc8f5770286ed4a7ff9fed2136b9435d7e2140645e4"
+        },
+        {
+          "path": "experiments/runs/R0017/models/2026-05_training_mean.joblib",
+          "bytes": 315,
+          "sha256": "cef15ab35d87346aab29020c2f508e6f5cdd821cf6b1f0688bfb4fc5ebefc63f"
+        },
+        {
+          "path": "experiments/runs/R0017/models/2026-05_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0017/models/2026-06_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0017/models/2026-06_g4b_linear.joblib",
+          "bytes": 85505,
+          "sha256": "583178bfc706bda0da76b3d9c30ca9e1fd3c2fbcd5132a26dec918279fb92509"
+        },
+        {
+          "path": "experiments/runs/R0017/models/2026-06_training_mean.joblib",
+          "bytes": 314,
+          "sha256": "254fe9773735f63d55ae4c23bab4e5969d62755b48ab3add10ad4d0060864e77"
+        },
+        {
+          "path": "experiments/runs/R0017/models/2026-06_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0017/models/2026-07_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0017/models/2026-07_g4b_linear.joblib",
+          "bytes": 91551,
+          "sha256": "0e700f5a57aabc25259c58f554bba4d38c2e725b56dc28720353e4bf792044b0"
+        },
+        {
+          "path": "experiments/runs/R0017/models/2026-07_training_mean.joblib",
+          "bytes": 316,
+          "sha256": "c418a0f8ea9aa5d0c0c67fe1c2402e9e95fe573de5fd556694e1305042da71dd"
+        },
+        {
+          "path": "experiments/runs/R0017/models/2026-07_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0017/predictions/2026-05_carry_forward.csv.gz",
+          "bytes": 13826651,
+          "sha256": "e248fb7df31712fa7ff6deac6f0f58d303a9b28b1f829ac82b1d9b1ca6d7cde1"
+        },
+        {
+          "path": "experiments/runs/R0017/predictions/2026-05_g4b_linear.csv.gz",
+          "bytes": 21670535,
+          "sha256": "c8ba14544c20b3c4cb554c6cc5b3d6bb4b1a6a5c02fb2e0007e755e1622349a1"
+        },
+        {
+          "path": "experiments/runs/R0017/predictions/2026-05_training_mean.csv.gz",
+          "bytes": 13190162,
+          "sha256": "fe504bda13ce211b8ca871b5f01ce6442544b3c37c9943c1a72a6003ca1efd99"
+        },
+        {
+          "path": "experiments/runs/R0017/predictions/2026-05_training_median.csv.gz",
+          "bytes": 12898887,
+          "sha256": "c764d622ee23cbbd9ca6aba2ee9ad630d48af5832120fa1de639c956bbd3f081"
+        },
+        {
+          "path": "experiments/runs/R0017/predictions/2026-06_carry_forward.csv.gz",
+          "bytes": 13675371,
+          "sha256": "492723757d022418cfbba3a84ad1cd4806a2e06a3ac11f0e5cae78cb2a24a635"
+        },
+        {
+          "path": "experiments/runs/R0017/predictions/2026-06_g4b_linear.csv.gz",
+          "bytes": 21252759,
+          "sha256": "bffe39ea618bf9f88aa30e5cf92b03d0c62940b3a6c3ae0db4e65c4c61bdc2a2"
+        },
+        {
+          "path": "experiments/runs/R0017/predictions/2026-06_training_mean.csv.gz",
+          "bytes": 12944107,
+          "sha256": "f6f2c1d67c85ae12206e550b046e557b59e6cbf722363314af3445c2abfa8210"
+        },
+        {
+          "path": "experiments/runs/R0017/predictions/2026-06_training_median.csv.gz",
+          "bytes": 12667990,
+          "sha256": "9e8c4d4c1168f6dea121491fe174d33380cffa4deecc67625c02796f6704cab2"
+        },
+        {
+          "path": "experiments/runs/R0017/predictions/2026-07_carry_forward.csv.gz",
+          "bytes": 14005849,
+          "sha256": "5f20f5c9c4cc7c38fc8708d248b4c79196a965f904526758fec9d02d2163b88f"
+        },
+        {
+          "path": "experiments/runs/R0017/predictions/2026-07_g4b_linear.csv.gz",
+          "bytes": 21632798,
+          "sha256": "4abe20c003d783d5279218008e52603dd0879cacbb7726d112cc3cdeb3832a27"
+        },
+        {
+          "path": "experiments/runs/R0017/predictions/2026-07_training_mean.csv.gz",
+          "bytes": 13189436,
+          "sha256": "c65744af56cd2183e0c88bff4372500db474eb3af19e5b5ad170e2c94994b8d1"
+        },
+        {
+          "path": "experiments/runs/R0017/predictions/2026-07_training_median.csv.gz",
+          "bytes": 12907931,
+          "sha256": "878daf7aae01a2b3fc17906777b47a6cce091ac53fafcc2f8d0767e265e85cc2"
+        }
+      ]
+    },
+    {
+      "run_id": "R0019",
+      "run_status": "completed",
+      "asset": "R0019-models-predictions.zip",
+      "bytes": 184869057,
+      "sha256": "31237e0f396b319c396930a142b5f8a9523a5367601fb7e5727ac25213ce149c",
+      "download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/research-artifacts-v1/R0019-models-predictions.zip",
+      "files": [
+        {
+          "path": "experiments/runs/R0019/models/2026-05_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0019/models/2026-05_g4b_noaa_linear.joblib",
+          "bytes": 80738,
+          "sha256": "410ca5ae3a0514bb36cf3bc8f5770286ed4a7ff9fed2136b9435d7e2140645e4"
+        },
+        {
+          "path": "experiments/runs/R0019/models/2026-05_training_mean.joblib",
+          "bytes": 315,
+          "sha256": "cef15ab35d87346aab29020c2f508e6f5cdd821cf6b1f0688bfb4fc5ebefc63f"
+        },
+        {
+          "path": "experiments/runs/R0019/models/2026-05_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0019/models/2026-06_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0019/models/2026-06_g4b_noaa_linear.joblib",
+          "bytes": 85505,
+          "sha256": "583178bfc706bda0da76b3d9c30ca9e1fd3c2fbcd5132a26dec918279fb92509"
+        },
+        {
+          "path": "experiments/runs/R0019/models/2026-06_training_mean.joblib",
+          "bytes": 314,
+          "sha256": "254fe9773735f63d55ae4c23bab4e5969d62755b48ab3add10ad4d0060864e77"
+        },
+        {
+          "path": "experiments/runs/R0019/models/2026-06_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0019/models/2026-07_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0019/models/2026-07_g4b_noaa_linear.joblib",
+          "bytes": 91551,
+          "sha256": "0e700f5a57aabc25259c58f554bba4d38c2e725b56dc28720353e4bf792044b0"
+        },
+        {
+          "path": "experiments/runs/R0019/models/2026-07_training_mean.joblib",
+          "bytes": 316,
+          "sha256": "c418a0f8ea9aa5d0c0c67fe1c2402e9e95fe573de5fd556694e1305042da71dd"
+        },
+        {
+          "path": "experiments/runs/R0019/models/2026-07_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0019/predictions/2026-05_carry_forward.csv.gz",
+          "bytes": 13826651,
+          "sha256": "e248fb7df31712fa7ff6deac6f0f58d303a9b28b1f829ac82b1d9b1ca6d7cde1"
+        },
+        {
+          "path": "experiments/runs/R0019/predictions/2026-05_g4b_noaa_linear.csv.gz",
+          "bytes": 21922407,
+          "sha256": "fa013d33e682689209835e8b7bb118a51aa256f1683c40f58b5ca6af833af5a4"
+        },
+        {
+          "path": "experiments/runs/R0019/predictions/2026-05_training_mean.csv.gz",
+          "bytes": 13190162,
+          "sha256": "fe504bda13ce211b8ca871b5f01ce6442544b3c37c9943c1a72a6003ca1efd99"
+        },
+        {
+          "path": "experiments/runs/R0019/predictions/2026-05_training_median.csv.gz",
+          "bytes": 12898887,
+          "sha256": "c764d622ee23cbbd9ca6aba2ee9ad630d48af5832120fa1de639c956bbd3f081"
+        },
+        {
+          "path": "experiments/runs/R0019/predictions/2026-06_carry_forward.csv.gz",
+          "bytes": 13675371,
+          "sha256": "492723757d022418cfbba3a84ad1cd4806a2e06a3ac11f0e5cae78cb2a24a635"
+        },
+        {
+          "path": "experiments/runs/R0019/predictions/2026-06_g4b_noaa_linear.csv.gz",
+          "bytes": 21493552,
+          "sha256": "bcd8c83bc2b52717c18e61dece4f1fad489d78286da119202f2535b96d567659"
+        },
+        {
+          "path": "experiments/runs/R0019/predictions/2026-06_training_mean.csv.gz",
+          "bytes": 12944107,
+          "sha256": "f6f2c1d67c85ae12206e550b046e557b59e6cbf722363314af3445c2abfa8210"
+        },
+        {
+          "path": "experiments/runs/R0019/predictions/2026-06_training_median.csv.gz",
+          "bytes": 12667990,
+          "sha256": "9e8c4d4c1168f6dea121491fe174d33380cffa4deecc67625c02796f6704cab2"
+        },
+        {
+          "path": "experiments/runs/R0019/predictions/2026-07_carry_forward.csv.gz",
+          "bytes": 14005849,
+          "sha256": "5f20f5c9c4cc7c38fc8708d248b4c79196a965f904526758fec9d02d2163b88f"
+        },
+        {
+          "path": "experiments/runs/R0019/predictions/2026-07_g4b_noaa_linear.csv.gz",
+          "bytes": 21881596,
+          "sha256": "9f9a823ab6a815887daf7b4f250d8439e5133de335e3b30ce0095c12312a3c1d"
+        },
+        {
+          "path": "experiments/runs/R0019/predictions/2026-07_training_mean.csv.gz",
+          "bytes": 13189436,
+          "sha256": "c65744af56cd2183e0c88bff4372500db474eb3af19e5b5ad170e2c94994b8d1"
+        },
+        {
+          "path": "experiments/runs/R0019/predictions/2026-07_training_median.csv.gz",
+          "bytes": 12907931,
+          "sha256": "878daf7aae01a2b3fc17906777b47a6cce091ac53fafcc2f8d0767e265e85cc2"
+        }
+      ]
+    },
+    {
+      "run_id": "R0021",
+      "run_status": "completed",
+      "asset": "R0021-models-predictions.zip",
+      "bytes": 44653816,
+      "sha256": "907150064990c6874b8ef767b6ee03eea329eb2f8ed0c9ad59742e8d3122780e",
+      "download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/research-artifacts-v1/R0021-models-predictions.zip",
+      "files": [
+        {
+          "path": "experiments/runs/R0021/models/2026-05_dt_d8_l50.joblib",
+          "bytes": 52801,
+          "sha256": "98fd07d4883b1ef537054c012fc383544a2faddba66caa844fc7ec0134a9d6f9"
+        },
+        {
+          "path": "experiments/runs/R0021/models/2026-06_dt_d8_l50.joblib",
+          "bytes": 55067,
+          "sha256": "b51bd4e5d8d6d5b7b6b0e6eb396a010859bbc251e2df5b80bf2caf0f0d32db8d"
+        },
+        {
+          "path": "experiments/runs/R0021/models/2026-07_dt_d8_l50.joblib",
+          "bytes": 56898,
+          "sha256": "2f3fba286eb53cfa1ada2ca6b46d425b2b925b02018c62548e068f11ed4820b6"
+        },
+        {
+          "path": "experiments/runs/R0021/predictions/2026-05_dt_d8_l50.csv.gz",
+          "bytes": 14797810,
+          "sha256": "492f45265488ffe842dcda3a093c34633ce4561cf75611dd4bcf2e75bb1ec4c4"
+        },
+        {
+          "path": "experiments/runs/R0021/predictions/2026-06_dt_d8_l50.csv.gz",
+          "bytes": 14649473,
+          "sha256": "f92a4ca3a946c7e5b9fe8b3cb3057765e3bad00b7399e5e10a1f0fef6fb6f1e3"
+        },
+        {
+          "path": "experiments/runs/R0021/predictions/2026-07_dt_d8_l50.csv.gz",
+          "bytes": 15040491,
+          "sha256": "a4820539c3fc4acc129a52ac01fe64164d225170724e008790433a1172e09122"
+        }
+      ]
+    },
+    {
+      "run_id": "R0022",
+      "run_status": "completed",
+      "asset": "R0022-models-predictions.zip",
+      "bytes": 45327684,
+      "sha256": "0f104fef01a5a9061000f9e38ba92c783a1943dfac5fd232ff022ae1e512653a",
+      "download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/research-artifacts-v1/R0022-models-predictions.zip",
+      "files": [
+        {
+          "path": "experiments/runs/R0022/models/2026-05_dt_d8_l200.joblib",
+          "bytes": 50490,
+          "sha256": "96787d579d8f92734b5cf94a2fe2e458ae5d655edd047927346c712c26b11a40"
+        },
+        {
+          "path": "experiments/runs/R0022/models/2026-06_dt_d8_l200.joblib",
+          "bytes": 53734,
+          "sha256": "d432c15dc5f80cfa2902ea590d3d56ebf71434ef85b046fba3104ea16be423a8"
+        },
+        {
+          "path": "experiments/runs/R0022/models/2026-07_dt_d8_l200.joblib",
+          "bytes": 55146,
+          "sha256": "40f55e1c8fbe0c2bf8b8c87b12e2d99151c1be82757c8feab19e8d8371078892"
+        },
+        {
+          "path": "experiments/runs/R0022/predictions/2026-05_dt_d8_l200.csv.gz",
+          "bytes": 15054054,
+          "sha256": "6d36fde79a1887719589c97c203c66e6f5002f768d85d394411f88999bf3f487"
+        },
+        {
+          "path": "experiments/runs/R0022/predictions/2026-06_dt_d8_l200.csv.gz",
+          "bytes": 14893732,
+          "sha256": "68e1b154fe78624601f44375b4db2da203267995e65593d4620529759cc80273"
+        },
+        {
+          "path": "experiments/runs/R0022/predictions/2026-07_dt_d8_l200.csv.gz",
+          "bytes": 15219240,
+          "sha256": "1cd98bb13e1cafce2b3cc00af16d9be06c9e390696b7d4df1c28f0d622e7c76f"
+        }
+      ]
+    },
+    {
+      "run_id": "R0023",
+      "run_status": "completed",
+      "asset": "R0023-models-predictions.zip",
+      "bytes": 52318460,
+      "sha256": "bc8bc41198e2afe4aea43742b48bd40af71ac9ef23bc44f72cbe4c7c7cf26e2f",
+      "download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/research-artifacts-v1/R0023-models-predictions.zip",
+      "files": [
+        {
+          "path": "experiments/runs/R0023/models/2026-05_dt_d16_l200.joblib",
+          "bytes": 90952,
+          "sha256": "c27081c399e173f2a0870646b966e5a43a507bcfed31ee67f1c90639f9492623"
+        },
+        {
+          "path": "experiments/runs/R0023/models/2026-06_dt_d16_l200.joblib",
+          "bytes": 130919,
+          "sha256": "adb4d605d6a536f130a0d48ceec8110e0311e4698c78ae5ad317588d0ecb069b"
+        },
+        {
+          "path": "experiments/runs/R0023/models/2026-07_dt_d16_l200.joblib",
+          "bytes": 157426,
+          "sha256": "83f80bbc5fd927461d32ba1c072c151a0c9f29866654b8c097888beb9d04a86e"
+        },
+        {
+          "path": "experiments/runs/R0023/predictions/2026-05_dt_d16_l200.csv.gz",
+          "bytes": 17068761,
+          "sha256": "7a9bd2c31fea1ecb1a6c1235026c5cd8387170165ccd7dd8965db8e6dc068f6d"
+        },
+        {
+          "path": "experiments/runs/R0023/predictions/2026-06_dt_d16_l200.csv.gz",
+          "bytes": 17197863,
+          "sha256": "e38b7ca19ba9e82b017a2adfa5d3b5d751a8840ec5b0a6266ebc0687a014dd6e"
+        },
+        {
+          "path": "experiments/runs/R0023/predictions/2026-07_dt_d16_l200.csv.gz",
+          "bytes": 17671239,
+          "sha256": "c4906edbe28705af69fc1e848f80c89aa29f008ae4833d2e140654c8c2692d30"
+        }
+      ]
+    },
+    {
+      "run_id": "R0024",
+      "run_status": "completed",
+      "asset": "R0024-models-predictions.zip",
+      "bytes": 49028400,
+      "sha256": "365013a99c0b8a309fafc046b533236d937157c758cc8fa1efcbdccf60126d53",
+      "download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/research-artifacts-v1/R0024-models-predictions.zip",
+      "files": [
+        {
+          "path": "experiments/runs/R0024/models/2026-05_dt_d16_l50.joblib",
+          "bytes": 125151,
+          "sha256": "21fde2e4df8bb8efc31576767838b8d97ac48f1b28aa6c3df8b33047d081a962"
+        },
+        {
+          "path": "experiments/runs/R0024/models/2026-06_dt_d16_l50.joblib",
+          "bytes": 180223,
+          "sha256": "eb14bb4078406203d7f5231b6edb492b302311fb039ad4edd1f97e7ccd698bda"
+        },
+        {
+          "path": "experiments/runs/R0024/models/2026-07_dt_d16_l50.joblib",
+          "bytes": 211836,
+          "sha256": "087b989d3c3de70676cb76240a330f02345f0b1a557bb54c5b69fcf8a9f73d0a"
+        },
+        {
+          "path": "experiments/runs/R0024/predictions/2026-05_dt_d16_l50.csv.gz",
+          "bytes": 15882570,
+          "sha256": "d2a2754cb87976beffd1848cc7d21599c9d3cd77e97627f2434def3447f6af7c"
+        },
+        {
+          "path": "experiments/runs/R0024/predictions/2026-06_dt_d16_l50.csv.gz",
+          "bytes": 16025535,
+          "sha256": "87b025550a0bbe407e1f3c15f348954be500b4597c06ea1e2a9e3ddbb9bfce1e"
+        },
+        {
+          "path": "experiments/runs/R0024/predictions/2026-07_dt_d16_l50.csv.gz",
+          "bytes": 16601797,
+          "sha256": "3702c9c2e91d0a796d051f1df42b5e954ad8f57983d1b3ec94c9c81d30388d6b"
+        }
+      ]
+    },
+    {
+      "run_id": "R0025",
+      "run_status": "completed",
+      "asset": "R0025-models-predictions.zip",
+      "bytes": 129496526,
+      "sha256": "880b33ee008e1b076005f786684f0b5e4a26008f18ff88adb8310886f5dbef50",
+      "download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/research-artifacts-v1/R0025-models-predictions.zip",
+      "files": [
+        {
+          "path": "experiments/runs/R0025/models/2026-05_rf_d16_l50.joblib",
+          "bytes": 13591479,
+          "sha256": "1d437ba23da5dc16cd3c24502dda696106b212725d6646a2af62cf6b21d8180f"
+        },
+        {
+          "path": "experiments/runs/R0025/models/2026-06_rf_d16_l50.joblib",
+          "bytes": 22066184,
+          "sha256": "29c73064a209a704ba872bbfde66abfcb224d83f0e2b343842a42cb796a29b56"
+        },
+        {
+          "path": "experiments/runs/R0025/models/2026-07_rf_d16_l50.joblib",
+          "bytes": 29555612,
+          "sha256": "d5f71fb30b12e6e29900b3d0abd6794d6999c408890105e8af0335976260d6b1"
+        },
+        {
+          "path": "experiments/runs/R0025/predictions/2026-05_rf_d16_l50.csv.gz",
+          "bytes": 21574309,
+          "sha256": "0c49979e01c0406726591ef8e541c9a716575ae67ff260767d892cfb58b8316e"
+        },
+        {
+          "path": "experiments/runs/R0025/predictions/2026-06_rf_d16_l50.csv.gz",
+          "bytes": 21156092,
+          "sha256": "b867ba239d25434b529404b87d5601fd022a1429b681ec12d798b70ee0e15927"
+        },
+        {
+          "path": "experiments/runs/R0025/predictions/2026-07_rf_d16_l50.csv.gz",
+          "bytes": 21551562,
+          "sha256": "a28692bfb086000c7b8c09b4e0e0180c41fd2911b2b9521b6bb7667230c2ac11"
+        }
+      ]
+    },
+    {
+      "run_id": "R0026",
+      "run_status": "completed",
+      "asset": "R0026-models-predictions.zip",
+      "bytes": 101744257,
+      "sha256": "1dc2e820d1cece2b2312092580617b93d76f24483e89100bc33369fa88e486d5",
+      "download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/research-artifacts-v1/R0026-models-predictions.zip",
+      "files": [
+        {
+          "path": "experiments/runs/R0026/models/2026-05_rf_d16_l200.joblib",
+          "bytes": 7500543,
+          "sha256": "1e3c39ec9efeeb8a26aa85993e68011f3ac9ac7cc5c73d0407cbb8a6d87f44b5"
+        },
+        {
+          "path": "experiments/runs/R0026/models/2026-06_rf_d16_l200.joblib",
+          "bytes": 12675472,
+          "sha256": "1f0e1752e0c26c7dbe0fecc0b08fa092e190b4511c1ec82e7bbf1e7a56837023"
+        },
+        {
+          "path": "experiments/runs/R0026/models/2026-07_rf_d16_l200.joblib",
+          "bytes": 17163905,
+          "sha256": "64351c6c978d3a2bd8bc070cbe68d1b2a868fd842a98bba095c1c257106d8034"
+        },
+        {
+          "path": "experiments/runs/R0026/predictions/2026-05_rf_d16_l200.csv.gz",
+          "bytes": 21612088,
+          "sha256": "c816b79e5f2851eea792302d5de7e9aa948c28b00bef454df8b460ca3e260fda"
+        },
+        {
+          "path": "experiments/runs/R0026/predictions/2026-06_rf_d16_l200.csv.gz",
+          "bytes": 21200340,
+          "sha256": "c442d50afd587602370ff715bc2d97fd3684601db788600e30808590a9325c1b"
+        },
+        {
+          "path": "experiments/runs/R0026/predictions/2026-07_rf_d16_l200.csv.gz",
+          "bytes": 21590609,
+          "sha256": "02cdb2a58b4237dee69ffe63c34cf7832c6c79674b935dbf962f5b2deb3fda96"
+        }
+      ]
+    },
+    {
+      "run_id": "R0028",
+      "run_status": "completed",
+      "asset": "R0028-models-predictions.zip",
+      "bytes": 95975924,
+      "sha256": "ed6f25b5f37f2d87eb136167f0150554864d29a44cc883dfd651a4f00f559a15",
+      "download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/research-artifacts-v1/R0028-models-predictions.zip",
+      "files": [
+        {
+          "path": "experiments/runs/R0028/models/2026-08_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0028/models/2026-08_rf_d16_l50.joblib",
+          "bytes": 35623724,
+          "sha256": "3397a70822f909c061cd06b391cbb1bd101406b865833566e474a4766f0480f6"
+        },
+        {
+          "path": "experiments/runs/R0028/models/2026-08_training_mean.joblib",
+          "bytes": 313,
+          "sha256": "07e3917fdad414c5b5dbb1d9841c633ffba7c3a1b6f73983b57dd0d856fae7c1"
+        },
+        {
+          "path": "experiments/runs/R0028/models/2026-08_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0028/predictions/2026-08_carry_forward.csv.gz",
+          "bytes": 13674759,
+          "sha256": "762d86b78cfbdea96e2c82bede80509482c98a1895b11dda0f5976db6743f9a9"
+        },
+        {
+          "path": "experiments/runs/R0028/predictions/2026-08_rf_d16_l50.csv.gz",
+          "bytes": 21117448,
+          "sha256": "97df097476ee5a965e1f466f6616da1ca1586d807969494b977593336f8e7f23"
+        },
+        {
+          "path": "experiments/runs/R0028/predictions/2026-08_training_mean.csv.gz",
+          "bytes": 12916382,
+          "sha256": "fa59970d8a0b606cf98ed9ebb61fedfadf0befc4bf15525c33753cbcd61b0381"
+        },
+        {
+          "path": "experiments/runs/R0028/predictions/2026-08_training_median.csv.gz",
+          "bytes": 12641177,
+          "sha256": "e211e4fd5d3a8a20ad95a683baea1593e29d6b349bc40f5af13ef6d2f553cb0f"
+        }
+      ]
+    },
+    {
+      "run_id": "R0030",
+      "run_status": "completed",
+      "asset": "R0030-models-predictions.zip",
+      "bytes": 95975924,
+      "sha256": "9b3fa588b7c4094db4ab8ea657b8224cbf0038ab3864a240558cff954a18b4d5",
+      "download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/research-artifacts-v1/R0030-models-predictions.zip",
+      "files": [
+        {
+          "path": "experiments/runs/R0030/models/2026-08_carry_forward.joblib",
+          "bytes": 63,
+          "sha256": "9e7682a035b4d0b46ac26a5a63c5602936a697ce49288083714193b429d0e8f5"
+        },
+        {
+          "path": "experiments/runs/R0030/models/2026-08_rf_d16_l50.joblib",
+          "bytes": 35623724,
+          "sha256": "3397a70822f909c061cd06b391cbb1bd101406b865833566e474a4766f0480f6"
+        },
+        {
+          "path": "experiments/runs/R0030/models/2026-08_training_mean.joblib",
+          "bytes": 313,
+          "sha256": "07e3917fdad414c5b5dbb1d9841c633ffba7c3a1b6f73983b57dd0d856fae7c1"
+        },
+        {
+          "path": "experiments/runs/R0030/models/2026-08_training_median.joblib",
+          "bytes": 304,
+          "sha256": "f0b184be401bc78074e9069fa1aa502a500a2daaef1a1e79f0d665326beeeb7a"
+        },
+        {
+          "path": "experiments/runs/R0030/predictions/2026-08_carry_forward.csv.gz",
+          "bytes": 13674759,
+          "sha256": "762d86b78cfbdea96e2c82bede80509482c98a1895b11dda0f5976db6743f9a9"
+        },
+        {
+          "path": "experiments/runs/R0030/predictions/2026-08_rf_d16_l50.csv.gz",
+          "bytes": 21117448,
+          "sha256": "97df097476ee5a965e1f466f6616da1ca1586d807969494b977593336f8e7f23"
+        },
+        {
+          "path": "experiments/runs/R0030/predictions/2026-08_training_mean.csv.gz",
+          "bytes": 12916382,
+          "sha256": "fa59970d8a0b606cf98ed9ebb61fedfadf0befc4bf15525c33753cbcd61b0381"
+        },
+        {
+          "path": "experiments/runs/R0030/predictions/2026-08_training_median.csv.gz",
+          "bytes": 12641177,
+          "sha256": "e211e4fd5d3a8a20ad95a683baea1593e29d6b349bc40f5af13ef6d2f553cb0f"
+        }
+      ]
+    }
+  ],
+  "prediction_samples_in_git": [
+    {
+      "path": "experiments/runs/R0027/explanations/R0017/explain_sample_predictions.csv.gz",
+      "bytes": 381007,
+      "sha256": "e9e6de5861306e78fe6acd66ba1216b20eb0dbc12ea4d6c15c5859e0dff713bd"
+    },
+    {
+      "path": "experiments/runs/R0027/explanations/R0025/explain_sample_predictions.csv.gz",
+      "bytes": 389809,
+      "sha256": "fb452db4bd1db89c50d9ddbca3ba9f92d9726792440866b66bb7b6f86999f459"
+    }
+  ]
+}

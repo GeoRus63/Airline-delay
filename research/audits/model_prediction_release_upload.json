@@ -1,0 +1,156 @@
+{
+  "checked_at_utc": "2026-10-24T09:51:42.394729+00:00",
+  "release_id": 422646054,
+  "release_url": "https://github.com/GeoRus63/Airline-delay/releases/tag/untagged-4e8a884487699df98e2a",
+  "tag": "research-artifacts-v1",
+  "draft": true,
+  "manifest_sha256": "98b32f1c3530e4971fd3945c4d92f85d963a81844505a2badcbbf267d4d3a221",
+  "expected_assets": 18,
+  "all_remote_digests_match": true,
+  "assets": [
+    {
+      "name": "R0006-models-predictions.zip",
+      "id": 671888609,
+      "size": 174240256,
+      "digest": "sha256:1905473867e4ed283678a82bcac1930b4431856dd5c57c17ec5c0780a44adfe2",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/untagged-4e8a884487699df98e2a/R0006-models-predictions.zip"
+    },
+    {
+      "name": "R0007-models-predictions.zip",
+      "id": 671888610,
+      "size": 174064078,
+      "digest": "sha256:02bc37b6dc99f3f5e2335fa6f4936ff718e40887c1a7ad22148cd52ffead2b35",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/untagged-4e8a884487699df98e2a/R0007-models-predictions.zip"
+    },
+    {
+      "name": "R0009-models-predictions.zip",
+      "id": 671888608,
+      "size": 184806477,
+      "digest": "sha256:d83758a469002dfde82b473036264c568e019dfb3c5bb0a5190d260a014aa1dc",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/untagged-4e8a884487699df98e2a/R0009-models-predictions.zip"
+    },
+    {
+      "name": "R0010-models-predictions.zip",
+      "id": 671888612,
+      "size": 174569108,
+      "digest": "sha256:0531d1a9ac9a821ad65d3ff20f4bca3781af5aaa4f66e17d73b12a0bd99e925d",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/untagged-4e8a884487699df98e2a/R0010-models-predictions.zip"
+    },
+    {
+      "name": "R0011-models-predictions.zip",
+      "id": 671889181,
+      "size": 184054789,
+      "digest": "sha256:0e7d9a0788c55a8465049c745574fc5051652ca92ab0cdb9c9ef0300e7f8a21b",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/untagged-4e8a884487699df98e2a/R0011-models-predictions.zip"
+    },
+    {
+      "name": "R0012-models-predictions.zip",
+      "id": 671889200,
+      "size": 184054789,
+      "digest": "sha256:734b8c8f9a891cf0291d6815133e9e48afcd672d00062b584d4587fe99de714e",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/untagged-4e8a884487699df98e2a/R0012-models-predictions.zip"
+    },
+    {
+      "name": "R0015-models-predictions.zip",
+      "id": 671889214,
+      "size": 184086241,
+      "digest": "sha256:0e5b13b68a917ec22a976d043b60324225f6f9271d9fe4440364cad3f620468d",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/untagged-4e8a884487699df98e2a/R0015-models-predictions.zip"
+    },
+    {
+      "name": "R0017-models-predictions.zip",
+      "id": 671889256,
+      "size": 184127534,
+      "digest": "sha256:e23258e5ec668e0fbcff1b22e4bf121591c206b6009413c35425913b69aa8de5",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/untagged-4e8a884487699df98e2a/R0017-models-predictions.zip"
+    },
+    {
+      "name": "R0019-models-predictions.zip",
+      "id": 671889755,
+      "size": 184869057,
+      "digest": "sha256:31237e0f396b319c396930a142b5f8a9523a5367601fb7e5727ac25213ce149c",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/untagged-4e8a884487699df98e2a/R0019-models-predictions.zip"
+    },
+    {
+      "name": "R0021-models-predictions.zip",
+      "id": 671889773,
+      "size": 44653816,
+      "digest": "sha256:907150064990c6874b8ef767b6ee03eea329eb2f8ed0c9ad59742e8d3122780e",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/untagged-4e8a884487699df98e2a/R0021-models-predictions.zip"
+    },
+    {
+      "name": "R0022-models-predictions.zip",
+      "id": 671889840,
+      "size": 45327684,
+      "digest": "sha256:0f104fef01a5a9061000f9e38ba92c783a1943dfac5fd232ff022ae1e512653a",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/untagged-4e8a884487699df98e2a/R0022-models-predictions.zip"
+    },
+    {
+      "name": "R0023-models-predictions.zip",
+      "id": 671889892,
+      "size": 52318460,
+      "digest": "sha256:bc8bc41198e2afe4aea43742b48bd40af71ac9ef23bc44f72cbe4c7c7cf26e2f",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/untagged-4e8a884487699df98e2a/R0023-models-predictions.zip"
+    },
+    {
+      "name": "R0024-models-predictions.zip",
+      "id": 671889970,
+      "size": 49028400,
+      "digest": "sha256:365013a99c0b8a309fafc046b533236d937157c758cc8fa1efcbdccf60126d53",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/untagged-4e8a884487699df98e2a/R0024-models-predictions.zip"
+    },
+    {
+      "name": "R0025-models-predictions.zip",
+      "id": 671890020,
+      "size": 129496526,
+      "digest": "sha256:880b33ee008e1b076005f786684f0b5e4a26008f18ff88adb8310886f5dbef50",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/untagged-4e8a884487699df98e2a/R0025-models-predictions.zip"
+    },
+    {
+      "name": "R0026-models-predictions.zip",
+      "id": 671890086,
+      "size": 101744257,
+      "digest": "sha256:1dc2e820d1cece2b2312092580617b93d76f24483e89100bc33369fa88e486d5",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/untagged-4e8a884487699df98e2a/R0026-models-predictions.zip"
+    },
+    {
+      "name": "R0028-models-predictions.zip",
+      "id": 671890146,
+      "size": 95975924,
+      "digest": "sha256:ed6f25b5f37f2d87eb136167f0150554864d29a44cc883dfd651a4f00f559a15",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/untagged-4e8a884487699df98e2a/R0028-models-predictions.zip"
+    },
+    {
+      "name": "R0030-models-predictions.zip",
+      "id": 671890350,
+      "size": 95975924,
+      "digest": "sha256:9b3fa588b7c4094db4ab8ea657b8224cbf0038ab3864a240558cff954a18b4d5",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/untagged-4e8a884487699df98e2a/R0030-models-predictions.zip"
+    },
+    {
+      "name": "model_prediction_manifest.json",
+      "id": 671890360,
+      "size": 67548,
+      "digest": "sha256:98b32f1c3530e4971fd3945c4d92f85d963a81844505a2badcbbf267d4d3a221",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/GeoRus63/Airline-delay/releases/download/untagged-4e8a884487699df98e2a/model_prediction_manifest.json"
+    }
+  ]
+}

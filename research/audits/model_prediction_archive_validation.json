@@ -1,0 +1,17 @@
+{
+  "checked_at_utc": "2026-10-24T09:53:03.156661+00:00",
+  "archive_count": 17,
+  "file_count": 268,
+  "original_manifest_membership_complete": true,
+  "original_run_receipts_matched_during_packaging": true,
+  "fresh_directory_restore_and_rehash_files": 268,
+  "sealed_delivery_files_unchanged": 271,
+  "relative_links_checked": 39,
+  "restore_safeguards": [
+    "unsafe member paths rejected",
+    "different existing file preserved and refused",
+    "corrupt archive rejected before extraction"
+  ],
+  "network_download_validation": "pending publication",
+  "main_expected_sha": "a143675fb4dc1002fd9e3e4b427500cc8f8b2143"
+}
