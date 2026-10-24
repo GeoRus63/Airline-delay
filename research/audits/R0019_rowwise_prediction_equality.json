@@ -1,0 +1,39 @@
+{
+  "reference": "R0017",
+  "candidate": "R0019",
+  "columns": [
+    "fold",
+    "connection_id",
+    "prediction_time",
+    "label_time",
+    "target_delay",
+    "predicted_delay_raw",
+    "predicted_delay"
+  ],
+  "folds": [
+    {
+      "fold": "2026-05",
+      "rows": 574571,
+      "all_selected_columns_exact_equal": true,
+      "max_absolute_prediction_difference": 0.0,
+      "selected_values_sha256": "ec5979307bebbdd4bbd22a6125a1cd05f666f2c07cb7a8e8956ab69e8779119e"
+    },
+    {
+      "fold": "2026-06",
+      "rows": 561972,
+      "all_selected_columns_exact_equal": true,
+      "max_absolute_prediction_difference": 0.0,
+      "selected_values_sha256": "623cf369a9e2b28e37bc2f7cdcbb98f103fde8c4ace3d799092fa4ea7ec4b6c4"
+    },
+    {
+      "fold": "2026-07",
+      "rows": 570548,
+      "all_selected_columns_exact_equal": true,
+      "max_absolute_prediction_difference": 0.0,
+      "selected_values_sha256": "6541c5525a0e368b69e61925c26af1a3830d5bcc677f4a392d28bc38c252dbe9"
+    }
+  ],
+  "verified": true,
+  "raw_or_august_targets_read": false,
+  "model_fit": false
+}
