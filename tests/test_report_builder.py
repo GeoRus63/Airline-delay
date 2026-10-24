@@ -140,6 +140,83 @@ class ReproductionDisclosure(unittest.TestCase):
                 self.assertFalse((root / "reports").exists())
 
 
+class OutcomeTradeoffDisclosure(unittest.TestCase):
+    def test_network_redraw_keeps_global_route_selection_then_filters_within_panels(self):
+        with tempfile.TemporaryDirectory() as temp:
+            nodes = pd.DataFrame([{"airport_id": i, "longitude": -110 + i / 10, "latitude": 35., "valid_connection_count": i,
+                                   "standardized_mean": -1. if i == 1 else float("nan")} for i in range(1, 102)])
+            nodes = pd.concat([nodes, pd.DataFrame([{"airport_id": 102, "longitude": 170., "latitude": 60., "valid_connection_count": 10,
+                                                     "standardized_mean": float("nan")}])], ignore_index=True)
+            # The largest route crosses panels. Exactly 99 of the global top100
+            # should be shown; taking top100 separately per panel would show 100.
+            edges = pd.DataFrame([{"origin_airport_id": 1, "destination_airport_id": i, "flight_count": 102 - i} for i in range(2, 102)] +
+                                 [{"origin_airport_id": 1, "destination_airport_id": 102, "flight_count": 1000}])
+            destination = Path(temp) / "network.png"
+            result = report.render_network_figure(nodes, edges, destination)
+            self.assertEqual(result["coordinate_supported_nodes"], 102)
+            self.assertEqual(len(result["global_top_routes"]), 100)
+            self.assertEqual(result["displayed_routes"], 99)
+            self.assertEqual([len(panel["node_ids"]) for panel in result["panels"]], [101, 1, 0, 0])
+            self.assertEqual(result["gray_nodes"], 101)
+            self.assertFalse(result["airport_code_labels"])
+            self.assertGreaterEqual(result["minimum_font_points"], 10)
+            self.assertEqual(report.digest(destination), result["image_sha256"])
+            with self.assertRaises(FileExistsError):
+                report.render_network_figure(nodes, edges, destination)
+
+    def test_overall_gain_does_not_hide_ordinary_mae_loss_or_severe_error_concentration(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            make_fixture(root)
+            directory = root / "experiments/runs/R0017"
+            rows = []
+            for model, ordinary_mae, ordinary_rmse, severe_mae, severe_rmse in [("r0001", 4., 5., 20., 25.), ("training_median", 2., 6., 30., 40.)]:
+                for value, n, mae, rmse in [("ordinary_lt60", 8, ordinary_mae, ordinary_rmse), ("severe_ge60", 2, severe_mae, severe_rmse),
+                                           ("all", 10, (8 * ordinary_mae + 2 * severe_mae) / 10, ((8 * ordinary_rmse**2 + 2 * severe_rmse**2) / 10)**.5)]:
+                    rows.append({"model": model, "fold": "overall", "group": "all" if value == "all" else "severity", "value": value,
+                                 "n": n, "mae": mae, "rmse": rmse, "unit": "minutes"})
+            write_table(directory / "metrics.csv", rows)
+            seal(root, "R0017", json.loads((directory / "config.json").read_text()))
+            archive = report.Archive(root)
+            run = {"id": "R0017", "metrics": archive.table("R0017", "metrics.csv", report.METRIC_COLUMNS)}
+            en, zh = report.final_tradeoff_prose(archive, run, "r0001")
+            text = " ".join(en)
+            self.assertIn("overall MAE by 5.26%", text)
+            self.assertIn("4.0000 versus 2.0000 min (worse; signed change +2.0000)", text)
+            self.assertIn("5.0000 versus 6.0000 min (better)", text)
+            self.assertIn("55.5556% of primary absolute error", text)
+            self.assertIn("86.2069% of primary squared error", text)
+            self.assertIn("no deployment switching rule or subgroup significance test", text)
+            self.assertIn("这不是航班实际延误节省", " ".join(zh))
+            run["metrics"].loc[run["metrics"].value.eq("ordinary_lt60"), "n"] = 9
+            with self.assertRaisesRegex(ValueError, "do not reconcile"):
+                report.final_tradeoff_prose(archive, run, "r0001")
+
+    def test_rq1_three_retention_denominators_and_cross_zero_example_are_distinct(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            make_fixture(root)
+            directory = root / "experiments/runs/R0019"
+            write_table(directory / "tables/rq1_airport_raw.csv", [
+                {"airport_id": airport, "airport_code": code, "n": n} for airport, code, n in [(1, "AAA", 100), (2, "FLL", 200), (3, "CCC", 700)]])
+            write_table(directory / "rq1_standardized/rq1_airports.csv", [
+                {"airport_id": airport, "threshold": "ge15", "supported": True, "retained_n": retained, "retained_share": .9,
+                 "standardized_mean": mean, "ci_low": low, "ci_high": high} for airport, retained, mean, low, high in [(1, 90, -1., -2., -.1), (2, 180, 1., -1., 2.)]])
+            path = directory / "rq1_standardized/rq1_threshold_stability.csv"
+            stability = pd.read_csv(path)
+            stability.loc[stability.threshold.eq("gt0"), "direction_agreement"] = .5
+            stability.to_csv(path, index=False)
+            seal(root, "R0019", json.loads((directory / "config.json").read_text()))
+            en, zh = report.rq1_support_prose(report.Archive(root), "R0019")
+            text = " ".join(en)
+            self.assertIn("270/1,000 (27.000%)", text)
+            self.assertIn("270/300 (90.000%)", text)
+            self.assertIn("1 negative and 1 positive", text)
+            self.assertIn("FLL: 1.000 [-1.000, 2.000]", text)
+            self.assertIn("gt0: 1/2, ge5: 2/2", text)
+            self.assertIn("并非完全方向稳健", " ".join(zh))
+
+
 class CoefficientDisclosure(unittest.TestCase):
     def test_included_upstream_requires_its_numeric_row_and_is_then_reported(self):
         with tempfile.TemporaryDirectory() as temp:

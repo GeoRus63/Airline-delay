@@ -1,0 +1,72 @@
+{
+  "created_at_utc": "2026-10-24T04:51:04.4757839Z",
+  "scope": "Interim preview evidence only; generated before later display-name refinement and before completed full reproduction",
+  "copies": [
+    {
+      "original_path": "tmp/final_presentation_preview_v01/deck_failed_finalizer.log",
+      "archived_copy": "research/audits/presentation_preview_v01_artifacts/initial_failure.log",
+      "sha256": "6eb4bde7b74611c2ea23bb52c0226eee789e0354a24c25fdc2b0ae602937cde2",
+      "bytes": 804
+    },
+    {
+      "original_path": "tmp/final_presentation_preview_v01/content.json",
+      "archived_copy": "research/audits/presentation_preview_v01_artifacts/initial_content.json",
+      "sha256": "f5fc8c7db27ce229205e7fcb61f28fa6d1d3a47a2b53c1de0ded77cf6e6681d9",
+      "bytes": 32437
+    },
+    {
+      "original_path": "tmp/final_presentation_preview_v01/content_v03.json",
+      "archived_copy": "research/audits/presentation_preview_v01_artifacts/reviewed_content_v03.json",
+      "sha256": "867b82b1fbc924bdbc64b5d4a690eadf6e69405a037d3777a2eb8fe01ba34292",
+      "bytes": 33841
+    },
+    {
+      "original_path": "tmp/final_presentation_preview_v01/content_v03.sources.json",
+      "archived_copy": "research/audits/presentation_preview_v01_artifacts/reviewed_content_v03.sources.json",
+      "sha256": "6f7d2468a41b086b87d9d73cbc7f894795fc5552fb31e8422c4e00c0dc3fee69",
+      "bytes": 21593
+    },
+    {
+      "original_path": "tmp/final_presentation_preview_v01/content_v03.evidence.csv",
+      "archived_copy": "research/audits/presentation_preview_v01_artifacts/reviewed_content_v03.evidence.csv",
+      "sha256": "c91af63c8692ce8c26b97e47e28e6c84889a71a38d4f64cfcf7364de688d040b",
+      "bytes": 21620
+    },
+    {
+      "original_path": "tmp/final_presentation_preview_v01/deck_v03/airline_delay.pptx",
+      "archived_copy": "research/audits/presentation_preview_v01_artifacts/reviewed_deck_v03.pptx",
+      "sha256": "f91a9746d886ad77d730b02074d3ffe746a303a0f91ee7efb70a4f26f0c8395e",
+      "bytes": 71306
+    },
+    {
+      "original_path": "tmp/final_presentation_preview_v01/.deck_v03-build/validation.json",
+      "archived_copy": "research/audits/presentation_preview_v01_artifacts/reviewed_deck_v03_validation.json",
+      "sha256": "37a8bc4016b3eadb1c34d1fb1e388746ca53f3803fe03c40951efb846392b3c2",
+      "bytes": 8915
+    },
+    {
+      "original_path": "tmp/final_presentation_preview_v01/deck_v02/slides/slide-06.png",
+      "archived_copy": "research/audits/presentation_preview_v01_artifacts/before_axis_fix_slide06.png",
+      "sha256": "26cea15bb48a605c8ddd727bb4c045e902dc7d671140a9ae98e51a1575c14488",
+      "bytes": 48397
+    },
+    {
+      "original_path": "tmp/final_presentation_preview_v01/deck_v03/slides/slide-06.png",
+      "archived_copy": "research/audits/presentation_preview_v01_artifacts/after_axis_fix_slide06.png",
+      "sha256": "342d530adb449309fac05ff656ef34ecbbeb1755d2f9865de3f8a92d1e44a6ba",
+      "bytes": 48213
+    },
+    {
+      "original_path": "tmp/final_presentation_preview_v01/deck_v03/slides/slide-04.png",
+      "archived_copy": "research/audits/presentation_preview_v01_artifacts/reviewed_airport_table_slide04.png",
+      "sha256": "ffaa6605247dfccd0f073833b46558e0eaf9087915e5fec6d2905888b52cfc0d",
+      "bytes": 70417
+    },
+    {
+      "original_path": "tmp/final_presentation_preview_v01/deck_v03/slides/slide-05.png",
+      "archived_copy": "research/audits/presentation_preview_v01_artifacts/reviewed_support_chart_slide05.png",
+      "sha256": "b3e73314f66e2ed74181d099d6d634d8d62747e6c27fef1098616c1d2f008fa8",
+      "bytes": 55686
+    }
+  ]
+}

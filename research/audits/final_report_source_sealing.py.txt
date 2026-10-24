@@ -1,0 +1,72 @@
+"""One-time final source snapshot; run only after R0030 is complete and pushed."""
+from datetime import datetime, timezone
+import hashlib, json, subprocess
+from pathlib import Path
+
+root = Path(__file__).resolve().parents[1]
+def git(*args):
+    return subprocess.check_output(['git', *args], cwd=root)
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+head = git('rev-parse', 'HEAD').decode().strip()
+remote = git('ls-remote', 'origin', 'refs/heads/codex/apr-aug-research').decode().split()[0]
+assert head == remote, 'Commit and push the completed research first'
+gate_sources = ['experiments/runs/R0030/manifest.json',
+                'experiments/runs/R0030/reproduction_verification.json',
+                'research/audits/R0030_archive_integrity.json',
+                'experiments/freezes/F0001/model_selection.json',
+                'configs/p6_final.json', 'configs/p7_reproduce_final.json']
+gate_pins = []
+for source in gate_sources:
+    value = (root/source).read_bytes()
+    assert git('show', f'{head}:{source}') == value, source
+    gate_pins.append({'path':source, 'sha256':sha(value), 'bytes':len(value)})
+manifest = json.loads((root/gate_sources[0]).read_text(encoding='utf8'))
+audit = json.loads((root/gate_sources[2]).read_text(encoding='utf8'))
+assert manifest['status'] == 'completed' and audit['passed'] and audit['reproduction_verified']
+r30 = [run for run in audit['runs'] if run['run_id'] == 'R0030']
+assert len(r30) == 1 and r30[0]['integrity_passed'] and r30[0]['eligible_completed']
+assert r30[0]['reproduction_verification']['verified'] is True
+assert json.loads((root/gate_sources[1]).read_text(encoding='utf8'))['verified'] is True
+freeze_bytes = (root/'experiments/freezes/F0001/model_selection.json').read_bytes()
+freeze_sha = sha(freeze_bytes)
+assert freeze_sha == '286c7de3cc56da3c6c61e16670bde538a672de7bca7f4b3136ce68501c2648f4'
+for source in ['configs/p6_final.json', 'configs/p7_reproduce_final.json']:
+    assert json.loads((root/source).read_text(encoding='utf8'))['freeze_manifest_sha256'] == freeze_sha
+freeze = json.loads(freeze_bytes)
+for pin in freeze['source_files']:
+    value = (root/pin['path']).read_bytes()
+    assert len(value) == pin['bytes'] and sha(value) == pin['sha256'], pin['path']
+paths = ['experiments/index.csv', 'research/研究记录.md']
+build_pins = []
+for source in ['scripts/build_report.py', 'scripts/render_report_pdf.py',
+               'scripts/build_presentation_content.py', 'scripts/build_presentation.mjs',
+               'scripts/render_presentation_video.py', 'configs/p7_report.json']:
+    value = (root/source).read_bytes()
+    assert git('show', f'{head}:{source}') == value, source
+    build_pins.append({'path':source, 'sha256':sha(value), 'bytes':len(value)})
+values = {}
+for source in paths:
+    value = (root/source).read_bytes()
+    assert git('show', f'{head}:{source}') == value, source
+    values[source] = value
+out = root/'reports/source_snapshots/S0001'
+out.mkdir(parents=True, exist_ok=False)
+records = []
+for source, value in values.items():
+    target = out/source
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_bytes(value)
+    assert target.read_bytes() == value
+    records.append({'original_path':source, 'snapshot_path':target.relative_to(root).as_posix(),
+                    'bytes':len(value), 'sha256':sha(value), 'source_git_commit':head,
+                    'git_blob_matches_worktree':True})
+mapping = {'schema_version':1, 'created_at_utc':datetime.now(timezone.utc).isoformat(),
+           'source_git_commit':head, 'source_remote_commit':remote,
+           'reproduction_run_id':'R0030', 'frozen_science_source_pins_checked':len(freeze['source_files']),
+           'completed_reproduction_and_freeze_pins':gate_pins,
+           'committed_build_sources':build_pins,
+           'sources':records,
+           'scope':'Exact bytes consumed by both final report and presentation content before later journal/index updates.'}
+(out/'mapping.json').write_text(json.dumps(mapping,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+print(json.dumps(mapping,ensure_ascii=False,indent=2))

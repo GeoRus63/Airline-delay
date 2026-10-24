@@ -1,0 +1,12 @@
+Observed command:
+node scripts/build_presentation.mjs tmp/final_presentation_preview_v01/content.json tmp/final_presentation_preview_v01/deck
+Exit code: 1
+Phase: finalizer chart-data-snapshot
+Observed error:
+Error: chart-data-snapshot validator did not pass
+{"error": "Excel cannot preserve the literal chart's numeric precision", "error_category": "SnapshotError", "ok": false}
+code: PRESENTATION_VALIDATION_FAILED
+validator: chart-data-snapshot
+exitCode: 2
+Cause: full-precision literal chart values cannot be preserved exactly by an embedded Excel workbook. Original input, draft and failed build directory retained.
+Repair: round only the two native chart display series to four decimals in content_v02.json. Saved scientific metrics, notes, selectors and source receipts retain original precision.

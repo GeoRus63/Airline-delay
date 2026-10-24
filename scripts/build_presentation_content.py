@@ -17,6 +17,39 @@ except ModuleNotFoundError:
     import build_report as report
 
 
+def severity_contributions(overall, ordinary, severe):
+    """Recover additive error contributions from archived metric rows only."""
+    for row in [overall, ordinary, severe]:
+        if row.n <= 0 or any(not math.isfinite(float(row[key])) or row[key] < 0 for key in ["mae", "rmse"]):
+            raise ValueError("Severity metrics need positive support and finite nonnegative errors")
+    if int(ordinary.n) + int(severe.n) != int(overall.n):
+        raise ValueError("Severity groups must partition the overall prediction sample")
+    sums = lambda row: (float(row.get("absolute_error_sum", row.n * row.mae)),
+                        float(row.get("squared_error_sum", row.n * row.rmse ** 2)))
+    for row in [overall, ordinary, severe]:
+        if any(not math.isfinite(actual) or not math.isclose(actual, expected, rel_tol=1e-8, abs_tol=1e-7)
+               for actual, expected in zip(sums(row), [row.n * row.mae, row.n * row.rmse ** 2])):
+            raise ValueError("Archived error sums do not reconcile with reported MAE/RMSE")
+    overall_ae, overall_se = sums(overall)
+    ordinary_ae, ordinary_se = sums(ordinary)
+    severe_ae, severe_se = sums(severe)
+    for total, parts in [(overall_ae, ordinary_ae + severe_ae), (overall_se, ordinary_se + severe_se)]:
+        if not math.isfinite(total) or total <= 0 or not math.isclose(total, parts, rel_tol=1e-8, abs_tol=1e-7):
+            raise ValueError("Severity error sums do not reconcile with overall errors")
+    return dict(sample_share=severe.n / overall.n, absolute_error_share=severe_ae / overall_ae,
+                squared_error_share=severe_se / overall_se)
+
+
+def chart_mae_values(rows):
+    """Limit embedded Excel chart values to declared display precision only."""
+    return [round(float(row.mae), 4) for row in rows]
+
+
+def display_model_name(name, model_type=None):
+    return {"training_mean": "Training mean", "training_median": "Training median", "carry_forward": "Upstream delay"}.get(
+        name, {"random_forest": "Random forest", "decision_tree": "Decision tree", "linear": "OLS"}.get(model_type, name))
+
+
 def build_content(config, output_path, *, root=report.ROOT):
     archive = report.Archive(root)
     validated = report.validate_inputs(archive, config)
@@ -58,6 +91,7 @@ def build_content(config, output_path, *, root=report.ROOT):
     frozen = archive.json(rqid, "rq1_standardized/frozen_reference.json")
     airport_table = archive.table(rqid, "rq1_standardized/rq1_airports.csv", ["airport_id", "threshold", "supported", "retained_n", "retained_share", "standardized_mean", "ci_low", "ci_high"])
     supported = airport_table.loc[airport_table.threshold.eq("ge15") & report.flag(airport_table.supported)]
+    nodes = archive.table(rqid, "rq1_standardized/network_nodes.csv", ["airport_id", "airport_code", "valid_connection_count", "standardized_mean"])
     raw = archive.table(rqid, "tables/rq1_airport_raw.csv", ["airport_id", "n", "mean_delta", "s_net"])
     rq_n = int(raw.n.sum())
     if rq_n <= 0:
@@ -71,7 +105,8 @@ def build_content(config, output_path, *, root=report.ROOT):
     final_metric_refs = [metric(final, name)[1] for name in [final["model"]["model_name"], *report.BASELINES]]
     selected_ref = cite(config["model_selection_run_id"], "selection/model_selection_decision.json", {"keys": ["selected_run_id", "primary_model_name", "reason", "promotion_decisions"]}, "Frozen learned model and primary predictor")
     fmt = report.number
-    label = lambda name: {"training_mean": "Training mean", "training_median": "Training median", "carry_forward": "Upstream delay"}.get(name, name)
+    model_types = {run["model"]["model_name"]: run["model"]["model_type"] for run in [*main, variant, noaa, *algorithms, final]}
+    label = lambda name: display_model_name(name, model_types.get(name))
     primary_label = label(choice["primary_model_name"])
     range_text = (f"{fmt(supported.standardized_mean.min())} to {fmt(supported.standardized_mean.max())} minutes"
                   if len(supported) else "not estimable under the frozen support rule")
@@ -114,18 +149,45 @@ def build_content(config, output_path, *, root=report.ROOT):
 
     image, image_refs = fig(rqid, "figures/rq1_standardized_airports.png", "rq1_standardized/rq1_airports.csv", {"threshold": "ge15"}, "Frozen common-support airport estimates and date-block uncertainty")
     negative = int(supported.standardized_mean.lt(0).sum())
-    add("Airport comparisons use one frozen reference", [
-        f"{len(frozen['airport_ids'])} frozen airports, {len(supported)} supported final estimates",
-        f"{negative} negative supported net-change estimates"],
+    rq_claims = [f"{len(frozen['airport_ids'])} frozen airports, {len(supported)} supported final estimates",
+                 f"{negative} negative supported net-change estimates"]
+    positive = supported.loc[supported.standardized_mean.gt(0)]
+    positive_note, positive_refs = "", []
+    if len(positive) == 1:
+        row = positive.iloc[0]
+        code = report.selected_row(nodes, airport_id=row.airport_id).airport_code
+        interval = f"[{fmt(row.ci_low)}, {fmt(row.ci_high)}]"
+        interval_note = ("includes zero" if row.ci_low <= 0 <= row.ci_high else
+                         "excludes zero" if math.isfinite(row.ci_low) and math.isfinite(row.ci_high) else "is not reportable")
+        rq_claims[1] = f"{negative} negative estimates; {code} interval {interval_note}"
+        positive_note = f"The sole positive point estimate is {code}, plus {fmt(row.standardized_mean)} minutes, with 95% interval {interval}, which {interval_note}. "
+        positive_refs = [cite(rqid, "rq1_standardized/rq1_airports.csv", {"threshold": "ge15", "airport_id": int(row.airport_id)}, "Sole positive supported airport estimate and uncertainty"),
+                         cite(rqid, "rq1_standardized/network_nodes.csv", {"airport_id": int(row.airport_id), "columns": ["airport_id", "airport_code"]}, "Verified display code for positive airport estimate")]
+    examples = supported.sort_values(["retained_n", "airport_id"], ascending=[False, True]).head(3)
+    if len(positive) == 1 and positive.iloc[0].airport_id not in set(examples.airport_id):
+        examples = supported.loc[[*examples.index, positive.index[0]]]
+    example_rows = []
+    for _, row in examples.iterrows():
+        code = report.selected_row(nodes, airport_id=row.airport_id).airport_code
+        example_rows.append([str(code), f"{int(row.retained_n):,}", fmt(row.standardized_mean),
+                             f"[{fmt(row.ci_low)}, {fmt(row.ci_high)}]"])
+    example_ref = cite(rqid, "rq1_standardized/rq1_airports.csv", {"threshold": "ge15", "supported": True,
+                       "selection": "top 3 by retained_n descending, airport_id ascending; append sole positive estimate if distinct",
+                       "airport_ids": [int(x) for x in examples.airport_id]}, "Support-selected airport examples, not an outcome ranking")
+    example_code_ref = cite(rqid, "rq1_standardized/network_nodes.csv", {"airport_ids": [int(x) for x in examples.airport_id],
+                             "columns": ["airport_id", "airport_code"]}, "Verified codes for displayed support-selected examples")
+    add("Support-selected airport examples", rq_claims,
         f"The development procedure froze {len(frozen['airport_ids'])} airports and {len(frozen['master_cells'])} common master cells. "
         f"The final main-threshold analysis supports {len(supported)} airport estimates, with standardized means spanning {range_text}. "
-        f"Among supported point estimates, {negative} are negative. Across the raw main population of {rq_n:,} connections, the mean change is {fmt(rq_mean)} minutes, which answers a different question from standardized cross-airport comparison. "
+        f"Among supported point estimates, {negative} are negative. " + positive_note +
+        f"Across the raw main population of {rq_n:,} connections, the mean change is {fmt(rq_mean)} minutes, which differs from standardized comparison. "
         "The standardization reuses the same airport set, cells and threshold-conditional pooled development weights. It does not renormalize separately for a weakly supported airport. "
         "Unsupported estimates remain missing. An airport may lose support in a particular month, so missing months stay NA rather than becoming zero or entering a rank. "
         "The April–August RQ1 summary includes development months and is not an independent August validation.",
-        55, [rq_ref, raw_ref, frozen_ref, *image_refs], image=image, caption="Negative change means fewer downstream delay minutes. Unsupported estimates remain NA.")
+        55, [rq_ref, raw_ref, frozen_ref, *image_refs, *positive_refs, example_ref, example_code_ref],
+        table=[["Airport", "Retained n", "Δ (min)", "95% CI"], *example_rows], tableColumnWidths=[110, 150, 130, 354],
+        caption="Examples selected by support, not a ranking. Full airport results remain in the linked CSV/plot.")
 
-    nodes = archive.table(rqid, "rq1_standardized/network_nodes.csv", ["airport_id", "valid_connection_count", "standardized_mean"])
     edges = archive.table(rqid, "rq1_standardized/network_edges.csv", ["origin_airport_id", "destination_airport_id", "flight_count"])
     monthly = archive.table(rqid, "rq1_standardized/rq1_airports_monthly.csv", ["month_utc", "threshold", "supported", "standardized_mean"])
     counts = monthly.loc[monthly.threshold.eq("ge15")].groupby("month_utc", sort=True).supported.apply(lambda s: int(report.flag(s).sum()))
@@ -133,15 +195,18 @@ def build_content(config, output_path, *, root=report.ROOT):
     image, image_refs = fig(rqid, "figures/rq1_network_geographic.png", "rq1_standardized/network_nodes.csv", {"rows": "all"}, "Airport connection performance and directed flight traffic")
     edge_ref = cite(rqid, "rq1_standardized/network_edges.csv", {"aggregation": "count;sum(flight_count)"}, "Directed traffic routes and flight volume")
     month_ref = cite(rqid, "rq1_standardized/rq1_airports_monthly.csv", {"threshold": "ge15", "aggregation": "count(supported) by month_utc"}, "Monthly support under identical frozen reference")
-    add("Route traffic and connection outcomes are distinct", [
+    add("Network denominators and monthly airport support", [
         f"{len(nodes):,} nodes, {len(edges):,} directed routes",
-        f"{int(edges.flight_count.sum()):,} flights represented by route counts"],
+        f"{int(nodes.valid_connection_count.sum()):,} connections; {int(edges.flight_count.sum()):,} flights"],
         f"The network contains {len(nodes):,} airport nodes and {len(edges):,} directed routes, representing {int(edges.flight_count.sum()):,} flights in the route tables. "
-        "Node size shows accepted connection support. Node colour shows the standardized net-delay change when support permits, while gray denotes an unsupported estimate. "
-        "Edge width shows flight traffic, not a count of delay-propagation events. The geographic view separates traffic concentration from the connection outcome we actually measured. "
+        f"Its nodes represent {int(nodes.valid_connection_count.sum()):,} accepted connections, while route counts represent individual flights. "
+        "The full geographic network remains available in the linked report and Notebook source figure. There, node colour shows supported standardized change, gray indicates no support, and edge width shows flight traffic rather than delay-propagation events. "
         f"Monthly supported-airport counts are {monthly_text}. These counts may change under the same frozen reference. "
         "Consequently, a range across available airports in one month is not a trend for a fixed airport panel, and the map cannot establish which airport caused a downstream delay.",
-        55, [*image_refs, edge_ref, month_ref], image=image, caption="Node colour: supported standardized change. Edge width: traffic, not causal propagation.")
+        55, [*image_refs, edge_ref, month_ref], chart={"type": "bar", "categories": list(counts.index.astype(str)),
+            "series": [{"name": "Supported airports", "values": [int(value) for value in counts]}],
+            "yLabel": "Supported airports", "minimum": 0, "maximum": len(frozen["airport_ids"]), "numberFormat": "0", "showValues": True},
+        caption="The supported airport set changes by month. This is not a fixed-cohort trend.")
 
     main_rows, main_refs = zip(*(metric(run) for run in main))
     pair_rows = [paired(left, right) for left, right in zip(main, main[1:])]
@@ -153,7 +218,7 @@ def build_content(config, output_path, *, root=report.ROOT):
         f"G0 has MAE {fmt(main_rows[0].mae)} minutes and G4B has {fmt(main_rows[-1].mae)} minutes. "
         + pair_text + " All paired differences use the same evaluation identities and time splits. Negative candidate-minus-reference differences indicate improvement. "
         "The addition order determines the measured increment. This is not an order-independent ranking of information value, and scheduled turnaround already belongs to G0.",
-        55, [*main_refs, *[ref for _, ref in pair_rows]], chart={"type": "bar", "categories": report.STAGES, "series": [{"name": "Development MAE", "values": [float(r.mae) for r in main_rows]}], "yLabel": "MAE (minutes)", "numberFormat": "0.00"})
+        55, [*main_refs, *[ref for _, ref in pair_rows]], chart={"type": "bar", "categories": report.STAGES, "series": [{"name": "Development MAE", "values": chart_mae_values(main_rows)}], "yLabel": "MAE (minutes)", "numberFormat": "0.00"})
 
     variant_row, variant_ref = metric(variant)
     noaa_row, noaa_ref = metric(noaa)
@@ -195,7 +260,7 @@ def build_content(config, output_path, *, root=report.ROOT):
         p = run["model"]["model_params"]
         prefix = "DT" if run["model"]["model_type"] == "decision_tree" else "RF"
         return f"{prefix} d{p['max_depth']} l{p['min_samples_leaf']}"
-    add("Model selection allows a baseline to win", [
+    add(f"{primary_label} wins the registered comparison", [
         f"Feature source {feature['selected_run_id']}; learned model {choice['selected_run_id']}",
         f"Frozen primary predictor: {primary_label}"],
         f"The feature-selection decision retained {feature['selected_run_id']}. The six tree and forest candidates then hold that feature set and preprocessing fixed. "
@@ -203,29 +268,49 @@ def build_content(config, output_path, *, root=report.ROOT):
         f"The retained learned model is {choice['selected_run_id']}, while the primary predictor is {primary_label}. The recorded reason is: {choice['reason']}. "
         "The practical and monthly-stability promotion rule was committed after P3, before weather and tree results were inspected. It was not registered before P0. "
         "The chosen primary need not be the single lowest-error trial among every exploratory candidate.",
-        55, [*algo_refs, selected_ref, cite(config["feature_selection_run_id"], "selection/feature_selection.json", {"keys": ["selected_run_id", "reason"]}, "Feature decision before fixed-feature algorithms")], chart={"type": "bar", "categories": [algorithm_name(r) for r in algo_runs], "series": [{"name": "Development MAE", "values": [float(row.mae) for row in algo_rows]}], "yLabel": "MAE (minutes)", "numberFormat": "0.00"})
+        55, [*algo_refs, selected_ref, cite(config["feature_selection_run_id"], "selection/feature_selection.json", {"keys": ["selected_run_id", "reason"]}, "Feature decision before fixed-feature algorithms")], chart={"type": "bar", "categories": [algorithm_name(r) for r in algo_runs], "series": [{"name": "Development MAE", "values": chart_mae_values(algo_rows)}], "yLabel": "MAE (minutes)", "numberFormat": "0.00"})
 
+    final_comparisons = archive.table(final["id"], "final_comparisons.csv", ["scope", "metric", "candidate_model", "reference_model", "ci95_low", "ci95_high"])
+    individual_intervals = final_comparisons.loc[final_comparisons.scope.eq("pooled") & final_comparisons.candidate_model.eq(choice["primary_model_name"])
+                                                & final_comparisons.reference_model.isin(report.BASELINES) & final_comparisons.metric.isin(["mae", "rmse"])]
+    if individual_intervals.duplicated(["metric", "reference_model"]).any():
+        raise ValueError("Final paired intervals contain duplicate comparisons")
+    interval_ref = cite(final["id"], "final_comparisons.csv", {"scope": "pooled", "candidate_model": choice["primary_model_name"], "metrics": ["mae", "rmse"]}, "Individual paired intervals, not joint 95 percent coverage")
     add("August evaluates the frozen primary and comparators", [
         f"Primary MAE {fmt(primary.mae)} min, RMSE {fmt(primary.rmse)} min",
         f"{int(primary.n):,} connections in the UTC August test window"],
         f"This is the final August comparison after the rules, features, preprocessing and primary predictor were frozen. The primary, {primary_label}, records MAE {fmt(primary.mae)} minutes and RMSE {fmt(primary.rmse)} minutes. "
         "The table also preserves the learned model and all three simple comparators. The mean and median baselines are estimated from mature training labels, while carry-forward transfers upstream delay directly. "
         "MAE is the primary decision metric because it measures average absolute minutes. RMSE gives greater weight to large errors. Neither metric alone describes every delay regime. "
-        "The final access ledger and saved-result verification identify this test. These slides read small saved summaries only. No test labels are reopened and no model is refitted for this presentation.",
-        55, [*final_metric_refs, cite(final["id"], "final_verification.json", {"keys": ["verified", "metrics_recomputed", "refitted", "raw_test_data_read"]}, "Saved final-result verification"), cite(final["id"], "model_selection.json", {"keys": ["payload_sha256", "primary_model_name"]}, "Frozen final selection")], table=[["Predictor", "MAE (min)", "RMSE (min)"], *[[label(row.model), fmt(row.mae), fmt(row.rmse)] for row in final_rows]])
+        f"The {len(individual_intervals)} paired intervals are individual 95% intervals, not a joint 95% statement across comparisons. "
+        "The final access ledger and saved-result verification identify this test. These slides read saved summaries only, without reopening test labels or refitting.",
+        55, [*final_metric_refs, interval_ref, cite(final["id"], "final_verification.json", {"keys": ["verified", "metrics_recomputed", "refitted", "raw_test_data_read"]}, "Saved final-result verification"), cite(final["id"], "model_selection.json", {"keys": ["payload_sha256", "primary_model_name"]}, "Frozen final selection")], table=[["Predictor", "MAE (min)", "RMSE (min)"], *[[label(row.model), fmt(row.mae), fmt(row.rmse)] for row in final_rows]])
 
-    ordinary, ordinary_ref = metric(final, choice["primary_model_name"], group="severity", value="ordinary_lt60")
-    severe, severe_ref = metric(final, choice["primary_model_name"], group="severity", value="severe_ge60")
-    residual = report.selected_row(archive.table(final["id"], "residual_summary.csv", ["model", "mean_signed_error", "median_signed_error", "p95_absolute_error"]), model=choice["primary_model_name"])
+    learned_name = final["model"]["model_name"]
+    learned_label = {"random_forest": "RF", "decision_tree": "DT", "linear": "OLS"}.get(final["model"]["model_type"], learned_name)
+    learned_all, learned_ref = metric(final, learned_name)
+    ordinary, ordinary_ref = metric(final, learned_name, group="severity", value="ordinary_lt60")
+    severe, severe_ref = metric(final, learned_name, group="severity", value="severe_ge60")
+    median_ordinary, median_ordinary_ref = metric(final, "training_median", group="severity", value="ordinary_lt60")
+    median_severe, median_severe_ref = metric(final, "training_median", group="severity", value="severe_ge60")
+    if int(ordinary.n) != int(median_ordinary.n) or int(severe.n) != int(median_severe.n):
+        raise ValueError("Learned-model and median severity groups must use identical sample support")
+    shares = severity_contributions(learned_all, ordinary, severe)
+    direction = lambda left, right: "higher" if left > right else "lower" if left < right else "equal"
     add("Error differs across delay regimes", [
-        f"Ordinary delay MAE {fmt(ordinary.mae)} min, n={int(ordinary.n):,}",
-        f"Severe delay MAE {fmt(severe.mae)} min, n={int(severe.n):,}",
-        f"95th percentile absolute error {fmt(residual.p95_absolute_error)} min"],
-        f"For ordinary delays below sixty minutes, the primary predictor has MAE {fmt(ordinary.mae)} minutes across {int(ordinary.n):,} connections. "
-        f"For severe delays of at least sixty minutes, its MAE is {fmt(severe.mae)} minutes across {int(severe.n):,} connections. These are outcome-defined diagnostic groups, not information used to choose a forecast at arrival. "
-        f"The mean signed error, prediction minus target, is {fmt(residual.mean_signed_error)} minutes, and the ninety-fifth percentile absolute error is {fmt(residual.p95_absolute_error)} minutes. "
-        "The signs and sample counts help distinguish systematic underprediction from rare large misses. Overall MAE therefore needs this diagnostic context before any operational use.",
-        45, [ordinary_ref, severe_ref, cite(final["id"], "residual_summary.csv", {"model": choice["primary_model_name"]}, "Final residual bias and tail")])
+        f"Ordinary MAE: {learned_label} {fmt(ordinary.mae, 4)} vs median {fmt(median_ordinary.mae, 4)} min",
+        f"Ordinary RMSE: {learned_label} {fmt(ordinary.rmse, 4)} vs median {fmt(median_ordinary.rmse, 4)} min",
+        f"Severe MAE: {learned_label} {fmt(severe.mae, 4)} vs median {fmt(median_severe.mae, 4)} min",
+        f"Severe: {100*shares['sample_share']:.4f}% of cases, {100*shares['absolute_error_share']:.4f}% of AE, {100*shares['squared_error_share']:.4f}% of SE"],
+        f"For ordinary delays below sixty minutes, {learned_label} MAE is {fmt(ordinary.mae, 4)} versus median {fmt(median_ordinary.mae, 4)}, {direction(ordinary.mae, median_ordinary.mae)}. "
+        f"RMSE is {fmt(ordinary.rmse, 4)} versus {fmt(median_ordinary.rmse, 4)}, {direction(ordinary.rmse, median_ordinary.rmse)}. "
+        f"For severe delays, MAE is {fmt(severe.mae, 4)} versus {fmt(median_severe.mae, 4)} minutes. "
+        f"Severe cases are {100*shares['sample_share']:.4f}% of the sample but contribute {100*shares['absolute_error_share']:.4f}% of {learned_label} absolute error and {100*shares['squared_error_share']:.4f}% of squared error. "
+        "These outcome-defined groups are post-hoc diagnostics. They support neither a deployable model-switching rule nor a claim of group-level statistical significance.",
+        45, [learned_ref, ordinary_ref, severe_ref, median_ordinary_ref, median_severe_ref,
+             cite(final["id"], "metrics.csv", {"model": learned_name, "fold": "overall", "groups": ["all", "severity"],
+                  "formulas": ["n_severe/n_all", "AE_severe/AE_all", "SE_severe/SE_all"],
+                  "fallback_sums": ["AE=n*mae", "SE=n*rmse^2"]}, "Severe-case sample share and additive error contributions")])
 
     explanation_base = f"explanations/{choice['selected_run_id']}"
     explanation = archive.json(config["model_selection_run_id"], explanation_base + "/explain_summary.json")
@@ -263,6 +348,8 @@ def build_content(config, output_path, *, root=report.ROOT):
         raise AssertionError(f"Speaker script length outside ten-minute range: {words} words")
     payload = json.dumps(content, ensure_ascii=False, indent=2, allow_nan=False)
     source_receipt = {"schema_version": 1, "config_sha256": report.canonical(config), "duration": 600, "slides": len(slides), "speaker_words": words,
+                      "chart_display_precision": {"decimal_places": 4, "unit": "minutes", "metric": "MAE",
+                          "scope": "embedded values in the two native MAE charts only; source metrics and evidence retain original precision"},
                       "raw_or_test_targets_read": False, "model_refit": False, "source_files": list(archive.receipts.values()), "report_config": config}
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(payload + "\n", encoding="utf-8")

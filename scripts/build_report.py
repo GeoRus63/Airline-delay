@@ -55,6 +55,7 @@ class Archive:
     def __init__(self, root):
         self.root = Path(root).resolve()
         self.receipts, self.runs, self.evidence, self.figures = {}, {}, [], []
+        self.network_figures = []
         self.index = self.table_path("experiments/index.csv", ["run_id", "status", "parent_run_id", "artifact_dir", "change", "decision"])
         if self.index.run_id.duplicated().any():
             raise ValueError("Duplicate run IDs in experiment index")
@@ -170,6 +171,111 @@ class Archive:
         target = f"figures/{run_id}_{path.name}"
         self.figures.append((path, target))
         return f"![{caption}]({target})\n\n{caption} {ref}"
+
+    def network_figure(self, run_id):
+        node_file, edge_file = "rq1_standardized/network_nodes.csv", "rq1_standardized/network_edges.csv"
+        nodes = self.table(run_id, node_file, ["airport_id", "latitude", "longitude", "valid_connection_count", "standardized_mean"])
+        edges = self.table(run_id, edge_file, ["origin_airport_id", "destination_airport_id", "flight_count"])
+        title = "Airport connection performance and directed flight flow"
+        code = "scripts/build_report.py::render_network_figure"
+        code_sha = digest(Path(__file__))
+        refs = self.cite(run_id, node_file, {"rows": "all", "plotting_code": code, "plotting_code_sha256": code_sha}, title, "figure")
+        refs += " " + self.cite(run_id, edge_file, {"rows": "global top 100 by flight_count descending, airport IDs ascending; within-panel only", "plotting_code": code, "plotting_code_sha256": code_sha}, title, "figure")
+        target = f"figures/{run_id}_network_publication.png"
+        inputs = [dict(self.receipts[self.source(run_id, name).relative_to(self.root).as_posix()]) for name in [node_file, edge_file]]
+        self.network_figures.append({"run_id": run_id, "nodes": nodes, "edges": edges, "target": target, "inputs": inputs})
+        caption = (title + ". Report-display redraw from the archived node/edge tables; all coordinate-supported nodes are retained, "
+                   "without individual airport-code labels. Node size denotes accepted connections; colour denotes supported standardized net change (>=15 min), "
+                   "gray denotes unsupported estimates, and arrow width denotes BTS flight count. The global top 100 routes are selected before retaining within-panel arrows; "
+                   "Alaska longitudes wrap across the dateline. This coordinate overview is not causal attribution.")
+        return f"![{title}]({target})\n\n{caption} {refs}"
+
+
+def render_network_figure(nodes, edges, destination):
+    """Report-only redraw; preserve complete_rq1's region and encoding rules."""
+    import numpy as np
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.colors import TwoSlopeNorm
+    from matplotlib.font_manager import fontManager
+    from matplotlib.text import Text
+
+    destination = Path(destination)
+    if destination.exists():
+        raise FileExistsError("Keep the existing report network image")
+    if nodes.airport_id.duplicated().any() or edges.duplicated(["origin_airport_id", "destination_airport_id"]).any():
+        raise ValueError("Report network requires unique archived nodes and directed routes")
+    visible = nodes.loc[nodes.latitude.notna() & nodes.longitude.notna() & nodes.valid_connection_count.gt(0)].copy()
+    top = edges.sort_values(["flight_count", "origin_airport_id", "destination_airport_id"], ascending=[False, True, True]).head(100)
+    largest = max(float(visible.valid_connection_count.max()) if len(visible) else 0, 1)
+    values = visible.standardized_mean.dropna()
+    extent = max(float(values.abs().max()) if len(values) else 0, 1)
+    norm = TwoSlopeNorm(vmin=-extent, vcenter=0, vmax=extent)
+    contiguous = visible.longitude.between(-125, -66) & visible.latitude.between(24, 50)
+    alaska = visible.latitude.ge(50)
+    hawaii = visible.longitude.between(-162, -153) & visible.latitude.between(18, 24)
+    regions = [("Contiguous US", contiguous, (-126, -65, 23, 51), [-120, -95, -70], [25, 35, 45]),
+               ("Alaska / north", alaska, (-190, -125, 50, 73), [-180, -155, -130], [50, 60, 70]),
+               ("Hawaii", hawaii, (-162, -153, 18, 24), [-162, -158, -154], [18, 21, 24]),
+               ("Territories / other", ~(contiguous | alaska | hawaii), (-180, 180, -20, 50), [-150, 0, 150], [-10, 20, 50])]
+    font_path = Path("C:/Windows/Fonts/times.ttf")
+    if font_path.is_file():
+        fontManager.addfont(str(font_path))
+    panels = []
+    with plt.rc_context({"font.family": "Times New Roman", "font.size": 10, "axes.titlesize": 10,
+                         "axes.labelsize": 10, "xtick.labelsize": 10, "ytick.labelsize": 10, "legend.fontsize": 10}):
+        fig, axes = plt.subplots(2, 2, figsize=(6.7, 5.5))
+        fig.subplots_adjust(left=.09, right=.80, bottom=.23, top=.94, wspace=.43, hspace=.58)
+        cmap = plt.get_cmap("RdBu_r")
+        maximum_edge = max(float(top.flight_count.max()) if len(top) else 0, 1)
+        for ax, (title, mask, limits, xticks, yticks) in zip(axes.flat, regions):
+            panel = visible.loc[mask].copy()
+            panel["plot_lon"] = panel.longitude
+            if title.startswith("Alaska"):
+                panel.loc[panel.longitude.gt(0), "plot_lon"] -= 360
+            coordinates = panel.set_index("airport_id")
+            ids = set(panel.airport_id)
+            shown = []
+            for edge in top.itertuples(index=False):
+                if edge.origin_airport_id not in ids or edge.destination_airport_id not in ids:
+                    continue
+                origin, dest = coordinates.loc[edge.origin_airport_id], coordinates.loc[edge.destination_airport_id]
+                if abs(origin.plot_lon - dest.plot_lon) > 180:
+                    continue
+                ax.annotate("", xy=(dest.plot_lon, dest.latitude), xytext=(origin.plot_lon, origin.latitude),
+                            arrowprops={"arrowstyle": "->", "color": "#555555", "alpha": .20,
+                                        "lw": .4 + 2 * edge.flight_count / maximum_edge, "shrinkA": 2, "shrinkB": 2}, zorder=1)
+                shown.append([int(edge.origin_airport_id), int(edge.destination_airport_id)])
+            sizes = 12 + 150 * np.sqrt(panel.valid_connection_count / largest)
+            colors = [cmap(norm(value)) if pd.notna(value) else "#aaaaaa" for value in panel.standardized_mean]
+            ax.scatter(panel.plot_lon, panel.latitude, s=sizes, c=colors, edgecolors="white", linewidths=.4, zorder=3)
+            ax.set(title=f"{title} (n={len(panel)})", xlim=limits[:2], ylim=limits[2:], xticks=xticks, yticks=yticks,
+                   xlabel="Longitude (degrees)", ylabel="Latitude (degrees)")
+            ax.grid(alpha=.18)
+            panels.append({"region": title, "node_ids": [int(value) for value in panel.airport_id], "displayed_routes": shown, "limits": list(limits)})
+        handles = []
+        for count in np.unique(np.maximum(1, np.round(np.array([.1, .5, 1]) * largest).astype(int))):
+            handles.append(axes[0, 0].scatter([], [], s=12 + 150 * np.sqrt(count / largest), color="#aaaaaa", label=f"{count:,}"))
+        fig.legend(handles=handles, loc="lower center", bbox_to_anchor=(.46, .015), ncol=3, frameon=False,
+                   title="Node size: accepted connections; gray: unsupported", title_fontsize=10)
+        color_axis = fig.add_axes([.875, .28, .025, .58])
+        bar = fig.colorbar(plt.cm.ScalarMappable(norm=norm, cmap=cmap), cax=color_axis, ticks=[-extent, 0, extent])
+        bar.ax.set_yticklabels([f"{-extent:.1f}", "0", f"{extent:.1f}"])
+        bar.set_label("Net change (min / connection)", fontsize=10)
+        fonts = [text.get_fontsize() for text in fig.findobj(Text) if text.get_text()]
+        if not fonts or min(fonts) < 10:
+            raise ValueError("Report network text must be at least 10pt before placement")
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(destination, dpi=240)
+        plt.close(fig)
+    return {"input_nodes": len(nodes), "coordinate_supported_nodes": len(visible), "gray_nodes": int(visible.standardized_mean.isna().sum()),
+            "input_routes": len(edges), "global_top_routes": [[int(row.origin_airport_id), int(row.destination_airport_id)] for row in top.itertuples()],
+            "displayed_routes": sum(len(panel["displayed_routes"]) for panel in panels), "panels": panels,
+            "airport_code_labels": False, "font_family": "Times New Roman", "minimum_font_points": min(fonts), "figure_inches": [6.7, 5.5],
+            "colour_extent": extent, "size_rule": "12 + 150 * sqrt(valid_connection_count / largest)",
+            "arrow_width_rule": "0.4 + 2 * flight_count / maximum_global_top100_count", "plotting_code": "scripts/build_report.py::render_network_figure",
+            "plotting_code_sha256": digest(Path(__file__)), "image_sha256": digest(destination)}
 
 
 def selected_row(table, **filters):
@@ -632,6 +738,55 @@ def rq1_reference_prose(archive, run_id):
     return en, zh
 
 
+def rq1_support_prose(archive, run_id):
+    """Keep national, selected-airport and per-airport retention denominators distinct."""
+    raw_file, adjusted_file = "tables/rq1_airport_raw.csv", "rq1_standardized/rq1_airports.csv"
+    raw = archive.table(run_id, raw_file, ["airport_id", "airport_code", "n"])
+    adjusted = archive.table(run_id, adjusted_file, ["airport_id", "threshold", "supported", "retained_n", "retained_share", "standardized_mean", "ci_low", "ci_high"])
+    frozen = archive.json(run_id, "rq1_standardized/frozen_reference.json")
+    supported = adjusted.loc[adjusted.threshold.eq("ge15") & flag(adjusted.supported)]
+    retained = int(supported.retained_n.sum())
+    national = int(raw.n.sum())
+    selected = int(raw.loc[raw.airport_id.isin(frozen["airport_ids"]), "n"].sum())
+    if national <= 0 or selected <= 0 or not 0 <= retained <= selected <= national:
+        raise ValueError("RQ1 retained/selected/national denominators do not reconcile")
+    ref = archive.cite(run_id, raw_file, {"airport_id_in": frozen["airport_ids"], "aggregation": "sum(n) within frozen A; sum(n) over all airports"}, "Distinct selected-airport and national raw main-population denominators")
+    ref += " " + archive.cite(run_id, adjusted_file, {"threshold": "ge15", "supported": True, "aggregation": "sum(retained_n); min/max(retained_share); sign and interval-zero checks"}, "Retained common-support coverage and point-estimate/interval distinction")
+    negative, positive = int(supported.standardized_mean.lt(0).sum()), int(supported.standardized_mean.gt(0).sum())
+    crossing = supported.loc[supported.ci_low.notna() & supported.ci_high.notna() & supported.ci_low.le(0) & supported.ci_high.ge(0)]
+    examples = []
+    for row in crossing.sort_values("airport_id").head(3).itertuples():
+        code = selected_row(raw, airport_id=int(row.airport_id)).airport_code
+        examples.append(f"{code}: {number(row.standardized_mean)} [{number(row.ci_low)}, {number(row.ci_high)}]")
+    example_text = "; ".join(examples) or "none"
+    en = [f"Retained common-support connections were {retained:,}/{national:,} ({number(100 * retained / national, 3)}%) of the national raw main population, "
+          f"and {retained:,}/{selected:,} ({number(100 * retained / selected, 3)}%) within the frozen {len(frozen['airport_ids'])}-airport set. "
+          f"Individual supported-airport retention ranged from {number(100 * supported.retained_share.min(), 2)}% to {number(100 * supported.retained_share.max(), 2)}%; these denominators are not interchangeable. "
+          f"There were {negative} negative and {positive} positive point estimates; reportable intervals including zero: {len(crossing)} (examples, estimate [95% interval]: {example_text}). "
+          f"A point-estimate sign alone does not establish a stable airport ranking. {ref}"]
+    zh = [f"共同支持保留{retained:,}/{national:,}条，即全国原始主样本的{number(100 * retained / national, 3)}%；"
+          f"在冻结{len(frozen['airport_ids'])}机场集合内部则为{retained:,}/{selected:,}，即{number(100 * retained / selected, 3)}%。"
+          f"逐个受支持机场的保留率范围是{number(100 * supported.retained_share.min(), 2)}%–{number(100 * supported.retained_share.max(), 2)}%，三个分母不能混用。"
+          f"点估计{negative}负、{positive}正，其中{len(crossing)}个可报告区间跨零；示例（估计[95%区间]）：{example_text}。点估计符号不能单独支持稳健机场排名。{ref}"]
+    stability_file = "rq1_standardized/rq1_threshold_stability.csv"
+    stability = archive.table(run_id, stability_file, ["threshold", "common_airports", "direction_agreement"])
+    directions = []
+    incomplete = False
+    for threshold in ["gt0", "ge5"]:
+        row = selected_row(stability, threshold=threshold)
+        count = int(round(row.common_airports * row.direction_agreement))
+        if not math.isclose(count, row.common_airports * row.direction_agreement, abs_tol=1e-8):
+            raise ValueError("RQ1 direction agreement does not identify an integer airport count")
+        directions.append(f"{threshold}: {count}/{int(row.common_airports)}")
+        incomplete |= count < int(row.common_airports)
+    ref = archive.cite(run_id, stability_file, {"threshold_in": ["gt0", "ge5"], "aggregation": "round(common_airports*direction_agreement)/common_airports"}, "Direction agreement counts under the alternative upstream thresholds")
+    en.append(f"Direction agreement with the main threshold was {', '.join(directions)}. "
+              f"{'Direction robustness is incomplete across these thresholds.' if incomplete else 'Agreement at these thresholds does not establish invariance beyond them.'} {ref}")
+    zh.append(f"与主阈值的方向一致计数为{', '.join(directions)}；"
+              f"{'这些阈值下并非完全方向稳健。' if incomplete else '这些阈值内一致仍不能外推为所有阈值不变。'}{ref}")
+    return en, zh
+
+
 def rq1_prose(archive, run_id, label):
     rawfile = "tables/rq1_airport_raw.csv"
     raw = archive.table(run_id, rawfile, ["airport_id", "airport_code", "n", "mean_delta", "s_plus", "s_minus", "s_net"])
@@ -640,7 +795,6 @@ def rq1_prose(archive, run_id, label):
         raise ValueError("RQ1 raw sample is empty")
     means = (raw.n * raw.mean_delta).sum() / n
     ref = archive.cite(run_id, rawfile, {"rows": "all", "aggregation": "sum(n*mean_delta)/sum(n); sum(n,s_plus,s_minus,s_net)"}, "Raw RQ1 sample and cumulative minutes")
-    raw_ref = ref
     text = [f"For {label}, the raw main population comprised {int(n):,} nonovernight connections with upstream delay at least 15 min. "
             f"Its mean net change was {number(means)} min per connection; cumulative increases, decreases and net change were "
             f"{number(raw.s_plus.sum(), 0)}, {number(raw.s_minus.sum(), 0)} and {number(raw.s_net.sum(), 0)} sample-minutes. "
@@ -653,12 +807,8 @@ def rq1_prose(archive, run_id, label):
                 f"The retained shares ranged from {number(supported.retained_share.min())} to {number(supported.retained_share.max())}; "
                 f"standardized mean net changes ranged from {number(supported.standardized_mean.min())} to {number(supported.standardized_mean.max())} min per connection. "
                 f"Unsupported estimates remain missing and are not ranked. {ref}")
-    interval_present = supported.ci_low.notna() & supported.ci_high.notna()
-    crosses_zero = interval_present & supported.ci_low.le(0) & supported.ci_high.ge(0)
-    text.append(f"Supported common cells retain {int(supported.retained_n.sum()):,} connections, or {number(100 * supported.retained_n.sum() / n, 2)}% of the all-airport raw main population. "
-                f"There are {int(supported.standardized_mean.lt(0).sum())} negative and {int(supported.standardized_mean.gt(0).sum())} positive supported point estimates; "
-                f"{int(interval_present.sum())} have reportable intervals and {int(crosses_zero.sum())} of those intervals include zero. "
-                f"Within-selected-airport retention is distinct from coverage of the whole raw population. {ref} {raw_ref}")
+    support_en, _ = rq1_support_prose(archive, run_id)
+    text.extend(support_en)
     for _, row in supported.sort_values(["retained_n", "airport_id"], ascending=[False, True]).head(3).iterrows():
         ref = archive.cite(run_id, name, {"threshold": "ge15", "airport_id": int(row.airport_id)}, "High-support airport estimate and interval")
         text.append(f"AirportID {int(row.airport_id)} had standardized net change {number(row.standardized_mean)} min "
@@ -691,9 +841,53 @@ def rq1_prose(archive, run_id, label):
         ("rq1_standardized_airports.png", name, "Frozen common-support airport estimates and date-block uncertainty"),
         ("rq1_threshold_stability.png", stability_file, "Direction and ranking sensitivity to upstream-delay thresholds"),
         ("rq1_network_geographic.png", "rq1_standardized/network_nodes.csv", "Airport connection performance and directed flight flow")]:
-        extras = [("rq1_standardized/network_edges.csv", {"rows": "all", "plot_selection": "top 100 directed routes by flight_count; within-panel routes shown"})] if filename == "rq1_network_geographic.png" else None
-        text.append(archive.figure(run_id, "figures/" + filename, table, {"rows": "all"}, caption, "scripts/complete_rq1.py", extra_sources=extras))
+        if filename == "rq1_network_geographic.png":
+            text.append(archive.network_figure(run_id))
+        else:
+            text.append(archive.figure(run_id, "figures/" + filename, table, {"rows": "all"}, caption, "scripts/complete_rq1.py"))
     return "\n\n".join(text)
+
+
+def final_tradeoff_prose(archive, final_run, primary):
+    """Outcome-defined severity groups diagnose prediction errors after evaluation."""
+    table = final_run["metrics"]
+    rows = {}
+    for model in [primary, "training_median"]:
+        for value in ["all", "ordinary_lt60", "severe_ge60"]:
+            rows[model, value] = selected_row(table, model=model, fold="overall", group="all" if value == "all" else "severity", value=value)
+        total, ordinary, severe = [rows[model, value] for value in ["all", "ordinary_lt60", "severe_ge60"]]
+        if (ordinary.n + severe.n != total.n or not math.isclose((ordinary.n * ordinary.mae + severe.n * severe.mae) / total.n, total.mae, abs_tol=1e-8)
+                or not math.isclose(math.sqrt((ordinary.n * ordinary.rmse**2 + severe.n * severe.rmse**2) / total.n), total.rmse, abs_tol=1e-8)):
+            raise ValueError("Final severity counts/errors do not reconcile with the overall sample")
+    total, ordinary, severe = [rows[primary, value] for value in ["all", "ordinary_lt60", "severe_ge60"]]
+    median, median_ordinary, median_severe = [rows["training_median", value] for value in ["all", "ordinary_lt60", "severe_ge60"]]
+    if ordinary.n != median_ordinary.n or severe.n != median_severe.n:
+        raise ValueError("Final primary/baseline severity supports differ")
+    ref = archive.cite(final_run["id"], "metrics.csv", {"model_in": [primary, "training_median"], "fold": "overall", "group_in": ["all", "severity"],
+                       "aggregation": "severe_n/overall_n; severe_n*mae/(overall_n*mae); severe_n*rmse^2/(overall_n*rmse^2); subgroup error differences"}, "Overall versus severity-specific prediction-error tradeoffs and error concentration")
+    ae_share = severe.n * severe.mae / (total.n * total.mae) if total.mae else float("nan")
+    se_share = severe.n * severe.rmse**2 / (total.n * total.rmse**2) if total.rmse else float("nan")
+    improvement = 100 * (median.mae - total.mae) / median.mae if median.mae else float("nan")
+    ordinary_delta = ordinary.n * ordinary.mae - median_ordinary.n * median_ordinary.mae
+    severe_delta = severe.n * severe.mae - median_severe.n * median_severe.mae
+    mae_effect = "worse" if ordinary.mae > median_ordinary.mae else "better" if ordinary.mae < median_ordinary.mae else "unchanged"
+    rmse_effect = "better" if ordinary.rmse < median_ordinary.rmse else "worse" if ordinary.rmse > median_ordinary.rmse else "unchanged"
+    en = [f"Relative to training_median, {primary} reduced overall MAE by {number(improvement, 2)}%, but the outcome-defined ordinary group (<60 min) had "
+          f"MAE {number(ordinary.mae, 4)} versus {number(median_ordinary.mae, 4)} min ({mae_effect}; signed change {ordinary.mae - median_ordinary.mae:+.4f}); "
+          f"its RMSE was {number(ordinary.rmse, 4)} versus {number(median_ordinary.rmse, 4)} min ({rmse_effect}). "
+          f"In the severe group (>=60 min), MAE was {number(severe.mae, 4)} versus {number(median_severe.mae, 4)} min. "
+          f"Severe cases numbered {int(severe.n):,}/{int(total.n):,} ({number(100 * severe.n / total.n, 4)}%) and accounted for "
+          f"{number(100 * ae_share, 4)}% of primary absolute error and {number(100 * se_share, 4)}% of primary squared error. "
+          f"Ordinary/severe changes in total absolute prediction error were {ordinary_delta / 1e6:+.3f}/{severe_delta / 1e6:+.3f} million minutes (primary minus median). "
+          f"These are prediction errors, not actual flight-delay minutes saved. Groups are retrospective diagnostics, with no deployment switching rule or subgroup significance test. {ref}"]
+    zh = [f"{primary}相对training_median总体MAE改善{number(improvement, 2)}%，但普通组（真实延误<60分钟）MAE为{number(ordinary.mae, 4)}对{number(median_ordinary.mae, 4)}分钟，"
+          f"{'变差' if mae_effect == 'worse' else '改善' if mae_effect == 'better' else '不变'}，有符号变化{ordinary.mae - median_ordinary.mae:+.4f}分钟；"
+          f"RMSE为{number(ordinary.rmse, 4)}对{number(median_ordinary.rmse, 4)}分钟（{'改善' if rmse_effect == 'better' else '变差' if rmse_effect == 'worse' else '不变'}）。"
+          f"严重组（≥60分钟）MAE为{number(severe.mae, 4)}对{number(median_severe.mae, 4)}分钟。严重样本{int(severe.n):,}/{int(total.n):,}，"
+          f"占{number(100 * severe.n / total.n, 4)}%，却占主预测器绝对误差{number(100 * ae_share, 4)}%、平方误差{number(100 * se_share, 4)}%。"
+          f"普通/严重组绝对预测误差合计变化为{ordinary_delta / 1e6:+.3f}/{severe_delta / 1e6:+.3f}百万分钟（主预测器减中位数基线）；"
+          f"这不是航班实际延误节省。按真实结果定义的组别仅供事后诊断，没有部署切换规则，也未做组别显著性检验。{ref}"]
+    return en, zh
 
 
 def reproduction_prose(archive, config, final_run):
@@ -1142,12 +1336,20 @@ def compose(archive, config, validated):
         lines.append(metric_sentence(archive, final_run, model))
     for value in ["ordinary_lt60", "severe_ge60"]:
         lines.append(f"For the frozen primary predictor in {value}, " + metric_sentence(archive, final_run, choice["primary_model_name"], group="severity", value=value))
+    tradeoff_en, tradeoff_zh = final_tradeoff_prose(archive, final_run, choice["primary_model_name"])
+    lines.extend(tradeoff_en)
     final_comparison = archive.table(final_run["id"], "final_comparisons.csv", [*COMPARISON_COLUMNS, "reference_model", "candidate_model"])
     for baseline in BASELINES:
         row = selected_row(final_comparison, reference_model=baseline, candidate_model=choice["primary_model_name"], metric="mae", scope="pooled")
         ref = archive.cite(final_run["id"], "final_comparisons.csv", {"reference_model": baseline, "candidate_model": choice["primary_model_name"], "metric": "mae", "scope": "pooled"}, "Final paired comparison with baseline")
         lines.append(f"Relative to {baseline}, primary-minus-baseline August MAE changed by {number(row.difference_candidate_minus_reference)} min "
                      f"(95% date-block interval {number(row.ci95_low)} to {number(row.ci95_high)}). {ref}")
+    calendar_days = sum((pd.Timestamp(fold["validation_end_exclusive"]) - pd.Timestamp(fold["validation_start"])).days for fold in final_run["model"]["folds"])
+    interval_ref = archive.cite(final_run["id"], "final_comparisons.csv", {"rows": "all"}, "Separate conditional final-test metric intervals, not joint coverage")
+    interval_ref += " " + archive.cite(final_run["id"], "model_manifest.json", {"keys": ["folds.validation_start", "folds.validation_end_exclusive"], "aggregation": "UTC calendar dates in the fixed test window"}, "Calendar supporting the final date-block intervals")
+    lines.append(f"The {len(final_comparison)} archived metric intervals are separate conditional intervals for the frozen models and {calendar_days} UTC test dates, "
+                 f"not simultaneous 95% coverage of all comparisons. They do not cover retraining, reselection or performance in other months. {interval_ref}")
+    interval_zh = f"归档的{len(final_comparison)}个指标区间逐项条件于冻结模型及{calendar_days}个UTC测试日期，不是全部比较的联合95%覆盖；不覆盖重新训练、重新选择或其他月份表现。{interval_ref}"
     residuals = archive.table(final_run["id"], "residual_summary.csv", ["model", "n", "mean_signed_error", "median_signed_error", "p95_absolute_error"])
     residual = selected_row(residuals, model=choice["primary_model_name"])
     ref = archive.cite(final_run["id"], "residual_summary.csv", {"model": choice["primary_model_name"]}, "Final signed residual bias and error tail")
@@ -1202,7 +1404,10 @@ def compose(archive, config, validated):
     chinese.extend(noaa_zh)
     chinese += ["## 执行预算与复现", *execution_zh]
     chinese.extend(coefficient_zh)
-    chinese.extend(reproduction_zh)
+    chinese += ["## 八月冻结测试与误差诊断", *tradeoff_zh]
+    chinese.append(interval_zh)
+    if reproduction_zh:
+        chinese += ["## 同冻结方案的完整复现", *reproduction_zh]
     chinese += ["## RQ1、研究演进和局限", "RQ1先报告原始均值与累计增加/减少/净变化，再按上游延误和计划周转共同支持标准化。共同支持机场、分层和权重由开发期冻结，逐月与4–8月最终描述重复使用；>0、≥5、≥15阈值不能另选有利机场。4–8月包含用于确定A/C/w的开发月份，是扩展期间的描述性汇总，不是独立8月验证。节点大小是衔接数、颜色是标准化每次净变化、有向边宽是航班量，不能解释为机场责任。"]
     chinese.extend(reference_zh)
     for run_id in [config["development_rq1_run_id"], config["final_rq1_run_id"]]:
@@ -1214,8 +1419,9 @@ def compose(archive, config, validated):
         chinese.append(f"{run_id} 原始主样本{int(raw.n.sum()):,}条，平均每次净变化{number((raw.n * raw.mean_delta).sum() / raw.n.sum())}分钟；"
                        f"累计增加{number(raw.s_plus.sum(), 0)}、累计减少{number(raw.s_minus.sum(), 0)}、累计净变化{number(raw.s_net.sum(), 0)}样本分钟。"
                        f"共同支持下可比较{len(adjusted)}个机场，标准化净变化范围{number(adjusted.standardized_mean.min())}至{number(adjusted.standardized_mean.max())}分钟。")
-        chinese.append(f"共同支持格实际保留{int(adjusted.retained_n.sum()):,}条，占全机场原始主样本{number(100 * adjusted.retained_n.sum() / raw.n.sum(), 2)}%；"
-                       "这与所选各机场内部保留率是不同分母。单月支持的机场集合可能变化，跨机场范围不等于同机场月际趋势；无支持月份仍为NA。")
+        _, support_zh = rq1_support_prose(archive, run_id)
+        chinese.extend(support_zh)
+        chinese.append("单月支持的机场集合可能变化，跨机场范围不等于同机场月际趋势；无支持月份仍为NA。")
     chinese += ["主线固定OLS并按预定顺序增量；variant替换和NOAA补缺独立比较。固定特征之后才比较4组决策树与2组随机森林。选择协议在P3之后、天气及DT/RF表现查看之前登记，不是P0前预注册；特征集合由OLS引导，不是RF全局最优特征或参数的证明。配对区间条件于已训练模型及既有选择，不是选择调整后的独立确认。共同天气覆盖子集只比较已有预测，不重新训练；源报文可用不等于每个天气变量齐全。每轮无增益、失败和失效都保留，不能只讲最终最好模型。",
                 "开发评价保留7月预测、8月才成熟的标签，因此预测输入的as-of契约与研究实际完成选模的时点必须分开；不能宣称截至8月1日已真实完成模型选择。",
                 "分组permutation是固定开发样本、固定模型在一组信息被打乱后的损失敏感性，不能加总为各因素贡献，也不能替代逐组增量实验。不能用TAF与METAR的permutation数值比推断实际增量价值倍数，较小的METAR敏感性也不表示METAR无用。PDP的边际网格范围并不保证全部联合输入组合都有支持。",
@@ -1261,6 +1467,12 @@ def build_report(config, *, root=ROOT):
         target = output / destination
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, target)
+    network_receipts = []
+    for item in archive.network_figures:
+        plotted = render_network_figure(item["nodes"], item["edges"], output / item["target"])
+        network_receipts.append({"run_id": item["run_id"], "output": item["target"], "inputs": item["inputs"], **plotted})
+    if network_receipts:
+        (output / "network_rendering_receipts.json").write_text(json.dumps(network_receipts, ensure_ascii=False, indent=2), encoding="utf-8")
     receipt = {"created_at_utc": datetime.now(timezone.utc).isoformat(), "config": config,
                "sources": list(archive.receipts.values()), "english_word_count": words,
                "format_requirements": {"font": "Times New Roman", "minimum_points": 10,

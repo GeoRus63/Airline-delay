@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "reviewed_at_utc": "2026-10-24T04:45:25.416816+00:00",
+  "review_type": "static read-only pre-execution source sealing and P7 order review",
+  "helper_executed": false,
+  "snapshot_created": false,
+  "pipeline_started_by_review": false,
+  "report_or_content_built": false,
+  "P7_pass_claimed": false,
+  "active_reproduction": {
+    "run_id": "R0030",
+    "status": "running",
+    "started_at_utc": "2026-10-24T04:17:44.747525+00:00",
+    "completed_claimed": false
+  },
+  "finding_count": 0,
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "medium",
+      "status": "resolved_in_owner_revision_static_review_only",
+      "location": "tmp/seal_final_report_sources.py:13-15",
+      "issue": "The snapshot gate checks only top-level audit passed/reproduction_verified, not the actual R0030 run entry or committed/pushed audit and manifest bytes.",
+      "false_positive_case": "A completed but uncommitted R0030 manifest and an incorrectly named or stale successful reproduction audit can pass while HEAD and remote match; committed index/journal alone do not attest the R0030 archive/audit bytes.",
+      "minimal_fix": "Require runs entry run_id R0030, integrity_passed=true, eligible_completed=true, reproduction_verification.verified=true, formal_run_id R0028, and compare working manifest/audit bytes with HEAD Git blobs; retain their path/hash/source commit in mapping. Do not read models or raw.",
+      "resolution": "Six gate files must match pushed HEAD Git bytes, including actual R0030 manifest/reproduction receipt/audit; require exactly one audit.runs R0030 entry with integrity_passed, eligible_completed and reproduction_verification.verified, plus top-level audit passed/reproduction_verified and completed manifest."
+    },
+    {
+      "id": "F2",
+      "severity": "medium",
+      "status": "resolved_in_owner_revision_static_review_only",
+      "location": "tmp/seal_final_report_sources.py:16-20",
+      "issue": "The script checks current freeze.source_files only, not the current freeze file identity against original final/reproduction config SHA.",
+      "false_positive_case": "A changed config/protocol/selection field in current F0001 JSON can leave every listed source-file pin intact. Source-pin verification is not freeze-payload identity verification.",
+      "minimal_fix": "Hash model_selection.json bytes, require equality with both configs/p6_final.json and configs/p7_reproduce_final.json freeze SHA and expected F0001 identity; optionally verify canonical payload; include this receipt in snapshot mapping.",
+      "resolution": "The original F0001 byte SHA is hard-pinned to 286c7de3cc56da3c6c61e16670bde538a672de7bca7f4b3136ce68501c2648f4; both formal/reproduction config SHA fields must match it, then all science source pins are checked. Mapping includes gate file receipts."
+    }
+  ],
+  "confirmations": [
+    {
+      "check": "Python syntax parses without executing module",
+      "passed": true
+    },
+    {
+      "check": "Remote and local HEAD equality gate exists",
+      "passed": true,
+      "scope": "Current remote head is queried by the helper only when eventually executed; this review did not run it or query remote."
+    },
+    {
+      "check": "Builder source and config committed byte checks",
+      "passed": true,
+      "paths": [
+        "scripts/build_report.py",
+        "scripts/render_report_pdf.py",
+        "scripts/build_presentation_content.py",
+        "scripts/build_presentation.mjs",
+        "scripts/render_presentation_video.py",
+        "configs/p7_report.json"
+      ]
+    },
+    {
+      "check": "Original index/journal Git bytes checked and snapshot written without overwrite",
+      "passed": true,
+      "details": "out.mkdir(exist_ok=False); copied original path subtree; target readback exact equality; mapping includes original_path,snapshot_path,bytes,sha256,source_git_commit."
+    },
+    {
+      "check": "Receipt schema alignment",
+      "passed": true,
+      "details": {
+        "snapshot_rows": "mapping.sources keyed by original_path; snapshot_path identifies preserved copy",
+        "report_input_rows": "source_receipts.json.sources with repository-relative path,bytes,sha256",
+        "report_output_rows": "source_receipts.json.outputs path is relative to reports/research_v01, not project root",
+        "presentation_input_rows": "content_v01.sources.json.source_files with repository-relative path,bytes,sha256"
+      }
+    },
+    {
+      "check": "No report-source recursion through S0001",
+      "passed": true,
+      "details": "Both builders still read live original index/journal. The snapshot is independent preserved evidence, not a builder input. Post-build comparison against snapshot is required before appending logs."
+    },
+    {
+      "check": "P7 current-run/self references excluded",
+      "passed": true,
+      "details": "audit_delivery rejects index/journal and any path under current run output. README/progress exclusion is a delivery-list policy; code does not automatically exclude them."
+    },
+    {
+      "check": "Public inventory Notebook timing",
+      "passed": true,
+      "details": "run_pipeline pins pre-run committed public 00 as a historical source. audit_delivery renders public/archive 00, then hashes public 00 in delivery_receipts; run manifest later hashes its own archive. This has no hash cycle."
+    },
+    {
+      "check": "Saved-reproduction audit semantics",
+      "passed": true,
+      "details": "verify_research_archive sets top-level reproduction_verified from per-run reproduction_verification.verified. Formal final flags remain separate. Saved verifier declares no refit/raw reads and does not replace archived full refit."
+    }
+  ],
+  "required_order": [
+    "Wait for existing batch R0030 full refit, independent audit and push; do not start another pipeline.",
+    "Commit and push all valid run evidence and final builder/config changes; verify HEAD/remote and actual R0030 audit identity.",
+    "Validate original F0001 identity/source pins and original index/journal Git bytes; create new S0001 and immutable mapping.",
+    "Build final report and presentation content in one no-index/journal-write window.",
+    "Verify both input source receipt arrays map original index/journal paths to exactly S0001 bytes/hash and source commit; preserve a separate consumption check receipt.",
+    "Generate real PDF/editable PPTX/600-second silent captioned video, actual QA and canonical copies; finalize instructions and explicit per-file delivery_paths.",
+    "Commit P7 source/config/public pre-run 00; run new R0031 only after all required files exist. Exclude mutable status pages/live bookkeeping/current R0031/self/postaudit unknown outputs.",
+    "P7 renders 00 then seals public 00; afterward do final links/visual QA and whole archive audit outside completed run, commit final status/supplemental receipts and push without mutating sealed artifacts."
+  ],
+  "limitations": [
+    "R0030 is running; no completed R0030 audit or final report/content exists yet. Snapshot helper was not executed.",
+    "No raw data, prediction rows, pickle/joblib, large model files or new pipeline run was read/executed.",
+    "This is static code/schema/order review, not successful final source sealing, not full scientific revalidation and not P7 pass.",
+    "Post-builder source receipt to snapshot verification is procedural and is not implemented by this snapshot helper.",
+    "mapping.scope currently says exact bytes consumed before either build has run; treat that as intended scope and write a separate actual consumption-verification receipt afterward.",
+    "The helper lives in ignored tmp/. If exact sealing procedure retention is desired, preserve its reviewed bytes or SHA outside tmp; mapping and exact snapshot bytes remain sufficient for data-byte comparison.",
+    "Actual external rendering runtime versions/fonts/tool hashes and PDF/PPTX/video/Notebook visual QA can only be certified after generating their real receipts and reviewing outputs.",
+    "Post-P7 final 00 QA and post-audit outputs cannot be retroactively inserted into the sealed current-run delivery list; preserve as separately committed supplementary receipts."
+  ],
+  "source_receipts": [
+    {
+      "path": "tmp/seal_final_report_sources.py",
+      "bytes": 4119,
+      "sha256": "0e956fb19d55e72576b7ee2a6551bebc124537bf954a8d5baaa56c0d0c548f6e"
+    },
+    {
+      "path": "scripts/build_report.py",
+      "bytes": 136539,
+      "sha256": "066b9064d3e3ffe9a0340e1ebb60c8f9a19851796821ffe4b70d3ddd3635727c"
+    },
+    {
+      "path": "scripts/build_presentation_content.py",
+      "bytes": 35494,
+      "sha256": "081bb1fb640088570536997ca3d2f4ebd945297b365eeb18af9f14cea0d4bb5b"
+    },
+    {
+      "path": "scripts/verify_research_archive.py",
+      "bytes": 17960,
+      "sha256": "7d46ea95fbfc102bb4ffc38825b453ac937192fe372d9917883f78d00d6c6096"
+    },
+    {
+      "path": "scripts/reproduce_final.py",
+      "bytes": 18846,
+      "sha256": "27526e262c94b07ca4ef00df0a1ed8e5fa0fc74faca0cf2181e52633953a3286"
+    },
+    {
+      "path": "scripts/audit_delivery.py",
+      "bytes": 3504,
+      "sha256": "c5ef642e610ff1d2faf174fc774d072b02702c9422563dbbbe508441fadff6dd"
+    },
+    {
+      "path": "scripts/run_pipeline.py",
+      "bytes": 20866,
+      "sha256": "1accd6c2a0495394b590b4f3c3fd5f9c01eca6a1b376c7f2d996dec711ef39bb"
+    },
+    {
+      "path": "scripts/render_research_notebooks.py",
+      "bytes": 35656,
+      "sha256": "7d9bca780233d822e34dec1b02eb337d324b71b666651758b8a5350300c82790"
+    },
+    {
+      "path": "configs/p7_report.json",
+      "bytes": 537,
+      "sha256": "e4878da31ce1eaed7efbb8cd2d147fb822bd6cd6a07576d62eb11bfc3337b442"
+    },
+    {
+      "path": "configs/p6_final.json",
+      "bytes": 344,
+      "sha256": "e9ea8e9a80be0e8121b7c34f08b32dfd7f37337055e90b215891ba75032e47c2"
+    },
+    {
+      "path": "configs/p7_reproduce_final.json",
+      "bytes": 412,
+      "sha256": "9647ac3dd13d726ad856e10a6a15abbfc3c3351b8553351772a4bb79fa526946"
+    },
+    {
+      "path": "experiments/freezes/F0001/model_selection.json",
+      "bytes": 37316,
+      "sha256": "286c7de3cc56da3c6c61e16670bde538a672de7bca7f4b3136ce68501c2648f4"
+    }
+  ],
+  "revision_history": [
+    {
+      "phase": "initial_static_review",
+      "findings": [
+        "F1",
+        "F2"
+      ],
+      "execution_performed": false,
+      "source_capture_note": "Initial findings were based on the first read-only tool output of the original helper. The owner revised the helper before this receipt captured its bytes; no original-version SHA is claimed. Source receipts below identify the revised helper only."
+    },
+    {
+      "phase": "owner_fix_followup_static_review",
+      "reviewed_at_utc": "2026-10-24T04:46:18.353756+00:00",
+      "helper_sha256": "0e956fb19d55e72576b7ee2a6551bebc124537bf954a8d5baaa56c0d0c548f6e",
+      "both_initial_findings_resolved_statically": true,
+      "execution_performed": false
+    }
+  ],
+  "unresolved_substantive_findings": [],
+  "initial_finding_count": 2,
+  "static_review_conclusion": "Initial two gate gaps are resolved in the owner revision. Receipt field interfaces and described order align; runtime sealing and final QA are not yet executed/certified.",
+  "followup_interface_checks": {
+    "AST_syntax_parses": true,
+    "gate_sources": [
+      "experiments/runs/R0030/manifest.json",
+      "experiments/runs/R0030/reproduction_verification.json",
+      "research/audits/R0030_archive_integrity.json",
+      "experiments/freezes/F0001/model_selection.json",
+      "configs/p6_final.json",
+      "configs/p7_reproduce_final.json"
+    ],
+    "reproduce_final_writer_has_top_level_verified_true": true,
+    "saved_verifier_returns_top_level_verified_true": true,
+    "auditor_path": "runs[run_id=R0030].reproduction_verification.verified",
+    "report_snapshot_match_path": "source_receipts.json.sources[*].path -> mapping.sources[*].original_path",
+    "presentation_snapshot_match_path": "content_v01.sources.json.source_files[*].path -> mapping.sources[*].original_path",
+    "mapping_records_gate_pins": true
+  },
+  "precondition_state_as_of_followup": {
+    "R0030_audit_exists": false,
+    "S0001_exists": false,
+    "helper_executed_by_this_review": false,
+    "P7_pass_claimed": false
+  },
+  "reviewed_helper_sha256": "0e956fb19d55e72576b7ee2a6551bebc124537bf954a8d5baaa56c0d0c548f6e"
+}

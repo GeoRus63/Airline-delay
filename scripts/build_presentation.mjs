@@ -60,7 +60,7 @@ for (const [i,s] of content.slides.entries()) {
   if (s.table) {
     tables.push(i+1);
     const values=s.table.map(row=>row.map(String));
-    const table=slide.tables.add({rows:values.length,columns:values[0].length,left,top:190,width,height:Math.min(410,values.length*62),values});
+    const table=slide.tables.add({rows:values.length,columns:values[0].length,left,top:190,width,height:Math.min(410,values.length*62),values,columnWidths:s.tableColumnWidths});
     table.borders.assign({fill:'#CBD2DA',width:0.8,style:'solid'});
     table.cells.block({row:0,column:0,rowCount:values.length,columnCount:values[0].length}).assign({textStyle:{typeface:font,fontSize:24,color:'#142235'},margins:{left:10,right:10,top:10,bottom:10}});
     table.cells.block({row:0,column:0,rowCount:1,columnCount:values[0].length}).assign({fill:'#EAF0F5',textStyle:{typeface:font,fontSize:24,bold:true,color:'#142235'}});
@@ -68,7 +68,7 @@ for (const [i,s] of content.slides.entries()) {
   if(s.chart) {
     charts.push(i+1);
     const c=s.chart;
-    const chart=slide.charts.add(c.type??'bar',{position:{left,top:172,width,height:420},categories:c.categories,series:c.series.map((x,j)=>({...x,fill:['#24557A','#6B929E','#A7BAC1'][j%3]})),hasLegend:c.series.length>1,legend:{position:'bottom',textStyle:{fontSize:22}},barOptions:{direction:c.direction??'column',grouping:'clustered'},xAxis:{textStyle:{fontSize:22},title:{text:c.xLabel??'',textStyle:{fontSize:22}}},yAxis:{minimumScale:c.minimum??0,textStyle:{fontSize:22},numberFormatCode:c.numberFormat??'0.0',title:{text:c.yLabel??'',textStyle:{fontSize:22}},majorGridlines:{fill:'#D8DEE5',width:0.6}},dataLabels:{showValue:c.showValues??false,textStyle:{fontSize:22},position:'outEnd'}});
+    const chart=slide.charts.add(c.type??'bar',{position:{left,top:172,width,height:420},categories:c.categories,series:c.series.map((x,j)=>({...x,fill:['#24557A','#6B929E','#A7BAC1'][j%3]})),hasLegend:c.series.length>1,legend:{position:'bottom',textStyle:{fontSize:22}},barOptions:{direction:c.direction??'column',grouping:'clustered'},xAxis:{textStyle:{fontSize:22},title:{text:c.xLabel??'',textStyle:{fontSize:22}}},yAxis:{min:c.minimum??0,max:c.maximum,textStyle:{fontSize:22},numberFormatCode:c.numberFormat??'0.0',title:{text:c.yLabel??'',textStyle:{fontSize:22}},majorGridlines:{fill:'#D8DEE5',width:0.6}},dataLabels:{showValue:c.showValues??false,textStyle:{fontSize:22},position:'outEnd'}});
     applyPresentationChartFont(chart,{fontFamily:font});
   }
   if(s.image) {

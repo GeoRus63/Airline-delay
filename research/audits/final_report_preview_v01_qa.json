@@ -1,0 +1,944 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-24T04:38:39.205718+00:00",
+  "artifact_status": "interim_preview_only_not_final_delivery",
+  "full_reproduction_pending": true,
+  "reproduction_results_included": false,
+  "final_canonical_output_not_generated": true,
+  "config": {
+    "mainline_run_ids": {
+      "G0": "R0006",
+      "G1": "R0007",
+      "G2": "R0009",
+      "G3": "R0012",
+      "G4A": "R0015",
+      "G4B": "R0017"
+    },
+    "variant_run_id": "R0010",
+    "noaa_run_id": "R0019",
+    "algorithm_run_ids": [
+      "R0021",
+      "R0022",
+      "R0023",
+      "R0024",
+      "R0025",
+      "R0026"
+    ],
+    "development_rq1_run_id": "R0018",
+    "feature_selection_run_id": "R0020",
+    "model_selection_run_id": "R0027",
+    "final_prediction_run_id": "R0028",
+    "final_rq1_run_id": "R0029",
+    "output_dir": "reports/preview_v01"
+  },
+  "input_config": {
+    "path": "tmp\\final_report_preview_v01_config.json",
+    "bytes": 554,
+    "sha256": "446c4168972c2e344de116b16fb4fd58bfea63cf62b455156855ba1d94d4fb08"
+  },
+  "builder": {
+    "path": "scripts\\build_report.py",
+    "bytes": 127740,
+    "sha256": "97ad1a2338fdb14b03d3c81db7914f6dde399e5762c4b969d99c73ba176c0951"
+  },
+  "renderer": {
+    "path": "scripts\\render_report_pdf.py",
+    "bytes": 23613,
+    "sha256": "1b45bd80ab3f11bf4f54ca38a16ba4f3e6c3606d204d6b55b57fe47a515a1928"
+  },
+  "dedicated_tests": {
+    "path": "tests\\test_report_builder.py",
+    "bytes": 27560,
+    "sha256": "48aa0f076a2d238ada9f16462673d67739ee0ad6c5140f992a1096aec9cec0f0"
+  },
+  "source_receipts": {
+    "path": "reports\\preview_v01\\source_receipts.json",
+    "bytes": 30287,
+    "sha256": "fa31b2110e7dfbfe5090cdfa5131f1cd16863bdb8aa16cf77f3c5ebfe5526d7d"
+  },
+  "markdown": {
+    "path": "reports\\preview_v01\\report_en.md",
+    "bytes": 41041,
+    "sha256": "328b57c3c2e428acba09c90eebf824f381c844efe9d564201b2685ad5a96360c"
+  },
+  "chinese_markdown": {
+    "path": "reports\\preview_v01\\结果解读_中文.md",
+    "bytes": 17980,
+    "sha256": "0f0530c221032df0ba8dd1fb286cbca2582b67e1e62520e099d96c2a90b91c37"
+  },
+  "evidence_index": {
+    "path": "reports\\preview_v01\\evidence_index.csv",
+    "bytes": 59862,
+    "sha256": "ef69c72a65432bf1a97636441e96dcf67a87b1fae2b7e78ade1fb94e9e2b7e30"
+  },
+  "layout_receipt": {
+    "path": "reports\\preview_v01\\report_preview_v01.layout.json",
+    "bytes": 8839,
+    "sha256": "5bd158158ede2b34d99684222955c5d45d4b56244426f420f7136a9494591b06"
+  },
+  "pdf": {
+    "path": "reports\\preview_v01\\report_preview_v01.pdf",
+    "bytes": 1386352,
+    "sha256": "80c6c916d0c213c37c722c170056d23c0b6623efcd3dfd491fc56135a7db01a1"
+  },
+  "source_snapshot_rechecks": [
+    {
+      "path": "experiments/index.csv",
+      "passed": true
+    },
+    {
+      "path": "research/研究记录.md",
+      "passed": true
+    },
+    {
+      "path": "research/literature_review.md",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0006/manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0006/config.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0006/model_manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0006/metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0007/manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0007/config.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0007/model_manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0007/metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0009/manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0009/config.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0009/model_manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0009/metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0012/manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0012/config.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0012/model_manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0012/metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0015/manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0015/config.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0015/model_manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0015/metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0017/manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0017/config.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0017/model_manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0017/metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0010/manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0010/config.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0010/model_manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0010/metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0019/manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0019/config.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0019/model_manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0019/metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0020/manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0020/config.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0020/selection/feature_selection.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0027/manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0027/config.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0027/selection/model_selection_decision.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0021/manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0021/config.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0021/model_manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0021/metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0022/manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0022/config.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0022/model_manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0022/metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0023/manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0023/config.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0023/model_manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0023/metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0024/manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0024/config.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0024/model_manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0024/metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0025/manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0025/config.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0025/model_manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0025/metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0026/manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0026/config.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0026/model_manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0026/metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0020/selection/candidates.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0027/selection/candidates.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0028/manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0028/config.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0028/model_manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0028/metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0028/model_selection.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0028/final_result.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0028/final_verification.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/final_access/2026-08.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0018/manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0018/config.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_complete_summary.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0029/manifest.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0029/config.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0029/rq1_complete_summary.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/frozen_reference.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0029/rq1_standardized/frozen_reference.json",
+      "passed": true
+    },
+    {
+      "path": "references/ind5003-2610_projects.pdf",
+      "passed": true
+    },
+    {
+      "path": "references/papers/1-s2.0-S1366554524001169-main.pdf",
+      "passed": true
+    },
+    {
+      "path": "references/papers/2211.08140v2.pdf",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0018/tables/eda_complete_summary.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0018/tables/single_flight_operations.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0018/tables/single_flight_delay_stats.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0018/tables/airline_aircraft_coverage.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0018/tables/airport_activity.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/selection_attempts.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/network_nodes.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0019/feature_audit.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0019/tables/noaa_overlap_summary.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0027/explanations/R0017/explain_summary.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0027/explanations/R0017/explain_coefficients.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0027/explanations/R0017/explain_intercepts.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0006/eda_summary.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0006/tables/eda_monthly_target.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0006/figures/eda_target_distribution.png",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0006/tables/eda_target_bins.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0018/tables/rq1_airport_raw.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/rq1_airports.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/rq1_threshold_stability.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/rq1_airports_monthly.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0018/rq1_standardized/network_edges.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0018/figures/rq1_standardized_airports.png",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0018/figures/rq1_threshold_stability.png",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0018/figures/rq1_network_geographic.png",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0029/tables/rq1_airport_raw.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0029/rq1_standardized/rq1_airports.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0029/rq1_standardized/rq1_threshold_stability.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0029/rq1_standardized/rq1_airports_monthly.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0029/rq1_standardized/network_nodes.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0029/rq1_standardized/network_edges.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0029/figures/rq1_standardized_airports.png",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0029/figures/rq1_threshold_stability.png",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0029/figures/rq1_network_geographic.png",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0007/comparison/comparison.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0007/comparison/comparison_metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0009/comparison/comparison.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0009/comparison/comparison_metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0012/comparison/comparison.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0012/comparison/comparison_metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0015/comparison/comparison.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0015/comparison/comparison_metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0017/comparison/comparison.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0017/comparison/comparison_metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0010/comparison/comparison.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0010/comparison/comparison_metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0019/comparison/comparison.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0019/comparison/comparison_metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0017/common_weather/definition.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0017/common_weather/G3_to_G4a/comparison.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0017/common_weather/G3_to_G4a/comparison_metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0017/common_weather/G4a_to_G4b/comparison.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0017/common_weather/G4a_to_G4b/comparison_metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0017/common_weather/G3_to_G4b/comparison.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0017/common_weather/G3_to_G4b/comparison_metrics.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0015/weather_coverage_summary.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0017/weather_coverage_summary.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0019/weather_coverage_summary.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0027/explanations/R0025/explain_summary.json",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0027/explanations/R0025/permutation_summary.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0028/final_comparisons.csv",
+      "passed": true
+    },
+    {
+      "path": "experiments/runs/R0028/residual_summary.csv",
+      "passed": true
+    }
+  ],
+  "page_count": 20,
+  "body_page_count": 17,
+  "body_page_limit": 25,
+  "font_checks": {
+    "passed": true,
+    "family": "Times New Roman",
+    "minimum_pdf_text_points": 10.0,
+    "body_points": 11.0,
+    "caption_table_points": 10,
+    "true_type_embedded": {
+      "/AAAAAA+TimesNewRomanPS-BoldMT": true,
+      "/AAAAAA+TimesNewRomanPSMT": true,
+      "/AAAAAA+TimesNewRomanPS-ItalicMT": true
+    }
+  },
+  "english_words": 5678,
+  "evidence_items": 194,
+  "continuous_prose_without_bullets": true,
+  "all_english_evidence_ids_resolve": true,
+  "all_pages_visually_reviewed": true,
+  "body_text_tables_page_count_QA_passed": true,
+  "final_visual_QA_passed": false,
+  "findings": [
+    {
+      "id": "network_readability",
+      "pages": [
+        10,
+        13
+      ],
+      "severity": "requires_display_revision_before_final_QA",
+      "description": "Both archived four-panel geographic networks have territory-cluster label overlap and small airport labels/legend text at report width. The report body and node/edge CSV evidence remain readable. No archive/source figure was modified.",
+      "proposed_next_step": "Parent will coordinate a non-frozen report-display redraw from the same archived nodes/edges; inspect its final PDF pages again."
+    },
+    {
+      "id": "chinese_section_placement",
+      "severity": "requires_prose_structure_revision",
+      "description": "New frozen-test tradeoff and interval text currently follows the OLS coefficient heading. Insert a separate August frozen test/error-diagnosis heading, and place optional completed reproduction evidence under its own heading in the next revision."
+    },
+    {
+      "id": "singular_interval_copyedit",
+      "pages": [
+        8,
+        10
+      ],
+      "severity": "minor_copyedit",
+      "description": "The phrase 1 reportable intervals should be made number-neutral or singular in the next revision."
+    }
+  ],
+  "pages": [
+    {
+      "page": 1,
+      "visually_reviewed": true,
+      "notes": "Cover fits; this file is classified as an interim preview by this QA receipt and directory, not final delivery.",
+      "image": {
+        "path": "reports\\preview_v01\\report_preview_v01.qa\\page-01.png",
+        "bytes": 20040,
+        "sha256": "45c3f60c9ca6de2ef0d3dc3d2f74d388923fea1d5e036a2045d4a39707d88bb0"
+      }
+    },
+    {
+      "page": 2,
+      "visually_reviewed": true,
+      "notes": "Contents entries and page references are readable and fit.",
+      "image": {
+        "path": "reports\\preview_v01\\report_preview_v01.qa\\page-02.png",
+        "bytes": 71148,
+        "sha256": "a76555cf62497fcf54f72412756cc66a8e262b49c5d0adf4fa7a83025dfc677e"
+      }
+    },
+    {
+      "page": 3,
+      "visually_reviewed": true,
+      "notes": "Opening questions, literature and preparation fit; EDA table starts without clipped rows.",
+      "image": {
+        "path": "reports\\preview_v01\\report_preview_v01.qa\\page-03.png",
+        "bytes": 336931,
+        "sha256": "494f70d1fd0173d4b0bf67a2fdba0e9f2c48d797e3475875276a1d4b8a100e5c"
+      }
+    },
+    {
+      "page": 4,
+      "visually_reviewed": true,
+      "notes": "EDA table continues with repeated header; all remaining EDA rows and coverage prose fit.",
+      "image": {
+        "path": "reports\\preview_v01\\report_preview_v01.qa\\page-04.png",
+        "bytes": 268661,
+        "sha256": "90d4d2b2149317e2f80b2c00176529cc45d3762bdb54ff6970b1d8a789549ef0"
+      }
+    },
+    {
+      "page": 5,
+      "visually_reviewed": true,
+      "notes": "Distribution chart, axes/caption and prediction-as-of versus selection-completion boundary are readable.",
+      "image": {
+        "path": "reports\\preview_v01\\report_preview_v01.qa\\page-05.png",
+        "bytes": 251010,
+        "sha256": "474fd50b4b99cd747d119f0b41e6addd993368d47b1d54c8afbb2ad005cb749a"
+      }
+    },
+    {
+      "page": 6,
+      "visually_reviewed": true,
+      "notes": "Execution budgets, shared prediction policy and RQ1 scope fit without overlap.",
+      "image": {
+        "path": "reports\\preview_v01\\report_preview_v01.qa\\page-06.png",
+        "bytes": 344940,
+        "sha256": "17c9824741f1036b88eb5055b6101440081694963c6fd34cc231acd6b0cc4fec"
+      }
+    },
+    {
+      "page": 7,
+      "visually_reviewed": true,
+      "notes": "All A25 labels and complete C16 weight table fit; threshold-specific 16/14/12 distinction is visible.",
+      "image": {
+        "path": "reports\\preview_v01\\report_preview_v01.qa\\page-07.png",
+        "bytes": 250946,
+        "sha256": "5b7baedbc175431071ebdde986e03f2eb47079271d68f49c12128849bf6bec4c"
+      }
+    },
+    {
+      "page": 8,
+      "visually_reviewed": true,
+      "notes": "Development RQ1 denominators, FLL interval and monthly support prose fit; minor singular/plural wording noted.",
+      "image": {
+        "path": "reports\\preview_v01\\report_preview_v01.qa\\page-08.png",
+        "bytes": 345970,
+        "sha256": "20b30da60694b0302848d927e0b032d19a28a343f2833b02357de0cce15b1a81"
+      }
+    },
+    {
+      "page": 9,
+      "visually_reviewed": true,
+      "notes": "Development interval plot and threshold chart readable; no overlapping labels or clipped captions found.",
+      "image": {
+        "path": "reports\\preview_v01\\report_preview_v01.qa\\page-09.png",
+        "bytes": 149477,
+        "sha256": "c16d8629ff4336dff01744b7a1f83cbaa2af358a4a3c164f622e70b8c88e8ba1"
+      }
+    },
+    {
+      "page": 10,
+      "visually_reviewed": true,
+      "notes": "Development four-panel network has small raster labels and territory annotation collisions; final RQ1 text fits.",
+      "image": {
+        "path": "reports\\preview_v01\\report_preview_v01.qa\\page-10.png",
+        "bytes": 332621,
+        "sha256": "7b2d2fefc1211e19eb1eb09334b16ff6fd4d1469ffad4dd9c9fe84d43f3705da"
+      }
+    },
+    {
+      "page": 11,
+      "visually_reviewed": true,
+      "notes": "Final monthly support and distinct node/edge denominators fit; whitespace below is expected figure placement.",
+      "image": {
+        "path": "reports\\preview_v01\\report_preview_v01.qa\\page-11.png",
+        "bytes": 187957,
+        "sha256": "86e5c7068e5c3b290a3de401147d2977b1a6d054e6699b6ebf8908f5247aff48"
+      }
+    },
+    {
+      "page": 12,
+      "visually_reviewed": true,
+      "notes": "Final interval and threshold charts readable; no overlapping annotations or clipped captions found.",
+      "image": {
+        "path": "reports\\preview_v01\\report_preview_v01.qa\\page-12.png",
+        "bytes": 136501,
+        "sha256": "2fc4924705b0c0ba20fd41038050164289c685ab01d6030b71a12e60554f11ad"
+      }
+    },
+    {
+      "page": 13,
+      "visually_reviewed": true,
+      "notes": "Final four-panel network has small raster labels and territory annotation collisions; following RQ2 text fits.",
+      "image": {
+        "path": "reports\\preview_v01\\report_preview_v01.qa\\page-13.png",
+        "bytes": 299690,
+        "sha256": "10c579757b5eae7bd9da7c977d99a92fdc759bf29e93165fb10c1dad03396309"
+      }
+    },
+    {
+      "page": 14,
+      "visually_reviewed": true,
+      "notes": "OLS feature comparisons and zero-effective-fill NOAA interpretation are readable.",
+      "image": {
+        "path": "reports\\preview_v01\\report_preview_v01.qa\\page-14.png",
+        "bytes": 331334,
+        "sha256": "d0c3d015adf640ee42d11a8e6d030bf15e62278cd0634ef97284b735226727b1"
+      }
+    },
+    {
+      "page": 15,
+      "visually_reviewed": true,
+      "notes": "Common-coverage results and algorithm metrics fit without overlapping headings.",
+      "image": {
+        "path": "reports\\preview_v01\\report_preview_v01.qa\\page-15.png",
+        "bytes": 301072,
+        "sha256": "f78a37e971ffffc3d395f84e941ed0b6d0ebd497e27ec2efa962a25f94611c8f"
+      }
+    },
+    {
+      "page": 16,
+      "visually_reviewed": true,
+      "notes": "Selection timing/conditional CI/permutation limits and actual OLS coefficients fit; paragraph continues normally.",
+      "image": {
+        "path": "reports\\preview_v01\\report_preview_v01.qa\\page-16.png",
+        "bytes": 367664,
+        "sha256": "aceafe60f0bb427597245aea5c298eb14cd6e49a877c1dbaa2d76666eb79e5e4"
+      }
+    },
+    {
+      "page": 17,
+      "visually_reviewed": true,
+      "notes": "Final primary/baseline and ordinary/severe tradeoffs, error concentration and separate conditional intervals fit.",
+      "image": {
+        "path": "reports\\preview_v01\\report_preview_v01.qa\\page-17.png",
+        "bytes": 318282,
+        "sha256": "048851c5380cd5be8869569f91fdfe8d45d20eee0418f4f924ea7d0cb57580d0"
+      }
+    },
+    {
+      "page": 18,
+      "visually_reviewed": true,
+      "notes": "Grouped errors and failed/invalidated research history are readable; paragraph continues normally.",
+      "image": {
+        "path": "reports\\preview_v01\\report_preview_v01.qa\\page-18.png",
+        "bytes": 315672,
+        "sha256": "6bca4a88804c90f85a1f82168c2dfbfc19f7b311e09790eab004392d732014a4"
+      }
+    },
+    {
+      "page": 19,
+      "visually_reviewed": true,
+      "notes": "Limitations continuation fits; unused page area is acceptable within the body-page limit.",
+      "image": {
+        "path": "reports\\preview_v01\\report_preview_v01.qa\\page-19.png",
+        "bytes": 124801,
+        "sha256": "7f81c9ea75b3db80e751b23ad9615cad8cd2ac3dfed6f3071abea7a5e88bc190"
+      }
+    },
+    {
+      "page": 20,
+      "visually_reviewed": true,
+      "notes": "Three reference entries and links fit without truncation.",
+      "image": {
+        "path": "reports\\preview_v01\\report_preview_v01.qa\\page-20.png",
+        "bytes": 86713,
+        "sha256": "ee2dfcd2326626128c681d016aa9985865d16501aadd349e9ab60d665640711c"
+      }
+    }
+  ],
+  "tests": {
+    "command": ".venv/Scripts/python.exe -m unittest tests.test_report_builder tests.test_report_evidence tests.test_presentation_content -q",
+    "tests": 31,
+    "passed": 31,
+    "seconds": 61.706
+  },
+  "real_completed_summary_data_used": true,
+  "raw_data_or_prediction_rows_read": false,
+  "feature_values_or_model_objects_read": false,
+  "fit_called": false,
+  "pipeline_started": false,
+  "authoring_marker_repeated": false,
+  "renderer_modified": false,
+  "archive_modified": false,
+  "limitations": [
+    "The PDF font check covers document text, tables and captions, not raster chart glyph font family or point size.",
+    "This preview omits the still-running full-reproduction run and cannot support a passed full-reproduction claim.",
+    "Final reports/research_v01 must be rebuilt after the completed reproduction/source snapshot and undergo fresh PDF and visual QA.",
+    "No final visual sign-off is issued while the listed network/section-placement findings remain."
+  ]
+}

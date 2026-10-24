@@ -1,0 +1,405 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-24T04:46:16.121307+00:00",
+  "preview_only": true,
+  "formal_deliverable": false,
+  "current_formal_prediction_run": "R0028",
+  "final_rq1_run": "R0029",
+  "model_selection_run": "R0027",
+  "retained_learned_run": "R0025",
+  "reproduction": {
+    "run_id": "R0030",
+    "status_from_frozen_index": "running",
+    "included_in_preview_config": false,
+    "source_outputs_read": false,
+    "complete_reproduction_claim": false
+  },
+  "raw_targets_read": false,
+  "models_loaded": false,
+  "predictions_read": false,
+  "models_fitted": false,
+  "authoring_marker_repeated": false,
+  "config": {
+    "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01_config.json",
+    "bytes": 585,
+    "sha256": "688a6fde5ccfe3d45f4cda65f499e4388790e77f2925ed195afd469123acf713"
+  },
+  "content": {
+    "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\content_v03.json",
+    "bytes": 33841,
+    "sha256": "867b82b1fbc924bdbc64b5d4a690eadf6e69405a037d3777a2eb8fe01ba34292"
+  },
+  "sources": {
+    "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\content_v03.sources.json",
+    "bytes": 21593,
+    "sha256": "6f7d2468a41b086b87d9d73cbc7f894795fc5552fb31e8422c4e00c0dc3fee69"
+  },
+  "evidence": {
+    "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\content_v03.evidence.csv",
+    "bytes": 21620,
+    "sha256": "c91af63c8692ce8c26b97e47e28e6c84889a71a38d4f64cfcf7364de688d040b"
+  },
+  "pptx": {
+    "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\deck_v03\\airline_delay.pptx",
+    "bytes": 71306,
+    "sha256": "f91a9746d886ad77d730b02074d3ffe746a303a0f91ee7efb70a4f26f0c8395e"
+  },
+  "validation": {
+    "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\.deck_v03-build\\validation.json",
+    "bytes": 8915,
+    "sha256": "37a8bc4016b3eadb1c34d1fb1e388746ca53f3803fe03c40951efb846392b3c2"
+  },
+  "duration_seconds": 600,
+  "slide_count": 12,
+  "speaker_words": 1341,
+  "source_pins": [
+    {
+      "path": "D:\\airline-delay\\experiments\\index.csv",
+      "bytes": 5829,
+      "sha256": "c13c6e126a8ba7123fca4dda61e9c379a08b2310cee5cb36cc9cbf94f29ec68b"
+    },
+    {
+      "path": "D:\\airline-delay\\research\\研究记录.md",
+      "bytes": 79623,
+      "sha256": "c39137845a83d174bb5c9fe245d76cdddb3ecad85b2a33bbbd7ff8ccfe3c3fb4"
+    }
+  ],
+  "generation_source_versions": [
+    {
+      "path": "scripts/build_report.py",
+      "sha256": "97ad1a2338fdb14b03d3c81db7914f6dde399e5762c4b969d99c73ba176c0951"
+    },
+    {
+      "path": "scripts/build_presentation_content.py",
+      "sha256": "92bdda861d69ddf1789b17e3a202386ffd8be06289baa289e79d1492a2998e2f"
+    },
+    {
+      "path": "scripts/build_presentation.mjs",
+      "sha256": "b1a08e1897efce47192b6c881aca3862de6e57cef6185529c78818865855ed8f"
+    }
+  ],
+  "source_consistency_status": "post-generation display-source drift; this preview is not final source-pin proof",
+  "generation_source_copy_preserved": false,
+  "source_drift_note": "Report agent confirmed post-v03 changes to network rendering/Chinese prose. validate_inputs and existing Archive read/source methods remained unchanged. Root authorized post-v03 presenter display-name and title refinements. No preview was silently regenerated against those changes.",
+  "generation_times": {
+    "content_utc": "2026-10-24T04:41:07.480864+00:00",
+    "pptx_utc": "2026-10-24T04:41:11.966613+00:00",
+    "post_generation_report_source_mtime_utc": "2026-10-24T04:43:03.455459+00:00"
+  },
+  "scripts": [
+    {
+      "path": "D:\\airline-delay\\scripts\\build_presentation_content.py",
+      "bytes": 35494,
+      "sha256": "081bb1fb640088570536997ca3d2f4ebd945297b365eeb18af9f14cea0d4bb5b"
+    },
+    {
+      "path": "D:\\airline-delay\\scripts\\build_presentation.mjs",
+      "bytes": 10829,
+      "sha256": "b1a08e1897efce47192b6c881aca3862de6e57cef6185529c78818865855ed8f"
+    },
+    {
+      "path": "D:\\airline-delay\\scripts\\build_report.py",
+      "bytes": 136539,
+      "sha256": "066b9064d3e3ffe9a0340e1ebb60c8f9a19851796821ffe4b70d3ddd3635727c"
+    }
+  ],
+  "source_metrics_precision_preserved": true,
+  "source_receipts_identical_to_v02": true,
+  "chart_display_precision": {
+    "decimal_places": 4,
+    "unit": "minutes",
+    "metric": "MAE",
+    "scope": "embedded values in the two native charts only; source metrics and evidence retain original precision"
+  },
+  "chart_axes": [
+    {
+      "slide": 5,
+      "chart_part": "ppt/slides/charts/chart1.xml",
+      "minimum": 0.0,
+      "maximum": 25.0
+    },
+    {
+      "slide": 6,
+      "chart_part": "ppt/slides/charts/chart2.xml",
+      "minimum": 0.0,
+      "maximum": null
+    },
+    {
+      "slide": 8,
+      "chart_part": "ppt/slides/charts/chart3.xml",
+      "minimum": 0.0,
+      "maximum": null
+    }
+  ],
+  "chart_owner_slides": [
+    5,
+    6,
+    8
+  ],
+  "native_table_owner_slides": [
+    4,
+    9
+  ],
+  "package_integrity_findings": 0,
+  "layout_findings": 0,
+  "layout_warnings": 0,
+  "fonts": [
+    "Arial"
+  ],
+  "artifact_import_passed": true,
+  "native_chart_validation_passed": true,
+  "visual_qa_passed": true,
+  "unresolved_visual_findings": [],
+  "pages": [
+    {
+      "slide": 1,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Findings-first title and final sample/RMSE/RQ1 counts are readable. No clipping or overlap.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\deck_v03\\slides\\slide-01.png",
+        "bytes": 41784,
+        "sha256": "a3884547d3467a3fa658c249e7093f5c8c3cf928587d64910f058872882ddc1f"
+      },
+      "review_basis": "exact SHA256 match to individually viewed v02 PNG",
+      "identical_to_individually_reviewed_v02": true
+    },
+    {
+      "slide": 2,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Prediction time and RQ1/RQ2 population distinctions fit with readable line spacing.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\deck_v03\\slides\\slide-02.png",
+        "bytes": 44635,
+        "sha256": "041a3cc8355913a75a820c91477c26bfdc59a9fa9ccc4736e37ed875b6fa9b42"
+      },
+      "review_basis": "exact SHA256 match to individually viewed v02 PNG",
+      "identical_to_individually_reviewed_v02": true
+    },
+    {
+      "slide": 3,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Development connection, airport, route and overnight counts fit without overlap.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\deck_v03\\slides\\slide-03.png",
+        "bytes": 37579,
+        "sha256": "630976f806969d25a7672016ecf6a6903780841c973cd6531382c8b233461334"
+      },
+      "review_basis": "exact SHA256 match to individually viewed v02 PNG",
+      "identical_to_individually_reviewed_v02": true
+    },
+    {
+      "slide": 4,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Native support-selected example table shows ORD, DEN, SFO and FLL with retained counts, standardized change and complete intervals. FLL interval crosses zero. Selection and full-source links are explicit.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\deck_v03\\slides\\slide-04.png",
+        "bytes": 70417,
+        "sha256": "ffaa6605247dfccd0f073833b46558e0eaf9087915e5fec6d2905888b52cfc0d"
+      },
+      "review_basis": "v03 PNG individually viewed",
+      "identical_to_individually_reviewed_v02": false
+    },
+    {
+      "slide": 5,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Native monthly-support bars show 6/8/12/15/15 with zero to 25 axis. Network nodes/routes and connection/flight denominators are distinct and readable. Changing support sets are disclosed.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\deck_v03\\slides\\slide-05.png",
+        "bytes": 55686,
+        "sha256": "b3e73314f66e2ed74181d099d6d634d8d62747e6c27fef1098616c1d2f008fa8"
+      },
+      "review_basis": "v03 PNG individually viewed",
+      "identical_to_individually_reviewed_v02": false
+    },
+    {
+      "slide": 6,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Cumulative MAE chart now starts at zero. All six stages, units and fixed-protocol claims fit without distortion or label clipping.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\deck_v03\\slides\\slide-06.png",
+        "bytes": 48213,
+        "sha256": "342d530adb449309fac05ff656ef34ecbbeb1755d2f9865de3f8a92d1e44a6ba"
+      },
+      "review_basis": "v03 PNG individually viewed",
+      "identical_to_individually_reviewed_v02": false
+    },
+    {
+      "slide": 7,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Variant, NOAA zero-fill and TAF revision-block statements fit in four readable claims.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\deck_v03\\slides\\slide-07.png",
+        "bytes": 46303,
+        "sha256": "23efba1228571eb0b2746a281a948e78b24513b4486029f4ef881c799fff7441"
+      },
+      "review_basis": "exact SHA256 match to individually viewed v02 PNG",
+      "identical_to_individually_reviewed_v02": true
+    },
+    {
+      "slide": 8,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Algorithm chart starts at zero. OLS and six DT/RF categories remain readable with natural two-line labels. The selected RF run is explicit.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\deck_v03\\slides\\slide-08.png",
+        "bytes": 49221,
+        "sha256": "bf3432f5d3bb14b7e26dce458abe2a077c9de031649ed3d638eecf50bbe52318"
+      },
+      "review_basis": "v03 PNG individually viewed",
+      "identical_to_individually_reviewed_v02": true
+    },
+    {
+      "slide": 9,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Native final-test table shows four predictors and MAE/RMSE without clipping; primary sample and units are clear.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\deck_v03\\slides\\slide-09.png",
+        "bytes": 60597,
+        "sha256": "d93618e7c19759421c7a5f79fb13324dcba9a113e4a3e2e0535ebe3bb00f16e6"
+      },
+      "review_basis": "exact SHA256 match to individually viewed v02 PNG",
+      "identical_to_individually_reviewed_v02": true
+    },
+    {
+      "slide": 10,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Ordinary MAE/RMSE, severe MAE and severe sample/AE/SE shares are readable. The notes retain post-hoc/no-switching/no-group-significance limits.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\deck_v03\\slides\\slide-10.png",
+        "bytes": 51245,
+        "sha256": "561714f959f532fa717997a6e0e2ce32df2d12e451a58e4e0996e20e1d826d94"
+      },
+      "review_basis": "exact SHA256 match to individually viewed v02 PNG",
+      "identical_to_individually_reviewed_v02": true
+    },
+    {
+      "slide": 11,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Permutation example and conditional/noncausal limits fit. Notes retain nonadditivity and non-selection-adjusted uncertainty.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\deck_v03\\slides\\slide-11.png",
+        "bytes": 41187,
+        "sha256": "5b445bad96aff9c2ff8d7b0d22c361f8373c6221a74a8a8a8d3a9601db94e6db"
+      },
+      "review_basis": "exact SHA256 match to individually viewed v02 PNG",
+      "identical_to_individually_reviewed_v02": true
+    },
+    {
+      "slide": 12,
+      "visually_reviewed": true,
+      "passed": true,
+      "notes": "Closing RQ1/RQ2 scope and new-season statement fit. No complete-reproduction success claim appears.",
+      "image": {
+        "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\deck_v03\\slides\\slide-12.png",
+        "bytes": 37504,
+        "sha256": "51eab85488feab681004e82ce39f341c5c8716c053e240893a1b9a64d1a6c33f"
+      },
+      "review_basis": "exact SHA256 match to individually viewed v02 PNG",
+      "identical_to_individually_reviewed_v02": true
+    }
+  ],
+  "reference_figure_receipts": [
+    {
+      "path": "D:\\airline-delay\\experiments\\runs\\R0029\\figures\\rq1_standardized_airports.png",
+      "bytes": 137447,
+      "sha256": "d90de5fffeafabda33fcac5474a1e08df32621869703bb677bca9f7ae473f917"
+    },
+    {
+      "path": "D:\\airline-delay\\experiments\\runs\\R0029\\figures\\rq1_network_geographic.png",
+      "bytes": 303996,
+      "sha256": "796d007c0c47fab5e5f6f29b10ada1290d21fc83b172973597837b1eeff0b11e"
+    }
+  ],
+  "numerical_summary": {
+    "primary": "rf_d16_l50",
+    "n": 560077,
+    "mae": 13.655091473780468,
+    "rmse": 42.91711903137761,
+    "ordinary_mae": [
+      8.278817548967025,
+      6.744647108577157
+    ],
+    "ordinary_rmse": [
+      10.815582978815668,
+      14.641484138085323
+    ],
+    "severe_mae": [
+      69.32549511587507,
+      134.54465281297516
+    ],
+    "severe_contributions": {
+      "sample_pct": 8.806824775879031,
+      "AE_pct": 44.71134368882697,
+      "SE_pct": 94.20836634039063
+    },
+    "rq1_supported": 25,
+    "rq1_negative": 24,
+    "positive_airport": "FLL",
+    "positive_mean": 0.4364630537155887,
+    "positive_interval": [
+      -2.403369978664235,
+      3.0117514241228664
+    ],
+    "monthly_supported": [
+      6,
+      8,
+      12,
+      15,
+      15
+    ]
+  },
+  "initial_failures": [
+    {
+      "stage": "first full-precision deck",
+      "cause": "Excel chart-data snapshot cannot preserve full floating precision",
+      "log": {
+        "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\deck_failed_finalizer.log",
+        "bytes": 804,
+        "sha256": "6eb4bde7b74611c2ea23bb52c0226eee789e0354a24c25fdc2b0ae602937cde2"
+      },
+      "original_input": {
+        "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\content.json",
+        "bytes": 32437,
+        "sha256": "f5fc8c7db27ce229205e7fcb61f28fa6d1d3a47a2b53c1de0ded77cf6e6681d9"
+      },
+      "failed_draft": {
+        "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\.deck-build\\candidate.pptx",
+        "bytes": 474238,
+        "sha256": "c4a3ff3c213329fd2d27d689636ce6059a7a39d9810cb13e71f624de79808b32"
+      },
+      "repair": "Round only two native MAE chart display series to four decimals; original scientific files and source receipts unchanged"
+    },
+    {
+      "stage": "v02 visual review",
+      "slides": [
+        4,
+        5,
+        6
+      ],
+      "cause": "Paper figures too small on slides 4/5; slide 6 automatically truncated its bar axis at 15 because minimumScale was unsupported",
+      "repair": "Native support-selected table, native monthly-support chart, and documented yAxis.min=0; prior preview retained"
+    }
+  ],
+  "targeted_tests": {
+    "command": ".venv/Scripts/python.exe -m unittest discover -s tests -p test_presentation_content.py -v",
+    "tests": 7,
+    "passed": 7,
+    "seconds": 8.651
+  },
+  "limitations": [
+    "Preview generated before R0030 completion. It makes no full-reproduction success claim and is not the final sealed delivery.",
+    "Reference PNGs remain unchanged in their source archives and are linked in notes; their unreadable slide renditions were replaced by native evidence.",
+    "Native PowerPoint application opening/editing was not tested. Artifact import, OOXML/workbook, rendering and visual checks do not prove native application behavior.",
+    "Final deliverables require all display code to be committed/stable, a fresh common source snapshot after R0030, and their own generation and visual review. The complete generating source copy was not retained for this preview; only observed SHA256 pins are recorded."
+  ]
+}

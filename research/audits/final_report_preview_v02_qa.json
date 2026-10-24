@@ -1,0 +1,476 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-24T04:49:24.968340+00:00",
+  "artifact_status": "interim_preview_only_not_final_delivery",
+  "full_reproduction_pending": true,
+  "reproduction_results_included": false,
+  "final_canonical_output_not_generated": true,
+  "config": {
+    "mainline_run_ids": {
+      "G0": "R0006",
+      "G1": "R0007",
+      "G2": "R0009",
+      "G3": "R0012",
+      "G4A": "R0015",
+      "G4B": "R0017"
+    },
+    "variant_run_id": "R0010",
+    "noaa_run_id": "R0019",
+    "algorithm_run_ids": [
+      "R0021",
+      "R0022",
+      "R0023",
+      "R0024",
+      "R0025",
+      "R0026"
+    ],
+    "development_rq1_run_id": "R0018",
+    "feature_selection_run_id": "R0020",
+    "model_selection_run_id": "R0027",
+    "final_prediction_run_id": "R0028",
+    "final_rq1_run_id": "R0029",
+    "output_dir": "reports/preview_v02"
+  },
+  "config_receipt": {
+    "path": "tmp/final_report_preview_v02_config.json",
+    "bytes": 554,
+    "sha256": "fb83cd081e6651792437f5b7fdedac1eed373b6683b64fcc8e9b5a9669324c35"
+  },
+  "report_source": {
+    "path": "scripts/build_report.py",
+    "bytes": 136539,
+    "sha256": "066b9064d3e3ffe9a0340e1ebb60c8f9a19851796821ffe4b70d3ddd3635727c"
+  },
+  "renderer_source": {
+    "path": "scripts/render_report_pdf.py",
+    "bytes": 23613,
+    "sha256": "1b45bd80ab3f11bf4f54ca38a16ba4f3e6c3606d204d6b55b57fe47a515a1928"
+  },
+  "english_markdown": {
+    "path": "reports/preview_v02/report_en.md",
+    "bytes": 42019,
+    "sha256": "96b23b6260328e2725c600c87119b02c9424ffb7fe2f522e856ad251906e7539"
+  },
+  "chinese_markdown": {
+    "path": "reports/preview_v02/结果解读_中文.md",
+    "bytes": 18020,
+    "sha256": "7a509ed45283a1f079c1e794c7386782a9cfe823d117171ac78a9293381ff61a"
+  },
+  "pdf": {
+    "path": "reports/preview_v02/report_preview_v02.pdf",
+    "bytes": 1132068,
+    "sha256": "a1f8f55db16e0b85e17a85dc35c0ca0757c74b34c47f9283d307e9df20cadb5b"
+  },
+  "renderer_layout_receipt": {
+    "path": "reports/preview_v02/report_preview_v02.layout.json",
+    "bytes": 9827,
+    "sha256": "0b0be7bd68f4e5dce951044be741ab6badbf0e92b37c3844ad8f8015765f3ef3"
+  },
+  "source_receipts": {
+    "path": "reports/preview_v02/source_receipts.json",
+    "bytes": 30055,
+    "sha256": "3cc6ee87faa38ebe19c89fc1e04a64f1f7bf034cb545ab03e6d6456b611412c7"
+  },
+  "network_rendering_receipts": {
+    "path": "reports/preview_v02/network_rendering_receipts.json",
+    "bytes": 39726,
+    "sha256": "d7ede19b14cc1f65c245d17b6e52c44d28952f241d5ae259faf3f6956a897ffe"
+  },
+  "previous_preview_qa": {
+    "path": "research/audits/final_report_preview_v01_qa.json",
+    "bytes": 28675,
+    "sha256": "3fca3b1f8b8248256fc1309ad1db2660d5c5e1537e1b39b48c53671e672ab7b1"
+  },
+  "prior_findings_preserved_and_resolved": [
+    "Original archived network labels overlap: replaced only report display with source-backed label-free redraw; original figures unchanged.",
+    "Chinese RF tradeoff paragraphs were beneath OLS heading: assigned their own final-test heading.",
+    "Singular interval count used plural sentence: replaced with neutral count wording."
+  ],
+  "page_count": 20,
+  "body_page_count": 17,
+  "body_page_limit": 25,
+  "body_page_limit_passed": true,
+  "english_word_count": 5804,
+  "evidence_rows": 192,
+  "source_hashes_rechecked": 145,
+  "all_builder_output_hashes_rechecked": true,
+  "continuous_prose_no_markdown_bullets": true,
+  "pdf_text_font_family": "Times New Roman",
+  "pdf_minimum_text_points": 10.0,
+  "pdf_fonts_embedded": {
+    "/AAAAAA+TimesNewRomanPS-BoldMT": true,
+    "/AAAAAA+TimesNewRomanPSMT": true,
+    "/AAAAAA+TimesNewRomanPS-ItalicMT": true
+  },
+  "all_pdf_text_fonts_passed": true,
+  "new_network_checks": [
+    {
+      "run_id": "R0018",
+      "nodes": 355,
+      "visible_nodes": 355,
+      "gray_nodes": 330,
+      "all_archived_routes": 6600,
+      "global_selected_routes": 100,
+      "within_panel_routes": 94,
+      "panels": [
+        {
+          "region": "Contiguous US",
+          "nodes": 323,
+          "displayed_routes": 86
+        },
+        {
+          "region": "Alaska / north",
+          "nodes": 19,
+          "displayed_routes": 0
+        },
+        {
+          "region": "Hawaii",
+          "nodes": 5,
+          "displayed_routes": 8
+        },
+        {
+          "region": "Territories / other",
+          "nodes": 8,
+          "displayed_routes": 0
+        }
+      ],
+      "source_and_route_selection_independently_rechecked": true,
+      "airport_code_labels": false,
+      "minimum_source_text_points": 10.0,
+      "minimum_placed_text_points": 10.101069455870256,
+      "source_receipts": [
+        {
+          "path": "experiments/runs/R0018/rq1_standardized/network_nodes.csv",
+          "bytes": 17379,
+          "sha256": "234a2afc6922526af0c23bac42f02e9abcda58cb0bd8e5ac0e24ebd25e009b3a"
+        },
+        {
+          "path": "experiments/runs/R0018/rq1_standardized/network_edges.csv",
+          "bytes": 110495,
+          "sha256": "5049716b817ec06c2b34157566fb69079509484a902b14608b7a179e205c0747"
+        }
+      ],
+      "image_sha256": "12d69785e4cdda8479c9556566d96bfa65fc5e7092ce3e35eeb2b600ca0ce5ed"
+    },
+    {
+      "run_id": "R0029",
+      "nodes": 355,
+      "visible_nodes": 355,
+      "gray_nodes": 330,
+      "all_archived_routes": 6629,
+      "global_selected_routes": 100,
+      "within_panel_routes": 95,
+      "panels": [
+        {
+          "region": "Contiguous US",
+          "nodes": 323,
+          "displayed_routes": 87
+        },
+        {
+          "region": "Alaska / north",
+          "nodes": 19,
+          "displayed_routes": 0
+        },
+        {
+          "region": "Hawaii",
+          "nodes": 5,
+          "displayed_routes": 8
+        },
+        {
+          "region": "Territories / other",
+          "nodes": 8,
+          "displayed_routes": 0
+        }
+      ],
+      "source_and_route_selection_independently_rechecked": true,
+      "airport_code_labels": false,
+      "minimum_source_text_points": 10.0,
+      "minimum_placed_text_points": 10.101069455870256,
+      "source_receipts": [
+        {
+          "path": "experiments/runs/R0029/rq1_standardized/network_nodes.csv",
+          "bytes": 17403,
+          "sha256": "b5415e1f6cf6fdb8c81cd433d0610771d2b683fc4176c6395d78c3ee1cd5e83b"
+        },
+        {
+          "path": "experiments/runs/R0029/rq1_standardized/network_edges.csv",
+          "bytes": 111476,
+          "sha256": "f40baa3f2993cb826af553b24bebc7f4f7beab2ca319b61282cba219ccf83fc5"
+        }
+      ],
+      "image_sha256": "5b1aa27f631230784a848c3baa4cfaa64a04ef5dc452354001c533e5c3393b14"
+    }
+  ],
+  "other_archived_figures": "Five unmodified source figures were visually reviewed at placed size; no overlap or clipping observed. Raster glyph sizes are not certified by PDF text-font checks.",
+  "all_pages_visually_reviewed": true,
+  "final_visual_QA_passed": true,
+  "page_reviews": [
+    {
+      "page": 1,
+      "section": "cover",
+      "image": {
+        "path": "reports/preview_v02/report_preview_v02.qa/page-01.png",
+        "bytes": 20040,
+        "sha256": "45c3f60c9ca6de2ef0d3dc3d2f74d388923fea1d5e036a2045d4a39707d88bb0"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "note": "Cover clear."
+    },
+    {
+      "page": 2,
+      "section": "contents",
+      "image": {
+        "path": "reports/preview_v02/report_preview_v02.qa/page-02.png",
+        "bytes": 71148,
+        "sha256": "a76555cf62497fcf54f72412756cc66a8e262b49c5d0adf4fa7a83025dfc677e"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "note": "Contents fits and matches visible sections."
+    },
+    {
+      "page": 3,
+      "section": "body",
+      "image": {
+        "path": "reports/preview_v02/report_preview_v02.qa/page-03.png",
+        "bytes": 336931,
+        "sha256": "494f70d1fd0173d4b0bf67a2fdba0e9f2c48d797e3475875276a1d4b8a100e5c"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "note": "Opening questions, literature and first EDA rows clear."
+    },
+    {
+      "page": 4,
+      "section": "body",
+      "image": {
+        "path": "reports/preview_v02/report_preview_v02.qa/page-04.png",
+        "bytes": 268661,
+        "sha256": "90d4d2b2149317e2f80b2c00176529cc45d3762bdb54ff6970b1d8a789549ef0"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "note": "Repeated table header and remaining EDA rows fit."
+    },
+    {
+      "page": 5,
+      "section": "body",
+      "image": {
+        "path": "reports/preview_v02/report_preview_v02.qa/page-05.png",
+        "bytes": 251010,
+        "sha256": "474fd50b4b99cd747d119f0b41e6addd993368d47b1d54c8afbb2ad005cb749a"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "note": "EDA/source histogram and timing distinction clear."
+    },
+    {
+      "page": 6,
+      "section": "body",
+      "image": {
+        "path": "reports/preview_v02/report_preview_v02.qa/page-06.png",
+        "bytes": 344940,
+        "sha256": "17c9824741f1036b88eb5055b6101440081694963c6fd34cc231acd6b0cc4fec"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "note": "Resource disclosure and first RQ1 fallback clear."
+    },
+    {
+      "page": 7,
+      "section": "body",
+      "image": {
+        "path": "reports/preview_v02/report_preview_v02.qa/page-07.png",
+        "bytes": 250946,
+        "sha256": "5b7baedbc175431071ebdde986e03f2eb47079271d68f49c12128849bf6bec4c"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "note": "Airport list and all 16 reference-weight rows fit."
+    },
+    {
+      "page": 8,
+      "section": "body",
+      "image": {
+        "path": "reports/preview_v02/report_preview_v02.qa/page-08.png",
+        "bytes": 345929,
+        "sha256": "6648cef50fc98ad572fe0c1e88b7a247e605bfcf9773ace07a7307853ffd0abc"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "note": "RQ1 denominator, threshold and interval prose clear."
+    },
+    {
+      "page": 9,
+      "section": "body",
+      "image": {
+        "path": "reports/preview_v02/report_preview_v02.qa/page-09.png",
+        "bytes": 149477,
+        "sha256": "c16d8629ff4336dff01744b7a1f83cbaa2af358a4a3c164f622e70b8c88e8ba1"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "note": "Development CI and sensitivity charts clear."
+    },
+    {
+      "page": 10,
+      "section": "body",
+      "image": {
+        "path": "reports/preview_v02/report_preview_v02.qa/page-10.png",
+        "bytes": 293222,
+        "sha256": "6a27c2a92e970757c170ace3b8a492cf2d6fc5ca19d833754469448433d6b1ad"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "note": "New development network has no code labels or collisions; caption and subsequent prose fit."
+    },
+    {
+      "page": 11,
+      "section": "body",
+      "image": {
+        "path": "reports/preview_v02/report_preview_v02.qa/page-11.png",
+        "bytes": 252544,
+        "sha256": "06d441aed7a971bcf0d2390ef2f570ea80e331046ccad0f25aaaedd9ed6b860b"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "note": "Expanded-period RQ1 support and denominator prose clear."
+    },
+    {
+      "page": 12,
+      "section": "body",
+      "image": {
+        "path": "reports/preview_v02/report_preview_v02.qa/page-12.png",
+        "bytes": 136521,
+        "sha256": "6a2ba3e72f80f02e64f794a761b56a73420d7394a097f6f7532868ed35e89ce9"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "note": "Expanded-period CI and sensitivity charts clear."
+    },
+    {
+      "page": 13,
+      "section": "body",
+      "image": {
+        "path": "reports/preview_v02/report_preview_v02.qa/page-13.png",
+        "bytes": 267190,
+        "sha256": "651d75df5b836fcab88757b0edfa4d72dad24351588939d1fc61f1fa7cd28509"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "note": "New expanded-period network has no code labels or collisions; caption and next section fit."
+    },
+    {
+      "page": 14,
+      "section": "body",
+      "image": {
+        "path": "reports/preview_v02/report_preview_v02.qa/page-14.png",
+        "bytes": 334658,
+        "sha256": "a49edabf136f937d55a462aada08ee27d4c0cf64e444337e12906203f88d76f2"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "note": "Feature-addition comparisons fit."
+    },
+    {
+      "page": 15,
+      "section": "body",
+      "image": {
+        "path": "reports/preview_v02/report_preview_v02.qa/page-15.png",
+        "bytes": 311037,
+        "sha256": "94bdb54bdc13af15a54f4bbf5bb26588d45b662a81fe0f960c20ab705126cc5b"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "note": "NOAA zero-fill limits and algorithm opening fit."
+    },
+    {
+      "page": 16,
+      "section": "body",
+      "image": {
+        "path": "reports/preview_v02/report_preview_v02.qa/page-16.png",
+        "bytes": 336535,
+        "sha256": "c48b71558ea18dccde37a5a0a2dd02de18b9d49a310a984e73ebaea7490b3f80"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "note": "Model selection, permutation limits and coefficient introduction fit."
+    },
+    {
+      "page": 17,
+      "section": "body",
+      "image": {
+        "path": "reports/preview_v02/report_preview_v02.qa/page-17.png",
+        "bytes": 345712,
+        "sha256": "5852fe2a13c2cb363bcc21c33ed421175b61ca4b53d77d29dfcc593e8fa4410b"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "note": "Coefficients, final performance tradeoffs and conditional CI statements fit."
+    },
+    {
+      "page": 18,
+      "section": "body",
+      "image": {
+        "path": "reports/preview_v02/report_preview_v02.qa/page-18.png",
+        "bytes": 291765,
+        "sha256": "e171f7215ad373961956622d4a228a58aab717ff7f30268d99cc525746006af8"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "note": "Group diagnostics and failed-run history fit."
+    },
+    {
+      "page": 19,
+      "section": "body",
+      "image": {
+        "path": "reports/preview_v02/report_preview_v02.qa/page-19.png",
+        "bytes": 193011,
+        "sha256": "f74dee8c240d06ced6ec818ffe6e34dc784e832647e8426afa42ea2238434589"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "note": "Remaining research process and limitations clear; intentional trailing whitespace."
+    },
+    {
+      "page": 20,
+      "section": "references",
+      "image": {
+        "path": "reports/preview_v02/report_preview_v02.qa/page-20.png",
+        "bytes": 86713,
+        "sha256": "ee2dfcd2326626128c681d016aa9985865d16501aadd349e9ab60d665640711c"
+      },
+      "visually_reviewed": true,
+      "result": "pass",
+      "note": "Three reference entries and URLs fit."
+    }
+  ],
+  "actual_regression_checks": {
+    "command": ".venv/Scripts/python.exe -m unittest tests.test_report_builder tests.test_report_evidence tests.test_presentation_content -q",
+    "tests": 33,
+    "elapsed_seconds": 59.64,
+    "result": "OK",
+    "syntax_ast_parse": [
+      "scripts/build_report.py",
+      "tests/test_report_builder.py",
+      "tests/test_report_evidence.py"
+    ]
+  },
+  "scope": {
+    "read_only_archived_small_summary_files": true,
+    "raw_read": false,
+    "pickle_read": false,
+    "prediction_rows_read": false,
+    "fit_called": false,
+    "R0030_read": false,
+    "archived_scientific_files_modified": false,
+    "renderer_modified": false,
+    "git_commands_run": false
+  },
+  "limitations": [
+    "Preview omits optional R0030 reproduction input and makes no completed-reproduction claim. Canonical report must be regenerated after completed reproduction and refreshed source snapshots.",
+    "All network nodes and original statistical encodings are retained; airport codes are intentionally not drawn. Full node/edge identities remain traceable through the archived CSVs and drawing receipt.",
+    "PDF renderer automated visual_review_completed remains false in its original receipt; this independent audit records actual review of all twenty rendered pages."
+  ]
+}
