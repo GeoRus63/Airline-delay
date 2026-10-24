@@ -99,21 +99,41 @@ for (const [i,slide] of finalDeck.slides.items.entries()) {
 }
 function stamp(seconds) {return new Date(Math.round(seconds*1000)).toISOString().slice(11,23).replace('.',',');}
 function captionChunks(notes) {
-  const chunks=[];
-  for(const sentence of notes.match(/[^.!?]+[.!?]+|[^.!?]+$/g)??[notes]) {
-    let current='';
-    for(const word of sentence.trim().split(/\s+/)) {
-      if(current && `${current} ${word}`.length>78) {chunks.push(current);current=word;}
-      else current=current?`${current} ${word}`:word;
-    }
-    if(current) chunks.push(current);
+  const words=notes.trim().split(/\s+/), chunks=[];
+  if(!notes.trim()) throw new Error('Caption notes must contain words');
+  if(words.some(word=>word.length>42)) throw new Error('Caption word exceeds 42 characters');
+  // Split only at whitespace: decimal points and all punctuation stay intact.
+  let current=[];
+  for(const word of words) {
+    const candidate=[...current,word];
+    try {captionLines(candidate.join(' '));current=candidate;}
+    catch {chunks.push(current);current=[word];}
   }
-  return chunks;
+  if(current.length) chunks.push(current);
+  // Balance a short final cue with its predecessor instead of leaving a
+  // one-to-three-word flash at the end of a sentence or slide.
+  if(chunks.length>1 && chunks.at(-1).length<4) {
+    const combined=[...chunks.at(-2),...chunks.at(-1)]; let best=null;
+    for(let cut=4;cut<=combined.length-4;cut++) {
+      const pair=[combined.slice(0,cut),combined.slice(cut)];
+      try {pair.forEach(part=>captionLines(part.join(' ')));}
+      catch {continue;}
+      if(!best || Math.abs(pair[0].length-pair[1].length)<Math.abs(best[0].length-best[1].length)) best=pair;
+    }
+    if(best) chunks.splice(-2,2,...best);
+  }
+  return chunks.map(words=>words.join(' '));
 }
 function captionLines(chunk) {
-  const words=chunk.split(' '); let lines=[''];
-  for(const word of words) {const i=lines.length-1;if(lines[i] && `${lines[i]} ${word}`.length>42)lines.push(word);else lines[i]=lines[i]?`${lines[i]} ${word}`:word;}
-  return lines.join('\n');
+  if(chunk.length<=42) return chunk;
+  const words=chunk.split(' '); let best=null;
+  for(let cut=1;cut<words.length;cut++) {
+    const lines=[words.slice(0,cut).join(' '),words.slice(cut).join(' ')];
+    if(lines.some(line=>line.length>42)) continue;
+    if(!best || Math.abs(lines[0].length-lines[1].length)<Math.abs(best[0].length-best[1].length)) best=lines;
+  }
+  if(!best) throw new Error('Caption must fit at most two lines of 42 characters');
+  return best.join('\n');
 }
 let time=0, cue=1, srt=[], script=[`# ${content.title??'Airline delay'}\n\nEnglish speaker script for human narration.\n`];
 for (const [i,s] of content.slides.entries()) {

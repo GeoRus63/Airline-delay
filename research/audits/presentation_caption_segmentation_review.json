@@ -1,0 +1,538 @@
+{
+  "created_utc": "2026-10-24T05:15:02.973Z",
+  "status": "passed caption-only validation; no PPTX or final video built",
+  "content": {
+    "path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\content_v03.json",
+    "sha256": "867b82b1fbc924bdbc64b5d4a690eadf6e69405a037d3777a2eb8fe01ba34292"
+  },
+  "builder": {
+    "path": "D:\\airline-delay\\scripts\\build_presentation.mjs",
+    "sha256": "551bce57159774caee8f474130ad9422e9178ea42792f0ed421e87a3c3a6a9a9",
+    "tested_function_source": "function stamp(seconds) {return new Date(Math.round(seconds*1000)).toISOString().slice(11,23).replace('.',',');}\nfunction captionChunks(notes) {\n  const words=notes.trim().split(/\\s+/), chunks=[];\n  if(!notes.trim()) throw new Error('Caption notes must contain words');\n  if(words.some(word=>word.length>42)) throw new Error('Caption word exceeds 42 characters');\n  // Split only at whitespace: decimal points and all punctuation stay intact.\n  let current=[];\n  for(const word of words) {\n    const candidate=[...current,word];\n    try {captionLines(candidate.join(' '));current=candidate;}\n    catch {chunks.push(current);current=[word];}\n  }\n  if(current.length) chunks.push(current);\n  // Balance a short final cue with its predecessor instead of leaving a\n  // one-to-three-word flash at the end of a sentence or slide.\n  if(chunks.length>1 && chunks.at(-1).length<4) {\n    const combined=[...chunks.at(-2),...chunks.at(-1)]; let best=null;\n    for(let cut=4;cut<=combined.length-4;cut++) {\n      const pair=[combined.slice(0,cut),combined.slice(cut)];\n      try {pair.forEach(part=>captionLines(part.join(' ')));}\n      catch {continue;}\n      if(!best || Math.abs(pair[0].length-pair[1].length)<Math.abs(best[0].length-best[1].length)) best=pair;\n    }\n    if(best) chunks.splice(-2,2,...best);\n  }\n  return chunks.map(words=>words.join(' '));\n}\nfunction captionLines(chunk) {\n  if(chunk.length<=42) return chunk;\n  const words=chunk.split(' '); let best=null;\n  for(let cut=1;cut<words.length;cut++) {\n    const lines=[words.slice(0,cut).join(' '),words.slice(cut).join(' ')];\n    if(lines.some(line=>line.length>42)) continue;\n    if(!best || Math.abs(lines[0].length-lines[1].length)<Math.abs(best[0].length-best[1].length)) best=lines;\n  }\n  if(!best) throw new Error('Caption must fit at most two lines of 42 characters');\n  return best.join('\\n');\n}\n"
+  },
+  "validator": {
+    "path": "D:\\airline-delay\\scripts\\validate_presentation_captions.mjs",
+    "sha256": "798fbc706521bcadfa9cecbc3f958f12e4efdab8187e749b5f64209daee4a957"
+  },
+  "before": {
+    "path": "D:\\airline-delay\\tmp\\presentation_caption_segmentation_review_v01\\captions_before.srt",
+    "sha256": "22d8459229b44cb1d234d11e6d0f35c7fe08faa4c3aff98a47d3afc9190d9d42",
+    "cue_count": 206,
+    "minimum_cue_seconds": 0.327,
+    "first_four_cues": [
+      {
+        "number": 1,
+        "start": 0,
+        "end": 5.941,
+        "duration_seconds": 5.941,
+        "text": "The main prediction result is an August\nmean absolute error of 13."
+      },
+      {
+        "number": 2,
+        "start": 5.941,
+        "end": 9.901,
+        "duration_seconds": 3.96,
+        "text": "655 minutes for the frozen primary\npredictor, rf_d16_l50."
+      },
+      {
+        "number": 3,
+        "start": 9.901,
+        "end": 13.366,
+        "duration_seconds": 3.465,
+        "text": "Its root mean squared error is 42."
+      },
+      {
+        "number": 4,
+        "start": 13.366,
+        "end": 16.337,
+        "duration_seconds": 2.971,
+        "text": "917 minutes over 560,077 accepted\nconnections."
+      }
+    ],
+    "short_cues_below_one_second": [
+      {
+        "number": 6,
+        "start": 21.287,
+        "end": 21.782,
+        "duration_seconds": 0.495,
+        "text": "reference."
+      },
+      {
+        "number": 9,
+        "start": 34.653,
+        "end": 35.149,
+        "duration_seconds": 0.496,
+        "text": "criterion."
+      },
+      {
+        "number": 11,
+        "start": 39.604,
+        "end": 40.099,
+        "duration_seconds": 0.495,
+        "text": "connections."
+      },
+      {
+        "number": 26,
+        "start": 92.028,
+        "end": 92.453,
+        "duration_seconds": 0.425,
+        "text": "month."
+      },
+      {
+        "number": 31,
+        "start": 106.386,
+        "end": 106.881,
+        "duration_seconds": 0.495,
+        "text": "reporting."
+      },
+      {
+        "number": 36,
+        "start": 122.723,
+        "end": 123.713,
+        "duration_seconds": 0.99,
+        "text": "zero delay."
+      },
+      {
+        "number": 40,
+        "start": 135.594,
+        "end": 136.089,
+        "duration_seconds": 0.495,
+        "text": "assumptions."
+      },
+      {
+        "number": 47,
+        "start": 155.607,
+        "end": 156.393,
+        "duration_seconds": 0.786,
+        "text": "436 minutes."
+      },
+      {
+        "number": 51,
+        "start": 165.036,
+        "end": 165.821,
+        "duration_seconds": 0.785,
+        "text": "403, 3."
+      },
+      {
+        "number": 71,
+        "start": 229.871,
+        "end": 230.345,
+        "duration_seconds": 0.474,
+        "text": "events."
+      },
+      {
+        "number": 77,
+        "start": 254.052,
+        "end": 255,
+        "duration_seconds": 0.948,
+        "text": "downstream delay."
+      },
+      {
+        "number": 79,
+        "start": 258.929,
+        "end": 259.583,
+        "duration_seconds": 0.654,
+        "text": "improve error."
+      },
+      {
+        "number": 84,
+        "start": 268.75,
+        "end": 269.405,
+        "duration_seconds": 0.655,
+        "text": "807 minutes."
+      },
+      {
+        "number": 87,
+        "start": 273.661,
+        "end": 274.643,
+        "duration_seconds": 0.982,
+        "text": "406 to -2."
+      },
+      {
+        "number": 88,
+        "start": 274.643,
+        "end": 274.97,
+        "duration_seconds": 0.327,
+        "text": "216."
+      },
+      {
+        "number": 91,
+        "start": 279.226,
+        "end": 280.208,
+        "duration_seconds": 0.982,
+        "text": "011 to -0."
+      },
+      {
+        "number": 92,
+        "start": 280.208,
+        "end": 280.536,
+        "duration_seconds": 0.328,
+        "text": "007."
+      },
+      {
+        "number": 95,
+        "start": 284.792,
+        "end": 285.774,
+        "duration_seconds": 0.982,
+        "text": "009 to 0."
+      },
+      {
+        "number": 96,
+        "start": 285.774,
+        "end": 286.101,
+        "duration_seconds": 0.327,
+        "text": "052."
+      },
+      {
+        "number": 99,
+        "start": 290.357,
+        "end": 291.339,
+        "duration_seconds": 0.982,
+        "text": "079 to -0."
+      },
+      {
+        "number": 100,
+        "start": 291.339,
+        "end": 291.667,
+        "duration_seconds": 0.328,
+        "text": "047."
+      },
+      {
+        "number": 103,
+        "start": 295.923,
+        "end": 296.905,
+        "duration_seconds": 0.982,
+        "text": "664 to -0."
+      },
+      {
+        "number": 104,
+        "start": 296.905,
+        "end": 297.232,
+        "duration_seconds": 0.327,
+        "text": "164."
+      },
+      {
+        "number": 115,
+        "start": 325.126,
+        "end": 325.966,
+        "duration_seconds": 0.84,
+        "text": "model columns."
+      },
+      {
+        "number": 121,
+        "start": 341.933,
+        "end": 342.353,
+        "duration_seconds": 0.42,
+        "text": "lag."
+      },
+      {
+        "number": 130,
+        "start": 367.664,
+        "end": 368.566,
+        "duration_seconds": 0.902,
+        "text": "preprocessing fixed."
+      },
+      {
+        "number": 134,
+        "start": 383.443,
+        "end": 383.893,
+        "duration_seconds": 0.45,
+        "text": "forty-two."
+      },
+      {
+        "number": 136,
+        "start": 388.852,
+        "end": 389.303,
+        "duration_seconds": 0.451,
+        "text": "rf_d16_l50."
+      },
+      {
+        "number": 144,
+        "start": 414.098,
+        "end": 415,
+        "duration_seconds": 0.902,
+        "text": "exploratory candidate."
+      },
+      {
+        "number": 149,
+        "start": 427.273,
+        "end": 428.182,
+        "duration_seconds": 0.909,
+        "text": "917 minutes."
+      },
+      {
+        "number": 154,
+        "start": 446.364,
+        "end": 446.818,
+        "duration_seconds": 0.454,
+        "text": "minutes."
+      },
+      {
+        "number": 158,
+        "start": 459.091,
+        "end": 460,
+        "duration_seconds": 0.909,
+        "text": "across comparisons."
+      },
+      {
+        "number": 161,
+        "start": 469.545,
+        "end": 470,
+        "duration_seconds": 0.455,
+        "text": "refitting."
+      },
+      {
+        "number": 183,
+        "start": 531.25,
+        "end": 531.667,
+        "duration_seconds": 0.417,
+        "text": "baseline."
+      },
+      {
+        "number": 188,
+        "start": 544.167,
+        "end": 545,
+        "duration_seconds": 0.833,
+        "text": "feature increments."
+      },
+      {
+        "number": 190,
+        "start": 548.75,
+        "end": 549.583,
+        "duration_seconds": 0.833,
+        "text": "correlated-feature support."
+      },
+      {
+        "number": 192,
+        "start": 553.75,
+        "end": 554.167,
+        "duration_seconds": 0.417,
+        "text": "effects."
+      },
+      {
+        "number": 203,
+        "start": 589.818,
+        "end": 590.545,
+        "duration_seconds": 0.727,
+        "text": "655 minutes."
+      }
+    ]
+  },
+  "after": {
+    "path": "D:\\airline-delay\\tmp\\presentation_caption_segmentation_review_v01\\validation_v02\\captions_after.srt",
+    "sha256": "7180b2da25671f084819eccbd6c1a23d3b2b2f440dfe5bcb9f516259cd712402",
+    "duration_seconds": 600,
+    "slides": 12,
+    "cue_count": 125,
+    "minimum_cue_seconds": 1.709,
+    "minimum_cue_words": 4,
+    "maximum_lines": 2,
+    "maximum_line_characters": 42,
+    "first_four_cues": [
+      {
+        "number": 1,
+        "slide": 1,
+        "start_ms": 0,
+        "end_ms": 7071,
+        "duration_seconds": 7.071,
+        "word_count": 14,
+        "text": "The main prediction result is an August\nmean absolute error of 13.655 minutes for"
+      },
+      {
+        "number": 2,
+        "slide": 1,
+        "start_ms": 7071,
+        "end_ms": 13131,
+        "duration_seconds": 6.06,
+        "word_count": 12,
+        "text": "the frozen primary predictor, rf_d16_l50.\nIts root mean squared error is 42.917"
+      },
+      {
+        "number": 3,
+        "slide": 1,
+        "start_ms": 13131,
+        "end_ms": 18687,
+        "duration_seconds": 5.556,
+        "word_count": 11,
+        "text": "minutes over 560,077 accepted connections.\nThe airport analysis supports 25 estimates"
+      },
+      {
+        "number": 4,
+        "slide": 1,
+        "start_ms": 18687,
+        "end_ms": 25253,
+        "duration_seconds": 6.566,
+        "word_count": 13,
+        "text": "under the unchanged development reference.\nThese are the two findings around which I"
+      }
+    ],
+    "every_note_word_and_punctuation_preserved": true,
+    "rounded_timeline_contiguous": true,
+    "original_slide_durations_preserved": true
+  },
+  "edge_cases_passed": 6,
+  "oversize_word_rejection_passed": true,
+  "slides": [
+    {
+      "slide": 1,
+      "duration_seconds": 50,
+      "notes_sha256": "f0a857a87bf01ba1e933441057a797612b10d97740fe1589ff5e76e46ea3b9b7",
+      "word_count": 99,
+      "cue_count": 8,
+      "minimum_cue_seconds": 5.555,
+      "minimum_cue_words": 11,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    },
+    {
+      "slide": 2,
+      "duration_seconds": 45,
+      "notes_sha256": "55f0180433898058520b96c533d0c645a28834aaf1187eb10da4dc98053d1803",
+      "word_count": 106,
+      "cue_count": 10,
+      "minimum_cue_seconds": 2.123,
+      "minimum_cue_words": 5,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    },
+    {
+      "slide": 3,
+      "duration_seconds": 50,
+      "notes_sha256": "321662d67cb64c8a021bbb847a04e1a08b5f065dd97c477375713b5ef7b47cab",
+      "word_count": 101,
+      "cue_count": 11,
+      "minimum_cue_seconds": 1.98,
+      "minimum_cue_words": 4,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    },
+    {
+      "slide": 4,
+      "duration_seconds": 55,
+      "notes_sha256": "abffa0a8a9b898d3037027b5dcdd00985b8e4eec1f21524f9b050e49ab256e73",
+      "word_count": 134,
+      "cue_count": 12,
+      "minimum_cue_seconds": 3.283,
+      "minimum_cue_words": 8,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    },
+    {
+      "slide": 5,
+      "duration_seconds": 55,
+      "notes_sha256": "20f614a758059e68cfe671592737e3eed1d34889fc3104d7a2702a7d848b02e8",
+      "word_count": 116,
+      "cue_count": 10,
+      "minimum_cue_seconds": 4.741,
+      "minimum_cue_words": 10,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    },
+    {
+      "slide": 6,
+      "duration_seconds": 55,
+      "notes_sha256": "0741f48e471b26a25d4947badc214ae60d38a13f0b5713339a55c6bb1bb44223",
+      "word_count": 151,
+      "cue_count": 14,
+      "minimum_cue_seconds": 2.185,
+      "minimum_cue_words": 6,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    },
+    {
+      "slide": 7,
+      "duration_seconds": 50,
+      "notes_sha256": "1f08b98d75a0cab6e4a34b7ba41e0285a3cc311c2e8ccc1ba7cece40c6c9292a",
+      "word_count": 117,
+      "cue_count": 11,
+      "minimum_cue_seconds": 1.709,
+      "minimum_cue_words": 4,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 41
+    },
+    {
+      "slide": 8,
+      "duration_seconds": 55,
+      "notes_sha256": "902901d58208a14c223b7d7e4e171cc079fe0f4f21e1a708dda8dea124e297fe",
+      "word_count": 122,
+      "cue_count": 11,
+      "minimum_cue_seconds": 1.803,
+      "minimum_cue_words": 4,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    },
+    {
+      "slide": 9,
+      "duration_seconds": 55,
+      "notes_sha256": "b998b0a201de7dd56d870a2452535ec245ad4949916e7e865eb3bb43fe0fc077",
+      "word_count": 119,
+      "cue_count": 11,
+      "minimum_cue_seconds": 2.311,
+      "minimum_cue_words": 5,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    },
+    {
+      "slide": 10,
+      "duration_seconds": 45,
+      "notes_sha256": "43a8e08c829b65b2067bc00b70c48273a8b82c6f296679893800ea8d7b19a922",
+      "word_count": 68,
+      "cue_count": 6,
+      "minimum_cue_seconds": 5.956,
+      "minimum_cue_words": 9,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    },
+    {
+      "slide": 11,
+      "duration_seconds": 65,
+      "notes_sha256": "56f77bc0b73a65289a1b1fedb18adc9e3626cddc26498e4b0e5ba1039af2f692",
+      "word_count": 154,
+      "cue_count": 16,
+      "minimum_cue_seconds": 2.532,
+      "minimum_cue_words": 6,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    },
+    {
+      "slide": 12,
+      "duration_seconds": 20,
+      "notes_sha256": "0ae94baddf1a60678f5e9235ff04efdf0cd9f7fa73e0c359456e22b5a54f77d8",
+      "word_count": 54,
+      "cue_count": 5,
+      "minimum_cue_seconds": 2.963,
+      "minimum_cue_words": 8,
+      "word_sequence_identical": true,
+      "maximum_line_characters": 42
+    }
+  ],
+  "limitations": "Timing remains proportional to word count, not synchronized to recorded speech. Full rendered-caption readability and final 600-second video QA remain required.",
+  "renderer_before": {
+    "path": "D:\\airline-delay\\tmp\\presentation_caption_segmentation_review_v01\\renderer_before.mjs",
+    "sha256": "b1a08e1897efce47192b6c881aca3862de6e57cef6185529c78818865855ed8f"
+  },
+  "old_srt_original_path": "D:\\airline-delay\\tmp\\final_presentation_preview_v01\\deck_v03\\captions_en.srt",
+  "observed_original_defects": {
+    "decimal_split_cues": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "description": "Original sentence regex treated decimal points as sentence endings, splitting 13.655 into 13. and 655, and 42.917 similarly. Original sentence-local groups also produced isolated short cues.",
+    "minimum_cue_seconds": 0.327
+  },
+  "tools": {
+    "node_path": "C:/Users/Ham/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+    "node_version": "v24.19.0"
+  },
+  "validation_command": [
+    "C:/Users/Ham/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+    "scripts/validate_presentation_captions.mjs",
+    "tmp/final_presentation_preview_v01/content_v03.json",
+    "tmp/presentation_caption_segmentation_review_v01/validation_v02",
+    "tmp/presentation_caption_segmentation_review_v01/captions_before.srt"
+  ],
+  "source_sealing_note": "No new runtime helper/import was added: production caption functions remain in the already sealed build_presentation.mjs. The new validator independently extracts only these functions and never executes PPTX authoring.",
+  "no_pptx_or_video_built": true
+}
