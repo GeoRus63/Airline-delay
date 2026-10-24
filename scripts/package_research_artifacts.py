@@ -93,7 +93,7 @@ def main() -> None:
         "prediction_samples_in_git": samples,
     }
     MANIFEST.parent.mkdir(exist_ok=True)
-    MANIFEST.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    MANIFEST.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(f"Manifest: {len(archives)} archives / {len(members)} files", flush=True)
 
 

@@ -1,9 +1,9 @@
 {
-  "checked_at_utc": "2026-10-24T09:51:42.394729+00:00",
+  "checked_at_utc": "2026-10-24T09:53:49.425426+00:00",
   "release_id": 422646054,
-  "release_url": "https://github.com/GeoRus63/Airline-delay/releases/tag/untagged-4e8a884487699df98e2a",
+  "release_url": "https://github.com/GeoRus63/Airline-delay/releases/tag/research-artifacts-v1",
   "tag": "research-artifacts-v1",
-  "draft": true,
+  "draft": false,
   "manifest_sha256": "98b32f1c3530e4971fd3945c4d92f85d963a81844505a2badcbbf267d4d3a221",
   "expected_assets": 18,
   "all_remote_digests_match": true,

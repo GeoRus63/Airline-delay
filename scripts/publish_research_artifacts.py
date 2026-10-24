@@ -117,7 +117,7 @@ def main() -> None:
                "all_remote_digests_match": True,
                "assets": [{key: a.get(key) for key in ("name", "id", "size", "digest", "state", "browser_download_url")}
                           for a in sorted(remote.values(), key=lambda x: x["name"])]}
-    RECEIPT.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    RECEIPT.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(f"Release verified: {len(remote)} assets, draft={release['draft']}", flush=True)
 
 

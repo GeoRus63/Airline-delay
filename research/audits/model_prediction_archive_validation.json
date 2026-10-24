@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-10-24T09:53:03.156661+00:00",
+  "checked_at_utc": "2026-10-24T09:58:47.478666+00:00",
   "archive_count": 17,
   "file_count": 268,
   "original_manifest_membership_complete": true,
@@ -12,6 +12,22 @@
     "different existing file preserved and refused",
     "corrupt archive rejected before extraction"
   ],
-  "network_download_validation": "pending publication",
-  "main_expected_sha": "a143675fb4dc1002fd9e3e4b427500cc8f8b2143"
+  "network_download_validation": {
+    "status": "passed",
+    "authentication": "none; public release download URLs",
+    "command": "python scripts/restore_research_artifacts.py --archive-dir tmp/public-release-downloads --root tmp/public-release-restore",
+    "archive_downloads": 17,
+    "restored_and_independently_rehashed_files": 268,
+    "public_manifest_bytes_equal_local": true,
+    "public_release_assets": 18,
+    "public_manifest_sha256": "98b32f1c3530e4971fd3945c4d92f85d963a81844505a2badcbbf267d4d3a221"
+  },
+  "main_expected_sha": "a143675fb4dc1002fd9e3e4b427500cc8f8b2143",
+  "main_verified_sha": "a143675fb4dc1002fd9e3e4b427500cc8f8b2143",
+  "default_branch_verified": "main",
+  "independent_review": {
+    "model": "gpt-6.1-sol",
+    "scope": "archive completeness, original receipts, path safety, overwrite refusal, upload digest checks, documentation",
+    "blocking_findings": 0
+  }
 }
