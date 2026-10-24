@@ -1,0 +1,23 @@
+{
+  "created_at_utc": "2026-10-24T05:28:05.797509+00:00",
+  "run_id": "R0030",
+  "browser": "Codex sidebar browser",
+  "url": "http://localhost:8765/experiments/runs/R0030/notebooks/07_%E6%9C%80%E7%BB%88%E8%AF%84%E4%BC%B0.html",
+  "html_sha256": "4afc1595fd8e5a1f70e90bf37b1b968893a8df3d94abcd45f67bf615039dd7f5",
+  "image_elements": 4,
+  "broken_images": 0,
+  "actual_visual_sections": [
+    "8-row raw/clipped prediction differences",
+    "reproduction provenance and formal ledger hash"
+  ],
+  "observations": [
+    "All eight model/column rows show zero maximum difference, 560077 rows each",
+    "The table is fully visible without column clipping at observed viewport",
+    "Reproduction provenance is displayed separately from formal R0028; no second formal claim"
+  ],
+  "screenshot": {
+    "path": "research/audits/R0030_reproduction_screenshot.png",
+    "sha256": "9241f3e0d02d77aa2ff598d08f0e2f2899536eb3df3a3636fc8a2621d5e07220"
+  },
+  "scope": "Selected verification sections visually reviewed, not every scroll position. Notebook execution and file-link checks belong to the separate light-result review."
+}
