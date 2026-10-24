@@ -1,0 +1,52 @@
+审查结论
+
+未发现所列数值、比例或既定执行流程存在必须改变科学方法的错误。无需重新选模、改机场或阈值，也无需调整复现容差。 本轮需要完善的是报告中的分组取舍、支持范围和证据状态。R28、R29可以作为已完成结果报告；R30尚未完成，仍不能写“完整复现通过”。
+
+1. 数值正确，但总体改善需要同时交代分组取舍
+
+我用所列两组AE/SE总和重算，四模型的整体MAE/RMSE均吻合，仅有双精度末位差异；相对改善及误差贡献比例也正确。
+
+结果定义分组	n	中位数基线MAE	RF MAE	RF−中位数
+普通：目标＜60分钟	510,752	6.7446	8.2788	+1.5342
+严重：目标≥60分钟	49,325	134.5447	69.3255	−65.2192
+
+总体MAE下降 4.3447分钟、24.14%，其算术分解是：普通组增加约 78.36万误差分钟，严重组减少约 321.69万误差分钟，净减少约243.34万；这是预测误差的变化，不是实际航班延误节省。
+
+必须准确限定两点：
+
+普通组只有MAE相对中位数变差。 该组RF的RMSE仍由14.6415降至10.8156，不能笼统称“普通组全面变差”。
+严重组占样本 8.81%，但贡献RF绝对误差的 44.71%、平方误差的 94.21%，说明尾部误差仍高度集中。按实际目标划分的组仅用于事后诊断，不能据此提出“普通用中位数、严重用RF”的部署规则，也不能由组均值推断逐行预测胜率。
+
+分组差异目前是描述性点结果，不应写成已经完成组别显著性检验。
+
+2. 不确定性与残差的必要限定
+
+六个所报区间均低于零，可以支持“在本次8月整体评价和既定重采样方案下，RF误差低于各基线”。但它们是六个逐项区间，不是联合95%区间；31个预测日、1000次重采样不等于拥有1000个独立观测期，也不覆盖重新训练或其他月份的不确定性。
+
+RF平均残差−0.912与中位残差+5.420应同时呈现，不能概括为“模型无偏”；95分位绝对误差仍为39.020分钟。当前没有严重组的有符号残差，不能仅凭严重组MAE断言其系统性低估。
+
+3. RQ1必须明确符号、支持和分母
+全期应写：25个支持机场中24个点估计为负；FLL唯一为正，+0.436分钟，但区间[−2.403, 3.012]包含零，方向尚不能确认。 不能写成“FLL已证实放大延误”，也不能解释为机场责任或因果效率。
+**278,633／482,013＝57.806%**是全部原始主样本的覆盖比例；**278,633／301,000＝92.569%**是所选25机场内部的总体保留率；84.163%—96.853%是逐机场范围。三者不能混用。
+阈值敏感性的排序相关较高，但方向一致仅为 20/25（>0）和24/25（≥5），不能称方向完全稳健；≥15自身的1.0不是额外验证。
+4–8月是包含开发期的扩展描述。8月仅15个机场支持，其余10个保持NA；不同月份支持集合变化不能直接解释为同一机场群的趋势。
+网络航班、accepted衔接、当地8月单航班和UTC预测窗口属于不同口径。D0003内的边界计数0不能证明原始当地8月航班没有UTC跨界。
+4. 报告与演示的最小修改
+
+保留全部四模型主表及RF严重度诊断，补入上述RF与中位数的两组取舍和误差贡献。中文解读明确“24负、1正且跨零”。幻灯片继续保持12页、600秒，在原误差页加入两组对照及尾部误差份额即可。
+
+这些属于报告内容与措辞修正。现有证据不要求改变科学方法；R30未完成只阻止“完整复现已经通过”的声明，不阻止报告已审计的正式结果。
+
+可直接用于英文报告的紧凑段落
+
+Predictive performance and trade-off
+
+On the prespecified August UTC prediction-window test (n = 560,077), the frozen random forest achieved pooled MAE/RMSE of 13.655/42.917 minutes, outperforming all three baselines on both aggregate metrics. Relative to the training-median baseline, MAE decreased by 4.345 minutes (24.14%; paired seven-day moving-block 95% interval: −6.647 to −1.985). This aggregate gain involved an outcome-defined trade-off: for ordinary cases (target <60 minutes), MAE increased from 6.745 to 8.279, although RMSE decreased from 14.641 to 10.816; for severe cases (target ≥60 minutes), MAE decreased from 134.545 to 69.325. Summed absolute error increased by 0.784 million minutes in ordinary cases and decreased by 3.217 million minutes in severe cases. Severe cases represented 8.81% of observations but accounted for 44.71% of RF absolute error and 94.21% of squared error. These retrospective strata describe error concentration and cannot define an operational model-switching rule.
+
+RQ1 scope and support
+
+RQ1 describes April–August, including the development months, and is not an independent August confirmation. Under the frozen reference standardization, 24 of the 25 supported airports had negative point estimates. FLL was the only positive estimate (+0.436 minutes), but its interval included zero (−2.403 to 3.012). The 278,633 retained connections represented 57.81% of the full raw main sample and 92.57% of the raw sample within the selected airports. Only 15 airports met the monthly support requirements in August; the remaining ten stayed unavailable. Relative to the ≥15-minute threshold, sign agreement was 20/25 for >0 and 24/25 for ≥5, despite high rank correlations. These descriptive associations do not establish airport-level causal effects or multiplicity-adjusted rankings.
+
+Uncertainty and verification status
+
+The six date-block intervals are individual comparisons conditional on the frozen models, the 31 UTC prediction dates and the specified resampling scheme; they do not provide simultaneous coverage or establish performance in other periods. Independent metric recomputation and archival audits passed. Full feature reconstruction and refitting in R30 remain in progress, so full numerical reproducibility has not yet been established. Because development retained July predictions with August-maturing outcomes, the study remains retrospective and does not simulate a selection process completed by 1 August.

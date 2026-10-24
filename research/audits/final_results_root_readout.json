@@ -1,0 +1,79 @@
+{
+  "created_at_utc": "2026-10-24T04:21:57.674536+00:00",
+  "scope": "Lightweight archived summaries only; no prediction, feature, model or raw rows read; no fit.",
+  "calculations": {
+    "rf_vs_median_relative_mae_reduction": 0.24137409974167476,
+    "severe_sample_share": 0.08806824775879031,
+    "rf_severe_absolute_error_share": 0.4471134368882697,
+    "rf_severe_squared_error_share": 0.9420836634039063,
+    "ordinary_mae_increase_vs_median": 1.5341704403898682,
+    "ordinary_absolute_error_increase": 783580.6207700055,
+    "severe_absolute_error_reduction": 3216934.9534094622,
+    "rq1_supported_airports": 25,
+    "rq1_negative_point_estimates": 24,
+    "rq1_retained_n": 278633,
+    "rq1_all_airport_raw_n": 482013,
+    "rq1_selected_airport_raw_n": 301000,
+    "rq1_retained_fraction_of_all_raw": 0.5780611726239748,
+    "rq1_retention_within_airports_range": [
+      0.8416325244248345,
+      0.9685334545041463
+    ],
+    "rq1_monthly_supported": {
+      "2026-04": 6,
+      "2026-05": 8,
+      "2026-06": 12,
+      "2026-07": 15,
+      "2026-08": 15
+    },
+    "rq1_final_range": [
+      -16.42438302279934,
+      0.4364630537155887
+    ],
+    "rq1_intervals_including_zero": [
+      {
+        "airport_id": 11697,
+        "standardized_mean": 0.4364630537155887,
+        "ci_low": -2.403369978664235,
+        "ci_high": 3.0117514241228664
+      }
+    ]
+  },
+  "sources": [
+    {
+      "path": "experiments/runs/R0028/metrics.csv",
+      "bytes": 449815,
+      "sha256": "c1c7194ed6739a50de9abe050f1ca23138a8ab9b8b5fb42ff9c769ff42f58591"
+    },
+    {
+      "path": "experiments/runs/R0028/final_comparisons.csv",
+      "bytes": 1199,
+      "sha256": "99fe2bb8ecb87a7c30969436b64a18c75cfc26fa2bd3aa8eb83cc7d7d517f42e"
+    },
+    {
+      "path": "experiments/runs/R0028/residual_summary.csv",
+      "bytes": 453,
+      "sha256": "a4e59cd3d42b2ac2a235985c10170705a3d922fc5448ed2541ed8620823c5d9d"
+    },
+    {
+      "path": "experiments/runs/R0029/rq1_summary.json",
+      "bytes": 872,
+      "sha256": "8c1ccf2641bf7ba721dfed0509132e49a7ade03fbac76f52de514f72a38c8456"
+    },
+    {
+      "path": "experiments/runs/R0029/rq1_standardized/rq1_airports.csv",
+      "bytes": 189115,
+      "sha256": "0af06767c5a7ed8f1f414fc4f58a01fcef24fd9e280f6a118b4b0dd597390a1d"
+    },
+    {
+      "path": "experiments/runs/R0029/rq1_standardized/rq1_airports_monthly.csv",
+      "bytes": 853138,
+      "sha256": "332ad834aee1bfef0d2435423ff5e2cbf6172f3b5d9696364488b45b9f24ef29"
+    },
+    {
+      "path": "experiments/runs/R0029/rq1_standardized/rq1_threshold_stability.csv",
+      "bytes": 194,
+      "sha256": "69ed76fd0cf4ab39b8ee810acc6cc98f5e2403cc3772e7d531be188be15a2612"
+    }
+  ]
+}

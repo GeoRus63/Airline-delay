@@ -1,0 +1,20 @@
+{
+  "mainline_run_ids": {
+    "G0": "R0006",
+    "G1": "R0007",
+    "G2": "R0009",
+    "G3": "R0012",
+    "G4A": "R0015",
+    "G4B": "R0017"
+  },
+  "variant_run_id": "R0010",
+  "noaa_run_id": "R0019",
+  "algorithm_run_ids": ["R0021", "R0022", "R0023", "R0024", "R0025", "R0026"],
+  "development_rq1_run_id": "R0018",
+  "feature_selection_run_id": "R0020",
+  "model_selection_run_id": "R0027",
+  "final_prediction_run_id": "R0028",
+  "final_rq1_run_id": "R0029",
+  "reproduction_run_id": "R0030",
+  "output_dir": "reports/research_v01"
+}

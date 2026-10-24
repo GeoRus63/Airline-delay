@@ -4,7 +4,7 @@
 
 本次 4–8 月重建已完成五个月清洗、D0003 衔接、W0002 天气、G0–G4B 主线与 variant/NOAA 分支、开发 EDA、完整 RQ1 和全部 DT/RF 开发网格。R0027 已按登记规则选中 R0025：G4B 65 个输入、200 树随机森林、depth16/leaf50、max_features=0.5、seed42，开发期 pooled MAE 12.1643 分钟、RMSE 41.7654 分钟，胜过三个基线。
 
-**项目已进入 P6：第九轮 Pro 最终选模审查完成，F0001 已冻结；唯一正式 8 月评估 R0028 于 2026-10-24 03:08:45Z 左右启动，目前仍在运行，尚无已完成的测试结果。** 不得重新启动第二次 formal 或删除访问账本。最终 RQ1/R0029、完整复现/R0030 的配置已提交但未执行；最终中英文报告、PDF、PPTX、字幕视频和 P7 交付审计仍待完成。冻结 SHA 与后续条件性命令见[最终运行说明](docs/最终运行说明.md)，当前状态见[执行进度](docs/执行进度.md)及[实验索引](experiments/index.csv)。
+**P0–P6 已实际完成：唯一正式 8 月评估 R0028 和最终 RQ1/R0029 均完成独立审计并推送；P7 完整重建/重训 R0030 正在运行，尚未声明复现通过。** 不得重新启动第二次 formal 或删除访问账本，也不要重复启动当前批处理。第十轮 Pro 审查未要求方法变更，报告中的误差分组、支持和证据状态仍需准确披露。最终中英文报告、PDF、可编辑PPTX、600秒无配音字幕视频和P7交付审计待生成，计划路径见[最终运行说明](docs/最终运行说明.md)。当前状态见[执行进度](docs/执行进度.md)及[实验索引](experiments/index.csv)。
 
 ## 新电脑 Codex 开工入口
 
@@ -51,10 +51,10 @@ python scripts/verify_downloads.py --raw-only
 
 命令只核对原始文件大小、哈希及压缩完整性，不联网、不清洗、不解析测试目标。检查通过后，按照[最终运行说明](docs/最终运行说明.md)恢复隔离环境与本地产物，再选择只读审计或使用新 run_id 重建。不要覆盖已完成运行。
 
-机型只用 family/variant，不加入机场设施、座位数或机龄。开发比较使用 4–7 月 UTC 前向验证与成熟训练标签；唯一正式 8 月时间外测试正在按冻结方案运行。网络图、周转热力图、阈值敏感性和变量增量已有开发结果；最终结论须等待正式运行及核验完成。
+机型只用 family/variant，不加入机场设施、座位数或机龄。开发比较使用4–7月UTC前向验证与成熟训练标签；正式8月评估已经完成，结果按F0001归档，不再据此调参。研究依据与结果解释以研究日志和有效运行档案为准；完整复现与最终报告的交付状态仍需后续核验。
 
 <details><summary>English</summary>
 
-This project covers 3,057,590 BTS flights from April–August 2026 across 355 airport IDs. Development experiments and registered model selection are complete. R0027 selected the R0025 random forest with 65 G4B inputs; development pooled MAE/RMSE were 12.1643/41.7654 minutes. Final review is complete and F0001 is frozen. The unique formal August assessment R0028 started at approximately 03:08:45 UTC on 24 October 2026 and is still running; no completed test result is claimed. Final RQ1, full refit reproduction and final deliverables remain pending. Do not reopen the formal test. Full Git history and separately copied ignored processed data, predictions, feature archives and models are required for migration and receipt verification.
+This project covers 3,057,590 BTS flights from April–August 2026 across 355 airport IDs. P0–P6 are complete, including registered model selection, the unique frozen August assessment R0028 and final RQ1 R0029; both final runs passed independent archive checks and were pushed. R0030 is rebuilding features and refitting the frozen models; successful full reproduction is not yet claimed. Final reports, editable slides, a 600-second captioned video without narration and delivery audit remain pending. Do not reopen the formal test or duplicate the running batch. Full Git history and separately copied ignored processed data, predictions, feature archives and models are required for migration and receipt verification.
 
 </details>

@@ -1,0 +1,41 @@
+{
+  "checked_at_utc": "2026-10-24T04:30:27.136122+00:00",
+  "run_id": "R0029",
+  "html": "experiments/runs/R0029/notebooks/07_最终评估.html",
+  "sha256": "ad461d36703372008ec7e88b135adb93ef00d0e59397bdb15319e6598b5cc3d5",
+  "kernel_errors": 0,
+  "local_links_checked": 46,
+  "missing_links": [],
+  "browser_images": 10,
+  "browser_broken_images": 0,
+  "browser_visual_checks": [
+    "actual R0028 model metrics embedded in R0029 combined Notebook",
+    "RF and all baselines ordinary/severe table",
+    "residual and paired-comparison scope",
+    "fixed R0018 reference final RQ1 scope"
+  ],
+  "screenshots": [
+    {
+      "path": "research/audits/R0029_final_metrics_screenshot.png",
+      "sha256": "696d81b26305d9b0e9c844f1c6cc0c9787c512237f956c954f3fedd8d7e2bcd5"
+    },
+    {
+      "path": "research/audits/R0029_paired_comparison_screenshot.png",
+      "sha256": "3e50848c649c6226773e819143acb32dbc72a6ba81580611965868bcc998775d"
+    },
+    {
+      "path": "research/audits/R0029_rq1_scope_screenshot.png",
+      "sha256": "0c9330868df515703d18679dbf0ba2044ce3686529cd65ce86ec2f19c0452c2b"
+    },
+    {
+      "path": "research/audits/R0029_severity_screenshot.png",
+      "sha256": "9cbeb59dd28703d180fe63545c514474eccb74147aab06a7cd4de413c953a0c8"
+    }
+  ],
+  "limits": [
+    "Selected visible sections, not every scroll position.",
+    "Wide metrics/config columns require horizontal scrolling; complete CSVs remain linked.",
+    "Inline TeX in the RQ1 scope was visible as delimiters in the browser snapshot; final report PDF math has separate rendering QA."
+  ],
+  "passed": true
+}
