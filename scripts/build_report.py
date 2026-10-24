@@ -621,10 +621,13 @@ def rq1_reference_prose(archive, run_id):
         turn = protocol["turnaround_bins"][cell % width: cell % width + 2]
         values = [number(maps[threshold][cell], 6) if cell in maps[threshold] else "NA" for threshold in ["gt0", "ge5", "ge15"]]
         table.append(f"| {cell} | [{edge(delay[0])}, {edge(delay[1])}) | [{edge(turn[0])}, {edge(turn[1])}) | {' | '.join(values)} |")
-    en.append("Threshold-specific weights condition one pooled development reference on its eligible cells; each weight column sums to one before display rounding. "
+    en.append(f"The {len(frozen['master_cells'])} common master cells are distinct from the threshold-specific references: "
+              f">0 uses {len(maps['gt0'])} cells, >=5 uses {len(maps['ge5'])}, and >=15 uses {len(maps['ge15'])}. "
+              "Threshold-specific weights condition one pooled development reference on its eligible cells; each weight column sums to one before display rounding. "
               "NA denotes a cell outside that threshold's reference, not a zero or an airport-specific renormalization. The >0 population excludes zero even in the [0,5) cell. "
               "These weights and A/C are reused for monthly and final RQ1, while an airport can lose support in an individual month. " + ref + "\n\n" + "\n".join(table))
-    zh.append("三个阈值在同一开发期主参考上条件化，表中每列权重在显示舍入前合计1。NA表示该格不属于对应阈值参考，并非补零，也不是按机场重算权重。"
+    zh.append(f"{len(frozen['master_cells'])}个共同主格不等于各阈值实际使用格数：>0使用{len(maps['gt0'])}格，≥5使用{len(maps['ge5'])}格，≥15使用{len(maps['ge15'])}格。"
+              "三个阈值在同一开发期主参考上条件化，表中每列权重在显示舍入前合计1。NA表示该格不属于对应阈值参考，并非补零，也不是按机场重算权重。"
               "即使格区间从0开始，>0人群也排除零延误。逐月和最终RQ1复用同一A/C/w，但单月机场仍可能失去支持。" + ref + "\n\n" + "\n".join(table))
     return en, zh
 
@@ -1044,7 +1047,8 @@ def compose(archive, config, validated):
     lines += ["## Prediction timing, validation and new methods",
               "Prediction time is upstream actual arrival; the target is downstream nonnegative departure delay, with prediction strictly before label time. "
               "May, June and July are forward validation months, trained respectively on mature April, April–May and April–June labels. UTC month-start half-open windows govern membership. "
-              "All learned imputation, category encoding and scaling are fitted inside each training fold, and every prediction is clipped at zero. The August test follows a committed frozen choice and mature April–July refitting; test performance never selects a model.",
+              "All learned imputation, category encoding and scaling are fitted inside each training fold, and every prediction is clipped at zero. The August test follows a committed frozen choice and mature April–July refitting; test performance never selects a model. "
+              "Development evaluation retains July predictions even when their labels mature in August. The feature as-of contract concerns inputs at each prediction time, separately from the retrospective completion date of model selection; it does not establish that selection had actually finished by 1 August.",
               "The new methods are as-of availability matching, common-support standardization and paired UTC date-block uncertainty. METAR lacks actual receipt timestamps, so observation plus five minutes is assumed available, with observation age capped at 120 minutes. "
               "TAF uses the latest archive bulletin state available at prediction time and queries the later of scheduled departure and prediction time. Archive/issue timestamps are availability proxies, not verified historical delivery receipts; TEMPO, probability, amendment, cancellation and NIL states remain distinct. The registered conservative rule blocks unverified amended, corrected or delayed bulletin values without falling back to an older forecast. Thus locating a latest state does not imply an approved active forecast. "
               "NOAA is a separate retrospective supplement: exact quality-code whitelisting does not establish full official QC certification or contemporaneous delivery, and conflicting or structural missing values are not automatically filled. "
@@ -1053,7 +1057,8 @@ def compose(archive, config, validated):
               "## RQ1: airport absorption and amplification",
               "For a connection, net change is downstream nonnegative departure delay minus upstream nonnegative arrival delay. A negative change means fewer delay minutes, not necessarily punctual departure. "
               "The main population is nonovernight with upstream delay at least 15 minutes. Airport comparison adjusts only for upstream-delay and scheduled-turnaround cells within frozen common support. "
-              "Common airports, cells and reference weights are held fixed across months and final reporting; uncertainty uses common date blocks and is descriptive, not causal or multiplicity-adjusted.",
+              "Common airports, cells and reference weights are held fixed across months and final reporting; uncertainty uses common date blocks and is descriptive, not causal or multiplicity-adjusted. "
+              "The April–August description includes the development months used to determine A/C/w. It describes an expanded period and is not an independent August validation.",
               "\n\n".join(reference_en),
               rq1_prose(archive, config["development_rq1_run_id"], "April–July development"),
               rq1_prose(archive, config["final_rq1_run_id"], "April–August final description"),
@@ -1122,6 +1127,7 @@ def compose(archive, config, validated):
                                ["fold", "group", "mean_delta_mae", "sd_delta_mae", "repeats"])
     lines.append("The retained learned model is explained separately from any winning baseline. Joint-group permutation preserves relationships within a feature group but can break relationships across groups; "
                  "repeat standard deviation is not a confidence interval. Encoded linear coefficients use reference categories and scaled inputs, and airport–route overlap prevents independent airport-effect interpretation. "
+                 "Group permutation losses cannot be summed as factor contributions or substituted for feature-addition experiments. Their ratio cannot establish a multiple of TAF versus METAR incremental value, and small METAR sensitivity does not show that METAR is useless. "
                  "PDP describes hypothetical input replacements and may cross correlated-feature support; neither technique establishes causation.")
     for fold, part in importance.groupby("fold", sort=True):
         row = part.sort_values(["mean_delta_mae", "group"], ascending=[False, True]).iloc[0]
@@ -1197,7 +1203,7 @@ def compose(archive, config, validated):
     chinese += ["## 执行预算与复现", *execution_zh]
     chinese.extend(coefficient_zh)
     chinese.extend(reproduction_zh)
-    chinese += ["## RQ1、研究演进和局限", "RQ1先报告原始均值与累计增加/减少/净变化，再按上游延误和计划周转共同支持标准化。共同支持机场、分层和权重由开发期冻结，逐月与4–8月最终描述重复使用；>0、≥5、≥15阈值不能另选有利机场。节点大小是衔接数、颜色是标准化每次净变化、有向边宽是航班量，不能解释为机场责任。"]
+    chinese += ["## RQ1、研究演进和局限", "RQ1先报告原始均值与累计增加/减少/净变化，再按上游延误和计划周转共同支持标准化。共同支持机场、分层和权重由开发期冻结，逐月与4–8月最终描述重复使用；>0、≥5、≥15阈值不能另选有利机场。4–8月包含用于确定A/C/w的开发月份，是扩展期间的描述性汇总，不是独立8月验证。节点大小是衔接数、颜色是标准化每次净变化、有向边宽是航班量，不能解释为机场责任。"]
     chinese.extend(reference_zh)
     for run_id in [config["development_rq1_run_id"], config["final_rq1_run_id"]]:
         matching = [item for item in archive.evidence if item["run_id"] == run_id and item["kind"] == "conclusion"]
@@ -1210,10 +1216,11 @@ def compose(archive, config, validated):
                        f"共同支持下可比较{len(adjusted)}个机场，标准化净变化范围{number(adjusted.standardized_mean.min())}至{number(adjusted.standardized_mean.max())}分钟。")
         chinese.append(f"共同支持格实际保留{int(adjusted.retained_n.sum()):,}条，占全机场原始主样本{number(100 * adjusted.retained_n.sum() / raw.n.sum(), 2)}%；"
                        "这与所选各机场内部保留率是不同分母。单月支持的机场集合可能变化，跨机场范围不等于同机场月际趋势；无支持月份仍为NA。")
-    chinese += ["主线固定OLS并按预定顺序增量；variant替换和NOAA补缺独立比较。固定特征之后才比较4组决策树与2组随机森林。共同天气覆盖子集只比较已有预测，不重新训练；源报文可用不等于每个天气变量齐全。每轮无增益、失败和失效都保留，不能只讲最终最好模型。",
+    chinese += ["主线固定OLS并按预定顺序增量；variant替换和NOAA补缺独立比较。固定特征之后才比较4组决策树与2组随机森林。选择协议在P3之后、天气及DT/RF表现查看之前登记，不是P0前预注册；特征集合由OLS引导，不是RF全局最优特征或参数的证明。配对区间条件于已训练模型及既有选择，不是选择调整后的独立确认。共同天气覆盖子集只比较已有预测，不重新训练；源报文可用不等于每个天气变量齐全。每轮无增益、失败和失效都保留，不能只讲最终最好模型。",
+                "开发评价保留7月预测、8月才成熟的标签，因此预测输入的as-of契约与研究实际完成选模的时点必须分开；不能宣称截至8月1日已真实完成模型选择。",
+                "分组permutation是固定开发样本、固定模型在一组信息被打乱后的损失敏感性，不能加总为各因素贡献，也不能替代逐组增量实验。不能用TAF与METAR的permutation数值比推断实际增量价值倍数，较小的METAR敏感性也不表示METAR无用。PDP的边际网格范围并不保证全部联合输入组合都有支持。",
                 "这是观察到有效、已完成、同机相邻衔接条件下的回顾性预测，不是全航班实时部署证明。METAR观测后5分钟和TAF归档/发布时间都是可用性假设/代理，NOAA精确质量码筛选不等于官方全QC认证。静态机队参考、计划信息事前可得假设、共同支持外推广、单季节和非因果解释都限制结论。",
-                "新学方法包括as-of连接、共同支持标准化和共同日期块区间。Li等用于传播视角与buffer定义，Chauhan等用于网络口径区分，Berkeley用于预测时点与逐步实验组织；并未复现三项工作的结论。",
-                "英文正文采用连续行文。Markdown只提供Times New Roman 11pt排版元数据；25页、字体、图表可读性仍须PDF渲染后逐页核验。任务书另要求约10分钟技术视频并避免AI配音，本构建器不生成视频或代替人声讲解。"]
+                "新学方法包括as-of连接、共同支持标准化和共同日期块区间。Li等用于传播视角与buffer定义，Chauhan等用于网络口径区分，Berkeley用于预测时点与逐步实验组织；并未复现三项工作的结论。"]
     for _, row in archive.index.loc[archive.index.status.isin(["failed", "invalidated"])].iterrows():
         ids = [item["evidence_id"] for item in archive.evidence if item["run_id"] == row.run_id and item["kind"] == "research_history"]
         chinese.append(f"研究演进：{row.run_id}状态{row.status}，改动“{row.change}”，决定“{row.decision}”。" + " ".join(f"[{item}]" for item in ids))
