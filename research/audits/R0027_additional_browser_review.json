@@ -1,0 +1,39 @@
+{
+  "reviewed_at_utc": "2026-10-24T03:37:26.805101+00:00",
+  "source": {
+    "path": "experiments/runs/R0027/notebooks/06_共同支持与模型比较.html",
+    "bytes": 5344481,
+    "sha256": "1d7fb79893591d2e646e2ed917bc9e45aca500f43bd3eec5f27911120ea8e909"
+  },
+  "method": "Sidebar browser local HTML; actual screenshot review plus read-only DOM image loading check",
+  "image_count": 34,
+  "broken_image_count": 0,
+  "visually_reviewed_sections": [
+    "6. Dynamic model and baseline introduction",
+    "Specified development pooled metrics, visible columns",
+    "Algorithm candidates and explanation introduction"
+  ],
+  "findings": [
+    "Displayed metrics agree with archived candidate results; numeric columns visible.",
+    "Wide technical hash/config columns exceed viewport; archive/download links remain the complete reference.",
+    "Generic historical heading includes pending evidence wording; actual explanation source is R0027 and populated. Frozen scientific renderer and archived HTML were not modified."
+  ],
+  "scope_limit": "This supplementary check does not claim all 34 figures were individually visually inspected. Final report/deck require their own complete visual QA.",
+  "screenshots": [
+    {
+      "path": "research/audits/R0027_models_screenshot.png",
+      "bytes": 78372,
+      "sha256": "7231d4a91ec27104d5fa82e691d4cc8c8ea3ace77b16bcad0b0493cc38972b49"
+    },
+    {
+      "path": "research/audits/R0027_pooled_table_screenshot.png",
+      "bytes": 123309,
+      "sha256": "62b0b5687755755011a4462d6858cdcfb1bf2478f4bc8a85411bcdf79387ee07"
+    },
+    {
+      "path": "research/audits/R0027_explanation_intro_screenshot.png",
+      "bytes": 117676,
+      "sha256": "cffe6be8d6e6dc8e1d7bfce270fdab6547b77f5868da4b6862367cbb9df94ed2"
+    }
+  ]
+}

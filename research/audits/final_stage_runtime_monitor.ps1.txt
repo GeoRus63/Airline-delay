@@ -1,0 +1,33 @@
+$ErrorActionPreference = 'Stop'
+Set-Location -LiteralPath 'D:\Airline-delay'
+$out = 'research/audits/final_stage_runtime_samples.jsonl'
+if (Test-Path -LiteralPath $out) { throw 'Telemetry output already exists' }
+$previous = @{}
+$lastTime = $null
+while ($true) {
+    $now = [DateTime]::UtcNow
+    $states = [ordered]@{}
+    foreach ($runId in @('R0028','R0029','R0030')) {
+        $manifestPath = "experiments/runs/$runId/manifest.json"
+        $states[$runId] = if (Test-Path -LiteralPath $manifestPath) { (Get-Content -LiteralPath $manifestPath -Raw -Encoding utf8 | ConvertFrom-Json).status } else { 'not_created' }
+    }
+    $records = @()
+    $tracked = @(Get-CimInstance Win32_Process -Filter "Name = 'python.exe'" | Where-Object { $_.CommandLine -match 'run_pipeline\.py.*--run-id (R0028|R0029|R0030)(?:\s|$)' })
+    foreach ($entry in $tracked) {
+        $processId = [int]$entry.ProcessId
+        $process = Get-Process -Id $processId -ErrorAction SilentlyContinue
+        if (-not $process) { continue }
+        $cpu = $process.TotalProcessorTime.TotalSeconds
+        $rate = $null
+        if ($previous.ContainsKey($processId) -and $lastTime) { $rate = [math]::Round(($cpu - $previous[$processId]) / ($now - $lastTime).TotalSeconds * 100, 2) }
+        $previous[$processId] = $cpu
+        $records += [ordered]@{ pid=$processId; cpu_percent=$rate; cpu_seconds=$cpu; working_set_bytes=$process.WorkingSet64; thread_count=$process.Threads.Count }
+    }
+    $memory = Get-CimInstance Win32_OperatingSystem | Select-Object -ExpandProperty FreePhysicalMemory
+    $record = [ordered]@{ sampled_at_utc=$now.ToString('o'); cpu_percent_convention='100 percent equals one logical CPU; first sample null'; run_status=$states; processes=$records; available_memory_bytes=([long]$memory*1024); free_d_bytes=(Get-PSDrive -Name D).Free }
+    $record | ConvertTo-Json -Depth 8 -Compress | Add-Content -LiteralPath $out -Encoding utf8
+    if ($states.R0030 -eq 'completed' -or @($states.Values | Where-Object { $_ -eq 'failed' }).Count -gt 0) { break }
+    $lastTime = $now
+    Start-Sleep -Seconds 30
+}
+Write-Output "Telemetry completed: $out"
