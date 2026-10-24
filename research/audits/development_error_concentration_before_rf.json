@@ -1,0 +1,101 @@
+{
+  "created_at_utc": "2026-10-24T00:49:32.629294+00:00",
+  "scope": "Read-only summaries of completed development metrics before full RF results; not a model-selection decision",
+  "sources": [
+    {
+      "run_id": "R0017",
+      "path": "experiments/runs/R0017/metrics.csv",
+      "sha256": "9379ac294c57e6f2d03a8b4d17adf3d90e9f722d60fe3532c6887d5e4ed5b04e"
+    },
+    {
+      "run_id": "R0023",
+      "path": "experiments/runs/R0023/metrics.csv",
+      "sha256": "d125b9d8e7b9732d4fd1202ec04d901502412a40ace2b8ee0a109f009a5bf9bb"
+    },
+    {
+      "run_id": "R0024",
+      "path": "experiments/runs/R0024/metrics.csv",
+      "sha256": "5453a7e28fda5e22e8fc27ad61b56de6b3d6d9c10b893f77bd45992cb304ec34"
+    }
+  ],
+  "rows": [
+    {
+      "run_id": "R0017",
+      "model": "carry_forward",
+      "pooled_n": 1707091,
+      "mae": 17.425607656533835,
+      "rmse": 57.330723531495785,
+      "ordinary_mae": 12.42662548964932,
+      "severe_mae": 76.71074952919021,
+      "severe_n": 132750,
+      "severe_population_share": 0.07776386847567002,
+      "severe_absolute_error_share": 0.342330939307088,
+      "severe_squared_error_share": 0.5710700623337778
+    },
+    {
+      "run_id": "R0017",
+      "model": "g4b_linear",
+      "pooled_n": 1707091,
+      "mae": 16.80660373036146,
+      "rmse": 44.81355707887568,
+      "ordinary_mae": 11.028483822569381,
+      "severe_mae": 85.33188488857833,
+      "severe_n": 132750,
+      "severe_population_share": 0.07776386847567002,
+      "severe_absolute_error_share": 0.39482917427682485,
+      "severe_squared_error_share": 0.8756765899849686
+    },
+    {
+      "run_id": "R0017",
+      "model": "training_mean",
+      "pooled_n": 1707091,
+      "mae": 20.911252222695456,
+      "rmse": 50.9295775569548,
+      "ordinary_mae": 12.547824271675378,
+      "severe_mae": 120.09684562259682,
+      "severe_n": 132750,
+      "severe_population_share": 0.07776386847567002,
+      "severe_absolute_error_share": 0.4466110019562781,
+      "severe_squared_error_share": 0.9284572540132198
+    },
+    {
+      "run_id": "R0017",
+      "model": "training_median",
+      "pooled_n": 1707091,
+      "mae": 16.618017434337126,
+      "rmse": 53.46896745918939,
+      "ordinary_mae": 6.803280229632589,
+      "severe_mae": 133.015329566855,
+      "severe_n": 132750,
+      "severe_population_share": 0.07776386847567002,
+      "severe_absolute_error_share": 0.6224440812242663,
+      "severe_squared_error_share": 0.9314589943597986
+    },
+    {
+      "run_id": "R0023",
+      "model": "dt_d16_l200",
+      "pooled_n": 1707091,
+      "mae": 12.484975313050358,
+      "rmse": 42.147048460235986,
+      "ordinary_mae": 7.476623080964132,
+      "severe_mae": 71.88124093576116,
+      "severe_n": 132750,
+      "severe_population_share": 0.07776386847567002,
+      "severe_absolute_error_share": 0.44771921656533686,
+      "severe_squared_error_share": 0.9392297506579634
+    },
+    {
+      "run_id": "R0024",
+      "model": "dt_d16_l50",
+      "pooled_n": 1707091,
+      "mae": 12.51969746642683,
+      "rmse": 42.124331745339646,
+      "ordinary_mae": 7.531058226981486,
+      "severe_mae": 71.68217798520365,
+      "severe_n": 132750,
+      "severe_population_share": 0.07776386847567002,
+      "severe_absolute_error_share": 0.4452410671934445,
+      "severe_squared_error_share": 0.9341277864766195
+    }
+  ]
+}

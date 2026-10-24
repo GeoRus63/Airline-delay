@@ -203,7 +203,8 @@ def model_archive(archive, run_id, development=True):
             raise ValueError(f"Incorrect UTC validation boundary: {run_id}")
         if pd.Timestamp(fold["max_train_label_time"]) >= start or pd.Timestamp(fold["max_train_prediction_time"]) >= start:
             raise ValueError(f"Training boundary/label maturity violated: {run_id}")
-    for name in [model["model_name"], *BASELINES]:
+    include_baselines = model.get("include_baselines", run["config"].get("include_baselines", True))
+    for name in [model["model_name"], *(BASELINES if include_baselines or not development else [])]:
         pooled = selected_row(table, model=name, fold="overall", group="all", value="all")
         monthly = [selected_row(table, model=name, fold=fold, group="all", value="all") for fold in folds]
         if sum(int(row.n) for row in monthly) != int(pooled.n) or int(pooled.n) <= 0:
@@ -691,6 +692,81 @@ def rq1_prose(archive, run_id, label):
     return "\n\n".join(text)
 
 
+def execution_prose(archive, development_runs, selected_run, final_run):
+    """Disclose recorded resource budgets without inventing missing defaults."""
+    def positive(value):
+        if value is not None and (type(value) is not int or value < 1):
+            raise ValueError("Recorded execution budget must be a positive integer")
+        return value
+
+    def budget(run):
+        values, refs = [], []
+        for key in ["threads", "fold_workers"]:
+            manifest_value = positive(run["model"].get(key))
+            config_value = positive(run["config"].get(key))
+            if manifest_value is not None and config_value is not None and manifest_value != config_value:
+                raise ValueError(f"Execution manifest/config disagree: {run['id']}/{key}")
+            values.append(manifest_value if manifest_value is not None else config_value)
+            filename = "model_manifest.json" if manifest_value is not None else "config.json"
+            refs.append(archive.cite(run["id"], filename, {"keys": [key], "recorded": values[-1]},
+                                     "Recorded execution budget, not measured CPU utilization"))
+        return tuple(values), " ".join(refs)
+
+    groups, budgets = {}, {}
+    for run in development_runs:
+        pair, refs = budget(run)
+        budgets[run["id"]] = pair
+        groups.setdefault(pair, []).append((run["id"], refs))
+    en, zh = [], []
+    for (threads, workers), members in groups.items():
+        ids = ", ".join(run_id for run_id, _ in members)
+        refs = " ".join(ref for _, ref in members)
+        if threads is None or workers is None:
+            setting = f"threads per fold={threads if threads is not None else 'not recorded'}, fold workers={workers if workers is not None else 'not recorded'}"
+            en.append(f"Development execution for {ids} recorded {setting}; missing fields are not inferred from other runs. {refs}")
+            zh.append(f"开发运行{ids}的归档配置为{setting}；缺字段不能从其他运行推定。{refs}")
+        else:
+            en.append(f"Development runs {ids} used {threads} threads per fold and up to {workers} simultaneous fold workers "
+                      f"(a configured budget of {threads * workers} worker threads, not measured CPU utilization). {refs}")
+            zh.append(f"开发运行{ids}每折{threads}线程、最多{workers}折同时运行，配置预算为{threads * workers}个工作线程，"
+                      f"并非实测CPU占用。{refs}")
+    frozen = archive.json(final_run["id"], "model_selection.json")
+    locked_threads = positive(frozen.get("config", {}).get("threads"))
+    final_budget, final_refs = budget(final_run)
+    ref = archive.cite(final_run["id"], "model_selection.json",
+                       {"keys": ["config.threads", "execution_delta", "source_files"], "selected_run_id": selected_run["id"]},
+                       "Frozen final/reproduction execution configuration and any development-to-final override")
+    development_threads = budgets[selected_run["id"]][0]
+    delta = frozen.get("execution_delta")
+    if locked_threads is not None:
+        if final_budget[0] != locked_threads:
+            raise ValueError("Final execution threads differ from the frozen configuration")
+        if delta is not None:
+            if (delta.get("explicitly_requested") is not True or delta.get("learning_parameters_unchanged") is not True
+                    or delta.get("threads", {}).get("final") != locked_threads
+                    or development_threads is None or delta.get("threads", {}).get("development") != development_threads):
+                raise ValueError("Frozen execution_delta disagrees with recorded development/final threads")
+            en.append(f"The freeze records an explicit execution-only change from {development_threads} development threads per fold "
+                      f"to {locked_threads} final threads, with learning parameters unchanged. {ref}")
+            zh.append(f"冻结execution_delta明确记录每折线程从开发{development_threads}改为最终{locked_threads}，学习参数不变。{ref}")
+        elif development_threads is not None and development_threads != locked_threads:
+            raise ValueError("Changed final thread budget lacks an explicit frozen execution_delta")
+        else:
+            en.append(f"The frozen final thread setting is {locked_threads}; no execution override is recorded. {ref}")
+            zh.append(f"冻结的最终线程数为{locked_threads}，未记录执行覆盖。{ref}")
+        en.append(f"The final run recorded {final_budget[0]} threads and {final_budget[1] if final_budget[1] is not None else 'an unrecorded number of'} fold workers. "
+                  f"Full reproduction must reuse this same freeze and its {locked_threads}-thread setting. {final_refs} {ref}")
+        zh.append(f"最终运行归档线程数为{final_budget[0]}，折间worker为{final_budget[1] if final_budget[1] is not None else '未记录'}；"
+                  f"完整复现必须使用同一freeze及其中{locked_threads}线程配置。{final_refs} {ref}")
+    else:
+        en.append(f"This archive does not record frozen execution threads; the report does not infer a final or reproduction budget. {ref}")
+        zh.append(f"该归档未记录冻结线程数，本报告不推定最终或复现线程预算。{ref}")
+    en.append("Elapsed time is not used to compare algorithm quality because execution budgets can differ. Parallel prediction reductions can differ in the last floating-point digits; "
+              "the fixed full-reproduction acceptance tolerances remain atol=1e-10 and rtol=0, without relaxation.")
+    zh.append("执行预算可能不同，不能据运行时长判断算法优劣。并行预测归约可能产生浮点末位差异；完整复现仍使用既定atol=1e-10、rtol=0，不放宽容差。")
+    return en, zh
+
+
 def compose(archive, config, validated):
     main, variant, noaa, algorithms, feature, choice, final_run = validated
     lines = ["---\ntitle: Flight delay propagation and downstream prediction\nlang: en\nmainfont: Times New Roman\nfontsize: 11pt\n---",
@@ -710,6 +786,8 @@ def compose(archive, config, validated):
     single_en, single_zh = single_flight_prose(archive, config["development_rq1_run_id"])
     reference_en, reference_zh = rq1_reference_prose(archive, config["development_rq1_run_id"])
     noaa_en, noaa_zh = noaa_prose(archive, noaa["id"])
+    selected_run = next(run for run in [*main, *algorithms] if run["id"] == choice["selected_run_id"])
+    execution_en, execution_zh = execution_prose(archive, [*main, variant, noaa, *algorithms], selected_run, final_run)
     lines.extend(single_en)
     eda_id = main[0]["id"]
     eda = archive.json(eda_id, "eda_summary.json")
@@ -732,6 +810,7 @@ def compose(archive, config, validated):
               "TAF uses the latest archive bulletin state available at prediction time and queries the later of scheduled departure and prediction time. Archive/issue timestamps are availability proxies, not verified historical delivery receipts; TEMPO, probability, amendment, cancellation and NIL states remain distinct. The registered conservative rule blocks unverified amended, corrected or delayed bulletin values without falling back to an older forecast. Thus locating a latest state does not imply an approved active forecast. "
               "NOAA is a separate retrospective supplement: exact quality-code whitelisting does not establish full official QC certification or contemporaneous delivery, and conflicting or structural missing values are not automatically filled. "
               "Weather absence retains the flight with explicit missingness rather than deleting it or imputing clear weather.",
+              "\n\n".join(execution_en),
               "## RQ1: airport absorption and amplification",
               "For a connection, net change is downstream nonnegative departure delay minus upstream nonnegative arrival delay. A negative change means fewer delay minutes, not necessarily punctual departure. "
               "The main population is nonovernight with upstream delay at least 15 minutes. Airport comparison adjusts only for upstream-delay and scheduled-turnaround cells within frozen common support. "
@@ -874,6 +953,7 @@ def compose(archive, config, validated):
         ids = [item["evidence_id"] for item in archive.evidence if item["run_id"] == run["id"] and item["source_file"].endswith("/metrics.csv")]
         chinese.append(f"{run['id']} / {name}：MAE {number(row.mae)}分钟，RMSE {number(row.rmse)}分钟，样本{int(row.n):,}。" + " ".join(f"[{item}]" for item in ids[:1]))
     chinese.extend(noaa_zh)
+    chinese += ["## 执行预算与复现", *execution_zh]
     chinese += ["## RQ1、研究演进和局限", "RQ1先报告原始均值与累计增加/减少/净变化，再按上游延误和计划周转共同支持标准化。共同支持机场、分层和权重由开发期冻结，逐月与4–8月最终描述重复使用；>0、≥5、≥15阈值不能另选有利机场。节点大小是衔接数、颜色是标准化每次净变化、有向边宽是航班量，不能解释为机场责任。"]
     chinese.extend(reference_zh)
     for run_id in [config["development_rq1_run_id"], config["final_rq1_run_id"]]:

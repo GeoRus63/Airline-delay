@@ -1,0 +1,125 @@
+{
+  "checked_at_utc": "2026-10-24T00:50:51.573897+00:00",
+  "runs": [
+    {
+      "run_id": "R0021",
+      "include_baselines": false,
+      "observed_models": [
+        "dt_d8_l50"
+      ],
+      "threads": 8,
+      "fold_workers": 3
+    },
+    {
+      "run_id": "R0022",
+      "include_baselines": false,
+      "observed_models": [
+        "dt_d8_l200"
+      ],
+      "threads": 8,
+      "fold_workers": 3
+    },
+    {
+      "run_id": "R0023",
+      "include_baselines": false,
+      "observed_models": [
+        "dt_d16_l200"
+      ],
+      "threads": 8,
+      "fold_workers": 3
+    },
+    {
+      "run_id": "R0024",
+      "include_baselines": false,
+      "observed_models": [
+        "dt_d16_l50"
+      ],
+      "threads": 8,
+      "fold_workers": 3
+    }
+  ],
+  "verified_run_source_receipts": [
+    {
+      "path": "experiments/runs/R0021/manifest.json",
+      "bytes": 38059,
+      "sha256": "2aa02ef5cf38fcffe830a9256a3a1586444e88537ebce068e1c42e062d29f271"
+    },
+    {
+      "path": "experiments/runs/R0021/config.json",
+      "bytes": 5588,
+      "sha256": "65751e20144d4b6ba5a1326fb2541082f39147641f98a1a696e3a07442531c12"
+    },
+    {
+      "path": "experiments/runs/R0021/model_manifest.json",
+      "bytes": 9667,
+      "sha256": "1d1e4420d544773a3943515b80b8ecd6e89de875212214c7387e2b3b2e9be270"
+    },
+    {
+      "path": "experiments/runs/R0021/metrics.csv",
+      "bytes": 236246,
+      "sha256": "d130d03df78daf9f405e77775f668856da02572601e3bf6ed3d44420e262c403"
+    },
+    {
+      "path": "experiments/runs/R0022/manifest.json",
+      "bytes": 38050,
+      "sha256": "2de73c4f7d5f1b4d83dadac96e97cea39f8dfee629cfe9800d0cc50450d06d7b"
+    },
+    {
+      "path": "experiments/runs/R0022/config.json",
+      "bytes": 5560,
+      "sha256": "8baec7eef20ce3005a382cf6d14371f21856b06cb7f690aebb9edfeacf684544"
+    },
+    {
+      "path": "experiments/runs/R0022/model_manifest.json",
+      "bytes": 9678,
+      "sha256": "f3d73c078d661550b90f704817af002190b4e8f69f70e613c90a711682ac0eea"
+    },
+    {
+      "path": "experiments/runs/R0022/metrics.csv",
+      "bytes": 237967,
+      "sha256": "efaf2aaff3c0368bbb69077073997587eddc575adb5d5d9dddcef4aad3d317c2"
+    },
+    {
+      "path": "experiments/runs/R0023/manifest.json",
+      "bytes": 38067,
+      "sha256": "66b14788ca99fdb10df014be12aad3d3b36db8884eae8117cd9af3d8955017ef"
+    },
+    {
+      "path": "experiments/runs/R0023/config.json",
+      "bytes": 5562,
+      "sha256": "d275c8c671c08b54bc3db8dd1a1a1314c8dddf2777a4488bf0ef6cc9b5917b58"
+    },
+    {
+      "path": "experiments/runs/R0023/model_manifest.json",
+      "bytes": 9684,
+      "sha256": "670d88a595b34630c3d2a7702a8999d0f5ad08fd7354b83dcc3d2d88943dfe0e"
+    },
+    {
+      "path": "experiments/runs/R0023/metrics.csv",
+      "bytes": 239518,
+      "sha256": "d125b9d8e7b9732d4fd1202ec04d901502412a40ace2b8ee0a109f009a5bf9bb"
+    },
+    {
+      "path": "experiments/runs/R0024/manifest.json",
+      "bytes": 38054,
+      "sha256": "31f0b0c4847ea181e20370d38ed89ad2dffc5f085e38f96bc1886f2c71f5971d"
+    },
+    {
+      "path": "experiments/runs/R0024/config.json",
+      "bytes": 5561,
+      "sha256": "3c15c6a613999db186cbdb38ac5d04c3df6d040db6ecd3c5b213f024ca1a3451"
+    },
+    {
+      "path": "experiments/runs/R0024/model_manifest.json",
+      "bytes": 9678,
+      "sha256": "a7f9e310572955af58e6aa7a09e84a0764c6c9656cb2a837e16c1a2073617c92"
+    },
+    {
+      "path": "experiments/runs/R0024/metrics.csv",
+      "bytes": 237804,
+      "sha256": "5453a7e28fda5e22e8fc27ad61b56de6b3d6d9c10b893f77bd45992cb304ec34"
+    }
+  ],
+  "no_raw_or_august_read": true,
+  "diagnostic_note": "An initial root smoke invocation validated all four runs but then used an incorrect Archive.sources counter attribute; this corrected invocation uses Archive.receipts and records only immutable run sources."
+}

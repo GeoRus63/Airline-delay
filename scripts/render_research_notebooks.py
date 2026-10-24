@@ -2,10 +2,13 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import json
+import os
 from pathlib import Path
-import shutil
+import re
 import sys
+from urllib.parse import quote, unquote, urlsplit
 
 import nbformat
 from nbclient import NotebookClient
@@ -26,7 +29,7 @@ def notice(text):
     display(Markdown(text))
 
 def link_file(path):
-    relative = os.path.relpath(path, RUN_DIR / "notebooks").replace(chr(92), "/")
+    relative = os.path.relpath(path, NOTEBOOK_DIR).replace(chr(92), "/")
     return f"[{path.name}]({quote(relative, safe='/.:')})"
 
 def archived_json(name, base=None, show=True, keys=None):
@@ -67,7 +70,7 @@ def archived_image(name, base=None):
     if not path.is_file():
         notice(f"**未归档图：{path.name}**。")
         return False
-    notice(f"**{path.name}**")
+    notice(f"**{link_file(path)}**")
     display(Image(filename=str(path)))
     return True
 
@@ -83,6 +86,15 @@ def archive_matches(pattern, base=None, kind="table", limit=60):
             archived_image(str(path.relative_to(base)), base=base)
         else:
             archived_table(str(path.relative_to(base)), base=base, limit=limit)
+
+def single_flight_eda(base):
+    notice(f"**完整单航段 EDA 来源：{base.name}**")
+    archived_json("tables/eda_complete_summary.json", base=base)
+    for name in ["single_flight_delay_stats.csv", "single_flight_operations.csv", "airline_aircraft_coverage.csv",
+                 "airline_aircraft_models.csv", "airport_activity.csv", "rq2_weather_missing_coverage.csv"]:
+        archived_table("tables/" + name, base=base)
+    for name in ["monthly_delay_quantiles.png", "delay_sign_counts.png"]:
+        archived_image("figures/" + name, base=base)
 
 def rq1_reference(base):
     value = archived_json("rq1_standardized/frozen_reference.json", base=base,
@@ -202,16 +214,15 @@ def analysis_template():
         ("code", SETUP),
         ("md", "## 1. 运行范围与完整探索性分析\n\n单航段原始有符号延误与衔接预测的非负目标分别展示。月份、机场、星期/小时、航司和机型覆盖用来识别组成与缺失；B43 2024/2025 是参考快照，不是逐预测时刻的历史机队。所有开发目标统计应来自 4–7 月。"),
         ("code", r'''archived_json("config.json")
-archived_json("tables/eda_complete_summary.json")
-archived_json("eda_summary.json")
-for name in ["single_flight_delay_stats.csv", "single_flight_operations.csv", "airline_aircraft_coverage.csv",
-             "airline_aircraft_models.csv", "airport_activity.csv", "rq2_weather_missing_coverage.csv",
-             "eda_monthly_target.csv", "eda_target_bins.csv", "eda_feature_missing.csv",
+single_flight_eda(RUN_DIR)
+notice(f"**衔接预测 RQ2 EDA 来源：{RQ2_EDA_RUN_DIR.name}**")
+archived_json("eda_summary.json", base=RQ2_EDA_RUN_DIR)
+for name in ["eda_monthly_target.csv", "eda_target_bins.csv", "eda_feature_missing.csv",
              "eda_support_airport.csv", "eda_support_route.csv", "eda_support_airline.csv"]:
-    archived_table("tables/" + name)
-for name in ["monthly_delay_quantiles.png", "delay_sign_counts.png", "eda_target_distribution.png",
+    archived_table("tables/" + name, base=RQ2_EDA_RUN_DIR)
+for name in ["eda_target_distribution.png",
              "eda_monthly_target.png", "eda_airport_support.png", "eda_turnaround_count.png", "eda_turnaround_mean_delta.png"]:
-    archived_image("figures/" + name)'''),
+    archived_image("figures/" + name, base=RQ2_EDA_RUN_DIR)'''),
         ("md", r"## 2. RQ1 定义与原始累计量" + "\n\n" + r"主分析为上游非负到达延误至少 15 分钟、计划非隔夜的有效同机衔接。\(\Delta=D^{dep}_{down}-D^{arr}_{up}\)。每次平均净变化以分钟/衔接计；\(S_+=\sum\max(\Delta,0)\)、\(S_-=\sum\max(-\Delta,0)\)、\(S_{net}=S_+-S_-\) 为样本累计分钟，受流量影响。负 Δ 不保证下游准点，更不证明机场造成了恢复。"),
         ("code", r'''archived_json("rq1_complete_summary.json")
 archived_json("rq1_summary.json")
@@ -237,14 +248,18 @@ archived_table("rq1_standardized/network_nodes.csv")
 archived_table("rq1_standardized/network_edges.csv")
 archived_image("figures/rq1_network_geographic.png")'''),
         ("md", "## 6. 动态模型与基线比较\n\n每轮实际算法、特征、参数和误差来自该轮 manifest/metrics。训练中位数直接对应绝对误差目标，训练均值对应平方误差目标；目标偏态时两种常数基线的 MAE 可以明显不同。carry-forward 是已知上游延误原样传递，也不应与常数基线混称。学习模型若没有优于中位数，应如实保留该结果。特征增益和算法增益分开比较，同样本差值才有直接意义。"),
-        ("code", "model_comparison_runs()"),
+        ("code", '''model_comparison_runs()
+notice(f"**模型选择决定来源：{OUTPUT_RUN_DIR.name}**")
+archived_json("selection/model_selection_decision.json", base=OUTPUT_RUN_DIR)
+archived_table("selection/candidates.csv", base=OUTPUT_RUN_DIR, limit=None)'''),
         ("md", "## 7. 解释分析与待完成证据\n\n分组置换把机场/航线与其他计划信息一同置换，保留组内结构，但仍可能打破与其他组的相关性。置换差值、编码系数和 PDP 都是模型与样本下的描述，不是因果效应。PDP 仅在固定开发样本支持范围选网格；线性机场/航线共线时不能把单独系数解释为机场作用。"),
-        ("code", r'''archive_matches("**/explain_summary.json", kind="json")
-archive_matches("**/permutation_summary.csv", limit=None)
-archive_matches("**/permutation_2026-07.png", kind="image")
-archive_matches("**/pdp_values.csv")
-archive_matches("**/pdp_support.csv")
-archive_matches("**/pdp_2026-07_*.png", kind="image")'''),
+        ("code", r'''notice(f"**解释分析归档来源：{OUTPUT_RUN_DIR.name}**")
+archive_matches("**/explain_summary.json", base=OUTPUT_RUN_DIR, kind="json")
+archive_matches("**/permutation_summary.csv", base=OUTPUT_RUN_DIR, limit=None)
+archive_matches("**/permutation_2026-07.png", base=OUTPUT_RUN_DIR, kind="image")
+archive_matches("**/pdp_values.csv", base=OUTPUT_RUN_DIR)
+archive_matches("**/pdp_support.csv", base=OUTPUT_RUN_DIR)
+archive_matches("**/pdp_2026-07_*.png", base=OUTPUT_RUN_DIR, kind="image")'''),
     ])
 
 
@@ -297,8 +312,9 @@ for baseline in ["training_mean", "training_median", "carry_forward"]:
     archived_table(f"final_comparison_{baseline}.csv", limit=None)
     archived_table(f"final_comparison_{baseline}_daily.csv", limit=None)
     archived_image(f"figures/final_comparison_{baseline}.png")'''),
-        ("md", r"## 6. 最终 RQ1：固定开发参考的机场描述" + "\n\n" + r"最终机场分析应复用开发期冻结的 A/C/w，不根据 8 月重新选择共同支持。每次标准化平均 \(\Delta\) 与累计 \(S_+,S_-,S_{net}\) 保持不同单位。这里的机场差异和网络流量是描述性结果，不证明机场造成了延误或恢复。"),
+        ("md", r"## 6. 最终完整 EDA 与 RQ1：固定开发参考的机场描述" + "\n\n" + r"下方完整单航段 EDA 仅读取最终 RQ1 运行已生成的表和图，不重新读取目标数据。最终机场分析应复用开发期冻结的 A/C/w，不根据 8 月重新选择共同支持。每次标准化平均 \(\Delta\) 与累计 \(S_+,S_-,S_{net}\) 保持不同单位。这里的机场差异和网络流量是描述性结果，不证明机场造成了延误或恢复。"),
         ("code", r'''notice(f"**RQ1 结果归档：{RQ1_RUN_DIR.name}**")
+single_flight_eda(RQ1_RUN_DIR)
 archived_json("rq1_complete_summary.json", base=RQ1_RUN_DIR)
 standard = archived_json("rq1_standardized/rq1_standardization_summary.json", base=RQ1_RUN_DIR)
 if standard is not None:
@@ -333,11 +349,39 @@ def _expression(path, root):
         return f"Path({str(path)!r})"
 
 
-def _render(notebook, filename, run_dir, root, model_runs=(), rq1_run_dir=None, update_main=True, output_dir=None):
+def _display_copy(notebook, archived_notebook_dir, display_notebook_dir, root):
+    """Rebase only the known bold source links emitted by this renderer."""
+    result = copy.deepcopy(notebook)
+    for cell in result.cells:
+        if "run_binding" in cell.get("metadata", {}).get("tags", []):
+            cell.source = "\n".join(
+                f"NOTEBOOK_DIR = {_expression(display_notebook_dir, root)}" if line.startswith("NOTEBOOK_DIR = ") else line
+                for line in cell.source.splitlines())
+        for output in cell.get("outputs", []):
+            data = output.get("data", {})
+            if "text/markdown" not in data:
+                continue
+
+            def rebase(match):
+                name, target = match.groups()
+                parsed = urlsplit(target)
+                if parsed.scheme or parsed.netloc or parsed.fragment or parsed.query or target.startswith(("/", "#")):
+                    return match.group(0)
+                actual = (archived_notebook_dir / unquote(target)).resolve()
+                relative = os.path.relpath(actual, display_notebook_dir).replace(chr(92), "/")
+                return f"**[{name}]({quote(relative, safe='/.:')})**"
+
+            data["text/markdown"] = re.sub(r"\*\*\[([^\]]+)\]\(([^)]+)\)\*\*", rebase, data["text/markdown"])
+    return result
+
+
+def _render(notebook, filename, run_dir, root, model_runs=(), rq1_run_dir=None, update_main=True, output_dir=None,
+            rq2_eda_run_dir=None):
     root = Path(root).resolve()
     run_dir = _resolve(run_dir, root)
     model_runs = [_resolve(value, root) for value in model_runs]
     rq1_run_dir = run_dir if rq1_run_dir is None else _resolve(rq1_run_dir, root)
+    rq2_eda_run_dir = run_dir if rq2_eda_run_dir is None else _resolve(rq2_eda_run_dir, root)
     archive_dir = run_dir if output_dir is None else _resolve(output_dir, root)
     manifest_path = archive_dir / "manifest.json"
     if manifest_path.is_file() and json.loads(manifest_path.read_text(encoding="utf-8-sig")).get("status") == "completed":
@@ -351,6 +395,9 @@ def _render(notebook, filename, run_dir, root, model_runs=(), rq1_run_dir=None, 
                "cwd = Path.cwd().resolve()\n"
                f"ROOT = next((p for p in [cwd, *cwd.parents] if (p / 'scripts/build_features.py').is_file()), Path({str(root)!r}))\n"
                f"RUN_DIR = {_expression(run_dir, root)}\n"
+               f"OUTPUT_RUN_DIR = {_expression(archive_dir, root)}\n"
+               f"NOTEBOOK_DIR = {_expression(destination, root)}\n"
+               f"RQ2_EDA_RUN_DIR = {_expression(rq2_eda_run_dir, root)}\n"
                f"MODEL_RUNS = [{', '.join(_expression(path, root) for path in model_runs)}]\n"
                f"RQ1_RUN_DIR = {_expression(rq1_run_dir, root)}")
     notebook.cells.insert(1, nbformat.v4.new_code_cell(binding, metadata={"tags": ["run_binding"]}))
@@ -370,7 +417,8 @@ def _render(notebook, filename, run_dir, root, model_runs=(), rq1_run_dir=None, 
     if update_main:
         (root / "notebooks").mkdir(exist_ok=True)
         try:
-            shutil.copy2(target, root / "notebooks" / filename)
+            display_notebook = _display_copy(notebook, destination, root / "notebooks", root)
+            nbformat.write(display_notebook, root / "notebooks" / filename)
         except OSError as error:
             if getattr(error, "winerror", None) not in {32, 33, 1224}:
                 raise
@@ -384,12 +432,14 @@ def _render(notebook, filename, run_dir, root, model_runs=(), rq1_run_dir=None, 
             warning_path.write_text(json.dumps(existing + display_warnings, ensure_ascii=False, indent=2), encoding="utf-8")
     return {"executed_notebook": str(target), "html": str(target.with_suffix(".html")),
             "interpreter": sys.executable, "update_main": update_main, "display_copy_warnings": display_warnings,
-            "raw_data_read": False, "trained": False}
+            "raw_data_read": False, "trained": False,
+            "source_runs": {"main": str(run_dir), "rq1": str(rq1_run_dir), "rq2_eda": str(rq2_eda_run_dir),
+                            "explanations": str(archive_dir)}, "notebook_directory": str(destination)}
 
 
-def render_analysis(run_dir, model_runs=(), *, output_dir=None, root=ROOT, update_main=True):
+def render_analysis(run_dir, model_runs=(), *, output_dir=None, root=ROOT, update_main=True, rq2_eda_run_dir=None):
     return _render(analysis_template(), "06_共同支持与模型比较.ipynb", run_dir, root,
-                   model_runs=model_runs, update_main=update_main, output_dir=output_dir)
+                   model_runs=model_runs, update_main=update_main, output_dir=output_dir, rq2_eda_run_dir=rq2_eda_run_dir)
 
 
 def render_final(run_dir, rq1_run_dir=None, *, output_dir=None, root=ROOT, update_main=True):
@@ -404,9 +454,11 @@ if __name__ == "__main__":
     parser.add_argument("--mode", choices=["analysis", "final"], default="analysis")
     parser.add_argument("--model-runs", nargs="*", default=[])
     parser.add_argument("--rq1-run-dir")
+    parser.add_argument("--rq2-eda-run-dir", help="Explicit existing development feature-run archive for RQ2 EDA")
     parser.add_argument("--output-dir", help="Separate active archive for the executed research notebook")
     parser.add_argument("--no-update-main", action="store_true")
     args = parser.parse_args()
-    result = (render_analysis(args.run_dir, args.model_runs, output_dir=args.output_dir, update_main=not args.no_update_main)
+    result = (render_analysis(args.run_dir, args.model_runs, output_dir=args.output_dir, update_main=not args.no_update_main,
+                              rq2_eda_run_dir=args.rq2_eda_run_dir)
               if args.mode == "analysis" else render_final(args.run_dir, args.rq1_run_dir, output_dir=args.output_dir, update_main=not args.no_update_main))
     print(result)

@@ -121,6 +121,7 @@ def execute(config, run_dir):
             explain_run(ROOT / 'experiments/runs' / source_id, run_dir / 'explanations' / source_id)
         render_analysis(ROOT / 'experiments/runs' / config['rq1_development_run_id'],
                         model_runs=[ROOT / 'experiments/runs' / name for name in config['model_run_ids']],
+                        rq2_eda_run_dir=ROOT / 'experiments/runs' / config['feature_source_run_id'],
                         output_dir=run_dir)
         return result
     if config['mode'] == 'prepare':
