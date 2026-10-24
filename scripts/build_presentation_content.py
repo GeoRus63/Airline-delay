@@ -121,7 +121,8 @@ def build_content(config, output_path, *, root=report.ROOT):
         f"The final main-threshold analysis supports {len(supported)} airport estimates, with standardized means spanning {range_text}. "
         f"Among supported point estimates, {negative} are negative. Across the raw main population of {rq_n:,} connections, the mean change is {fmt(rq_mean)} minutes, which answers a different question from standardized cross-airport comparison. "
         "The standardization reuses the same airport set, cells and threshold-conditional pooled development weights. It does not renormalize separately for a weakly supported airport. "
-        "Unsupported estimates remain missing. An airport may lose support in a particular month, so missing months stay NA rather than becoming zero or entering a rank.",
+        "Unsupported estimates remain missing. An airport may lose support in a particular month, so missing months stay NA rather than becoming zero or entering a rank. "
+        "The April–August RQ1 summary includes development months and is not an independent August validation.",
         55, [rq_ref, raw_ref, frozen_ref, *image_refs], image=image, caption="Negative change means fewer downstream delay minutes. Unsupported estimates remain NA.")
 
     nodes = archive.table(rqid, "rq1_standardized/network_nodes.csv", ["airport_id", "valid_connection_count", "standardized_mean"])
@@ -238,6 +239,7 @@ def build_content(config, output_path, *, root=report.ROOT):
         "Airport rankings, permutation and PDP are noncausal"],
         f"On the fixed explanation subsample for {top.fold}, group {top.group} has the largest archived permutation MAE increase, {fmt(top.mean_delta_mae)} minutes, with repeat standard deviation {fmt(top.sd_delta_mae)} over {int(top.repeats)} repeats. "
         "This explains the retained learned model separately from a potentially winning baseline. Joint-group permutation preserves within-group relationships but may break relationships across groups. Repeat standard deviation is not a confidence interval. "
+        "Group permutation changes cannot be added together or substituted for staged feature increments. "
         "PDP uses hypothetical input replacements that may leave observed correlated-feature support. Coefficients, importance and airport rankings therefore do not identify causal effects. "
         "The date-block intervals resample saved predictions with common date draws. They do not repeat training or selection, and they are not selection-adjusted. "
         "The evidence also covers one season, conditional completed chains and incomplete weather delivery provenance. NOAA supplementation is retrospective. "
