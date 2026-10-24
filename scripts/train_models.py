@@ -185,6 +185,31 @@ def make_g0_pipeline(config: dict) -> Pipeline:
     return make_pipeline(config)
 
 
+def prediction_threads(config):
+    """Optional deterministic RF reduction; absent means the existing fit budget."""
+    if "prediction_threads" not in config:
+        return int(config.get("threads", 8))
+    value = config["prediction_threads"]
+    if type(value) is not int or value != 1 or config.get("model_type") != "random_forest":
+        raise ValueError("prediction_threads must be integer 1 and applies only to random_forest")
+    return value
+
+
+def predict_pipeline(model, features, config):
+    budget = prediction_threads(config)
+    if "prediction_threads" not in config:
+        return model.predict(features)
+    regressor = model.named_steps["regression"]
+    if not isinstance(regressor, RandomForestRegressor):
+        raise ValueError("prediction_threads requires a fitted RandomForestRegressor")
+    original = regressor.n_jobs
+    try:
+        regressor.n_jobs = budget
+        return model.predict(features)
+    finally:
+        regressor.n_jobs = original
+
+
 def _run_fold(fold: str, train: pd.DataFrame, validation: pd.DataFrame, config: dict,
               output_dir: str, audit: dict) -> tuple[pd.DataFrame, dict]:
     """Picklable Windows-spawn worker; owns only this fold's files and mutable data."""
@@ -192,7 +217,8 @@ def _run_fold(fold: str, train: pd.DataFrame, validation: pd.DataFrame, config: 
     threads = int(config.get("threads", 8))
     started = time.perf_counter()
     timing = {"fold": fold, "pid": os.getpid(), "threads": threads, "train_rows": len(train),
-              "validation_rows": len(validation), "models_seconds": {}, "status": "running"}
+              "validation_rows": len(validation), "models_seconds": {}, "status": "running",
+              "fit_threads": threads, "prediction_threads": prediction_threads(config)}
     summaries = []
     with (output / f"fold_{fold}.log").open("w", encoding="utf-8") as log:
         with contextlib.redirect_stdout(log), contextlib.redirect_stderr(log):
@@ -209,7 +235,7 @@ def _run_fold(fold: str, train: pd.DataFrame, validation: pd.DataFrame, config: 
                         if name == config.get("model_name", "g0_linear"):
                             model = make_pipeline(config)
                             model.fit(x_train, y)
-                            predicted = model.predict(x_val)
+                            predicted = predict_pipeline(model, x_val, config)
                         elif name == "carry_forward":
                             model = {"rule": "max(upstream_arr_delay_minutes, 0)"}
                             predicted = validation.upstream_arr_delay_minutes.to_numpy(dtype=float)
@@ -346,7 +372,8 @@ def run_development(frame: pd.DataFrame, config: dict, output_dir: str | Path) -
                                             "numeric_imputation": "median; add_indicator=True; keep_empty_features=True",
                                             "numeric_scaling": "StandardScaler(with_mean=False), fixed across algorithms",
                                             "unknown_categories": "infrequent_if_exist"},
-                "threads": threads, "fold_workers": int(workers), "fold_timings": fold_timings,
+                "threads": threads, "fit_threads": threads, "prediction_threads": prediction_threads(config),
+                "fold_workers": int(workers), "fold_timings": fold_timings,
                 "linear_tolerance": float(config.get("model_params", {}).get("tol", config.get("linear_tolerance", 1e-6))),
                 "linear_fit_intercept": True if config.get("model_type", "linear") == "linear" else None,
                 "sparse_solver": "scipy.sparse.linalg.lsqr via sklearn LinearRegression" if config.get("model_type", "linear") == "linear" else None,

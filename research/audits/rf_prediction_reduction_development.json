@@ -1,0 +1,117 @@
+{
+  "created_at_utc": "2026-10-24T01:26:09.212350+00:00",
+  "scope": "Completed May development fold only; no refitting or changes to active/archived models; no August data",
+  "model_file": "experiments\\runs\\R0025\\models\\2026-05_rf_d16_l50.joblib",
+  "model_sha256_before_and_after": "1d437ba23da5dc16cd3c24502dda696106b212725d6646a2af62cf6b21d8180f",
+  "features_file": "experiments\\runs\\R0017\\data\\features.pkl",
+  "feature_source_run": "R0017",
+  "sampling": "50000 uniformly sampled May prediction-window rows, seed42; chronological source order",
+  "sample_ids_sha256": "8dc3db371e6c4de77a6986150e0ada6437d22720a827734049d67a5fec1402bf",
+  "sample_n": 50000,
+  "metadata_metric_rows": 818,
+  "source_estimator_n_jobs": 8,
+  "tree_count": 200,
+  "transformed_shape": [
+    50000,
+    5152
+  ],
+  "transformed_nnz": 3325231,
+  "results": [
+    {
+      "label": "parallel_reference",
+      "prediction_threads": 24,
+      "elapsed_seconds": 0.2718666000000667,
+      "max_prediction_difference_from_parallel_reference": 0.0,
+      "max_metric_differences_from_parallel_reference": {
+        "mae": 0.0,
+        "rmse": 0.0,
+        "absolute_error_sum": 0.0,
+        "squared_error_sum": 0.0
+      },
+      "metric_rows_exceeding_1e_10": {
+        "mae": 0,
+        "rmse": 0,
+        "absolute_error_sum": 0,
+        "squared_error_sum": 0
+      }
+    },
+    {
+      "label": "parallel_repeat_1",
+      "prediction_threads": 24,
+      "elapsed_seconds": 0.2534088999964297,
+      "max_prediction_difference_from_parallel_reference": 2.2737367544323206e-13,
+      "max_metric_differences_from_parallel_reference": {
+        "mae": 5.3290705182007514e-14,
+        "rmse": 6.128431095930864e-14,
+        "absolute_error_sum": 1.4551915228366852e-11,
+        "squared_error_sum": 4.656612873077393e-10
+      },
+      "metric_rows_exceeding_1e_10": {
+        "mae": 0,
+        "rmse": 0,
+        "absolute_error_sum": 0,
+        "squared_error_sum": 10
+      }
+    },
+    {
+      "label": "parallel_repeat_2",
+      "prediction_threads": 24,
+      "elapsed_seconds": 0.26611679999768967,
+      "max_prediction_difference_from_parallel_reference": 1.7053025658242404e-13,
+      "max_metric_differences_from_parallel_reference": {
+        "mae": 5.3290705182007514e-14,
+        "rmse": 6.128431095930864e-14,
+        "absolute_error_sum": 1.4551915228366852e-11,
+        "squared_error_sum": 4.656612873077393e-10
+      },
+      "metric_rows_exceeding_1e_10": {
+        "mae": 0,
+        "rmse": 0,
+        "absolute_error_sum": 0,
+        "squared_error_sum": 18
+      }
+    },
+    {
+      "label": "serial_reference",
+      "prediction_threads": 1,
+      "elapsed_seconds": 1.1316391000000294,
+      "max_prediction_difference_from_parallel_reference": 1.7053025658242404e-13,
+      "max_metric_differences_from_parallel_reference": {
+        "mae": 5.3290705182007514e-14,
+        "rmse": 6.128431095930864e-14,
+        "absolute_error_sum": 3.637978807091713e-12,
+        "squared_error_sum": 4.656612873077393e-10
+      },
+      "metric_rows_exceeding_1e_10": {
+        "mae": 0,
+        "rmse": 0,
+        "absolute_error_sum": 0,
+        "squared_error_sum": 18
+      }
+    },
+    {
+      "label": "serial_repeat_1",
+      "prediction_threads": 1,
+      "elapsed_seconds": 1.126156099999207,
+      "max_prediction_difference_from_parallel_reference": 1.7053025658242404e-13,
+      "max_metric_differences_from_parallel_reference": {
+        "mae": 5.3290705182007514e-14,
+        "rmse": 6.128431095930864e-14,
+        "absolute_error_sum": 3.637978807091713e-12,
+        "squared_error_sum": 4.656612873077393e-10
+      },
+      "metric_rows_exceeding_1e_10": {
+        "mae": 0,
+        "rmse": 0,
+        "absolute_error_sum": 0,
+        "squared_error_sum": 18
+      },
+      "serial_prediction_exactly_equal": true,
+      "serial_metrics_exactly_equal": true
+    }
+  ],
+  "total_seconds": 7.253272699999798,
+  "training_performed": false,
+  "august_accessed": false,
+  "model_file_unchanged": true
+}

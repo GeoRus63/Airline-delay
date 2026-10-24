@@ -157,6 +157,9 @@ def validate_freeze(config):
                      or type(minimum) is float and 0 < minimum < 1)
     if not valid_minimum or type(locked["threads"]) is not int or locked["threads"] < 1:
         raise ValueError("Frozen min_frequency/threads are invalid")
+    training.prediction_threads(locked)  # Optional RF-only execution setting; old freezes retain their default.
+    if "prediction_threads" in config:
+        training.prediction_threads({**locked, "prediction_threads": config["prediction_threads"]})
     for key in ["max_depth", "min_samples_leaf", "n_estimators", "random_state"]:
         if key in locked["model_params"] and type(locked["model_params"][key]) is not int:
             raise ValueError(f"Frozen model parameter {key} must be an integer")
@@ -366,7 +369,8 @@ def _fit_frozen(frozen, freeze_path, freeze_hash, verified, output, ledger_path,
     _write_json(output / "model_manifest.json", {
         **result, **training.resolve_features(locked), "model_type": locked["model_type"],
         "model_params": result["actual_model_params"], "include_baselines": True,
-        "threads": locked["threads"], "fold_workers": 1, "fold_timings": [timing],
+        "threads": locked["threads"], "fit_threads": locked["threads"],
+        "prediction_threads": training.prediction_threads(locked), "fold_workers": 1, "fold_timings": [timing],
         "linear_tolerance": locked["linear_tolerance"],
         "effective_preprocessing": {"min_frequency": locked["preprocessing"]["min_frequency"],
                                     "drop": "first", "sparse": True,

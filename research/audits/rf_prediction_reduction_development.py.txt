@@ -1,0 +1,74 @@
+from pathlib import Path
+import sys, json, hashlib, time
+from datetime import datetime, timezone
+import joblib
+import numpy as np
+import pandas as pd
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from scripts.train_models import PREDICTION_METADATA, hash_ids
+from scripts.evaluate_models import summarize_predictions, metrics_from_summaries
+
+def sha(path):
+    with path.open('rb') as stream:
+        return hashlib.file_digest(stream, 'sha256').hexdigest()
+
+feature_path = ROOT / 'experiments/runs/R0017/data/features.pkl'
+model_path = ROOT / 'experiments/runs/R0025/models/2026-05_rf_d16_l50.joblib'
+destination = ROOT / 'research/audits/rf_prediction_reduction_development.json'
+if destination.exists():
+    raise FileExistsError(destination)
+started = time.perf_counter()
+before = sha(model_path)
+frame = pd.read_pickle(feature_path)
+assert frame.prediction_time.max() < pd.Timestamp('2026-08-01', tz='UTC')
+mask = frame.prediction_time.ge(pd.Timestamp('2026-05-01', tz='UTC')) & frame.prediction_time.lt(pd.Timestamp('2026-06-01', tz='UTC'))
+positions = np.flatnonzero(mask.to_numpy())
+selected = np.sort(np.random.default_rng(42).choice(positions, size=50000, replace=False))
+sample = frame.iloc[selected].copy()
+del frame
+pipeline = joblib.load(model_path)
+features = json.loads((ROOT / 'experiments/runs/R0017/model_manifest.json').read_text())['features']
+transformed = pipeline.named_steps['preprocess'].transform(sample[features])
+estimator = pipeline.named_steps['regression']
+original_jobs = estimator.n_jobs
+metadata = sample[PREDICTION_METADATA + ['aircraft_family']].copy()
+metadata.insert(0, 'fold', '2026-05')
+metadata.insert(0, 'model', 'rf_d16_l50')
+def metrics(values):
+    row = metadata.copy()
+    row['predicted_delay'] = np.maximum(values, 0)
+    return metrics_from_summaries(summarize_predictions(row))
+outputs = []
+reference_prediction, reference_metrics = None, None
+for label, workers in [('parallel_reference',24),('parallel_repeat_1',24),('parallel_repeat_2',24),('serial_reference',1),('serial_repeat_1',1)]:
+    estimator.n_jobs = workers
+    tick = time.perf_counter()
+    predicted = estimator.predict(transformed)
+    summary = metrics(predicted)
+    if reference_prediction is None:
+        reference_prediction, reference_metrics = predicted, summary
+    differences = {column: float(np.max(np.abs(summary[column].to_numpy() - reference_metrics[column].to_numpy())))
+                   for column in ['mae', 'rmse', 'absolute_error_sum', 'squared_error_sum']}
+    outputs.append({'label':label, 'prediction_threads':workers, 'elapsed_seconds':time.perf_counter()-tick,
+                    'max_prediction_difference_from_parallel_reference':float(np.max(np.abs(predicted-reference_prediction))),
+                    'max_metric_differences_from_parallel_reference':differences,
+                    'metric_rows_exceeding_1e_10':{column:int((np.abs(summary[column]-reference_metrics[column])>1e-10).sum()) for column in differences}})
+    if label == 'serial_reference':
+        serial_prediction, serial_metrics = predicted, summary
+    if label == 'serial_repeat_1':
+        outputs[-1]['serial_prediction_exactly_equal'] = bool(np.array_equal(serial_prediction,predicted))
+        outputs[-1]['serial_metrics_exactly_equal'] = bool(serial_metrics.equals(summary))
+    print(json.dumps(outputs[-1]),flush=True)
+estimator.n_jobs = original_jobs
+assert sha(model_path) == before
+result={'created_at_utc':datetime.now(timezone.utc).isoformat(), 'scope':'Completed May development fold only; no refitting or changes to active/archived models; no August data',
+        'model_file':str(model_path.relative_to(ROOT)), 'model_sha256_before_and_after':before,
+        'features_file':str(feature_path.relative_to(ROOT)), 'feature_source_run':'R0017',
+        'sampling':'50000 uniformly sampled May prediction-window rows, seed42; chronological source order',
+        'sample_ids_sha256':hash_ids(sample.connection_id), 'sample_n':len(sample), 'metadata_metric_rows':len(reference_metrics),
+        'source_estimator_n_jobs':original_jobs, 'tree_count':len(estimator.estimators_),
+        'transformed_shape':list(transformed.shape), 'transformed_nnz':transformed.nnz, 'results':outputs,
+        'total_seconds':time.perf_counter()-started, 'training_performed':False, 'august_accessed':False, 'model_file_unchanged':True}
+with destination.open('x',encoding='utf-8') as stream:
+    json.dump(result,stream,ensure_ascii=False,indent=2)

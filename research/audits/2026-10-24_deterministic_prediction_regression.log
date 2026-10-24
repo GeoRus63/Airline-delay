@@ -1,0 +1,29 @@
+test_explicit_threads_only_default_identity_and_source_gate (tests.test_freeze_execution.FreezeExecutionTests.test_explicit_threads_only_default_identity_and_source_gate) ... ok
+test_prediction_budget_restored_on_success_and_exception (tests.test_freeze_execution.FreezeExecutionTests.test_prediction_budget_restored_on_success_and_exception) ... ok
+test_seeded_200_tree_forest_is_unchanged_by_parallel_worker_count (tests.test_freeze_execution.FreezeExecutionTests.test_seeded_200_tree_forest_is_unchanged_by_parallel_worker_count) ... ok
+test_changed_labels_metrics_or_feature_values_are_rejected (tests.test_model_selection.ModelSelection.test_changed_labels_metrics_or_feature_values_are_rejected) ... ok
+test_complete_feature_chain_tie_and_excluded_branches (tests.test_model_selection.ModelSelection.test_complete_feature_chain_tie_and_excluded_branches) ... ok
+test_model_grid_stability_sequential_promotion_and_baseline_primary (tests.test_model_selection.ModelSelection.test_model_grid_stability_sequential_promotion_and_baseline_primary) ... ok
+test_synthetic_explicit_freeze_schema_pins_and_dirty_source_rejection (tests.test_model_selection.ModelSelection.test_synthetic_explicit_freeze_schema_pins_and_dirty_source_rejection) ... ok
+test_changed_data_hash_is_rejected_before_august_access (tests.test_final_evaluation.FinalEvaluation.test_changed_data_hash_is_rejected_before_august_access) ... ok
+test_development_feature_archive_forbidden_in_runtime_and_frozen_config (tests.test_final_evaluation.FinalEvaluation.test_development_feature_archive_forbidden_in_runtime_and_frozen_config) ... ok
+test_freeze_pins_are_checked_before_reading_final_features (tests.test_final_evaluation.FinalEvaluation.test_freeze_pins_are_checked_before_reading_final_features) ... ok
+test_reproduction_accepts_only_same_frozen_science_and_pins_its_executed_sources (tests.test_final_evaluation.FinalEvaluation.test_reproduction_accepts_only_same_frozen_science_and_pins_its_executed_sources) ... ok
+test_single_frozen_fit_strict_cutoffs_baseline_primary_and_verify_without_refit (tests.test_final_evaluation.FinalEvaluation.test_single_frozen_fit_strict_cutoffs_baseline_primary_and_verify_without_refit) ... ok
+test_weather_manifest_and_all_dependencies_are_pinned_before_august (tests.test_final_evaluation.FinalEvaluation.test_weather_manifest_and_all_dependencies_are_pinned_before_august) ... ok
+test_reproduce_final (unittest.loader._FailedTest.test_reproduce_final) ... ERROR
+
+======================================================================
+ERROR: test_reproduce_final (unittest.loader._FailedTest.test_reproduce_final)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_reproduce_final
+Traceback (most recent call last):
+  File "E:\PythonEnvs\general\Lib\unittest\loader.py", line 141, in loadTestsFromName
+    module = __import__(module_name)
+ModuleNotFoundError: No module named 'tests.test_reproduce_final'
+
+
+----------------------------------------------------------------------
+Ran 14 tests in 15.168s
+
+FAILED (errors=1)

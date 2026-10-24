@@ -381,13 +381,14 @@ def _assert_committed(paths):
     return commit
 
 
-def create_freeze(selection, path, *, final_threads=None):
+def create_freeze(selection, path, *, final_threads=None, final_prediction_threads=None):
     """Explicit opt-in only: seal a completed model selection, never assess August.
 
     Returns file-byte and canonical-payload hashes. This is deliberately not called
     by either selection function. The caller commits all source changes first.
     final_threads is an explicit execution-only override, recorded in the freeze;
     the completed selection/source check always precedes this override.
+    final_prediction_threads=1 opts RF into sequential prediction reduction only.
     """
     selection_path = Path(selection).resolve() if isinstance(selection, (str, Path)) else None
     selection = _json(selection_path) if selection_path else dict(selection)
@@ -417,6 +418,16 @@ def create_freeze(selection, path, *, final_threads=None):
             "development_config_sha256": final.canonical_sha256(selection["config"]),
         }
         config["threads"] = final_threads
+    if final_prediction_threads is not None:
+        if type(final_prediction_threads) is not int or final_prediction_threads != 1 or config["model_type"] != "random_forest":
+            raise ValueError("final_prediction_threads must be integer 1 and applies only to random_forest")
+        if execution_delta is None:
+            execution_delta = {"explicitly_requested": True, "learning_parameters_unchanged": True,
+                               "development_config_sha256": final.canonical_sha256(selection["config"])}
+        execution_delta["reason"] = "Only execution worker budgets change; RF prediction uses fixed sequential tree reduction; learning parameters remain unchanged"
+        execution_delta["prediction_threads"] = {"development": training.prediction_threads(selection["config"]),
+                                                  "final": final_prediction_threads}
+        config["prediction_threads"] = final_prediction_threads
     sources = final._required_sources(config["feature_group"]) | {Path(__file__).resolve(), PROTOCOL_PATH.resolve()}
     for name in ["scripts/run_pipeline.py", "requirements.txt"]:
         if (ROOT / name).is_file():

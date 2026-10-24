@@ -1,0 +1,12 @@
+test_algorithm_archive_can_declare_no_repeated_baselines (tests.test_report_builder.ExecutionDisclosure.test_algorithm_archive_can_declare_no_repeated_baselines) ... ok
+test_frozen_rf_prediction_budget_is_separate_with_prediction_only_or_combined_delta (tests.test_report_builder.ExecutionDisclosure.test_frozen_rf_prediction_budget_is_separate_with_prediction_only_or_combined_delta) ... ok
+test_legacy_fixture_missing_fields_is_not_assumed_to_use_defaults (tests.test_report_builder.ExecutionDisclosure.test_legacy_fixture_missing_fields_is_not_assumed_to_use_defaults) ... ok
+test_mixed_budgets_and_explicit_override_are_source_backed (tests.test_report_builder.ExecutionDisclosure.test_mixed_budgets_and_explicit_override_are_source_backed) ... ok
+test_rf_prediction_and_fit_manifest_conflicts_are_rejected (tests.test_report_builder.ExecutionDisclosure.test_rf_prediction_and_fit_manifest_conflicts_are_rejected) ... ok
+test_same_budget_needs_no_override (tests.test_report_builder.ExecutionDisclosure.test_same_budget_needs_no_override) ... ok
+test_unrecorded_override_or_conflicting_manifest_is_rejected (tests.test_report_builder.ExecutionDisclosure.test_unrecorded_override_or_conflicting_manifest_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 7.169s
+
+OK

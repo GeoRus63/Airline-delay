@@ -1,0 +1,18 @@
+test_compare_read_only_mode_never_writes_on_prediction_difference (tests.test_final_reproduction.FinalReproduction.test_compare_read_only_mode_never_writes_on_prediction_difference) ... ok
+test_feature_and_prediction_differences_fail_and_preserve_ledger (tests.test_final_reproduction.FinalReproduction.test_feature_and_prediction_differences_fail_and_preserve_ledger) ... ok
+test_fingerprint_seals_schema_and_baseline_only_inputs (tests.test_final_reproduction.FinalReproduction.test_fingerprint_seals_schema_and_baseline_only_inputs) ... ok
+test_missing_or_incomplete_ledger_rejected_without_feature_read (tests.test_final_reproduction.FinalReproduction.test_missing_or_incomplete_ledger_rejected_without_feature_read) ... ok
+test_pipeline_dispatches_reproduction_and_archives_its_notebook_receipt (tests.test_final_reproduction.FinalReproduction.test_pipeline_dispatches_reproduction_and_archives_its_notebook_receipt) ... ok
+test_reproduction_notebook_is_labeled_and_renders_only_to_new_output (tests.test_final_reproduction.FinalReproduction.test_reproduction_notebook_is_labeled_and_renders_only_to_new_output) ... ok
+test_saved_reproduction_rejects_missing_receipt_prediction_and_ledger_hash_tampering (tests.test_final_reproduction.FinalReproduction.test_saved_reproduction_rejects_missing_receipt_prediction_and_ledger_hash_tampering) ... ok
+test_saved_reproduction_verifier_is_read_only_and_never_opens_raw_or_refits (tests.test_final_reproduction.FinalReproduction.test_saved_reproduction_verifier_is_read_only_and_never_opens_raw_or_refits) ... ok
+test_success_rebuilds_and_refits_all_four_models_without_new_formal_claim (tests.test_final_reproduction.FinalReproduction.test_success_rebuilds_and_refits_all_four_models_without_new_formal_claim) ... D:\airline-delay\.venv\Lib\site-packages\zmq\_future.py:718: RuntimeWarning: Proactor event loop does not implement add_reader family of methods required for zmq. Registering an additional selector thread for add_reader support via tornado. Use `asyncio.set_event_loop_policy(WindowsSelectorEventLoopPolicy())` to avoid this warning.
+  self._get_loop()
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+ok
+test_wrong_freeze_science_source_and_input_rejected_before_feature_read (tests.test_final_reproduction.FinalReproduction.test_wrong_freeze_science_source_and_input_rejected_before_feature_read) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 24.871s
+
+OK

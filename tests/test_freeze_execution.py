@@ -57,6 +57,26 @@ class FreezeExecutionTests(unittest.TestCase):
                 for invalid in [True, False, 0, -1, 33, 2.0, "24"]:
                     with self.subTest(invalid=invalid), self.assertRaisesRegex(ValueError, "final_threads"):
                         selection.create_freeze(decision, root / "invalid/freeze.json", final_threads=invalid)
+                deterministic_path = root / "deterministic/freeze.json"
+                selection.create_freeze(decision, deterministic_path, final_threads=24, final_prediction_threads=1)
+                for mode in ["final", "reproduce_final"]:
+                    locked = selection.final.validate_freeze({"mode": mode, "freeze_manifest_path": str(deterministic_path),
+                        "freeze_manifest_sha256": selection.final.sha256_file(deterministic_path)})[0]
+                    self.assertEqual(locked["config"]["prediction_threads"], 1)
+                    self.assertEqual(locked["config"]["threads"], 24)
+                    self.assertEqual(locked["config"]["model_params"], decision["config"]["model_params"])
+                for invalid in [True, False, 0, 2, 1.0, "1"]:
+                    with self.subTest(prediction_threads=invalid), self.assertRaisesRegex(ValueError, "final_prediction_threads"):
+                        selection.create_freeze(decision, root / "bad_prediction/freeze.json", final_prediction_threads=invalid)
+                with patch.object(selection, "_scientific_config", return_value={**decision["config"], "threads": 123}):
+                    with self.assertRaisesRegex(ValueError, "source/config"):
+                        selection.create_freeze(decision, root / "bad_source/freeze.json", final_prediction_threads=True)
+                non_rf = copy.deepcopy(decision)
+                non_rf["config"]["model_type"] = "linear"
+                non_rf["selection_sha256"] = selection.final.canonical_sha256({k: v for k, v in non_rf.items() if k != "selection_sha256"})
+                with patch.object(selection, "_scientific_config", return_value=non_rf["config"]):
+                    with self.assertRaisesRegex(ValueError, "only to random_forest"):
+                        selection.create_freeze(non_rf, root / "non_rf/freeze.json", final_prediction_threads=1)
                 changed = copy.deepcopy(decision)
                 changed["config"]["threads"] = 24
                 changed["selection_sha256"] = selection.final.canonical_sha256(
@@ -66,6 +86,28 @@ class FreezeExecutionTests(unittest.TestCase):
             self.assertEqual(decision, original)
             for path, contents in archived.items():
                 self.assertEqual(path.read_bytes(), contents)
+
+    def test_prediction_budget_restored_on_success_and_exception(self):
+        from sklearn.pipeline import Pipeline
+        forest = RandomForestRegressor(n_jobs=24)
+        model = Pipeline([("regression", forest)])
+        config = {"model_type": "random_forest", "threads": 24, "prediction_threads": 1}
+        seen = []
+        def predict(_):
+            seen.append(forest.n_jobs)
+            return np.array([1.])
+        with patch.object(model, "predict", side_effect=predict):
+            selection.training.predict_pipeline(model, None, config)
+            selection.training.predict_pipeline(model, None, {"model_type": "random_forest", "threads": 24})
+        self.assertEqual(seen, [1, 24])
+        self.assertEqual(forest.n_jobs, 24)
+        with patch.object(model, "predict", side_effect=RuntimeError("prediction failed")):
+            with self.assertRaisesRegex(RuntimeError, "prediction failed"):
+                selection.training.predict_pipeline(model, None, config)
+        self.assertEqual(forest.n_jobs, 24)
+        for kind in ["linear", "decision_tree"]:
+            with self.assertRaises(ValueError):
+                selection.training.prediction_threads({**config, "model_type": kind})
 
     def test_seeded_200_tree_forest_is_unchanged_by_parallel_worker_count(self):
         rng = np.random.default_rng(42)

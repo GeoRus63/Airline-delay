@@ -895,6 +895,24 @@ def execution_prose(archive, development_runs, selected_run, final_run):
                                      "Recorded execution budget, not measured CPU utilization"))
         return tuple(values), " ".join(refs)
 
+    def prediction_budget(run, threads):
+        fit = positive(run["model"].get("fit_threads"))
+        prediction = positive(run["model"].get("prediction_threads"))
+        configured = positive(run["config"].get("prediction_threads"))
+        if fit is not None and fit != threads:
+            raise ValueError("Recorded fit_threads differ from the training thread budget")
+        if configured is not None and (configured != 1 or run["model"].get("model_type") != "random_forest"):
+            raise ValueError("Explicit prediction_threads must be 1 for random_forest")
+        if prediction is not None and configured is not None and prediction != configured:
+            raise ValueError("Prediction manifest/config disagree")
+        effective = prediction if prediction is not None else configured if configured is not None else threads
+        ref = archive.cite(run["id"], "model_manifest.json",
+                           {"keys": ["threads", "fit_threads", "prediction_threads"], "legacy_prediction_default": "threads"},
+                           "Separate recorded fit/prediction budgets; absent prediction setting retains the training budget")
+        if configured is not None:
+            ref += " " + archive.cite(run["id"], "config.json", {"keys": ["prediction_threads"]}, "Explicit prediction execution setting")
+        return effective, ref
+
     groups, budgets = {}, {}
     for run in development_runs:
         pair, refs = budget(run)
@@ -914,33 +932,68 @@ def execution_prose(archive, development_runs, selected_run, final_run):
             zh.append(f"开发运行{ids}每折{threads}线程、最多{workers}折同时运行，配置预算为{threads * workers}个工作线程，"
                       f"并非实测CPU占用。{refs}")
     frozen = archive.json(final_run["id"], "model_selection.json")
-    locked_threads = positive(frozen.get("config", {}).get("threads"))
+    locked = frozen.get("config", {})
+    locked_threads = positive(locked.get("threads"))
+    locked_prediction = positive(locked.get("prediction_threads"))
     final_budget, final_refs = budget(final_run)
-    ref = archive.cite(final_run["id"], "model_selection.json",
-                       {"keys": ["config.threads", "execution_delta", "source_files"], "selected_run_id": selected_run["id"]},
-                       "Frozen final/reproduction execution configuration and any development-to-final override")
+    final_prediction, prediction_ref = prediction_budget(final_run, final_budget[0])
     development_threads = budgets[selected_run["id"]][0]
+    development_prediction, development_prediction_ref = prediction_budget(selected_run, development_threads)
+    ref = archive.cite(final_run["id"], "model_selection.json",
+                       {"keys": ["config.threads", "config.prediction_threads", "execution_delta", "source_files"], "selected_run_id": selected_run["id"]},
+                       "Frozen final/reproduction execution configuration and any development-to-final override")
     delta = frozen.get("execution_delta")
     if locked_threads is not None:
         if final_budget[0] != locked_threads:
             raise ValueError("Final execution threads differ from the frozen configuration")
+        if locked_prediction is not None and (locked_prediction != 1 or locked.get("model_type") != "random_forest"
+                                               or final_run["model"].get("model_type") != "random_forest"
+                                               or final_run["model"].get("prediction_threads") != locked_prediction):
+            raise ValueError("Frozen RF prediction_threads disagree with the final model manifest")
+        effective_prediction = locked_prediction if locked_prediction is not None else locked_threads
+        if final_prediction != effective_prediction:
+            raise ValueError("Final prediction threads differ from the frozen configuration")
         if delta is not None:
             if (delta.get("explicitly_requested") is not True or delta.get("learning_parameters_unchanged") is not True
-                    or delta.get("threads", {}).get("final") != locked_threads
-                    or development_threads is None or delta.get("threads", {}).get("development") != development_threads):
+                    or not any(key in delta for key in ["threads", "prediction_threads"])):
                 raise ValueError("Frozen execution_delta disagrees with recorded development/final threads")
+        if delta is not None and "threads" in delta:
+            if (delta["threads"].get("final") != locked_threads or development_threads is None
+                    or delta["threads"].get("development") != development_threads):
+                raise ValueError("Frozen execution_delta training threads disagree")
             en.append(f"The freeze records an explicit execution-only change from {development_threads} development threads per fold "
                       f"to {locked_threads} final threads, with learning parameters unchanged. {ref}")
             zh.append(f"冻结execution_delta明确记录每折线程从开发{development_threads}改为最终{locked_threads}，学习参数不变。{ref}")
         elif development_threads is not None and development_threads != locked_threads:
             raise ValueError("Changed final thread budget lacks an explicit frozen execution_delta")
         else:
-            en.append(f"The frozen final thread setting is {locked_threads}; no execution override is recorded. {ref}")
-            zh.append(f"冻结的最终线程数为{locked_threads}，未记录执行覆盖。{ref}")
-        en.append(f"The final run recorded {final_budget[0]} threads and {final_budget[1] if final_budget[1] is not None else 'an unrecorded number of'} fold workers. "
-                  f"Full reproduction must reuse this same freeze and its {locked_threads}-thread setting. {final_refs} {ref}")
-        zh.append(f"最终运行归档线程数为{final_budget[0]}，折间worker为{final_budget[1] if final_budget[1] is not None else '未记录'}；"
-                  f"完整复现必须使用同一freeze及其中{locked_threads}线程配置。{final_refs} {ref}")
+            en.append(f"The frozen final training-thread setting is {locked_threads}; "
+                      f"{'no execution override is recorded' if delta is None else 'no training-thread override is recorded'}. {ref}")
+            zh.append(f"冻结的最终训练线程数为{locked_threads}，未记录{'执行' if delta is None else '训练线程'}覆盖。{ref}")
+        if delta is not None and "prediction_threads" in delta:
+            if (delta["prediction_threads"].get("development") != development_prediction
+                    or delta["prediction_threads"].get("final") != effective_prediction):
+                raise ValueError("Frozen execution_delta prediction threads disagree")
+            en.append(f"The execution delta separately records prediction threads changing from {development_prediction} to {effective_prediction}, "
+                      f"with learning parameters unchanged. {development_prediction_ref} {ref}")
+            zh.append(f"execution_delta另记录预测线程从{development_prediction}改为{effective_prediction}，学习参数不变。{development_prediction_ref} {ref}")
+        elif development_prediction is not None and development_prediction != effective_prediction:
+            # Legacy freezes that changed only threads also changed their default prediction budget.
+            if locked_prediction is not None:
+                raise ValueError("Changed prediction thread budget lacks a frozen execution_delta")
+        en.append(f"The final run recorded {final_budget[0]} threads for training and {effective_prediction} for prediction, with "
+                  f"{final_budget[1] if final_budget[1] is not None else 'an unrecorded number of'} fold workers. "
+                  f"Full reproduction must reuse this same freeze, including its {locked_threads} training threads and {effective_prediction} prediction threads. "
+                  f"Without an explicit prediction setting, prediction retains the recorded training budget. {final_refs} {prediction_ref} {ref}")
+        zh.append(f"最终归档为训练{final_budget[0]}线程、预测{effective_prediction}线程、折间worker {final_budget[1] if final_budget[1] is not None else '未记录'}；"
+                  f"完整复现必须使用同一freeze及相同训练/预测线程配置。未显式配置预测线程时，预测沿用归档训练预算。{final_refs} {prediction_ref} {ref}")
+        if locked_prediction is not None:
+            en.append("The frozen shared prediction entry temporarily sets RF prediction workers to the sequential budget so trees accumulate in a fixed order, "
+                      "then restores the training n_jobs value before the joblib model is saved. Loading that model and calling bare predict does not preserve this prediction policy. "
+                      "The policy targets the original absolute 1e-10 contract for all reported metrics, including unnormalised error sums; it changes execution, not learning parameters. " + ref)
+            zh.append("冻结的共享预测入口临时将RF预测worker设为顺序预算，以固定树的累加次序，之后恢复训练n_jobs再保存joblib。"
+                      "因此加载该模型后直接裸调用predict并不自动保持此预测策略，必须使用冻结的共享入口。"
+                      "这项执行设置针对原有全部指标（含未归一化误差总和）的绝对1e-10契约，不改变学习参数。" + ref)
     else:
         en.append(f"This archive does not record frozen execution threads; the report does not infer a final or reproduction budget. {ref}")
         zh.append(f"该归档未记录冻结线程数，本报告不推定最终或复现线程预算。{ref}")

@@ -1,0 +1,63 @@
+from pathlib import Path
+import sys, json, hashlib, time
+from datetime import datetime, timezone
+import joblib
+import numpy as np
+import pandas as pd
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT))
+from scripts.train_models import PREDICTION_METADATA, hash_ids, predict_pipeline
+from scripts.evaluate_models import summarize_predictions, metrics_from_summaries
+def sha(path):
+    with path.open('rb') as stream: return hashlib.file_digest(stream,'sha256').hexdigest()
+output=ROOT/'research/audits/rf_deterministic_prediction_path.json'
+if output.exists(): raise FileExistsError(output)
+model_path=ROOT/'experiments/runs/R0025/models/2026-05_rf_d16_l50.joblib'
+original_sha=sha(model_path)
+frame=pd.read_pickle(ROOT/'experiments/runs/R0017/data/features.pkl')
+assert frame.prediction_time.max()<pd.Timestamp('2026-08-01',tz='UTC')
+mask=frame.prediction_time.ge(pd.Timestamp('2026-05-01',tz='UTC')) & frame.prediction_time.lt(pd.Timestamp('2026-06-01',tz='UTC'))
+selected=np.sort(np.random.default_rng(42).choice(np.flatnonzero(mask.to_numpy()),size=50000,replace=False))
+sample=frame.iloc[selected].copy()
+del frame
+features=json.loads((ROOT/'experiments/runs/R0017/model_manifest.json').read_text())['features']
+config=json.loads((ROOT/'experiments/runs/R0025/config.json').read_text())
+config['prediction_threads']=1
+results=[]
+for repeat in range(2):
+    pipeline=joblib.load(model_path)
+    regressor=pipeline.named_steps['regression']
+    original_jobs=regressor.n_jobs
+    actual_jobs=[]
+    predict=regressor.predict
+    def recorded_predict(data):
+        actual_jobs.append(regressor.n_jobs)
+        return predict(data)
+    regressor.predict=recorded_predict
+    def forbidden_fit(*args,**kwargs): raise AssertionError('Fit is forbidden in this audit')
+    pipeline.fit=forbidden_fit
+    started=time.perf_counter()
+    raw=predict_pipeline(pipeline,sample[features],config)
+    assert actual_jobs==[1] and regressor.n_jobs==original_jobs==8
+    rows=sample[PREDICTION_METADATA+['aircraft_family']].copy()
+    rows.insert(0,'fold','2026-05'); rows.insert(0,'model','rf_d16_l50')
+    rows['predicted_delay']=np.maximum(raw,0)
+    metrics=metrics_from_summaries(summarize_predictions(rows))
+    item={'repeat':repeat,'prediction_call_n_jobs':actual_jobs,'restored_n_jobs':regressor.n_jobs,'seconds':time.perf_counter()-started}
+    if repeat==0:
+        first_raw, first_clip, first_metrics=raw, rows.predicted_delay.copy(), metrics
+    else:
+        item.update(raw_exactly_equal=bool(np.array_equal(first_raw,raw)),clipped_exactly_equal=bool(np.array_equal(first_clip,rows.predicted_delay)),
+                    all_metric_columns_exactly_equal=bool(first_metrics.equals(metrics)),
+                    max_raw_absolute_difference=float(np.max(np.abs(first_raw-raw))),
+                    max_metric_absolute_difference={name:float(np.max(np.abs(first_metrics[name]-metrics[name]))) for name in ['mae','rmse','absolute_error_sum','squared_error_sum']})
+        assert item['raw_exactly_equal'] and item['clipped_exactly_equal'] and item['all_metric_columns_exactly_equal']
+    results.append(item)
+assert sha(model_path)==original_sha
+receipt={'created_at_utc':datetime.now(timezone.utc).isoformat(),'scope':'Saved May development model reload -> shared predict_pipeline -> production complete metrics; no fit or August access',
+         'model_file':str(model_path.relative_to(ROOT)),'model_sha256_before_and_after':original_sha,'sample_n':len(sample),'sample_ids_sha256':hash_ids(sample.connection_id),
+         'metric_rows':len(metrics),'metric_columns':list(metrics),'fit_called':False,'august_accessed':False,'model_file_unchanged':True,
+         'source_files':[{'path':str(path.relative_to(ROOT)),'sha256':sha(path)} for path in [ROOT/'scripts/train_models.py',ROOT/'scripts/evaluate_models.py']],
+         'results':results,'full_final_reproduction_proven':False}
+with output.open('x',encoding='utf8') as stream: json.dump(receipt,stream,indent=2)
+print(json.dumps(receipt,indent=2))

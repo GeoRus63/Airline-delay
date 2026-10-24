@@ -269,7 +269,7 @@ class ExecutionDisclosure(unittest.TestCase):
             self.assertIn("R0001, R0013 used 8 threads per fold and up to 3", en)
             self.assertIn("R0014 used 24 threads per fold and up to 1", en)
             self.assertIn("from 8 development threads per fold to 24 final threads", en)
-            self.assertIn("same freeze and its 24-thread setting", en)
+            self.assertIn("same freeze, including its 24 training threads and 24 prediction threads", en)
             self.assertIn("atol=1e-10 and rtol=0", en)
             self.assertIn("不能据运行时长判断算法优劣", zh)
             self.assertTrue(any(row["source_file"].endswith("R0001/config.json") for row in evidence))
@@ -285,6 +285,71 @@ class ExecutionDisclosure(unittest.TestCase):
             en, _, _ = self.prose(root, ["R0014"], "R0014")
             self.assertIn("no execution override is recorded", en)
             self.assertNotIn("from 8 development", en)
+
+    def rf_prediction_fixture(self, root, development_threads=24, final_fit=24, final_prediction=1):
+        make_fixture(root)
+        self.run_with_budget(root, "R0013", threads=development_threads, workers=1)
+        self.run_with_budget(root, "R0017", threads=24, workers=1)
+        directory = root / "experiments/runs/R0017"
+        model = json.loads((directory / "model_manifest.json").read_text())
+        model.update(model_type="random_forest", fit_threads=final_fit, prediction_threads=final_prediction)
+        write_json(directory / "model_manifest.json", model)
+        config = json.loads((directory / "config.json").read_text())
+        config["model_type"] = "random_forest"
+        seal(root, "R0017", config)
+        delta = {"explicitly_requested": True, "learning_parameters_unchanged": True,
+                 "prediction_threads": {"development": development_threads, "final": 1}}
+        if development_threads != 24:
+            delta["threads"] = {"development": development_threads, "final": 24}
+        self.freeze(root, 24, delta)
+        path = directory / "model_selection.json"
+        frozen = json.loads(path.read_text())
+        frozen["config"].update(model_type="random_forest", prediction_threads=1)
+        frozen["payload_sha256"] = report.canonical({k: v for k, v in frozen.items() if k != "payload_sha256"})
+        write_json(path, frozen)
+        seal(root, "R0017", config)
+
+    def test_frozen_rf_prediction_budget_is_separate_with_prediction_only_or_combined_delta(self):
+        for development_threads in [24, 8]:
+            with self.subTest(development_threads=development_threads), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                self.rf_prediction_fixture(root, development_threads)
+                en, zh, evidence = self.prose(root, ["R0013"], "R0013")
+                self.assertIn("24 threads for training and 1 for prediction", en)
+                self.assertIn(f"prediction threads changing from {development_threads} to 1", en)
+                self.assertIn("restores the training n_jobs", en)
+                self.assertIn("bare predict does not preserve this prediction policy", en)
+                self.assertIn("including unnormalised error sums", en)
+                self.assertIn("训练24线程、预测1线程", zh)
+                self.assertTrue(any('config.prediction_threads' in row["selector"] for row in evidence))
+                self.assertTrue(any('fit_threads' in row["selector"] for row in evidence))
+                if development_threads == 24:
+                    self.assertIn("no training-thread override is recorded", en)
+                    self.assertNotIn("from 24 development threads per fold to", en)
+
+    def test_rf_prediction_and_fit_manifest_conflicts_are_rejected(self):
+        for fault in ["prediction", "fit", "missing_prediction", "delta", "non_rf"]:
+            with self.subTest(fault=fault), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                self.rf_prediction_fixture(root, final_fit=8 if fault == "fit" else 24,
+                                           final_prediction=24 if fault == "prediction" else 1)
+                directory = root / "experiments/runs/R0017"
+                if fault == "missing_prediction":
+                    path = directory / "model_manifest.json"
+                    model = json.loads(path.read_text())
+                    model.pop("prediction_threads")
+                    write_json(path, model)
+                if fault in {"delta", "non_rf"}:
+                    path = directory / "model_selection.json"
+                    frozen = json.loads(path.read_text())
+                    if fault == "delta":
+                        frozen["execution_delta"]["prediction_threads"]["development"] = 8
+                    else:
+                        frozen["config"]["model_type"] = "linear"
+                    write_json(path, frozen)
+                seal(root, "R0017", json.loads((directory / "config.json").read_text()))
+                with self.assertRaisesRegex(ValueError, "prediction|fit_threads"):
+                    self.prose(root, ["R0013"], "R0013")
 
     def test_legacy_fixture_missing_fields_is_not_assumed_to_use_defaults(self):
         with tempfile.TemporaryDirectory() as temp:
