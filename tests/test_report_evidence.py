@@ -190,7 +190,8 @@ def make_fixture(root):
         write_table(directory / "rq1_standardized/rq1_airports.csv", [{"airport_id": airport, "threshold": threshold, "supported": True, "retained_n": 2, "retained_share": 1., "standardized_mean": -5., "ci_low": -6., "ci_high": -4., "valid_replicates": 1000} for airport in [1, 2] for threshold in ["gt0", "ge5", "ge15"]])
         write_table(directory / "rq1_standardized/rq1_threshold_stability.csv", [{"threshold": threshold, "common_airports": 2, "frozen_airports": 2, "direction_agreement": 1., "spearman": None} for threshold in ["gt0", "ge5", "ge15"]])
         write_table(directory / "rq1_standardized/rq1_airports_monthly.csv", [{"month_utc": "2026-04", "threshold": "ge15", "supported": True, "standardized_mean": -5., "retained_share": 1.}])
-        write_table(directory / "rq1_standardized/network_nodes.csv", [{"airport_id": airport, "airport_code": "AAA" if airport == 1 else "BBB", "valid_connection_count": 2, "standardized_mean": -5.} for airport in [1, 2]])
+        write_table(directory / "rq1_standardized/network_nodes.csv", [{"airport_id": airport, "airport_code": "AAA" if airport == 1 else "BBB", "latitude": 35., "longitude": -100. + airport,
+                    "valid_connection_count": 2, "standardized_mean": -5., "supported": True} for airport in [1, 2]])
         write_table(directory / "rq1_standardized/network_edges.csv", [{"origin_airport_id": 1, "destination_airport_id": 2, "flight_count": 8}])
         (directory / "figures").mkdir()
         for name in ["rq1_standardized_airports", "rq1_threshold_stability", "rq1_network_geographic"]:
@@ -295,6 +296,10 @@ class ReportEvidence(unittest.TestCase):
             self.assertEqual(len({row["evidence_id"] for row in evidence}), len(evidence))
             network_figures = [row for row in evidence if row["kind"] == "figure" and row["claim"] == "Airport connection performance and directed flight flow"]
             self.assertEqual({Path(row["source_file"]).name for row in network_figures}, {"network_nodes.csv", "network_edges.csv"})
+            network_receipts = json.loads((root / "reports/network_rendering_receipts.json").read_text(encoding="utf-8"))
+            self.assertEqual(len(network_receipts), 2)
+            self.assertTrue(all(item["coordinate_supported_nodes"] == 2 and item["minimum_font_points"] >= 10 and not item["airport_code_labels"] for item in network_receipts))
+            self.assertIn("## 八月冻结测试与误差诊断", chinese)
             receipts = json.loads((root / "reports/source_receipts.json").read_text(encoding="utf-8"))
             self.assertFalse(receipts["data_access"]["prediction_rows"])
             self.assertTrue(all(not any(token in item["path"] for token in [".pkl", "/raw/", "/predictions/"]) for item in receipts["sources"]))
